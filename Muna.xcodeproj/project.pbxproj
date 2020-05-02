@@ -338,9 +338,9 @@
 				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Muna/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Muna/Info.plist;
+				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -359,9 +359,9 @@
 				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Muna/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Muna/Info.plist;
+				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
