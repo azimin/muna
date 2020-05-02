@@ -1,0 +1,12 @@
+excluded:
+    - Pods
+disabled_rules:
+    - identifier_name
+    - function_parameter_count
+    - force_cast
+line_length: 160
+function_body_length: 100
+type_name:
+  max_length: 60
+nesting:
+    type_level: 3
