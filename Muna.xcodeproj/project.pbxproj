@@ -12,8 +12,10 @@
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
 		239DC91E245D95E8001FA50C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91C245D95E8001FA50C /* Main.storyboard */; };
+		9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelView.swift */; };
 		9F8CCC84245DB4CF00E0F102 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8CCC83245DB4CF00E0F102 /* CircleImage.swift */; };
 		9F8CCC86245DB5BA00E0F102 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8CCC85245DB5BA00E0F102 /* MapView.swift */; };
+		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,8 +27,12 @@
 		239DC91D245D95E8001FA50C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		239DC91F245D95E8001FA50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		239DC920245D95E8001FA50C /* Muna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muna.entitlements; sourceTree = "<group>"; };
+		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
+		9F540FF5245E2B07007BF60C /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
 		9F8CCC83245DB4CF00E0F102 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		9F8CCC85245DB5BA00E0F102 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
+		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +52,8 @@
 			children = (
 				239DC912245D95E5001FA50C /* Muna */,
 				239DC911245D95E5001FA50C /* Products */,
+				F6267EF807AC45BC4DCADCC6 /* Pods */,
+				DF9B4F4541A06E89BD25CA05 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +91,7 @@
 			children = (
 				9F8CCC7F245DB47B00E0F102 /* UI */,
 				239DC915245D95E5001FA50C /* ContentView.swift */,
+				9F540FF5245E2B07007BF60C /* MainPanelView.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -144,6 +154,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6267EF807AC45BC4DCADCC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */,
+				B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,10 +179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 239DC923245D95E8001FA50C /* Build configuration list for PBXNativeTarget "Muna" */;
 			buildPhases = (
+				5CF88BD5300C3E94FF3E265A /* [CP] Check Pods Manifest.lock */,
 				239DC926245D96AF001FA50C /* Swiftlint */,
 				239DC90C245D95E5001FA50C /* Sources */,
 				239DC90D245D95E5001FA50C /* Frameworks */,
 				239DC90E245D95E5001FA50C /* Resources */,
+				AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +260,45 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		5CF88BD5300C3E94FF3E265A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Muna-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Muna/Pods-Muna-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Muna/Pods-Muna-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Muna/Pods-Muna-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -241,6 +310,7 @@
 				9F8CCC86245DB5BA00E0F102 /* MapView.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9F8CCC84245DB4CF00E0F102 /* CircleImage.swift in Sources */,
+				9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +443,7 @@
 		};
 		239DC924245D95E8001FA50C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
@@ -394,6 +465,7 @@
 		};
 		239DC925245D95E8001FA50C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
