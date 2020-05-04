@@ -56,7 +56,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
         transform.fromValue = self.backgroundView.layer?.transform
         transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
-        transform.duration = 0.35
+        transform.duration = 0.25
 
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
@@ -67,7 +67,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
         transform.fromValue = self.backgroundView.layer?.transform
         transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-        transform.duration = 0.35
+        transform.duration = 0.25
 
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 

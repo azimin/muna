@@ -28,6 +28,11 @@ class MainPanelItemView: View {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layout() {
+        super.layout()
+        self.metainformationPlate.layer?.cornerRadius = 12
+    }
+
     func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.cornerRadius = 12
@@ -46,6 +51,9 @@ class MainPanelItemView: View {
         self.metainformationPlate.blendingMode = .withinWindow
         self.metainformationPlate.material = .dark
         self.metainformationPlate.state = .active
+        self.metainformationPlate.wantsLayer = true
+        self.metainformationPlate.maskImage = NSImage(color: .black, size: .init(width: 1, height: 1))
+
         self.metainformationPlate.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(180)
             maker.bottom.leading.trailing.equalToSuperview()
@@ -61,5 +69,14 @@ class MainPanelItemView: View {
 
         self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
+    }
+}
+
+extension NSImage {
+    convenience init(color: NSColor, size: NSSize) {
+        self.init(size: size)
+        lockFocus()
+        color.drawSwatch(in: NSRect(origin: .zero, size: size))
+        unlockFocus()
     }
 }
