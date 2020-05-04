@@ -60,6 +60,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+
+        self.addMonitor()
     }
 
     func hide(completion: VoidBlock?) {
@@ -74,6 +76,26 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         CATransaction.setCompletionBlock(completion)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
         CATransaction.commit()
+    }
+
+    var downMonitor: Any?
+
+    func addMonitor() {
+        self.collectionView.becomeFirstResponder()
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+
+            // up
+            if event.keyCode == 126 {
+                self.selectPreveous()
+                return nil
+                // down
+            } else if event.keyCode == 125 {
+                self.selectNext()
+                return nil
+            }
+
+            return event
+        })
     }
 
     func setup() {
@@ -115,10 +137,47 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Cell")
         )
 
+        let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: 0, section: 0))
+        self.collectionView.selectItems(at: itemsToSelect, scrollPosition: .top)
+
         self.collectionView.registerReusableCellWithClass(GenericCollectionViewItem<MainPanelItemView>.self)
 
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
+        }
+    }
+
+    func selectPreveous() {
+        guard let value = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("NO index path")
+            return
+        }
+
+        if value.item > 0 {
+            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: value.item - 1, section: value.section))
+            self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+            NSAnimationContext.beginGrouping()
+            NSAnimationContext.current.duration = 0.3
+            NSAnimationContext.current.allowsImplicitAnimation = true
+            self.collectionView.animator().selectItems(at: itemsToSelect, scrollPosition: .bottom)
+            NSAnimationContext.endGrouping()
+        }
+    }
+
+    func selectNext() {
+        guard let value = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("NO index path")
+            return
+        }
+
+        if self.collectionView.numberOfItems(inSection: value.section) > value.item + 1 {
+            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: value.item + 1, section: value.section))
+            self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+            NSAnimationContext.beginGrouping()
+            NSAnimationContext.current.duration = 0.3
+            NSAnimationContext.current.allowsImplicitAnimation = true
+            self.collectionView.animator().selectItems(at: itemsToSelect, scrollPosition: .bottom)
+            NSAnimationContext.endGrouping()
         }
     }
 
@@ -149,5 +208,18 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             width: collectionView.frame.size.width,
             height: 250
         )
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+
+        NSAnimationContext.beginGrouping()
+        NSAnimationContext.current.duration = 0.3
+        NSAnimationContext.current.allowsImplicitAnimation = true
+        self.collectionView.animator().scrollToItems(at: indexPaths, scrollPosition: .bottom)
+        NSAnimationContext.endGrouping()
+    }
+
+    override func keyDown(with event: NSEvent) {
+        print("Test")
     }
 }

@@ -70,12 +70,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
 
+    var oldApp: NSRunningApplication?
+
     @objc func togglePane() {
         self.setupWindowIfNeeded()
 
         if self.isPanelShowed {
+            self.oldApp?.activate(options: .activateIgnoringOtherApps)
             self.hidePanel()
+//            NSApplication.shared.deactivate()
         } else {
+            self.oldApp = NSWorkspace.shared.frontmostApplication
+            NSApplication.shared.activate(ignoringOtherApps: true)
             self.window.makeKeyAndOrderFront(nil)
             self.showPanel()
         }
@@ -106,9 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false
         )
         self.window.backgroundColor = NSColor.clear
-        self.window.contentView = MainPanelView()
-        self.window.makeKeyAndOrderFront(nil)
-
+        self.window.contentViewController = MainPanelViewController()
         // Overlap dock, but not menu bar
         self.window.level = .statusBar - 2
     }
