@@ -79,12 +79,13 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         self.backgroundView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }
+        self.backgroundView.layer?.borderColor = NSColor.gray.cgColor
+        self.backgroundView.layer?.borderWidth = 0.5
 
         self.backgroundView.addSubview(self.visualView)
         self.visualView.blendingMode = .behindWindow
         self.visualView.material = .dark
         self.visualView.state = .active
-//        self.visualView.appearance = NSAppearance(named: .vibrantDark)
         self.visualView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }

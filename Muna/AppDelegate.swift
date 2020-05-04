@@ -93,8 +93,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let frame = NSRect(
-            x: mainScreen.frame.width - self.windowFrameWidth,
-            y: 0,
+            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+            y: mainScreen.frame.minY,
             width: self.windowFrameWidth,
             height: mainScreen.frame.height - 0
         )
@@ -120,8 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let frame = NSRect(
-            x: mainScreen.frame.width - self.windowFrameWidth,
-            y: 0,
+            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+            y: mainScreen.frame.minY,
             width: self.windowFrameWidth,
             height: mainScreen.frame.height - 0
         )
@@ -137,7 +137,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func hidePanel() {
         if let view = self.window.contentView as? MainPanelView {
             view.hide {
-                print("hide")
                 self.window.setIsVisible(false)
             }
         }
