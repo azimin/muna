@@ -15,6 +15,7 @@
 		9F8CCC84245DB4CF00E0F102 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8CCC83245DB4CF00E0F102 /* CircleImage.swift */; };
 		9F8CCC86245DB5BA00E0F102 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8CCC85245DB5BA00E0F102 /* MapView.swift */; };
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
+		9FA07F5524608CC400654D36 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5424608CC400654D36 /* Preferences.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		9F8CCC83245DB4CF00E0F102 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		9F8CCC85245DB5BA00E0F102 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
+		9FA07F5424608CC400654D36 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
 		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9FA07F5324608CB600654D36 /* Preferences */,
 			);
 			path = ApplicationLayer;
 			sourceTree = "<group>";
@@ -152,6 +155,14 @@
 				9FA07F512460820400654D36 /* NSView+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9FA07F5324608CB600654D36 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				9FA07F5424608CC400654D36 /* Preferences.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
@@ -307,6 +318,7 @@
 			files = (
 				9F8CCC86245DB5BA00E0F102 /* MapView.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
+				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
 				9F8CCC84245DB4CF00E0F102 /* CircleImage.swift in Sources */,
 				9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */,

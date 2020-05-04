@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftUI
+import MASShortcut
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -22,11 +23,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Create the window and set the content view.
 
+        self.setupUserDefaults()
         self.setupStatusBarItem()
+        self.setupShortcuts()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        MASShortcutBinder.shared()?.breakBinding(
+            withDefaultsKey: Preferences.defaultShortcutUDKey
+        )
+    }
+
+    func setupUserDefaults() {
+        UserDefaults.standard.register(defaults: Preferences.defaultUserDefaults)
+    }
+
+    func setupShortcuts() {
+        MASShortcutBinder.shared()?.bindShortcut(
+            withDefaultsKey: Preferences.defaultShortcutUDKey,
+            toAction: {
+                self.togglePane()
+        })
     }
 
     func setupStatusBarItem() {

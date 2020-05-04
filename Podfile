@@ -7,5 +7,6 @@ target 'Muna' do
 
   # Pods for Muna
   pod 'SnapKit'
+  pod 'MASShortcut'
 
 end
