@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2362A30C2460231B0077078C /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362A30B2460231B0077078C /* DateParser.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC916245D95E5001FA50C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC915245D95E5001FA50C /* ContentView.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2362A30B2460231B0077078C /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239DC915245D95E5001FA50C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2362A309246022FB0077078C /* ApplicationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2362A30A246023030077078C /* Core */,
+			);
+			path = ApplicationLayer;
+			sourceTree = "<group>";
+		};
+		2362A30A246023030077078C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2362A30B2460231B0077078C /* DateParser.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		239DC907245D95E5001FA50C = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +73,7 @@
 		239DC912245D95E5001FA50C /* Muna */ = {
 			isa = PBXGroup;
 			children = (
+				2362A309246022FB0077078C /* ApplicationLayer */,
 				239DC913245D95E5001FA50C /* AppDelegate.swift */,
 				239DC915245D95E5001FA50C /* ContentView.swift */,
 				239DC917245D95E8001FA50C /* Assets.xcassets */,
@@ -167,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2362A30C2460231B0077078C /* DateParser.swift in Sources */,
 				239DC916245D95E5001FA50C /* ContentView.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 			);
