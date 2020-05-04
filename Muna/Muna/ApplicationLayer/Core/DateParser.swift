@@ -14,6 +14,8 @@ protocol DateParserProtocol {
 }
 class DateParser: DateParserProtocol {
 
+    private let datePattern = "\\b((\\w*(in|after)\\w*) (\\d?)\\w* (\\w*(minute|minutes|hour|hours)\\w*))\\b"
+
     func parseDate(from string: String) -> [Date?] {
         let detector: NSDataDetector
         do {
@@ -34,5 +36,24 @@ class DateParser: DateParserProtocol {
 
         let dates = matches.map { $0.date }
         return dates
+    }
+
+    private func tryFindByRegularExpression(from string: String) -> [Date?] {
+        let detector: NSRegularExpression
+        do {
+            detector = try NSRegularExpression(pattern: self.datePattern, options: [NSRegularExpression.Options.caseInsensitive])
+        } catch {
+            // TODO: - Make appAsserationHandler
+            assertionFailure("Error on detector initialization: \(error)")
+            return []
+        }
+
+        let matches = detector.matches(
+            in: string,
+            options: [],
+            range: NSRange(location: 0, length: string.utf16.count)
+        )
+
+        return []
     }
 }
