@@ -12,18 +12,20 @@ import SnapKit
 typealias VoidBlock = () -> Void
 
 final class Cell: NSCollectionViewItem {
-  let label = NSText()
-  let myImageView = NSImageView()
+  let itemView = MainPanelItemView()
 
   override func loadView() {
     self.view = NSView()
     self.view.wantsLayer = true
 
-    self.view.layer?.backgroundColor = NSColor.red.cgColor
+    self.view.addSubview(self.itemView)
+    self.itemView.snp.makeConstraints { (maker) in
+        maker.edges.equalToSuperview()
+    }
   }
 }
 
-class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate {
+class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     let backgroundView = View()
     let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
@@ -100,8 +102,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
 
         let layout = NSCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 4
-        layout.itemSize = NSSize(width: 300, height: 400)
+        layout.minimumLineSpacing = 24
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -131,8 +132,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
           for: indexPath
         ) as! Cell
 
-        cell.label.string = "Index: \(indexPath)"
-        cell.myImageView.image =
+        cell.itemView.deadlineLabel.stringValue = "End in: \(indexPath)"
+        cell.itemView.commentLabel.stringValue = "Index: \(indexPath)"
+        cell.itemView.imageView.image =
             NSImage(named: NSImage.Name("img"))
 
         return cell
@@ -156,7 +158,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
       return NSSize(
         width: collectionView.frame.size.width,
-        height: 40
+        height: 250
       )
     }
 }
