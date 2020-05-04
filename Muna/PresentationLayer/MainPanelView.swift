@@ -32,6 +32,7 @@ final class Cell: NSCollectionViewItem {
 }
 
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate {
+    let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
 
     override init(frame: NSRect) {
@@ -44,11 +45,22 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     }
 
     func setup() {
+        self.addSubview(self.visualView)
+        self.visualView.blendingMode = .behindWindow
+        self.visualView.material = .dark
+        self.visualView.state = .active
+//        self.visualView.appearance = NSAppearance(named: .vibrantDark)
+        self.visualView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
+        }
+
         let scrollView = NSScrollView()
         scrollView.documentView = self.collectionView
         self.addSubview(scrollView)
         scrollView.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview()
+            maker.edges.equalToSuperview().inset(
+                NSEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+            )
         }
 
         let layout = NSCollectionViewFlowLayout()
@@ -69,11 +81,6 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
         }
-    }
-
-    override func layout() {
-        super.layout()
-        print(self.collectionView.frame)
     }
 
     // MARK: - NSCollectionViewDataSource
