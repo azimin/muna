@@ -9,15 +9,7 @@
 import Cocoa
 import SnapKit
 
-//class HackedCollectionView: NSCollectionView {
-//    override func setFrameSize(_ newSize: NSSize) {
-//        let size = collectionViewLayout?.collectionViewContentSize ?? newSize
-//        super.setFrameSize(size)
-//        if let scrollView = enclosingScrollView {
-//            scrollView.hasHorizontalScroller = size.width > scrollView.frame.width
-//        }
-//    }
-//}
+typealias VoidBlock = () -> Void
 
 final class Cell: NSCollectionViewItem {
   let label = NSText()
@@ -32,6 +24,7 @@ final class Cell: NSCollectionViewItem {
 }
 
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate {
+    let backgroundView = View()
     let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
 
@@ -44,8 +37,50 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         fatalError("init(coder:) has not been implemented")
     }
 
+    var isFirstLanch = true
+
+    override func layout() {
+        super.layout()
+
+        if isFirstLanch {
+            self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+            self.isFirstLanch = false
+        }
+    }
+
+    func show() {
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
+        transform.duration = 0.35
+
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+    }
+
+    func hide(completion: VoidBlock?) {
+        CATransaction.begin()
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        transform.duration = 0.35
+
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+
+        CATransaction.setCompletionBlock(completion)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+        CATransaction.commit()
+    }
+
     func setup() {
-        self.addSubview(self.visualView)
+        self.addSubview(self.backgroundView)
+        self.backgroundView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
+        }
+
+        self.backgroundView.addSubview(self.visualView)
         self.visualView.blendingMode = .behindWindow
         self.visualView.material = .dark
         self.visualView.state = .active
@@ -56,7 +91,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         let scrollView = NSScrollView()
         scrollView.documentView = self.collectionView
-        self.addSubview(scrollView)
+        self.backgroundView.addSubview(scrollView)
         scrollView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(
                 NSEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)

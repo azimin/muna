@@ -76,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if self.isPanelShowed {
             self.hidePanel()
         } else {
+            self.window.makeKeyAndOrderFront(nil)
             self.showPanel()
         }
         self.isPanelShowed.toggle()
@@ -92,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let frame = NSRect(
-            x: mainScreen.frame.width,
+            x: mainScreen.frame.width - self.windowFrameWidth,
             y: 0,
             width: self.windowFrameWidth,
             height: mainScreen.frame.height - 0
@@ -100,7 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.window = NSWindow(
             contentRect: frame,
-            styleMask: [.fullSizeContentView],
+            styleMask: [],
             backing: .buffered,
             defer: false
         )
@@ -125,22 +126,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             height: mainScreen.frame.height - 0
         )
 
-        self.window.setFrame(frame, display: true, animate: true)
+        self.window.setFrame(frame, display: true, animate: false)
+
+        if let view = self.window.contentView as? MainPanelView {
+            view.show()
+        }
+        self.window.setIsVisible(true)
     }
 
     func hidePanel() {
-        guard let windowScreen = self.window.screen else {
-            assertionFailure("No main screen")
-            return
+        if let view = self.window.contentView as? MainPanelView {
+            view.hide {
+                print("hide")
+                self.window.setIsVisible(false)
+            }
         }
-
-        let frame = NSRect(
-            x: windowScreen.frame.width,
-            y: 0,
-            width: self.windowFrameWidth,
-            height: windowScreen.frame.height - 0
-        )
-
-        self.window.setFrame(frame, display: true, animate: true)
     }
 }
