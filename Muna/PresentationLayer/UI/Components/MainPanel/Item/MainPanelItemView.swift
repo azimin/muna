@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-class MainPanelItemView: View {
+final class MainPanelItemView: View, GenericCellSubview {
     let backgroundView = View()
 
     let imageView = ImageView()
@@ -35,6 +35,8 @@ class MainPanelItemView: View {
 
     func setup() {
         self.addSubview(self.backgroundView)
+        self.backgroundView.layer?.borderWidth = 1
+        self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         self.backgroundView.layer?.cornerRadius = 12
         self.backgroundView.layer?.masksToBounds = true
         self.backgroundView.snp.makeConstraints { (maker) in
@@ -67,8 +69,21 @@ class MainPanelItemView: View {
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 
+        self.deadlineLabel.textColor = NSColor.color(.white)
         self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
+
+        self.commentLabel.textColor = NSColor.color(.white60alpha)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
+    }
+
+    func setSelected(_ selected: Bool, animated: Bool) {
+        if selected {
+            self.backgroundView.layer?.borderWidth = 3
+            self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
+        } else {
+            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
+        }
     }
 }
 

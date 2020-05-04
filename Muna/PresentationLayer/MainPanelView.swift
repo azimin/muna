@@ -12,17 +12,17 @@ import SnapKit
 typealias VoidBlock = () -> Void
 
 final class Cell: NSCollectionViewItem {
-  let itemView = MainPanelItemView()
+    let itemView = MainPanelItemView()
 
-  override func loadView() {
-    self.view = NSView()
-    self.view.wantsLayer = true
+    override func loadView() {
+        self.view = NSView()
+        self.view.wantsLayer = true
 
-    self.view.addSubview(self.itemView)
-    self.itemView.snp.makeConstraints { (maker) in
-        maker.edges.equalToSuperview()
+        self.view.addSubview(self.itemView)
+        self.itemView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
+        }
     }
-  }
 }
 
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
@@ -31,7 +31,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     let collectionView = NSCollectionView()
 
     override init(frame: NSRect) {
-       super.init(frame: frame)
+        super.init(frame: frame)
         self.setup()
     }
 
@@ -111,9 +111,11 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         self.collectionView.backgroundColors = [.clear]
         self.collectionView.isSelectable = true
         self.collectionView.register(
-          Cell.self,
-          forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Cell")
+            Cell.self,
+            forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Cell")
         )
+
+        self.collectionView.registerReusableCellWithClass(GenericCollectionViewItem<MainPanelItemView>.self)
 
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
@@ -123,42 +125,29 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     // MARK: - NSCollectionViewDataSource
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-           return 50000
-       }
+        return 50000
+    }
 
-       func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let cell = collectionView.makeItem(
-          withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Cell"),
-          for: indexPath
-        ) as! Cell
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
 
-        cell.itemView.deadlineLabel.stringValue = "End in: \(indexPath)"
-        cell.itemView.commentLabel.stringValue = "Index: \(indexPath)"
-        cell.itemView.imageView.image =
+        let cell = collectionView.dequeueReusableCellWithType(
+            GenericCollectionViewItem<MainPanelItemView>.self,
+            indexPath: indexPath
+        )
+
+        cell.customSubview.deadlineLabel.stringValue = "End in: \(indexPath)"
+        cell.customSubview.commentLabel.stringValue = "Index: \(indexPath)"
+        cell.customSubview.imageView.image =
             NSImage(named: NSImage.Name("img"))
 
         return cell
-       }
-
-    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        guard let indexPath = indexPaths.first,
-        let cell = collectionView.item(at: indexPath) as? Cell else {
-          return
-      }
-    }
-
-    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
-      guard let indexPath = indexPaths.first,
-        let cell = collectionView.item(at: indexPath) as? Cell else {
-          return
-      }
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
 
-      return NSSize(
-        width: collectionView.frame.size.width,
-        height: 250
-      )
+        return NSSize(
+            width: collectionView.frame.size.width,
+            height: 250
+        )
     }
 }
