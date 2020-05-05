@@ -14,5 +14,5 @@ protocol ParserProtocol {
 
     func parse(fromText text: String, refDate: Date) -> ParsedResult?
 
-    func extract(fromMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult?
+    func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult?
 }

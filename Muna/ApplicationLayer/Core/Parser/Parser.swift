@@ -14,7 +14,6 @@ class Parser: ParserProtocol {
         return ""
     }
 
-
     func parse(fromText text: String, refDate: Date) -> ParsedResult? {
         let regex: NSRegularExpression
         do {
@@ -27,10 +26,10 @@ class Parser: ParserProtocol {
         guard let match = regex.firstMatch(in: text, range: NSRange(location: 0, length: text.count)) else {
             return nil
         }
-        return self.extract(fromMatch: match, refDate: refDate)
+        return self.extract(fromText: text, withMatch: match, refDate: refDate)
     }
 
-    func extract(fromMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
+    func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
         return nil
     }
 }
