@@ -1,20 +1,24 @@
 PODS:
   - MASShortcut (2.4.0)
   - SnapKit (5.0.1)
+  - SwiftDate (6.1.0)
 
 DEPENDENCIES:
   - MASShortcut
   - SnapKit
+  - SwiftDate
 
 SPEC REPOS:
   trunk:
     - MASShortcut
     - SnapKit
+    - SwiftDate
 
 SPEC CHECKSUMS:
   MASShortcut: d9e4909e878661cc42877cc9d6efbe638273ab57
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
 
-PODFILE CHECKSUM: 5bc20c71dcaea4ba087196e011aaee42e50e8a79
+PODFILE CHECKSUM: 74e8ce50b19cd47722ab4ec57252fa51ada55b03
 
 COCOAPODS: 1.9.1
