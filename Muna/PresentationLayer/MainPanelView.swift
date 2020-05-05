@@ -11,21 +11,22 @@ import SnapKit
 
 typealias VoidBlock = () -> Void
 
-final class Cell: NSCollectionViewItem {
-    let itemView = MainPanelItemView()
+class Panel: NSPanel {
+    override var acceptsFirstResponder: Bool {
+        return true
+    }
 
-    override func loadView() {
-        self.view = NSView()
-        self.view.wantsLayer = true
+    override var canBecomeMain: Bool {
+        return true
+    }
 
-        self.view.addSubview(self.itemView)
-        self.itemView.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview()
-        }
+    override var canBecomeKey: Bool {
+        return true
     }
 }
 
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
+
     let backgroundView = View()
     let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
@@ -33,6 +34,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
+
+        self.window?.makeFirstResponder(self)
     }
 
     required init?(coder: NSCoder) {
@@ -132,10 +135,6 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         self.collectionView.allowsMultipleSelection = false
         self.collectionView.backgroundColors = [.clear]
         self.collectionView.isSelectable = true
-        self.collectionView.register(
-            Cell.self,
-            forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Cell")
-        )
 
         let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: 0, section: 0))
         self.collectionView.selectItems(at: itemsToSelect, scrollPosition: .top)

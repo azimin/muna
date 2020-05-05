@@ -76,13 +76,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.setupWindowIfNeeded()
 
         if self.isPanelShowed {
-            self.oldApp?.activate(options: .activateIgnoringOtherApps)
+//            self.oldApp?.activate(options: .activateIgnoringOtherApps)
             self.hidePanel()
 //            NSApplication.shared.deactivate()
         } else {
-            self.oldApp = NSWorkspace.shared.frontmostApplication
-            NSApplication.shared.activate(ignoringOtherApps: true)
+//            self.oldApp = NSWorkspace.shared.frontmostApplication
+//            NSApplication.shared.activate(ignoringOtherApps: true)
             self.window.makeKeyAndOrderFront(nil)
+//            self.window.orderFrontRegardless()
             self.showPanel()
         }
         self.isPanelShowed.toggle()
@@ -105,9 +106,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             height: mainScreen.frame.height - 0
         )
 
-        self.window = NSWindow(
+        self.window = Panel(
             contentRect: frame,
-            styleMask: [],
+            styleMask: [.nonactivatingPanel],
             backing: .buffered,
             defer: false
         )
