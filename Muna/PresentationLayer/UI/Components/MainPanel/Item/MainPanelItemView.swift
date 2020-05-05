@@ -28,11 +28,7 @@ final class MainPanelItemView: View, GenericCellSubview {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layout() {
-        super.layout()
-    }
-
-    func setup() {
+    private func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.borderWidth = 1
         self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
@@ -91,14 +87,16 @@ final class MainPanelItemView: View, GenericCellSubview {
     func update(item: PanelItemModel) {
         self.deadlineLabel.stringValue = "End in: \(item.dueDate)"
 
-        let oldStatus = self.commentLabel.isHidden
         if let comment = item.comment, comment.isEmpty == false {
             self.commentLabel.isHidden = false
         } else {
             self.commentLabel.isHidden = true
         }
-        if oldStatus != self.commentLabel.isHidden {
-            self.layoutSubtreeIfNeeded()
+
+        if item.dueDate.compare(Date()) == .orderedAscending {
+            self.deadlineLabel.textColor = NSColor.color(.redLight)
+        } else {
+            self.deadlineLabel.textColor = NSColor.color(.white)
         }
 
         self.commentLabel.stringValue = item.comment ?? ""

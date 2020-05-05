@@ -13,6 +13,7 @@ enum ColorStyle {
     case black
     case white60alpha
     case blueSelected
+    case redLight
 
     var color: NSColor {
         switch self {
@@ -24,6 +25,8 @@ enum ColorStyle {
             return NSColor.white.withAlphaComponent(0.6)
         case .blueSelected:
             return NSColor(hex: "2C7DD3")
+        case .redLight:
+            return NSColor(hex: "FF8484")
         }
     }
 }
