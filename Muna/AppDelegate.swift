@@ -26,6 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.setupUserDefaults()
         self.setupStatusBarItem()
         self.setupShortcuts()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.hidePanelIfNeeded),
+            name: NSWindow.didResignKeyNotification,
+            object: nil
+        )
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -69,6 +76,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
+
+    @objc func hidePanelIfNeeded() {
+        if self.isPanelShowed {
+            self.hidePanel()
+            self.isPanelShowed = false
+        }
+    }
 
     @objc func togglePane() {
         self.setupWindowIfNeeded()
