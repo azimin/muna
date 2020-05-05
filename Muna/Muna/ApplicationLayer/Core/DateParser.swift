@@ -8,52 +8,72 @@
 
 import Foundation
 
-protocol DateParserProtocol {
-
-    func parseDate(from string: String) -> [Date?]
+enum Constants {
+    enum Time: String {
+        case minute
+        case minutes
+        case hour
+        case hours
+        case h
+        case weekends
+    }
 }
-class DateParser: DateParserProtocol {
 
-    private let datePattern = "\\b(\\w*(in)\\w*) (\\d?)(\\w*|(\\w+\\-\\w*)|(\\w* \\w*))(\\w*(minute|minutes|hour|hours|h|h.))\\b"
+struct DetectorResult {
+    let date: Date
+    let stringRange: NSRange
+}
 
-    func parseDate(from string: String) -> [Date?] {
-        let detector: NSDataDetector
-        do {
-            detector = try NSDataDetector(
-                types: NSTextCheckingResult.CheckingType.date.rawValue
-            )
-        } catch {
-            // TODO: - Make appAsserationHandler
-            assertionFailure("Error on detector initialization: \(error)")
-            return []
-        }
+protocol DateInStringDetectorProtocol {
 
-        let matches = detector.matches(
-            in: string,
-            options: [],
-            range: NSRange(location: 0, length: string.utf16.count)
-        )
+    func processDateFrom(string: String) -> [DetectorResult]?
+}
 
-        let dates = matches.map { $0.date }
-        return dates
+class DateInStringDetector: DateInStringDetectorProtocol {
+
+    private let datePattern = """
+    \\b(\\w*(in)\\w*) \\d*\\s*(\\w*(\(Constants.Time.minute.rawValue)
+    |\(Constants.Time.minutes.rawValue)
+    |\(Constants.Time.hour.rawValue)
+    |\(Constants.Time.hours.rawValue)
+    |\(Constants.Time.h.rawValue)))\\b
+    """
+
+    private let dataDetector: NSDataDetector
+    private let regularExpressionProcessor: NSRegularExpression
+
+    init() throws {
+        self.dataDetector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
+        self.regularExpressionProcessor = try NSRegularExpression(pattern: self.datePattern, options: [.caseInsensitive])
     }
 
-    private func tryFindByRegularExpression(from string: String) -> [Date?] {
-        let detector: NSRegularExpression
-        do {
-            detector = try NSRegularExpression(pattern: self.datePattern, options: [NSRegularExpression.Options.caseInsensitive])
-        } catch {
-            // TODO: - Make appAsserationHandler
-            assertionFailure("Error on detector initialization: \(error)")
-            return []
-        }
-
-        let matches = detector.matches(
+    func processDateFrom(string: String) -> [DetectorResult]? {
+        if let dateMatch = self.dataDetector.matches(
             in: string,
             options: [],
             range: NSRange(location: 0, length: string.utf16.count)
-        )
+        ).last, let date = dateMatch.date {
+            return [DetectorResult(date: date, stringRange: dateMatch.range)]
+        }
 
-        return []
+        return self.processDateByRegularExpression(from: string)
+    }
+
+    private func processDateByRegularExpression(from string: String) -> [DetectorResult]? {
+        var results: [DetectorResult]?
+        guard let match = regularExpressionProcessor.matches(
+            in: string,
+            options: [],
+            range: NSRange(location: 0, length: string.utf16.count)
+        ).last else {
+            return nil
+        }
+
+        let foundSubstring = (string as NSString).substring(with: match.range)
+        let digits = Int(foundSubstring.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
+        let timeString = foundSubstring.components(separatedBy: CharacterSet.decimalDigits).last?.trimmingCharacters(in: .whitespaces)
+        let time = Constants.Time(rawValue: timeString ?? "")
+        print("\(digits) \(time)")
+        return nil
     }
 }
