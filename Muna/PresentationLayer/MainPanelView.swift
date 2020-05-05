@@ -31,6 +31,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
 
+    var data: [PanelItemModel] = fakeData
+
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
@@ -183,7 +185,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     // MARK: - NSCollectionViewDataSource
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50000
+        return self.data.count
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
@@ -193,10 +195,11 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             indexPath: indexPath
         )
 
-        cell.customSubview.deadlineLabel.stringValue = "End in: \(indexPath)"
-        cell.customSubview.commentLabel.stringValue = "Index: \(indexPath)"
-        cell.customSubview.imageView.image =
-            NSImage(named: NSImage.Name("img"))
+        let item = self.data[indexPath.item]
+
+        cell.customSubview.deadlineLabel.stringValue = "End in: \(item.dueDate)"
+        cell.customSubview.commentLabel.stringValue = item.comment ?? ""
+        cell.customSubview.imageView.image = item.image
 
         return cell
     }

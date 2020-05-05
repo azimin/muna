@@ -70,20 +70,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
 
-    var oldApp: NSRunningApplication?
-
     @objc func togglePane() {
         self.setupWindowIfNeeded()
 
         if self.isPanelShowed {
-//            self.oldApp?.activate(options: .activateIgnoringOtherApps)
             self.hidePanel()
-//            NSApplication.shared.deactivate()
         } else {
-//            self.oldApp = NSWorkspace.shared.frontmostApplication
-//            NSApplication.shared.activate(ignoringOtherApps: true)
             self.window.makeKeyAndOrderFront(nil)
-//            self.window.orderFrontRegardless()
             self.showPanel()
         }
         self.isPanelShowed.toggle()
