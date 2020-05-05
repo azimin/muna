@@ -30,7 +30,6 @@ final class MainPanelItemView: View, GenericCellSubview {
 
     override func layout() {
         super.layout()
-        self.metainformationPlate.layer?.cornerRadius = 12
     }
 
     func setup() {
@@ -53,11 +52,14 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationPlate.blendingMode = .withinWindow
         self.metainformationPlate.material = .dark
         self.metainformationPlate.state = .active
+        self.metainformationPlate.layer?.maskedCorners = [
+            .layerMaxXMinYCorner, .layerMinXMinYCorner
+        ]
+        self.metainformationPlate.layer?.cornerRadius = 12
         self.metainformationPlate.wantsLayer = true
         self.metainformationPlate.maskImage = NSImage(color: .black, size: .init(width: 1, height: 1))
 
         self.metainformationPlate.snp.makeConstraints { (maker) in
-            maker.top.equalToSuperview().inset(180)
             maker.bottom.leading.trailing.equalToSuperview()
         }
 
@@ -84,6 +86,23 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.backgroundView.layer?.borderWidth = 1
             self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         }
+    }
+
+    func update(item: PanelItemModel) {
+        self.deadlineLabel.stringValue = "End in: \(item.dueDate)"
+
+        let oldStatus = self.commentLabel.isHidden
+        if let comment = item.comment, comment.isEmpty == false {
+            self.commentLabel.isHidden = false
+        } else {
+            self.commentLabel.isHidden = true
+        }
+        if oldStatus != self.commentLabel.isHidden {
+            self.layoutSubtreeIfNeeded()
+        }
+
+        self.commentLabel.stringValue = item.comment ?? ""
+        self.imageView.image = item.image
     }
 }
 

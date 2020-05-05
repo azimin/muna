@@ -196,10 +196,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         )
 
         let item = self.data[indexPath.item]
-
-        cell.customSubview.deadlineLabel.stringValue = "End in: \(item.dueDate)"
-        cell.customSubview.commentLabel.stringValue = item.comment ?? ""
-        cell.customSubview.imageView.image = item.image
+        cell.customSubview.update(item: item)
 
         return cell
     }

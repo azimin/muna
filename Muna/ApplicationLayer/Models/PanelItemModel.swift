@@ -60,8 +60,8 @@ var fakeData: [PanelItemModel] = [
     ),
     PanelItemModel(
         dueDate: Date().addingTimeInterval(60 * 24 * 4),
-        comment: nil,
-        path: "SAfari/dtf",
+        comment: "Some very very long title that will not fit one line",
+        path: "Safari/dtf",
         image: NSImage(named: NSImage.Name("img_8"))!
     )
 ]
