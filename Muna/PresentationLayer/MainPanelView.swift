@@ -31,7 +31,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     let visualView = NSVisualEffectView()
     let collectionView = NSCollectionView()
 
-    var data: [PanelItemModel] = fakeData
+    let groupedData = PanelItemModelGrouping(items: fakeData)
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -141,7 +141,13 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: 0, section: 0))
         self.collectionView.selectItems(at: itemsToSelect, scrollPosition: .top)
 
-        self.collectionView.registerReusableCellWithClass(GenericCollectionViewItem<MainPanelItemView>.self)
+        self.collectionView.registerReusableCellWithClass(
+            GenericCollectionViewItem<MainPanelItemView>.self
+        )
+
+        self.collectionView.registerReusableHeaderClass(
+            MainPanelHeaderView.self
+        )
 
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
@@ -154,8 +160,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             return
         }
 
-        if value.item > 0 {
-            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: value.item - 1, section: value.section))
+        if let preveous = self.collectionView.preveousIndexPath(indexPath: value) {
+            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: preveous)
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
             NSAnimationContext.beginGrouping()
             NSAnimationContext.current.duration = 0.3
@@ -171,8 +177,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             return
         }
 
-        if self.collectionView.numberOfItems(inSection: value.section) > value.item + 1 {
-            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: value.item + 1, section: value.section))
+        if let next = self.collectionView.nextIndexPath(indexPath: value) {
+            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: next)
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
             NSAnimationContext.beginGrouping()
             NSAnimationContext.current.duration = 0.3
@@ -184,8 +190,29 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     // MARK: - NSCollectionViewDataSource
 
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
+        return self.groupedData.sections
+    }
+
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.data.count
+        return self.groupedData.numberOfItems(in: section)
+    }
+
+    func collectionView(
+        _ collectionView: NSCollectionView,
+        viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
+        at indexPath: IndexPath) -> NSView {
+        guard kind == NSCollectionView.elementKindSectionHeader else {
+            return NSView()
+        }
+
+        let header = collectionView.dequeueReusableHeaderCellWithType(
+            MainPanelHeaderView.self,
+            indexPath: indexPath
+        )
+        let group = self.groupedData.group(in: indexPath.section)
+        header.label.stringValue = group.rawValue
+        return header
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
@@ -195,10 +222,28 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             indexPath: indexPath
         )
 
-        let item = self.data[indexPath.item]
+        let item = self.groupedData.item(at: indexPath)
         cell.customSubview.update(item: item)
 
         return cell
+    }
+
+    func collectionView(
+        _ collectionView: NSCollectionView,
+        layout collectionViewLayout: NSCollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int) -> NSSize {
+        return NSSize(
+            width: collectionView.frame.size.width,
+            height: 28
+        )
+    }
+
+    func collectionView(
+        _ collectionView: NSCollectionView,
+        layout collectionViewLayout: NSCollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> NSEdgeInsets {
+        return NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {

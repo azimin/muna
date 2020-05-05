@@ -93,7 +93,7 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.commentLabel.isHidden = true
         }
 
-        if item.dueDate.compare(Date()) == .orderedAscending {
+        if item.dueDate < Date() {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
             self.deadlineLabel.textColor = NSColor.color(.white)

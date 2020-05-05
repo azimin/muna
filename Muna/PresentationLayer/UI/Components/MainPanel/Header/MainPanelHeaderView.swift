@@ -9,8 +9,13 @@
 import Cocoa
 import SnapKit
 
-final class MainPanelHeaderView: View, GenericCellSubview {
+final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSCollectionViewSectionHeaderView {
     let label = Label(fontStyle: .bold, size: 18)
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        self.setup()
+    }
 
     init() {
         super.init(frame: .zero)
@@ -25,9 +30,10 @@ final class MainPanelHeaderView: View, GenericCellSubview {
         self.addSubview(self.label)
         self.label.textColor = NSColor.color(.white)
         self.label.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview().inset(
-                NSEdgeInsets(top: 2, left: 16, bottom: 0, right: 16)
+            maker.leading.trailing.equalToSuperview().inset(
+                NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             )
+            maker.centerY.equalToSuperview()
         }
     }
 }

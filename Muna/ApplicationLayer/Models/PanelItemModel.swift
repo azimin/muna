@@ -47,19 +47,19 @@ var fakeData: [PanelItemModel] = [
         image: NSImage(named: NSImage.Name("img_5"))!
     ),
     PanelItemModel(
-        dueDate: Date().addingTimeInterval(60 * 20),
+        dueDate: Date().addingTimeInterval(60 * 60 * 20),
         comment: nil,
         path: "Bear",
         image: NSImage(named: NSImage.Name("img_6"))!
     ),
     PanelItemModel(
-        dueDate: Date().addingTimeInterval(60 * 23),
+        dueDate: Date().addingTimeInterval(60 * 60 * 23),
         comment: nil,
         path: "Safari/tj",
         image: NSImage(named: NSImage.Name("img_7"))!
     ),
     PanelItemModel(
-        dueDate: Date().addingTimeInterval(60 * 24 * 4),
+        dueDate: Date().addingTimeInterval(60 * 60 * 24 * 4),
         comment: "Some very very long title that will not fit one line",
         path: "Safari/dtf",
         image: NSImage(named: NSImage.Name("img_8"))!

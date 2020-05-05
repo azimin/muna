@@ -14,6 +14,7 @@
 		9F3BC1462461D0A4002B6217 /* PanelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1452461D0A4002B6217 /* PanelItemModel.swift */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
+		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
 		9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelView.swift */; };
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
 		9FA07F5524608CC400654D36 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5424608CC400654D36 /* Preferences.swift */; };
@@ -44,6 +45,7 @@
 		9F3BC1452461D0A4002B6217 /* PanelItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModel.swift; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
+		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		9FA07F5424608CC400654D36 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA07F512460820400654D36 /* NSView+Extensions.swift */,
+				9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */,
 				9FA07F682460C16000654D36 /* NSColor+Hex.swift */,
 			);
 			path = Extensions;
@@ -436,6 +439,7 @@
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
+				9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
