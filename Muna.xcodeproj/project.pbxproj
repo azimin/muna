@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		23561B3F2461E76F00097E4A /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B3E2461E76F00097E4A /* DateParser.swift */; };
+		23561B412461ECB900097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* Parser.swift */; };
+		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		23561B3E2461E76F00097E4A /* DateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
+		23561B402461ECB900097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239DC917245D95E8001FA50C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				23561B3E2461E76F00097E4A /* DateParser.swift */,
+				23561B402461ECB900097E4A /* Parser.swift */,
+				23561B422461ED8800097E4A /* ParsedResult.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 			files = (
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
+				23561B432461ED8800097E4A /* ParsedResult.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
@@ -447,6 +454,7 @@
 				23561B3F2461E76F00097E4A /* DateParser.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
+				23561B412461ECB900097E4A /* Parser.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,

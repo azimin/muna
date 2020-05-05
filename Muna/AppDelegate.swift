@@ -9,6 +9,7 @@
 import Cocoa
 import SwiftUI
 import MASShortcut
+import SwiftyChrono
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
