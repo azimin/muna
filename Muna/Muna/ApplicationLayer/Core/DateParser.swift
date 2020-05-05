@@ -14,7 +14,7 @@ protocol DateParserProtocol {
 }
 class DateParser: DateParserProtocol {
 
-    private let datePattern = "\\b(\\w*(in|after)\\w*) (\\d?)(\\w*|(\\w+\\-\\w*)|(\\w* \\w*)) (\\w*(minute|minutes|hour|hours))\\b"
+    private let datePattern = "\\b(\\w*(in)\\w*) (\\d?)(\\w*|(\\w+\\-\\w*)|(\\w* \\w*))(\\w*(minute|minutes|hour|hours|h|h.))\\b"
 
     func parseDate(from string: String) -> [Date?] {
         let detector: NSDataDetector
