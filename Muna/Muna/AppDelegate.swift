@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
-        let string = "Homework in wekeends"
+        let string = "Homework in weekends"
         let parser = try? DateInStringDetector()
         print(parser?.processDateFrom(string: string))
     }

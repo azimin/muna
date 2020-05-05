@@ -36,7 +36,8 @@ class DateInStringDetector: DateInStringDetectorProtocol {
     |\(Constants.Time.minutes.rawValue)
     |\(Constants.Time.hour.rawValue)
     |\(Constants.Time.hours.rawValue)
-    |\(Constants.Time.h.rawValue)))\\b
+    |\(Constants.Time.h.rawValue)
+    |\(Constants.Time.weekends.rawValue)))\\b
     """
 
     private let dataDetector: NSDataDetector
@@ -71,7 +72,12 @@ class DateInStringDetector: DateInStringDetectorProtocol {
 
         let foundSubstring = (string as NSString).substring(with: match.range)
         let digits = Int(foundSubstring.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
-        let timeString = foundSubstring.components(separatedBy: CharacterSet.decimalDigits).last?.trimmingCharacters(in: .whitespaces)
+        let timeString: String?
+        if digits == nil {
+            timeString = foundSubstring.components(separatedBy: " ").last?.trimmingCharacters(in: .whitespaces)
+        } else {
+            timeString = foundSubstring.components(separatedBy: CharacterSet.decimalDigits).last?.trimmingCharacters(in: .whitespaces)
+        }
         let time = Constants.Time(rawValue: timeString ?? "")
         print("\(digits) \(time)")
         return nil
