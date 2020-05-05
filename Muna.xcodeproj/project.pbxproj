@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		23561B3F2461E76F00097E4A /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B3E2461E76F00097E4A /* DateParser.swift */; };
-		23561B412461ECB900097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* Parser.swift */; };
+		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
+		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
+		23561B492461F46600097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B482461F46600097E4A /* Parser.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
@@ -36,8 +38,10 @@
 
 /* Begin PBXFileReference section */
 		23561B3E2461E76F00097E4A /* DateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
-		23561B402461ECB900097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
+		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
+		23561B482461F46600097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239DC917245D95E8001FA50C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,11 +86,29 @@
 		23561B3D2461E76F00097E4A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				23561B442461EEAD00097E4A /* Parser */,
 				23561B3E2461E76F00097E4A /* DateParser.swift */,
-				23561B402461ECB900097E4A /* Parser.swift */,
 				23561B422461ED8800097E4A /* ParsedResult.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		23561B442461EEAD00097E4A /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				23561B402461ECB900097E4A /* ParserProtocol.swift */,
+				23561B482461F46600097E4A /* Parser.swift */,
+				23561B452461EEB500097E4A /* ENParsers */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		23561B452461EEB500097E4A /* ENParsers */ = {
+			isa = PBXGroup;
+			children = (
+				23561B462461EF3300097E4A /* ENWeekdaysParser.swift */,
+			);
+			path = ENParsers;
 			sourceTree = "<group>";
 		};
 		239DC907245D95E5001FA50C = {
@@ -447,6 +469,7 @@
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
+				23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
@@ -454,13 +477,14 @@
 				23561B3F2461E76F00097E4A /* DateParser.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
-				23561B412461ECB900097E4A /* Parser.swift in Sources */,
+				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
 				9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */,
 				9F3BC1462461D0A4002B6217 /* PanelItemModel.swift in Sources */,
+				23561B492461F46600097E4A /* Parser.swift in Sources */,
 				9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

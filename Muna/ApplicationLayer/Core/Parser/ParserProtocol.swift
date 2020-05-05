@@ -8,9 +8,11 @@
 
 import Foundation
 
-protocol Parser {
+protocol ParserProtocol {
 
     var pattern: String { get }
 
     func parse(fromText text: String, refDate: Date) -> ParsedResult?
+
+    func extract(fromMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult?
 }

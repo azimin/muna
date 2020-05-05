@@ -9,5 +9,7 @@
 import Foundation
 
 struct ParsedResult {
-    
+
+    let range: NSRange
+    let finalDate: Date
 }
