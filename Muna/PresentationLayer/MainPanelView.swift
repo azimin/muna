@@ -29,6 +29,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     let backgroundView = View()
     let visualView = NSVisualEffectView()
+    let scrollView = NSScrollView()
     let collectionView = NSCollectionView()
 
     let groupedData = PanelItemModelGrouping(items: fakeData)
@@ -119,10 +120,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             maker.edges.equalToSuperview()
         }
 
-        let scrollView = NSScrollView()
-        scrollView.documentView = self.collectionView
-        self.backgroundView.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (maker) in
+        self.scrollView.documentView = self.collectionView
+        self.backgroundView.addSubview(self.scrollView)
+        self.scrollView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(
                 NSEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
             )
@@ -161,13 +161,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
 
         if let preveous = self.collectionView.preveousIndexPath(indexPath: value) {
-            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: preveous)
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
-            NSAnimationContext.beginGrouping()
-            NSAnimationContext.current.duration = 0.3
-            NSAnimationContext.current.allowsImplicitAnimation = true
-            self.collectionView.animator().selectItems(at: itemsToSelect, scrollPosition: .bottom)
-            NSAnimationContext.endGrouping()
+            self.selectIndexPath(indexPath: preveous)
         }
     }
 
@@ -178,13 +173,40 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
 
         if let next = self.collectionView.nextIndexPath(indexPath: value) {
-            let itemsToSelect = Set<IndexPath>.init(arrayLiteral: next)
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+            self.selectIndexPath(indexPath: next)
+        }
+    }
+
+    func selectIndexPath(indexPath: IndexPath) {
+        let cell = collectionView.item(at: indexPath)
+
+        var shouldScroll = cell == nil
+        if let cellItem = cell {
+            let visibleFrame = CGRect(
+                x: self.scrollView.documentVisibleRect.minX,
+                y: self.scrollView.documentVisibleRect.minY,
+                width: self.scrollView.frame.width,
+                height: self.scrollView.frame.height
+            )
+
+            shouldScroll = visibleFrame.intersectionPercentage(cellItem.view.frame) < 100
+        }
+
+        if shouldScroll {
             NSAnimationContext.beginGrouping()
             NSAnimationContext.current.duration = 0.3
             NSAnimationContext.current.allowsImplicitAnimation = true
-            self.collectionView.animator().selectItems(at: itemsToSelect, scrollPosition: .bottom)
+            self.collectionView.animator().selectItems(
+                at: Set<IndexPath>.init(arrayLiteral: indexPath),
+                scrollPosition: .nearestHorizontalEdge
+            )
             NSAnimationContext.endGrouping()
+        } else {
+            self.collectionView.selectItems(
+                at: Set<IndexPath>.init(arrayLiteral: indexPath),
+                scrollPosition: .left
+            )
         }
     }
 
@@ -256,14 +278,23 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
 
-        NSAnimationContext.beginGrouping()
-        NSAnimationContext.current.duration = 0.3
-        NSAnimationContext.current.allowsImplicitAnimation = true
-        self.collectionView.animator().scrollToItems(at: indexPaths, scrollPosition: .bottom)
-        NSAnimationContext.endGrouping()
+        if let value = indexPaths.first {
+            self.selectIndexPath(indexPath: value)
+        }
     }
 
     override func keyDown(with event: NSEvent) {
         print("Test")
+    }
+}
+
+extension CGRect {
+    func intersectionPercentage(_ otherRect: CGRect) -> CGFloat {
+        if !intersects(otherRect) { return 0 }
+        let intersectionRect = intersection(otherRect)
+        if intersectionRect == self || intersectionRect == otherRect { return 100 }
+        let intersectionArea = intersectionRect.width * intersectionRect.height
+        let area = width * height
+        return (intersectionArea / area) * 100
     }
 }
