@@ -27,6 +27,9 @@ class Panel: NSPanel {
 
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
 
+    private let headerHight: CGFloat = 28
+    private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+
     let backgroundView = View()
     let visualView = NSVisualEffectView()
     let scrollView = NSScrollView()
@@ -180,6 +183,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     func selectIndexPath(indexPath: IndexPath) {
         let cell = collectionView.item(at: indexPath)
+        var cellFrame: CGRect?
 
         var shouldScroll = cell == nil
         if let cellItem = cell {
@@ -190,18 +194,39 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
                 height: self.scrollView.frame.height
             )
 
+            cellFrame = cellItem.view.frame
             shouldScroll = visibleFrame.intersectionPercentage(cellItem.view.frame) < 100
         }
 
         if shouldScroll {
-            NSAnimationContext.beginGrouping()
-            NSAnimationContext.current.duration = 0.3
-            NSAnimationContext.current.allowsImplicitAnimation = true
-            self.collectionView.animator().selectItems(
-                at: Set<IndexPath>.init(arrayLiteral: indexPath),
-                scrollPosition: .nearestHorizontalEdge
-            )
-            NSAnimationContext.endGrouping()
+            if var frame = cellFrame {
+                if indexPath.item == 0 {
+                    let topInset = self.insetsForSection.top + self.insetsForSection.bottom + self.headerHight
+                    frame.origin.y -= topInset
+                    frame.size.height += topInset
+                }
+                frame.size.height += self.insetsForSection.bottom
+
+                self.collectionView.selectItems(
+                    at: Set<IndexPath>.init(arrayLiteral: indexPath),
+                    scrollPosition: .left
+                )
+                NSAnimationContext.beginGrouping()
+                NSAnimationContext.current.duration = 0.3
+                NSAnimationContext.current.allowsImplicitAnimation = true
+                self.collectionView.animator().scrollToVisible(frame)
+                NSAnimationContext.endGrouping()
+            } else {
+                assertionFailure("Shouldn't reach")
+                NSAnimationContext.beginGrouping()
+                NSAnimationContext.current.duration = 0.3
+                NSAnimationContext.current.allowsImplicitAnimation = true
+                self.collectionView.animator().selectItems(
+                    at: Set<IndexPath>.init(arrayLiteral: indexPath),
+                    scrollPosition: .nearestHorizontalEdge
+                )
+                NSAnimationContext.endGrouping()
+            }
         } else {
             self.collectionView.selectItems(
                 at: Set<IndexPath>.init(arrayLiteral: indexPath),
@@ -256,7 +281,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         referenceSizeForHeaderInSection section: Int) -> NSSize {
         return NSSize(
             width: collectionView.frame.size.width,
-            height: 28
+            height: self.headerHight
         )
     }
 
@@ -265,7 +290,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         layout collectionViewLayout: NSCollectionViewLayout,
         insetForSectionAt section: Int
     ) -> NSEdgeInsets {
-        return NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        return self.insetsForSection
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
