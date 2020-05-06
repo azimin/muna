@@ -118,17 +118,6 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         return nil
     }
 
-//    - (WLListViewCell *)cellAtPoint:(NSPoint)point
-//    {
-//        for (WLListViewCell *cell in _visibleCells) {
-//            if (NSPointInRect(point, cell.frame)) {
-//                return cell;
-//            }
-//        }
-//
-//        return nil;
-//    }
-
     // MARK: - Show/Hide
 
     func show() {
