@@ -185,6 +185,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     }
 
     func hide(completion: VoidBlock?) {
+        self.popover?.close()
+
         CATransaction.begin()
         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
         transform.fromValue = self.backgroundView.layer?.transform
