@@ -9,6 +9,7 @@
 import Cocoa
 import SnapKit
 
+// swiftlint:disable type_body_length
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
 
     private let headerHight: CGFloat = 28
@@ -93,25 +94,74 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
     }
 
+    var capturedView: NSView?
+    var capturedItem: PanelItemModel?
+
     override func rightMouseUp(with event: NSEvent) {
         let point = self.convert(event.locationInWindow, to: self.collectionView)
 
-        if let cell = self.cellAt(point: point) {
+        if let item = self.cellAt(point: point),
+            let indexPath = self.collectionView.indexPath(for: item) {
+
+            self.selectIndexPath(indexPath: indexPath, completion: nil)
+
+            self.capturedView = item.view
+            self.capturedItem = self.groupedData.item(at: indexPath)
             // TODO: Work with menu
             let menu = NSMenu(title: "ControlMenu")
             menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
-            menu.addItem(NSMenuItem(title: "Preview", action: nil, keyEquivalent: ""))
-            NSMenu.popUpContextMenu(menu, with: event, for: cell)
+            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.showPopOver), keyEquivalent: ""))
+            NSMenu.popUpContextMenu(menu, with: event, for: item.view)
         } else {
             return super.rightMouseUp(with: event)
         }
     }
 
-    func cellAt(point: NSPoint) -> NSView? {
+    var popover: NSPopover?
+
+    var isPopOverShown: Bool {
+        return self.popover?.isShown == true
+    }
+
+    func togglePopOver() {
+        if self.popover == nil || self.popover?.isShown == false {
+            self.showPopOver()
+        } else {
+            self.popover?.close()
+        }
+    }
+
+    @objc
+    func showPopOver() {
+        self.popover?.close()
+
+        guard let capturedView = self.capturedView,
+            let capturedItem = self.capturedItem else {
+            assertionFailure("No captured view")
+            return
+        }
+
+        let popover = NSPopover()
+        popover.contentViewController = ImagePreviewViewController(
+            image: capturedItem.image
+        )
+        popover.behavior = .semitransient
+        popover.animates = true
+
+        popover.show(
+            relativeTo: capturedView.frame,
+            of: self.collectionView,
+            preferredEdge: .minX
+        )
+
+        self.popover = popover
+    }
+
+    func cellAt(point: NSPoint) -> NSCollectionViewItem? {
         for cell in self.collectionView.visibleItems() {
             // swiftlint:disable legacy_nsgeometry_functions
             if NSPointInRect(point, cell.view.frame) {
-                return cell.view
+                return cell
             }
         }
 
@@ -167,6 +217,37 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
          })
      }
 
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        // esc
+        if event.keyCode == 53 {
+            (NSApplication.shared.delegate as? AppDelegate)?.hidePanelIfNeeded()
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
+    }
+
+    override func insertText(_ insertString: Any) {
+        if let string = insertString as? String, string == " " {
+            if let indexPath = self.collectionView.selectionIndexPaths.first {
+
+                self.selectIndexPath(indexPath: indexPath, completion: {
+                    guard let item = self.collectionView.item(at: indexPath) else {
+                        assertionFailure("No item")
+                        return
+                    }
+                    self.capturedView = item.view
+                    self.capturedItem = self.groupedData.item(at: indexPath)
+                    self.togglePopOver()
+                })
+            } else {
+                assertionFailure("No selected index")
+            }
+        } else {
+            super.insertText(insertString)
+        }
+    }
+
     // MARK: - Preveous/Next
 
     func selectPreveous() {
@@ -177,7 +258,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         if let preveous = self.collectionView.preveousIndexPath(indexPath: value) {
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
-            self.selectIndexPath(indexPath: preveous)
+            self.selectIndexPath(indexPath: preveous, completion: nil)
         }
     }
 
@@ -189,13 +270,15 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         if let next = self.collectionView.nextIndexPath(indexPath: value) {
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
-            self.selectIndexPath(indexPath: next)
+            self.selectIndexPath(indexPath: next, completion: nil)
         }
     }
 
     var selectedIndex: IndexPath?
 
-    func selectIndexPath(indexPath: IndexPath) {
+    func selectIndexPath(indexPath: IndexPath, completion: VoidBlock?) {
+        self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+
         self.selectedIndex = indexPath
 
         let cell = collectionView.item(at: indexPath)
@@ -234,6 +317,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
                 NSAnimationContext.beginGrouping()
                 NSAnimationContext.current.duration = 0.15
                 NSAnimationContext.current.allowsImplicitAnimation = true
+                NSAnimationContext.current.completionHandler = {
+                    completion?()
+                }
                 self.collectionView.animator().scrollToVisible(frame)
                 NSAnimationContext.endGrouping()
             } else {
@@ -241,8 +327,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
                 NSAnimationContext.current.duration = 0.15
                 NSAnimationContext.current.allowsImplicitAnimation = true
                 NSAnimationContext.current.completionHandler = {
+                    completion?()
                     if let indexPath = self.selectedIndex {
-                        self.selectIndexPath(indexPath: indexPath)
+                        self.selectIndexPath(indexPath: indexPath, completion: nil)
                     }
                 }
                 self.collectionView.animator().selectItems(
@@ -259,6 +346,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             if let frame = frameToScroll {
                 self.collectionView.scrollToVisible(frame)
             }
+            completion?()
         }
     }
 
@@ -331,7 +419,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
 
         if let value = indexPaths.first {
-            self.selectIndexPath(indexPath: value)
+            self.selectIndexPath(indexPath: value, completion: nil)
         }
     }
 }

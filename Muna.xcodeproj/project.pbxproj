@@ -14,6 +14,7 @@
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
 		9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0E24633D1700F05D81 /* Blocks.swift */; };
+		9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C13246346F900F05D81 /* ImagePreviewViewController.swift */; };
 		9F3BC1462461D0A4002B6217 /* PanelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1452461D0A4002B6217 /* PanelItemModel.swift */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
@@ -48,6 +49,7 @@
 		9F025C0924633C6F00F05D81 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		9F025C0E24633D1700F05D81 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
+		9F025C13246346F900F05D81 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		9F3BC1452461D0A4002B6217 /* PanelItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModel.swift; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
@@ -130,6 +132,30 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		9F025C10246346D700F05D81 /* ImagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				9F025C12246346ED00F05D81 /* ViewController */,
+			);
+			path = ImagePreview;
+			sourceTree = "<group>";
+		};
+		9F025C11246346E600F05D81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F540FF5245E2B07007BF60C /* MainPanelView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9F025C12246346ED00F05D81 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9F025C13246346F900F05D81 /* ImagePreviewViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9F3BC1442461D098002B6217 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,7 +170,6 @@
 			children = (
 				9FC06BEF2460CE4C008D4D3C /* Parts */,
 				9F8CCC7F245DB47B00E0F102 /* UI */,
-				9F540FF5245E2B07007BF60C /* MainPanelView.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -275,6 +300,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				9F025C10246346D700F05D81 /* ImagePreview */,
 				9FC06BF02460CE56008D4D3C /* MainPanel */,
 			);
 			path = Parts;
@@ -283,17 +309,18 @@
 		9FC06BF02460CE56008D4D3C /* MainPanel */ = {
 			isa = PBXGroup;
 			children = (
-				9FC06BF42460CE68008D4D3C /* View */,
+				9F025C11246346E600F05D81 /* View */,
+				9FC06BF42460CE68008D4D3C /* ViewController */,
 			);
 			path = MainPanel;
 			sourceTree = "<group>";
 		};
-		9FC06BF42460CE68008D4D3C /* View */ = {
+		9FC06BF42460CE68008D4D3C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */,
 			);
-			name = View;
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
@@ -469,6 +496,7 @@
 				9F540FF6245E2B07007BF60C /* MainPanelView.swift in Sources */,
 				9F3BC1462461D0A4002B6217 /* PanelItemModel.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
+				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
 				9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
