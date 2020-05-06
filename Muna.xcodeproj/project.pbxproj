@@ -33,6 +33,7 @@
 		9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F6E2460C2E500654D36 /* GenericCollectionViewItem.swift */; };
 		9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F712460C31B00654D36 /* ReusableView.swift */; };
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
+		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		9FA07F6E2460C2E500654D36 /* GenericCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewItem.swift; sourceTree = "<group>"; };
 		9FA07F712460C31B00654D36 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
+		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelViewController.swift; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
 		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9F540FF5245E2B07007BF60C /* MainPanelView.swift */,
+				9FB8B5202463672300BE7544 /* PopUpController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
+				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,

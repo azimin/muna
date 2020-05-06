@@ -65,3 +65,16 @@ var fakeData: [PanelItemModel] = [
         image: NSImage(named: NSImage.Name("img_8"))!
     )
 ]
+
+extension Array {
+    func repeated(count: Int) -> Self {
+        assert(count > 0, "count must be greater than 0")
+
+        var result = self
+        for _ in 0 ..< count - 1 {
+            result += self
+        }
+
+        return result
+    }
+}

@@ -10,7 +10,7 @@ import Cocoa
 import SnapKit
 
 // swiftlint:disable type_body_length
-class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
+class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
 
     private let headerHight: CGFloat = 28
     private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
@@ -21,6 +21,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     let collectionView = NSCollectionView()
 
     let groupedData = PanelItemModelGrouping(items: fakeData)
+
+    let popUpController = PopUpController()
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -45,6 +47,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     }
 
     func setup() {
+        self.popUpController.delegate = self
+
         self.addSubview(self.backgroundView)
         self.backgroundView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
@@ -110,7 +114,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             // TODO: Work with menu
             let menu = NSMenu(title: "ControlMenu")
             menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
-            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.showPopOver), keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.popUpController.show), keyEquivalent: ""))
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
         } else {
             return super.rightMouseUp(with: event)
@@ -231,11 +235,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     override func insertText(_ insertString: Any) {
         if let string = insertString as? String, string == " " {
-            if self.isPopOverShown {
-                self.togglePopOver()
-            } else {
-                self.popUpOnSelectedItem(forceShow: false)
-            }
+            self.popUpController.toggle()
         } else {
             super.insertText(insertString)
         }
@@ -272,13 +272,13 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
 
         if let preveous = self.collectionView.preveousIndexPath(indexPath: value) {
-            self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+            if self.collectionView.selectionIndexPaths.first == preveous {
+                return
+            }
             self.selectIndexPath(indexPath: preveous, completion: nil)
         }
 
-        if self.isPopOverShown {
-            self.popUpOnSelectedItem(forceShow: true)
-        }
+        self.popUpController.hideAndAddShowToQueueIfNeeded()
     }
 
     func selectNext() {
@@ -288,13 +288,13 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
 
         if let next = self.collectionView.nextIndexPath(indexPath: value) {
-            self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
+            if self.collectionView.selectionIndexPaths.first == next {
+                return
+            }
             self.selectIndexPath(indexPath: next, completion: nil)
         }
 
-        if self.isPopOverShown {
-            self.popUpOnSelectedItem(forceShow: true)
-        }
+        self.popUpController.hideAndAddShowToQueueIfNeeded()
     }
 
     var selectedIndex: IndexPath?
@@ -371,6 +371,16 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             }
             completion?()
         }
+    }
+
+    // MARK: - PopUpControllerDelegate
+
+    func popUpControllerAskToHide(_ popUpController: PopUpController) {
+        self.popover?.close()
+    }
+
+    func popUpControllerAskToShowCurrentItem(_ popUpController: PopUpController) {
+        self.popUpOnSelectedItem(forceShow: true)
     }
 
     // MARK: - NSCollectionViewDataSource
