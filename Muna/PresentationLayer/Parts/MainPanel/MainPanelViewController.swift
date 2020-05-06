@@ -15,11 +15,5 @@ class MainPanelViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.becomeFirstResponder()
-    }
-
-    override func keyDown(with event: NSEvent) {
-        print("Swag")
     }
 }

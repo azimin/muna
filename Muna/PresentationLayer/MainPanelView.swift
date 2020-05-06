@@ -9,22 +9,6 @@
 import Cocoa
 import SnapKit
 
-typealias VoidBlock = () -> Void
-
-class Panel: NSPanel {
-    override var acceptsFirstResponder: Bool {
-        return true
-    }
-
-    override var canBecomeMain: Bool {
-        return true
-    }
-
-    override var canBecomeKey: Bool {
-        return true
-    }
-}
-
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
 
     private let headerHight: CGFloat = 28
@@ -90,7 +74,6 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     var downMonitor: Any?
 
     func addMonitor() {
-        self.collectionView.becomeFirstResponder()
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
             // up
@@ -306,20 +289,5 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         if let value = indexPaths.first {
             self.selectIndexPath(indexPath: value)
         }
-    }
-
-    override func keyDown(with event: NSEvent) {
-        print("Test")
-    }
-}
-
-extension CGRect {
-    func intersectionPercentage(_ otherRect: CGRect) -> CGFloat {
-        if !intersects(otherRect) { return 0 }
-        let intersectionRect = intersection(otherRect)
-        if intersectionRect == self || intersectionRect == otherRect { return 100 }
-        let intersectionArea = intersectionRect.width * intersectionRect.height
-        let area = width * height
-        return (intersectionArea / area) * 100
     }
 }
