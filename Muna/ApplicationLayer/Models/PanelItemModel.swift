@@ -41,6 +41,18 @@ var fakeData: [PanelItemModel] = [
         image: NSImage(named: NSImage.Name("img_4"))!
     ),
     PanelItemModel(
+        dueDate: Date().addingTimeInterval(60 * 66),
+        comment: "Clean folders",
+        path: "Finder",
+        image: NSImage(named: NSImage.Name("img_9"))!
+    ),
+    PanelItemModel(
+        dueDate: Date().addingTimeInterval(60 * 65),
+        comment: "Clean folders",
+        path: "Finder",
+        image: NSImage(named: NSImage.Name("img_10"))!
+    ),
+    PanelItemModel(
         dueDate: Date().addingTimeInterval(60 * 120),
         comment: "Check app",
         path: "App Store",

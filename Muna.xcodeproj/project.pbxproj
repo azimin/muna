@@ -146,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				9F540FF5245E2B07007BF60C /* MainPanelView.swift */,
-				9FB8B5202463672300BE7544 /* PopUpController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -180,6 +179,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9FB8B522246372CA00BE7544 /* Controllers */,
 				9F025C0D24633D0F00F05D81 /* Helpers */,
 				9F3BC1442461D098002B6217 /* Models */,
 				9FA07F5324608CB600654D36 /* Preferences */,
@@ -298,6 +298,14 @@
 				9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		9FB8B522246372CA00BE7544 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9FB8B5202463672300BE7544 /* PopUpController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {

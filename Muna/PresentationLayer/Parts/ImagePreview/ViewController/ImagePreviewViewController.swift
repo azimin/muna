@@ -13,8 +13,11 @@ class ImagePreviewViewController: NSViewController {
     let imageView = ImageView()
 
     let image: NSImage
-    init(image: NSImage) {
+    let maxSize: CGSize
+
+    init(image: NSImage, maxSize: CGSize) {
         self.image = image
+        self.maxSize = maxSize
         super.init(nibName: nil, bundle: nil)
 
         self.imageView.image = image
@@ -31,9 +34,14 @@ class ImagePreviewViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let proportion = self.image.size.height / self.image.size.width
+
         self.view.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
+            maker.width.lessThanOrEqualTo(maxSize.width)
+            maker.height.lessThanOrEqualTo(maxSize.height)
+            maker.height.equalTo(self.imageView.snp.width).multipliedBy(proportion)
         }
     }
 }

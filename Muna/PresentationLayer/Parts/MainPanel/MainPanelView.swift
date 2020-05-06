@@ -145,9 +145,18 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
                 return
         }
 
+        guard let screeSize = self.window?.screen?.frame else {
+            assertionFailure("No screen size")
+            return
+        }
+
         let popover = NSPopover()
         popover.contentViewController = ImagePreviewViewController(
-            image: capturedItem.image
+            image: capturedItem.image,
+            maxSize: CGSize(
+                width: screeSize.width * 0.5,
+                height: screeSize.height * 0.8
+            )
         )
         popover.behavior = .semitransient
         popover.animates = true
