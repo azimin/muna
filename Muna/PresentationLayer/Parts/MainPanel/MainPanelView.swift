@@ -231,7 +231,11 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     override func insertText(_ insertString: Any) {
         if let string = insertString as? String, string == " " {
-            self.popUpOnSelectedItem(forceShow: false)
+            if self.isPopOverShown {
+                self.togglePopOver()
+            } else {
+                self.popUpOnSelectedItem(forceShow: false)
+            }
         } else {
             super.insertText(insertString)
         }
@@ -329,16 +333,16 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         if shouldScroll {
             if let frame = frameToScroll {
-                self.collectionView.selectItems(
-                    at: Set<IndexPath>.init(arrayLiteral: indexPath),
-                    scrollPosition: .left
-                )
                 NSAnimationContext.beginGrouping()
                 NSAnimationContext.current.duration = 0.15
                 NSAnimationContext.current.allowsImplicitAnimation = true
                 NSAnimationContext.current.completionHandler = {
                     completion?()
                 }
+                self.collectionView.selectItems(
+                    at: Set<IndexPath>.init(arrayLiteral: indexPath),
+                    scrollPosition: .left
+                )
                 self.collectionView.animator().scrollToVisible(frame)
                 NSAnimationContext.endGrouping()
             } else {
