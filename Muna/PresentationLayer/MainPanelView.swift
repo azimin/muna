@@ -164,7 +164,11 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
     }
 
+    var selectedIndex: IndexPath?
+
     func selectIndexPath(indexPath: IndexPath) {
+        self.selectedIndex = indexPath
+
         let cell = collectionView.item(at: indexPath)
         var cellFrame: CGRect?
 
@@ -181,29 +185,37 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             shouldScroll = visibleFrame.intersectionPercentage(cellItem.view.frame) < 100
         }
 
-        if shouldScroll {
-            if var frame = cellFrame {
-                if indexPath.item == 0 {
-                    let topInset = self.insetsForSection.top + self.insetsForSection.bottom + self.headerHight
-                    frame.origin.y -= topInset
-                    frame.size.height += topInset
-                }
-                frame.size.height += self.insetsForSection.bottom
+        var frameToScroll: CGRect?
+        if var frame = cellFrame {
+            if indexPath.item == 0 {
+                let topInset = self.insetsForSection.top + self.insetsForSection.bottom + self.headerHight
+                frame.origin.y -= topInset
+                frame.size.height += topInset
+            }
+            frame.size.height += self.insetsForSection.bottom
+            frameToScroll = frame
+        }
 
+        if shouldScroll {
+            if let frame = frameToScroll {
                 self.collectionView.selectItems(
                     at: Set<IndexPath>.init(arrayLiteral: indexPath),
                     scrollPosition: .left
                 )
                 NSAnimationContext.beginGrouping()
-                NSAnimationContext.current.duration = 0.3
+                NSAnimationContext.current.duration = 0.15
                 NSAnimationContext.current.allowsImplicitAnimation = true
                 self.collectionView.animator().scrollToVisible(frame)
                 NSAnimationContext.endGrouping()
             } else {
-                assertionFailure("Shouldn't reach")
                 NSAnimationContext.beginGrouping()
-                NSAnimationContext.current.duration = 0.3
+                NSAnimationContext.current.duration = 0.15
                 NSAnimationContext.current.allowsImplicitAnimation = true
+                NSAnimationContext.current.completionHandler = {
+                    if let indexPath = self.selectedIndex {
+                        self.selectIndexPath(indexPath: indexPath)
+                    }
+                }
                 self.collectionView.animator().selectItems(
                     at: Set<IndexPath>.init(arrayLiteral: indexPath),
                     scrollPosition: .nearestHorizontalEdge
@@ -215,6 +227,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
                 at: Set<IndexPath>.init(arrayLiteral: indexPath),
                 scrollPosition: .left
             )
+            if let frame = frameToScroll {
+                self.collectionView.scrollToVisible(frame)
+            }
         }
     }
 
