@@ -137,8 +137,8 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
         guard let capturedView = self.capturedView,
             let capturedItem = self.capturedItem else {
-            assertionFailure("No captured view")
-            return
+                assertionFailure("No captured view")
+                return
         }
 
         let popover = NSPopover()
@@ -171,51 +171,51 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     // MARK: - Show/Hide
 
     func show() {
-         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
-         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-         transform.fromValue = self.backgroundView.layer?.transform
-         transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
-         transform.duration = 0.25
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
+        transform.duration = 0.25
 
-         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
-         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
-         self.addMonitor()
-     }
+        self.addMonitor()
+    }
 
-     func hide(completion: VoidBlock?) {
-         CATransaction.begin()
-         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-         transform.fromValue = self.backgroundView.layer?.transform
-         transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-         transform.duration = 0.25
+    func hide(completion: VoidBlock?) {
+        CATransaction.begin()
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        transform.duration = 0.25
 
-         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
-         CATransaction.setCompletionBlock(completion)
-         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-         CATransaction.commit()
-     }
+        CATransaction.setCompletionBlock(completion)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+        CATransaction.commit()
+    }
 
-     var downMonitor: Any?
+    var downMonitor: Any?
 
-     func addMonitor() {
-         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+    func addMonitor() {
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
-             // up
-             if event.keyCode == 126 {
-                 self.selectPreveous()
-                 return nil
-                 // down
-             } else if event.keyCode == 125 {
-                 self.selectNext()
-                 return nil
-             }
+            // up
+            if event.keyCode == 126 {
+                self.selectPreveous()
+                return nil
+                // down
+            } else if event.keyCode == 125 {
+                self.selectNext()
+                return nil
+            }
 
-             return event
-         })
-     }
+            return event
+        })
+    }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         // esc
@@ -229,23 +229,32 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     override func insertText(_ insertString: Any) {
         if let string = insertString as? String, string == " " {
-            if let indexPath = self.collectionView.selectionIndexPaths.first {
-
-                self.selectIndexPath(indexPath: indexPath, completion: {
-                    guard let item = self.collectionView.item(at: indexPath) else {
-                        assertionFailure("No item")
-                        return
-                    }
-                    self.capturedView = item.view
-                    self.capturedItem = self.groupedData.item(at: indexPath)
-                    self.togglePopOver()
-                })
-            } else {
-                assertionFailure("No selected index")
-            }
+            self.popUpOnSelectedItem(forceShow: false)
         } else {
             super.insertText(insertString)
         }
+    }
+
+    func popUpOnSelectedItem(forceShow: Bool) {
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        self.selectIndexPath(indexPath: indexPath, completion: {
+            guard let item = self.collectionView.item(at: indexPath) else {
+                assertionFailure("No item")
+                return
+            }
+            self.capturedView = item.view
+            self.capturedItem = self.groupedData.item(at: indexPath)
+
+            if forceShow {
+                self.showPopOver()
+            } else {
+                self.togglePopOver()
+            }
+        })
     }
 
     // MARK: - Preveous/Next
@@ -260,6 +269,10 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
             self.selectIndexPath(indexPath: preveous, completion: nil)
         }
+
+        if self.isPopOverShown {
+            self.popUpOnSelectedItem(forceShow: true)
+        }
     }
 
     func selectNext() {
@@ -271,6 +284,10 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         if let next = self.collectionView.nextIndexPath(indexPath: value) {
             self.collectionView.deselectItems(at: self.collectionView.selectionIndexPaths)
             self.selectIndexPath(indexPath: next, completion: nil)
+        }
+
+        if self.isPopOverShown {
+            self.popUpOnSelectedItem(forceShow: true)
         }
     }
 
