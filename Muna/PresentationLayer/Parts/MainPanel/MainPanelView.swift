@@ -138,6 +138,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
     @objc
     func showPopOver() {
         self.popover?.close()
+        self.popover = nil
 
         guard let capturedView = self.capturedView,
             let capturedItem = self.capturedItem else {
@@ -168,6 +169,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         )
 
         self.popover = popover
+        self.popUpController.popover = popover
     }
 
     func cellAt(point: NSPoint) -> NSCollectionViewItem? {

@@ -17,6 +17,7 @@ protocol PopUpControllerDelegate: class {
 class PopUpController {
     enum UserState {
         case shown
+        case shouldShow
         case hidden
     }
 
@@ -24,6 +25,11 @@ class PopUpController {
     weak var delegate: PopUpControllerDelegate?
 
     var timer: Timer?
+    var popover: NSPopover?
+
+    private var isPopOverShown: Bool {
+        return self.popover?.isShown == true
+    }
 
     func hide() {
         self.state = .hidden
@@ -33,9 +39,13 @@ class PopUpController {
 
     func toggle() {
         switch self.state {
-        case .hidden:
-            self.show()
-        case .shown:
+        case .hidden, .shown:
+            if self.isPopOverShown {
+                self.hide()
+            } else {
+                self.show()
+            }
+        case .shouldShow:
             self.hide()
         }
     }
@@ -48,10 +58,17 @@ class PopUpController {
     }
 
     func hideAndAddShowToQueueIfNeeded() {
-        guard self.state == .shown else {
+        if self.state == .hidden {
             return
         }
 
+        if self.state == .shown {
+            guard self.isPopOverShown else {
+                return
+            }
+        }
+
+        self.state = .shouldShow
         self.delegate?.popUpControllerAskToHide(self)
 
         self.timer?.invalidate()
@@ -59,7 +76,7 @@ class PopUpController {
 
         self.timer = Timer(timeInterval: 0.2, repeats: false, block: { [weak self] (timer) in
             guard let self = self, timer == self.timer else { return }
-            if self.state == .shown {
+            if self.state == .shouldShow {
                 self.delegate?.popUpControllerAskToShowCurrentItem(self)
             }
         })
