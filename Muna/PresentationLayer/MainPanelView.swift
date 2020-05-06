@@ -43,53 +43,6 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
         }
     }
 
-    func show() {
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-
-        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-        transform.fromValue = self.backgroundView.layer?.transform
-        transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
-        transform.duration = 0.25
-
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
-        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-
-        self.addMonitor()
-    }
-
-    func hide(completion: VoidBlock?) {
-        CATransaction.begin()
-        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-        transform.fromValue = self.backgroundView.layer?.transform
-        transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-        transform.duration = 0.25
-
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-
-        CATransaction.setCompletionBlock(completion)
-        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-        CATransaction.commit()
-    }
-
-    var downMonitor: Any?
-
-    func addMonitor() {
-        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
-
-            // up
-            if event.keyCode == 126 {
-                self.selectPreveous()
-                return nil
-                // down
-            } else if event.keyCode == 125 {
-                self.selectNext()
-                return nil
-            }
-
-            return event
-        })
-    }
-
     func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.snp.makeConstraints { (maker) in
@@ -139,6 +92,93 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
             self.collectionView.setFrameSize(contentSize)
         }
     }
+
+    override func rightMouseUp(with event: NSEvent) {
+        let point = self.convert(event.locationInWindow, to: self.collectionView)
+
+        if let cell = self.cellAt(point: point) {
+            // TODO: Work with menu
+            let menu = NSMenu(title: "ControlMenu")
+            menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Preview", action: nil, keyEquivalent: ""))
+            NSMenu.popUpContextMenu(menu, with: event, for: cell)
+        } else {
+            return super.rightMouseUp(with: event)
+        }
+    }
+
+    func cellAt(point: NSPoint) -> NSView? {
+        for cell in self.collectionView.visibleItems() {
+            // swiftlint:disable legacy_nsgeometry_functions
+            if NSPointInRect(point, cell.view.frame) {
+                return cell.view
+            }
+        }
+
+        return nil
+    }
+
+//    - (WLListViewCell *)cellAtPoint:(NSPoint)point
+//    {
+//        for (WLListViewCell *cell in _visibleCells) {
+//            if (NSPointInRect(point, cell.frame)) {
+//                return cell;
+//            }
+//        }
+//
+//        return nil;
+//    }
+
+    // MARK: - Show/Hide
+
+    func show() {
+         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+
+         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+         transform.fromValue = self.backgroundView.layer?.transform
+         transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
+         transform.duration = 0.25
+
+         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
+         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+
+         self.addMonitor()
+     }
+
+     func hide(completion: VoidBlock?) {
+         CATransaction.begin()
+         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+         transform.fromValue = self.backgroundView.layer?.transform
+         transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+         transform.duration = 0.25
+
+         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+
+         CATransaction.setCompletionBlock(completion)
+         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+         CATransaction.commit()
+     }
+
+     var downMonitor: Any?
+
+     func addMonitor() {
+         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+
+             // up
+             if event.keyCode == 126 {
+                 self.selectPreveous()
+                 return nil
+                 // down
+             } else if event.keyCode == 125 {
+                 self.selectNext()
+                 return nil
+             }
+
+             return event
+         })
+     }
+
+    // MARK: - Preveous/Next
 
     func selectPreveous() {
         guard let value = self.collectionView.selectionIndexPaths.first else {
