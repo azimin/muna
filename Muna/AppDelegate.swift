@@ -18,6 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
 
+    var mouseLocation: NSPoint { NSEvent.mouseLocation }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
 
@@ -33,6 +35,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
+
+        NSEvent.addGlobalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDown, handler: {(event: NSEvent) in
+            print("mouseLocationDown:", String(format: "%.1f, %.1f", self.mouseLocation.x, self.mouseLocation.y))
+        })
+        NSEvent.addGlobalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDragged, handler: {(event: NSEvent) in
+            print("mouseLocation:", String(format: "%.1f, %.1f", self.mouseLocation.x, self.mouseLocation.y))
+        })
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2317E9E62464A6BF00E017A3 /* ScreenShotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenShotStateView.swift */; };
+		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2317E9E52464A6BF00E017A3 /* ScreenShotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateView.swift; sourceTree = "<group>"; };
+		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239DC917245D95E8001FA50C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +91,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2317E9E32464A69200E017A3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2317E9E42464A69C00E017A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2317E9E52464A6BF00E017A3 /* ScreenShotStateView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		23435AC72464A61F00B4DE50 /* ScreenshotState */ = {
+			isa = PBXGroup;
+			children = (
+				2317E9E42464A69C00E017A3 /* View */,
+				2317E9E32464A69200E017A3 /* ViewController */,
+			);
+			path = ScreenshotState;
+			sourceTree = "<group>";
+		};
 		239DC907245D95E5001FA50C = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +340,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				23435AC72464A61F00B4DE50 /* ScreenshotState */,
 				9F025C10246346D700F05D81 /* ImagePreview */,
 				9FC06BF02460CE56008D4D3C /* MainPanel */,
 			);
@@ -493,6 +523,8 @@
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
+				2317E9E62464A6BF00E017A3 /* ScreenShotStateView.swift in Sources */,
+				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
