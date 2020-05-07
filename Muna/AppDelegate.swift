@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         let enParser = ENWeekdaysParser()
-        enParser.parse(fromText: "Do on tuesday", refDate: Date())
+        enParser.parse(fromText: "Do on next beautiful tuesday", refDate: Date())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

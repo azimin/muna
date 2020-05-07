@@ -38,34 +38,30 @@ class ENWeekdaysParser: Parser {
     }
 
     override func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
-        let matchedSubstring = text.subString(with: match.range)
-        print(match.numberOfRanges)
-//        let prefixGroup = match.string(from: text, atRangeIndex: 1)
-        let prefixGroup = ""
-        
-        let weekdayGroup = match.string(from: text, atRangeIndex: 2)
-
-        
-        guard let dateOffset = self.weekDayOffset[weekdayGroup] else {
+        let weekdayName = match.string(from: text, atRangeIndex: 2)
+        guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
             return nil
         }
-        
+
         let today = refDate.weekday
 
+        let prefixGroup = match.isEmpty(atRangeIndex: 1) ? "" : match.string(from: text, atRangeIndex: 1)
+
         var weekday: Int
-        if dateOffset - today < 0 {
-            weekday = (7 - today) + dateOffset
+        if weekdayOffset - today < 0 {
+            weekday = (7 - today) + weekdayOffset
         } else {
-            weekday = today - dateOffset
+            weekday = today - weekdayOffset
         }
 
         if prefixGroup == "next" {
             weekday += 7
         }
 
-        print(refDate.added(weekday, .weekday).timeIntervalSince1970)
-        
-        return nil
+        let finalDate = refDate.added(weekday, .weekday)
+        let parsedResult = ParsedResult(range: match.range, finalDate: finalDate)
+
+        return parsedResult
     }
 }
 
@@ -150,7 +146,7 @@ extension Date {
         // by default, start from 1. we mimic the moment.js' SPEC, start from 0
         return cal.component(.weekday, from: self) - 1
     }
-    
+
     var utcYear: Int { return utcCal.component(.year, from: self) }
     var utcMonth: Int { return utcCal.component(.month, from: self) }
     var utcDay: Int { return utcCal.component(.day, from: self) }
@@ -163,7 +159,7 @@ extension Date {
         // by default, start from 1. we mimic the moment.js' SPEC, start from 0
         return utcCal.component(.weekday, from: self) - 1
     }
-    
+
     /// ask number of day in the current month.
     ///
     /// e.g. the "unit" will be .day, the "baseUnit" will be .month
@@ -171,14 +167,14 @@ extension Date {
         if let range = cal.range(of: unit, in: baseUnit, for: self) {
             return range.upperBound - range.lowerBound
         }
-        
+
         return nil
     }
-    
+
     func differenceOfTimeInterval(to date: Date) -> TimeInterval {
         return timeIntervalSince1970 - date.timeIntervalSince1970
     }
-    
+
     /// offset minutes between UTC and current time zone, the value could be 60, 0, -60, etc.
     var utcOffset: Int {
         get {
@@ -191,7 +187,7 @@ extension Date {
             self = Date(timeInterval: interval, since: self)
         }
     }
-    
+
     func added(_ value: Int, _ unit: Calendar.Component) -> Date {
         return cal.date(byAdding: unit, value: value, to: self)!
     }
@@ -208,4 +204,3 @@ func nanoSecondsToMilliseconds(_ nanoSeconds: Int) -> Int {
     let ms = Int(doubleMs)
     return doubleMs > Double(ms) ? ms + 1 : ms
 }
-
