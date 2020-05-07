@@ -31,6 +31,10 @@ class PopUpController {
         return self.popover?.isShown == true
     }
 
+    var isHidden: Bool {
+        return self.popover?.isShown != true
+    }
+
     func hide() {
         self.state = .hidden
         self.delegate?.popUpControllerAskToHide(self)

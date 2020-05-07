@@ -61,8 +61,8 @@ class PanelItemModelGrouping {
             if let count = result[key]?.count, count > 0 {
                 names[index] = key
                 values[index] = result[key]
+                index += 1
             }
-            index += 1
         }
     }
 }

@@ -9,6 +9,22 @@
 import Cocoa
 import SnapKit
 
+class CustomScrollView: NSScrollView {
+    override func scrollWheel(with event: NSEvent) {
+        if self.isStoped, event.phase != .began, event.phase != .mayBegin {
+            return
+        }
+        self.isStoped = false
+        super.scrollWheel(with: event)
+    }
+
+    var isStoped: Bool = false
+
+    func stopScroll() {
+        self.isStoped = true
+    }
+}
+
 // swiftlint:disable type_body_length
 class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
 
@@ -17,7 +33,7 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     let backgroundView = View()
     let visualView = NSVisualEffectView()
-    let scrollView = NSScrollView()
+    let scrollView = CustomScrollView()
     let collectionView = NSCollectionView()
 
     let groupedData = PanelItemModelGrouping(items: fakeData)
@@ -246,6 +262,9 @@ class MainPanelView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegat
 
     override func insertText(_ insertString: Any) {
         if let string = insertString as? String, string == " " {
+            if self.popUpController.isHidden {
+                self.scrollView.stopScroll()
+            }
             self.popUpController.toggle()
         } else {
             super.insertText(insertString)
