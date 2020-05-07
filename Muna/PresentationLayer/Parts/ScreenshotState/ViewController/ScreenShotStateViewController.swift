@@ -12,7 +12,7 @@ class ScreenShotStateViewController: NSViewController {
 
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
-    private var startedPoint = CGPoint.zero
+    private var startedPoint = NSPoint.zero
 
     override func loadView() {
         self.view = ScreenShotStateView()
@@ -27,13 +27,30 @@ class ScreenShotStateViewController: NSViewController {
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
-        self.startedPoint = self.mouseLocation
+
+        self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
+
+        (self.view as! ScreenShotStateView).startDash()
     }
 
     override func mouseUp(with event: NSEvent) {
         
     }
 
-    override func mouseDragged(with event: NSEvent) {
+     override func mouseDragged(with event: NSEvent) {
+
+        let point = self.view.convert(event.locationInWindow, from: nil)
+        (self.view as! ScreenShotStateView).continiouslyDrawDash(
+            fromStartPoint: self.startedPoint,
+            toPoint: point
+        )
+    }
+
+    // MARK: - Show hide
+
+    func show() {
+    }
+
+    func hide() {
     }
 }
