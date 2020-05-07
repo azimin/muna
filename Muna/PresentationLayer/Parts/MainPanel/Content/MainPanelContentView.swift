@@ -237,6 +237,9 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
                 let topInset = self.insetsForSection.top + self.insetsForSection.bottom + self.headerHight
                 frame.origin.y -= topInset
                 frame.size.height += topInset
+            } else {
+                frame.origin.y -= self.insetsForSection.top
+                frame.size.height += self.insetsForSection.top
             }
             frame.size.height += self.insetsForSection.bottom
             frameToScroll = frame
@@ -338,10 +341,18 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         _ collectionView: NSCollectionView,
         layout collectionViewLayout: NSCollectionViewLayout,
         referenceSizeForHeaderInSection section: Int) -> NSSize {
-        return NSSize(
-            width: collectionView.frame.size.width,
-            height: self.headerHight
-        )
+        if section == 0 {
+            return NSSize(
+                width: collectionView.frame.size.width,
+                height: self.headerHight + 16
+            )
+        } else {
+            return NSSize(
+                width: collectionView.frame.size.width,
+                height: self.headerHight
+            )
+        }
+
     }
 
     func collectionView(

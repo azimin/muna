@@ -33,7 +33,7 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
             maker.leading.trailing.equalToSuperview().inset(
                 NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             )
-            maker.centerY.equalToSuperview()
+            maker.bottom.equalToSuperview().inset(4)
         }
     }
 }
