@@ -24,7 +24,7 @@ class ScreenShotStateViewController: NSViewController {
         // esc
         if event.keyCode == 53 {
             (self.view as! ScreenShotStateView).removeLayer()
-            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotState()
+            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
             return true
         }
 

@@ -40,6 +40,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
+    
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.hideScreenshotIfNeeded),
+            name: NSWindow.didResignKeyNotification,
+            object: nil
+        )
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -95,6 +102,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if self.isPanelShowed {
             self.hidePanel()
             self.isPanelShowed = false
+        }
+    }
+
+    @objc func hideScreenshotIfNeeded() {
+        if self.isScreenshotShowed {
+            self.hideScreenshotState()
+            self.isScreenshotShowed = false
         }
     }
 
@@ -210,6 +224,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.window.setIsVisible(false)
             }
         }
-        self.isScreenshotShowed.toggle()
     }
 }
