@@ -14,7 +14,6 @@ class ScreenShotStateView: View {
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        self.backgroundColor = .black
     }
 
     required init?(coder: NSCoder) {
@@ -23,9 +22,9 @@ class ScreenShotStateView: View {
 
     func startDash() {
         shapeLayer = CAShapeLayer()
-        shapeLayer.lineWidth = 1.0
+        shapeLayer.lineWidth = 2.0
         shapeLayer.fillColor = NSColor.clear.cgColor
-        shapeLayer.strokeColor = NSColor.black.cgColor
+        shapeLayer.strokeColor = NSColor.white.cgColor
         shapeLayer.lineDashPattern = [10, 5]
         self.layer?.addSublayer(shapeLayer)
 
@@ -46,5 +45,9 @@ class ScreenShotStateView: View {
         path.addLine(to: NSPoint(x: toPoint.x, y: startPoint.y))
         path.closeSubpath()
         self.shapeLayer.path = path
+    }
+
+    func removeLayer() {
+        self.shapeLayer = nil
     }
 }

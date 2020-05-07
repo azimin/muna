@@ -21,7 +21,14 @@ class ScreenShotStateViewController: NSViewController {
     // MARK: - Kyes
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        return true
+        // esc
+        if event.keyCode == 53 {
+            (self.view as! ScreenShotStateView).removeLayer()
+            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotState()
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
     }
 
     // MARK: - Mouse events
@@ -34,7 +41,8 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     override func mouseUp(with event: NSEvent) {
-        
+        (self.view as! ScreenShotStateView).removeLayer()
+        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotState()
     }
 
      override func mouseDragged(with event: NSEvent) {
@@ -51,6 +59,7 @@ class ScreenShotStateViewController: NSViewController {
     func show() {
     }
 
-    func hide() {
+     func hide(completion: VoidBlock?) {
+        completion?()
     }
 }

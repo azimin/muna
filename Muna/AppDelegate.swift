@@ -13,6 +13,11 @@ import MASShortcut
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    enum WindowType {
+        case screenshot
+        case panel
+    }
+
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -35,13 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
-
-        NSEvent.addGlobalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDown, handler: {(event: NSEvent) in
-            print("mouseLocationDown:", String(format: "%.1f, %.1f", self.mouseLocation.x, self.mouseLocation.y))
-        })
-        NSEvent.addGlobalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDragged, handler: {(event: NSEvent) in
-            print("mouseLocation:", String(format: "%.1f, %.1f", self.mouseLocation.x, self.mouseLocation.y))
-        })
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -64,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
-                print("Hi! ")
+                self.toggleScreenshotState()
         })
     }
 
@@ -91,6 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
+    var isScreenshotShowed = false
 
     @objc func hidePanelIfNeeded() {
         if self.isPanelShowed {
@@ -100,7 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func togglePane() {
-        self.setupWindowIfNeeded()
+        self.setupWindow(forType: .panel)
 
         if self.isPanelShowed {
             self.hidePanel()
@@ -111,33 +110,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.isPanelShowed.toggle()
     }
 
-    func setupWindowIfNeeded() {
-        if self.window != nil {
-            return
-        }
-
+    func setupWindow(forType type: WindowType) {
         guard let mainScreen = NSScreen.main else {
             assertionFailure("No main screen")
             return
         }
 
-        let frame = NSRect(
-            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-            y: mainScreen.frame.minY,
-            width: self.windowFrameWidth,
-            height: mainScreen.frame.height - 0
-        )
+        switch type {
+        case .panel:
+            let frame = NSRect(
+                x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+                y: mainScreen.frame.minY,
+                width: self.windowFrameWidth,
+                height: mainScreen.frame.height - 0
+            )
 
-        self.window = Panel(
-            contentRect: frame,
-            styleMask: [.nonactivatingPanel],
-            backing: .buffered,
-            defer: false
-        )
-        self.window.backgroundColor = NSColor.clear
-        self.window.contentViewController = MainPanelViewController()
-        // Overlap dock, but not menu bar
-        self.window.level = .statusBar - 2
+            self.window = Panel(
+                contentRect: frame,
+                styleMask: [.nonactivatingPanel],
+                backing: .buffered,
+                defer: false
+            )
+            self.window.backgroundColor = NSColor.clear
+            self.window.contentViewController = MainPanelViewController()
+            // Overlap dock, but not menu bar
+            self.window.level = .statusBar - 2
+        case .screenshot:
+            self.window = Panel(
+                contentRect: mainScreen.frame,
+                styleMask: [.nonactivatingPanel],
+                backing: .buffered,
+                defer: true
+            )
+            self.window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
+            self.window.contentViewController = ScreenShotStateViewController()
+            // Overlap dock, but not menu bar
+            self.window.level = .statusBar - 2
+        }
     }
 
     func showPanel() {
@@ -167,5 +176,40 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.window.setIsVisible(false)
             }
         }
+    }
+
+    @objc func toggleScreenshotState() {
+        self.setupWindow(forType: .screenshot)
+
+        if self.isScreenshotShowed {
+            self.hideScreenshotState()
+        } else {
+            self.window.makeKeyAndOrderFront(nil)
+            self.showScreenShotState()
+        }
+        self.isScreenshotShowed.toggle()
+    }
+
+    func showScreenShotState() {
+        guard let mainScreen = NSScreen.main else {
+            assertionFailure("No main screen")
+            return
+        }
+
+        self.window.setFrame(mainScreen.frame, display: true, animate: false)
+
+        if let view = self.window.contentViewController as? ScreenShotStateViewController {
+            view.show()
+        }
+        self.window.setIsVisible(true)
+    }
+
+    func hideScreenshotState() {
+        if let viewController = self.window.contentViewController as? ScreenShotStateViewController {
+            viewController.hide {
+                self.window.setIsVisible(false)
+            }
+        }
+        self.isScreenshotShowed.toggle()
     }
 }
