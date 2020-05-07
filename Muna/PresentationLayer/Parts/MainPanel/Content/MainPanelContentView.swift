@@ -186,6 +186,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             if self.collectionView.selectionIndexPaths.first == preveous {
                 return
             }
+            self.scrollView.stopScroll()
             self.selectIndexPath(indexPath: preveous, completion: nil)
         }
 
@@ -202,6 +203,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             if self.collectionView.selectionIndexPaths.first == next {
                 return
             }
+            self.scrollView.stopScroll()
             self.selectIndexPath(indexPath: next, completion: nil)
         }
 

@@ -16,6 +16,7 @@ class MainPanelView: NSView {
     let segmentControl = NSSegmentedControl(labels: ["Hi", "There"], trackingMode: .selectOne, target: nil, action: nil)
     let topSeparator = View()
     let mainContentView = MainPanelContentView()
+
     let bottomSeparator = View()
 
     override init(frame: NSRect) {
@@ -72,10 +73,19 @@ class MainPanelView: NSView {
             maker.height.equalTo(0.5)
         }
 
+        self.backgroundView.addSubview(self.bottomSeparator)
+        self.bottomSeparator.backgroundColor = NSColor.color(.separator)
+        self.bottomSeparator.snp.makeConstraints { (maker) in
+            maker.bottom.equalToSuperview().inset(44)
+            maker.leading.trailing.equalToSuperview()
+            maker.height.equalTo(0.5)
+        }
+
         self.backgroundView.addSubview(self.mainContentView)
         self.mainContentView.snp.makeConstraints { (maker) in
             maker.top.equalTo(self.topSeparator.snp.bottom)
-            maker.leading.trailing.bottom.equalToSuperview()
+            maker.bottom.equalTo(self.bottomSeparator.snp.top)
+            maker.leading.trailing.equalToSuperview()
         }
     }
 
