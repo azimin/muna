@@ -51,6 +51,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             toAction: {
                 self.togglePane()
         })
+
+        MASShortcutBinder.shared()?.bindShortcut(
+            withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
+            toAction: {
+                print("Hi! ")
+        })
     }
 
     func setupStatusBarItem() {
