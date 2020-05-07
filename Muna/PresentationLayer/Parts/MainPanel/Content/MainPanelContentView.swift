@@ -26,9 +26,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
-
-        // TODO: Fix me
-//        self.window?.makeFirstResponder(self)
     }
 
     required init?(coder: NSCoder) {

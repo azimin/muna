@@ -9,11 +9,14 @@
 import Cocoa
 import SnapKit
 
-// swiftlint:disable type_body_length
 class MainPanelView: NSView {
     let backgroundView = View()
     let visualView = NSVisualEffectView()
+
+    let segmentControl = NSSegmentedControl(labels: ["Hi", "There"], trackingMode: .selectOne, target: nil, action: nil)
+    let topSeparator = View()
     let mainContentView = MainPanelContentView()
+    let bottomSeparator = View()
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -42,7 +45,7 @@ class MainPanelView: NSView {
         self.backgroundView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }
-        self.backgroundView.layer?.borderColor = NSColor.gray.cgColor
+        self.backgroundView.layer?.borderColor = CGColor.color(.separator)
         self.backgroundView.layer?.borderWidth = 0.5
 
         self.backgroundView.addSubview(self.visualView)
@@ -53,11 +56,26 @@ class MainPanelView: NSView {
             maker.edges.equalToSuperview()
         }
 
+        self.backgroundView.addSubview(self.segmentControl)
+        self.segmentControl.cell?.controlTint = .defaultControlTint
+        self.segmentControl.snp.makeConstraints { (maker) in
+            maker.top.equalToSuperview().inset(40)
+            maker.centerX.equalToSuperview()
+            maker.width.equalTo(340)
+        }
+
+        self.backgroundView.addSubview(self.topSeparator)
+        self.topSeparator.backgroundColor = NSColor.color(.separator)
+        self.topSeparator.snp.makeConstraints { (maker) in
+            maker.top.equalTo(self.segmentControl.snp.bottom).inset(-16)
+            maker.leading.trailing.equalToSuperview()
+            maker.height.equalTo(0.5)
+        }
+
         self.backgroundView.addSubview(self.mainContentView)
         self.mainContentView.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview().inset(
-                NSEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
-            )
+            maker.top.equalTo(self.topSeparator.snp.bottom)
+            maker.leading.trailing.bottom.equalToSuperview()
         }
     }
 
