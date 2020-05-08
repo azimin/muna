@@ -19,9 +19,9 @@ class ScreenshotStateView: View {
     private var shapeLayer: CAShapeLayer?
 
     let leftVisualView = View()
-    let topVisualView = View()
-    let rightVisualView = View()
     let bottomVisualView = View()
+    let rightVisualView = View()
+    let topVisualView = View()
 
     var screenshotFrame = CGRect.zero
 
@@ -40,11 +40,11 @@ class ScreenshotStateView: View {
     func setup() {
         self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
 
-        self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+        self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
 
         self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
 
-        self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+        self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
     }
 
     func startDash() {
@@ -99,15 +99,16 @@ class ScreenshotStateView: View {
             height: self.bounds.height
         )
 
-        self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
-        self.topVisualView.frame = CGRect(
+        self.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
+        self.bottomVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
             y: .zero,
             width: self.screenshotFrame.width - 4,
             height: self.screenshotFrame.minY + 2
         )
-        self.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
-        self.bottomVisualView.frame = CGRect(
+
+        self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
+        self.topVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
             y: self.screenshotFrame.maxY - 2,
             width: self.screenshotFrame.width - 4,
