@@ -28,7 +28,7 @@ class WindowManager {
         case .panel:
             self.showPanel(in: window)
         case .screenshot:
-            break
+            self.showScreenshotState(in: window)
         }
     }
 

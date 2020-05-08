@@ -97,20 +97,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
     }
 
-    let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
     var isScreenshotShowed = false
 
     @objc func hidePanelIfNeeded() {
         if self.isPanelShowed {
-            self.hidePanel()
+            self.windowManager.hideWindow(.panel)
             self.isPanelShowed = false
         }
     }
 
     @objc func hideScreenshotIfNeeded() {
         if self.isScreenshotShowed {
-            self.hideScreenshotState()
+            self.windowManager.hideWindow(.screenshot)
             self.isScreenshotShowed = false
         }
     }
@@ -124,14 +123,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.isPanelShowed.toggle()
     }
 
-    func showPanel() {
-        self.windowManager.activateWindow(.panel)
-    }
-
-    func hidePanel() {
-        self.windowManager.hideWindow(.panel)
-    }
-
     @objc func toggleScreenshotState() {
         if self.isScreenshotShowed {
             self.windowManager.hideWindow(.screenshot)
@@ -139,13 +130,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.windowManager.activateWindow(.screenshot)
         }
         self.isScreenshotShowed.toggle()
-    }
-
-    func showScreenShotState() {
-        self.windowManager.activateWindow(.screenshot)
-    }
-
-    func hideScreenshotState() {
-        self.windowManager.hideWindow(.screenshot)
     }
 }

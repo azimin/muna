@@ -114,10 +114,18 @@ class ScreenshotStateView: View {
         )
     }
 
+    private func hideVisuals() {
+        self.layer?.sublayers?.forEach {
+            $0.removeFromSuperlayer()
+        }
+
+        self.shapeLayer = nil
+    }
+
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         // esc
         if event.keyCode == 53 {
-            self.shapeLayer = nil
+            self.hideVisuals()
             self.delegate?.escapeWasTapped()
             return true
         }
