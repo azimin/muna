@@ -4,6 +4,7 @@ disabled_rules:
     - identifier_name
     - function_parameter_count
     - force_cast
+    - trailing_comma
 line_length: 160
 function_body_length: 100
 type_name:
