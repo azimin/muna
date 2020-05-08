@@ -113,11 +113,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func togglePane() {
-        self.setupWindow(forType: .panel)
-
         if self.isPanelShowed {
             self.hidePanel()
         } else {
+            self.setupWindow(forType: .panel)
             self.window.makeKeyAndOrderFront(nil)
             self.showPanel()
         }
@@ -125,8 +124,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func setupWindow(forType type: WindowType) {
+
         guard let mainScreen = NSScreen.main else {
             assertionFailure("No main screen")
+            return
+        }
+        if self.window != nil {
+            let frame: NSRect
+            switch type {
+            case .screenshot:
+                frame = mainScreen.frame
+                self.window.contentViewController = ScreenShotStateViewController()
+            case .panel:
+                frame = NSRect(
+                    x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+                    y: mainScreen.frame.minY,
+                    width: self.windowFrameWidth,
+                    height: mainScreen.frame.height - 0
+                )
+                self.window.contentViewController = MainPanelViewController()
+            }
+            self.window.setFrame(frame, display: true)
             return
         }
 
