@@ -45,6 +45,7 @@
 		9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDC2465F54B007D92B8 /* NSStackView+Builder.swift */; };
 		9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */; };
 		9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE024660235007D92B8 /* ButtonCell.swift */; };
+		9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		9FE96BDC2465F54B007D92B8 /* NSStackView+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStackView+Builder.swift"; sourceTree = "<group>"; };
 		9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Builder.swift"; sourceTree = "<group>"; };
 		9FE96BE024660235007D92B8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
 		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -294,6 +296,7 @@
 				9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */,
 				9FA07F682460C16000654D36 /* NSColor+Hex.swift */,
 				9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */,
+				9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
+				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,

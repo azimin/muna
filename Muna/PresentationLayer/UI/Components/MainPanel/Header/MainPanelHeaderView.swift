@@ -10,7 +10,12 @@ import Cocoa
 import SnapKit
 
 final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSCollectionViewSectionHeaderView {
-    let label = Label(fontStyle: .bold, size: 18)
+    let label = Label(
+        fontStyle: .medium,
+        size: 20
+    )
+    .withTextColorStyle(.white60alpha)
+
     let redArrowView = View()
 
     override init(frame frameRect: NSRect) {
@@ -29,7 +34,6 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
 
     private func setup() {
         self.addSubview(self.label)
-        self.label.textColor = NSColor.color(.white)
         self.label.snp.makeConstraints { maker in
             maker.leading.equalToSuperview().inset(
                 NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)

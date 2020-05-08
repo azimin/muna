@@ -12,15 +12,15 @@ import SnapKit
 class PanelBottomBarView: View {
     let appNameLabel = Label(
         fontStyle: .heavy,
-        size: 14
+        size: 12
     )
     .withTextColorStyle(.white60alpha)
     .withText("Muna")
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
-    let shortcutsButton = Button().withImageName("icon_cmd")
-    let settingsButton = Button().withImageName("icon_settings_2")
+    let shortcutsButton = Button().withImageName("icon_cmd", color: .white60)
+    let settingsButton = Button().withImageName("icon_settings_2", color: .white60)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

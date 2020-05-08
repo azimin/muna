@@ -12,6 +12,7 @@ enum ColorStyle {
     case white
     case black
     case white60alpha
+    case white60
     case blueSelected
     case redLight
     case redDots
@@ -25,6 +26,8 @@ enum ColorStyle {
             return NSColor.black
         case .white60alpha:
             return NSColor.white.withAlphaComponent(0.6)
+        case .white60:
+            return NSColor(hex: "969696")
         case .blueSelected:
             return NSColor(hex: "2C7DD3")
         case .redLight:

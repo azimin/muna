@@ -16,8 +16,12 @@ extension Button {
         return self
     }
 
-    func withImageName(_ name: String) -> Self {
-        self.image = NSImage(named: NSImage.Name(name))
+    func withImageName(_ name: String, color: ColorStyle? = nil) -> Self {
+        if let color = color {
+            self.image = NSImage(named: NSImage.Name(name))?.tint(color: NSColor.color(color))
+        } else {
+            self.image = NSImage(named: NSImage.Name(name))
+        }
         self.imagePosition = .imageOnly
         self.imageScaling = .scaleProportionallyUpOrDown
         return self
