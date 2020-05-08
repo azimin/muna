@@ -16,7 +16,7 @@ protocol ScreenshotStateViewDelegate: class {
 class ScreenshotStateView: View {
 
     weak var delegate: ScreenshotStateViewDelegate?
-    private var shapeLayer: CAShapeLayer!
+    private var shapeLayer: CAShapeLayer?
 
     let leftVisualView = View()
     let topVisualView = View()
@@ -49,11 +49,13 @@ class ScreenshotStateView: View {
 
     func startDash() {
         shapeLayer = CAShapeLayer()
-        shapeLayer.lineWidth = 2.0
-        shapeLayer.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        shapeLayer.strokeColor = NSColor.white.cgColor
-        shapeLayer.lineDashPattern = [10, 5]
-        self.layer?.addSublayer(shapeLayer)
+        shapeLayer?.lineWidth = 2.0
+        shapeLayer?.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        shapeLayer?.strokeColor = NSColor.white.cgColor
+        shapeLayer?.lineDashPattern = [10, 5]
+
+        guard let layer = shapeLayer else { return }
+        self.layer?.addSublayer(layer)
 
         var dashAnimation = CABasicAnimation()
         dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
@@ -61,7 +63,7 @@ class ScreenshotStateView: View {
         dashAnimation.fromValue = 0.0
         dashAnimation.toValue = 15.0
         dashAnimation.repeatCount = .infinity
-        shapeLayer.add(dashAnimation, forKey: "linePhase")
+        shapeLayer?.add(dashAnimation, forKey: "linePhase")
     }
 
     func continiouslyDrawDash(fromStartPoint startPoint: NSPoint, toPoint: NSPoint) {
@@ -71,7 +73,7 @@ class ScreenshotStateView: View {
         path.addLine(to: toPoint)
         path.addLine(to: NSPoint(x: toPoint.x, y: startPoint.y))
         path.closeSubpath()
-        self.shapeLayer.path = path
+        self.shapeLayer?.path = path
 
         self.screenshotFrame.origin = startPoint
         self.screenshotFrame.size.width = toPoint.x - startPoint.x
@@ -79,36 +81,36 @@ class ScreenshotStateView: View {
     }
 
     func showVisuals() {
-        self.shapeLayer.fillColor = NSColor.clear.cgColor
+        self.shapeLayer?.fillColor = NSColor.clear.cgColor
 
-        self.addSubview(self.leftVisualView)
+        self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
         self.leftVisualView.frame = CGRect(
             x: .zero,
             y: .zero,
-            width: self.screenshotFrame.minX,
+            width: self.screenshotFrame.minX + 2,
             height: self.bounds.height
         )
 
-        self.addSubview(self.rightVisualView)
+        self.layer?.insertSublayer(self.rightVisualView.layer!, at: 0)
         self.rightVisualView.frame = CGRect(
-            x: self.screenshotFrame.maxX,
+            x: self.screenshotFrame.maxX - 2,
             y: .zero,
             width: self.bounds.width - self.screenshotFrame.maxX,
             height: self.bounds.height
         )
 
-        self.addSubview(self.topVisualView)
+        self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
         self.topVisualView.frame = CGRect(
-            x: self.screenshotFrame.minX,
+            x: self.screenshotFrame.minX + 2,
             y: .zero,
-            width: self.screenshotFrame.width,
-            height: self.screenshotFrame.minY
+            width: self.screenshotFrame.width - 4,
+            height: self.screenshotFrame.minY + 2
         )
-        self.addSubview(self.bottomVisualView)
+        self.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
         self.bottomVisualView.frame = CGRect(
-            x: self.screenshotFrame.minX,
-            y: self.screenshotFrame.maxY,
-            width: self.screenshotFrame.width,
+            x: self.screenshotFrame.minX + 2,
+            y: self.screenshotFrame.maxY - 2,
+            width: self.screenshotFrame.width - 4,
             height: self.bounds.height - self.screenshotFrame.minY
         )
     }

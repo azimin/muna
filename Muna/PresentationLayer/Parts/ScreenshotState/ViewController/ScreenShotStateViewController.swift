@@ -14,6 +14,8 @@ class ScreenShotStateViewController: NSViewController {
 
     private var startedPoint = NSPoint.zero
 
+    var isNeededToDrawFrame = true
+
     override func loadView() {
         self.view = ScreenshotStateView(delegate: self)
     }
@@ -21,6 +23,9 @@ class ScreenShotStateViewController: NSViewController {
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
+        guard self.isNeededToDrawFrame else {
+            return
+        }
 
         self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
 
@@ -28,10 +33,14 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     override func mouseUp(with event: NSEvent) {
+        self.isNeededToDrawFrame = false
         (self.view as! ScreenshotStateView).showVisuals()
     }
 
-     override func mouseDragged(with event: NSEvent) {
+    override func mouseDragged(with event: NSEvent) {
+        guard self.isNeededToDrawFrame else {
+            return
+        }
 
         let point = self.view.convert(event.locationInWindow, from: nil)
         (self.view as! ScreenshotStateView).continiouslyDrawDash(
@@ -49,6 +58,7 @@ class ScreenShotStateViewController: NSViewController {
 
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
+        self.isNeededToDrawFrame = true
         (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
     }
 }
