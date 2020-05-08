@@ -93,6 +93,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             action: #selector(self.togglePane),
             keyEquivalent: "o"
         )
+
+        statusBarMenu.addItem(
+            withTitle: "Quit",
+            action: #selector(self.closeApp),
+            keyEquivalent: ""
+        )
     }
 
     let windowFrameWidth: CGFloat = 380
@@ -122,6 +128,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.showPanel()
         }
         self.isPanelShowed.toggle()
+    }
+
+    @objc func closeApp() {
+        NSApplication.shared.terminate(self)
     }
 
     func setupWindow(forType type: WindowType) {
