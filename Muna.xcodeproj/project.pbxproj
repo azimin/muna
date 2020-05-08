@@ -13,6 +13,7 @@
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
 		239DC91E245D95E8001FA50C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91C245D95E8001FA50C /* Main.storyboard */; };
+		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
 		9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0E24633D1700F05D81 /* Blocks.swift */; };
@@ -59,6 +60,7 @@
 		239DC91D245D95E8001FA50C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		239DC91F245D95E8001FA50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		239DC920245D95E8001FA50C /* Muna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muna.entitlements; sourceTree = "<group>"; };
+		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
 		9F025C0924633C6F00F05D81 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
@@ -173,6 +175,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		23A6B29F24660A19006A7A4D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				23A6B2A024660A1F006A7A4D /* Navigations */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		23A6B2A024660A1F006A7A4D /* Navigations */ = {
+			isa = PBXGroup;
+			children = (
+				23A6B2A124660A36006A7A4D /* WindowManager.swift */,
+			);
+			path = Navigations;
+			sourceTree = "<group>";
+		};
 		9F025C0D24633D0F00F05D81 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +246,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				23A6B29F24660A19006A7A4D /* Core */,
 				9FB8B522246372CA00BE7544 /* Controllers */,
 				9F025C0D24633D0F00F05D81 /* Helpers */,
 				9F3BC1442461D098002B6217 /* Models */,
@@ -601,6 +620,7 @@
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
+				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,
 				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
