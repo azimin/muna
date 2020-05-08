@@ -111,9 +111,9 @@ class ScreenshotStateView: View {
         self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
         self.topVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
-            y: self.screenshotFrame.maxY,
+            y: self.screenshotFrame.maxY - 2,
             width: self.screenshotFrame.width - 4,
-            height: self.bounds.height - self.screenshotFrame.minY - 2
+            height: self.bounds.height - self.screenshotFrame.minY + 2
         )
     }
 
