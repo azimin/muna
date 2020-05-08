@@ -117,7 +117,7 @@ class ScreenshotStateView: View {
         )
     }
 
-    private func hideVisuals() {
+    func hideVisuals() {
         self.layer?.sublayers?.forEach {
             $0.removeFromSuperlayer()
         }

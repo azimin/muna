@@ -112,6 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.windowManager.hideWindow(.panel)
         } else {
             self.windowManager.activateWindow(.panel)
+            self.hideScreenshotIfNeeded()
         }
         self.isPanelShowed.toggle()
     }
