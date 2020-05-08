@@ -128,11 +128,15 @@ class MainPanelView: NSView {
 
             // up
             if event.keyCode == 126 {
-                self.mainContentView.selectPreveous()
+                self.mainContentView.selectPreveous(
+                    nextSection: event.modifierFlags.contains(.shift)
+                )
                 return nil
                 // down
             } else if event.keyCode == 125 {
-                self.mainContentView.selectNext()
+                self.mainContentView.selectNext(
+                    nextSection: event.modifierFlags.contains(.shift)
+                )
                 return nil
             }
 

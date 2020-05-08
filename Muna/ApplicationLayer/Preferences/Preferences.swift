@@ -14,11 +14,13 @@ class Preferences {
     static var defaultShortcutScreenshotKey = "screenshot_full_short"
 
     static var defaultUserDefaults: [String: NSObject] {
+        // cmd + shift + t
         let defaultActivationShortcut = MASShortcut(
             keyCode: 17,
             modifierFlags: [.command, .shift]
         )
 
+        // cmd + shift + t
         let defaultScreensshotShortcut = MASShortcut(
             keyCode: 1,
             modifierFlags: [.command, .shift]

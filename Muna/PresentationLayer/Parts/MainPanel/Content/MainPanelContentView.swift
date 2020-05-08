@@ -174,13 +174,16 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     // MARK: - Preveous/Next
 
-    func selectPreveous() {
+    func selectPreveous(nextSection: Bool) {
         guard let value = self.collectionView.selectionIndexPaths.first else {
             assertionFailure("NO index path")
             return
         }
 
-        if let preveous = self.collectionView.preveousIndexPath(indexPath: value) {
+        if let preveous = self.collectionView.preveousIndexPath(
+            indexPath: value,
+            nextSection: nextSection
+        ) {
             if self.collectionView.selectionIndexPaths.first == preveous {
                 return
             }
@@ -191,13 +194,16 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.popUpController.hideAndAddShowToQueueIfNeeded()
     }
 
-    func selectNext() {
+    func selectNext(nextSection: Bool) {
         guard let value = self.collectionView.selectionIndexPaths.first else {
             assertionFailure("NO index path")
             return
         }
 
-        if let next = self.collectionView.nextIndexPath(indexPath: value) {
+        if let next = self.collectionView.nextIndexPath(
+            indexPath: value,
+            nextSection: nextSection
+        ) {
             if self.collectionView.selectionIndexPaths.first == next {
                 return
             }
@@ -322,6 +328,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         )
         let group = self.groupedData.group(in: indexPath.section)
         header.label.stringValue = group.rawValue
+        header.redArrowView.isHidden = group != .passed
+
         return header
     }
 

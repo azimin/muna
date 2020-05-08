@@ -11,6 +11,7 @@ import SnapKit
 
 final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSCollectionViewSectionHeaderView {
     let label = Label(fontStyle: .bold, size: 18)
+    let redArrowView = View()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -30,10 +31,19 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
         self.addSubview(self.label)
         self.label.textColor = NSColor.color(.white)
         self.label.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(
+            maker.leading.equalToSuperview().inset(
                 NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             )
             maker.bottom.equalToSuperview().inset(4)
+        }
+
+        self.addSubview(self.redArrowView)
+        self.redArrowView.backgroundColor = NSColor.color(.redDots)
+        self.redArrowView.layer?.cornerRadius = 5
+        self.redArrowView.snp.makeConstraints { maker in
+            maker.leading.equalTo(label.snp.trailing)
+            maker.top.equalTo(self.label.snp.top).inset(-2)
+            maker.size.equalTo(10)
         }
     }
 }
