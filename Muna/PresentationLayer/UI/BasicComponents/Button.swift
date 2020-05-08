@@ -11,7 +11,13 @@ import Cocoa
 class Button: NSButton {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        let cell = ButtonCell()
+        self.cell = cell
+
         self.isBordered = false
+        cell.highlightedAction = { [weak self] flag in
+            self?.layer?.opacity = flag ? 0.7 : 1.0
+        }
     }
 
     required init?(coder: NSCoder) {
