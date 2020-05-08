@@ -37,11 +37,8 @@ class ScreenshotStateView: View {
 
     func setup() {
         self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
     }
 
@@ -79,6 +76,12 @@ class ScreenshotStateView: View {
     }
 
     func showVisuals() {
+        guard self.screenshotFrame.width > 5, self.screenshotFrame.height > 5 else {
+            self.hideVisuals()
+            self.delegate?.escapeWasTapped()
+            return
+        }
+
         self.shapeLayer?.fillColor = NSColor.clear.cgColor
 
         self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)

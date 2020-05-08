@@ -104,6 +104,8 @@ class WindowManager {
     }
 
     private func showScreenshotState(in window: NSWindow) {
+        window.makeKeyAndOrderFront(nil)
+
         window.setFrame(
             self.frameFor(.screenshot),
             display: true,
