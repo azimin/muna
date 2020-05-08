@@ -8,4 +8,4 @@
 
 import Cocoa
 
-extension NSView { }
+extension NSView {}

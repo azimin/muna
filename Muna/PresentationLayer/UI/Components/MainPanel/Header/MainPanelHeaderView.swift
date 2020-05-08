@@ -29,7 +29,7 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
     private func setup() {
         self.addSubview(self.label)
         self.label.textColor = NSColor.color(.white)
-        self.label.snp.makeConstraints { (maker) in
+        self.label.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview().inset(
                 NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             )

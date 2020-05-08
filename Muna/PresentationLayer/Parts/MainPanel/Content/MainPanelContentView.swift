@@ -11,7 +11,6 @@ import SnapKit
 
 // swiftlint:disable type_body_length
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
-
     private let headerHight: CGFloat = 28
     private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
 
@@ -37,7 +36,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.scrollView.documentView = self.collectionView
         self.addSubview(self.scrollView)
-        self.scrollView.snp.makeConstraints { (maker) in
+        self.scrollView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
@@ -75,7 +74,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         if let item = self.cellAt(point: point),
             let indexPath = self.collectionView.indexPath(for: item) {
-
             self.selectIndexPath(indexPath: indexPath, completion: nil)
 
             self.capturedView = item.view
@@ -111,8 +109,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         guard let capturedView = self.capturedView,
             let capturedItem = self.capturedItem else {
-                assertionFailure("No captured view")
-                return
+            assertionFailure("No captured view")
+            return
         }
 
         guard let screeSize = self.window?.screen?.frame else {
@@ -217,7 +215,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.selectedIndex = indexPath
 
-        let cell = collectionView.item(at: indexPath)
+        let cell = self.collectionView.item(at: indexPath)
         var cellFrame: CGRect?
 
         var shouldScroll = cell == nil
@@ -312,7 +310,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     func collectionView(
         _ collectionView: NSCollectionView,
         viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
-        at indexPath: IndexPath) -> NSView {
+        at indexPath: IndexPath
+    ) -> NSView {
         guard kind == NSCollectionView.elementKindSectionHeader else {
             return NSView()
         }
@@ -327,7 +326,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-
         let cell = collectionView.dequeueReusableCellWithType(
             GenericCollectionViewItem<MainPanelItemView>.self,
             indexPath: indexPath
@@ -342,7 +340,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     func collectionView(
         _ collectionView: NSCollectionView,
         layout collectionViewLayout: NSCollectionViewLayout,
-        referenceSizeForHeaderInSection section: Int) -> NSSize {
+        referenceSizeForHeaderInSection section: Int
+    ) -> NSSize {
         if section == 0 {
             return NSSize(
                 width: collectionView.frame.size.width,
@@ -354,7 +353,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
                 height: self.headerHight
             )
         }
-
     }
 
     func collectionView(
@@ -366,7 +364,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-
         return NSSize(
             width: collectionView.frame.size.width,
             height: 250
@@ -374,7 +371,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-
         if let value = indexPaths.first {
             self.selectIndexPath(indexPath: value, completion: nil)
         }

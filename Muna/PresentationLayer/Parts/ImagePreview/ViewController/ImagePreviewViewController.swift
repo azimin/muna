@@ -9,7 +9,6 @@
 import Cocoa
 
 class ImagePreviewViewController: NSViewController {
-
     let imageView = ImageView()
 
     let image: NSImage
@@ -28,7 +27,7 @@ class ImagePreviewViewController: NSViewController {
     }
 
     override func loadView() {
-      self.view = NSView()
+        self.view = NSView()
     }
 
     override func viewDidLoad() {
@@ -37,7 +36,7 @@ class ImagePreviewViewController: NSViewController {
         let proportion = self.image.size.height / self.image.size.width
 
         self.view.addSubview(self.imageView)
-        self.imageView.snp.makeConstraints { (maker) in
+        self.imageView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
             maker.width.lessThanOrEqualTo(maxSize.width)
             maker.height.lessThanOrEqualTo(maxSize.height)

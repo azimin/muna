@@ -34,13 +34,13 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         self.backgroundView.layer?.cornerRadius = 12
         self.backgroundView.layer?.masksToBounds = true
-        self.backgroundView.snp.makeConstraints { (maker) in
+        self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
         }
 
         self.backgroundView.addSubview(self.imageView)
         self.imageView.imageScaling = .scaleProportionallyUpOrDown
-        self.imageView.snp.makeConstraints { (maker) in
+        self.imageView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
@@ -49,13 +49,13 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationPlate.material = .dark
         self.metainformationPlate.state = .active
         self.metainformationPlate.layer?.maskedCorners = [
-            .layerMaxXMinYCorner, .layerMinXMinYCorner
+            .layerMaxXMinYCorner, .layerMinXMinYCorner,
         ]
         self.metainformationPlate.layer?.cornerRadius = 12
         self.metainformationPlate.wantsLayer = true
         self.metainformationPlate.maskImage = NSImage(color: .black, size: .init(width: 1, height: 1))
 
-        self.metainformationPlate.snp.makeConstraints { (maker) in
+        self.metainformationPlate.snp.makeConstraints { maker in
             maker.bottom.leading.trailing.equalToSuperview()
         }
 
@@ -63,7 +63,7 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationStackView.orientation = .vertical
         self.metainformationStackView.spacing = 4
         self.metainformationStackView.alignment = .leading
-        self.metainformationStackView.snp.makeConstraints { (maker) in
+        self.metainformationStackView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 

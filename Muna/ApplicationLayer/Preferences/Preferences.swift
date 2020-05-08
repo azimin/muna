@@ -29,7 +29,8 @@ class Preferences {
         if let shortcut = defaultActivationShortcut,
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
-                requiringSecureCoding: false) {
+                requiringSecureCoding: false
+            ) {
             result[Preferences.defaultShortcutUDKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutUDKey)
         }
@@ -37,7 +38,8 @@ class Preferences {
         if let shortcut = defaultScreensshotShortcut,
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
-                requiringSecureCoding: false) {
+                requiringSecureCoding: false
+            ) {
             result[Preferences.defaultShortcutScreenshotKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutScreenshotKey)
         }

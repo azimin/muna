@@ -35,7 +35,7 @@ class MainPanelView: NSView {
     override func layout() {
         super.layout()
 
-        if isFirstLanch {
+        if self.isFirstLanch {
             self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
             self.isFirstLanch = false
         }
@@ -43,7 +43,7 @@ class MainPanelView: NSView {
 
     func setup() {
         self.addSubview(self.backgroundView)
-        self.backgroundView.snp.makeConstraints { (maker) in
+        self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
         self.backgroundView.layer?.borderColor = CGColor.color(.separator)
@@ -53,13 +53,13 @@ class MainPanelView: NSView {
         self.visualView.blendingMode = .behindWindow
         self.visualView.material = .dark
         self.visualView.state = .active
-        self.visualView.snp.makeConstraints { (maker) in
+        self.visualView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
         self.backgroundView.addSubview(self.segmentControl)
         self.segmentControl.cell?.controlTint = .defaultControlTint
-        self.segmentControl.snp.makeConstraints { (maker) in
+        self.segmentControl.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(40)
             maker.centerX.equalToSuperview()
             maker.width.equalTo(340)
@@ -67,7 +67,7 @@ class MainPanelView: NSView {
 
         self.backgroundView.addSubview(self.topSeparator)
         self.topSeparator.backgroundColor = NSColor.color(.separator)
-        self.topSeparator.snp.makeConstraints { (maker) in
+        self.topSeparator.snp.makeConstraints { maker in
             maker.top.equalTo(self.segmentControl.snp.bottom).inset(-16)
             maker.leading.trailing.equalToSuperview()
             maker.height.equalTo(0.5)
@@ -75,14 +75,14 @@ class MainPanelView: NSView {
 
         self.backgroundView.addSubview(self.bottomSeparator)
         self.bottomSeparator.backgroundColor = NSColor.color(.separator)
-        self.bottomSeparator.snp.makeConstraints { (maker) in
+        self.bottomSeparator.snp.makeConstraints { maker in
             maker.bottom.equalToSuperview().inset(44)
             maker.leading.trailing.equalToSuperview()
             maker.height.equalTo(0.5)
         }
 
         self.backgroundView.addSubview(self.mainContentView)
-        self.mainContentView.snp.makeConstraints { (maker) in
+        self.mainContentView.snp.makeConstraints { maker in
             maker.top.equalTo(self.topSeparator.snp.bottom)
             maker.bottom.equalTo(self.bottomSeparator.snp.top)
             maker.leading.trailing.equalToSuperview()
@@ -91,73 +91,73 @@ class MainPanelView: NSView {
 
     // MARK: - Show/Hide
 
-       func show() {
-           self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+    func show() {
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
-           let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-           transform.fromValue = self.backgroundView.layer?.transform
-           transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
-           transform.duration = 0.25
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
+        transform.duration = 0.25
 
-           self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
-           self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
-           self.addMonitor()
-       }
+        self.addMonitor()
+    }
 
-       func hide(completion: VoidBlock?) {
+    func hide(completion: VoidBlock?) {
         self.mainContentView.popover?.close()
 
-           CATransaction.begin()
-           let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-           transform.fromValue = self.backgroundView.layer?.transform
-           transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-           transform.duration = 0.25
+        CATransaction.begin()
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        transform.duration = 0.25
 
-           self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
+        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
-           CATransaction.setCompletionBlock(completion)
-           self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-           CATransaction.commit()
-       }
+        CATransaction.setCompletionBlock(completion)
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
+        CATransaction.commit()
+    }
 
     var downMonitor: Any?
 
-       func addMonitor() {
-           self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+    func addMonitor() {
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
-               // up
-               if event.keyCode == 126 {
+            // up
+            if event.keyCode == 126 {
                 self.mainContentView.selectPreveous()
-                   return nil
-                   // down
-               } else if event.keyCode == 125 {
+                return nil
+                // down
+            } else if event.keyCode == 125 {
                 self.mainContentView.selectNext()
-                   return nil
-               }
+                return nil
+            }
 
-               return event
+            return event
            })
-       }
+    }
 
-       override func performKeyEquivalent(with event: NSEvent) -> Bool {
-           // esc
-           if event.keyCode == 53 {
-               (NSApplication.shared.delegate as? AppDelegate)?.hidePanelIfNeeded()
-               return true
-           }
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        // esc
+        if event.keyCode == 53 {
+            (NSApplication.shared.delegate as? AppDelegate)?.hidePanelIfNeeded()
+            return true
+        }
 
-           return super.performKeyEquivalent(with: event)
-       }
+        return super.performKeyEquivalent(with: event)
+    }
 
-       override func insertText(_ insertString: Any) {
-           if let string = insertString as? String, string == " " {
+    override func insertText(_ insertString: Any) {
+        if let string = insertString as? String, string == " " {
             if self.mainContentView.popUpController.isHidden {
                 self.mainContentView.scrollView.stopScroll()
-               }
+            }
             self.mainContentView.popUpController.toggle()
-           } else {
-               super.insertText(insertString)
-           }
-       }
+        } else {
+            super.insertText(insertString)
+        }
+    }
 }

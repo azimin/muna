@@ -9,7 +9,7 @@
 import Foundation
 import SwiftDate
 
-protocol PopUpControllerDelegate: class {
+protocol PopUpControllerDelegate: AnyObject {
     func popUpControllerAskToShowCurrentItem(_ popUpController: PopUpController)
     func popUpControllerAskToHide(_ popUpController: PopUpController)
 }
@@ -78,12 +78,12 @@ class PopUpController {
         self.timer?.invalidate()
         self.timer = nil
 
-        self.timer = Timer(timeInterval: 0.2, repeats: false, block: { [weak self] (timer) in
+        self.timer = Timer(timeInterval: 0.2, repeats: false, block: { [weak self] timer in
             guard let self = self, timer == self.timer else { return }
             if self.state == .shouldShow {
                 self.delegate?.popUpControllerAskToShowCurrentItem(self)
             }
         })
-        RunLoop.current.add(timer!, forMode: .common)
+        RunLoop.current.add(self.timer!, forMode: .common)
     }
 }

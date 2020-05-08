@@ -7,12 +7,11 @@
 //
 
 import Cocoa
-import SwiftUI
 import MASShortcut
+import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     enum WindowType {
         case screenshot
         case panel
@@ -40,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
-    
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.hideScreenshotIfNeeded),
@@ -64,13 +63,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             withDefaultsKey: Preferences.defaultShortcutUDKey,
             toAction: {
                 self.togglePane()
-        })
+            }
+        )
 
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
                 self.toggleScreenshotState()
-        })
+            }
+        )
     }
 
     func setupStatusBarItem() {
@@ -124,7 +125,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func setupWindow(forType type: WindowType) {
-
         guard let mainScreen = NSScreen.main else {
             assertionFailure("No main screen")
             return

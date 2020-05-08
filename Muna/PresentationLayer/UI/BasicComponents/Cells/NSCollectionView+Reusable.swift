@@ -47,6 +47,6 @@ extension NSCollectionView {
             ofKind: NSCollectionView.elementKindSectionHeader,
             withIdentifier: NSUserInterfaceItemIdentifier(rawValue: viewType.reuseIdentifier),
             for: indexPath
-            ) as! T
+        ) as! T
     }
 }

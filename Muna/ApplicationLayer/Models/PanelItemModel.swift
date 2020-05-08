@@ -75,7 +75,7 @@ var fakeData: [PanelItemModel] = [
         comment: "Some very very long title that will not fit one line",
         path: "Safari/dtf",
         image: NSImage(named: NSImage.Name("img_8"))!
-    )
+    ),
 ]
 
 extension Array {

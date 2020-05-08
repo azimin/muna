@@ -9,7 +9,6 @@
 import Cocoa
 
 class ScreenShotStateViewController: NSViewController {
-
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
     private var startedPoint = NSPoint.zero
@@ -51,7 +50,7 @@ class ScreenShotStateViewController: NSViewController {
 
     // MARK: - Show hide
 
-     func hide(completion: VoidBlock?) {
+    func hide(completion: VoidBlock?) {
         completion?()
     }
 }

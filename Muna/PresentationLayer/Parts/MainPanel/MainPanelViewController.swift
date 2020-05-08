@@ -10,7 +10,7 @@ import Cocoa
 
 class MainPanelViewController: NSViewController {
     override func loadView() {
-      self.view = MainPanelView()
+        self.view = MainPanelView()
     }
 
     override func viewDidLoad() {

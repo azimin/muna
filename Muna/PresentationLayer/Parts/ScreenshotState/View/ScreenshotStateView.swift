@@ -8,13 +8,11 @@
 
 import Cocoa
 
-protocol ScreenshotStateViewDelegate: class {
-
+protocol ScreenshotStateViewDelegate: AnyObject {
     func escapeWasTapped()
 }
 
 class ScreenshotStateView: View {
-
     weak var delegate: ScreenshotStateViewDelegate?
     private var shapeLayer: CAShapeLayer?
 
@@ -48,11 +46,11 @@ class ScreenshotStateView: View {
     }
 
     func startDash() {
-        shapeLayer = CAShapeLayer()
-        shapeLayer?.lineWidth = 2.0
-        shapeLayer?.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        shapeLayer?.strokeColor = NSColor.white.cgColor
-        shapeLayer?.lineDashPattern = [10, 5]
+        self.shapeLayer = CAShapeLayer()
+        self.shapeLayer?.lineWidth = 2.0
+        self.shapeLayer?.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.shapeLayer?.strokeColor = NSColor.white.cgColor
+        self.shapeLayer?.lineDashPattern = [10, 5]
 
         guard let layer = shapeLayer else { return }
         self.layer?.addSublayer(layer)
@@ -63,7 +61,7 @@ class ScreenshotStateView: View {
         dashAnimation.fromValue = 0.0
         dashAnimation.toValue = 15.0
         dashAnimation.repeatCount = .infinity
-        shapeLayer?.add(dashAnimation, forKey: "linePhase")
+        self.shapeLayer?.add(dashAnimation, forKey: "linePhase")
     }
 
     func continiouslyDrawDash(fromStartPoint startPoint: NSPoint, toPoint: NSPoint) {
