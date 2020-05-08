@@ -39,6 +39,11 @@
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */; };
+		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
+		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
+		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
+		9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDC2465F54B007D92B8 /* NSStackView+Builder.swift */; };
+		9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +84,11 @@
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelViewController.swift; sourceTree = "<group>"; };
+		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
+		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
+		9FE96BDC2465F54B007D92B8 /* NSStackView+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStackView+Builder.swift"; sourceTree = "<group>"; };
+		9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Builder.swift"; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
 		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -178,6 +188,7 @@
 		9F025C11246346E600F05D81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */,
 				9F99D6012464B64B00695A19 /* Content */,
 				9F99D6022464B65900695A19 /* MainPanelView.swift */,
 			);
@@ -243,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA07F612460AB8000654D36 /* Style */,
+				9FE96BD92465F489007D92B8 /* Builders */,
 				9F8CCC82245DB4A500E0F102 /* Extensions */,
 				9F8CCC81245DB49100E0F102 /* BasicComponents */,
 				9F8CCC80245DB48500E0F102 /* Components */,
@@ -266,6 +278,7 @@
 				9FA07F5D2460A8AC00654D36 /* Label.swift */,
 				9FA07F642460AD2800654D36 /* ImageView.swift */,
 				9F025C0924633C6F00F05D81 /* Panel.swift */,
+				9FE96BD42465F3BF007D92B8 /* Button.swift */,
 				9F99D5FF2464B63900695A19 /* StopableScrollView.swift */,
 			);
 			path = BasicComponents;
@@ -376,6 +389,24 @@
 				9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
+			isa = PBXGroup;
+			children = (
+				9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */,
+			);
+			path = PanelBottomBarView;
+			sourceTree = "<group>";
+		};
+		9FE96BD92465F489007D92B8 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				9FE96BDA2465F495007D92B8 /* Label+Builder.swift */,
+				9FE96BDC2465F54B007D92B8 /* NSStackView+Builder.swift */,
+				9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */,
+			);
+			path = Builders;
 			sourceTree = "<group>";
 		};
 		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
@@ -548,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
@@ -556,6 +588,7 @@
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
+				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
@@ -570,9 +603,12 @@
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
+				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
+				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
 				9F540FF6245E2B07007BF60C /* MainPanelContentView.swift in Sources */,
 				9F3BC1462461D0A4002B6217 /* PanelItemModel.swift in Sources */,
+				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,

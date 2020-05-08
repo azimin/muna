@@ -12,7 +12,7 @@ import SnapKit
 final class MainPanelItemView: View, GenericCellSubview {
     let backgroundView = View()
 
-    let imageView = ImageView()
+    var imageView = ImageView()
     let metainformationPlate = NSVisualEffectView()
     let metainformationStackView = NSStackView()
 

@@ -18,6 +18,7 @@ class MainPanelView: NSView {
     let mainContentView = MainPanelContentView()
 
     let bottomSeparator = View()
+    let bottomBar = PanelBottomBarView()
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -73,10 +74,16 @@ class MainPanelView: NSView {
             maker.height.equalTo(0.5)
         }
 
+        self.backgroundView.addSubview(self.bottomBar)
+        self.bottomBar.snp.makeConstraints { maker in
+            maker.bottom.equalToSuperview()
+            maker.leading.trailing.equalToSuperview()
+        }
+
         self.backgroundView.addSubview(self.bottomSeparator)
         self.bottomSeparator.backgroundColor = NSColor.color(.separator)
         self.bottomSeparator.snp.makeConstraints { maker in
-            maker.bottom.equalToSuperview().inset(44)
+            maker.bottom.equalTo(self.bottomBar.snp.top)
             maker.leading.trailing.equalToSuperview()
             maker.height.equalTo(0.5)
         }
