@@ -1,5 +1,5 @@
 //
-//  ScreenShotStateView.swift
+//  ScreenshotStateView.swift
 //  Muna
 //
 //  Created by Egor Petrov on 07.05.2020.
@@ -8,12 +8,20 @@
 
 import Cocoa
 
-class ScreenShotStateView: View {
+protocol ScreenshotStateViewDelegate: class {
 
+    func escapeWasTapped()
+}
+
+class ScreenshotStateView: View {
+
+    weak var delegate: ScreenshotStateViewDelegate?
     private var shapeLayer: CAShapeLayer!
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    init(delegate: ScreenshotStateViewDelegate?) {
+        self.delegate = delegate
+
+        super.init(frame: .zero)
     }
 
     required init?(coder: NSCoder) {
@@ -23,7 +31,7 @@ class ScreenShotStateView: View {
     func startDash() {
         shapeLayer = CAShapeLayer()
         shapeLayer.lineWidth = 2.0
-        shapeLayer.fillColor = NSColor.clear.cgColor
+        shapeLayer.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
         shapeLayer.strokeColor = NSColor.white.cgColor
         shapeLayer.lineDashPattern = [10, 5]
         self.layer?.addSublayer(shapeLayer)
@@ -47,7 +55,14 @@ class ScreenShotStateView: View {
         self.shapeLayer.path = path
     }
 
-    func removeLayer() {
-        self.shapeLayer = nil
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        // esc
+        if event.keyCode == 53 {
+            self.shapeLayer = nil
+            self.delegate?.escapeWasTapped()
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
     }
 }

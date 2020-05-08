@@ -15,20 +15,7 @@ class ScreenShotStateViewController: NSViewController {
     private var startedPoint = NSPoint.zero
 
     override func loadView() {
-        self.view = ScreenShotStateView()
-    }
-
-    // MARK: - Kyes
-
-    override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        // esc
-        if event.keyCode == 53 {
-            (self.view as! ScreenShotStateView).removeLayer()
-            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
-            return true
-        }
-
-        return super.performKeyEquivalent(with: event)
+        self.view = ScreenshotStateView(delegate: self)
     }
 
     // MARK: - Mouse events
@@ -37,18 +24,16 @@ class ScreenShotStateViewController: NSViewController {
 
         self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
 
-        (self.view as! ScreenShotStateView).startDash()
+        (self.view as! ScreenshotStateView).startDash()
     }
 
     override func mouseUp(with event: NSEvent) {
-        (self.view as! ScreenShotStateView).removeLayer()
-        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotState()
     }
 
      override func mouseDragged(with event: NSEvent) {
 
         let point = self.view.convert(event.locationInWindow, from: nil)
-        (self.view as! ScreenShotStateView).continiouslyDrawDash(
+        (self.view as! ScreenshotStateView).continiouslyDrawDash(
             fromStartPoint: self.startedPoint,
             toPoint: point
         )
@@ -61,5 +46,11 @@ class ScreenShotStateViewController: NSViewController {
 
      func hide(completion: VoidBlock?) {
         completion?()
+    }
+}
+
+extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
+    func escapeWasTapped() {
+        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
     }
 }
