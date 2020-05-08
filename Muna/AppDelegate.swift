@@ -212,9 +212,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.window.setFrame(mainScreen.frame, display: true, animate: false)
 
-        if let view = self.window.contentViewController as? ScreenShotStateViewController {
-            view.show()
-        }
         self.window.setIsVisible(true)
     }
 

@@ -28,6 +28,7 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     override func mouseUp(with event: NSEvent) {
+        (self.view as! ScreenshotStateView).showVisuals()
     }
 
      override func mouseDragged(with event: NSEvent) {
@@ -40,9 +41,6 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     // MARK: - Show hide
-
-    func show() {
-    }
 
      func hide(completion: VoidBlock?) {
         completion?()
