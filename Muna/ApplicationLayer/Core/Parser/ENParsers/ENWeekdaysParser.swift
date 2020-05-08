@@ -129,11 +129,11 @@ let utcTimeZone: TimeZone = TimeZone(identifier: "UTC")!
 private let noneZeroComponents: Set<Calendar.Component> = [.year, .month, .day]
 
 extension Date {
-    
+
     func isAfter(_ other: Date) -> Bool {
         return self.timeIntervalSince1970 > other.timeIntervalSince1970
     }
-    
+
     var year: Int { return cal.component(.year, from: self) }
     var month: Int { return cal.component(.month, from: self) }
     var day: Int { return cal.component(.day, from: self) }

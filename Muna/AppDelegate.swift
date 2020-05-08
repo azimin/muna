@@ -34,9 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
-
-        let enParser = ENWeekdaysParser()
-        enParser.parse(fromText: "Do on next beautiful tuesday", refDate: Date())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
