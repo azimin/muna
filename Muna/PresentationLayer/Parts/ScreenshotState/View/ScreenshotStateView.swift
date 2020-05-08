@@ -93,7 +93,7 @@ class ScreenshotStateView: View {
         self.rightVisualView.frame = CGRect(
             x: self.screenshotFrame.maxX - 2,
             y: .zero,
-            width: self.bounds.width - self.screenshotFrame.maxX,
+            width: self.bounds.width - self.screenshotFrame.maxX + 2,
             height: self.bounds.height
         )
 
@@ -108,9 +108,9 @@ class ScreenshotStateView: View {
         self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
         self.topVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
-            y: self.screenshotFrame.maxY - 2,
+            y: self.screenshotFrame.maxY,
             width: self.screenshotFrame.width - 4,
-            height: self.bounds.height - self.screenshotFrame.minY
+            height: self.bounds.height - self.screenshotFrame.minY - 2
         )
     }
 
