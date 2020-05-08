@@ -33,23 +33,11 @@ class WindowManager {
     }
 
     private func setupWindow(_ windowType: WindowType) {
-        guard let mainScreen = NSScreen.main else {
-            assertionFailure("No main screen")
-            return
-        }
-
         let window: NSWindow
         switch windowType {
         case .panel:
-            let frame = NSRect(
-                x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-                y: mainScreen.frame.minY,
-                width: self.windowFrameWidth,
-                height: mainScreen.frame.height - 0
-            )
-
             window = Panel(
-                contentRect: frame,
+                contentRect: self.frameFor(.panel),
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered,
                 defer: false
@@ -61,7 +49,7 @@ class WindowManager {
             self.showPanel(in: window)
         case .screenshot:
             window = Panel(
-                contentRect: mainScreen.frame,
+                contentRect: self.frameFor(.screenshot),
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered,
                 defer: true

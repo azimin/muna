@@ -12,17 +12,10 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    enum WindowType {
-        case screenshot
-        case panel
-    }
-
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
-
-    var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
     let windowManager = WindowManager()
 
