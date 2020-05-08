@@ -14,41 +14,36 @@ class ScreenShotStateViewController: NSViewController {
 
     private var startedPoint = NSPoint.zero
 
+    var isNeededToDrawFrame = true
+
     override func loadView() {
-        self.view = ScreenShotStateView()
-    }
-
-    // MARK: - Kyes
-
-    override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        // esc
-        if event.keyCode == 53 {
-            (self.view as! ScreenShotStateView).removeLayer()
-            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
-            return true
-        }
-
-        return super.performKeyEquivalent(with: event)
+        self.view = ScreenshotStateView(delegate: self)
     }
 
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
+        guard self.isNeededToDrawFrame else {
+            return
+        }
 
         self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
 
-        (self.view as! ScreenShotStateView).startDash()
+        (self.view as! ScreenshotStateView).startDash()
     }
 
     override func mouseUp(with event: NSEvent) {
-        (self.view as! ScreenShotStateView).removeLayer()
-        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotState()
+        self.isNeededToDrawFrame = false
+        (self.view as! ScreenshotStateView).showVisuals()
     }
 
-     override func mouseDragged(with event: NSEvent) {
+    override func mouseDragged(with event: NSEvent) {
+        guard self.isNeededToDrawFrame else {
+            return
+        }
 
         let point = self.view.convert(event.locationInWindow, from: nil)
-        (self.view as! ScreenShotStateView).continiouslyDrawDash(
+        (self.view as! ScreenshotStateView).continiouslyDrawDash(
             fromStartPoint: self.startedPoint,
             toPoint: point
         )
@@ -56,10 +51,14 @@ class ScreenShotStateViewController: NSViewController {
 
     // MARK: - Show hide
 
-    func show() {
-    }
-
      func hide(completion: VoidBlock?) {
         completion?()
+    }
+}
+
+extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
+    func escapeWasTapped() {
+        self.isNeededToDrawFrame = true
+        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
     }
 }
