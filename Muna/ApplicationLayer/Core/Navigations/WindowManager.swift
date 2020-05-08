@@ -15,6 +15,8 @@ enum WindowType: String {
 }
 
 class WindowManager {
+    private let windowFrameWidth: CGFloat = 380
+
     var windows = [String: NSWindow]()
 
     func activateWindow(_ windowType: WindowType) {
@@ -29,8 +31,6 @@ class WindowManager {
             break
         }
     }
-
-    let windowFrameWidth: CGFloat = 380
 
     private func setupWindow(_ windowType: WindowType) {
         guard let mainScreen = NSScreen.main else {
