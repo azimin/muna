@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
+    let windowManager = WindowManager()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
 
@@ -117,8 +119,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if self.isPanelShowed {
             self.hidePanel()
         } else {
-            self.setupWindow(forType: .panel)
-            self.window.makeKeyAndOrderFront(nil)
+//            self.setupWindow(forType: .panel)
+//            self.window.makeKeyAndOrderFront(nil)
             self.showPanel()
         }
         self.isPanelShowed.toggle()
@@ -187,36 +189,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        let frame = NSRect(
-            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-            y: mainScreen.frame.minY,
-            width: self.windowFrameWidth,
-            height: mainScreen.frame.height - 0
-        )
+//        let frame = NSRect(
+//            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+//            y: mainScreen.frame.minY,
+//            width: self.windowFrameWidth,
+//            height: mainScreen.frame.height - 0
+//        )
+//
+//        self.window.setFrame(frame, display: true, animate: false)
 
-        self.window.setFrame(frame, display: true, animate: false)
-
-        if let view = self.window.contentView as? MainPanelView {
-            view.show()
-        }
-        self.window.setIsVisible(true)
+//        if let view = self.window.contentView as? MainPanelView {
+//            view.show()
+//        }
+        self.windowManager.activateWindow(.panel)
     }
 
     func hidePanel() {
-        if let view = self.window.contentView as? MainPanelView {
-            view.hide {
-                self.window.setIsVisible(false)
-            }
-        }
+//        if let view = self.window.contentView as? MainPanelView {
+//            view.hide {
+//                self.windowManager.hideWindow(.panel)
+//            }
+//        }
+        self.windowManager.hideWindow(.panel)
     }
 
     @objc func toggleScreenshotState() {
-        self.setupWindow(forType: .screenshot)
+//        self.setupWindow(forType: .screenshot)
 
         if self.isScreenshotShowed {
             self.hideScreenshotState()
         } else {
-            self.window.makeKeyAndOrderFront(nil)
+//            self.window.makeKeyAndOrderFront(nil)
             self.showScreenShotState()
         }
         self.isScreenshotShowed.toggle()
@@ -228,16 +231,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        self.window.setFrame(mainScreen.frame, display: true, animate: false)
-
-        self.window.setIsVisible(true)
+//        self.window.setFrame(mainScreen.frame, display: true, animate: false)
+//
+//        self.window.setIsVisible(true)
+        self.windowManager.activateWindow(.screenshot)
     }
 
     func hideScreenshotState() {
-        if let viewController = self.window.contentViewController as? ScreenShotStateViewController {
-            viewController.hide {
-                self.window.setIsVisible(false)
-            }
-        }
+//        if let viewController = self.window.contentViewController as? ScreenShotStateViewController {
+//            viewController.hide {
+//                self.window.setIsVisible(false)
+//            }
+//        }
+        self.windowManager.hideWindow(.screenshot)
     }
 }
