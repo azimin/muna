@@ -88,10 +88,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             action: #selector(self.togglePane),
             keyEquivalent: "o"
         )
+
+        statusBarMenu.addItem(
+            withTitle: "Quit",
+            action: #selector(self.closeApp),
+            keyEquivalent: ""
+        )
     }
 
     var isPanelShowed = false
     var isScreenshotShowed = false
+
+    @objc func closeApp() {
+        NSApplication.shared.terminate(self)
+    }
 
     @objc func hidePanelIfNeeded() {
         if self.isPanelShowed {
