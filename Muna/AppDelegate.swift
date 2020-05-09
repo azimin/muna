@@ -75,7 +75,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let statusBarItem = statusBar.statusItem(
             withLength: NSStatusItem.squareLength
         )
-        statusBarItem.button?.title = "🌯"
+
+        let image = NSImage(named: NSImage.Name("icon_menu"))
+        image?.isTemplate = true
+        statusBarItem.button?.image = image
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
