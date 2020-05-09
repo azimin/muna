@@ -14,6 +14,7 @@
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
 		239DC91E245D95E8001FA50C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91C245D95E8001FA50C /* Main.storyboard */; };
 		23C2E52F246629950042C707 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2E52E246629950042C707 /* TextField.swift */; };
+		23C2E53224662B250042C707 /* ReminderSetupper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2E53124662B250042C707 /* ReminderSetupper.swift */; };
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
 		9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0E24633D1700F05D81 /* Blocks.swift */; };
@@ -61,6 +62,7 @@
 		239DC91F245D95E8001FA50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		239DC920245D95E8001FA50C /* Muna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muna.entitlements; sourceTree = "<group>"; };
 		23C2E52E246629950042C707 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		23C2E53124662B250042C707 /* ReminderSetupper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSetupper.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
 		9F025C0924633C6F00F05D81 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
@@ -173,6 +175,22 @@
 				239DC91A245D95E8001FA50C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		23C2E53024662AFE0042C707 /* ReminderSetupper */ = {
+			isa = PBXGroup;
+			children = (
+				23C2E53324662B280042C707 /* View */,
+			);
+			path = ReminderSetupper;
+			sourceTree = "<group>";
+		};
+		23C2E53324662B280042C707 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				23C2E53124662B250042C707 /* ReminderSetupper.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9F025C0D24633D0F00F05D81 /* Helpers */ = {
@@ -376,6 +394,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				23C2E53024662AFE0042C707 /* ReminderSetupper */,
 				23435AC72464A61F00B4DE50 /* ScreenshotState */,
 				9F025C10246346D700F05D81 /* ImagePreview */,
 				9FC06BF02460CE56008D4D3C /* MainPanel */,
@@ -599,6 +618,7 @@
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
+				23C2E53224662B250042C707 /* ReminderSetupper.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
