@@ -37,11 +37,8 @@ class ScreenshotStateView: View {
 
     func setup() {
         self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
     }
 
@@ -79,6 +76,12 @@ class ScreenshotStateView: View {
     }
 
     func showVisuals() {
+        guard self.screenshotFrame.width > 5, self.screenshotFrame.height > 5 else {
+            self.hideVisuals()
+            self.delegate?.escapeWasTapped()
+            return
+        }
+
         self.shapeLayer?.fillColor = NSColor.clear.cgColor
 
         self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
@@ -93,7 +96,7 @@ class ScreenshotStateView: View {
         self.rightVisualView.frame = CGRect(
             x: self.screenshotFrame.maxX - 2,
             y: .zero,
-            width: self.bounds.width - self.screenshotFrame.maxX,
+            width: self.bounds.width - self.screenshotFrame.maxX + 2,
             height: self.bounds.height
         )
 
@@ -110,14 +113,22 @@ class ScreenshotStateView: View {
             x: self.screenshotFrame.minX + 2,
             y: self.screenshotFrame.maxY - 2,
             width: self.screenshotFrame.width - 4,
-            height: self.bounds.height - self.screenshotFrame.minY
+            height: self.bounds.height - self.screenshotFrame.minY + 2
         )
+    }
+
+    func hideVisuals() {
+        self.layer?.sublayers?.forEach {
+            $0.removeFromSuperlayer()
+        }
+
+        self.shapeLayer = nil
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         // esc
         if event.keyCode == 53 {
-            self.shapeLayer = nil
+            self.hideVisuals()
             self.delegate?.escapeWasTapped()
             return true
         }

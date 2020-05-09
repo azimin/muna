@@ -51,6 +51,8 @@ class ScreenShotStateViewController: NSViewController {
     // MARK: - Show hide
 
     func hide(completion: VoidBlock?) {
+        self.isNeededToDrawFrame = true
+        (self.view as! ScreenshotStateView).hideVisuals()
         completion?()
     }
 }
