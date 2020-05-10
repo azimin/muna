@@ -60,7 +60,7 @@ class MainPanelView: NSView {
 
         self.backgroundView.addSubview(self.segmentControl)
         self.segmentControl.selectedSegment = 0
-        self.segmentControl.cell?.controlTint = .defaultControlTint
+        self.segmentControl.segmentStyle = .capsule
         self.segmentControl.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(40)
             maker.centerX.equalToSuperview()

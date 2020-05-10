@@ -81,8 +81,8 @@ class PanelItemModelGrouping {
         var index = 0
         for key in Group.allCases {
             if let count = result[key]?.count, count > 0 {
-                names[index] = key
-                values[index] = result[key]
+                self.names[index] = key
+                self.values[index] = result[key]
                 index += 1
             }
         }
