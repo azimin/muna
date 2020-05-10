@@ -13,7 +13,7 @@ class MainPanelView: NSView {
     let backgroundView = View()
     let visualView = NSVisualEffectView()
 
-    let segmentControl = NSSegmentedControl(labels: ["Hi", "There"], trackingMode: .selectOne, target: nil, action: nil)
+    let segmentControl = NSSegmentedControl(labels: ["Uncompleted", "No deadline", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
     let topSeparator = View()
     let mainContentView = MainPanelContentView()
 
@@ -59,12 +59,15 @@ class MainPanelView: NSView {
         }
 
         self.backgroundView.addSubview(self.segmentControl)
+        self.segmentControl.selectedSegment = 0
         self.segmentControl.cell?.controlTint = .defaultControlTint
         self.segmentControl.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(40)
             maker.centerX.equalToSuperview()
             maker.width.equalTo(340)
         }
+        self.segmentControl.target = self
+        self.segmentControl.action = #selector(self.segmentChanged)
 
         self.backgroundView.addSubview(self.topSeparator)
         self.topSeparator.backgroundColor = NSColor.color(.separator)
@@ -98,6 +101,20 @@ class MainPanelView: NSView {
 
     // MARK: - Show/Hide
 
+    @objc
+    func segmentChanged() {
+        switch self.segmentControl.selectedSegment {
+        case 0:
+            self.mainContentView.switchContent(filter: .uncompleted)
+        case 1:
+            self.mainContentView.switchContent(filter: .noDeadline)
+        case 2:
+            self.mainContentView.switchContent(filter: .completed)
+        default:
+            assertionFailure("Unsupported index")
+        }
+    }
+
     func show() {
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
@@ -110,6 +127,7 @@ class MainPanelView: NSView {
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
         self.addMonitor()
+        self.mainContentView.reloadData()
     }
 
     func hide(completion: VoidBlock?) {

@@ -18,7 +18,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     let collectionView = NSCollectionView()
     let segmentControl = NSSegmentedControl()
 
-    let groupedData = PanelItemModelGrouping(
+    var groupedData = PanelItemModelGrouping(
         items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all)
     )
 
@@ -66,6 +66,21 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
         }
+    }
+
+    func switchContent(filter: ItemsDatabaseService.Filter) {
+        self.groupedData = PanelItemModelGrouping(
+            items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: filter)
+        )
+        self.collectionView.reloadData()
+        self.scrollView.contentView.scroll(to: .zero)
+    }
+
+    func reloadData() {
+        self.groupedData = PanelItemModelGrouping(
+            items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .uncompleted)
+        )
+        self.collectionView.reloadData()
     }
 
     var capturedView: NSView?
