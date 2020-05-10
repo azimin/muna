@@ -11,10 +11,10 @@ import Cocoa
 class OverlayView: View {
     private var dashLayer: CAShapeLayer?
 
-    let leftVisualShapeLayer = CALayer()
-    let bottomVisualShapeLayer = CALayer()
-    let rightVisualShapeLayer = CALayer()
-    let topVisualShapeLayer = CALayer()
+    private var leftVisualShapeLayer: CALayer?
+    private var bottomVisualShapeLayer: CALayer?
+    private var rightVisualShapeLayer: CALayer?
+    private var topVisualShapeLayer: CALayer?
 
     override var isFlipped: Bool {
         return true
@@ -52,41 +52,45 @@ class OverlayView: View {
     func showOverlay(atRect rect: NSRect) {
         self.dashLayer?.fillColor = NSColor.clear.cgColor
 
-        self.leftVisualShapeLayer.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        self.layer?.insertSublayer(self.leftVisualShapeLayer, at: 0)
-        self.leftVisualShapeLayer.frame = CGRect(
+        self.leftVisualShapeLayer = CALayer()
+        self.leftVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.layer?.insertSublayer(self.leftVisualShapeLayer!, at: 0)
+        self.leftVisualShapeLayer?.frame = CGRect(
             x: .zero,
             y: .zero,
             width: rect.minX + 2,
             height: self.bounds.height
         )
 
-        self.rightVisualShapeLayer.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        self.layer?.insertSublayer(self.rightVisualShapeLayer, at: 0)
-        self.rightVisualShapeLayer.frame = CGRect(
+        self.rightVisualShapeLayer = CALayer()
+        self.rightVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.layer?.insertSublayer(self.rightVisualShapeLayer!, at: 0)
+        self.rightVisualShapeLayer?.frame = CGRect(
             x: rect.maxX - 2,
             y: .zero,
             width: self.bounds.width - rect.maxX + 2,
             height: self.bounds.height
         )
 
-        self.bottomVisualShapeLayer.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        self.layer?.insertSublayer(self.bottomVisualShapeLayer, at: 0)
-        self.bottomVisualShapeLayer.frame = CGRect(
+        self.bottomVisualShapeLayer = CALayer()
+        self.bottomVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.layer?.insertSublayer(self.bottomVisualShapeLayer!, at: 0)
+        self.bottomVisualShapeLayer?.frame = CGRect(
             x: rect.minX + 2,
             y: .zero,
             width: rect.width - 4,
             height: rect.minY + 2
         )
 
-        self.topVisualShapeLayer.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        self.layer?.insertSublayer(self.topVisualShapeLayer, at: 0)
-        self.topVisualShapeLayer.frame = CGRect(
+        self.topVisualShapeLayer = CALayer()
+        self.topVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.topVisualShapeLayer?.frame = CGRect(
             x: rect.minX + 2,
             y: rect.maxY - 2,
             width: rect.width - 4,
             height: self.bounds.height - rect.minY + 2
         )
+        self.layer?.insertSublayer(self.topVisualShapeLayer!, at: 0)
     }
 
     func clearOverlay() {
@@ -94,6 +98,10 @@ class OverlayView: View {
             $0.removeFromSuperlayer()
         }
 
+        self.leftVisualShapeLayer = nil
+        self.topVisualShapeLayer = nil
+        self.rightVisualShapeLayer = nil
+        self.bottomVisualShapeLayer = nil
         self.dashLayer = nil
     }
 }
