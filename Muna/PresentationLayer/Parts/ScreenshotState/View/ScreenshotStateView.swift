@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SnapKit
 
 protocol ScreenshotStateViewDelegate: AnyObject {
     func escapeWasTapped()
@@ -20,6 +21,8 @@ class ScreenshotStateView: View {
     weak var delegate: ScreenshotStateViewDelegate?
     private var shapeLayer: CAShapeLayer?
 
+    let screenshotImageView = ImageView()
+
     let leftVisualView = View()
     let bottomVisualView = View()
     let rightVisualView = View()
@@ -31,19 +34,30 @@ class ScreenshotStateView: View {
         self.delegate = delegate
 
         super.init(frame: .zero)
-
-        self.setup()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup() {
+    override func layout() {
+        super.layout()
+
+        self.setupInitialLayout()
+    }
+
+    func setupInitialLayout() {
         self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+
+        self.addSubview(self.screenshotImageView)
+        self.screenshotImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        self.screenshotImageView.isHidden = true
     }
 
     func startDash() {
@@ -120,6 +134,8 @@ class ScreenshotStateView: View {
             height: self.bounds.height - self.screenshotFrame.minY + 2
         )
 
+        self.screenshotImageView.isHidden = false
+
         completion()
     }
 
@@ -128,6 +144,9 @@ class ScreenshotStateView: View {
             $0.removeFromSuperlayer()
         }
 
+        self.screenshotImageView.isHidden = true
+
+        self.screenshotImageView.image = nil
         self.shapeLayer = nil
     }
 

@@ -39,6 +39,7 @@ class ScreenShotStateViewController: NSViewController {
         (self.view as! ScreenshotStateView).showVisuals { [unowned self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 let image = self.makeScreenshot()
+                (self.view as! ScreenshotStateView).screenshotImageView.image = image
             }
         }
     }
