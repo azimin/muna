@@ -80,8 +80,8 @@ class ScreenshotStateView: View {
     }
 
     func showVisuals() {
-        self.overlayView.isHidden = false
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
+        self.overlayView.isHidden = false
 
         self.screenshotImageView.isHidden = false
     }
