@@ -14,6 +14,13 @@ extension NSCollectionView {
         let numberOfItemsInCurrentSection = self.numberOfItems(inSection: section)
 
         if nextSection {
+            if self.numberOfSections == section + 1 {
+                return IndexPath(
+                    item: self.numberOfItems(inSection: section) - 1,
+                    section: section
+                )
+            }
+
             if self.numberOfSections <= section + 1 {
                 return nil
             }
