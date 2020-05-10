@@ -22,7 +22,6 @@
 		9F33D47924684DA800395C44 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47824684DA800395C44 /* ItemModel.swift */; };
 		9F33D47B2468554D00395C44 /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47A2468554D00395C44 /* ImageStorageService.swift */; };
 		9F33D48024685A7900395C44 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47F24685A7900395C44 /* ServiceLocator.swift */; };
-		9F3BC1462461D0A4002B6217 /* FakePanelItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1452461D0A4002B6217 /* FakePanelItemModel.swift */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
@@ -74,7 +73,6 @@
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		9F33D47A2468554D00395C44 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
 		9F33D47F24685A7900395C44 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		9F3BC1452461D0A4002B6217 /* FakePanelItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePanelItemModel.swift; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 		9F3BC1442461D098002B6217 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9F3BC1452461D0A4002B6217 /* FakePanelItemModel.swift */,
 				9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */,
 			);
 			path = Models;
@@ -683,7 +680,6 @@
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
 				9F33D48024685A7900395C44 /* ServiceLocator.swift in Sources */,
 				9F540FF6245E2B07007BF60C /* MainPanelContentView.swift in Sources */,
-				9F3BC1462461D0A4002B6217 /* FakePanelItemModel.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
