@@ -251,6 +251,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     // MARK: - Preveous/Next
 
     func selectPreveous(nextSection: Bool) {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
         guard let value = self.collectionView.selectionIndexPaths.first else {
             assertionFailure("NO index path")
             return
@@ -271,6 +275,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func selectNext(nextSection: Bool) {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
         guard let value = self.collectionView.selectionIndexPaths.first else {
             assertionFailure("NO index path")
             return
