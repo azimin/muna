@@ -9,9 +9,7 @@
 import Cocoa
 
 class ScreenShotStateViewController: NSViewController {
-    private var mainDisplayID: CGDirectDisplayID {
-        return CGMainDisplayID()
-    }
+    var windowId: CGWindowID?
 
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
@@ -23,6 +21,10 @@ class ScreenShotStateViewController: NSViewController {
         self.view = ScreenshotStateView(delegate: self)
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+    }
+
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
@@ -30,26 +32,17 @@ class ScreenShotStateViewController: NSViewController {
             return
         }
 
-        self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
-        (self.view as! ScreenshotStateView).startDash()
+        self.makeScreenshot { [unowned self] image in
+            (self.view as! ScreenshotStateView).screenshotImageView.image = image
+            (self.view as! ScreenshotStateView).screenshotImageView.isHidden = false
+            self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
+            (self.view as! ScreenshotStateView).startDash()
+        }
     }
 
     override func mouseUp(with event: NSEvent) {
         self.isNeededToDrawFrame = false
-        (self.view as! ScreenshotStateView).hideVisualsForScreenshot { [unowned self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.makeScreenshot { [unowned self] image in
-                    guard let image = image else {
-                        self.escapeWasTapped()
-                        return
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        (self.view as! ScreenshotStateView).screenshotImageView.image = image
-                        (self.view as! ScreenshotStateView).showVisuals()
-                    }
-                }
-            }
-        }
+        (self.view as! ScreenshotStateView).showVisuals()
     }
 
     override func mouseDragged(with event: NSEvent) {
@@ -79,7 +72,14 @@ class ScreenShotStateViewController: NSViewController {
         .appendingPathComponent("ReminderPictures", isDirectory: true)
 
     func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
-        guard let cgImage = CGDisplayCreateImage(self.mainDisplayID, rect: self.view.frame) else {
+        guard let windowId = self.windowId else {
+            assertionFailure("Window id is nil")
+            completion(nil)
+            return
+        }
+
+        guard let cgImage = CGWindowListCreateImage(NSScreen.main!.frame, .optionOnScreenBelowWindow, windowId, .bestResolution) else {
+            assertionFailure("Screenshot handling is failed")
             completion(nil)
             return
         }
