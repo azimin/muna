@@ -46,6 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        ServiceLocator.shared.itemsDatabase.saveItems()
+
         MASShortcutBinder.shared()?.breakBinding(
             withDefaultsKey: Preferences.defaultShortcutUDKey
         )

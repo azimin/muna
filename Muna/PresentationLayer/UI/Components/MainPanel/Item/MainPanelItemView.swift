@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-final class MainPanelItemView: View, GenericCellSubview {
+final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     let backgroundView = View()
 
     var imageView = ImageView()
@@ -29,6 +29,10 @@ final class MainPanelItemView: View, GenericCellSubview {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func reuse() {
+        self.item = nil
     }
 
     private func setup() {
@@ -91,6 +95,11 @@ final class MainPanelItemView: View, GenericCellSubview {
     @objc
     func toggleCompletion() {
         self.isComplited.toggle()
+        self.item?.isComplited = self.isComplited
+        self.updateStyle()
+    }
+
+    func updateStyle() {
         let imageName = self.isComplited ? "reminder-on" : "reminder-off"
         _ = self.completionButton.withImageName(imageName)
     }
@@ -104,6 +113,8 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         }
     }
+
+    private var item: ItemModel?
 
     func update(item: ItemModel) {
         if let dueDate = item.dueDate {
@@ -125,9 +136,14 @@ final class MainPanelItemView: View, GenericCellSubview {
         }
 
         self.commentLabel.stringValue = item.comment ?? ""
+        self.isComplited = item.isComplited
 
         let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName)
         self.imageView.image = image
+
+        self.item = item
+
+        self.updateStyle()
     }
 }
 

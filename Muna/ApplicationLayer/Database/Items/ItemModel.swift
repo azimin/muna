@@ -30,7 +30,23 @@ class ItemModel: Codable {
     var dueDate: Date?
     var comment: String?
 
-    var isComplited: Bool
+    var isComplited: Bool {
+        didSet {
+            self.itemsDatabaseService?.saveItems()
+        }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case imageName
+        case creationDate
+        case dueDateString
+        case dueDate
+        case comment
+        case isComplited
+    }
+
+    weak var itemsDatabaseService: ItemsDatabaseServiceProtocol?
 
     init(
         id: String,
@@ -39,7 +55,8 @@ class ItemModel: Codable {
         dueDateString: String?,
         dueDate: Date?,
         comment: String?,
-        isComplited: Bool
+        isComplited: Bool,
+        itemsDatabaseService: ItemsDatabaseServiceProtocol
     ) {
         self.id = id
         self.imageName = imageName
@@ -48,6 +65,7 @@ class ItemModel: Codable {
         self.dueDate = dueDate
         self.comment = comment
         self.isComplited = isComplited
+        self.itemsDatabaseService = itemsDatabaseService
     }
 
     func toggleComplited() {

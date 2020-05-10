@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol ItemsDatabaseServiceProtocol {
+protocol ItemsDatabaseServiceProtocol: AnyObject {
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
 
     @discardableResult
@@ -89,7 +89,8 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             dueDateString: dueDateString,
             dueDate: dueDate,
             comment: comment,
-            isComplited: false
+            isComplited: false,
+            itemsDatabaseService: self
         )
         self.items.append(item)
         self.saveItems()
@@ -119,6 +120,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             if let loadedItems = try? decoder.decode([ItemModel].self, from: savedItems) {
                 self.items = loadedItems
             }
+            self.items.forEach { $0.itemsDatabaseService = self }
         }
     }
 }
