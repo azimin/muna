@@ -107,7 +107,14 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
             return
         }
 
-        guard let croppedImage = cgImage.cropping(to: rect) else {
+        let newRect = NSRect(
+            x: rect.minX * NSScreen.main!.backingScaleFactor,
+            y: rect.minY * NSScreen.main!.backingScaleFactor,
+            width: rect.width * NSScreen.main!.backingScaleFactor,
+            height: rect.height * NSScreen.main!.backingScaleFactor
+        )
+
+        guard let croppedImage = cgImage.cropping(to: newRect) else {
             assertionFailure("Image processing is failed")
             return
         }

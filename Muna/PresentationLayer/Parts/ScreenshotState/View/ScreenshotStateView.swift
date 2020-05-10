@@ -77,14 +77,7 @@ class ScreenshotStateView: View {
         }
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
 
-        let saveFrame = NSRect(
-            x: self.screenshotFrame.minX * NSScreen.main!.backingScaleFactor,
-            y: self.screenshotFrame.minY * NSScreen.main!.backingScaleFactor,
-            width: self.screenshotFrame.width * NSScreen.main!.backingScaleFactor,
-            height: self.screenshotFrame.height * NSScreen.main!.backingScaleFactor
-        )
-
-        self.delegate?.saveImage(withRect: saveFrame)
+        self.delegate?.saveImage(withRect: self.screenshotFrame)
     }
 
     func hideVisuals() {
