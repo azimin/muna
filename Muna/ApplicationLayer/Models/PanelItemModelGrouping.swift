@@ -16,6 +16,7 @@ class PanelItemModelGrouping {
         case tomorrow = "Tomorrow"
         case later = "Later"
         case noDate = "No date"
+        case completed = "Completed"
     }
 
     var totalNumberOfItems: Int {
@@ -60,7 +61,9 @@ class PanelItemModelGrouping {
             }
             return first.creationDate < second.creationDate
         }) {
-            if let dueDate = item.dueDate {
+            if item.isComplited {
+                result[.completed]?.append(item)
+            } else if let dueDate = item.dueDate {
                 if dueDate < Date() {
                     result[.passed]?.append(item)
                 } else if dueDate.isToday {
