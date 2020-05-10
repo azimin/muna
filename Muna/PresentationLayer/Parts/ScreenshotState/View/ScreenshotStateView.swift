@@ -68,22 +68,13 @@ class ScreenshotStateView: View {
         self.screenshotFrame.size.height = toPoint.y - startPoint.y
     }
 
-    func hideVisualsForScreenshot(completion: @escaping VoidBlock) {
+    func showVisuals() {
         guard self.screenshotFrame.width > 5, self.screenshotFrame.height > 5 else {
             self.hideVisuals()
             self.delegate?.escapeWasTapped()
             return
         }
-        self.overlayView.isHidden = true
-
-        completion()
-    }
-
-    func showVisuals() {
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
-        self.overlayView.isHidden = false
-
-        self.screenshotImageView.isHidden = false
     }
 
     func hideVisuals() {

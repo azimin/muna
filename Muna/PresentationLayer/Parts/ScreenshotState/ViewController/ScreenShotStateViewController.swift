@@ -35,6 +35,7 @@ class ScreenShotStateViewController: NSViewController {
         self.makeScreenshot { [unowned self] image in
             (self.view as! ScreenshotStateView).screenshotImageView.image = image
             (self.view as! ScreenshotStateView).screenshotImageView.isHidden = false
+
             self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
             (self.view as! ScreenshotStateView).startDash()
         }
