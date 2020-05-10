@@ -66,10 +66,6 @@ class ScreenShotStateViewController: NSViewController {
 
     // MARK: - Make screen shot
 
-    private let directoryURL = FileManager.default
-        .homeDirectoryForCurrentUser
-        .appendingPathComponent("ReminderPictures", isDirectory: true)
-
     func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
         guard let windowId = self.windowId else {
             assertionFailure("Window id is nil")
