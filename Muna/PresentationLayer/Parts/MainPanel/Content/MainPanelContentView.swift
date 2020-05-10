@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
     private let headerHight: CGFloat = 28
     private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
@@ -24,6 +24,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     )
 
     let popUpController = PopUpController()
+    let emptyStateView = EmptyStateView()
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -43,6 +44,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             maker.edges.equalToSuperview()
         }
 
+        self.addSubview(self.emptyStateView)
+        self.emptyStateView.snp.makeConstraints { maker in
+            maker.width.equalTo(WindowManager.panelWindowFrameWidth - 32)
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview()
+        }
+
         let layout = NSCollectionViewFlowLayout()
         layout.minimumLineSpacing = 24
 
@@ -54,6 +62,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.collectionView.isSelectable = true
 
         self.selectFirstIndexIfNeeded()
+        self.updateState()
 
         self.collectionView.registerReusableCellWithClass(
             GenericCollectionViewItem<MainPanelItemView>.self
@@ -74,6 +83,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: filter)
         )
         self.collectionView.reloadData()
+        self.updateState()
+
         self.selectFirstIndexIfNeeded()
         self.scrollView.contentView.scroll(to: .zero)
     }
@@ -85,9 +96,25 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: self.selectedFilter)
         )
         self.collectionView.reloadData()
+        self.updateState()
 
         if let indexPath = selectedIndexPath {
             self.select(indexPath: indexPath)
+        }
+    }
+
+    func updateState() {
+        self.emptyStateView.isHidden = self.groupedData.totalNumberOfItems > 0
+        switch self.selectedFilter {
+        case .noDeadline:
+            self.emptyStateView.update(style: .noDeadline)
+        case .uncompleted:
+            self.emptyStateView.update(style: .noUncompletedItems(shortcut: "cmd + shift + s"))
+        case .completed:
+            self.emptyStateView.update(style: .noCompletedItems)
+        default:
+            assertionFailure("Not supported")
+            self.emptyStateView.update(style: .noUncompletedItems(shortcut: nil))
         }
     }
 

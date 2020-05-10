@@ -6,7 +6,7 @@
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 extension Label {
     func withTextColorStyle(_ colorStyle: ColorStyle) -> Self {
@@ -16,6 +16,11 @@ extension Label {
 
     func withText(_ text: String) -> Self {
         self.stringValue = text
+        return self
+    }
+
+    func withAligment(_ alignment: NSTextAlignment) -> Self {
+        self.alignment = alignment
         return self
     }
 }

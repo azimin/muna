@@ -22,6 +22,7 @@
 		9F33D47924684DA800395C44 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47824684DA800395C44 /* ItemModel.swift */; };
 		9F33D47B2468554D00395C44 /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47A2468554D00395C44 /* ImageStorageService.swift */; };
 		9F33D48024685A7900395C44 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D47F24685A7900395C44 /* ServiceLocator.swift */; };
+		9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D482246875B000395C44 /* EmptyStateView.swift */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
@@ -73,6 +74,7 @@
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		9F33D47A2468554D00395C44 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
 		9F33D47F24685A7900395C44 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		9F33D482246875B000395C44 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 			path = ImageStorage;
 			sourceTree = "<group>";
 		};
+		9F33D4812468759F00395C44 /* EmptyState */ = {
+			isa = PBXGroup;
+			children = (
+				9F33D482246875B000395C44 /* EmptyStateView.swift */,
+			);
+			path = EmptyState;
+			sourceTree = "<group>";
+		};
 		9F3BC1442461D098002B6217 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +390,7 @@
 		9FA07F582460A53200654D36 /* MainPanel */ = {
 			isa = PBXGroup;
 			children = (
+				9F33D4812468759F00395C44 /* EmptyState */,
 				9FA07F5A2460A5B200654D36 /* Header */,
 				9FA07F592460A5AD00654D36 /* Item */,
 			);
@@ -660,6 +671,7 @@
 				9F33D47924684DA800395C44 /* ItemModel.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
+				9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,

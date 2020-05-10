@@ -9,6 +9,15 @@
 import Cocoa
 
 class Label: NSTextField {
+    var text: String {
+        set {
+            self.stringValue = newValue
+        }
+        get {
+            return self.stringValue
+        }
+    }
+
     init(fontStyle: FontStyle, size: CGFloat) {
         super.init(frame: .zero)
         self.font = FontStyle.customFont(style: fontStyle, size: size)

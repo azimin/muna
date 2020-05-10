@@ -15,7 +15,10 @@ enum WindowType: String {
 }
 
 class WindowManager {
-    private let windowFrameWidth: CGFloat = 380
+    static let panelWindowFrameWidth: CGFloat = 380
+    var windowFrameWidth: CGFloat {
+        return WindowManager.panelWindowFrameWidth
+    }
 
     var windows = [String: NSWindow]()
 
