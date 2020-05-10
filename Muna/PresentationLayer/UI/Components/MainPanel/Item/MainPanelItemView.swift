@@ -142,6 +142,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.imageView.image = image
 
         self.item = item
+        item.toggleSeen()  
 
         self.updateStyle()
     }

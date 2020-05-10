@@ -17,8 +17,10 @@ protocol ItemModelProtocol {
     var comment: String? { get }
 
     var isComplited: Bool { get }
+    var isNew: Bool { get }
 
     func toggleComplited()
+    func toggleSeen()
 }
 
 class ItemModel: Codable {
@@ -42,6 +44,8 @@ class ItemModel: Codable {
         }
     }
 
+    var isNew: Bool = false
+
     enum CodingKeys: String, CodingKey {
         case id
         case imageName
@@ -62,6 +66,7 @@ class ItemModel: Codable {
         dueDate: Date?,
         comment: String?,
         isComplited: Bool,
+        isNew: Bool,
         itemsDatabaseService: ItemsDatabaseServiceProtocol
     ) {
         self.id = id
@@ -71,10 +76,15 @@ class ItemModel: Codable {
         self.dueDate = dueDate
         self.comment = comment
         self.isComplited = isComplited
+        self.isNew = isNew
         self.itemsDatabaseService = itemsDatabaseService
     }
 
     func toggleComplited() {
         self.isComplited.toggle()
+    }
+
+    func toggleSeen() {
+        self.isNew = false
     }
 }

@@ -90,6 +90,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             dueDate: dueDate,
             comment: comment,
             isComplited: false,
+            isNew: true,
             itemsDatabaseService: self
         )
         self.items.append(item)

@@ -11,6 +11,7 @@ import SwiftDate
 
 class PanelItemModelGrouping {
     enum Group: String, CaseIterable {
+        case new = "New"
         case passed = "Passed"
         case today = "Today"
         case tomorrow = "Tomorrow"
@@ -61,7 +62,9 @@ class PanelItemModelGrouping {
             }
             return first.creationDate < second.creationDate
         }) {
-            if item.isComplited {
+            if item.isNew {
+                result[.new]?.append(item)
+            } else if item.isComplited {
                 result[.completed]?.append(item)
             } else if let dueDate = item.dueDate {
                 if dueDate < Date() {
