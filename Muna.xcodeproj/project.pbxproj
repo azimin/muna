@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
-		236B1A8C2468380500BD91CA /* ScreenshotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B1A8B2468380500BD91CA /* ScreenshotService.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
@@ -62,7 +61,6 @@
 /* Begin PBXFileReference section */
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
-		236B1A8B2468380500BD91CA /* ScreenshotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotService.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239DC917245D95E8001FA50C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,14 +150,6 @@
 				2317E9E32464A69200E017A3 /* ViewController */,
 			);
 			path = ScreenshotState;
-			sourceTree = "<group>";
-		};
-		236B1A8A246837EE00BD91CA /* ScreenshotService */ = {
-			isa = PBXGroup;
-			children = (
-				236B1A8B2468380500BD91CA /* ScreenshotService.swift */,
-			);
-			path = ScreenshotService;
 			sourceTree = "<group>";
 		};
 		239DC907245D95E5001FA50C = {
@@ -332,9 +322,6 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				236B1A8A246837EE00BD91CA /* ScreenshotService */,
-				9F33D47C24685A3F00395C44 /* ServiceLocator */,
-				9F33D47424684D4E00395C44 /* Database */,
 				23A6B29F24660A19006A7A4D /* Core */,
 				9FB8B522246372CA00BE7544 /* Controllers */,
 				9F025C0D24633D0F00F05D81 /* Helpers */,
@@ -732,7 +719,6 @@
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
-				236B1A8C2468380500BD91CA /* ScreenshotService.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
 				9F33D48024685A7900395C44 /* ServiceLocator.swift in Sources */,
 				9F540FF6245E2B07007BF60C /* MainPanelContentView.swift in Sources */,

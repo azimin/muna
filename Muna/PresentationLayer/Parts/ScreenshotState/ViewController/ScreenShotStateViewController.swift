@@ -9,9 +9,11 @@
 import Cocoa
 
 class ScreenShotStateViewController: NSViewController {
-    private var mouseLocation: NSPoint { NSEvent.mouseLocation }
+    private var mainDisplayID: CGDirectDisplayID {
+        return CGMainDisplayID()
+    }
 
-    private let screenshotService = ScreenshotService()
+    private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
     private var startedPoint = NSPoint.zero
 
@@ -34,18 +36,11 @@ class ScreenShotStateViewController: NSViewController {
 
     override func mouseUp(with event: NSEvent) {
         self.isNeededToDrawFrame = false
-        (self.view as! ScreenshotStateView).showVisuals()
-        print(self.startedPoint)
-        print(NSScreen.main!.backingScaleFactor)
-        let frame = CGRect(
-            x: self.startedPoint.x,
-            y: self.startedPoint.y,
-            width: (self.view as! ScreenshotStateView).screenshotFrame.size.width,
-            height: (self.view as! ScreenshotStateView).screenshotFrame.size.height
-        )
-        print(frame)
-
-        self.screenshotService.makeScreenshot(inRect: CGRect(x: 0, y: 92, width: 100, height: 100), name: "world.jpg")
+        (self.view as! ScreenshotStateView).showVisuals { [unowned self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                let image = self.makeScreenshot()
+            }
+        }
     }
 
     override func mouseDragged(with event: NSEvent) {
@@ -66,6 +61,16 @@ class ScreenShotStateViewController: NSViewController {
         self.isNeededToDrawFrame = true
         (self.view as! ScreenshotStateView).hideVisuals()
         completion?()
+    }
+
+    // MARK: - Make screen shot
+
+    func makeScreenshot() -> NSImage? {
+        guard let cgImage = CGDisplayCreateImage(self.mainDisplayID, rect: self.view.frame) else {
+            return nil
+        }
+        let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
+        return image
     }
 }
 

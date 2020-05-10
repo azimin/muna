@@ -79,7 +79,7 @@ class ScreenshotStateView: View {
         self.screenshotFrame.size.height = toPoint.y - startPoint.y
     }
 
-    func showVisuals() {
+    func showVisuals(completion: @escaping VoidBlock) {
         guard self.screenshotFrame.width > 5, self.screenshotFrame.height > 5 else {
             self.hideVisuals()
             self.delegate?.escapeWasTapped()
@@ -119,6 +119,8 @@ class ScreenshotStateView: View {
             width: self.screenshotFrame.width - 4,
             height: self.bounds.height - self.screenshotFrame.minY + 2
         )
+
+        completion()
     }
 
     func hideVisuals() {
