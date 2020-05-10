@@ -9,62 +9,67 @@
 import Cocoa
 
 class ShortcutItemView: View {
-    enum Key {
-        case command
-        case enter
-        case shift
-        case option
-        case control
-        case up
-        case down
-        case char(value: String)
-        case number(value: Int)
+    let imageView = ImageView().withIsHidden(true)
+    let iconLabel = Label(fontStyle: .bold, size: 7).withIsHidden(true)
+    let label = Label(fontStyle: .bold, size: 7).withIsHidden(true)
 
-        var image: NSImage? {
-            let name: String?
-            switch self {
-            case .command:
-                name = "icon_cmd"
-            default:
-                name = nil
-            }
+    init(modifierFlags: NSEvent.ModifierFlags) {
+        let iconString: String
+        let textString: String
 
-            if let name = name {
-                return NSImage(named: NSImage.Name(name))
-            }
-            return nil
+        switch modifierFlags {
+        case .command:
+            iconString = Key.command.description
+            textString = "Cmd"
+        case .shift:
+            iconString = Key.shift.description
+            textString = "Shift"
+        case .option:
+            iconString = Key.option.description
+            textString = "Option"
+        case .control:
+            iconString = Key.control.description
+            textString = "Control"
+        default:
+            assertionFailure("No supported key")
+            iconString = ""
+            textString = "Unknown"
         }
-
-        var name: String? {
-            switch self {
-            case .command:
-                return "Cmd"
-            case .enter:
-                return "Enter"
-            case .shift:
-                return "Shift"
-            case .option:
-                return "Option"
-            case .control:
-                return "Control"
-            case let .char(value):
-                return "\(value)"
-            case let .number(value):
-                return "\(value)"
-            case .up, .down:
-                return nil
-            }
-        }
-    }
-
-    let imageView = ImageView()
-    let label = Label(fontStyle: .bold, size: 7)
-
-    private let key: Key
-    init(key: Key) {
-        self.key = key
         super.init(frame: .zero)
         self.setup()
+
+        self.iconLabel.text = iconString
+        self.label.text = textString
+
+        self.iconLabel.isHidden = false
+        self.label.isHidden = false
+    }
+
+    init(key: Key) {
+        var image: NSImage?
+        var text: String?
+
+        switch key {
+        case .upArrow:
+            image = NSImage(named: NSImage.Name("key-up"))
+        case .downArrow:
+            image = NSImage(named: NSImage.Name("key-down"))
+        default:
+            text = key.description
+        }
+
+        super.init(frame: .zero)
+        self.setup()
+
+        if let image = image {
+            self.imageView.image = image
+            self.imageView.isHidden = false
+        }
+
+        if let text = text {
+            self.label.text = text
+            self.label.isHidden = false
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -75,7 +80,7 @@ class ShortcutItemView: View {
         self.layer?.cornerRadius = 3
         self.backgroundColor = NSColor.color(.white60alpha)
 
-        let stackView = NSStackView(views: [self.imageView, self.label])
+        let stackView = NSStackView(views: [self.imageView, self.iconLabel, self.label])
         stackView.spacing = 3
 
         self.addSubview(stackView)

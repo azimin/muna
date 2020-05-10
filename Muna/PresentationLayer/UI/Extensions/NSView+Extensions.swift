@@ -8,4 +8,9 @@
 
 import Cocoa
 
-extension NSView {}
+extension NSView {
+    func withIsHidden(_ isHidden: Bool) -> Self {
+        self.isHidden = isHidden
+        return self
+    }
+}
