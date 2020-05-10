@@ -40,6 +40,9 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     override func mouseUp(with event: NSEvent) {
+        guard self.isNeededToDrawFrame else {
+            return
+        }
         self.isNeededToDrawFrame = false
         (self.view as! ScreenshotStateView).showVisuals()
     }
