@@ -18,6 +18,10 @@ class PanelItemModelGrouping {
         case noDate = "No date"
     }
 
+    var totalNumberOfItems: Int {
+        return self.values.reduce(0) { $0 + $1.value.count }
+    }
+
     var sections: Int {
         return self.values.count
     }

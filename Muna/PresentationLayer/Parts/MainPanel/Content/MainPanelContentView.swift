@@ -18,8 +18,9 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     let collectionView = NSCollectionView()
     let segmentControl = NSSegmentedControl()
 
+    var selectedFilter: ItemsDatabaseService.Filter = .uncompleted
     var groupedData = PanelItemModelGrouping(
-        items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all)
+        items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .uncompleted)
     )
 
     let popUpController = PopUpController()
@@ -52,8 +53,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.collectionView.backgroundColors = [.clear]
         self.collectionView.isSelectable = true
 
-        let itemsToSelect = Set<IndexPath>.init(arrayLiteral: IndexPath(item: 0, section: 0))
-        self.collectionView.selectItems(at: itemsToSelect, scrollPosition: .top)
+        self.selectFirstIndexIfNeeded()
 
         self.collectionView.registerReusableCellWithClass(
             GenericCollectionViewItem<MainPanelItemView>.self
@@ -69,18 +69,44 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func switchContent(filter: ItemsDatabaseService.Filter) {
+        self.selectedFilter = filter
         self.groupedData = PanelItemModelGrouping(
             items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: filter)
         )
         self.collectionView.reloadData()
+        self.selectFirstIndexIfNeeded()
         self.scrollView.contentView.scroll(to: .zero)
     }
 
     func reloadData() {
+        let selectedIndexPath = self.collectionView.selectionIndexPaths.first
+
         self.groupedData = PanelItemModelGrouping(
-            items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .uncompleted)
+            items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: self.selectedFilter)
         )
         self.collectionView.reloadData()
+
+        if let indexPath = selectedIndexPath {
+            self.select(indexPath: indexPath)
+        }
+    }
+
+    private func selectFirstIndexIfNeeded() {
+        self.select(indexPath: .init(item: 0, section: 0))
+    }
+
+    private func select(indexPath: IndexPath) {
+        if self.collectionView.numberOfSections > indexPath.section, self.collectionView.numberOfItems(inSection: indexPath.section) > indexPath.item {
+            self.collectionView.selectItems(
+                at: .init(arrayLiteral: indexPath),
+                scrollPosition: .left
+            )
+        } else if self.collectionView.numberOfSections > 0, self.collectionView.numberOfItems(inSection: 0) > 0 {
+            self.collectionView.selectItems(
+                at: .init(arrayLiteral: IndexPath(item: 0, section: 0)),
+                scrollPosition: .left
+            )
+        }
     }
 
     var capturedView: NSView?
