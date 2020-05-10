@@ -11,6 +11,7 @@ import SnapKit
 
 protocol ScreenshotStateViewDelegate: AnyObject {
     func escapeWasTapped()
+    func saveImage(withRect rect: NSRect)
 }
 
 class ScreenshotStateView: View {
@@ -75,6 +76,15 @@ class ScreenshotStateView: View {
             return
         }
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
+
+        let saveFrame = NSRect(
+            x: self.screenshotFrame.minX * NSScreen.main!.backingScaleFactor,
+            y: self.screenshotFrame.minY * NSScreen.main!.backingScaleFactor,
+            width: self.screenshotFrame.width * NSScreen.main!.backingScaleFactor,
+            height: self.screenshotFrame.height * NSScreen.main!.backingScaleFactor
+        )
+
+        self.delegate?.saveImage(withRect: saveFrame)
     }
 
     func hideVisuals() {

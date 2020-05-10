@@ -11,6 +11,8 @@ import Cocoa
 class ScreenShotStateViewController: NSViewController {
     var windowId: CGWindowID?
 
+    private var tmpCGImage: CGImage?
+
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
     private var startedPoint = NSPoint.zero
@@ -85,15 +87,9 @@ class ScreenShotStateViewController: NSViewController {
             return
         }
 
+        self.tmpCGImage = cgImage
+
         let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
-        let bitmap = NSBitmapImageRep(cgImage: cgImage)
-        let jpgData = bitmap.representation(using: .jpeg, properties: [:])
-        do {
-            try FileManager.default.createDirectory(at: self.directoryURL, withIntermediateDirectories: true, attributes: nil)
-            try jpgData?.write(to: self.directoryURL.appendingPathComponent("Hello.jpg"), options: .atomic)
-        } catch {
-            print(error)
-        }
 
         completion(image)
     }
@@ -103,5 +99,26 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
         self.isNeededToDrawFrame = true
         (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
+    }
+
+    func saveImage(withRect rect: NSRect) {
+        guard let cgImage = self.tmpCGImage else {
+            assertionFailure("Image for save is nil")
+            return
+        }
+
+        guard let croppedImage = cgImage.cropping(to: rect) else {
+            assertionFailure("Image processing is failed")
+            return
+        }
+
+        let image = NSImage(cgImage: croppedImage, size: rect.size)
+
+        ServiceLocator.shared.itemsDatabase.addItem(
+            image: image,
+            dueDateString: "New awesome string",
+            dueDate: Date(),
+            comment: "Hello"
+        )
     }
 }
