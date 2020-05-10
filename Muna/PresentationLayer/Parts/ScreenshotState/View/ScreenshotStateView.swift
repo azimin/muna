@@ -22,6 +22,7 @@ class ScreenshotStateView: View {
     private var shapeLayer: CAShapeLayer?
 
     let screenshotImageView = ImageView()
+    let overlayView = View()
 
     let leftVisualView = View()
     let bottomVisualView = View()
@@ -52,6 +53,12 @@ class ScreenshotStateView: View {
             make.edges.equalToSuperview()
         }
 
+        self.addSubview(self.overlayView)
+        self.overlayView.backgroundColor = .clear
+        self.overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
@@ -68,7 +75,7 @@ class ScreenshotStateView: View {
         self.shapeLayer?.lineDashPattern = [10, 5]
 
         guard let layer = shapeLayer else { return }
-        self.layer?.addSublayer(layer)
+        self.overlayView.layer?.addSublayer(layer)
 
         var dashAnimation = CABasicAnimation()
         dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
@@ -107,8 +114,7 @@ class ScreenshotStateView: View {
     func showVisuals() {
         self.shapeLayer?.strokeColor = NSColor.white.cgColor
 
-//        self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
-        self.addSubview(self.leftVisualView)
+        self.overlayView.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
         self.leftVisualView.frame = CGRect(
             x: .zero,
             y: .zero,
@@ -116,7 +122,7 @@ class ScreenshotStateView: View {
             height: self.bounds.height
         )
 
-        self.layer?.insertSublayer(self.rightVisualView.layer!, at: 0)
+        self.overlayView.layer?.insertSublayer(self.rightVisualView.layer!, at: 0)
         self.rightVisualView.frame = CGRect(
             x: self.screenshotFrame.maxX - 2,
             y: .zero,
@@ -124,7 +130,7 @@ class ScreenshotStateView: View {
             height: self.bounds.height
         )
 
-        self.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
+        self.overlayView.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
         self.bottomVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
             y: .zero,
@@ -132,7 +138,7 @@ class ScreenshotStateView: View {
             height: self.screenshotFrame.minY + 2
         )
 
-        self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
+        self.overlayView.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
         self.topVisualView.frame = CGRect(
             x: self.screenshotFrame.minX + 2,
             y: self.screenshotFrame.maxY - 2,
@@ -144,7 +150,7 @@ class ScreenshotStateView: View {
     }
 
     func hideVisuals() {
-        self.layer?.sublayers?.forEach {
+        self.overlayView.layer?.sublayers?.forEach {
             $0.removeFromSuperlayer()
         }
 
