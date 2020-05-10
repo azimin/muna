@@ -16,8 +16,11 @@ final class MainPanelItemView: View, GenericCellSubview {
     let metainformationPlate = NSVisualEffectView()
     let metainformationStackView = NSStackView()
 
+    let completionButton = Button().withImageName("reminder-off")
     let deadlineLabel = Label(fontStyle: .heavy, size: 16)
     let commentLabel = Label(fontStyle: .medium, size: 14)
+
+    private var isComplited: Bool = false
 
     init() {
         super.init(frame: .zero)
@@ -64,7 +67,7 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationStackView.spacing = 4
         self.metainformationStackView.alignment = .leading
         self.metainformationStackView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+            maker.top.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 
         self.deadlineLabel.textColor = NSColor.color(.white)
@@ -72,6 +75,24 @@ final class MainPanelItemView: View, GenericCellSubview {
 
         self.commentLabel.textColor = NSColor.color(.white60alpha)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
+
+        self.metainformationPlate.addSubview(self.completionButton)
+        self.completionButton.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().inset(12)
+            maker.size.equalTo(19)
+            maker.trailing.equalTo(self.metainformationStackView.snp.leading).inset(-12)
+            maker.top.equalTo(self.deadlineLabel.snp.top)
+        }
+
+        self.completionButton.target = self
+        self.completionButton.action = #selector(self.toggleCompletion)
+    }
+
+    @objc
+    func toggleCompletion() {
+        self.isComplited.toggle()
+        let imageName = self.isComplited ? "reminder-on" : "reminder-off"
+        _ = self.completionButton.withImageName(imageName)
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
