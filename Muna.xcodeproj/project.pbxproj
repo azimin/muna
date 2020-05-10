@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
+		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
 		239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DC913245D95E5001FA50C /* AppDelegate.swift */; };
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
+		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
 		239DC910245D95E5001FA50C /* Muna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DC913245D95E5001FA50C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,9 +140,18 @@
 		2317E9E42464A69C00E017A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				231DCAC324686A2C009B7D80 /* Subviews */,
 				2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		231DCAC324686A2C009B7D80 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				231DCAC424686A3D009B7D80 /* OverlayView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		23435AC72464A61F00B4DE50 /* ScreenshotState */ = {
@@ -712,6 +723,7 @@
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
 				9F33D4882468826100395C44 /* ShortcutView.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
+				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9F33D47624684D5C00395C44 /* ItemsDatabaseService.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
