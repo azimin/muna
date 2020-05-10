@@ -47,15 +47,15 @@ class ScreenshotStateView: View {
     }
 
     func setupInitialLayout() {
-        self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-
         self.addSubview(self.screenshotImageView)
         self.screenshotImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+
+        self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+        self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+        self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+        self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
 
         self.screenshotImageView.isHidden = true
     }
@@ -93,16 +93,22 @@ class ScreenshotStateView: View {
         self.screenshotFrame.size.height = toPoint.y - startPoint.y
     }
 
-    func showVisuals(completion: @escaping VoidBlock) {
+    func hideVisualsForScreenshot(completion: @escaping VoidBlock) {
         guard self.screenshotFrame.width > 5, self.screenshotFrame.height > 5 else {
             self.hideVisuals()
             self.delegate?.escapeWasTapped()
             return
         }
-
         self.shapeLayer?.fillColor = NSColor.clear.cgColor
+        self.shapeLayer?.strokeColor = NSColor.clear.cgColor
+        completion()
+    }
 
-        self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
+    func showVisuals() {
+        self.shapeLayer?.strokeColor = NSColor.white.cgColor
+
+//        self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
+        self.addSubview(self.leftVisualView)
         self.leftVisualView.frame = CGRect(
             x: .zero,
             y: .zero,
@@ -135,8 +141,6 @@ class ScreenshotStateView: View {
         )
 
         self.screenshotImageView.isHidden = false
-
-        completion()
     }
 
     func hideVisuals() {

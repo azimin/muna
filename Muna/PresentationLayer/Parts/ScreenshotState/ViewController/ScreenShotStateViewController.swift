@@ -36,10 +36,18 @@ class ScreenShotStateViewController: NSViewController {
 
     override func mouseUp(with event: NSEvent) {
         self.isNeededToDrawFrame = false
-        (self.view as! ScreenshotStateView).showVisuals { [unowned self] in
+        (self.view as! ScreenshotStateView).hideVisualsForScreenshot { [unowned self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                let image = self.makeScreenshot()
-                (self.view as! ScreenshotStateView).screenshotImageView.image = image
+                self.makeScreenshot { [unowned self] image in
+                    guard let image = image else {
+                        self.escapeWasTapped()
+                        return
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        (self.view as! ScreenshotStateView).screenshotImageView.image = image
+                        (self.view as! ScreenshotStateView).showVisuals()
+                    }
+                }
             }
         }
     }
@@ -66,12 +74,27 @@ class ScreenShotStateViewController: NSViewController {
 
     // MARK: - Make screen shot
 
-    func makeScreenshot() -> NSImage? {
+    private let directoryURL = FileManager.default
+        .homeDirectoryForCurrentUser
+        .appendingPathComponent("ReminderPictures", isDirectory: true)
+
+    func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
         guard let cgImage = CGDisplayCreateImage(self.mainDisplayID, rect: self.view.frame) else {
-            return nil
+            completion(nil)
+            return
         }
+
         let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
-        return image
+        let bitmap = NSBitmapImageRep(cgImage: cgImage)
+        let jpgData = bitmap.representation(using: .jpeg, properties: [:])
+        do {
+            try FileManager.default.createDirectory(at: self.directoryURL, withIntermediateDirectories: true, attributes: nil)
+            try jpgData?.write(to: self.directoryURL.appendingPathComponent("Hello.jpg"), options: .atomic)
+        } catch {
+            print(error)
+        }
+
+        completion(image)
     }
 }
 
