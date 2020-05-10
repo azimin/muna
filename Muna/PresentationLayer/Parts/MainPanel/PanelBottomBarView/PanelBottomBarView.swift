@@ -19,8 +19,8 @@ class PanelBottomBarView: View {
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
-    let shortcutsButton = Button().withImageName("icon_cmd", color: .white60)
-    let settingsButton = Button().withImageName("icon_settings_2", color: .white60)
+    let shortcutsButton = Button().withImageName("icon_cmd", color: .white)
+    let settingsButton = Button().withImageName("icon_settings_2", color: .white)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

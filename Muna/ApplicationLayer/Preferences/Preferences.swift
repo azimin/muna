@@ -15,16 +15,17 @@ class Preferences {
 
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + t
-        let defaultActivationShortcut = MASShortcut(
-            keyCode: 17,
-            modifierFlags: [.command, .shift]
-        )
 
-        // cmd + shift + t
-        let defaultScreensshotShortcut = MASShortcut(
-            keyCode: 1,
-            modifierFlags: [.command, .shift]
-        )
+        let defaultActivationShortcut = ShortcutItem(
+            key: .t,
+            modifiers: [.command, .shift]
+        ).masShortcut
+
+        // cmd + shift + s
+        let defaultScreensshotShortcut = ShortcutItem(
+            key: .s,
+            modifiers: [.command, .shift]
+        ).masShortcut
 
         var result: [String: NSObject] = [:]
 
