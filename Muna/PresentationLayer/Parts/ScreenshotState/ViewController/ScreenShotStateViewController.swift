@@ -11,6 +11,8 @@ import Cocoa
 class ScreenShotStateViewController: NSViewController {
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
+    private let screenshotService = ScreenshotService()
+
     private var startedPoint = NSPoint.zero
 
     var isNeededToDrawFrame = true
@@ -34,6 +36,8 @@ class ScreenShotStateViewController: NSViewController {
     override func mouseUp(with event: NSEvent) {
         self.isNeededToDrawFrame = false
         (self.view as! ScreenshotStateView).showVisuals()
+        let frame = (self.view as! ScreenshotStateView).screenshotFrame
+        self.screenshotService.makeScreenshot(inRect: frame)
     }
 
     override func mouseDragged(with event: NSEvent) {
