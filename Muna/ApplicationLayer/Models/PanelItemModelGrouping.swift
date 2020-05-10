@@ -15,6 +15,7 @@ class PanelItemModelGrouping {
         case today = "Today"
         case tomorrow = "Tomorrow"
         case later = "Later"
+        case noDate = "No date"
     }
 
     var sections: Int {
@@ -25,7 +26,7 @@ class PanelItemModelGrouping {
         return self.values[section]?.count ?? 0
     }
 
-    func item(at indexPath: IndexPath) -> FakePanelItemModel {
+    func item(at indexPath: IndexPath) -> ItemModel {
         return self.values[indexPath.section]![indexPath.item]
     }
 
@@ -34,25 +35,39 @@ class PanelItemModelGrouping {
     }
 
     private var names: [Int: Group] = [:]
-    private var values: [Int: [FakePanelItemModel]] = [:]
+    private var values: [Int: [ItemModel]] = [:]
 
-    init(items: [FakePanelItemModel]) {
-        var result: [Group: [FakePanelItemModel]] = [:]
+    // swiftlint:disable cyclomatic_complexity
+    init(items: [ItemModel]) {
+        var result: [Group: [ItemModel]] = [:]
         for key in Group.allCases {
             result[key] = []
         }
 
         for item in items.sorted(by: { (first, second) -> Bool in
-            first.dueDate < second.dueDate
+            if first.dueDate != nil, second.dueDate == nil {
+                return true
+            }
+            if first.dueDate == nil, second.dueDate != nil {
+                return false
+            }
+            if let firstDueDate = first.dueDate, let secondDueDate = second.dueDate {
+                return firstDueDate < secondDueDate
+            }
+            return first.creationDate < second.creationDate
         }) {
-            if item.dueDate < Date() {
-                result[.passed]?.append(item)
-            } else if item.dueDate.isToday {
-                result[.today]?.append(item)
-            } else if item.dueDate.isTomorrow {
-                result[.tomorrow]?.append(item)
+            if let dueDate = item.dueDate {
+                if dueDate < Date() {
+                    result[.passed]?.append(item)
+                } else if dueDate.isToday {
+                    result[.today]?.append(item)
+                } else if dueDate.isTomorrow {
+                    result[.tomorrow]?.append(item)
+                } else {
+                    result[.later]?.append(item)
+                }
             } else {
-                result[.later]?.append(item)
+                result[.noDate]?.append(item)
             }
         }
 

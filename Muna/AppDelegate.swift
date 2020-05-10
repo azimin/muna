@@ -41,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
+
+//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

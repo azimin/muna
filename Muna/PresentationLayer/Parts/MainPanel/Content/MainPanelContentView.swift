@@ -18,7 +18,9 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     let collectionView = NSCollectionView()
     let segmentControl = NSSegmentedControl()
 
-    let groupedData = PanelItemModelGrouping(items: fakeData)
+    let groupedData = PanelItemModelGrouping(
+        items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all)
+    )
 
     let popUpController = PopUpController()
 
@@ -67,7 +69,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     var capturedView: NSView?
-    var capturedItem: FakePanelItemModel?
+    var capturedItem: ItemModel?
 
     override func rightMouseUp(with event: NSEvent) {
         let point = self.convert(event.locationInWindow, to: self.collectionView)
@@ -118,9 +120,15 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             return
         }
 
+        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: capturedItem.imageName) else {
+            assertionFailure("No image")
+            return
+        }
+
         let popover = NSPopover()
+
         popover.contentViewController = ImagePreviewViewController(
-            image: capturedItem.image,
+            image: image,
             maxSize: CGSize(
                 width: screeSize.width * 0.5,
                 height: screeSize.height * 0.8

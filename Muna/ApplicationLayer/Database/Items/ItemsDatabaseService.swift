@@ -21,6 +21,8 @@ protocol ItemsDatabaseServiceProtocol {
     func removeItem(id: String)
 
     func saveItems()
+
+    func generateFakeDataIfNeeded(count: Int)
 }
 
 class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
@@ -57,7 +59,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     func removeItem(id: String) {
         if let index = self.items.firstIndex(where: { $0.id == id }) {
+            let item = self.items[index]
             self.items.remove(at: index)
+
+            _ = self.imageStorage.removeImage(name: item.imageName)
         } else {
             assertionFailure("No id")
         }
@@ -99,12 +104,37 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         }
     }
 
+    private func removeItems() {
+        for item in self.items {
+            self.imageStorage.removeImage(name: item.imageName)
+        }
+        UserDefaults.standard.removeObject(forKey: self.key)
+        UserDefaults.standard.synchronize()
+        self.items = []
+    }
+
     private func loadItems() {
         if let savedItems = defaults.object(forKey: self.key) as? Data {
             let decoder = JSONDecoder()
             if let loadedItems = try? decoder.decode([ItemModel].self, from: savedItems) {
                 self.items = loadedItems
             }
+        }
+    }
+}
+
+extension ItemsDatabaseService {
+    func generateFakeDataIfNeeded(count: Int) {
+        self.removeItems()
+
+        for i in 0 ..< count {
+            let imageName = "img_\(Int.random(in: 1 ..< 11))"
+            self.addItem(
+                image: NSImage(named: NSImage.Name(imageName))!,
+                dueDateString: "in 2h",
+                dueDate: Date().addingTimeInterval(60 * 60 * Double(i)),
+                comment: "Hi there"
+            )
         }
     }
 }

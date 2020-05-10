@@ -11,6 +11,10 @@ import Cocoa
 protocol ImageStorageServiceProtocol {
     func saveImage(image: NSImage, name: String) -> Bool
     func loadImage(name: String, completion: ImageStorageService.Completion?)
+    func forceLoadImage(name: String) -> NSImage?
+
+    @discardableResult
+    func removeImage(name: String) -> Bool
 }
 
 class ImageStorageService: ImageStorageServiceProtocol {
@@ -18,22 +22,42 @@ class ImageStorageService: ImageStorageServiceProtocol {
 
     func saveImage(image: NSImage, name: String) -> Bool {
         let data = image.tiffRepresentation(using: .jpeg, factor: 1.0)
-        let filename = self.getDocumentsDirectory().appendingPathComponent("images/\(name).jpeg")
+        let directoryUrl = self.getDocumentsDirectory().appendingPathComponent("images")
         do {
-            try data?.write(to: filename)
+            try FileManager.default.createDirectory(
+                at: directoryUrl,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+            try data?.write(to: directoryUrl.appendingPathComponent("\(name).jpeg"))
             return true
         } catch {
+            print(error.localizedDescription)
             return false
         }
     }
 
     func loadImage(name: String, completion: Completion?) {
+        completion?(self.forceLoadImage(name: name))
+    }
+
+    func forceLoadImage(name: String) -> NSImage? {
         let filename = self.getDocumentsDirectory().appendingPathComponent("images/\(name).jpeg")
         if let data = try? Data(contentsOf: filename) {
             let image = NSImage(data: data)
-            completion?(image)
+            return image
         } else {
-            completion?(nil)
+            return nil
+        }
+    }
+
+    func removeImage(name: String) -> Bool {
+        let filename = self.getDocumentsDirectory().appendingPathComponent("images/\(name).jpeg")
+        do {
+            try FileManager.default.removeItem(at: filename)
+            return true
+        } catch {
+            return false
         }
     }
 

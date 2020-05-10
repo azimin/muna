@@ -105,8 +105,12 @@ final class MainPanelItemView: View, GenericCellSubview {
         }
     }
 
-    func update(item: FakePanelItemModel) {
-        self.deadlineLabel.stringValue = "End in: \(item.dueDate)"
+    func update(item: ItemModel) {
+        if let dueDate = item.dueDate {
+            self.deadlineLabel.stringValue = "End in: \(dueDate)"
+        } else {
+            self.deadlineLabel.stringValue = "No reminder"
+        }
 
         if let comment = item.comment, comment.isEmpty == false {
             self.commentLabel.isHidden = false
@@ -114,14 +118,16 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.commentLabel.isHidden = true
         }
 
-        if item.dueDate < Date() {
+        if let dueDate = item.dueDate, dueDate < Date() {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
             self.deadlineLabel.textColor = NSColor.color(.white)
         }
 
         self.commentLabel.stringValue = item.comment ?? ""
-        self.imageView.image = item.image
+
+        let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName)
+        self.imageView.image = image
     }
 }
 
