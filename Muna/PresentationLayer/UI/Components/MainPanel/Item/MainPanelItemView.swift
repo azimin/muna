@@ -100,7 +100,7 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.backgroundView.layer?.borderWidth = 3
             self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
         } else {
-            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         }
     }
