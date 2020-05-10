@@ -13,6 +13,10 @@ protocol ScreenshotStateViewDelegate: AnyObject {
 }
 
 class ScreenshotStateView: View {
+    override var isFlipped: Bool {
+        return true
+    }
+
     weak var delegate: ScreenshotStateViewDelegate?
     private var shapeLayer: CAShapeLayer?
 

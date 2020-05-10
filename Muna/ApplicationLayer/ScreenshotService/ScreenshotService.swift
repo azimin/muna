@@ -9,19 +9,19 @@
 import Cocoa
 
 protocol ScreenshotServiceProtocol {
-    func makeScreenshot(inRect rect: CGRect) -> NSImage?
+    func makeScreenshot(inRect rect: CGRect, name: String) -> NSImage?
 }
 
 final class ScreenshotService: ScreenshotServiceProtocol {
     private let directoryURL = FileManager.default
         .homeDirectoryForCurrentUser
-        .appendingPathComponent("ReminderPictures")
+        .appendingPathComponent("ReminderPictures", isDirectory: true)
 
     private var mainDisplayID: CGDirectDisplayID {
         return CGMainDisplayID()
     }
 
-    func makeScreenshot(inRect rect: CGRect) -> NSImage? {
+    func makeScreenshot(inRect rect: CGRect, name: String) -> NSImage? {
         guard let cgImage = CGDisplayCreateImage(self.mainDisplayID, rect: rect) else {
             return nil
         }
@@ -29,7 +29,8 @@ final class ScreenshotService: ScreenshotServiceProtocol {
         let bitmap = NSBitmapImageRep(cgImage: cgImage)
         let jpgData = bitmap.representation(using: .jpeg, properties: [:])
         do {
-            try jpgData?.write(to: self.directoryURL.appendingPathComponent("new.jpg"), options: .atomic)
+            try FileManager.default.createDirectory(at: self.directoryURL, withIntermediateDirectories: true, attributes: nil)
+            try jpgData?.write(to: self.directoryURL.appendingPathComponent(name), options: .atomic)
         } catch {
             print(error)
         }

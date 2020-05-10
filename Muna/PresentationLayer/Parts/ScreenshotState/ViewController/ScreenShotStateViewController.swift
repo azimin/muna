@@ -29,15 +29,23 @@ class ScreenShotStateViewController: NSViewController {
         }
 
         self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
-
         (self.view as! ScreenshotStateView).startDash()
     }
 
     override func mouseUp(with event: NSEvent) {
         self.isNeededToDrawFrame = false
         (self.view as! ScreenshotStateView).showVisuals()
-        let frame = (self.view as! ScreenshotStateView).screenshotFrame
-        self.screenshotService.makeScreenshot(inRect: frame)
+        print(self.startedPoint)
+        print(NSScreen.main!.backingScaleFactor)
+        let frame = CGRect(
+            x: self.startedPoint.x,
+            y: self.startedPoint.y,
+            width: (self.view as! ScreenshotStateView).screenshotFrame.size.width,
+            height: (self.view as! ScreenshotStateView).screenshotFrame.size.height
+        )
+        print(frame)
+
+        self.screenshotService.makeScreenshot(inRect: CGRect(x: 0, y: 92, width: 100, height: 100), name: "world.jpg")
     }
 
     override func mouseDragged(with event: NSEvent) {
