@@ -13,6 +13,7 @@ enum ColorStyle {
     case black
     case white60alpha
     case white60
+    case gray
     case blueSelected
     case redLight
     case redDots
@@ -34,6 +35,8 @@ enum ColorStyle {
             return NSColor(hex: "FF8484")
         case .redDots:
             return NSColor(hex: "FF2F2F")
+        case .gray:
+            return NSColor(hex: "404040")
         case .separator:
             return NSColor.gray
         }

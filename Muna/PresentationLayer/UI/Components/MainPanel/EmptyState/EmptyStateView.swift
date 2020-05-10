@@ -10,10 +10,12 @@ import Cocoa
 
 class EmptyStateView: View {
     enum Style {
-        case noUncompletedItems(shortcut: String?)
+        case noUncompletedItems(shortcut: ShortcutItem?)
         case noDeadline
         case noCompletedItems
     }
+
+    let stackView = NSStackView()
 
     let titelLabel = Label(
         fontStyle: .heavy,
@@ -28,12 +30,7 @@ class EmptyStateView: View {
     .withTextColorStyle(.white60alpha)
     .withAligment(.center)
 
-    let shortcutLabel = Label(
-        fontStyle: .medium,
-        size: 14
-    )
-    .withTextColorStyle(.white60alpha)
-    .withAligment(.center)
+    var shortcutView: NSView?
 
     init() {
         super.init(frame: .zero)
@@ -45,22 +42,20 @@ class EmptyStateView: View {
     }
 
     private func setup() {
-        let stackView = NSStackView()
-        stackView.alignment = .centerX
-        self.addSubview(stackView)
-        stackView.snp.makeConstraints { maker in
+        self.stackView.alignment = .centerX
+        self.addSubview(self.stackView)
+        self.stackView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
-        stackView.addArrangedSubview(self.titelLabel)
-        stackView.setCustomSpacing(14, after: self.titelLabel)
-        stackView.addArrangedSubview(self.actionLabel)
-        stackView.setCustomSpacing(8, after: self.actionLabel)
-        stackView.addArrangedSubview(self.shortcutLabel)
+        self.stackView.addArrangedSubview(self.titelLabel)
+        self.stackView.setCustomSpacing(14, after: self.titelLabel)
+        self.stackView.addArrangedSubview(self.actionLabel)
+        self.stackView.setCustomSpacing(8, after: self.actionLabel)
     }
 
     func update(style: Style) {
-        self.shortcutLabel.isHidden = true
+        self.shortcutView?.removeFromSuperview()
         self.actionLabel.isHidden = true
 
         switch style {
@@ -70,8 +65,10 @@ class EmptyStateView: View {
 
             if let shortcut = shortcut {
                 self.actionLabel.isHidden = false
-                self.shortcutLabel.isHidden = false
-                self.shortcutLabel.text = shortcut
+                let shortcutView = ShortcutView(item: shortcut)
+                self.stackView.addArrangedSubview(shortcutView)
+
+                self.shortcutView = shortcutView
             }
         case .noDeadline:
             self.titelLabel.text = "No items without dealines"

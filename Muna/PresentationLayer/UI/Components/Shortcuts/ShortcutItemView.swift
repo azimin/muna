@@ -10,8 +10,8 @@ import Cocoa
 
 class ShortcutItemView: View {
     let imageView = ImageView().withIsHidden(true)
-    let iconLabel = Label(fontStyle: .bold, size: 7).withIsHidden(true)
-    let label = Label(fontStyle: .bold, size: 7).withIsHidden(true)
+    let iconLabel = Label(fontStyle: .bold, size: 11).withIsHidden(true)
+    let label = Label(fontStyle: .bold, size: 11).withIsHidden(true)
 
     init(modifierFlags: NSEvent.ModifierFlags) {
         let iconString: String
@@ -78,7 +78,7 @@ class ShortcutItemView: View {
 
     func setup() {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.white60alpha)
+        self.backgroundColor = NSColor.color(.gray)
 
         let stackView = NSStackView(views: [self.imageView, self.iconLabel, self.label])
         stackView.spacing = 3

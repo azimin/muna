@@ -100,6 +100,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         if let indexPath = selectedIndexPath {
             self.select(indexPath: indexPath)
+        } else {
+            self.select(indexPath: .init(item: 0, section: 0))
         }
     }
 
@@ -109,7 +111,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         case .noDeadline:
             self.emptyStateView.update(style: .noDeadline)
         case .uncompleted:
-            self.emptyStateView.update(style: .noUncompletedItems(shortcut: "cmd + shift + s"))
+            self.emptyStateView.update(style: .noUncompletedItems(shortcut: .init(
+                key: .s,
+                modifiers: [.command, .shift]
+            )))
         case .completed:
             self.emptyStateView.update(style: .noCompletedItems)
         default:
