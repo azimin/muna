@@ -30,8 +30,14 @@ class ItemModel: Codable {
     var dueDate: Date?
     var comment: String?
 
+    var completionDate: Date?
     var isComplited: Bool {
         didSet {
+            if self.isComplited {
+                self.completionDate = Date()
+            } else {
+                self.completionDate = nil
+            }
             self.itemsDatabaseService?.saveItems()
         }
     }
