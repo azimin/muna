@@ -105,7 +105,7 @@ final class MainPanelItemView: View, GenericCellSubview {
         }
     }
 
-    func update(item: PanelItemModel) {
+    func update(item: FakePanelItemModel) {
         self.deadlineLabel.stringValue = "End in: \(item.dueDate)"
 
         if let comment = item.comment, comment.isEmpty == false {

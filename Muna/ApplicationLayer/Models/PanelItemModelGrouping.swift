@@ -25,7 +25,7 @@ class PanelItemModelGrouping {
         return self.values[section]?.count ?? 0
     }
 
-    func item(at indexPath: IndexPath) -> PanelItemModel {
+    func item(at indexPath: IndexPath) -> FakePanelItemModel {
         return self.values[indexPath.section]![indexPath.item]
     }
 
@@ -34,10 +34,10 @@ class PanelItemModelGrouping {
     }
 
     private var names: [Int: Group] = [:]
-    private var values: [Int: [PanelItemModel]] = [:]
+    private var values: [Int: [FakePanelItemModel]] = [:]
 
-    init(items: [PanelItemModel]) {
-        var result: [Group: [PanelItemModel]] = [:]
+    init(items: [FakePanelItemModel]) {
+        var result: [Group: [FakePanelItemModel]] = [:]
         for key in Group.allCases {
             result[key] = []
         }

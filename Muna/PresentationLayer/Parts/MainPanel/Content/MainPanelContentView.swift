@@ -67,7 +67,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     var capturedView: NSView?
-    var capturedItem: PanelItemModel?
+    var capturedItem: FakePanelItemModel?
 
     override func rightMouseUp(with event: NSEvent) {
         let point = self.convert(event.locationInWindow, to: self.collectionView)
