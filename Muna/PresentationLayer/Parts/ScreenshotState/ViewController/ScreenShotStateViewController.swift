@@ -9,6 +9,10 @@
 import Cocoa
 
 class ScreenShotStateViewController: NSViewController {
+    var windowId: CGWindowID?
+
+    private var tmpCGImage: CGImage?
+
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
 
     private var startedPoint = NSPoint.zero
@@ -26,9 +30,13 @@ class ScreenShotStateViewController: NSViewController {
             return
         }
 
-        self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
+        self.makeScreenshot { [unowned self] image in
+            (self.view as! ScreenshotStateView).screenshotImageView.image = image
+            (self.view as! ScreenshotStateView).screenshotImageView.isHidden = false
 
-        (self.view as! ScreenshotStateView).startDash()
+            self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
+            (self.view as! ScreenshotStateView).startDash()
+        }
     }
 
     override func mouseUp(with event: NSEvent) {
@@ -55,11 +63,63 @@ class ScreenShotStateViewController: NSViewController {
         (self.view as! ScreenshotStateView).hideVisuals()
         completion?()
     }
+
+    // MARK: - Make screen shot
+
+    func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
+        guard let windowId = self.windowId else {
+            assertionFailure("Window id is nil")
+            completion(nil)
+            return
+        }
+
+        guard let cgImage = CGWindowListCreateImage(NSScreen.main!.frame, .optionOnScreenBelowWindow, windowId, .bestResolution) else {
+            assertionFailure("Screenshot handling is failed")
+            completion(nil)
+            return
+        }
+
+        self.tmpCGImage = cgImage
+
+        let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
+
+        completion(image)
+    }
 }
 
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
         self.isNeededToDrawFrame = true
         (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
+    }
+
+    func saveImage(withRect rect: NSRect) {
+        guard let cgImage = self.tmpCGImage else {
+            assertionFailure("Image for save is nil")
+            return
+        }
+
+        let newRect = NSRect(
+            x: rect.minX * NSScreen.main!.backingScaleFactor,
+            y: rect.minY * NSScreen.main!.backingScaleFactor,
+            width: rect.width * NSScreen.main!.backingScaleFactor,
+            height: rect.height * NSScreen.main!.backingScaleFactor
+        )
+
+        guard let croppedImage = cgImage.cropping(to: newRect) else {
+            assertionFailure("Image processing is failed")
+            return
+        }
+
+        let image = NSImage(cgImage: croppedImage, size: rect.size)
+
+        ServiceLocator.shared.itemsDatabase.addItem(
+            image: image,
+            dueDateString: "New awesome string",
+            dueDate: Date(),
+            comment: "Hello"
+        )
+
+        self.tmpCGImage = nil
     }
 }

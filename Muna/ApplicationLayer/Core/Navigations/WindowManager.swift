@@ -109,6 +109,10 @@ class WindowManager {
     private func showScreenshotState(in window: NSWindow) {
         window.makeKeyAndOrderFront(nil)
 
+        if let viewController = window.contentViewController as? ScreenShotStateViewController {
+            viewController.windowId = CGWindowID(window.windowNumber)
+        }
+
         window.setFrame(
             self.frameFor(.screenshot),
             display: true,
