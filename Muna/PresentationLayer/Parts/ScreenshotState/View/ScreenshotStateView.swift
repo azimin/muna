@@ -7,19 +7,22 @@
 //
 
 import Cocoa
+import SnapKit
 
 protocol ScreenshotStateViewDelegate: AnyObject {
     func escapeWasTapped()
+    func saveImage(withRect rect: NSRect)
 }
 
 class ScreenshotStateView: View {
-    weak var delegate: ScreenshotStateViewDelegate?
-    private var shapeLayer: CAShapeLayer?
+    override var isFlipped: Bool {
+        return true
+    }
 
-    let leftVisualView = View()
-    let bottomVisualView = View()
-    let rightVisualView = View()
-    let topVisualView = View()
+    weak var delegate: ScreenshotStateViewDelegate?
+
+    let screenshotImageView = ImageView()
+    let overlayView = OverlayView()
 
     var screenshotFrame = CGRect.zero
 
@@ -27,48 +30,39 @@ class ScreenshotStateView: View {
         self.delegate = delegate
 
         super.init(frame: .zero)
-
-        self.setup()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup() {
-        self.leftVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.bottomVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.rightVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
-        self.topVisualView.backgroundColor = NSColor.black.withAlphaComponent(0.3)
+    override func layout() {
+        super.layout()
+
+        self.setupInitialLayout()
+    }
+
+    func setupInitialLayout() {
+        self.addSubview(self.screenshotImageView)
+        self.screenshotImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        self.addSubview(self.overlayView)
+        self.overlayView.backgroundColor = .clear
+        self.overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        self.screenshotImageView.isHidden = true
     }
 
     func startDash() {
-        self.shapeLayer = CAShapeLayer()
-        self.shapeLayer?.lineWidth = 2.0
-        self.shapeLayer?.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
-        self.shapeLayer?.strokeColor = NSColor.white.cgColor
-        self.shapeLayer?.lineDashPattern = [10, 5]
-
-        guard let layer = shapeLayer else { return }
-        self.layer?.addSublayer(layer)
-
-        var dashAnimation = CABasicAnimation()
-        dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
-        dashAnimation.duration = 0.75
-        dashAnimation.fromValue = 0.0
-        dashAnimation.toValue = 15.0
-        dashAnimation.repeatCount = .infinity
-        self.shapeLayer?.add(dashAnimation, forKey: "linePhase")
+        self.overlayView.startDash()
     }
 
     func continiouslyDrawDash(fromStartPoint startPoint: NSPoint, toPoint: NSPoint) {
-        let path = CGMutablePath()
-        path.move(to: startPoint)
-        path.addLine(to: NSPoint(x: startPoint.x, y: toPoint.y))
-        path.addLine(to: toPoint)
-        path.addLine(to: NSPoint(x: toPoint.x, y: startPoint.y))
-        path.closeSubpath()
-        self.shapeLayer?.path = path
+        self.overlayView.continiouslyDrawDash(fromStartPoint: startPoint, toPoint: toPoint)
 
         self.screenshotFrame.origin = startPoint
         self.screenshotFrame.size.width = toPoint.x - startPoint.x
@@ -81,48 +75,17 @@ class ScreenshotStateView: View {
             self.delegate?.escapeWasTapped()
             return
         }
+        self.overlayView.showOverlay(atRect: self.screenshotFrame)
 
-        self.shapeLayer?.fillColor = NSColor.clear.cgColor
-
-        self.layer?.insertSublayer(self.leftVisualView.layer!, at: 0)
-        self.leftVisualView.frame = CGRect(
-            x: .zero,
-            y: .zero,
-            width: self.screenshotFrame.minX + 2,
-            height: self.bounds.height
-        )
-
-        self.layer?.insertSublayer(self.rightVisualView.layer!, at: 0)
-        self.rightVisualView.frame = CGRect(
-            x: self.screenshotFrame.maxX - 2,
-            y: .zero,
-            width: self.bounds.width - self.screenshotFrame.maxX + 2,
-            height: self.bounds.height
-        )
-
-        self.layer?.insertSublayer(self.bottomVisualView.layer!, at: 0)
-        self.bottomVisualView.frame = CGRect(
-            x: self.screenshotFrame.minX + 2,
-            y: .zero,
-            width: self.screenshotFrame.width - 4,
-            height: self.screenshotFrame.minY + 2
-        )
-
-        self.layer?.insertSublayer(self.topVisualView.layer!, at: 0)
-        self.topVisualView.frame = CGRect(
-            x: self.screenshotFrame.minX + 2,
-            y: self.screenshotFrame.maxY - 2,
-            width: self.screenshotFrame.width - 4,
-            height: self.bounds.height - self.screenshotFrame.minY + 2
-        )
+        self.delegate?.saveImage(withRect: self.screenshotFrame)
     }
 
     func hideVisuals() {
-        self.layer?.sublayers?.forEach {
-            $0.removeFromSuperlayer()
-        }
+        self.overlayView.clearOverlay()
 
-        self.shapeLayer = nil
+        self.screenshotImageView.isHidden = true
+
+        self.screenshotImageView.image = nil
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
