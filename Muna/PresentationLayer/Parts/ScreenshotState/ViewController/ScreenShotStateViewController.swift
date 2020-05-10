@@ -23,10 +23,6 @@ class ScreenShotStateViewController: NSViewController {
         self.view = ScreenshotStateView(delegate: self)
     }
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
-    }
-
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
@@ -127,5 +123,7 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
             dueDate: Date(),
             comment: "Hello"
         )
+
+        self.tmpCGImage = nil
     }
 }
