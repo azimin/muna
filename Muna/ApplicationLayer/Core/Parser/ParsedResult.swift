@@ -8,7 +8,12 @@
 
 import Foundation
 
+public enum ComponentUnit {
+    case year, month, day, hour, minute, second, millisecond, weekday, timeZoneOffset, meridiem
+}
+
 struct ParsedResult {
     let range: NSRange
-    let finalDate: Date
+
+    let unit: [ComponentUnit: Int]
 }

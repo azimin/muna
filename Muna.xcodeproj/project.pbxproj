@@ -181,21 +181,13 @@
 			path = ScreenshotState;
 			sourceTree = "<group>";
 		};
-		23561B3D2461E76F00097E4A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				23561B442461EEAD00097E4A /* Parser */,
-				23561B422461ED8800097E4A /* ParsedResult.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		23561B442461EEAD00097E4A /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				23561B422461ED8800097E4A /* ParsedResult.swift */,
+				23561B452461EEB500097E4A /* ENParsers */,
 				23561B402461ECB900097E4A /* ParserProtocol.swift */,
 				23561B482461F46600097E4A /* Parser.swift */,
-				23561B452461EEB500097E4A /* ENParsers */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -296,6 +288,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				23561B442461EEAD00097E4A /* Parser */,
 				9F33D4892468828100395C44 /* Shortcut */,
 				23A6B2A024660A1F006A7A4D /* Navigations */,
 			);
@@ -395,7 +388,6 @@
 				23A6B29F24660A19006A7A4D /* Core */,
 				9FB8B522246372CA00BE7544 /* Controllers */,
 				9F025C0D24633D0F00F05D81 /* Helpers */,
-				23561B3D2461E76F00097E4A /* Core */,
 				9F3BC1442461D098002B6217 /* Models */,
 				9FA07F5324608CB600654D36 /* Preferences */,
 			);
