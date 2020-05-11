@@ -9,7 +9,6 @@
 import Foundation
 
 class ENWeekdaysParser: Parser {
-
     private let weekDayOffset = [
         "sunday": 0,
         "sun": 0,
@@ -26,7 +25,7 @@ class ENWeekdaysParser: Parser {
         "friday": 5,
         "fri": 5,
         "saturday": 6,
-        "sat": 6
+        "sat": 6,
     ]
 
     private var days: String {
@@ -67,21 +66,21 @@ class ENWeekdaysParser: Parser {
 
 extension NSTextCheckingResult {
     func isNotEmpty(atRangeIndex index: Int) -> Bool {
-            return range(at: index).length != 0
+        return range(at: index).length != 0
     }
 
     func isEmpty(atRangeIndex index: Int) -> Bool {
-            return range(at: index).length == 0
+        return range(at: index).length == 0
     }
 
     func string(from text: String, atRangeIndex index: Int) -> String {
-            return text.subString(with: range(at: index))
+        return text.subString(with: range(at: index))
     }
 }
 
 extension String {
     var firstString: String? {
-        return substring(from: 0, to: 1)
+        return self.substring(from: 0, to: 1)
     }
 
     func subString(with range: NSRange) -> String {
@@ -96,9 +95,9 @@ extension String {
         if startIdx < 0 || (endIdx != nil && endIdx! < 0) {
             return ""
         }
-            let start = index(startIndex, offsetBy: startIdx)
-            let end = endIdx != nil ? index(startIndex, offsetBy: endIdx!) : endIndex
-            return String(self[start..<end])
+        let start = index(startIndex, offsetBy: startIdx)
+        let end = endIdx != nil ? index(startIndex, offsetBy: endIdx!) : endIndex
+        return String(self[start ..< end])
     }
 
     func range(ofStartIndex idx: Int, length: Int) -> Range<String.Index> {
@@ -124,12 +123,12 @@ var utcCal: Calendar {
     cal.timeZone = utcTimeZone
     return cal
 }
+
 let utcTimeZone: TimeZone = TimeZone(identifier: "UTC")!
 
 private let noneZeroComponents: Set<Calendar.Component> = [.year, .month, .day]
 
 extension Date {
-
     func isAfter(_ other: Date) -> Bool {
         return self.timeIntervalSince1970 > other.timeIntervalSince1970
     }
@@ -194,13 +193,13 @@ extension Date {
 }
 
 func millisecondsToNanoSeconds(_ milliseconds: Int) -> Int {
-    return milliseconds * 1000000
+    return milliseconds * 1_000_000
 }
 
 func nanoSecondsToMilliseconds(_ nanoSeconds: Int) -> Int {
     /// this convert is used to prevent from nanoseconds error
     /// test case, create a date with nanoseconds 11000000, and get it via Calendar.Component, you will get 10999998
-    let doubleMs = Double(nanoSeconds) / 1000000
+    let doubleMs = Double(nanoSeconds) / 1_000_000
     let ms = Int(doubleMs)
     return doubleMs > Double(ms) ? ms + 1 : ms
 }

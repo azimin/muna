@@ -1,0 +1,4 @@
+--self insert
+--wrapcollections before-first
+--stripunusedargs closure-only
+--exclude Pods

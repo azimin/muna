@@ -9,15 +9,18 @@
 import Cocoa
 import SnapKit
 
-final class MainPanelItemView: View, GenericCellSubview {
+final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     let backgroundView = View()
 
-    let imageView = ImageView()
+    var imageView = ImageView()
     let metainformationPlate = NSVisualEffectView()
     let metainformationStackView = NSStackView()
 
+    let completionButton = Button().withImageName("reminder-off")
     let deadlineLabel = Label(fontStyle: .heavy, size: 16)
     let commentLabel = Label(fontStyle: .medium, size: 14)
+
+    private var isComplited: Bool = false
 
     init() {
         super.init(frame: .zero)
@@ -28,19 +31,23 @@ final class MainPanelItemView: View, GenericCellSubview {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func reuse() {
+        self.item = nil
+    }
+
     private func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.borderWidth = 1
         self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         self.backgroundView.layer?.cornerRadius = 12
         self.backgroundView.layer?.masksToBounds = true
-        self.backgroundView.snp.makeConstraints { (maker) in
+        self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
         }
 
         self.backgroundView.addSubview(self.imageView)
         self.imageView.imageScaling = .scaleProportionallyUpOrDown
-        self.imageView.snp.makeConstraints { (maker) in
+        self.imageView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
@@ -49,13 +56,13 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationPlate.material = .dark
         self.metainformationPlate.state = .active
         self.metainformationPlate.layer?.maskedCorners = [
-            .layerMaxXMinYCorner, .layerMinXMinYCorner
+            .layerMaxXMinYCorner, .layerMinXMinYCorner,
         ]
         self.metainformationPlate.layer?.cornerRadius = 12
         self.metainformationPlate.wantsLayer = true
         self.metainformationPlate.maskImage = NSImage(color: .black, size: .init(width: 1, height: 1))
 
-        self.metainformationPlate.snp.makeConstraints { (maker) in
+        self.metainformationPlate.snp.makeConstraints { maker in
             maker.bottom.leading.trailing.equalToSuperview()
         }
 
@@ -63,8 +70,8 @@ final class MainPanelItemView: View, GenericCellSubview {
         self.metainformationStackView.orientation = .vertical
         self.metainformationStackView.spacing = 4
         self.metainformationStackView.alignment = .leading
-        self.metainformationStackView.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+        self.metainformationStackView.snp.makeConstraints { maker in
+            maker.top.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 
         self.deadlineLabel.textColor = NSColor.color(.white)
@@ -72,6 +79,29 @@ final class MainPanelItemView: View, GenericCellSubview {
 
         self.commentLabel.textColor = NSColor.color(.white60alpha)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
+
+        self.metainformationPlate.addSubview(self.completionButton)
+        self.completionButton.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().inset(12)
+            maker.size.equalTo(19)
+            maker.trailing.equalTo(self.metainformationStackView.snp.leading).inset(-12)
+            maker.top.equalTo(self.deadlineLabel.snp.top)
+        }
+
+        self.completionButton.target = self
+        self.completionButton.action = #selector(self.toggleCompletion)
+    }
+
+    @objc
+    func toggleCompletion() {
+        self.isComplited.toggle()
+        self.item?.isComplited = self.isComplited
+        self.updateStyle()
+    }
+
+    func updateStyle() {
+        let imageName = self.isComplited ? "reminder-on" : "reminder-off"
+        _ = self.completionButton.withImageName(imageName)
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
@@ -79,13 +109,19 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.backgroundView.layer?.borderWidth = 3
             self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
         } else {
-            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
         }
     }
 
-    func update(item: PanelItemModel) {
-        self.deadlineLabel.stringValue = "End in: \(item.dueDate)"
+    private var item: ItemModel?
+
+    func update(item: ItemModel) {
+        if let dueDate = item.dueDate {
+            self.deadlineLabel.stringValue = "End in: \(dueDate)"
+        } else {
+            self.deadlineLabel.stringValue = "No reminder"
+        }
 
         if let comment = item.comment, comment.isEmpty == false {
             self.commentLabel.isHidden = false
@@ -93,14 +129,22 @@ final class MainPanelItemView: View, GenericCellSubview {
             self.commentLabel.isHidden = true
         }
 
-        if item.dueDate.compare(Date()) == .orderedAscending {
+        if let dueDate = item.dueDate, dueDate < Date() {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
             self.deadlineLabel.textColor = NSColor.color(.white)
         }
 
         self.commentLabel.stringValue = item.comment ?? ""
-        self.imageView.image = item.image
+        self.isComplited = item.isComplited
+
+        let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName)
+        self.imageView.image = image
+
+        self.item = item
+        item.toggleSeen()
+
+        self.updateStyle()
     }
 }
 

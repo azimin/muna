@@ -10,7 +10,6 @@ import Cocoa
 import SnapKit
 
 final class GenericCollectionViewItem<T: NSView>: NSCollectionViewItem, ReusableView where T: GenericCellSubview {
-
     public let customSubview = T()
     public weak var reusableComponent: ReusableComponent?
 

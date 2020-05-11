@@ -30,5 +30,3 @@ extension ReusableView {
         return nil
     }
 }
-
-public typealias MunaCollectionViewCell = NSCollectionViewItem & ReusableView

@@ -9,4 +9,5 @@ target 'Muna' do
   pod 'SnapKit'
   pod 'MASShortcut'
   pod 'SwiftyChrono'
+  pod 'SwiftDate'
 end

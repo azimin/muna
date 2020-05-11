@@ -9,7 +9,6 @@
 import Foundation
 
 class Parser: ParserProtocol {
-
     var pattern: String {
         return ""
     }
@@ -17,7 +16,7 @@ class Parser: ParserProtocol {
     func parse(fromText text: String, refDate: Date) -> ParsedResult? {
         let regex: NSRegularExpression
         do {
-            regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            regex = try NSRegularExpression(pattern: self.pattern, options: .caseInsensitive)
         } catch {
             assertionFailure("Couldnt allocate regex: \(error)")
             return nil

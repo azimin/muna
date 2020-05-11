@@ -7,17 +7,17 @@
 //
 
 import Cocoa
-import SwiftUI
 import MASShortcut
 import SwiftyChrono
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
+
+    let windowManager = WindowManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
@@ -34,11 +34,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWindow.didResignKeyNotification,
             object: nil
         )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.hideScreenshotIfNeeded),
+            name: NSWindow.didResignKeyNotification,
+            object: nil
+        )
+
+//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        ServiceLocator.shared.itemsDatabase.saveItems()
+
         MASShortcutBinder.shared()?.breakBinding(
-            withDefaultsKey: Preferences.defaultShortcutUDKey
+            withDefaultsKey: Preferences.defaultShortcutScreenshotKey
+        )
+
+        MASShortcutBinder.shared()?.breakBinding(
+            withDefaultsKey: Preferences.defaultShortcutPanelKey
         )
     }
 
@@ -48,10 +63,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func setupShortcuts() {
         MASShortcutBinder.shared()?.bindShortcut(
-            withDefaultsKey: Preferences.defaultShortcutUDKey,
+            withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
                 self.togglePane()
-        })
+            }
+        )
+
+        MASShortcutBinder.shared()?.bindShortcut(
+            withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
+            toAction: {
+                self.toggleScreenshotState()
+            }
+        )
+
+        #if DEBUG
+
+            MASShortcutBinder.shared()?.bindShortcut(
+                withDefaultsKey: Preferences.defaultShortcutDebugKey,
+                toAction: {
+                    self.toggleDebugState()
+                }
+            )
+
+        #endif
     }
 
     func setupStatusBarItem() {
@@ -60,7 +94,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let statusBarItem = statusBar.statusItem(
             withLength: NSStatusItem.squareLength
         )
-        statusBarItem.button?.title = "🌯"
+
+        let image = NSImage(named: NSImage.Name("icon_menu"))
+        image?.isTemplate = true
+        statusBarItem.button?.image = image
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
@@ -73,85 +110,61 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             action: #selector(self.togglePane),
             keyEquivalent: "o"
         )
+
+        statusBarMenu.addItem(
+            withTitle: "Quit",
+            action: #selector(self.closeApp),
+            keyEquivalent: ""
+        )
     }
 
-    let windowFrameWidth: CGFloat = 380
     var isPanelShowed = false
+    var isScreenshotShowed = false
+    var isDebugShowed = false
+
+    @objc func closeApp() {
+        NSApplication.shared.terminate(self)
+    }
 
     @objc func hidePanelIfNeeded() {
         if self.isPanelShowed {
-            self.hidePanel()
+            self.windowManager.hideWindow(.panel)
             self.isPanelShowed = false
         }
     }
 
-    @objc func togglePane() {
-        self.setupWindowIfNeeded()
+    @objc func hideScreenshotIfNeeded() {
+        if self.isScreenshotShowed {
+            self.windowManager.hideWindow(.screenshot)
+            self.isScreenshotShowed = false
+        }
+    }
 
+    @objc func togglePane() {
         if self.isPanelShowed {
-            self.hidePanel()
+            self.windowManager.hideWindow(.panel)
         } else {
-            self.window.makeKeyAndOrderFront(nil)
-            self.showPanel()
+            self.windowManager.activateWindow(.panel)
+            self.hideScreenshotIfNeeded()
         }
         self.isPanelShowed.toggle()
     }
 
-    func setupWindowIfNeeded() {
-        if self.window != nil {
-            return
+    @objc func toggleScreenshotState() {
+        if self.isScreenshotShowed {
+            self.windowManager.hideWindow(.screenshot)
+        } else {
+            self.windowManager.activateWindow(.screenshot)
         }
-
-        guard let mainScreen = NSScreen.main else {
-            assertionFailure("No main screen")
-            return
-        }
-
-        let frame = NSRect(
-            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-            y: mainScreen.frame.minY,
-            width: self.windowFrameWidth,
-            height: mainScreen.frame.height - 0
-        )
-
-        self.window = Panel(
-            contentRect: frame,
-            styleMask: [.nonactivatingPanel],
-            backing: .buffered,
-            defer: false
-        )
-        self.window.backgroundColor = NSColor.clear
-        self.window.contentViewController = MainPanelViewController()
-        // Overlap dock, but not menu bar
-        self.window.level = .statusBar - 2
+        self.isScreenshotShowed.toggle()
     }
 
-    func showPanel() {
-        guard let mainScreen = NSScreen.main else {
-            assertionFailure("No main screen")
-            return
+    @objc func toggleDebugState() {
+        if self.isDebugShowed {
+            self.windowManager.hideWindow(.debug)
+        } else {
+            self.windowManager.activateWindow(.debug)
         }
-
-        let frame = NSRect(
-            x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-            y: mainScreen.frame.minY,
-            width: self.windowFrameWidth,
-            height: mainScreen.frame.height - 0
-        )
-
-        self.window.setFrame(frame, display: true, animate: false)
-
-        if let view = self.window.contentView as? MainPanelView {
-            view.show()
-        }
-        self.window.setIsVisible(true)
-    }
-
-    func hidePanel() {
-        if let view = self.window.contentView as? MainPanelView {
-            view.hide {
-                self.window.setIsVisible(false)
-            }
-        }
+        self.isDebugShowed.toggle()
     }
 }

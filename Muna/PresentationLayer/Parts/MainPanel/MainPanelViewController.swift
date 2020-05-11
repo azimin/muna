@@ -9,17 +9,29 @@
 import Cocoa
 
 class MainPanelViewController: NSViewController {
+    var rootView: MainPanelView {
+        return self.view as! MainPanelView
+    }
+
     override func loadView() {
-      self.view = MainPanelView()
+        self.view = MainPanelView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.becomeFirstResponder()
+        self.rootView.bottomBar.settingsButton.target = self
+        self.rootView.bottomBar.settingsButton.action = #selector(self.settingAction)
+
+        self.rootView.bottomBar.shortcutsButton.target = self
+        self.rootView.bottomBar.shortcutsButton.action = #selector(self.shortcutAction)
     }
 
-    override func keyDown(with event: NSEvent) {
-        print("Swag")
+    @objc func settingAction() {
+        print("Settings")
+    }
+
+    @objc func shortcutAction() {
+        print("Shortcut")
     }
 }

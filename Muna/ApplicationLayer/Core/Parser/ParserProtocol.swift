@@ -9,7 +9,6 @@
 import Foundation
 
 protocol ParserProtocol {
-
     var pattern: String { get }
 
     func parse(fromText text: String, refDate: Date) -> ParsedResult?
