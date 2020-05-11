@@ -9,3 +9,4 @@
 import Foundation
 
 typealias VoidBlock = () -> Void
+typealias BoolBlock = (_ flag: Bool) -> Void

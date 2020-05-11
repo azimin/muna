@@ -52,6 +52,7 @@
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
+		9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -116,6 +117,7 @@
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionedTextField.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				9FC9CDC624699E8A0018FAD7 /* TextField.swift */,
+				9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 			files = (
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */,
+				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
