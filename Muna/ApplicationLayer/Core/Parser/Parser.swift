@@ -13,7 +13,7 @@ class Parser: ParserProtocol {
         return ""
     }
 
-    func parse(fromText text: String, refDate: Date) -> ParsedResult? {
+    func parse(fromText text: String, refDate: Date) -> ParsedItem? {
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: self.pattern, options: .caseInsensitive)
@@ -25,10 +25,10 @@ class Parser: ParserProtocol {
         guard let match = regex.firstMatch(in: text, range: NSRange(location: 0, length: text.count)) else {
             return nil
         }
-        return self.extract(fromText: text, withMatch: match, refDate: refDate)
+        return ParsedItem(text: text, match: match, refDate: refDate)
     }
 
-    func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
-        return nil
+    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+        return []
     }
 }

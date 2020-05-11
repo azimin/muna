@@ -8,12 +8,33 @@
 
 import Foundation
 
-public enum ComponentUnit {
+enum ComponentUnit {
     case year, month, day, hour, minute, second, millisecond, weekday, timeZoneOffset, meridiem
 }
 
-struct ParsedResult {
-    let range: NSRange
+enum TimeUnit: String {
+    case noon
+    case afertnoon
+    case evening
+    case mindnight
+    case morning
+    case specificTime
+    case allDay
+}
 
-    let unit: [ComponentUnit: Int]
+struct ParsedTime {
+    let timeUnit: TimeUnit
+    let hours: Int?
+}
+
+struct ParsedResult {
+    var range: [NSRange]
+    let date: Date
+    var time: ParsedTime
+}
+
+struct ParsedItem {
+    let text: String
+    let match: NSTextCheckingResult
+    let refDate: Date
 }

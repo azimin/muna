@@ -38,15 +38,15 @@ class ENWeekdaysParser: Parser {
         return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow)\\b"
     }
 
-    override func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
-        let weekdayName = match.string(from: text, atRangeIndex: 2)
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult: [ParsedResult]) -> [ParsedResult] {
+        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2)
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
-            return nil
+            return []
         }
 
-        let today = refDate.weekday
+        let today = parsedItem.refDate.weekday
 
-        let prefixGroup = match.isEmpty(atRangeIndex: 1) ? "" : match.string(from: text, atRangeIndex: 1)
+        let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1)
 
         var weekday: Int
         if weekdayName != "tomorrow" {
@@ -67,12 +67,11 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        print(weekday)
-        print((refDate + weekday.days).timeIntervalSince1970)
+        let finalDate = parsedItem.refDate + weekday.days
 
-        let parsedResult = ParsedResult(range: match.range, unit: [.day: weekday])
+        let parsedResult = ParsedResult(range: [parsedItem.match.range], date: finalDate, time: .init(timeUnit: .allDay, hours: nil))
 
-        return parsedResult
+        return [parsedResult]
     }
 }
 

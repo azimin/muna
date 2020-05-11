@@ -10,44 +10,68 @@ import Foundation
 
 class ENTimeParser: Parser {
     override var pattern: String {
-        return "\\b(?:(?:at)\\s*)?(([1-9]|1[0-9]|2[0-4]))(((?:\\.|\\:|\\：)([0-5][0-9]))?)(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?))?\\b"
+        return "\\b(?:(?:at)\\s*)?"
+            + "(([1-9]|1[0-9]|2[0-4]))"
+            + "(((?:\\.|\\:|\\：)([0-5][0-9]))?)"
+            + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?))?\\b"
     }
 
     let hourGroup = 1
     let minutesGroup = 5
     let partOfTheDayGroup = 6
 
-    override func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
-        print(match.numberOfRanges)
+    private let seconds = 60
+    private let hourInSeconds = 60 * 60
 
-        guard !match.isEmpty(atRangeIndex: self.hourGroup) else {
-            return nil
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+        print(parsedItem.match.numberOfRanges)
+
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) else {
+            return []
         }
 
-        guard var hoursOffset = Int(match.string(from: text, atRangeIndex: self.hourGroup)) else {
-            return nil
+        guard var hoursOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)) else {
+            return []
         }
         print(hoursOffset)
 
-        let partOfTheDay = match.isEmpty(atRangeIndex: self.partOfTheDayGroup) ? "" : match.string(from: text, atRangeIndex: self.partOfTheDayGroup)
+        var partOfTheDay = ""
+        if !parsedItem.match.isEmpty(atRangeIndex: self.partOfTheDayGroup) {
+            partOfTheDay = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.partOfTheDayGroup)
+        }
 
         if !partOfTheDay.isEmpty, partOfTheDay == "pm", hoursOffset <= 12 {
             hoursOffset += 12
         }
 
         var minutesOffset = 0
-        if !match.isEmpty(atRangeIndex: self.minutesGroup), let minutes = Int(match.string(from: text, atRangeIndex: self.minutesGroup)) {
+        if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
+            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
             minutesOffset = minutes
         }
 
-        let result = ParsedResult(
-            range: match.range,
-            unit:
-            [
-                .hour: hoursOffset,
-                .minute: minutesOffset,
-            ]
+        let time = hoursOffset * self.hourInSeconds + minutesOffset * self.seconds
+        let parsedTime = ParsedTime(
+            timeUnit: .specificTime,
+            hours: time
         )
-        return result
+        var parsedResults = [ParsedResult]()
+        if !results.isEmpty {
+            parsedResults = results.map {
+                var newTime = $0
+                newTime.range.append(parsedItem.match.range)
+                newTime.time = parsedTime
+                return newTime
+            }
+        } else {
+            parsedResults.append(
+                ParsedResult(
+                    range: [parsedItem.match.range],
+                    date: parsedItem.refDate,
+                    time: parsedTime
+                )
+            )
+        }
+        return parsedResults
     }
 }
