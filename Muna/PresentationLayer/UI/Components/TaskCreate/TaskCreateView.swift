@@ -19,8 +19,16 @@ class TaskCreateView: View {
     let secondOption = TaskReminderItemView()
     let thirdOption = TaskReminderItemView()
 
+    lazy var options: [TaskReminderItemView] = [
+        self.firstOption,
+        self.secondOption,
+        self.thirdOption,
+    ]
+
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
+
+    var selectedIndex: Int = 0
 
     override init(frame frameRect: NSRect) {
         super.init(frame: .zero)
@@ -56,7 +64,7 @@ class TaskCreateView: View {
         self.vialPlateOverlay.layer?.cornerRadius = 12
         self.vialPlateOverlay.layer?.borderWidth = 1
         self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
-        self.vialPlateOverlay.backgroundColor = NSColor.color(.black).withAlphaComponent(0.3)
+        self.vialPlateOverlay.backgroundColor = NSColor.color(.black).withAlphaComponent(0.4)
 
         self.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { maker in
@@ -103,7 +111,8 @@ class TaskCreateView: View {
                 maker.width.equalToSuperview()
             }
         }
-        self.secondOption.update(style: .selected)
+        self.firstOption.update(style: .selected)
+        self.secondOption.update(style: .notSelected)
         self.thirdOption.update(style: .notSelected)
 
         self.addSubview(self.doneButton)
@@ -111,5 +120,40 @@ class TaskCreateView: View {
             maker.bottom.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.contentStackView.snp.bottom).inset(-32)
         }
+
+        self.addMonitor()
+    }
+
+    var downMonitor: Any?
+
+    func addMonitor() {
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+
+            if event.keyCode == Key.upArrow.carbonKeyCode {
+                self.selectPreveous()
+                return nil
+            } else if event.keyCode == Key.downArrow.carbonKeyCode {
+                self.selectNext()
+                return nil
+            }
+
+            return event
+        })
+    }
+
+    func selectPreveous() {
+        if self.selectedIndex > 0 {
+            self.options[self.selectedIndex].update(style: .notSelected)
+            self.selectedIndex -= 1
+        }
+        self.options[self.selectedIndex].update(style: .selected)
+    }
+
+    func selectNext() {
+        if self.selectedIndex < self.options.count - 1 {
+            self.options[self.selectedIndex].update(style: .notSelected)
+            self.selectedIndex += 1
+        }
+        self.options[self.selectedIndex].update(style: .selected)
     }
 }
