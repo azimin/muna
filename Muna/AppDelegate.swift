@@ -48,7 +48,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ServiceLocator.shared.itemsDatabase.saveItems()
 
         MASShortcutBinder.shared()?.breakBinding(
-            withDefaultsKey: Preferences.defaultShortcutUDKey
+            withDefaultsKey: Preferences.defaultShortcutScreenshotKey
+        )
+
+        MASShortcutBinder.shared()?.breakBinding(
+            withDefaultsKey: Preferences.defaultShortcutPanelKey
         )
     }
 
@@ -58,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func setupShortcuts() {
         MASShortcutBinder.shared()?.bindShortcut(
-            withDefaultsKey: Preferences.defaultShortcutUDKey,
+            withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
                 self.togglePane()
             }
@@ -70,6 +74,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.toggleScreenshotState()
             }
         )
+
+        #if DEBUG
+
+            MASShortcutBinder.shared()?.bindShortcut(
+                withDefaultsKey: Preferences.defaultShortcutDebugKey,
+                toAction: {
+                    self.toggleDebugState()
+                }
+            )
+
+        #endif
     }
 
     func setupStatusBarItem() {
@@ -104,6 +119,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var isPanelShowed = false
     var isScreenshotShowed = false
+    var isDebugShowed = false
 
     @objc func closeApp() {
         NSApplication.shared.terminate(self)
@@ -140,5 +156,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.windowManager.activateWindow(.screenshot)
         }
         self.isScreenshotShowed.toggle()
+    }
+
+    @objc func toggleDebugState() {
+        if self.isDebugShowed {
+            self.windowManager.hideWindow(.debug)
+        } else {
+            self.windowManager.activateWindow(.debug)
+        }
+        self.isDebugShowed.toggle()
     }
 }

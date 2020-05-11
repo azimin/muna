@@ -49,6 +49,9 @@
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */; };
+		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
+		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
+		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -110,6 +113,9 @@
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelViewController.swift; sourceTree = "<group>"; };
+		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -393,6 +399,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9FC9CDC524699E7C0018FAD7 /* TextField */,
 				9F33D48424687F6A00395C44 /* Shortcuts */,
 				9FA07F582460A53200654D36 /* MainPanel */,
 			);
@@ -499,6 +506,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				9FC9CDC424699E4B0018FAD7 /* Debug */,
 				23435AC72464A61F00B4DE50 /* ScreenshotState */,
 				9F025C10246346D700F05D81 /* ImagePreview */,
 				9FC06BF02460CE56008D4D3C /* MainPanel */,
@@ -521,6 +529,39 @@
 				9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		9FC9CDC424699E4B0018FAD7 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDCD2469A0770018FAD7 /* View */,
+				9FC9CDCC2469A0700018FAD7 /* ViewController */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		9FC9CDC524699E7C0018FAD7 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDC624699E8A0018FAD7 /* TextField.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		9FC9CDCC2469A0700018FAD7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9FC9CDCD2469A0770018FAD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDC824699EF30018FAD7 /* DebugView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
@@ -712,6 +753,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
+				9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
@@ -723,6 +765,7 @@
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
+				9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
@@ -731,6 +774,7 @@
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
 				239AB0AB24688E8E001526DA /* ImageStorageService.swift in Sources */,
+				9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */,
 				9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,

@@ -12,6 +12,7 @@ import Foundation
 enum WindowType: String {
     case panel
     case screenshot
+    case debug
 }
 
 class WindowManager {
@@ -28,6 +29,8 @@ class WindowManager {
             return
         }
         switch windowType {
+        case .debug:
+            self.showDebug(in: window)
         case .panel:
             self.showPanel(in: window)
         case .screenshot:
@@ -38,6 +41,18 @@ class WindowManager {
     private func setupWindow(_ windowType: WindowType) {
         let window: NSWindow
         switch windowType {
+        case .debug:
+            window = Panel(
+                contentRect: self.frameFor(.debug),
+                styleMask: [.nonactivatingPanel],
+                backing: .buffered,
+                defer: false
+            )
+            window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
+            window.contentViewController = DebugViewController()
+            // Overlap dock, but not menu bar
+            window.level = .statusBar
+            self.showScreenshotState(in: window)
         case .panel:
             window = Panel(
                 contentRect: self.frameFor(.panel),
@@ -75,6 +90,8 @@ class WindowManager {
 
         let frame: NSRect
         switch windowType {
+        case .debug:
+            frame = mainScreen.frame
         case .screenshot:
             frame = mainScreen.frame
         case .panel:
@@ -90,6 +107,18 @@ class WindowManager {
     }
 
     // MARK: - Window showing
+
+    private func showDebug(in window: NSWindow) {
+        window.makeKeyAndOrderFront(nil)
+
+        window.setFrame(
+            self.frameFor(.debug),
+            display: true,
+            animate: false
+        )
+
+        window.setIsVisible(true)
+    }
 
     private func showPanel(in window: NSWindow) {
         window.makeKeyAndOrderFront(nil)
@@ -129,6 +158,8 @@ class WindowManager {
         }
 
         switch windowType {
+        case .debug:
+            window.setIsVisible(false)
         case .screenshot:
             if let viewController = window.contentViewController as? ScreenShotStateViewController {
                 viewController.hide {
