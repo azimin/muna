@@ -14,7 +14,12 @@ class TaskCreateView: View {
     let closeButton = Button()
         .withImageName("icon_close")
 
+    let firstOption = TaskReminderItemView()
+    let secondOption = TaskReminderItemView()
+    let thirdOption = TaskReminderItemView()
+
     let contentStackView = NSStackView()
+    let doneButton = TaskDoneButton()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: .zero)
@@ -26,14 +31,14 @@ class TaskCreateView: View {
     }
 
     func setup() {
-        self.snp.makeConstraints { (maker) in
+        self.snp.makeConstraints { maker in
             maker.width.equalTo(220)
         }
         self.layer?.cornerRadius = 12
         self.layer?.masksToBounds = true
 
         self.addSubview(self.vialPlate)
-        self.vialPlate.snp.makeConstraints { (maker) in
+        self.vialPlate.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
         self.vialPlate.wantsLayer = true
@@ -43,7 +48,7 @@ class TaskCreateView: View {
         self.vialPlate.layer?.cornerRadius = 12
 
         self.addSubview(self.closeButton)
-        self.closeButton.snp.makeConstraints { (maker) in
+        self.closeButton.snp.makeConstraints { maker in
             maker.top.trailing.equalToSuperview().inset(NSEdgeInsets(
                 top: 16,
                 left: 0,
@@ -54,20 +59,46 @@ class TaskCreateView: View {
         }
 
         self.addSubview(self.contentStackView)
-        self.contentStackView.snp.makeConstraints { (maker) in
-            maker.leading.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(
+        self.contentStackView.distribution = .fill
+        self.contentStackView.orientation = .vertical
+        self.contentStackView.snp.makeConstraints { maker in
+            maker.leading.trailing.equalToSuperview().inset(NSEdgeInsets(
                 top: 16,
                 left: 12,
                 bottom: 16,
                 right: 12
             ))
-            maker.top.equalTo(self.closeButton.snp.bottom).inset(16)
+            maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
         }
 
         let reminderTextField = TextField()
+        reminderTextField.placeholder = "When to remind"
+
         let commentTextField = TextField()
+        commentTextField.placeholder = "Comment"
 
         self.contentStackView.addArrangedSubview(reminderTextField)
+        self.contentStackView.setCustomSpacing(6, after: reminderTextField)
+        self.contentStackView.addArrangedSubview(self.firstOption)
+        self.contentStackView.setCustomSpacing(2, after: self.firstOption)
+        self.contentStackView.addArrangedSubview(self.secondOption)
+        self.contentStackView.setCustomSpacing(2, after: self.secondOption)
+        self.contentStackView.addArrangedSubview(self.thirdOption)
+        self.contentStackView.setCustomSpacing(6, after: self.thirdOption)
         self.contentStackView.addArrangedSubview(commentTextField)
+
+        for view in [self.firstOption, self.secondOption, self.thirdOption] {
+            view.snp.makeConstraints { maker in
+                maker.width.equalToSuperview()
+            }
+        }
+        self.secondOption.update(style: .selected)
+        self.thirdOption.update(style: .notSelected)
+
+        self.addSubview(self.doneButton)
+        self.doneButton.snp.makeConstraints { maker in
+            maker.bottom.leading.trailing.equalToSuperview()
+            maker.top.equalTo(self.contentStackView.snp.bottom).inset(-32)
+        }
     }
 }

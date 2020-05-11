@@ -54,6 +54,8 @@
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
 		9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */; };
 		9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */; };
+		9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */; };
+		9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -120,6 +122,8 @@
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionedTextField.swift; sourceTree = "<group>"; };
 		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
+		9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDoneButton.swift; sourceTree = "<group>"; };
+		9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskReminderItemView.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -573,9 +577,19 @@
 		9FC9CDD02469B69D0018FAD7 /* TaskCreate */ = {
 			isa = PBXGroup;
 			children = (
+				9FC9CDD52469F5510018FAD7 /* SmallComponents */,
 				9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */,
 			);
 			path = TaskCreate;
+			sourceTree = "<group>";
+		};
+		9FC9CDD52469F5510018FAD7 /* SmallComponents */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */,
+				9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */,
+			);
+			path = SmallComponents;
 			sourceTree = "<group>";
 		};
 		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
@@ -782,6 +796,7 @@
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
+				9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
@@ -808,6 +823,7 @@
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
+				9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,

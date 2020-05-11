@@ -19,9 +19,12 @@ enum ColorStyle {
     case redDots
     case separator
     case blueSelection
+    case clear
 
     var color: NSColor {
         switch self {
+        case .clear:
+            return NSColor.clear
         case .blueSelection:
             return NSColor(hex: "0D5AAC")
         case .white:
