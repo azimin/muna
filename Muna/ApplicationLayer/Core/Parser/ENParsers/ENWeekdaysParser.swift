@@ -35,7 +35,7 @@ class ENWeekdaysParser: Parser {
     }
 
     override var pattern: String {
-        return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow)\\b"
+        return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow|weekends)\\b"
     }
 
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult: [ParsedResult]) -> [ParsedResult] {
