@@ -69,9 +69,19 @@ class ENWeekdaysParser: Parser {
 
         let finalDate = parsedItem.refDate + weekday.days
 
-        let parsedResult = ParsedResult(range: [parsedItem.match.range], date: finalDate, time: .init(timeUnit: .allDay, hours: nil))
+        var newParsedResult: [ParsedResult]
+        if !toParsedResult.isEmpty {
+            newParsedResult = toParsedResult.map {
+                var newResult = $0
+                newResult.date = finalDate
+                newResult.range.append(parsedItem.match.range)
+                return newResult
+            }
+        } else {
+            newParsedResult = [ParsedResult(range: [parsedItem.match.range], date: finalDate, time: .init(timeUnit: .allDay, hours: nil))]
+        }
 
-        return [parsedResult]
+        return newParsedResult
     }
 }
 

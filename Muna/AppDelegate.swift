@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
 //        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
-        ENTimeParser().parse(fromText: "Hello", refDate: Date())
+//        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

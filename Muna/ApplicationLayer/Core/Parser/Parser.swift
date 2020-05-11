@@ -13,19 +13,20 @@ class Parser: ParserProtocol {
         return ""
     }
 
-    func parse(fromText text: String, refDate: Date) -> ParsedItem? {
+    func parse(fromText text: String, refDate: Date, into items: [ParsedResult]) -> [ParsedResult] {
         let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: self.pattern, options: .caseInsensitive)
         } catch {
             assertionFailure("Couldnt allocate regex: \(error)")
-            return nil
+            return []
         }
 
         guard let match = regex.firstMatch(in: text, range: NSRange(location: 0, length: text.count)) else {
-            return nil
+            return []
         }
-        return ParsedItem(text: text, match: match, refDate: refDate)
+        let item = ParsedItem(text: text, match: match, refDate: refDate)
+        return self.extract(fromParsedItem: item, toParsedResult: items)
     }
 
     func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {

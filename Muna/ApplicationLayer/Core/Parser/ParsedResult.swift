@@ -29,7 +29,7 @@ struct ParsedTime {
 
 struct ParsedResult {
     var range: [NSRange]
-    let date: Date
+    var date: Date
     var time: ParsedTime
 }
 
