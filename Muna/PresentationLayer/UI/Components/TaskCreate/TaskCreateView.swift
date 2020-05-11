@@ -46,6 +46,12 @@ class RemindersOptionsController {
     func showItems(items: [ReminderItem]) {
         self.isEditingState = true
         self.avialbleItems = items
+        self.selectedIndex = 0
+
+        self.delegate?.remindersOptionsControllerShowItems(
+            self,
+            items: items
+        )
     }
 
     func hilightNextItemIfNeeded() {
@@ -198,6 +204,24 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         }
 
         self.addMonitor()
+
+        self.controller.delegate = self
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.controller.showItems(items: [
+                .init(title: "Wed, May 13", subtitle: "in 5 days"),
+                .init(title: "Wed, May 20", subtitle: "in 12 days"),
+                .init(title: "Wed, May 27", subtitle: "in 20 days"),
+            ])
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+            self.controller.showItems(items: [
+                .init(title: "Wed, May 13", subtitle: "in 5 days"),
+                .init(title: "Wed, May 20", subtitle: "in 12 days"),
+                .init(title: "Wed, May 27", subtitle: "in 20 days"),
+            ])
+        }
     }
 
     var downMonitor: Any?
@@ -249,14 +273,26 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 self.mainOption?.update(style: .selected)
                 self.mainOption?.update(item: item)
             } else {
+                subviewIndex += 1
                 let option = TaskReminderItemView()
                 option.update(style: .notSelected)
                 option.update(item: item)
+                option.isHidden = true
                 self.contentStackView.insertArrangedSubview(option, at: subviewIndex)
                 self.options.append(option)
-                subviewIndex += 1
             }
         }
+
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.25
+            context.allowsImplicitAnimation = true
+
+            for optionIndex in 0 ..< self.options.count {
+                self.options[optionIndex].isHidden = false
+            }
+
+            self.layoutSubtreeIfNeeded()
+        }, completionHandler: nil)
     }
 
     func remindersOptionsControllerHighliteItem(
@@ -285,6 +321,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 self.options[optionIndex].isHidden = true
             }
 
+            self.mainOption = option
             self.layoutSubtreeIfNeeded()
         }, completionHandler: {
             var offset = 0
