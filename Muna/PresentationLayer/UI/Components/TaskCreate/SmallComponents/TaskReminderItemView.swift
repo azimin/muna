@@ -72,6 +72,11 @@ class TaskReminderItemView: View {
         self.update(style: .basic)
     }
 
+    func update(item: RemindersOptionsController.ReminderItem) {
+        self.mainLabel.text = item.title
+        self.infoLabel.text = item.subtitle
+    }
+
     func update(style: Style, animated: Bool = false) {
         self.selectionView.backgroundColor = NSColor.color(.clear)
         self.mainLabel.textColor = NSColor.color(.white)
@@ -93,7 +98,7 @@ class TaskReminderItemView: View {
 
     func updateConstraints(style: Style, animated: Bool) {
         NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.25
+            context.duration = animated ? 0.25 : 0
             context.allowsImplicitAnimation = true
 
             switch style {

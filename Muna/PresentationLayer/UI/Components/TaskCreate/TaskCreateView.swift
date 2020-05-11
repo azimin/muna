@@ -8,27 +8,105 @@
 
 import Cocoa
 
-class TaskCreateView: View {
+protocol RemindersOptionsControllerDelegate: AnyObject {
+    func remindersOptionsControllerShowItems(
+        _ controller: RemindersOptionsController,
+        items: [RemindersOptionsController.ReminderItem]
+    )
+
+    func remindersOptionsControllerHighliteItem(
+        _ controller: RemindersOptionsController,
+        index: Int
+    )
+
+    func remindersOptionsControllerSelectItem(
+        _ controller: RemindersOptionsController,
+        index: Int
+    )
+}
+
+class RemindersOptionsController {
+    weak var delegate: RemindersOptionsControllerDelegate?
+
+    private var isEditingState: Bool = false
+    private var selectedIndex = 0
+
+    class ReminderItem {
+        let title: String
+        let subtitle: String
+
+        init(title: String, subtitle: String) {
+            self.title = title
+            self.subtitle = subtitle
+        }
+    }
+
+    private var avialbleItems: [ReminderItem] = []
+
+    func showItems(items: [ReminderItem]) {
+        self.isEditingState = true
+        self.avialbleItems = items
+    }
+
+    func hilightNextItemIfNeeded() {
+        guard self.isEditingState else {
+            return
+        }
+
+        let newIndex = self.selectedIndex + 1
+        if newIndex < self.avialbleItems.count {
+            self.selectedIndex = newIndex
+            self.delegate?.remindersOptionsControllerHighliteItem(
+                self,
+                index: newIndex
+            )
+        }
+    }
+
+    func hilightPreveousItemsIfNeeded() {
+        guard self.isEditingState else {
+            return
+        }
+
+        let newIndex = self.selectedIndex - 1
+        if newIndex >= 0, newIndex < self.avialbleItems.count {
+            self.selectedIndex = newIndex
+            self.delegate?.remindersOptionsControllerHighliteItem(
+                self,
+                index: newIndex
+            )
+        }
+    }
+
+    func selectItemIfNeeded() {
+        guard self.isEditingState else {
+            return
+        }
+
+        self.isEditingState = false
+        self.delegate?.remindersOptionsControllerSelectItem(
+            self,
+            index: self.selectedIndex
+        )
+    }
+}
+
+class TaskCreateView: View, RemindersOptionsControllerDelegate {
     let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
 
     let closeButton = Button()
         .withImageName("icon_close")
 
-    let firstOption = TaskReminderItemView()
-    let secondOption = TaskReminderItemView()
-    let thirdOption = TaskReminderItemView()
-
-    lazy var options: [TaskReminderItemView] = [
-        self.firstOption,
-        self.secondOption,
-        self.thirdOption,
-    ]
+    var mainOption: TaskReminderItemView?
+    var options: [TaskReminderItemView] = []
 
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
 
     var selectedIndex: Int = 0
+
+    var controller = RemindersOptionsController()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: .zero)
@@ -97,24 +175,21 @@ class TaskCreateView: View {
         let commentTextField = TextField()
         commentTextField.placeholder = "Comment"
 
+        let option = TaskReminderItemView()
+        self.mainOption = option
+        self.mainOption?.infoLabel.text = ""
+
         self.contentStackView.addArrangedSubview(reminderTextField)
         self.contentStackView.setCustomSpacing(6, after: reminderTextField)
-        self.contentStackView.addArrangedSubview(self.firstOption)
-        self.contentStackView.setCustomSpacing(2, after: self.firstOption)
-        self.contentStackView.addArrangedSubview(self.secondOption)
-        self.contentStackView.setCustomSpacing(2, after: self.secondOption)
-        self.contentStackView.addArrangedSubview(self.thirdOption)
-        self.contentStackView.setCustomSpacing(6, after: self.thirdOption)
+        self.contentStackView.addArrangedSubview(option)
+        self.contentStackView.setCustomSpacing(6, after: option)
         self.contentStackView.addArrangedSubview(commentTextField)
 
-        for view in [self.firstOption, self.secondOption, self.thirdOption] {
-            view.snp.makeConstraints { maker in
-                maker.width.equalToSuperview()
-            }
+        option.snp.makeConstraints { maker in
+            maker.width.equalToSuperview()
         }
-        self.firstOption.update(style: .selected)
-        self.secondOption.update(style: .notSelected)
-        self.thirdOption.update(style: .notSelected)
+        option.update(style: .basic)
+        self.options.append(option)
 
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { maker in
@@ -131,36 +206,18 @@ class TaskCreateView: View {
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
             if event.keyCode == Key.upArrow.carbonKeyCode {
-                self.selectPreveous()
+                self.controller.hilightPreveousItemsIfNeeded()
                 return nil
             } else if event.keyCode == Key.downArrow.carbonKeyCode {
-                self.selectNext()
+                self.controller.hilightNextItemIfNeeded()
                 return nil
             } else if event.keyCode == Key.leftArrow.carbonKeyCode {
-                self.updateItem()
+                self.controller.selectItemIfNeeded()
                 return nil
             }
 
             return event
         })
-    }
-
-    var isBasic = false
-
-    func updateItem() {
-        self.options[self.selectedIndex].updateConstraints(style: self.isBasic ? .selected : .basic, animated: true)
-
-        self.isBasic.toggle()
-
-        NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.25
-            context.allowsImplicitAnimation = true
-
-            self.secondOption.isHidden = self.isBasic
-            self.thirdOption.isHidden = self.isBasic
-            self.layoutSubtreeIfNeeded()
-
-        }, completionHandler: nil)
     }
 
     func selectPreveous() {
@@ -177,5 +234,65 @@ class TaskCreateView: View {
             self.selectedIndex += 1
         }
         self.options[self.selectedIndex].update(style: .selected)
+    }
+
+    // MARK: - RemindersOptionsControllerDelegate
+
+    func remindersOptionsControllerShowItems(
+        _ controller: RemindersOptionsController,
+        items: [RemindersOptionsController.ReminderItem]
+    ) {
+        var subviewIndex = self.contentStackView.arrangedSubviews.firstIndex(of: self.mainOption!) ?? 0
+
+        for (index, item) in items.enumerated() {
+            if index == 0 {
+                self.mainOption?.update(style: .selected)
+                self.mainOption?.update(item: item)
+            } else {
+                let option = TaskReminderItemView()
+                option.update(style: .notSelected)
+                option.update(item: item)
+                self.contentStackView.insertArrangedSubview(option, at: subviewIndex)
+                self.options.append(option)
+                subviewIndex += 1
+            }
+        }
+    }
+
+    func remindersOptionsControllerHighliteItem(
+        _ controller: RemindersOptionsController,
+        index: Int
+    ) {
+        for (optionIndex, option) in self.options.enumerated() {
+            option.update(
+                style: optionIndex == index ? .selected : .notSelected
+            )
+        }
+    }
+
+    func remindersOptionsControllerSelectItem(
+        _ controller: RemindersOptionsController,
+        index: Int
+    ) {
+        let option = self.options[index]
+        option.update(style: .basic, animated: true)
+
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.25
+            context.allowsImplicitAnimation = true
+
+            for optionIndex in 0 ..< self.options.count where optionIndex != index {
+                self.options[optionIndex].isHidden = true
+            }
+
+            self.layoutSubtreeIfNeeded()
+        }, completionHandler: {
+            var offset = 0
+            for optionIndex in 0 ..< self.options.count where optionIndex != index {
+                self.options[optionIndex - offset].removeFromSuperview()
+                self.options.remove(at: optionIndex - offset)
+                offset += 1
+            }
+        })
     }
 }
