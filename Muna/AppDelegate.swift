@@ -8,7 +8,6 @@
 
 import Cocoa
 import MASShortcut
-import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
