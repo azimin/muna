@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
 //        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
-        ENTimeParser().parse(fromText: "Hello 12:30am", refDate: Date())
+        ENTimeParser().parse(fromText: "Hello 12:30 am", refDate: Date())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

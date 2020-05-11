@@ -14,8 +14,8 @@ class ENTimeParser: Parser {
     }
 
     let hourGroup = 1
-    let minutesGroup = 2
-    let partOfTheDayGroup = 3
+    let minutesGroup = 3
+    let partOfTheDayGroup = 4
 
     override func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
         print(match.numberOfRanges)
@@ -26,15 +26,34 @@ class ENTimeParser: Parser {
 
         let nowHours = refDate.hour
         let nowMinutes = refDate.minute
-        let nowSeconds = refDate.second
 
-        guard let hoursOffset = Int(match.string(from: text, atRangeIndex: self.hourGroup)) else {
+        guard var hoursOffset = Int(match.string(from: text, atRangeIndex: self.hourGroup)) else {
             return nil
         }
 
-        let minutesOffset = match.isEmpty(atRangeIndex: self.minutesGroup) ? 0 : Int(match.string(from: text, atRangeIndex: self.minutesGroup))
-
         let partOfTheDay = match.isEmpty(atRangeIndex: self.partOfTheDayGroup) ? "" : match.string(from: text, atRangeIndex: self.partOfTheDayGroup)
-        return nil
+
+        if !partOfTheDay.isEmpty, hoursOffset <= 12 {
+            hoursOffset += 12
+        }
+
+        hoursOffset -= nowHours
+
+        var minutesOffset = 0
+        if !match.isEmpty(atRangeIndex: self.minutesGroup), let minutes = Int(match.string(from: text, atRangeIndex: self.minutesGroup)) {
+            minutesOffset = minutes - nowMinutes
+        }
+
+        let result = ParsedResult(
+            range: match.range,
+            unit:
+            [
+                .hour: hoursOffset,
+                .minute: minutesOffset,
+                .second: 0,
+            ]
+        )
+        print(result)
+        return result
     }
 }
