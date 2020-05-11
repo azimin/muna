@@ -41,6 +41,7 @@ class TaskCreateView: View {
 
     func setup() {
         self.backgroundColor = NSColor.clear
+
         self.snp.makeConstraints { maker in
             maker.width.equalTo(220)
         }
@@ -135,10 +136,31 @@ class TaskCreateView: View {
             } else if event.keyCode == Key.downArrow.carbonKeyCode {
                 self.selectNext()
                 return nil
+            } else if event.keyCode == Key.leftArrow.carbonKeyCode {
+                self.updateItem()
+                return nil
             }
 
             return event
         })
+    }
+
+    var isBasic = false
+
+    func updateItem() {
+        self.options[self.selectedIndex].updateConstraints(style: self.isBasic ? .selected : .basic, animated: true)
+
+        self.isBasic.toggle()
+
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.25
+            context.allowsImplicitAnimation = true
+
+            self.secondOption.isHidden = self.isBasic
+            self.thirdOption.isHidden = self.isBasic
+            self.layoutSubtreeIfNeeded()
+
+        }, completionHandler: nil)
     }
 
     func selectPreveous() {

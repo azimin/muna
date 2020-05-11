@@ -72,7 +72,7 @@ class TaskReminderItemView: View {
         self.update(style: .basic)
     }
 
-    func update(style: Style) {
+    func update(style: Style, animated: Bool = false) {
         self.selectionView.backgroundColor = NSColor.color(.clear)
         self.mainLabel.textColor = NSColor.color(.white)
         self.infoLabel.textColor = NSColor.color(.white).withAlphaComponent(0.8)
@@ -81,29 +81,40 @@ class TaskReminderItemView: View {
         case .basic:
             self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .color(.blueSelected))
             self.mainLabel.textColor = NSColor.color(.blueSelected)
-            self.contentViewConstraint?.update(inset: NSEdgeInsets(
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0
-            ))
         case .selected:
             self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .color(.white))
             self.selectionView.backgroundColor = NSColor.color(.blueSelected)
-            self.contentViewConstraint?.update(inset: NSEdgeInsets(
-                top: 0,
-                left: 8,
-                bottom: 0,
-                right: 8
-            ))
         case .notSelected:
             self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .white)
-            self.contentViewConstraint?.update(inset: NSEdgeInsets(
-                top: 0,
-                left: 8,
-                bottom: 0,
-                right: 8
-            ))
         }
+
+        self.updateConstraints(style: style, animated: animated)
+    }
+
+    func updateConstraints(style: Style, animated: Bool) {
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.25
+            context.allowsImplicitAnimation = true
+
+            switch style {
+            case .basic:
+                self.contentViewConstraint?.update(inset: NSEdgeInsets(
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0
+                ))
+            case .selected, .notSelected:
+                self.contentViewConstraint?.update(inset: NSEdgeInsets(
+                    top: 0,
+                    left: 8,
+                    bottom: 0,
+                    right: 8
+                ))
+            }
+
+            self.layoutSubtreeIfNeeded()
+
+        }, completionHandler: nil)
     }
 }

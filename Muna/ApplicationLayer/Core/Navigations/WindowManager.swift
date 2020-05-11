@@ -44,12 +44,13 @@ class WindowManager {
         case .debug:
             window = Panel(
                 contentRect: self.frameFor(.debug),
-                styleMask: [.nonactivatingPanel],
+                styleMask: [.nonactivatingPanel, .borderless],
                 backing: .buffered,
                 defer: false
             )
-            window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
+            window.backgroundColor = NSColor.clear
             window.contentViewController = DebugViewController()
+            window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showScreenshotState(in: window)
@@ -62,6 +63,7 @@ class WindowManager {
             )
             window.backgroundColor = NSColor.clear
             window.contentViewController = MainPanelViewController()
+            window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar - 2
             self.showPanel(in: window)
@@ -74,6 +76,7 @@ class WindowManager {
             )
             window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
             window.contentViewController = ScreenShotStateViewController()
+            window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showScreenshotState(in: window)
