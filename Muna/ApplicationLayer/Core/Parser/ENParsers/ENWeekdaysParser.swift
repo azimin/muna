@@ -11,22 +11,23 @@ import SwiftDate
 
 class ENWeekdaysParser: Parser {
     private let weekDayOffset = [
-        "sunday": 0,
-        "sun": 0,
-        "monday": 1,
-        "mon": 1,
-        "tuesday": 2,
-        "tue": 2,
-        "wednesday": 3,
-        "wed": 3,
-        "thursday": 4,
-        "thurs": 4,
-        "thur": 4,
-        "thu": 4,
-        "friday": 5,
-        "fri": 5,
-        "saturday": 6,
-        "sat": 6,
+        "sunday": 1,
+        "sun": 1,
+        "tomorrow": 1,
+        "monday": 2,
+        "mon": 2,
+        "tuesday": 3,
+        "tue": 3,
+        "wednesday": 4,
+        "wed": 4,
+        "thursday": 5,
+        "thurs": 5,
+        "thur": 6,
+        "thu": 6,
+        "friday": 7,
+        "fri": 7,
+        "saturday": 8,
+        "sat": 8,
     ]
 
     private var days: String {
@@ -34,7 +35,7 @@ class ENWeekdaysParser: Parser {
     }
 
     override var pattern: String {
-        return "\\b(?:on\\s*?)?(?:(next|this))?\\s*(\(days))\\b"
+        return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow)\\b"
     }
 
     override func extract(fromText text: String, withMatch match: NSTextCheckingResult, refDate: Date) -> ParsedResult? {
@@ -48,15 +49,26 @@ class ENWeekdaysParser: Parser {
         let prefixGroup = match.isEmpty(atRangeIndex: 1) ? "" : match.string(from: text, atRangeIndex: 1)
 
         var weekday: Int
-        if weekdayOffset - today < 0 {
-            weekday = (7 - today) + weekdayOffset
+        if weekdayName != "tomorrow" {
+            if weekdayOffset - today < 0 {
+                weekday = (7 - today) + weekdayOffset
+            } else {
+                weekday = weekdayOffset - today
+            }
+
+            if prefixGroup == "next" {
+                weekday += 7
+            }
         } else {
-            weekday = today - weekdayOffset
+            weekday = weekdayOffset
+
+            if prefixGroup == "after" {
+                weekday += 1
+            }
         }
 
-        if prefixGroup == "next" {
-            weekday += 7
-        }
+        print(weekday)
+        print((refDate + weekday.days).timeIntervalSince1970)
 
         let parsedResult = ParsedResult(range: match.range, unit: [.day: weekday])
 
