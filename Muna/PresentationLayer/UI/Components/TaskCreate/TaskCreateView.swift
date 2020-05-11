@@ -10,6 +10,7 @@ import Cocoa
 
 class TaskCreateView: View {
     let vialPlate = NSVisualEffectView()
+    let vialPlateOverlay = View()
 
     let closeButton = Button()
         .withImageName("icon_close")
@@ -31,6 +32,7 @@ class TaskCreateView: View {
     }
 
     func setup() {
+        self.backgroundColor = NSColor.clear
         self.snp.makeConstraints { maker in
             maker.width.equalTo(220)
         }
@@ -42,10 +44,19 @@ class TaskCreateView: View {
             maker.edges.equalToSuperview()
         }
         self.vialPlate.wantsLayer = true
-        self.vialPlate.blendingMode = .withinWindow
+        self.vialPlate.blendingMode = .behindWindow
         self.vialPlate.material = .dark
         self.vialPlate.state = .active
         self.vialPlate.layer?.cornerRadius = 12
+
+        self.addSubview(self.vialPlateOverlay)
+        self.vialPlateOverlay.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+        self.vialPlateOverlay.layer?.cornerRadius = 12
+        self.vialPlateOverlay.layer?.borderWidth = 1
+        self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
+        self.vialPlateOverlay.backgroundColor = NSColor.color(.black).withAlphaComponent(0.3)
 
         self.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { maker in

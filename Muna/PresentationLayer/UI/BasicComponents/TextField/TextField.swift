@@ -40,7 +40,7 @@ class TextField: View, NSTextFieldDelegate {
     }
 
     func setup() {
-        self.layer?.cornerRadius = 2
+        self.layer?.cornerRadius = 4
         self.setBorder(isFocused: false)
 
         self.addSubview(self.textField)
