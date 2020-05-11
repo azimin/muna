@@ -53,6 +53,7 @@
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
 		9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */; };
+		9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -118,6 +119,7 @@
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionedTextField.swift; sourceTree = "<group>"; };
+		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -401,7 +403,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				9FC9CDC524699E7C0018FAD7 /* TextField */,
+				9FC9CDD02469B69D0018FAD7 /* TaskCreate */,
 				9F33D48424687F6A00395C44 /* Shortcuts */,
 				9FA07F582460A53200654D36 /* MainPanel */,
 			);
@@ -412,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA07F702460C30F00654D36 /* Cells */,
+				9FC9CDC524699E7C0018FAD7 /* TextField */,
 				9FA07F5624609E0100654D36 /* View.swift */,
 				9FA07F5D2460A8AC00654D36 /* Label.swift */,
 				9FA07F642460AD2800654D36 /* ImageView.swift */,
@@ -565,6 +568,14 @@
 				9FC9CDC824699EF30018FAD7 /* DebugView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9FC9CDD02469B69D0018FAD7 /* TaskCreate */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */,
+			);
+			path = TaskCreate;
 			sourceTree = "<group>";
 		};
 		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
@@ -795,6 +806,7 @@
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
+				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
