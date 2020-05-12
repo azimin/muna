@@ -106,6 +106,9 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         .withImageName("icon_close")
 
     var mainOption: TaskReminderItemView?
+
+    var parsedDates = [ParsedResult]()
+
     var options: [TaskReminderItemView] = []
 
     let contentStackView = NSStackView()
@@ -114,6 +117,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     var selectedIndex: Int = 0
 
     var controller = RemindersOptionsController()
+
+    private let dateParser = MunaChrono()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: .zero)
@@ -342,10 +347,9 @@ extension TaskCreateView: NSTextFieldDelegate {
             return
         }
 
-        let chrono = MunaChrono()
-        let parsedResult = chrono.parseFromString(textField.stringValue, date: Date())
+        self.parsedDates = self.dateParser.parseFromString(textField.stringValue, date: Date())
 
-        let result = parsedResult.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        let items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
                 return nil
             }
@@ -355,6 +359,6 @@ extension TaskCreateView: NSTextFieldDelegate {
             )
             return item
         }
-        self.controller.showItems(items: result)
+        self.controller.showItems(items: items)
     }
 }
