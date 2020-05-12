@@ -8,14 +8,15 @@
 
 import Cocoa
 
-class TextField: View {
-    let textField = ActionedTextField()
+protocol TextFieldDelegate: AnyObject {
+    func textFieldTextDidChange(textField: TextField, text: String)
+}
 
-    weak var delegate: NSTextFieldDelegate? {
-        didSet {
-            self.textField.delegate = self.delegate
-        }
-    }
+class TextField: View, NSTextFieldDelegate {
+    let textField = ActionedTextField()
+    let clearButton = Button().withImageName("icon_text_field_clear")
+
+    weak var delegate: TextFieldDelegate?
 
     var placeholder: String? {
         set {
@@ -36,7 +37,11 @@ class TextField: View {
         }
     }
 
-    init() {
+    // Show clear button
+    private let clearable: Bool
+
+    init(clearable: Bool) {
+        self.clearable = clearable
         super.init(frame: .zero)
         self.setup()
     }
@@ -48,6 +53,8 @@ class TextField: View {
     func setup() {
         self.layer?.cornerRadius = 4
         self.setBorder(isFocused: false)
+
+        self.textField.delegate = self
 
         self.addSubview(self.textField)
         self.textField.isFocused = { [weak self] isFocused in
@@ -61,13 +68,30 @@ class TextField: View {
         self.textField.isBezeled = false
 
         self.textField.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(NSEdgeInsets(
+            maker.top.bottom.leading.equalToSuperview().inset(NSEdgeInsets(
                 top: 4,
                 left: 5,
                 bottom: 4,
                 right: 5
             ))
         }
+
+        self.addSubview(self.clearButton)
+        self.clearButton.isHidden = true
+        self.clearButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.textField.snp.trailing).inset(-6)
+            maker.trailing.equalToSuperview().inset(6)
+            maker.centerY.equalToSuperview()
+            maker.size.equalTo(8)
+        }
+        self.clearButton.action = #selector(self.clear)
+    }
+
+    @objc
+    func clear() {
+        self.textField.stringValue = ""
+        self.clearButton.isHidden = true
+        self.delegate?.textFieldTextDidChange(textField: self, text: "")
     }
 
     func setBorder(isFocused: Bool) {
@@ -78,5 +102,23 @@ class TextField: View {
             self.layer?.borderWidth = 1
             self.layer?.borderColor = CGColor.color(.white60)
         }
+    }
+
+    func controlTextDidChange(_ obj: Notification) {
+        guard let textField = obj.object as? ActionedTextField else {
+            assertionFailure("Wrong object")
+            return
+        }
+
+        if textField.stringValue.isEmpty == false, self.clearable {
+            self.clearButton.isHidden = false
+        } else {
+            self.clearButton.isHidden = true
+        }
+
+        self.delegate?.textFieldTextDidChange(
+            textField: self,
+            text: textField.stringValue
+        )
     }
 }

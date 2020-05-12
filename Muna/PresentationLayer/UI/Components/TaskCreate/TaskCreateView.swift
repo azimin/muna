@@ -24,7 +24,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
-    let commentTextField = TextField()
+    let commentTextField = TextField(clearable: false)
 
     var selectedIndex: Int = 0
 
@@ -96,12 +96,11 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
         }
 
-        let reminderTextField = TextField()
+        let reminderTextField = TextField(clearable: true)
         reminderTextField.delegate = self
         reminderTextField.placeholder = "When to remind"
 
-        let commentTextField = TextField()
-        commentTextField.placeholder = "Comment"
+        self.commentTextField.placeholder = "Comment"
 
         let option = TaskReminderItemView()
         self.mainOption = option
@@ -111,7 +110,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         self.contentStackView.setCustomSpacing(6, after: reminderTextField)
         self.contentStackView.addArrangedSubview(option)
         self.contentStackView.setCustomSpacing(6, after: option)
-        self.contentStackView.addArrangedSubview(commentTextField)
+        self.contentStackView.addArrangedSubview(self.commentTextField)
 
         option.snp.makeConstraints { maker in
             maker.width.equalToSuperview()
@@ -126,6 +125,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         }
 
         self.doneButton.action = #selector(self.handleDoneButton)
+        self.closeButton.action = #selector(self.handleCloseButton)
 
         self.addMonitor()
 
@@ -277,6 +277,12 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     // MARK: - Saving
 
     @objc
+    private func handleCloseButton() {
+        // TODO: - Improve
+        (NSApplication.shared.delegate as? AppDelegate)?.toggleDebugState()
+    }
+
+    @objc
     private func handleDoneButton() {
         guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
             return
@@ -293,13 +299,9 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     }
 }
 
-extension TaskCreateView: NSTextFieldDelegate {
-    func controlTextDidChange(_ obj: Notification) {
-        guard let textField = obj.object as? ActionedTextField else {
-            return
-        }
-
-        self.parsedDates = self.dateParser.parseFromString(textField.stringValue, date: Date())
+extension TaskCreateView: TextFieldDelegate {
+    func textFieldTextDidChange(textField: TextField, text: String) {
+        self.parsedDates = self.dateParser.parseFromString(text, date: Date())
 
         var items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
@@ -312,11 +314,11 @@ extension TaskCreateView: NSTextFieldDelegate {
             return item
         }
 
-        if textField.stringValue == "t" {
+        if text == "t" {
             items.append(.init(title: "Today", subtitle: "1"))
             items.append(.init(title: "Today", subtitle: "2"))
         }
-        if textField.stringValue == "tt" {
+        if text == "tt" {
             items.append(.init(title: "Yersterday", subtitle: "1"))
         }
 
