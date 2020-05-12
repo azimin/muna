@@ -218,6 +218,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             maker.top.equalTo(self.contentStackView.snp.bottom).inset(-32)
         }
 
+        self.doneButton.action = #selector(self.handleDoneButton)
+
         self.addMonitor()
 
         self.controller.delegate = self
@@ -233,9 +235,6 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 return nil
             } else if event.keyCode == Key.downArrow.carbonKeyCode {
                 self.controller.hilightNextItemIfNeeded()
-                return nil
-            } else if event.keyCode == Key.leftArrow.carbonKeyCode {
-                self.controller.selectItemIfNeeded()
                 return nil
             }
 
