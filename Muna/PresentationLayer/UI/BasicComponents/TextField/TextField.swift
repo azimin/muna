@@ -8,8 +8,14 @@
 
 import Cocoa
 
-class TextField: View, NSTextFieldDelegate {
+class TextField: View {
     let textField = ActionedTextField()
+
+    weak var delegate: NSTextFieldDelegate? {
+        didSet {
+            self.textField.delegate = self.delegate
+        }
+    }
 
     var placeholder: String? {
         set {
@@ -54,7 +60,6 @@ class TextField: View, NSTextFieldDelegate {
         self.textField.focusRingType = .none
         self.textField.isBezeled = false
 
-        self.textField.delegate = self
         self.textField.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(
                 top: 4,

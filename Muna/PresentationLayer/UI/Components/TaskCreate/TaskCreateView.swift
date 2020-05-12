@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftDate
 
 protocol RemindersOptionsControllerDelegate: AnyObject {
     func remindersOptionsControllerShowItems(
@@ -105,6 +106,9 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         .withImageName("icon_close")
 
     var mainOption: TaskReminderItemView?
+
+    var parsedDates = [ParsedResult]()
+
     var options: [TaskReminderItemView] = []
 
     let contentStackView = NSStackView()
@@ -113,6 +117,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     var selectedIndex: Int = 0
 
     var controller = RemindersOptionsController()
+
+    private let dateParser = MunaChrono()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: .zero)
@@ -176,6 +182,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         }
 
         let reminderTextField = TextField()
+        reminderTextField.delegate = self
         reminderTextField.placeholder = "When to remind"
 
         let commentTextField = TextField()
@@ -206,22 +213,6 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         self.addMonitor()
 
         self.controller.delegate = self
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.controller.showItems(items: [
-                .init(title: "Wed, May 13", subtitle: "in 5 days"),
-                .init(title: "Wed, May 20", subtitle: "in 12 days"),
-                .init(title: "Wed, May 27", subtitle: "in 20 days"),
-            ])
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-            self.controller.showItems(items: [
-                .init(title: "Wed, May 13", subtitle: "in 5 days"),
-                .init(title: "Wed, May 20", subtitle: "in 12 days"),
-                .init(title: "Wed, May 27", subtitle: "in 20 days"),
-            ])
-        }
     }
 
     var downMonitor: Any?
@@ -331,5 +322,27 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 offset += 1
             }
         })
+    }
+}
+
+extension TaskCreateView: NSTextFieldDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        guard let textField = obj.object as? ActionedTextField else {
+            return
+        }
+
+        self.parsedDates = self.dateParser.parseFromString(textField.stringValue, date: Date())
+
+        let items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+            guard let offset = result.date.difference(in: .day, from: Date()) else {
+                return nil
+            }
+            let item = RemindersOptionsController.ReminderItem(
+                title: "\(result.date.monthName(.short)), \(result.date.ordinalDay) \(result.date.weekdayName(.short))",
+                subtitle: "in \(offset) days"
+            )
+            return item
+        }
+        self.controller.showItems(items: items)
     }
 }

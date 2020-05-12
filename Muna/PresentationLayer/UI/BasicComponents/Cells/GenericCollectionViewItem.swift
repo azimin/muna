@@ -13,7 +13,7 @@ final class GenericCollectionViewItem<T: NSView>: NSCollectionViewItem, Reusable
     public let customSubview = T()
     public weak var reusableComponent: ReusableComponent?
 
-    public override func prepareForReuse() {
+    override public func prepareForReuse() {
         super.prepareForReuse()
         self.reusableComponent?.reuse()
 
@@ -35,7 +35,7 @@ final class GenericCollectionViewItem<T: NSView>: NSCollectionViewItem, Reusable
         self.customSubview.setSelected(self.isSelected, animated: false)
     }
 
-    public override var isSelected: Bool {
+    override public var isSelected: Bool {
         didSet {
             self.customSubview.setSelected(self.isSelected, animated: false)
         }
