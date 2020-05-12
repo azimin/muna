@@ -1013,7 +1013,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1037,7 +1037,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

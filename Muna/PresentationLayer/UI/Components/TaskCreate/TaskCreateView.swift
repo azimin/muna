@@ -213,22 +213,6 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         self.addMonitor()
 
         self.controller.delegate = self
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            self.controller.showItems(items: [
-//                .init(title: "Wed, May 13", subtitle: "in 5 days"),
-//                .init(title: "Wed, May 20", subtitle: "in 12 days"),
-//                .init(title: "Wed, May 27", subtitle: "in 20 days"),
-//            ])
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-//            self.controller.showItems(items: [
-//                .init(title: "Wed, May 13", subtitle: "in 5 days"),
-//                .init(title: "Wed, May 20", subtitle: "in 12 days"),
-//                .init(title: "Wed, May 27", subtitle: "in 20 days"),
-//            ])
-//        }
     }
 
     var downMonitor: Any?
