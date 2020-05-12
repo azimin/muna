@@ -143,6 +143,9 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             } else if event.keyCode == Key.downArrow.carbonKeyCode {
                 self.controller.hilightNextItemIfNeeded()
                 return nil
+            } else if event.keyCode == Key.return.carbonKeyCode {
+                self.controller.selectItemIfNeeded()
+                return nil
             }
 
             return event
@@ -172,6 +175,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         items: [RemindersOptionsController.ReminderItem]
     ) {
         self.mainOption = self.options.first
+        self.shouldRunCompletion = false
 
         var subviewIndex = self.contentStackView.arrangedSubviews.firstIndex(of: self.mainOption!) ?? 0
 
@@ -235,12 +239,16 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         }
     }
 
+    private var shouldRunCompletion = false
+
     func remindersOptionsControllerSelectItem(
         _ controller: RemindersOptionsController,
         index: Int
     ) {
         let option = self.options[index]
         option.update(style: .basic, animated: true)
+
+        self.shouldRunCompletion = true
 
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.25
@@ -253,6 +261,10 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             self.mainOption = option
             self.layoutSubtreeIfNeeded()
         }, completionHandler: {
+            guard self.shouldRunCompletion else {
+                return
+            }
+
             var offset = 0
             for optionIndex in 0 ..< self.options.count where optionIndex != index {
                 self.options[optionIndex - offset].removeFromSuperview()
