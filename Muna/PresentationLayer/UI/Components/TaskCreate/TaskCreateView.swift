@@ -70,6 +70,10 @@ class RemindersOptionsController {
         }
     }
 
+    func item(by index: Int) -> ReminderItem {
+        self.avialbleItems[index]
+    }
+
     func hilightPreveousItemsIfNeeded() {
         guard self.isEditingState else {
             return
@@ -113,14 +117,18 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
+    let commentTextField = TextField()
 
     var selectedIndex: Int = 0
 
     var controller = RemindersOptionsController()
 
     private let dateParser = MunaChrono()
+    private let savingProcessingService: SavingProcessingService
 
-    override init(frame frameRect: NSRect) {
+    init(savingProcessingService: SavingProcessingService) {
+        self.savingProcessingService = savingProcessingService
+
         super.init(frame: .zero)
         self.setup()
     }
@@ -322,6 +330,21 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 offset += 1
             }
         })
+    }
+
+    // MARK: - Saving
+
+    @objc
+    private func handleDoneButton() {
+        let reminderItem = self.controller.item(by: self.selectedIndex)
+        let parsedResult = self.parsedDates[self.selectedIndex]
+
+        let itemToSave = SavingProcessingService.ItemToSave(
+            dueDateString: reminderItem.title,
+            date: parsedResult.date,
+            comment: self.commentTextField.textField.stringValue
+        )
+        self.savingProcessingService.save(withItem: itemToSave)
     }
 }
 

@@ -9,7 +9,7 @@
 import Cocoa
 
 class DebugView: View {
-    let contentView = TaskCreateView()
+    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
 
     init() {
         super.init(frame: .zero)

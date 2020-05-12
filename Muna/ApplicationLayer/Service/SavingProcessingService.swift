@@ -9,7 +9,7 @@
 import Cocoa
 
 class SavingProcessingService {
-    struct ReminderItem {
+    struct ItemToSave {
         let dueDateString: String
         let date: Date
         let comment: String?
@@ -27,7 +27,7 @@ class SavingProcessingService {
         self.image = image
     }
 
-    func save(withItem item: ReminderItem) {
+    func save(withItem item: ItemToSave) {
         guard let image = self.image else {
             assertionFailure("Image is not provided")
             return
