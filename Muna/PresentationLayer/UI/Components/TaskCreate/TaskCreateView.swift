@@ -9,102 +9,6 @@
 import Cocoa
 import SwiftDate
 
-protocol RemindersOptionsControllerDelegate: AnyObject {
-    func remindersOptionsControllerShowItems(
-        _ controller: RemindersOptionsController,
-        items: [RemindersOptionsController.ReminderItem]
-    )
-
-    func remindersOptionsControllerHighliteItem(
-        _ controller: RemindersOptionsController,
-        index: Int
-    )
-
-    func remindersOptionsControllerSelectItem(
-        _ controller: RemindersOptionsController,
-        index: Int
-    )
-}
-
-class RemindersOptionsController {
-    weak var delegate: RemindersOptionsControllerDelegate?
-
-    private var isEditingState: Bool = false
-    private var selectedIndex = 0
-
-    class ReminderItem {
-        let title: String
-        let subtitle: String
-
-        init(title: String, subtitle: String) {
-            self.title = title
-            self.subtitle = subtitle
-        }
-    }
-
-    private var avialbleItems: [ReminderItem] = []
-
-    func showItems(items: [ReminderItem]) {
-        self.isEditingState = true
-        self.avialbleItems = items
-        self.selectedIndex = 0
-
-        self.delegate?.remindersOptionsControllerShowItems(
-            self,
-            items: items
-        )
-    }
-
-    func hilightNextItemIfNeeded() {
-        guard self.isEditingState else {
-            return
-        }
-
-        let newIndex = self.selectedIndex + 1
-        if newIndex < self.avialbleItems.count {
-            self.selectedIndex = newIndex
-            self.delegate?.remindersOptionsControllerHighliteItem(
-                self,
-                index: newIndex
-            )
-        }
-    }
-
-    func item(by index: Int) -> ReminderItem? {
-        guard !self.avialbleItems.isEmpty else {
-            return nil
-        }
-        return self.avialbleItems[index]
-    }
-
-    func hilightPreveousItemsIfNeeded() {
-        guard self.isEditingState else {
-            return
-        }
-
-        let newIndex = self.selectedIndex - 1
-        if newIndex >= 0, newIndex < self.avialbleItems.count {
-            self.selectedIndex = newIndex
-            self.delegate?.remindersOptionsControllerHighliteItem(
-                self,
-                index: newIndex
-            )
-        }
-    }
-
-    func selectItemIfNeeded() {
-        guard self.isEditingState else {
-            return
-        }
-
-        self.isEditingState = false
-        self.delegate?.remindersOptionsControllerSelectItem(
-            self,
-            index: self.selectedIndex
-        )
-    }
-}
-
 class TaskCreateView: View, RemindersOptionsControllerDelegate {
     let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
@@ -267,29 +171,53 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         _ controller: RemindersOptionsController,
         items: [RemindersOptionsController.ReminderItem]
     ) {
+        self.mainOption = self.options.first
+
         var subviewIndex = self.contentStackView.arrangedSubviews.firstIndex(of: self.mainOption!) ?? 0
 
-        for (index, item) in items.enumerated() {
-            if index == 0 {
-                self.mainOption?.update(style: .selected)
-                self.mainOption?.update(item: item)
+        for (index, item) in items.enumerated() where index != 0 {
+            subviewIndex += 1
+            let option: TaskReminderItemView
+            if self.options.count > index {
+                option = self.options[index]
             } else {
-                subviewIndex += 1
-                let option = TaskReminderItemView()
-                option.update(style: .notSelected)
-                option.update(item: item)
-                option.isHidden = true
-                self.contentStackView.insertArrangedSubview(option, at: subviewIndex)
+                option = TaskReminderItemView()
+            }
+            option.update(style: .notSelected, animated: true)
+            option.update(item: item)
+            option.isHidden = true
+            self.contentStackView.insertArrangedSubview(option, at: subviewIndex)
+            if self.options.count <= index {
                 self.options.append(option)
             }
         }
 
+        if items.count == 0 {
+            self.mainOption?.update(style: .basic, animated: true)
+            self.mainOption?.update(item: .init(
+                title: "No reminder",
+                subtitle: ""
+            ))
+        } else {
+            self.mainOption?.update(style: .selected, animated: true)
+            self.mainOption?.update(item: items[0])
+        }
+
+        let numberOfItems = max(items.count, 1)
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.25
             context.allowsImplicitAnimation = true
 
-            for optionIndex in 0 ..< self.options.count {
+            for optionIndex in 0 ..< numberOfItems {
                 self.options[optionIndex].isHidden = false
+            }
+            if numberOfItems < self.options.count {
+                var offset = 0
+                for itemIndex in numberOfItems ..< self.options.count {
+                    self.options[itemIndex - offset].removeFromSuperview()
+                    self.options.remove(at: itemIndex - offset)
+                    offset += 1
+                }
             }
 
             self.layoutSubtreeIfNeeded()
@@ -361,7 +289,7 @@ extension TaskCreateView: NSTextFieldDelegate {
 
         self.parsedDates = self.dateParser.parseFromString(textField.stringValue, date: Date())
 
-        let items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        var items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
                 return nil
             }
@@ -371,6 +299,16 @@ extension TaskCreateView: NSTextFieldDelegate {
             )
             return item
         }
+
+        if textField.stringValue == "t" {
+            items.append(.init(title: "Today", subtitle: "1"))
+            items.append(.init(title: "Today", subtitle: "2"))
+        }
+        if textField.stringValue == "tt" {
+            items.append(.init(title: "Yersterday", subtitle: "1"))
+        }
+
+        print(items)
         self.controller.showItems(items: items)
     }
 }

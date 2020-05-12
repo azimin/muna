@@ -54,6 +54,7 @@
 		9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F6E2460C2E500654D36 /* GenericCollectionViewItem.swift */; };
 		9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F712460C31B00654D36 /* ReusableView.swift */; };
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
+		9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
@@ -129,6 +130,7 @@
 		9FA07F6E2460C2E500654D36 /* GenericCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewItem.swift; sourceTree = "<group>"; };
 		9FA07F712460C31B00654D36 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
+		9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersOptionsController.swift; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelViewController.swift; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 			children = (
 				9FC9CDD52469F5510018FAD7 /* SmallComponents */,
 				9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */,
+				9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */,
 			);
 			path = TaskCreate;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				23561B432461ED8800097E4A /* ParsedResult.swift in Sources */,
+				9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
 				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
