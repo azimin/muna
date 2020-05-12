@@ -70,8 +70,11 @@ class RemindersOptionsController {
         }
     }
 
-    func item(by index: Int) -> ReminderItem {
-        self.avialbleItems[index]
+    func item(by index: Int) -> ReminderItem? {
+        guard !self.avialbleItems.isEmpty else {
+            return nil
+        }
+        return self.avialbleItems[index]
     }
 
     func hilightPreveousItemsIfNeeded() {
@@ -335,7 +338,10 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     @objc
     private func handleDoneButton() {
-        let reminderItem = self.controller.item(by: self.selectedIndex)
+        guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
+            return
+        }
+
         let parsedResult = self.parsedDates[self.selectedIndex]
 
         let itemToSave = SavingProcessingService.ItemToSave(
