@@ -19,6 +19,18 @@ class ScreenShotStateViewController: NSViewController {
 
     var isNeededToDrawFrame = true
 
+    private let savingProcessingService: SavingProcessingService
+
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        self.savingProcessingService = ServiceLocator.shared.savingService
+
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func loadView() {
         self.view = ScreenshotStateView(delegate: self)
     }
@@ -116,12 +128,7 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
 
         let image = NSImage(cgImage: croppedImage, size: rect.size)
 
-        ServiceLocator.shared.itemsDatabase.addItem(
-            image: image,
-            dueDateString: "New awesome string",
-            dueDate: Date(),
-            comment: "Hello"
-        )
+        self.savingProcessingService.addImage(image)
 
         self.tmpCGImage = nil
     }

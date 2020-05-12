@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
+		233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E747C246B4AB60070EABA /* SavingProcessingService.swift */; };
 		233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DA2469D8AC004DD671 /* ENTimeParser.swift */; };
 		233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DC246A0494004DD671 /* MunaChrono.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		233E747C246B4AB60070EABA /* SavingProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingProcessingService.swift; sourceTree = "<group>"; };
 		233F53DA2469D8AC004DD671 /* ENTimeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeParser.swift; sourceTree = "<group>"; };
 		233F53DC246A0494004DD671 /* MunaChrono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MunaChrono.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 				231DCAC424686A3D009B7D80 /* OverlayView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		233E747B246B4A800070EABA /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				233E747C246B4AB60070EABA /* SavingProcessingService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		23435AC72464A61F00B4DE50 /* ScreenshotState */ = {
@@ -397,6 +407,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				233E747B246B4A800070EABA /* Service */,
 				239AB0AC24688EE6001526DA /* ServiceLocator */,
 				239AB0A324688E8E001526DA /* Database */,
 				23A6B29F24660A19006A7A4D /* Core */,
@@ -864,6 +875,7 @@
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */,
+				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,

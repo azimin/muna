@@ -70,6 +70,13 @@ class RemindersOptionsController {
         }
     }
 
+    func item(by index: Int) -> ReminderItem? {
+        guard !self.avialbleItems.isEmpty else {
+            return nil
+        }
+        return self.avialbleItems[index]
+    }
+
     func hilightPreveousItemsIfNeeded() {
         guard self.isEditingState else {
             return
@@ -113,14 +120,18 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
+    let commentTextField = TextField()
 
     var selectedIndex: Int = 0
 
     var controller = RemindersOptionsController()
 
     private let dateParser = MunaChrono()
+    private let savingProcessingService: SavingProcessingService
 
-    override init(frame frameRect: NSRect) {
+    init(savingProcessingService: SavingProcessingService) {
+        self.savingProcessingService = savingProcessingService
+
         super.init(frame: .zero)
         self.setup()
     }
@@ -210,6 +221,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             maker.top.equalTo(self.contentStackView.snp.bottom).inset(-32)
         }
 
+        self.doneButton.action = #selector(self.handleDoneButton)
+
         self.addMonitor()
 
         self.controller.delegate = self
@@ -225,9 +238,6 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 return nil
             } else if event.keyCode == Key.downArrow.carbonKeyCode {
                 self.controller.hilightNextItemIfNeeded()
-                return nil
-            } else if event.keyCode == Key.leftArrow.carbonKeyCode {
-                self.controller.selectItemIfNeeded()
                 return nil
             }
 
@@ -322,6 +332,24 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
                 offset += 1
             }
         })
+    }
+
+    // MARK: - Saving
+
+    @objc
+    private func handleDoneButton() {
+        guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
+            return
+        }
+
+        let parsedResult = self.parsedDates[self.selectedIndex]
+
+        let itemToSave = SavingProcessingService.ItemToSave(
+            dueDateString: reminderItem.title,
+            date: parsedResult.date,
+            comment: self.commentTextField.textField.stringValue
+        )
+        self.savingProcessingService.save(withItem: itemToSave)
     }
 }
 
