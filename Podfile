@@ -8,6 +8,6 @@ target 'Muna' do
   # Pods for Muna
   pod 'SnapKit'
   pod 'MASShortcut'
+  pod 'SwiftyChrono'
   pod 'SwiftDate'
-
 end

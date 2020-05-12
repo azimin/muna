@@ -8,6 +8,7 @@
 
 import Cocoa
 import MASShortcut
+import SwiftyChrono
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -42,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
 //        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
+//        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
