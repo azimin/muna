@@ -144,8 +144,11 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             } else if Shortcuts.nextTime.item.validateWith(event: event) {
                 self.controller.hilightNextItemIfNeeded()
                 return nil
-            } else if self.reminderTextField.isInFocus && Shortcuts.acceptTime.item.validateWith(event: event) {
+            } else if self.reminderTextField.isInFocus, Shortcuts.acceptTime.item.validateWith(event: event) {
                 self.controller.selectItemIfNeeded()
+                return nil
+            } else if Shortcuts.create.item.validateWith(event: event) {
+                self.createTask()
                 return nil
             }
 
@@ -285,6 +288,10 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     @objc
     private func handleDoneButton() {
+        self.createTask()
+    }
+
+    func createTask() {
         guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
             return
         }

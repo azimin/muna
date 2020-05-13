@@ -25,7 +25,7 @@ extension TaskCreateView {
             case .nextField:
                 return ShortcutItem(key: .tab, modifiers: [])
             case .create:
-                return ShortcutItem(key: .return, modifiers: [.command])
+                return ShortcutItem(key: .return, modifiers: [.shift])
             case .acceptTime:
                 return ShortcutItem(key: .return, modifiers: [])
             }
