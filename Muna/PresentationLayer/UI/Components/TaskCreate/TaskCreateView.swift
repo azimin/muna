@@ -9,13 +9,7 @@
 import Cocoa
 import SwiftDate
 
-class TaskCreateView: View, RemindersOptionsControllerDelegate {
-    let vialPlate = NSVisualEffectView()
-    let vialPlateOverlay = View()
-
-    let closeButton = Button()
-        .withImageName("icon_close")
-
+class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     var mainOption: TaskReminderItemView?
 
     var parsedDates = [ParsedResult]()
@@ -38,7 +32,7 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     init(savingProcessingService: SavingProcessingService) {
         self.savingProcessingService = savingProcessingService
 
-        super.init(frame: .zero)
+        super.init()
         self.setup()
     }
 
@@ -46,43 +40,11 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup() {
-        self.backgroundColor = NSColor.clear
+    override func setup() {
+        super.setup()
 
         self.snp.makeConstraints { maker in
             maker.width.equalTo(220)
-        }
-        self.layer?.cornerRadius = 12
-        self.layer?.masksToBounds = true
-
-        self.addSubview(self.vialPlate)
-        self.vialPlate.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-        self.vialPlate.wantsLayer = true
-        self.vialPlate.blendingMode = .behindWindow
-        self.vialPlate.material = .dark
-        self.vialPlate.state = .active
-        self.vialPlate.layer?.cornerRadius = 12
-
-        self.addSubview(self.vialPlateOverlay)
-        self.vialPlateOverlay.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-        self.vialPlateOverlay.layer?.cornerRadius = 12
-        self.vialPlateOverlay.layer?.borderWidth = 1
-        self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
-        self.vialPlateOverlay.backgroundColor = NSColor.color(.black).withAlphaComponent(0.4)
-
-        self.addSubview(self.closeButton)
-        self.closeButton.snp.makeConstraints { maker in
-            maker.top.trailing.equalToSuperview().inset(NSEdgeInsets(
-                top: 16,
-                left: 0,
-                bottom: 0,
-                right: 12
-            ))
-            maker.size.equalTo(CGSize(width: 16, height: 16))
         }
 
         self.addSubview(self.contentStackView)

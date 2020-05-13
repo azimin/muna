@@ -12,6 +12,7 @@ enum FontStyle {
     case bold
     case medium
     case heavy
+    case regular
 
     static func customFont(style: FontStyle, size: CGFloat) -> NSFont {
         switch style {
@@ -21,6 +22,8 @@ enum FontStyle {
             return NSFont.systemFont(ofSize: size, weight: .heavy)
         case .medium:
             return NSFont.systemFont(ofSize: size, weight: .medium)
+        case .regular:
+            return NSFont.systemFont(ofSize: size, weight: .regular)
         }
     }
 }
