@@ -39,6 +39,7 @@
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
+		9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */; };
 		9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D5FF2464B63900695A19 /* StopableScrollView.swift */; };
 		9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D6022464B65900695A19 /* MainPanelView.swift */; };
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
@@ -115,6 +116,7 @@
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
+		9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCreateView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F99D5FF2464B63900695A19 /* StopableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopableScrollView.swift; sourceTree = "<group>"; };
 		9F99D6022464B65900695A19 /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 			children = (
 				9FC9CDD52469F5510018FAD7 /* SmallComponents */,
 				9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */,
+				9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */,
 				9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */,
 			);
 			path = TaskCreate;
@@ -831,6 +834,7 @@
 				236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */,
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */,
+				9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */,
 				9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */,
 				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,

@@ -16,6 +16,8 @@ class TextField: View, NSTextFieldDelegate {
     let textField = ActionedTextField()
     let clearButton = Button().withImageName("icon_text_field_clear")
 
+    private(set) var isInFocus: Bool = false
+
     weak var delegate: TextFieldDelegate?
 
     var placeholder: String? {
@@ -95,6 +97,8 @@ class TextField: View, NSTextFieldDelegate {
     }
 
     func setBorder(isFocused: Bool) {
+        self.isInFocus = isFocused
+
         if isFocused {
             self.layer?.borderWidth = 2
             self.layer?.borderColor = CGColor.color(.blueSelection)

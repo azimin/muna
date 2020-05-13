@@ -24,6 +24,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
 
     let contentStackView = NSStackView()
     let doneButton = TaskDoneButton()
+
+    let reminderTextField = TextField(clearable: true)
     let commentTextField = TextField(clearable: false)
 
     var selectedIndex: Int = 0
@@ -96,9 +98,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
         }
 
-        let reminderTextField = TextField(clearable: true)
-        reminderTextField.delegate = self
-        reminderTextField.placeholder = "When to remind"
+        self.reminderTextField.delegate = self
+        self.reminderTextField.placeholder = "When to remind"
 
         self.commentTextField.placeholder = "Comment"
 
@@ -106,8 +107,8 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
         self.mainOption = option
         self.mainOption?.infoLabel.text = ""
 
-        self.contentStackView.addArrangedSubview(reminderTextField)
-        self.contentStackView.setCustomSpacing(6, after: reminderTextField)
+        self.contentStackView.addArrangedSubview(self.reminderTextField)
+        self.contentStackView.setCustomSpacing(6, after: self.reminderTextField)
         self.contentStackView.addArrangedSubview(option)
         self.contentStackView.setCustomSpacing(6, after: option)
         self.contentStackView.addArrangedSubview(self.commentTextField)
@@ -137,13 +138,13 @@ class TaskCreateView: View, RemindersOptionsControllerDelegate {
     func addMonitor() {
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
-            if event.keyCode == Key.upArrow.carbonKeyCode {
+            if Shortcuts.preveousTime.item.validateWith(event: event) {
                 self.controller.hilightPreveousItemsIfNeeded()
                 return nil
-            } else if event.keyCode == Key.downArrow.carbonKeyCode {
+            } else if Shortcuts.nextTime.item.validateWith(event: event) {
                 self.controller.hilightNextItemIfNeeded()
                 return nil
-            } else if event.keyCode == Key.return.carbonKeyCode {
+            } else if self.reminderTextField.isInFocus && Shortcuts.acceptTime.item.validateWith(event: event) {
                 self.controller.selectItemIfNeeded()
                 return nil
             }
