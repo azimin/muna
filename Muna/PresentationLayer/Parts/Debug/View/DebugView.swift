@@ -9,7 +9,8 @@
 import Cocoa
 
 class DebugView: View {
-    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+//    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+    let contentView = TaskCreateShortcuts()
 
     init() {
         super.init(frame: .zero)
@@ -24,7 +25,6 @@ class DebugView: View {
         self.addSubview(self.contentView)
         self.contentView.snp.makeConstraints { maker in
             maker.center.equalToSuperview()
-            maker.width.equalTo(220)
         }
     }
 }

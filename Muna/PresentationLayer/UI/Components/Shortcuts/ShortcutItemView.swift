@@ -39,7 +39,7 @@ class ShortcutItemView: View {
         self.setup()
 
         self.iconLabel.text = iconString
-        self.label.text = textString
+        self.label.text = textString.uppercased()
 
         self.iconLabel.isHidden = false
         self.label.isHidden = false
@@ -54,6 +54,13 @@ class ShortcutItemView: View {
             image = NSImage(named: NSImage.Name("key-up"))
         case .downArrow:
             image = NSImage(named: NSImage.Name("key-down"))
+        case .tab:
+            image = NSImage(named: NSImage.Name("icon_tab"))
+            text = "Tab"
+        case .return:
+            self.iconLabel.text = key.description
+            self.iconLabel.isHidden = false
+            text = "return"
         default:
             text = key.description
         }
@@ -67,7 +74,7 @@ class ShortcutItemView: View {
         }
 
         if let text = text {
-            self.label.text = text
+            self.label.text = text.uppercased()
             self.label.isHidden = false
         }
     }
@@ -79,6 +86,10 @@ class ShortcutItemView: View {
     func setup() {
         self.layer?.cornerRadius = 3
         self.backgroundColor = NSColor.color(.gray)
+
+        self.imageView.snp.makeConstraints { maker in
+            maker.size.equalTo(11)
+        }
 
         let stackView = NSStackView(views: [self.imageView, self.iconLabel, self.label])
         stackView.spacing = 3

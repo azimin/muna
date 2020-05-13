@@ -94,6 +94,7 @@ class TaskCreateShortcuts: PopupView {
 
         self.addSubview(self.contentStackView)
         self.contentStackView.spacing = 24
+        self.contentStackView.orientation = .vertical
         self.contentStackView.snp.makeConstraints { maker in
             maker.top.equalTo(self.separatorView.snp.bottom).inset(-16)
             maker.leading.trailing.bottom.equalToSuperview().inset(16)

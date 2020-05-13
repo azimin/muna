@@ -45,7 +45,7 @@ class ShortcutDescriptionView: View {
         self.shortcutView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.trailing.equalToSuperview()
-            maker.trailing.greaterThanOrEqualTo(self.titleLabel.snp.trailing).inset(-8)
+            maker.leading.greaterThanOrEqualTo(self.titleLabel.snp.trailing).inset(-8)
         }
     }
 }
