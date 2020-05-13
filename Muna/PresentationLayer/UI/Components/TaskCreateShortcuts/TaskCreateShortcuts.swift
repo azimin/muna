@@ -13,11 +13,13 @@ class TaskCreateShortcuts: PopupView {
         case createCard
         case nextTextField
         case nextTimeInterval
+        case seletTimeInterval
 
         static var values: [DescriptionShortcut] = [
             .createCard,
             .nextTextField,
             .nextTimeInterval,
+            .seletTimeInterval,
         ]
 
         var shortcut: [TaskCreateView.Shortcuts] {
@@ -28,6 +30,8 @@ class TaskCreateShortcuts: PopupView {
                 return [.nextField]
             case .nextTimeInterval:
                 return [.preveousTime, .nextTime]
+            case .seletTimeInterval:
+                return [.acceptTime]
             }
         }
 
@@ -36,9 +40,11 @@ class TaskCreateShortcuts: PopupView {
             case .createCard:
                 return "Create card"
             case .nextTextField:
-                return "Next time interval"
-            case .nextTimeInterval:
                 return "Next text field"
+            case .nextTimeInterval:
+                return "Next time interval"
+            case .seletTimeInterval:
+                return "Enter time interval"
             }
         }
 
@@ -50,6 +56,8 @@ class TaskCreateShortcuts: PopupView {
                 return "To go from reminder to comment and back"
             case .nextTimeInterval:
                 return "To switch time values when reminder suggest multiply values"
+            case .seletTimeInterval:
+                return "To select highlited time interval"
             }
         }
     }
