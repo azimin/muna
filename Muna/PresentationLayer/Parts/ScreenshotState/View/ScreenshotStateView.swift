@@ -23,11 +23,13 @@ class ScreenshotStateView: View {
 
     let screenshotImageView = ImageView()
     let overlayView = OverlayView()
+    let reminderSetupPopup: TaskCreateView
 
     var screenshotFrame = CGRect.zero
 
-    init(delegate: ScreenshotStateViewDelegate?) {
+    init(delegate: ScreenshotStateViewDelegate?, savingService: SavingProcessingService) {
         self.delegate = delegate
+        self.reminderSetupPopup = TaskCreateView(savingProcessingService: savingService)
 
         super.init(frame: .zero)
     }
@@ -55,6 +57,9 @@ class ScreenshotStateView: View {
         }
 
         self.screenshotImageView.isHidden = true
+
+        self.addSubview(self.reminderSetupPopup)
+        self.reminderSetupPopup.alphaValue = 0
     }
 
     func startDash() {
@@ -78,6 +83,47 @@ class ScreenshotStateView: View {
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
 
         self.delegate?.saveImage(withRect: self.screenshotFrame)
+        self.positionForReminderSetupPopup()
+    }
+
+    func positionForReminderSetupPopup() {
+        var popupFrame = self.reminderSetupPopup.frame
+        let leftX: CGFloat
+        let leftInsideX: CGFloat
+        let rightX: CGFloat
+        let maxRightPosition: CGFloat
+
+        if self.screenshotFrame.size.width < 0 {
+            leftX = self.screenshotFrame.minX - self.reminderSetupPopup.frame.width - 16
+            leftInsideX = self.screenshotFrame.minX + 16
+            rightX = self.screenshotFrame.maxX + 16
+            maxRightPosition = self.screenshotFrame.maxX + 16 + popupFrame.width
+
+        } else {
+            leftX = self.screenshotFrame.origin.x - self.reminderSetupPopup.frame.width - 16
+            leftInsideX = self.screenshotFrame.origin.x + 16
+            rightX = self.screenshotFrame.maxX + 16
+            maxRightPosition = self.screenshotFrame.maxX + 16 + popupFrame.width
+        }
+
+        if leftX < self.bounds.minX, maxRightPosition > self.bounds.maxX {
+            popupFrame.origin.x = leftInsideX
+        } else if leftX < self.bounds.minX {
+            popupFrame.origin.x = rightX
+        } else {
+            popupFrame.origin.x = leftX
+        }
+
+        var normalY = self.screenshotFrame.minY - 16
+
+        if normalY < self.bounds.minY {
+            normalY = 16
+        }
+
+        popupFrame.origin.y = normalY
+
+        self.reminderSetupPopup.frame = popupFrame
+        self.layoutSubtreeIfNeeded()
     }
 
     func hideVisuals() {
@@ -86,6 +132,7 @@ class ScreenshotStateView: View {
         self.screenshotImageView.isHidden = true
 
         self.screenshotImageView.image = nil
+        self.reminderSetupPopup.isHidden = true
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
