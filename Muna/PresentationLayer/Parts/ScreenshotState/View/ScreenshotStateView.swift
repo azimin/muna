@@ -59,7 +59,7 @@ class ScreenshotStateView: View {
         self.screenshotImageView.isHidden = true
 
         self.addSubview(self.reminderSetupPopup)
-        self.reminderSetupPopup.alphaValue = 0
+        self.reminderSetupPopup.isHidden = true
     }
 
     func startDash() {
@@ -83,10 +83,12 @@ class ScreenshotStateView: View {
         self.overlayView.showOverlay(atRect: self.screenshotFrame)
 
         self.delegate?.saveImage(withRect: self.screenshotFrame)
-        self.positionForReminderSetupPopup()
+
+        self.setPositionForReminderPopupSetup()
+        self.reminderSetupPopup.isHidden = false
     }
 
-    func positionForReminderSetupPopup() {
+    func setPositionForReminderPopupSetup() {
         var popupFrame = self.reminderSetupPopup.frame
         let leftX: CGFloat
         let leftInsideX: CGFloat

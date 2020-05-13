@@ -242,7 +242,7 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     @objc
     private func handleCloseButton() {
         // TODO: - Improve
-        (NSApplication.shared.delegate as? AppDelegate)?.toggleDebugState()
+        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
     }
 
     @objc
@@ -263,6 +263,8 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             comment: self.commentTextField.textField.stringValue
         )
         self.savingProcessingService.save(withItem: itemToSave)
+        // TODO: - Improve close process
+        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
     }
 }
 
