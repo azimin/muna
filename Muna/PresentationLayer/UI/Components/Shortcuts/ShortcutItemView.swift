@@ -58,9 +58,7 @@ class ShortcutItemView: View {
             image = NSImage(named: NSImage.Name("icon_tab"))
             text = "Tab"
         case .return:
-            self.iconLabel.text = key.description
-            self.iconLabel.isHidden = false
-            text = "return"
+            text = key.description
         default:
             text = key.description
         }

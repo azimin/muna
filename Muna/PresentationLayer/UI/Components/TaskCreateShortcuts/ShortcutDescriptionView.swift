@@ -13,6 +13,8 @@ class ShortcutDescriptionView: View {
         .withTextColorStyle(.white)
     let subtitleLabel = Label(fontStyle: .regular, size: 12)
         .withTextColorStyle(.white60alpha)
+
+    let shortcutContainerView = View()
     let shortcutView: ShortcutView
 
     init(title: String, subtitle: String, shortcutItems: [ShortcutItem]) {
@@ -30,22 +32,34 @@ class ShortcutDescriptionView: View {
 
     func setup() {
         self.addSubview(self.titleLabel)
+        self.titleLabel.alignment = .left
+//        self.titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         self.titleLabel.snp.makeConstraints { maker in
             maker.top.leading.equalToSuperview()
         }
 
         self.addSubview(self.subtitleLabel)
+        self.subtitleLabel.alignment = .left
+        self.subtitleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         self.subtitleLabel.snp.makeConstraints { maker in
             maker.top.equalTo(self.titleLabel.snp.bottom)
             maker.leading.bottom.equalToSuperview()
-            maker.trailing.equalTo(self.titleLabel.snp.trailing)
+//            maker.trailing.equalTo(self.titleLabel.snp.trailing)
         }
 
-        self.addSubview(self.shortcutView)
-        self.shortcutView.snp.makeConstraints { maker in
+        self.addSubview(self.shortcutContainerView)
+        self.shortcutContainerView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.trailing.equalToSuperview()
             maker.leading.greaterThanOrEqualTo(self.titleLabel.snp.trailing).inset(-8)
+            maker.leading.greaterThanOrEqualTo(self.subtitleLabel.snp.trailing).inset(-8)
+        }
+
+        self.shortcutContainerView.addSubview(self.shortcutView)
+        self.shortcutView.snp.makeConstraints { maker in
+            maker.top.trailing.bottom.equalToSuperview()
+            maker.leading.greaterThanOrEqualToSuperview()
         }
     }
 }

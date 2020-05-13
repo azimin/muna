@@ -70,7 +70,7 @@ class TaskCreateShortcuts: PopupView {
         super.setup()
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(300)
+            maker.width.equalTo(340)
         }
 
         self.addSubview(self.title)
@@ -95,11 +95,13 @@ class TaskCreateShortcuts: PopupView {
         self.addSubview(self.contentStackView)
         self.contentStackView.spacing = 24
         self.contentStackView.orientation = .vertical
+        self.contentStackView.distribution = .fill
         self.contentStackView.snp.makeConstraints { maker in
             maker.top.equalTo(self.separatorView.snp.bottom).inset(-16)
             maker.leading.trailing.bottom.equalToSuperview().inset(16)
         }
 
+        var shortcutViews: [ShortcutDescriptionView] = []
         for item in DescriptionShortcut.values {
             let view = ShortcutDescriptionView(
                 title: item.title,
@@ -107,6 +109,22 @@ class TaskCreateShortcuts: PopupView {
                 shortcutItems: item.shortcut.map { $0.item }
             )
             self.contentStackView.addArrangedSubview(view)
+            shortcutViews.append(view)
+        }
+
+        var preveousView: ShortcutDescriptionView?
+        for view in shortcutViews {
+            view.snp.makeConstraints { maker in
+                maker.width.equalToSuperview()
+            }
+
+            if let preveousView = preveousView {
+                preveousView.shortcutContainerView.snp.makeConstraints { maker in
+                    maker.width.equalTo(view.shortcutContainerView.snp.width)
+                }
+            } else {
+                preveousView = view
+            }
         }
     }
 }
