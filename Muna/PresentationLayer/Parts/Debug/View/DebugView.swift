@@ -9,8 +9,8 @@
 import Cocoa
 
 class DebugView: View {
-//    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
-    let contentView = TaskCreateShortcuts()
+    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+//    let contentView = TaskCreateShortcuts()
 
     init() {
         super.init(frame: .zero)

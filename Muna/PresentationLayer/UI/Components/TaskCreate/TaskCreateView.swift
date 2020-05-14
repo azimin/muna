@@ -33,7 +33,6 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         self.savingProcessingService = savingProcessingService
 
         super.init()
-        self.setup()
     }
 
     required init?(coder: NSCoder) {
@@ -60,7 +59,6 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
         }
 
-        self.reminderTextField.delegate = self
         self.reminderTextField.placeholder = "When to remind"
 
         self.commentTextField.placeholder = "Comment"
@@ -75,9 +73,8 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         self.contentStackView.setCustomSpacing(6, after: option)
         self.contentStackView.addArrangedSubview(self.commentTextField)
 
-        option.snp.makeConstraints { maker in
-            maker.width.equalToSuperview()
-        }
+        self.reminderTextField.delegate = self
+
         option.update(style: .basic)
         self.options.append(option)
 
