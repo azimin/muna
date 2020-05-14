@@ -44,7 +44,9 @@ class ShortcutView: View {
             views.append(shortcutItemView)
             views.append(self.symbolView(symbol: "/"))
         }
-        views.removeLast()
+        if oneOfItem.isEmpty == false {
+            views.removeLast()
+        }
         views.forEach { stackView.addArrangedSubview($0) }
     }
 

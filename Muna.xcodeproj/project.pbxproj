@@ -34,6 +34,7 @@
 		9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1526FC246DBDA30037623B /* ShortcutController.swift */; };
 		9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1526FE246DBF020037623B /* ShortcutAction.swift */; };
 		9F152701246DC2560037623B /* MainPanelViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152700246DC2560037623B /* MainPanelViewController+Shortcuts.swift */; };
+		9F152703246DCE870037623B /* TimeExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152702246DCE870037623B /* TimeExampleView.swift */; };
 		9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D482246875B000395C44 /* EmptyStateView.swift */; };
 		9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48524687F8400395C44 /* ShortcutItemView.swift */; };
 		9F33D4882468826100395C44 /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D4872468826100395C44 /* ShortcutView.swift */; };
@@ -112,6 +113,7 @@
 		9F1526FC246DBDA30037623B /* ShortcutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutController.swift; sourceTree = "<group>"; };
 		9F1526FE246DBF020037623B /* ShortcutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutAction.swift; sourceTree = "<group>"; };
 		9F152700246DC2560037623B /* MainPanelViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainPanelViewController+Shortcuts.swift"; sourceTree = "<group>"; };
+		9F152702246DCE870037623B /* TimeExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeExampleView.swift; sourceTree = "<group>"; };
 		9F33D47524684D5C00395C44 /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		9F33D47A2468554D00395C44 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */,
+				9F152702246DCE870037623B /* TimeExampleView.swift */,
 				9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */,
 			);
 			path = TaskCreateShortcuts;
@@ -895,6 +898,7 @@
 				9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */,
 				9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
+				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,

@@ -9,6 +9,19 @@
 import Cocoa
 
 class TaskCreateShortcuts: PopupView {
+    private var frameWidth: CGFloat = 340
+
+    var timeExamples: [String] = [
+        "in 2h",
+        "tomorrow",
+        "in the evening",
+        "2 pm",
+        "next monday 10 am",
+        "weekends",
+        "15 min",
+        "in 3 days in the morning",
+    ]
+
     enum DescriptionShortcut {
         case createCard
         case nextTextField
@@ -78,7 +91,7 @@ class TaskCreateShortcuts: PopupView {
         super.setup()
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(340)
+            maker.width.equalTo(self.frameWidth)
         }
 
         self.addSubview(self.title)
@@ -103,7 +116,7 @@ class TaskCreateShortcuts: PopupView {
         self.addSubview(self.contentStackView)
         self.contentStackView.spacing = 24
         self.contentStackView.orientation = .vertical
-        self.contentStackView.distribution = .fill
+        self.contentStackView.alignment = .leading
         self.contentStackView.snp.makeConstraints { maker in
             maker.top.equalTo(self.separatorView.snp.bottom).inset(-16)
             maker.leading.trailing.bottom.equalToSuperview().inset(16)
@@ -120,6 +133,15 @@ class TaskCreateShortcuts: PopupView {
             shortcutViews.append(view)
         }
 
+        let view = ShortcutDescriptionView(
+            title: "Reminder",
+            subtitle: "Example of text you can enter to reminder text field",
+            shortcutItems: []
+        )
+        self.contentStackView.addArrangedSubview(view)
+        self.contentStackView.setCustomSpacing(12, after: view)
+        shortcutViews.append(view)
+
         var preveousView: ShortcutDescriptionView?
         for view in shortcutViews {
             view.snp.makeConstraints { maker in
@@ -134,5 +156,30 @@ class TaskCreateShortcuts: PopupView {
                 preveousView = view
             }
         }
+
+        var width: CGFloat = 0
+        let maxWidth = self.frameWidth - 32
+
+        var currentStackView = NSStackView()
+        currentStackView.spacing = 6
+
+        for title in self.timeExamples {
+            let exampleView = TimeExampleView()
+            exampleView.label.text = title
+
+            let size = exampleView.fittingSize
+            if width + size.width > maxWidth {
+                self.contentStackView.addArrangedSubview(currentStackView)
+                self.contentStackView.setCustomSpacing(6, after: currentStackView)
+                currentStackView = NSStackView()
+                currentStackView.spacing = 6
+                currentStackView.addArrangedSubview(exampleView)
+                width = size.width
+            } else {
+                currentStackView.addArrangedSubview(exampleView)
+                width += size.width
+            }
+        }
+        self.contentStackView.addArrangedSubview(currentStackView)
     }
 }

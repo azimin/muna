@@ -33,7 +33,6 @@ class ShortcutDescriptionView: View {
     func setup() {
         self.addSubview(self.titleLabel)
         self.titleLabel.alignment = .left
-//        self.titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         self.titleLabel.snp.makeConstraints { maker in
             maker.top.leading.equalToSuperview()
@@ -45,7 +44,6 @@ class ShortcutDescriptionView: View {
         self.subtitleLabel.snp.makeConstraints { maker in
             maker.top.equalTo(self.titleLabel.snp.bottom)
             maker.leading.bottom.equalToSuperview()
-//            maker.trailing.equalTo(self.titleLabel.snp.trailing)
         }
 
         self.addSubview(self.shortcutContainerView)
