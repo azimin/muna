@@ -45,15 +45,17 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     }
 
     func fetchItems(filter: Filter) -> [ItemModel] {
+        let items = self.items.filter { $0.isDeleted == false }
+
         switch filter {
         case .all:
-            return self.items
+            return items
         case .uncompleted:
-            return self.items.filter { $0.isComplited == false }
+            return items.filter { $0.isComplited == false }
         case .completed:
-            return self.items.filter { $0.isComplited == true }
+            return items.filter { $0.isComplited == true }
         case .noDeadline:
-            return self.items.filter { $0.dueDate == nil && $0.isComplited == false }
+            return items.filter { $0.dueDate == nil && $0.isComplited == false }
         }
     }
 

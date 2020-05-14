@@ -156,11 +156,29 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             // TODO: Work with menu
             let menu = NSMenu(title: "ControlMenu")
             menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
-            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.popUpController.show), keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.previewAction), keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: ""))
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
         } else {
             return super.rightMouseUp(with: event)
         }
+    }
+
+    @objc func previewAction() {
+        self.popUpController.show()
+    }
+
+    @objc
+    func deleteActiveItemAction() {
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        self.selectIndexPath(indexPath: indexPath, completion: {
+            let item = self.groupedData.item(at: indexPath)
+            ServiceLocator.shared.itemsDatabase.removeItem(id: item.id)
+        })
     }
 
     var popover: NSPopover?

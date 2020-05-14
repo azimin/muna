@@ -18,6 +18,7 @@ protocol ItemModelProtocol {
 
     var isComplited: Bool { get }
     var isNew: Bool { get }
+    var isDeleted: Bool { get }
 
     func toggleComplited()
     func toggleSeen()
@@ -45,6 +46,7 @@ class ItemModel: Codable {
     }
 
     var isNew: Bool = false
+    var isDeleted: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case id
