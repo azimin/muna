@@ -186,11 +186,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     @objc func toggleScreenshotState() {
         if self.isScreenshotShowed {
+            self.isScreenshotShowed = false
             self.windowManager.hideWindow(.screenshot)
         } else {
+            self.isScreenshotShowed = true
             self.windowManager.activateWindow(.screenshot)
         }
-        self.isScreenshotShowed.toggle()
     }
 
     @objc func toggleDebugState() {

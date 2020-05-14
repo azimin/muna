@@ -32,16 +32,12 @@ class ScreenshotStateView: View {
         self.reminderSetupPopup = TaskCreateView(savingProcessingService: savingService)
 
         super.init(frame: .zero)
+
+        self.setupInitialLayout()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layout() {
-        super.layout()
-
-        self.setupInitialLayout()
     }
 
     func setupInitialLayout() {
