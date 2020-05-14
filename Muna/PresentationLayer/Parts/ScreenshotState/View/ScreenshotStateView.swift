@@ -141,6 +141,11 @@ class ScreenshotStateView: View {
         if x < self.bounds.minX {
             x = self.reminderSetupPopup.frame.maxX + 16
         }
+
+        if self.screenshotFrame.size.width < 0 {
+            x = self.reminderSetupPopup.frame.minX + self.reminderSetupPopup.frame.width + 16
+        }
+
         let normalY = self.reminderSetupPopup.frame.minY
 
         popupFrame.origin.x = x
