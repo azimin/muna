@@ -126,7 +126,6 @@ class MainPanelView: NSView {
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
-        self.addMonitor()
         self.mainContentView.reloadData()
     }
 
@@ -146,29 +145,6 @@ class MainPanelView: NSView {
         CATransaction.commit()
     }
 
-    var downMonitor: Any?
-
-    func addMonitor() {
-        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
-
-            // up
-            if event.keyCode == 126 {
-                self.mainContentView.selectPreveous(
-                    nextSection: event.modifierFlags.contains(.shift)
-                )
-                return nil
-                // down
-            } else if event.keyCode == 125 {
-                self.mainContentView.selectNext(
-                    nextSection: event.modifierFlags.contains(.shift)
-                )
-                return nil
-            }
-
-            return event
-           })
-    }
-
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         // esc
         if event.keyCode == 53 {
@@ -179,14 +155,10 @@ class MainPanelView: NSView {
         return super.performKeyEquivalent(with: event)
     }
 
-    override func insertText(_ insertString: Any) {
-        if let string = insertString as? String, string == " " {
-            if self.mainContentView.popUpController.isHidden {
-                self.mainContentView.scrollView.stopScroll()
-            }
-            self.mainContentView.popUpController.toggle()
-        } else {
-            super.insertText(insertString)
+    func spaceClicked() {
+        if self.mainContentView.popUpController.isHidden {
+            self.mainContentView.scrollView.stopScroll()
         }
+        self.mainContentView.popUpController.toggle()
     }
 }

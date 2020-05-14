@@ -25,6 +25,10 @@ class ShortcutItem {
         )
     }
 
+    var modifierFlags: [NSEvent.ModifierFlags] {
+        return self.modifiers.splitToSingleFlags(discardNotImportant: false)
+    }
+
     func validateWith(event: NSEvent) -> Bool {
         let eventFlags = event.modifierFlags.splitToSingleFlags(discardNotImportant: true)
         let keyFlag = self.modifiers.splitToSingleFlags(discardNotImportant: true)

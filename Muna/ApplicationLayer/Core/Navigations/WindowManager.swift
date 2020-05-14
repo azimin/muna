@@ -132,8 +132,8 @@ class WindowManager {
             animate: false
         )
 
-        if let view = window.contentView as? MainPanelView {
-            view.show()
+        if let viewController = window.contentViewController as? MainPanelViewController {
+            viewController.show()
         }
         window.setIsVisible(true)
     }
@@ -170,8 +170,8 @@ class WindowManager {
                 }
             }
         case .panel:
-            if let view = window.contentView as? MainPanelView {
-                view.hide {
+            if let viewController = window.contentViewController as? MainPanelViewController {
+                viewController.hide {
                     window.setIsVisible(false)
                 }
             }
