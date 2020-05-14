@@ -237,6 +237,11 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         })
     }
 
+    func clear() {
+        self.reminderTextField.clear()
+        self.commentTextField.clear()
+    }
+
     // MARK: - Saving
 
     @objc
@@ -291,7 +296,6 @@ extension TaskCreateView: TextFieldDelegate {
             items.append(.init(title: "Yersterday", subtitle: "1"))
         }
 
-        print(items)
         self.controller.showItems(items: items)
     }
 }

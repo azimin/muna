@@ -136,6 +136,7 @@ class ScreenshotStateView: View {
 
         self.screenshotImageView.image = nil
         self.reminderSetupPopup.isHidden = true
+        self.reminderSetupPopup.clear()
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
