@@ -128,6 +128,8 @@ class ScreenshotStateView: View {
     func hideVisuals() {
         self.overlayView.clearOverlay()
 
+        self.screenshotFrame = .zero
+
         self.screenshotImageView.isHidden = true
 
         self.screenshotImageView.image = nil
