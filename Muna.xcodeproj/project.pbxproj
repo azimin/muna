@@ -31,7 +31,6 @@
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
 		9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0E24633D1700F05D81 /* Blocks.swift */; };
 		9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C13246346F900F05D81 /* ImagePreviewViewController.swift */; };
-		9F1526FB246DBB8C0037623B /* MainPanelContentView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1526FA246DBB8C0037623B /* MainPanelContentView+Shortcuts.swift */; };
 		9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1526FC246DBDA30037623B /* ShortcutController.swift */; };
 		9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1526FE246DBF020037623B /* ShortcutAction.swift */; };
 		9F152701246DC2560037623B /* MainPanelViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152700246DC2560037623B /* MainPanelViewController+Shortcuts.swift */; };
@@ -110,7 +109,6 @@
 		9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		9F025C0E24633D1700F05D81 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
 		9F025C13246346F900F05D81 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
-		9F1526FA246DBB8C0037623B /* MainPanelContentView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainPanelContentView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F1526FC246DBDA30037623B /* ShortcutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutController.swift; sourceTree = "<group>"; };
 		9F1526FE246DBF020037623B /* ShortcutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutAction.swift; sourceTree = "<group>"; };
 		9F152700246DC2560037623B /* MainPanelViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainPanelViewController+Shortcuts.swift"; sourceTree = "<group>"; };
@@ -522,7 +520,6 @@
 			isa = PBXGroup;
 			children = (
 				9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */,
-				9F1526FA246DBB8C0037623B /* MainPanelContentView+Shortcuts.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -873,7 +870,6 @@
 				9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
 				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
-				9F1526FB246DBB8C0037623B /* MainPanelContentView+Shortcuts.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
