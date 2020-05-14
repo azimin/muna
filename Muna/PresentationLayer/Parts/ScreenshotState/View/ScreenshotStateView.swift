@@ -23,6 +23,9 @@ class ScreenshotStateView: View {
 
     let screenshotImageView = ImageView()
     let overlayView = OverlayView()
+
+    let taskCreateShortCutsView = TaskCreateShortcuts()
+
     let reminderSetupPopup: TaskCreateView
 
     var screenshotFrame = CGRect.zero
@@ -56,6 +59,9 @@ class ScreenshotStateView: View {
 
         self.addSubview(self.reminderSetupPopup)
         self.reminderSetupPopup.isHidden = true
+
+        self.addSubview(self.taskCreateShortCutsView)
+        self.taskCreateShortCutsView.isHidden = true
     }
 
     func startDash() {
@@ -83,9 +89,12 @@ class ScreenshotStateView: View {
         self.setPositionForReminderPopupSetup()
         self.reminderSetupPopup.isHidden = false
         self.reminderSetupPopup.window?.makeFirstResponder(self.reminderSetupPopup)
+
+        self.setPositionForTaskCreateShortcuts()
+        self.taskCreateShortCutsView.isHidden = false
     }
 
-    func setPositionForReminderPopupSetup() {
+    private func setPositionForReminderPopupSetup() {
         var popupFrame = self.reminderSetupPopup.frame
         let leftX: CGFloat
         let leftInsideX: CGFloat
@@ -125,6 +134,22 @@ class ScreenshotStateView: View {
         self.layoutSubtreeIfNeeded()
     }
 
+    private func setPositionForTaskCreateShortcuts() {
+        var popupFrame = self.taskCreateShortCutsView.frame
+        var x = self.reminderSetupPopup.frame.minX - popupFrame.width - 16
+
+        if x < self.bounds.minX {
+            x = self.reminderSetupPopup.frame.maxX + 16
+        }
+        let normalY = self.reminderSetupPopup.frame.minY
+
+        popupFrame.origin.x = x
+        popupFrame.origin.y = normalY
+
+        self.taskCreateShortCutsView.frame = popupFrame
+        self.layoutSubtreeIfNeeded()
+    }
+
     func hideVisuals() {
         self.overlayView.clearOverlay()
 
@@ -134,6 +159,7 @@ class ScreenshotStateView: View {
 
         self.screenshotImageView.image = nil
         self.reminderSetupPopup.isHidden = true
+        self.taskCreateShortCutsView.isHidden = true
         self.reminderSetupPopup.clear()
     }
 
