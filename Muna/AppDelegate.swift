@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             object: nil
         )
 
-//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 20)
+        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 //        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
     }
 

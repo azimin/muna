@@ -77,7 +77,9 @@ class MainPanelViewController: NSViewController {
                 )
             }
         case .deleteItem:
-            return nil
+            return { [weak self] in
+                self?.rootView.mainContentView.deleteActiveItemAction()
+            }
         case .previewItem:
             return { [weak self] in
                 self?.rootView.spaceClicked()
