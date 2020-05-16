@@ -39,14 +39,14 @@ class ENWeekdaysParser: Parser {
     }
 
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
-        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2)
+        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
             return []
         }
 
         let today = parsedItem.refDate.weekday
 
-        let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1)
+        let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1).lowercased()
 
         var weekday: Int
         if weekdayName != "tomorrow" {

@@ -10,15 +10,16 @@ import Foundation
 
 class ENTimeParser: Parser {
     override var pattern: String {
-        return "\\b(?:(?:at|in)\\s*)?"
+        return "\\b(?:(at|in)\\s*)?"
             + "(([1-9]|1[0-9]|2[0-4]))"
             + "(((?:\\.|\\:||\\.|\\：)([0-5][0-9]))?)"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?|h?))?\\b"
     }
 
-    let hourGroup = 1
-    let minutesGroup = 5
-    let partOfTheDayGroup = 6
+    let prefixGroup = 1
+    let hourGroup = 2
+    let minutesGroup = 6
+    let partOfTheDayGroup = 7
 
     private let seconds = 60
     private let hourInSeconds = 60 * 60
@@ -39,7 +40,12 @@ class ENTimeParser: Parser {
             partOfTheDay = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.partOfTheDayGroup)
         }
 
-        if !partOfTheDay.isEmpty, partOfTheDay == "pm", nowTime < 12 {
+        var prefix = ""
+        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup) {
+            prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup)
+        }
+
+        if !partOfTheDay.isEmpty, partOfTheDay == "pm", nowTime < 12, prefix != "in" {
             hoursOffset = 12 - nowTime + hoursOffset
         }
 

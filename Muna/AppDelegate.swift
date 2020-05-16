@@ -50,7 +50,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
-        print(MunaChrono().parseFromString("At 2h", date: Date()))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
