@@ -59,6 +59,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.toolbar.allowsUserCustomization = false
         self.view.window?.toolbar = self.toolbar
         self.setView(for: .general, animate: false)
+
+        self.window.makeKeyAndOrderFront(nil)
         self.window.center()
     }
 

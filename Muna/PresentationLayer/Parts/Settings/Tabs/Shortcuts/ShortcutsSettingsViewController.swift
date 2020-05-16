@@ -12,4 +12,8 @@ class ShortcutsSettingsViewController: NSViewController {
     override func loadView() {
         self.view = ShortcutsSettingsView()
     }
+
+    override func viewDidLoad() {
+        self.title = "Shortcuts"
+    }
 }

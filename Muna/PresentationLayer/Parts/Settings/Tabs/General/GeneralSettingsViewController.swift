@@ -12,4 +12,8 @@ class GeneralSettingsViewController: NSViewController {
     override func loadView() {
         self.view = GeneralSettingsView()
     }
+
+    override func viewDidLoad() {
+        self.title = "General"
+    }
 }

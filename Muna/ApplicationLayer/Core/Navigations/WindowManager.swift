@@ -155,15 +155,6 @@ class WindowManager {
 
     private func showSettings(in window: NSWindow) {
         NSApp.activate(ignoringOtherApps: true)
-        window.makeKeyAndOrderFront(nil)
-
-        window.setFrame(
-            self.frameFor(.settings),
-            display: true,
-            animate: false
-        )
-        window.center()
-
         window.setIsVisible(true)
     }
 
