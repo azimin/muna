@@ -130,6 +130,10 @@ class ScreenshotStateView: View {
 
         popupFrame.origin.y = normalY
 
+        if popupFrame.maxY > self.bounds.maxY {
+            popupFrame.origin.y = self.bounds.minY - 16 - popupFrame.size.height
+        }
+
         self.reminderSetupPopup.frame = popupFrame
         self.layoutSubtreeIfNeeded()
     }
