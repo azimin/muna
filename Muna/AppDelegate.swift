@@ -228,7 +228,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let category = UNNotificationCategory(
             identifier: "item",
-            actions: [completeAction, laterAction],
+            actions: [laterAction, completeAction],
             intentIdentifiers: [],
             options: .customDismissAction
         )
@@ -260,19 +260,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 assertionFailure("No item by id")
             }
         case .later:
-            // TODO: Implement later
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: 10)
+            }
             print("Show later for task")
         }
 
         completionHandler()
-    }
-
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        print("Showed notification")
-        completionHandler([.alert, .badge, .sound])
     }
 }

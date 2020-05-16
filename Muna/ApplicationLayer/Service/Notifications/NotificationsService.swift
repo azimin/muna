@@ -12,16 +12,22 @@ import UserNotifications
 
 protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval)
+
     func removeNotification(item: ItemModelProtocol)
 }
 
 class NotificationsService: NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol) {
+        self.sheduleNotification(item: item, offset: 0)
+    }
+
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval) {
         guard let dueDate = item.dueDate else {
             return
         }
 
-        let timeInterval = dueDate.timeIntervalSince(Date())
+        let timeInterval = dueDate.timeIntervalSince(Date()) + offset
         guard timeInterval > 0 else {
             return
         }
