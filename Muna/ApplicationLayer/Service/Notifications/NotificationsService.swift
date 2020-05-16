@@ -12,11 +12,17 @@ import UserNotifications
 
 protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
+    func removeNotification(item: ItemModelProtocol)
 }
 
 class NotificationsService: NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol) {
         guard let dueDate = item.dueDate else {
+            return
+        }
+
+        let timeInterval = dueDate.timeIntervalSince(Date())
+        guard timeInterval > 0 else {
             return
         }
 
@@ -38,15 +44,13 @@ class NotificationsService: NotificationsServiceProtocol {
             print(error)
         }
 
-        let timeInterval = dueDate.timeIntervalSince(Date())
-
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: timeInterval,
             repeats: false
         )
 
         let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
+            identifier: item.notificationId,
             content: notificationContent,
             trigger: trigger
         )
@@ -58,5 +62,11 @@ class NotificationsService: NotificationsServiceProtocol {
                 print("Success")
             }
         })
+    }
+
+    func removeNotification(item: ItemModelProtocol) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: [item.notificationId]
+        )
     }
 }

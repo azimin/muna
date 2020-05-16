@@ -16,6 +16,8 @@ protocol ItemModelProtocol {
     var dueDate: Date? { get }
     var comment: String? { get }
 
+    var notificationId: String { get }
+
     var isComplited: Bool { get }
     var isNew: Bool { get }
     var isDeleted: Bool { get }
@@ -33,12 +35,20 @@ class ItemModel: ItemModelProtocol, Codable {
     var dueDate: Date?
     var comment: String?
 
+    var notificationId: String
+
     var completionDate: Date?
     var isComplited: Bool {
         didSet {
             if self.isComplited {
+                ServiceLocator.shared.notifications.removeNotification(
+                    item: self
+                )
                 self.completionDate = Date()
             } else {
+                ServiceLocator.shared.notifications.sheduleNotification(
+                    item: self
+                )
                 self.completionDate = nil
             }
             self.itemsDatabaseService?.saveItems()
@@ -56,6 +66,7 @@ class ItemModel: ItemModelProtocol, Codable {
         case dueDate
         case comment
         case isComplited
+        case notificationId
     }
 
     weak var itemsDatabaseService: ItemsDatabaseServiceProtocol?
@@ -80,6 +91,7 @@ class ItemModel: ItemModelProtocol, Codable {
         self.isComplited = isComplited
         self.isNew = isNew
         self.itemsDatabaseService = itemsDatabaseService
+        self.notificationId = UUID().uuidString
     }
 
     func toggleComplited() {
