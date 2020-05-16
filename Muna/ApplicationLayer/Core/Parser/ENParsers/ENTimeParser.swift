@@ -12,14 +12,15 @@ class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(at|in)\\s*)?"
             + "(([1-9]|1[0-9]|2[0-4]))"
-            + "(((?:\\.|\\:||\\.|\\：)([0-5][0-9]))?)"
+            + "(((\\.|\\:|\\：)([0-5][0-9]))?)"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?|h?))?\\b"
     }
 
     let prefixGroup = 1
-    let hourGroup = 2
-    let minutesGroup = 6
-    let partOfTheDayGroup = 7
+    let hourGroup = 3
+    let minutesSeparatorGroup = 6
+    let minutesGroup = 7
+    let partOfTheDayGroup = 8
 
     private let seconds = 60
     private let hourInSeconds = 60 * 60
@@ -50,8 +51,22 @@ class ENTimeParser: Parser {
         }
 
         var minutesOffset = 0
+        (0 ... 8).forEach {
+            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+            }
+        }
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
+            !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
+            print(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup))
+            if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == "." {
+                if minutes < 10 || minutesOffset % 10 == 0 {
+                    minutesOffset = (60 / 100) * (minutes * 10)
+                } else {
+                    minutesOffset = (60 / 100) * minutes
+                }
+            }
             minutesOffset = minutes
         }
 

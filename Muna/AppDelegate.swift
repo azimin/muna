@@ -8,6 +8,7 @@
 
 import Cocoa
 import MASShortcut
+import SwiftDate
 import SwiftyChrono
 import UserNotifications
 
@@ -50,6 +51,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
+
+        let currentTime = TimeZone.current.secondsFromGMT()
+        let date = Date() + currentTime.seconds
+        print(MunaChrono().parseFromString("In 2h", date: date))
+        print(MunaChrono().parseFromString("Tomorrow", date: date))
+        print(MunaChrono().parseFromString("tomorrow", date: date))
+        print(MunaChrono().parseFromString("Yesterday at 5pm", date: date))
+        print(MunaChrono().parseFromString("5.30", date: date))
+        print(MunaChrono().parseFromString("5.30am", date: date))
+        print(MunaChrono().parseFromString("In 1.5h", date: date))
+//        On weekends
+//        Remind on weekends at 20.00
+//        20 may
+//        Next month
+//        Tomorrow evening
+//        At evening 7.30 pm
+//        On sun
+//        In 3 days in the morning
+//        Thu 7 pm (if today monday)
+//        Thu 7 pm (if today wed)
+//        Next Friday 8 30 pm
+//        Wed 8:30 pm
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

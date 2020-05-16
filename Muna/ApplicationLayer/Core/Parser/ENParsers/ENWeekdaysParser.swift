@@ -13,6 +13,7 @@ class ENWeekdaysParser: Parser {
     private let weekDayOffset = [
         "sunday": 1,
         "sun": 1,
+        "yesterday": -1,
         "tomorrow": 1,
         "monday": 2,
         "mon": 2,
