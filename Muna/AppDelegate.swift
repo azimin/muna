@@ -63,6 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
         print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
         print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
+        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
 
 //        On weekends
 //        Remind on weekends at 20.00
@@ -73,7 +74,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        In 3 days in the morning
 //        Thu 7 pm (if today monday)
 //        Thu 7 pm (if today wed)
-//        Next Friday 8 30 pm
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
