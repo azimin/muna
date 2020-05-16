@@ -12,8 +12,8 @@ class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(?:at|in)\\s*)?"
             + "(([1-9]|1[0-9]|2[0-4]))"
-            + "(((?:\\.|\\:|\\：)([0-5][0-9]))?)"
-            + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?))?\\b"
+            + "(((?:\\.|\\:||\\.|\\：)([0-5][0-9]))?)"
+            + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?|h?))?\\b"
     }
 
     let hourGroup = 1
