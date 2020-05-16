@@ -11,13 +11,25 @@ import Cocoa
 class SettingsViewController: NSViewController, NSToolbarDelegate {
     enum ToolbarItem: String, CaseIterable {
         case general = "General"
+        case shortcuts = "Shortcuts"
 
         var identifier: NSToolbarItem.Identifier {
             return NSToolbarItem.Identifier(self.rawValue)
         }
+
+        var image: NSImage? {
+            switch self {
+            case .general:
+                return NSImage(named: NSImage.preferencesGeneralName)
+            case .shortcuts:
+                return NSImage(named: NSImage.slideshowTemplateName)
+            }
+        }
     }
 
     private let generalViewController = GeneralSettingsViewController()
+    private let shortcutsViewController = GeneralSettingsViewController()
+
     private var currentItem: ToolbarItem?
     let toolbar = NSToolbar(identifier: NSToolbar.Identifier("settings"))
 
@@ -93,6 +105,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         switch item {
         case .general:
             return self.generalViewController
+        case .shortcuts:
+            return self.shortcutsViewController
         }
     }
 
@@ -126,8 +140,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
         let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
         toolbarItem.label = item.rawValue
-        toolbarItem.image = NSImage(named: NSImage.preferencesGeneralName)
-        toolbarItem.view = GeneralSettingsView()
+        toolbarItem.image = item.image
         toolbarItem.action = #selector(self.switchToolbarItem(_:))
 
         return toolbarItem

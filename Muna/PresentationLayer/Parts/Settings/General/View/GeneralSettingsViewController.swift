@@ -8,4 +8,8 @@
 
 import Cocoa
 
-class GeneralSettingsViewController: NSViewController {}
+class GeneralSettingsViewController: NSViewController {
+    override func loadView() {
+        self.view = GeneralSettingsView()
+    }
+}
