@@ -126,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusBarMenu.addItem(
             withTitle: "Preference",
-            action: #selector(self.togglePane),
+            action: #selector(self.showSettings),
             keyEquivalent: ","
         )
 
@@ -144,6 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var isPanelShowed = false
     var isScreenshotShowed = false
     var isDebugShowed = false
+    var isSettingsShowed = false
 
     @objc func closeApp() {
         NSApplication.shared.terminate(self)
@@ -189,5 +190,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.windowManager.activateWindow(.debug)
         }
         self.isDebugShowed.toggle()
+    }
+
+    @objc func showSettings() {
+        if self.isSettingsShowed {
+            self.windowManager.hideWindow(.settings)
+        } else {
+            self.windowManager.activateWindow(.settings)
+        }
+        self.isSettingsShowed.toggle()
     }
 }

@@ -13,6 +13,7 @@ enum WindowType: String {
     case panel
     case screenshot
     case debug
+    case settings
 }
 
 class WindowManager {
@@ -28,6 +29,7 @@ class WindowManager {
             self.setupWindow(windowType)
             return
         }
+
         switch windowType {
         case .debug:
             self.showDebug(in: window)
@@ -35,6 +37,8 @@ class WindowManager {
             self.showPanel(in: window)
         case .screenshot:
             self.showScreenshotState(in: window)
+        case .settings:
+            self.showSettings(in: window)
         }
     }
 
@@ -80,6 +84,15 @@ class WindowManager {
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showScreenshotState(in: window)
+        case .settings:
+            window = NSWindow(
+                contentRect: self.frameFor(.settings),
+                styleMask: [.closable],
+                backing: .buffered,
+                defer: true
+            )
+            window.contentViewController = SettingsViewController()
+            self.showSettings(in: window)
         }
 
         self.windows[windowType.rawValue] = window
@@ -104,6 +117,8 @@ class WindowManager {
                 width: self.windowFrameWidth,
                 height: mainScreen.frame.height - 0
             )
+        case .settings:
+            frame = mainScreen.frame
         }
 
         return frame
@@ -135,6 +150,18 @@ class WindowManager {
         if let viewController = window.contentViewController as? MainPanelViewController {
             viewController.show()
         }
+        window.setIsVisible(true)
+    }
+
+    private func showSettings(in window: NSWindow) {
+        window.makeKeyAndOrderFront(nil)
+
+        window.setFrame(
+            self.frameFor(.settings),
+            display: true,
+            animate: false
+        )
+
         window.setIsVisible(true)
     }
 
@@ -175,6 +202,8 @@ class WindowManager {
                     window.setIsVisible(false)
                 }
             }
+        case .settings:
+            window.setIsVisible(false)
         }
     }
 }
