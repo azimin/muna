@@ -34,19 +34,17 @@ class ENTimeParser: Parser {
             return results
         }
 
-        let nowTime = parsedItem.refDate.hour
-
         var partOfTheDay = ""
         if !parsedItem.match.isEmpty(atRangeIndex: self.partOfTheDayGroup) {
-            partOfTheDay = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.partOfTheDayGroup)
+            partOfTheDay = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.partOfTheDayGroup).lowercased()
         }
 
         var prefix = ""
         if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup) {
-            prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup)
+            prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased()
         }
 
-        if !partOfTheDay.isEmpty, partOfTheDay == "pm", nowTime < 12, prefix != "in" {
+        if !partOfTheDay.isEmpty, partOfTheDay == "pm", prefix != "in" {
             hoursOffset += 12
         }
 
@@ -60,7 +58,7 @@ class ENTimeParser: Parser {
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
             if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
                 parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == ".",
-                partOfTheDay != "pm" {
+                prefix == "in" {
                 if minutes < 10 || minutesOffset % 10 == 0 {
                     minutesOffset = (60 / 100) * (minutes * 10)
                 } else {
