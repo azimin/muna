@@ -57,12 +57,9 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
         self.toolbar.delegate = self
         self.toolbar.allowsUserCustomization = false
-
-        let item = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier("general"))
-        item.label = "General"
-
         self.view.window?.toolbar = self.toolbar
         self.setView(for: .general, animate: false)
+        self.window.center()
     }
 
     // MARK: - Control
@@ -97,6 +94,12 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
         self.window.setFrame(newFrame, display: true, animate: animate)
         self.window.contentView?.addSubview(newViewController.view)
+        newViewController.view.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: newFrame.width,
+            height: newFrame.height
+        )
     }
 
     // MARK: - Helpers
@@ -133,13 +136,17 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         return ToolbarItem.allCases.map { $0.identifier }
     }
 
+    func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return ToolbarItem.allCases.map { $0.identifier }
+    }
+
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         guard let item = ToolbarItem(rawValue: itemIdentifier.rawValue) else {
             assertionFailure("Not correct identifier")
             return nil
         }
 
-        let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+        let toolbarItem = NSToolbarItem(itemIdentifier: item.identifier)
         toolbarItem.label = item.rawValue
         toolbarItem.image = item.image
         toolbarItem.action = #selector(self.switchToolbarItem(_:))
