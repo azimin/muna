@@ -111,15 +111,16 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     }
 
     private func frameFromView(newWiew: NSView) -> NSRect {
-        let oldFrame = self.window.frame
-        var newFrame = self.window.frameRect(forContentRect: newWiew.frame)
+        var oldFrame = self.window.frame
+        let newSize = newWiew.fittingSize
 
-        newFrame.origin = NSPoint(
-            x: oldFrame.origin.x,
-            y: oldFrame.origin.y - (newFrame.size.height - oldFrame.size.height)
+        oldFrame.origin = NSPoint(
+            x: oldFrame.origin.x - (newSize.width - oldFrame.width),
+            y: oldFrame.origin.y - (newSize.height - oldFrame.height)
         )
+        oldFrame.size = newSize
 
-        return newFrame
+        return oldFrame
     }
 
     // MARK: - Toolbar

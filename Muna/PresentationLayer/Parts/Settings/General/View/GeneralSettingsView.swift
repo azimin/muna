@@ -8,7 +8,15 @@
 
 import Cocoa
 
-class GeneralSettingsView: View {
+protocol SettingsViewProtocol {}
+
+extension SettingsViewProtocol {
+    var frameWidth: CGFloat {
+        return 320
+    }
+}
+
+class GeneralSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
@@ -35,7 +43,7 @@ class GeneralSettingsView: View {
         self.settingsView.snp.makeConstraints { maker in
             maker.leading.equalTo(self.titlesView.snp.trailing)
             maker.trailing.top.bottom.equalToSuperview()
-            maker.width.equalTo(120)
+            maker.width.equalTo(self.frameWidth - 120)
         }
     }
 }
