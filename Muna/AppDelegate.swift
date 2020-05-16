@@ -50,10 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
-        //        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
-
-//        ServiceLocator.shared.savingService.addImage(NSImage(named: NSImage.Name("img_4"))!)
-//        ServiceLocator.shared.savingService.save(withItem: .init(dueDateString: "12", date: Date().addingTimeInterval(5), comment: "My comment"))
+        print(MunaChrono().parseFromString("At 2h", date: Date()))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

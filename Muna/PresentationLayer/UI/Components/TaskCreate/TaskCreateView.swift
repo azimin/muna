@@ -275,7 +275,9 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
 
 extension TaskCreateView: TextFieldDelegate {
     func textFieldTextDidChange(textField: TextField, text: String) {
-        self.parsedDates = self.dateParser.parseFromString(text, date: Date())
+        let offset = TimeZone.current.secondsFromGMT()
+
+        self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
 
         var items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
