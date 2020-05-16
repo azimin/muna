@@ -47,7 +47,7 @@ class ENTimeParser: Parser {
         }
 
         if !partOfTheDay.isEmpty, partOfTheDay == "pm", nowTime < 12, prefix != "in" {
-            hoursOffset = 12 - nowTime + hoursOffset
+            hoursOffset += 12
         }
 
         var minutesOffset = 0
@@ -57,17 +57,18 @@ class ENTimeParser: Parser {
             }
         }
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
-            !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
-            print(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup))
-            if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == "." {
+            if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
+                parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == ".",
+                partOfTheDay != "pm" {
                 if minutes < 10 || minutesOffset % 10 == 0 {
                     minutesOffset = (60 / 100) * (minutes * 10)
                 } else {
                     minutesOffset = (60 / 100) * minutes
                 }
+            } else {
+                minutesOffset = minutes
             }
-            minutesOffset = minutes
         }
 
         let time = hoursOffset * self.hourInSeconds + minutesOffset * self.seconds
