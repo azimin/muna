@@ -82,7 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: {
-                    self.toggleDebugState()
+                    self.toggleSettingsState()
                 }
             )
 
@@ -126,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusBarMenu.addItem(
             withTitle: "Preference",
-            action: #selector(self.showSettings),
+            action: #selector(self.toggleSettingsState),
             keyEquivalent: ","
         )
 
@@ -192,7 +192,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.isDebugShowed.toggle()
     }
 
-    @objc func showSettings() {
+    @objc func toggleSettingsState() {
         if self.isSettingsShowed {
             self.windowManager.hideWindow(.settings)
         } else {

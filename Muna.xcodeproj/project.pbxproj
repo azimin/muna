@@ -74,6 +74,7 @@
 		9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */; };
 		9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */; };
 		9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */; };
+		9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -160,6 +161,7 @@
 		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
 		9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDoneButton.swift; sourceTree = "<group>"; };
 		9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskReminderItemView.swift; sourceTree = "<group>"; };
+		9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -386,23 +388,16 @@
 		9F152704246DD7800037623B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				9F15270C24701A3D0037623B /* Root */,
 				9F152707246DD7C80037623B /* General */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		9F152705246DD7B60037623B /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				9F152708246DD7D70037623B /* SettingsViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		9F152706246DD7C40037623B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9F15270A246DD7DF0037623B /* SettingsView.swift */,
+				9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -411,9 +406,17 @@
 			isa = PBXGroup;
 			children = (
 				9F152706246DD7C40037623B /* View */,
-				9F152705246DD7B60037623B /* ViewController */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		9F15270C24701A3D0037623B /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				9F15270A246DD7DF0037623B /* SettingsView.swift */,
+				9F152708246DD7D70037623B /* SettingsViewController.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 		9F33D4812468759F00395C44 /* EmptyState */ = {
@@ -936,6 +939,7 @@
 				9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */,
 				9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */,
 				9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */,
+				9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,

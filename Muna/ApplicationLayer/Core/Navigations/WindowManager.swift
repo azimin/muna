@@ -87,7 +87,7 @@ class WindowManager {
         case .settings:
             window = NSWindow(
                 contentRect: self.frameFor(.settings),
-                styleMask: [.closable],
+                styleMask: [.closable, .titled],
                 backing: .buffered,
                 defer: true
             )
@@ -118,7 +118,7 @@ class WindowManager {
                 height: mainScreen.frame.height - 0
             )
         case .settings:
-            frame = mainScreen.frame
+            frame = NSRect(x: 0, y: 0, width: 300, height: 400)
         }
 
         return frame
@@ -154,6 +154,7 @@ class WindowManager {
     }
 
     private func showSettings(in window: NSWindow) {
+        NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
 
         window.setFrame(
@@ -161,6 +162,7 @@ class WindowManager {
             display: true,
             animate: false
         )
+        window.center()
 
         window.setIsVisible(true)
     }
