@@ -52,19 +52,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
-        let currentTime = TimeZone.current.secondsFromGMT()
-        let date = Date() + currentTime.seconds
-        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
-        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
-        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
-        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
-        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
-        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
-        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
-        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
-        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
-        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
-
+//        let currentTime = TimeZone.current.secondsFromGMT()
+//        let date = Date() + currentTime.seconds
+//        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
+//        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
+//        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
+//        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
+//        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
+//        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
+//        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
+//        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
 //        On weekends
 //        Remind on weekends at 20.00
 //        20 may
