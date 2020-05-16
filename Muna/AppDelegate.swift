@@ -12,7 +12,7 @@ import SwiftyChrono
 import UserNotifications
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -28,7 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print(error)
             }
         }
+        UNUserNotificationCenter.current().delegate = self
 
+        self.registerNotificationsActions()
         self.setupUserDefaults()
         self.setupStatusBarItem()
         self.setupShortcuts()
@@ -49,6 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
         //        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
+
+        ServiceLocator.shared.savingService.addImage(NSImage(named: NSImage.Name("img_4"))!)
+        ServiceLocator.shared.savingService.save(withItem: .init(dueDateString: "12", date: Date().addingTimeInterval(5), comment: "My comment"))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -204,5 +209,57 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.windowManager.activateWindow(.settings)
         }
         self.isSettingsShowed.toggle()
+    }
+
+    // MARK: - User Notifications
+
+    func registerNotificationsActions() {
+        let completeAction = UNNotificationAction(
+            identifier: NotificationAction.complete.rawValue,
+            title: "Complete",
+            options: .destructive
+        )
+
+        let laterAction = UNNotificationAction(
+            identifier: NotificationAction.later.rawValue,
+            title: "Later",
+            options: .authenticationRequired
+        )
+
+        let category = UNNotificationCategory(
+            identifier: "item",
+            actions: [completeAction, laterAction],
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        guard let action = NotificationAction(rawValue: response.actionIdentifier) else {
+            completionHandler()
+            return
+        }
+
+        switch action {
+        case .complete:
+            print("Complete task")
+        case .later:
+            print("Show later for task")
+        }
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+        print("Showed notification")
+        completionHandler([.alert, .badge, .sound])
     }
 }

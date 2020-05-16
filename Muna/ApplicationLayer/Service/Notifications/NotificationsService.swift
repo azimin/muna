@@ -24,6 +24,18 @@ class NotificationsService: NotificationsServiceProtocol {
 
         notificationContent.subtitle = "Time to check pending items"
         notificationContent.body = item.comment ?? ""
+        notificationContent.categoryIdentifier = "item"
+
+        do {
+            let attachement = try UNNotificationAttachment(
+                identifier: "image",
+                url: ServiceLocator.shared.imageStorage.urlOfImage(name: item.imageName),
+                options: nil
+            )
+            notificationContent.attachments = [attachement]
+        } catch {
+            print(error)
+        }
 
         let timeInterval = dueDate.timeIntervalSince(Date())
 

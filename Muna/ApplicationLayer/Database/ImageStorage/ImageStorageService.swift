@@ -9,6 +9,8 @@
 import Cocoa
 
 protocol ImageStorageServiceProtocol {
+    func urlOfImage(name: String) -> URL
+
     func saveImage(image: NSImage, name: String) -> Bool
     func loadImage(name: String, completion: ImageStorageService.Completion?)
     func forceLoadImage(name: String) -> NSImage?
@@ -35,6 +37,11 @@ class ImageStorageService: ImageStorageServiceProtocol {
             print(error.localizedDescription)
             return false
         }
+    }
+
+    func urlOfImage(name: String) -> URL {
+        let filePath = self.getDocumentsDirectory().appendingPathComponent("images/\(name).jpeg")
+        return filePath
     }
 
     func loadImage(name: String, completion: Completion?) {
