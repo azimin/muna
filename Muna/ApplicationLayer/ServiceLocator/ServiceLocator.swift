@@ -14,10 +14,12 @@ class ServiceLocator {
     let imageStorage: ImageStorageServiceProtocol
     let itemsDatabase: ItemsDatabaseServiceProtocol
     let savingService: SavingProcessingService
+    let notifications: NotificationsServiceProtocol
 
     init() {
         self.imageStorage = ImageStorageService()
         self.itemsDatabase = ItemsDatabaseService(imageStorage: self.imageStorage)
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
+        self.notifications = NotificationsService()
     }
 }

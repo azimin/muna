@@ -32,12 +32,18 @@ class SavingProcessingService {
             assertionFailure("Image is not provided")
             return
         }
-        self.database.addItem(
+        let itemModel = self.database.addItem(
             image: image,
             dueDateString: item.dueDateString,
             dueDate: item.date,
             comment: item.comment
         )
         self.image = nil
+
+        if let itemModel = itemModel {
+            ServiceLocator.shared.notifications.sheduleNotification(
+                item: itemModel
+            )
+        }
     }
 }

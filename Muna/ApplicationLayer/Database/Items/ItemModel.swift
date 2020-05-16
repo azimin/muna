@@ -24,7 +24,7 @@ protocol ItemModelProtocol {
     func toggleSeen()
 }
 
-class ItemModel: Codable {
+class ItemModel: ItemModelProtocol, Codable {
     var id: String
     var imageName: String
     var creationDate: Date

@@ -79,6 +79,7 @@
 		9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */; };
 		9FE0F537247023000046A5C4 /* ShortcutsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */; };
 		9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */; };
+		9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53D247075690046A5C4 /* NotificationsService.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -170,6 +171,7 @@
 		9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsView.swift; sourceTree = "<group>"; };
 		9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsViewController.swift; sourceTree = "<group>"; };
 		9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewProtocol.swift; sourceTree = "<group>"; };
+		9FE0F53D247075690046A5C4 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -221,7 +223,8 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				233E747C246B4AB60070EABA /* SavingProcessingService.swift */,
+				9FE0F53B247075530046A5C4 /* Notifications */,
+				9FE0F53C247075600046A5C4 /* SavingProcessing */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -635,7 +638,7 @@
 		9FB8B522246372CA00BE7544 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9FB8B5202463672300BE7544 /* PopUpController.swift */,
+				9FE0F53A2470754B0046A5C4 /* Popup */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -731,6 +734,30 @@
 				9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */,
 			);
 			path = Shortcuts;
+			sourceTree = "<group>";
+		};
+		9FE0F53A2470754B0046A5C4 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				9FB8B5202463672300BE7544 /* PopUpController.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		9FE0F53B247075530046A5C4 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				9FE0F53D247075690046A5C4 /* NotificationsService.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		9FE0F53C247075600046A5C4 /* SavingProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				233E747C246B4AB60070EABA /* SavingProcessingService.swift */,
+			);
+			path = SavingProcessing;
 			sourceTree = "<group>";
 		};
 		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
@@ -942,6 +969,7 @@
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
+				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */,
 				9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */,

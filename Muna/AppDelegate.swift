@@ -9,6 +9,7 @@
 import Cocoa
 import MASShortcut
 import SwiftyChrono
+import UserNotifications
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -20,9 +21,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let windowManager = WindowManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-
-        // Create the window and set the content view.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
+            if granted {
+                print("Approval granted to send notifications")
+            } else if let error = error {
+                print(error)
+            }
+        }
 
         self.setupUserDefaults()
         self.setupStatusBarItem()
@@ -43,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
-//        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
+        //        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
