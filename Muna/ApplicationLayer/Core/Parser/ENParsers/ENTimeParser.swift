@@ -27,11 +27,11 @@ class ENTimeParser: Parser {
 
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) else {
-            return []
+            return results
         }
 
         guard var hoursOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)) else {
-            return []
+            return results
         }
 
         let nowTime = parsedItem.refDate.hour

@@ -19,11 +19,11 @@ class Parser: ParserProtocol {
             regex = try NSRegularExpression(pattern: self.pattern, options: .caseInsensitive)
         } catch {
             assertionFailure("Couldnt allocate regex: \(error)")
-            return []
+            return items
         }
 
         guard let match = regex.firstMatch(in: text, range: NSRange(location: 0, length: text.count)) else {
-            return []
+            return items
         }
         let item = ParsedItem(text: text, match: match, refDate: refDate)
         return self.extract(fromParsedItem: item, toParsedResult: items)
