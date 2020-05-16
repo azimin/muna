@@ -27,7 +27,7 @@ class EmptyStateView: View {
         fontStyle: .medium,
         size: 14
     )
-    .withTextColorStyle(.white60alpha)
+    .withTextColorStyle(.title60AccentAlpha)
     .withAligment(.center)
 
     var shortcutView: NSView?

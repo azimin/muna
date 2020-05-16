@@ -24,6 +24,11 @@ class PopupView: View {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.vialPlate.material = Theme.current.visualEffectMaterial
+    }
+
     func setup() {
         self.backgroundColor = NSColor.clear
 
@@ -36,7 +41,6 @@ class PopupView: View {
         }
         self.vialPlate.wantsLayer = true
         self.vialPlate.blendingMode = .behindWindow
-        self.vialPlate.material = .dark
         self.vialPlate.state = .active
         self.vialPlate.layer?.cornerRadius = 12
 

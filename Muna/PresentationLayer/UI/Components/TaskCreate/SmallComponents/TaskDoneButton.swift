@@ -26,7 +26,7 @@ class TaskDoneButton: Button {
         self.wantsLayer = true
         self.layer?.borderWidth = 1
         self.layer?.borderColor = CGColor.color(.separator)
-        self.layer?.backgroundColor = CGColor.color(.white).copy(alpha: 0.1)
+        self.layer?.backgroundColor = CGColor.color(.titleAccent).copy(alpha: 0.1)
         self.snp.makeConstraints { maker in
             maker.height.equalTo(50)
         }

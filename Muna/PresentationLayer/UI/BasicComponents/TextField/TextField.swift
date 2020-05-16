@@ -26,7 +26,7 @@ class TextField: View, NSTextFieldDelegate {
                 self.textField.placeholderAttributedString = NSAttributedString(
                     string: placeholder,
                     attributes: [
-                        NSAttributedString.Key.foregroundColor: NSColor.color(.white60),
+                        NSAttributedString.Key.foregroundColor: NSColor.color(.title60Accent),
                         NSAttributedString.Key.font: FontStyle.customFont(style: .medium, size: 12),
                     ]
                 )
@@ -63,7 +63,7 @@ class TextField: View, NSTextFieldDelegate {
             self?.setBorder(isFocused: isFocused)
         }
 
-        self.textField.textColor = NSColor.color(.white)
+        self.textField.textColor = NSColor.color(.titleAccent)
         self.textField.wantsLayer = true
         self.textField.drawsBackground = false
         self.textField.focusRingType = .none
@@ -104,7 +104,7 @@ class TextField: View, NSTextFieldDelegate {
             self.layer?.borderColor = CGColor.color(.blueSelection)
         } else {
             self.layer?.borderWidth = 1
-            self.layer?.borderColor = CGColor.color(.white60)
+            self.layer?.borderColor = CGColor.color(.titleAccent)
         }
     }
 

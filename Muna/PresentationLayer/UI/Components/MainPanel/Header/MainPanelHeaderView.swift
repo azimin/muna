@@ -14,7 +14,7 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
         fontStyle: .medium,
         size: 20
     )
-    .withTextColorStyle(.white60alpha)
+    .withTextColorStyle(.title60AccentAlpha)
 
     let redArrowView = View()
 

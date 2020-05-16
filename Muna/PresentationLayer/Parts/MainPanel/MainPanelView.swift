@@ -42,6 +42,11 @@ class MainPanelView: NSView {
         }
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.visualView.material = Theme.current.visualEffectMaterial
+    }
+
     func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.snp.makeConstraints { maker in
@@ -52,7 +57,6 @@ class MainPanelView: NSView {
 
         self.backgroundView.addSubview(self.visualView)
         self.visualView.blendingMode = .behindWindow
-        self.visualView.material = .dark
         self.visualView.state = .active
         self.visualView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()

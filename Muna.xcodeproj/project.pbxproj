@@ -81,6 +81,7 @@
 		9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */; };
 		9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53D247075690046A5C4 /* NotificationsService.swift */; };
 		9FE0F54024707EF70046A5C4 /* NotificationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53F24707EF70046A5C4 /* NotificationAction.swift */; };
+		9FE4DD73247085BA0084D259 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4DD72247085BA0084D259 /* Theme.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -174,6 +175,7 @@
 		9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewProtocol.swift; sourceTree = "<group>"; };
 		9FE0F53D247075690046A5C4 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		9FE0F53F24707EF70046A5C4 /* NotificationAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAction.swift; sourceTree = "<group>"; };
+		9FE4DD72247085BA0084D259 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 			children = (
 				9FA07F622460AB8800654D36 /* FontStyle.swift */,
 				9FA07F662460C0F900654D36 /* ColorStyle.swift */,
+				9FE4DD72247085BA0084D259 /* Theme.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
+				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
 				23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */,

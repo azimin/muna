@@ -76,11 +76,11 @@ class TaskCreateShortcuts: PopupView {
     }
 
     let title = Label(fontStyle: .bold, size: 15)
-        .withTextColorStyle(.white)
+        .withTextColorStyle(.titleAccent)
         .withText("Amazing shortcuts")
 
     let subtitle = Label(fontStyle: .medium, size: 13)
-        .withTextColorStyle(.white60)
+        .withTextColorStyle(.title60Accent)
         .withText("To 🚀 your productivity")
 
     let separatorView = View()

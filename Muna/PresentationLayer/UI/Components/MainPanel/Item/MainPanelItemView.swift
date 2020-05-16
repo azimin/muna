@@ -35,10 +35,15 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.item = nil
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.metainformationPlate.material = Theme.current.visualEffectMaterial
+    }
+
     private func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.borderWidth = 1
-        self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
+        self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
         self.backgroundView.layer?.cornerRadius = 12
         self.backgroundView.layer?.masksToBounds = true
         self.backgroundView.snp.makeConstraints { maker in
@@ -53,7 +58,6 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
         self.backgroundView.addSubview(self.metainformationPlate)
         self.metainformationPlate.blendingMode = .withinWindow
-        self.metainformationPlate.material = .dark
         self.metainformationPlate.state = .active
         self.metainformationPlate.layer?.maskedCorners = [
             .layerMaxXMinYCorner, .layerMinXMinYCorner,
@@ -74,10 +78,10 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             maker.top.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 
-        self.deadlineLabel.textColor = NSColor.color(.white)
+        self.deadlineLabel.textColor = NSColor.color(.titleAccent)
         self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
 
-        self.commentLabel.textColor = NSColor.color(.white60alpha)
+        self.commentLabel.textColor = NSColor.color(.title60AccentAlpha)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
 
         self.metainformationPlate.addSubview(self.completionButton)
@@ -110,7 +114,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
         } else {
             self.backgroundView.layer?.borderWidth = 0
-            self.backgroundView.layer?.borderColor = CGColor.color(.white60alpha)
+            self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
         }
     }
 
@@ -132,7 +136,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         if let dueDate = item.dueDate, dueDate < Date() {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
-            self.deadlineLabel.textColor = NSColor.color(.white)
+            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
         }
 
         self.commentLabel.stringValue = item.comment ?? ""

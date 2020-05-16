@@ -10,9 +10,9 @@ import Cocoa
 
 class ShortcutDescriptionView: View {
     let titleLabel = Label(fontStyle: .medium, size: 15)
-        .withTextColorStyle(.white)
+        .withTextColorStyle(.titleAccent)
     let subtitleLabel = Label(fontStyle: .regular, size: 12)
-        .withTextColorStyle(.white60alpha)
+        .withTextColorStyle(.title60Accent)
 
     let shortcutContainerView = View()
     let shortcutView: ShortcutView
