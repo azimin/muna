@@ -106,16 +106,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusBarItem = statusBarItem
         self.statusBarMenu = statusBarMenu
 
-        statusBarMenu.addItem(
-            withTitle: "Show items",
+        let item = NSMenuItem(
+            title: "Show items",
             action: #selector(self.togglePane),
-            keyEquivalent: "o"
+            keyEquivalent: "t"
+        )
+        item.keyEquivalentModifierMask = [.shift, .command]
+        statusBarMenu.addItem(item)
+
+        statusBarMenu.addItem(
+            NSMenuItem.separator()
+        )
+
+        statusBarMenu.addItem(
+            withTitle: "About Mena",
+            action: #selector(self.togglePane),
+            keyEquivalent: ""
+        )
+
+        statusBarMenu.addItem(
+            withTitle: "Preference",
+            action: #selector(self.togglePane),
+            keyEquivalent: ","
+        )
+
+        statusBarMenu.addItem(
+            NSMenuItem.separator()
         )
 
         statusBarMenu.addItem(
             withTitle: "Quit",
             action: #selector(self.closeApp),
-            keyEquivalent: ""
+            keyEquivalent: "q"
         )
     }
 
