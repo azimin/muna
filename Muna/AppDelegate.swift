@@ -246,19 +246,31 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             return
         }
 
+        guard let itemId = response.notification.request.content.userInfo["item_id"] as? String else {
+            completionHandler()
+            return
+        }
+
         switch action {
         case .complete:
-            print("Complete task")
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                item.isComplited = true
+                ServiceLocator.shared.itemsDatabase.saveItems()
+            } else {
+                assertionFailure("No item by id")
+            }
         case .later:
             print("Show later for task")
         }
+
+        completionHandler()
     }
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
         print("Showed notification")
         completionHandler([.alert, .badge, .sound])
     }

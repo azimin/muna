@@ -25,6 +25,7 @@ class NotificationsService: NotificationsServiceProtocol {
         notificationContent.subtitle = "Time to check pending items"
         notificationContent.body = item.comment ?? ""
         notificationContent.categoryIdentifier = "item"
+        notificationContent.userInfo = ["item_id": item.id]
 
         do {
             let attachement = try UNNotificationAttachment(

@@ -9,6 +9,7 @@
 import Cocoa
 
 protocol ItemsDatabaseServiceProtocol: AnyObject {
+    func item(by id: String) -> ItemModel?
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
 
     @discardableResult
@@ -42,6 +43,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     init(imageStorage: ImageStorageServiceProtocol) {
         self.imageStorage = imageStorage
         self.loadItems()
+    }
+
+    func item(by id: String) -> ItemModel? {
+        return self.items.first(where: { $0.id == id })
     }
 
     func fetchItems(filter: Filter) -> [ItemModel] {
