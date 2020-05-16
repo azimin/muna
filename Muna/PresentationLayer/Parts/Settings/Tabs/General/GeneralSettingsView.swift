@@ -8,14 +8,6 @@
 
 import Cocoa
 
-protocol SettingsViewProtocol {}
-
-extension SettingsViewProtocol {
-    var frameWidth: CGFloat {
-        return 320
-    }
-}
-
 class GeneralSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()

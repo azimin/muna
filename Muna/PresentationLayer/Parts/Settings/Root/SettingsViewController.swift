@@ -28,7 +28,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     }
 
     private let generalViewController = GeneralSettingsViewController()
-    private let shortcutsViewController = GeneralSettingsViewController()
+    private let shortcutsViewController = ShortcutsSettingsViewController()
 
     private var currentItem: ToolbarItem?
     let toolbar = NSToolbar(identifier: NSToolbar.Identifier("settings"))

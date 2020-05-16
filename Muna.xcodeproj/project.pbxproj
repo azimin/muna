@@ -76,6 +76,9 @@
 		9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */; };
 		9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */; };
 		9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */; };
+		9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */; };
+		9FE0F537247023000046A5C4 /* ShortcutsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */; };
+		9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */; };
 		9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD42465F3BF007D92B8 /* Button.swift */; };
 		9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */; };
 		9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDA2465F495007D92B8 /* Label+Builder.swift */; };
@@ -164,6 +167,9 @@
 		9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskReminderItemView.swift; sourceTree = "<group>"; };
 		9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
+		9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsView.swift; sourceTree = "<group>"; };
+		9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsViewController.swift; sourceTree = "<group>"; };
+		9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewProtocol.swift; sourceTree = "<group>"; };
 		9FE96BD42465F3BF007D92B8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		9FE96BD72465F3EF007D92B8 /* PanelBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelBottomBarView.swift; sourceTree = "<group>"; };
 		9FE96BDA2465F495007D92B8 /* Label+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Builder.swift"; sourceTree = "<group>"; };
@@ -391,26 +397,28 @@
 			isa = PBXGroup;
 			children = (
 				9F15270C24701A3D0037623B /* Root */,
-				9F152707246DD7C80037623B /* General */,
+				9F152707246DD7C80037623B /* Tabs */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		9F152706246DD7C40037623B /* View */ = {
+		9F152706246DD7C40037623B /* General */ = {
 			isa = PBXGroup;
 			children = (
 				9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */,
 				9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */,
 			);
-			path = View;
+			path = General;
 			sourceTree = "<group>";
 		};
-		9F152707246DD7C80037623B /* General */ = {
+		9F152707246DD7C80037623B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				9F152706246DD7C40037623B /* View */,
+				9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */,
+				9FE0F533247022970046A5C4 /* Shortcuts */,
+				9F152706246DD7C40037623B /* General */,
 			);
-			path = General;
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		9F15270C24701A3D0037623B /* Root */ = {
@@ -716,6 +724,15 @@
 			path = SmallComponents;
 			sourceTree = "<group>";
 		};
+		9FE0F533247022970046A5C4 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */,
+				9FE0F536247023000046A5C4 /* ShortcutsSettingsViewController.swift */,
+			);
+			path = Shortcuts;
+			sourceTree = "<group>";
+		};
 		9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,6 +925,7 @@
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */,
 				9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */,
+				9FE0F537247023000046A5C4 /* ShortcutsSettingsViewController.swift in Sources */,
 				9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */,
 				9F152701246DC2560037623B /* MainPanelViewController+Shortcuts.swift in Sources */,
 				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
@@ -961,6 +979,7 @@
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
+				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
@@ -969,6 +988,7 @@
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
+				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
