@@ -33,8 +33,14 @@ class PanelBottomBarView: View {
     override func updateLayer() {
         super.updateLayer()
         self.appNameLabel.textColor = NSColor.color(.title60AccentAlpha)
-        self.shortcutsButton.withImageName("icon_cmd", color: .titleAccent)
-        self.settingsButton.withImageName("icon_settings_2", color: .titleAccent)
+        self.shortcutsButton.withImageName(
+            "icon_cmd",
+            color: .button
+        )
+        self.settingsButton.withImageName(
+            "icon_settings_2",
+            color: .button
+        )
     }
 
     func setup() {
