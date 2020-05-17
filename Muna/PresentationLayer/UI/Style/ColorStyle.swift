@@ -16,10 +16,7 @@ enum ColorStyle {
     case foregroundOverlay
     case grayBackground
 
-    case white
     case black
-    case white60alpha
-    case white60
     case gray
     case blueSelected
     case redLight
@@ -45,14 +42,8 @@ enum ColorStyle {
                 return NSColor(hex: "404040")
             case .clear:
                 return NSColor.clear
-            case .white:
-                return NSColor.white
             case .black:
                 return NSColor.black
-            case .white60alpha:
-                return NSColor.white.withAlphaComponent(0.6)
-            case .white60:
-                return NSColor(hex: "969696")
             case .blueSelected:
                 return NSColor(hex: "2C7DD3")
             case .redLight:
@@ -80,14 +71,8 @@ enum ColorStyle {
                 return NSColor(hex: "C6C6C6")
             case .clear:
                 return NSColor.clear
-            case .white:
-                return NSColor.white
             case .black:
                 return NSColor.black
-            case .white60alpha:
-                return NSColor.white.withAlphaComponent(0.6)
-            case .white60:
-                return NSColor(hex: "969696")
             case .blueSelected:
                 return NSColor(hex: "2C7DD3")
             case .redLight:

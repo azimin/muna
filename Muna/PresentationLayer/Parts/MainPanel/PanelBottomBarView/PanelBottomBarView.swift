@@ -14,13 +14,12 @@ class PanelBottomBarView: View {
         fontStyle: .heavy,
         size: 12
     )
-    .withTextColorStyle(.white60alpha)
     .withText("Muna")
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
-    let shortcutsButton = Button().withImageName("icon_cmd", color: .white)
-    let settingsButton = Button().withImageName("icon_settings_2", color: .white)
+    let shortcutsButton = Button().withImageName("icon_cmd")
+    let settingsButton = Button().withImageName("icon_settings_2")
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -29,6 +28,13 @@ class PanelBottomBarView: View {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        self.appNameLabel.textColor = NSColor.color(.title60AccentAlpha)
+        self.shortcutsButton.withImageName("icon_cmd", color: .titleAccent)
+        self.settingsButton.withImageName("icon_settings_2", color: .titleAccent)
     }
 
     func setup() {

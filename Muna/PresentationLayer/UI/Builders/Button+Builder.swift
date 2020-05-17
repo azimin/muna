@@ -16,6 +16,7 @@ extension Button {
         return self
     }
 
+    @discardableResult
     func withImageName(_ name: String, color: ColorStyle? = nil) -> Self {
         if let color = color {
             self.image = NSImage(named: NSImage.Name(name))?.tint(color: NSColor.color(color))
