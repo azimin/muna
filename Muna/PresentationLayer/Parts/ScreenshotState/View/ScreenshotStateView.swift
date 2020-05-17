@@ -148,7 +148,22 @@ class ScreenshotStateView: View {
         let topSpace = aroundRect.minY
         let bottomSpace = self.bounds.maxY - aroundRect.maxY
 
+        let rightSpaceFromScreenshot = self.bounds.maxX - self.screenshotFrame.maxX
+        let leftSpaceFromScreenshot = self.screenshotFrame.minX
+        let topSpaceFromScreenshot = self.screenshotFrame.minY
+        let bottomSpaceFromScreenshot = self.bounds.maxY - self.screenshotFrame.maxY
+
         newRect.origin.y = aroundRect.minY
+
+        let isEnoughRightSpaceFromScreenshot = rightSpaceFromScreenshot >= rect.width + 16
+        let isEnoughLeftSpaceFromScreenshot = leftSpaceFromScreenshot >= rect.width + 16
+        let isEnoughTopSpaceFromScreenshot = topSpaceFromScreenshot >= rect.height + 16
+        let isEnoughBottomSpaceFromScreenshot = bottomSpaceFromScreenshot >= rect.height + 16
+
+        if !isEnoughRightSpaceFromScreenshot, !isEnoughLeftSpaceFromScreenshot, !isEnoughTopSpaceFromScreenshot, !isEnoughBottomSpaceFromScreenshot {
+            newRect.origin.x = aroundRect.maxX + 16
+            newRect.origin.y = aroundRect.midY - newRect.width / 2
+        }
 
         let isEnoughRightSpace = rightSpace >= rect.width + 16
         let isEnoughLeftSpace = leftSpace >= rect.width + 16
