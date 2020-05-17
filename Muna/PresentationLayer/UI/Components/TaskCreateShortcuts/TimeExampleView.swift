@@ -22,7 +22,7 @@ class TimeExampleView: View {
 
     func setup() {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.gray)
+        self.backgroundColor = NSColor.color(.grayBackground)
 
         self.addSubview(self.label)
         self.label.snp.makeConstraints { maker in

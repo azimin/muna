@@ -13,6 +13,8 @@ enum ColorStyle {
     case title60Accent
     case title60AccentAlpha
     case backgroundOverlay
+    case foregroundOverlay
+    case grayBackground
 
     case white
     case black
@@ -37,6 +39,10 @@ enum ColorStyle {
                 return NSColor.white.withAlphaComponent(0.6)
             case .backgroundOverlay:
                 return NSColor.black.withAlphaComponent(0.5)
+            case .foregroundOverlay:
+                return NSColor.black.withAlphaComponent(0.5)
+            case .grayBackground:
+                return NSColor(hex: "404040")
             case .clear:
                 return NSColor.clear
             case .white:
@@ -68,6 +74,10 @@ enum ColorStyle {
                 return NSColor.black.withAlphaComponent(0.6)
             case .backgroundOverlay:
                 return NSColor.black.withAlphaComponent(0.5)
+            case .foregroundOverlay:
+                return NSColor.white.withAlphaComponent(0.5)
+            case .grayBackground:
+                return NSColor(hex: "C6C6C6")
             case .clear:
                 return NSColor.clear
             case .white:

@@ -51,7 +51,7 @@ class PopupView: View {
         self.vialPlateOverlay.layer?.cornerRadius = 12
         self.vialPlateOverlay.layer?.borderWidth = 1
         self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
-        self.vialPlateOverlay.backgroundColor = NSColor.color(.backgroundOverlay)
+        self.vialPlateOverlay.backgroundColor = NSColor.color(.foregroundOverlay)
 
         self.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { maker in

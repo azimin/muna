@@ -45,6 +45,13 @@ class ShortcutItemView: View {
         self.label.isHidden = false
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.iconLabel.textColor = NSColor.color(.titleAccent)
+        self.label.textColor = NSColor.color(.titleAccent)
+        self.imageView.image = self.imageView.image?.tint(color: NSColor.color(.titleAccent))
+    }
+
     init(key: Key) {
         var image: NSImage?
         var text: String?
@@ -67,7 +74,7 @@ class ShortcutItemView: View {
         self.setup()
 
         if let image = image {
-            self.imageView.image = image
+            self.imageView.image = image.tint(color: NSColor.color(.titleAccent))
             self.imageView.isHidden = false
         }
 
@@ -83,7 +90,7 @@ class ShortcutItemView: View {
 
     func setup() {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.gray)
+        self.backgroundColor = NSColor.color(.grayBackground)
 
         self.imageView.snp.makeConstraints { maker in
             maker.size.equalTo(11)
