@@ -187,7 +187,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         let item = self.groupedData.item(at: indexPath)
-        item.isComplited = true
+        item.isComplited.toggle()
 
         self.selectIndexPath(indexPath: indexPath, completion: nil)
     }

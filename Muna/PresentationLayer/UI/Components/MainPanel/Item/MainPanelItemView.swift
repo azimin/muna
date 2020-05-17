@@ -158,7 +158,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
         self.updateStyle()
 
-        self.itemObservable = ServiceLocator.shared.itemsDatabase.itemUpdated.observeNew(self, closure: { [weak self] id in
+        self.itemObservable = ServiceLocator.shared.itemsDatabase.itemUpdated.observe(self, closure: { [weak self] _, id in
             guard let self = self else { return }
             if id != nil, self.item?.id == id {
                 self.isComplited = item.isComplited
