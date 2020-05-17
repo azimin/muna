@@ -24,7 +24,7 @@ class ScreenshotStateView: View {
     let screenshotImageView = ImageView()
     let overlayView = OverlayView()
 
-    let taskCreateShortCutsView = TaskCreateShortcuts()
+    let taskCreateShortCutsView = TaskCreateShortcuts(style: .withoutShortcutsButton)
 
     let reminderSetupPopup: TaskCreateView
 
@@ -35,6 +35,8 @@ class ScreenshotStateView: View {
         self.reminderSetupPopup = TaskCreateView(savingProcessingService: savingService)
 
         super.init(frame: .zero)
+
+        self.reminderSetupPopup.delegate = self
 
         self.setupInitialLayout()
     }
@@ -89,9 +91,6 @@ class ScreenshotStateView: View {
         self.setPositionForReminderPopupSetup()
         self.reminderSetupPopup.isHidden = false
         self.reminderSetupPopup.window?.makeFirstResponder(self.reminderSetupPopup)
-
-        self.setPositionForTaskCreateShortcuts(aroundRect: self.reminderSetupPopup.frame)
-        self.taskCreateShortCutsView.isHidden = false
     }
 
     private func setPositionForReminderPopupSetup() {
@@ -191,6 +190,11 @@ class ScreenshotStateView: View {
         self.reminderSetupPopup.clear()
     }
 
+    func showShortcutsView(aroundViewFrame frame: NSRect) {
+        self.setPositionForTaskCreateShortcuts(aroundRect: self.reminderSetupPopup.frame)
+        self.taskCreateShortCutsView.isHidden = false
+    }
+
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         // esc
         if event.keyCode == 53 {
@@ -200,5 +204,11 @@ class ScreenshotStateView: View {
         }
 
         return super.performKeyEquivalent(with: event)
+    }
+}
+
+extension ScreenshotStateView: TaskCreateViewDelegate {
+    func shortcutsButtonTapped() {
+        self.showShortcutsView(aroundViewFrame: self.reminderSetupPopup.frame)
     }
 }

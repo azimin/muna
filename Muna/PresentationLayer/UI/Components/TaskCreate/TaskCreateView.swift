@@ -9,6 +9,10 @@
 import Cocoa
 import SwiftDate
 
+protocol TaskCreateViewDelegate: AnyObject {
+    func shortcutsButtonTapped()
+}
+
 class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     var mainOption: TaskReminderItemView?
 
@@ -29,18 +33,20 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     private let dateParser = MunaChrono()
     private let savingProcessingService: SavingProcessingService
 
+    weak var delegate: TaskCreateViewDelegate?
+
     init(savingProcessingService: SavingProcessingService) {
         self.savingProcessingService = savingProcessingService
 
-        super.init()
+        super.init(style: .withShortcutsButton)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setup() {
-        super.setup()
+    override func setup(forStyle style: Style) {
+        super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
             maker.width.equalTo(220)
@@ -86,6 +92,7 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
 
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
+        self.shortcutsButton.action = #selector(self.handleShortcutsButton)
 
         self.addMonitor()
 
@@ -271,6 +278,11 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         self.savingProcessingService.save(withItem: itemToSave)
         // TODO: - Improve close process
         (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+    }
+
+    @objc
+    private func handleShortcutsButton() {
+        self.delegate?.shortcutsButtonTapped()
     }
 }
 
