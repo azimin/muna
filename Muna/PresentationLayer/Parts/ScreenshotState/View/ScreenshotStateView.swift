@@ -92,93 +92,50 @@ class ScreenshotStateView: View {
 
         self.delegate?.saveImage(withRect: self.screenshotFrame)
 
-        self.setPositionForReminderPopupSetup()
+        self.reminderSetupPopup.frame = self.positionForView(
+            rect: self.reminderSetupPopup.frame,
+            aroundRect: self.screenshotFrame
+        )
         self.reminderSetupPopup.isHidden = false
         self.window?.makeFirstResponder(self.reminderSetupPopup.reminderTextField.textField)
-    }
-
-    private func setPositionForReminderPopupSetup() {
-        var popupFrame = self.reminderSetupPopup.frame
-        let leftX: CGFloat
-        let leftInsideX: CGFloat
-        let rightX: CGFloat
-        let maxRightPosition: CGFloat
-
-        if self.screenshotFrame.size.width < 0 {
-            leftX = self.screenshotFrame.minX - self.reminderSetupPopup.frame.width - 16
-            leftInsideX = self.screenshotFrame.minX + 16
-            rightX = self.screenshotFrame.maxX + 16
-            maxRightPosition = self.screenshotFrame.maxX + 16 + popupFrame.width
-
-        } else {
-            leftX = self.screenshotFrame.origin.x - self.reminderSetupPopup.frame.width - 16
-            leftInsideX = self.screenshotFrame.origin.x + 16
-            rightX = self.screenshotFrame.maxX + 16
-            maxRightPosition = self.screenshotFrame.maxX + 16 + popupFrame.width
-        }
-
-        if leftX < self.bounds.minX, maxRightPosition > self.bounds.maxX {
-            popupFrame.origin.x = leftInsideX
-        } else if leftX < self.bounds.minX {
-            popupFrame.origin.x = rightX
-        } else {
-            popupFrame.origin.x = leftX
-        }
-
-        var normalY = self.screenshotFrame.minY - 16
-
-        if normalY < self.bounds.minY {
-            normalY = 16
-        }
-
-        popupFrame.origin.y = normalY
-
-        if popupFrame.maxY > self.bounds.maxY {
-            popupFrame.origin.y = self.bounds.minY - 16 - popupFrame.size.height
-        }
-
-        self.reminderSetupPopup.frame = popupFrame
         self.layoutSubtreeIfNeeded()
     }
 
-    private func setPositionForTaskCreateShortcuts(aroundRect rect: CGRect) {
-        var popupFrame = self.taskCreateShortCutsView.frame
-        popupFrame.origin.x = rect.minX - 16 - popupFrame.width
-        popupFrame.origin.y = rect.origin.y
+    private func positionForView(rect: CGRect, aroundRect: CGRect) -> NSRect {
+        var newRect = rect
+        let rightSpace = self.bounds.maxX - aroundRect.maxX
+        let leftSpace = aroundRect.minX
+        let topSpace = aroundRect.minY
+        let bottomSpace = self.bounds.maxY - aroundRect.maxY
 
-        if popupFrame.origin.x < self.bounds.minX {
-            popupFrame.origin.x = rect.maxX + 16
+        newRect.origin.y = aroundRect.minY
 
-            if self.screenshotFrame.intersects(popupFrame), rect.maxY + 16 + popupFrame.height < self.bounds.maxY {
-                popupFrame.origin.x = rect.origin.x
-                popupFrame.origin.y = rect.maxY + 16
-            }
+        let isEnoughRightSpace = rightSpace >= rect.width + 16
+        let isEnoughLeftSpace = leftSpace >= rect.width + 16
+        let isEnoughTopSpace = topSpace >= rect.height + 16
+        let isEnoughBottomSpace = bottomSpace >= rect.height + 16
 
-            if self.screenshotFrame.intersects(popupFrame), rect.minY - 16 - popupFrame.height > self.bounds.minY {
-                popupFrame.origin.x = rect.origin.x
-                popupFrame.origin.y = rect.origin.y - 16 - popupFrame.height
-            }
+        if isEnoughRightSpace {
+            newRect.origin.x = aroundRect.maxX + 16
+            return newRect
         }
 
-        if popupFrame.maxY > self.bounds.maxY {
-            popupFrame.origin.y = self.bounds.maxY - popupFrame.height - 16
+        if isEnoughLeftSpace {
+            newRect.origin.x =  aroundRect.minX - newRect.width - 16
+            return newRect
         }
 
-        if self.screenshotFrame.intersects(popupFrame), rect.maxX + 16 + popupFrame.width < self.bounds.maxX {
-            popupFrame.origin.x = rect.maxX + 16
-
-            if self.screenshotFrame.intersects(popupFrame) {
-                popupFrame.origin.x = rect.origin.x
-            }
-
-            if self.screenshotFrame.intersects(popupFrame), self.screenshotFrame.origin.x + self.screenshotFrame.size.width + 16 + popupFrame.width < self.bounds.maxX {
-                popupFrame.origin.y = rect.origin.y
-                popupFrame.origin.x = self.screenshotFrame.origin.x + self.screenshotFrame.size.width + 16
-            }
+        if isEnoughTopSpace && !isEnoughLeftSpace && !isEnoughRightSpace {
+            newRect.origin.y = aroundRect.minY - newRect.height - 16
+            return newRect
         }
 
-        self.taskCreateShortCutsView.frame = popupFrame
-        self.layoutSubtreeIfNeeded()
+        if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace {
+            newRect.origin.y = aroundRect.maxY + 16
+            return newRect
+        }
+
+        return newRect
     }
 
     func hideVisuals() {
@@ -195,7 +152,7 @@ class ScreenshotStateView: View {
     }
 
     func showShortcutsView(aroundViewFrame frame: NSRect) {
-        self.setPositionForTaskCreateShortcuts(aroundRect: self.reminderSetupPopup.frame)
+//        self.setPositionForView(aroundRect: self.reminderSetupPopup.frame)
         self.taskCreateShortCutsView.isHidden = false
         self.isShortcutsViewShowed = true
     }
