@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import LaunchAtLogin
 import MASShortcut
 import SwiftDate
 import SwiftyChrono
@@ -22,6 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     let windowManager = WindowManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        print(LaunchAtLogin.isEnabled)
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
             if granted {
                 print("Approval granted to send notifications")
