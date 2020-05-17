@@ -216,6 +216,8 @@ class ScreenshotStateView: View {
 
         return super.performKeyEquivalent(with: event)
     }
+
+    func handleCloseShortcut() {}
 }
 
 extension ScreenshotStateView: TaskCreateViewDelegate {

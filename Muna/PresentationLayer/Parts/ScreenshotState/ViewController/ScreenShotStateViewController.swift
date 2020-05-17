@@ -73,7 +73,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
             return
         }
         self.isNeededToDrawFrame = false
-        (self.view as! ScreenshotStateView).showVisuals()
+        rootView.showVisuals()
     }
 
     override func mouseDragged(with event: NSEvent) {
@@ -82,7 +82,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         }
 
         let point = self.view.convert(event.locationInWindow, from: nil)
-        (self.view as! ScreenshotStateView).continiouslyDrawDash(
+        self.rootView.continiouslyDrawDash(
             fromStartPoint: self.startedPoint,
             toPoint: point
         )
@@ -92,7 +92,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     func hide(completion: VoidBlock?) {
         self.isNeededToDrawFrame = true
-        (self.view as! ScreenshotStateView).hideVisuals()
+        self.rootView.hideVisuals()
         completion?()
     }
 
@@ -121,7 +121,9 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     func actionForShortcut(_ shortcut: Shortcut) -> VoidBlock? {
         switch shortcut {
         case .closeItem:
-            return nil
+            return { [weak self] in
+                self?.rootView.handleCloseShortcut()
+            }
         }
     }
 }
