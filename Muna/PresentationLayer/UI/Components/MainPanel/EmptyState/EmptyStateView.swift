@@ -42,7 +42,7 @@ class EmptyStateView: View {
 
     override func updateLayer() {
         super.updateLayer()
-        self.titelLabel.textColor = NSColor.color(.titleAccent)
+        self.titelLabel.textColor = NSColor.color(.title60AccentAlpha)
         self.actionLabel.textColor = NSColor.color(.title60AccentAlpha)
     }
 

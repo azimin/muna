@@ -170,6 +170,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     @objc
     func deleteActiveItemAction() {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
             assertionFailure("No selected index")
             return
