@@ -264,7 +264,12 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     }
 
     func createTask() {
+        defer {
+            (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+        }
+
         guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
+            self.savingProcessingService.save(withItem: nil)
             return
         }
 
@@ -276,8 +281,6 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             comment: self.commentTextField.textField.stringValue
         )
         self.savingProcessingService.save(withItem: itemToSave)
-        // TODO: - Improve close process
-        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
     }
 
     @objc
