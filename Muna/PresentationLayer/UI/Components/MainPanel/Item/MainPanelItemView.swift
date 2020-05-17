@@ -14,6 +14,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     var imageView = ImageView()
     let metainformationPlate = NSVisualEffectView()
+    let metainformationPlateOverlay = View()
     let metainformationStackView = NSStackView()
 
     let completionButton = Button().withImageName("reminder-off")
@@ -38,6 +39,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     override func updateLayer() {
         super.updateLayer()
         self.metainformationPlate.material = Theme.current.visualEffectMaterial
+        self.metainformationPlateOverlay.backgroundColor = NSColor.color(.lightForegroundOverlay)
 
         self.deadlineLabel.textColor = NSColor.color(.titleAccent)
         self.commentLabel.textColor = NSColor.color(.title60AccentAlpha)
@@ -72,6 +74,11 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             maker.bottom.leading.trailing.equalToSuperview()
         }
 
+        self.metainformationPlate.addSubview(self.metainformationPlateOverlay)
+        self.metainformationPlateOverlay.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+
         self.metainformationPlate.addSubview(self.metainformationStackView)
         self.metainformationStackView.orientation = .vertical
         self.metainformationStackView.spacing = 4
@@ -104,7 +111,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     func updateStyle() {
         let imageName = self.isComplited ? "reminder-on" : "reminder-off"
-        _ = self.completionButton.withImageName(imageName)
+        _ = self.completionButton.withImageName(imageName, color: .titleAccent)
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
