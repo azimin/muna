@@ -20,7 +20,7 @@ class PopupView: View {
     let closeButton = Button()
         .withImageName("icon_close")
 
-    let shortcutsButton = Button().withImageName("icon_cmd", color: .white)
+    let shortcutsButton = Button().withImageName("icon_cmd", color: .button)
 
     init(style: Style) {
         super.init(frame: .zero)

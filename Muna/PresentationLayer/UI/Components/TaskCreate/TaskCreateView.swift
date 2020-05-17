@@ -49,7 +49,7 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(220)
+            maker.width.equalTo(264)
         }
 
         self.addSubview(self.contentStackView)
