@@ -32,12 +32,17 @@ class RemindersOptionsController {
     private var selectedIndex = 0
 
     class ReminderItem {
+        // left side
         let title: String
         let subtitle: String
 
-        init(title: String, subtitle: String) {
+        // right side
+        let additionalText: String
+
+        init(title: String, subtitle: String, additionalText: String) {
             self.title = title
             self.subtitle = subtitle
+            self.additionalText = additionalText
         }
     }
 

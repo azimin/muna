@@ -62,7 +62,8 @@ class PanelItemModelGrouping {
             }
             return first.creationDate < second.creationDate
         }) {
-            if item.isNew {
+            let threeMinsAgo = Date() - 3.minutes
+            if item.isNew, item.creationDate > threeMinsAgo {
                 result[.new]?.append(item)
             } else if item.isComplited {
                 result[.completed]?.append(item)

@@ -18,10 +18,13 @@ class TaskReminderItemView: View {
 
     var contentViewConstraint: Constraint?
 
+    private var style: Style = .basic
+
     let selectionView = View()
     let contentView = View()
     let iconImageView = ImageView()
     let mainLabel = Label(fontStyle: .bold, size: 12)
+    let secondLabel = Label(fontStyle: .medium, size: 12)
     let infoLabel = Label(fontStyle: .bold, size: 12)
 
     override init(frame frameRect: NSRect) {
@@ -62,27 +65,46 @@ class TaskReminderItemView: View {
             maker.bottom.equalToSuperview().inset(6)
         }
 
+        self.contentView.addSubview(self.secondLabel)
+        self.secondLabel.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.mainLabel.snp.trailing).inset(-2)
+            maker.centerY.equalTo(self.mainLabel.snp.centerY)
+        }
+
         self.contentView.addSubview(self.infoLabel)
         self.infoLabel.snp.makeConstraints { maker in
             maker.trailing.equalToSuperview()
-            maker.leading.greaterThanOrEqualTo(self.mainLabel.snp.trailing).inset(-8)
+            maker.leading.greaterThanOrEqualTo(self.secondLabel.snp.trailing).inset(-8)
             maker.centerY.equalToSuperview()
         }
 
         self.update(style: .basic)
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.updateColors()
+    }
+
     func update(item: RemindersOptionsController.ReminderItem) {
         self.mainLabel.text = item.title
-        self.infoLabel.text = item.subtitle
+        self.secondLabel.text = item.subtitle
+        self.infoLabel.text = item.additionalText
     }
 
     func update(style: Style, animated: Bool = false) {
+        self.style = style
+        self.updateColors()
+
+        self.updateConstraints(style: style, animated: animated)
+    }
+
+    func updateColors() {
         self.selectionView.backgroundColor = NSColor.color(.clear)
         self.mainLabel.textColor = NSColor.color(.titleAccent)
         self.infoLabel.textColor = NSColor.color(.titleAccent).withAlphaComponent(0.8)
 
-        switch style {
+        switch self.style {
         case .basic:
             self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .color(.blueSelected))
             self.mainLabel.textColor = NSColor.color(.blueSelected)
@@ -92,8 +114,6 @@ class TaskReminderItemView: View {
         case .notSelected:
             self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: NSColor.color(.titleAccent))
         }
-
-        self.updateConstraints(style: style, animated: animated)
     }
 
     func updateConstraints(style: Style, animated: Bool) {

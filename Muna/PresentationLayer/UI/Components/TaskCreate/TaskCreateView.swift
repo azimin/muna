@@ -163,7 +163,8 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             self.mainOption?.update(style: .basic, animated: true)
             self.mainOption?.update(item: .init(
                 title: "No reminder",
-                subtitle: ""
+                subtitle: "",
+                additionalText: ""
             ))
         } else {
             self.mainOption?.update(style: .selected, animated: true)
@@ -279,23 +280,17 @@ extension TaskCreateView: TextFieldDelegate {
 
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
 
-        var items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        let items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
                 return nil
             }
+            let time = result.date.toFormat("HH:mm")
             let item = RemindersOptionsController.ReminderItem(
                 title: "\(result.date.monthName(.short)), \(result.date.ordinalDay) \(result.date.weekdayName(.short))",
-                subtitle: "in \(offset) days"
+                subtitle: time,
+                additionalText: "in \(offset) days"
             )
             return item
-        }
-
-        if text == "t" {
-            items.append(.init(title: "Today", subtitle: "1"))
-            items.append(.init(title: "Today", subtitle: "2"))
-        }
-        if text == "tt" {
-            items.append(.init(title: "Yersterday", subtitle: "1"))
         }
 
         self.controller.showItems(items: items)
