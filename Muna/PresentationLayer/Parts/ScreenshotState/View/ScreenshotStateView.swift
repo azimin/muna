@@ -94,7 +94,7 @@ class ScreenshotStateView: View {
 
         self.setPositionForReminderPopupSetup()
         self.reminderSetupPopup.isHidden = false
-        self.window?.makeFirstResponder(self.reminderSetupPopup)
+        self.window?.makeFirstResponder(self.reminderSetupPopup.reminderTextField.textField)
     }
 
     private func setPositionForReminderPopupSetup() {
