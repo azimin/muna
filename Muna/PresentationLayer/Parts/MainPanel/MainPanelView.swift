@@ -12,6 +12,7 @@ import SnapKit
 class MainPanelView: NSView {
     let backgroundView = View()
     let visualView = NSVisualEffectView()
+    let visualOverlayView = View()
 
     let segmentControl = NSSegmentedControl(labels: ["Uncompleted", "No deadline", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
     let topSeparator = View()
@@ -62,6 +63,12 @@ class MainPanelView: NSView {
             maker.edges.equalToSuperview()
         }
 
+        self.backgroundView.addSubview(self.visualOverlayView)
+        self.visualOverlayView.backgroundColor = NSColor.color(.lightForegroundOverlay)
+        self.visualOverlayView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+
         self.backgroundView.addSubview(self.segmentControl)
         self.segmentControl.selectedSegment = 0
         self.segmentControl.segmentStyle = .capsule
@@ -78,7 +85,7 @@ class MainPanelView: NSView {
         self.topSeparator.snp.makeConstraints { maker in
             maker.top.equalTo(self.segmentControl.snp.bottom).inset(-16)
             maker.leading.trailing.equalToSuperview()
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
 
         self.backgroundView.addSubview(self.bottomBar)
@@ -92,7 +99,7 @@ class MainPanelView: NSView {
         self.bottomSeparator.snp.makeConstraints { maker in
             maker.bottom.equalTo(self.bottomBar.snp.top)
             maker.leading.trailing.equalToSuperview()
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
 
         self.backgroundView.addSubview(self.mainContentView)

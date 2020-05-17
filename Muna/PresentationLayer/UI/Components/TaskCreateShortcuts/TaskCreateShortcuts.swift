@@ -110,7 +110,7 @@ class TaskCreateShortcuts: PopupView {
         self.separatorView.snp.makeConstraints { maker in
             maker.top.equalTo(self.subtitle.snp.bottom).inset(-12)
             maker.leading.trailing.equalToSuperview()
-            maker.height.equalTo(0.5)
+            maker.height.equalTo(1)
         }
 
         self.addSubview(self.contentStackView)
