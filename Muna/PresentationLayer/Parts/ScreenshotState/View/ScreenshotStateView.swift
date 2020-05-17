@@ -115,6 +115,13 @@ class ScreenshotStateView: View {
         let isEnoughTopSpace = topSpace >= rect.height + 16
         let isEnoughBottomSpace = bottomSpace >= rect.height + 16
 
+        if !isEnoughRightSpace, !isEnoughLeftSpace, !isEnoughTopSpace, !isEnoughBottomSpace {
+            let centerX = aroundRect.midX - newRect.width / 2
+            let centerY = aroundRect.midY - newRect.height / 2
+            newRect.origin = CGPoint(x: centerX, y: centerY)
+            return newRect
+        }
+
         if isEnoughRightSpace {
             newRect.origin.x = aroundRect.maxX + 16
         }
@@ -129,19 +136,6 @@ class ScreenshotStateView: View {
 
         if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace && !isEnoughTopSpace {
             newRect.origin.y = aroundRect.maxY + 16
-        }
-
-        if self.screenshotFrame.intersects(newRect) && isEnoughLeftSpace {
-            newRect.origin.x = aroundRect.minX - newRect.width - 16
-        }
-
-        if self.screenshotFrame.intersects(newRect) && isEnoughTopSpace {
-            newRect.origin.y = aroundRect.minY - newRect.height - 16
-        }
-
-        if self.screenshotFrame.intersects(newRect) && isEnoughBottomSpace {
-            newRect.origin.y = aroundRect.maxY + 16
-            newRect.origin.x = aroundRect.minX
         }
 
         return newRect
