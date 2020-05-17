@@ -27,6 +27,7 @@ class PopupView: View {
     override func updateLayer() {
         super.updateLayer()
         self.vialPlate.material = Theme.current.visualEffectMaterial
+        _ = self.closeButton.withImageName("icon_close", color: .title60Accent)
     }
 
     func setup() {

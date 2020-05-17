@@ -52,6 +52,11 @@ class TextField: View, NSTextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        _ = self.clearButton.withImageName("icon_text_field_clear", color: .titleAccent)
+    }
+
     func setup() {
         self.layer?.cornerRadius = 4
         self.setBorder(isFocused: false)
