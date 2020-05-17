@@ -37,6 +37,8 @@
 		9F152703246DCE870037623B /* TimeExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152702246DCE870037623B /* TimeExampleView.swift */; };
 		9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152708246DD7D70037623B /* SettingsViewController.swift */; };
 		9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15270A246DD7DF0037623B /* SettingsView.swift */; };
+		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
+		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D482246875B000395C44 /* EmptyStateView.swift */; };
 		9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48524687F8400395C44 /* ShortcutItemView.swift */; };
 		9F33D4882468826100395C44 /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D4872468826100395C44 /* ShortcutView.swift */; };
@@ -93,6 +95,20 @@
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9F2682C22471BEE100B79D03 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
@@ -127,6 +143,7 @@
 		9F152702246DCE870037623B /* TimeExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeExampleView.swift; sourceTree = "<group>"; };
 		9F152708246DD7D70037623B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9F15270A246DD7DF0037623B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		9F33D47524684D5C00395C44 /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		9F33D47A2468554D00395C44 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
@@ -194,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */,
 				A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,6 +816,7 @@
 		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */,
 				C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */,
 			);
 			name = Frameworks;
@@ -825,7 +844,10 @@
 				239DC90C245D95E5001FA50C /* Sources */,
 				239DC90D245D95E5001FA50C /* Frameworks */,
 				239DC90E245D95E5001FA50C /* Resources */,
+				9F2682C32471BEF000B79D03 /* Carthage */,
 				AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */,
+				9F2682C42471BF4500B79D03 /* LaunchAtLogin */,
+				9F2682C22471BEE100B79D03 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -940,6 +962,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat . --swiftversion 5\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		9F2682C32471BEF000B79D03 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/LaunchAtLogin.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		9F2682C42471BF4500B79D03 /* LaunchAtLogin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = LaunchAtLogin;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Carthage/Build/Mac/LaunchAtLogin.framework/Resources/copy-helper.sh\"\n";
 		};
 		AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1187,6 +1246,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1211,6 +1274,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Muna/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
