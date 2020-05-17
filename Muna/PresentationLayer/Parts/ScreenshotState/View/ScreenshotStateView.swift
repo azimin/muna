@@ -117,22 +117,31 @@ class ScreenshotStateView: View {
 
         if isEnoughRightSpace {
             newRect.origin.x = aroundRect.maxX + 16
-            return newRect
         }
 
-        if isEnoughLeftSpace {
-            newRect.origin.x =  aroundRect.minX - newRect.width - 16
-            return newRect
+        if isEnoughLeftSpace && !isEnoughRightSpace {
+            newRect.origin.x = aroundRect.minX - newRect.width - 16
         }
 
         if isEnoughTopSpace && !isEnoughLeftSpace && !isEnoughRightSpace {
             newRect.origin.y = aroundRect.minY - newRect.height - 16
-            return newRect
         }
 
-        if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace {
+        if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace && !isEnoughTopSpace {
             newRect.origin.y = aroundRect.maxY + 16
-            return newRect
+        }
+
+        if self.screenshotFrame.intersects(newRect) && isEnoughLeftSpace {
+            newRect.origin.x = aroundRect.minX - newRect.width - 16
+        }
+
+        if self.screenshotFrame.intersects(newRect) && isEnoughTopSpace {
+            newRect.origin.y = aroundRect.minY - newRect.height - 16
+        }
+
+        if self.screenshotFrame.intersects(newRect) && isEnoughBottomSpace {
+            newRect.origin.y = aroundRect.maxY + 16
+            newRect.origin.x = aroundRect.minX
         }
 
         return newRect
@@ -152,9 +161,13 @@ class ScreenshotStateView: View {
     }
 
     func showShortcutsView(aroundViewFrame frame: NSRect) {
-//        self.setPositionForView(aroundRect: self.reminderSetupPopup.frame)
+        self.taskCreateShortCutsView.frame = self.positionForView(
+            rect: self.taskCreateShortCutsView.frame,
+            aroundRect: frame
+        )
         self.taskCreateShortCutsView.isHidden = false
         self.isShortcutsViewShowed = true
+        self.layoutSubtreeIfNeeded()
     }
 
     @objc
