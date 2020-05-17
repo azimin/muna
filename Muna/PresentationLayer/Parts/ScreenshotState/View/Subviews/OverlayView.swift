@@ -23,7 +23,7 @@ class OverlayView: View {
     func startDash() {
         self.dashLayer = CAShapeLayer()
         self.dashLayer?.lineWidth = 2.0
-        self.dashLayer?.fillColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.dashLayer?.fillColor = CGColor.color(.backgroundOverlay)
         self.dashLayer?.strokeColor = NSColor.white.cgColor
         self.dashLayer?.lineDashPattern = [10, 5]
 
@@ -53,7 +53,7 @@ class OverlayView: View {
         self.dashLayer?.fillColor = NSColor.clear.cgColor
 
         self.leftVisualShapeLayer = CALayer()
-        self.leftVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.leftVisualShapeLayer?.backgroundColor = CGColor.color(.backgroundOverlay)
         self.layer?.insertSublayer(self.leftVisualShapeLayer!, at: 0)
         self.leftVisualShapeLayer?.frame = CGRect(
             x: .zero,
@@ -63,7 +63,7 @@ class OverlayView: View {
         )
 
         self.rightVisualShapeLayer = CALayer()
-        self.rightVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.rightVisualShapeLayer?.backgroundColor = CGColor.color(.backgroundOverlay)
         self.layer?.insertSublayer(self.rightVisualShapeLayer!, at: 0)
         self.rightVisualShapeLayer?.frame = CGRect(
             x: rect.maxX - 2,
@@ -73,7 +73,7 @@ class OverlayView: View {
         )
 
         self.bottomVisualShapeLayer = CALayer()
-        self.bottomVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.bottomVisualShapeLayer?.backgroundColor = CGColor.color(.backgroundOverlay)
         self.layer?.insertSublayer(self.bottomVisualShapeLayer!, at: 0)
         self.bottomVisualShapeLayer?.frame = CGRect(
             x: rect.minX + 2,
@@ -83,7 +83,7 @@ class OverlayView: View {
         )
 
         self.topVisualShapeLayer = CALayer()
-        self.topVisualShapeLayer?.backgroundColor = NSColor.black.withAlphaComponent(0.3).cgColor
+        self.topVisualShapeLayer?.backgroundColor = CGColor.color(.backgroundOverlay)
         self.topVisualShapeLayer?.frame = CGRect(
             x: rect.minX + 2,
             y: rect.maxY - 2,

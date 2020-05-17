@@ -12,6 +12,7 @@ enum ColorStyle {
     case titleAccent
     case title60Accent
     case title60AccentAlpha
+    case backgroundOverlay
 
     case white
     case black
@@ -22,7 +23,6 @@ enum ColorStyle {
     case redLight
     case redDots
     case separator
-    case blueSelection
     case clear
 
     var color: NSColor {
@@ -35,10 +35,10 @@ enum ColorStyle {
                 return NSColor(hex: "969696")
             case .title60AccentAlpha:
                 return NSColor.white.withAlphaComponent(0.6)
+            case .backgroundOverlay:
+                return NSColor.black.withAlphaComponent(0.5)
             case .clear:
                 return NSColor.clear
-            case .blueSelection:
-                return NSColor(hex: "0D5AAC")
             case .white:
                 return NSColor.white
             case .black:
@@ -66,10 +66,10 @@ enum ColorStyle {
                 return NSColor(hex: "666666")
             case .title60AccentAlpha:
                 return NSColor.black.withAlphaComponent(0.6)
+            case .backgroundOverlay:
+                return NSColor.black.withAlphaComponent(0.5)
             case .clear:
                 return NSColor.clear
-            case .blueSelection:
-                return NSColor(hex: "0D5AAC")
             case .white:
                 return NSColor.white
             case .black:

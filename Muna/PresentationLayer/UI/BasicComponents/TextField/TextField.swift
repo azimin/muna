@@ -101,7 +101,7 @@ class TextField: View, NSTextFieldDelegate {
 
         if isFocused {
             self.layer?.borderWidth = 2
-            self.layer?.borderColor = CGColor.color(.blueSelection)
+            self.layer?.borderColor = CGColor.color(.blueSelected)
         } else {
             self.layer?.borderWidth = 1
             self.layer?.borderColor = CGColor.color(.titleAccent)
