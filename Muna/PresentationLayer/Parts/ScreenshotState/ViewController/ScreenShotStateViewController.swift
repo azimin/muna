@@ -32,7 +32,7 @@ class ScreenShotStateViewController: NSViewController {
     }
 
     override func loadView() {
-        self.view = ScreenshotStateView(delegate: self)
+        self.view = ScreenshotStateView(delegate: self, savingService: self.savingProcessingService)
     }
 
     // MARK: - Mouse events

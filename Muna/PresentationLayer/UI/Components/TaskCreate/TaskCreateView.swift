@@ -237,12 +237,17 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         })
     }
 
+    func clear() {
+        self.reminderTextField.clear()
+        self.commentTextField.clear()
+    }
+
     // MARK: - Saving
 
     @objc
     private func handleCloseButton() {
         // TODO: - Improve
-        (NSApplication.shared.delegate as? AppDelegate)?.toggleDebugState()
+        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
     }
 
     @objc
@@ -263,12 +268,16 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             comment: self.commentTextField.textField.stringValue
         )
         self.savingProcessingService.save(withItem: itemToSave)
+        // TODO: - Improve close process
+        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
     }
 }
 
 extension TaskCreateView: TextFieldDelegate {
     func textFieldTextDidChange(textField: TextField, text: String) {
-        self.parsedDates = self.dateParser.parseFromString(text, date: Date())
+        let offset = TimeZone.current.secondsFromGMT()
+
+        self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
 
         var items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
@@ -289,7 +298,6 @@ extension TaskCreateView: TextFieldDelegate {
             items.append(.init(title: "Yersterday", subtitle: "1"))
         }
 
-        print(items)
         self.controller.showItems(items: items)
     }
 }

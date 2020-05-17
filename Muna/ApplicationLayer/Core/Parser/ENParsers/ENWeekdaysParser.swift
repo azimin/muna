@@ -13,6 +13,7 @@ class ENWeekdaysParser: Parser {
     private let weekDayOffset = [
         "sunday": 1,
         "sun": 1,
+        "yesterday": -1,
         "tomorrow": 1,
         "monday": 2,
         "mon": 2,
@@ -38,15 +39,15 @@ class ENWeekdaysParser: Parser {
         return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow|weekends)\\b"
     }
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult: [ParsedResult]) -> [ParsedResult] {
-        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2)
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
-            return []
+            return results
         }
 
         let today = parsedItem.refDate.weekday
 
-        let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1)
+        let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1).lowercased()
 
         var weekday: Int
         if weekdayName != "tomorrow" {
@@ -70,8 +71,8 @@ class ENWeekdaysParser: Parser {
         let finalDate = parsedItem.refDate + weekday.days
 
         var newParsedResult: [ParsedResult]
-        if !toParsedResult.isEmpty {
-            newParsedResult = toParsedResult.map {
+        if !results.isEmpty {
+            newParsedResult = results.map {
                 var newResult = $0
                 newResult.date = finalDate
                 newResult.range.append(parsedItem.match.range)

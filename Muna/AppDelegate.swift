@@ -8,6 +8,7 @@
 
 import Cocoa
 import MASShortcut
+import SwiftDate
 import SwiftyChrono
 import UserNotifications
 
@@ -50,10 +51,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
-        //        print(MunaChrono().parseFromString("Do homework on next tuesday at 13:30", date: Date()))
 
-//        ServiceLocator.shared.savingService.addImage(NSImage(named: NSImage.Name("img_4"))!)
-//        ServiceLocator.shared.savingService.save(withItem: .init(dueDateString: "12", date: Date().addingTimeInterval(5), comment: "My comment"))
+//        let currentTime = TimeZone.current.secondsFromGMT()
+//        let date = Date() + currentTime.seconds
+//        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
+//        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
+//        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
+//        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
+//        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
+//        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
+//        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
+//        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
+//        On weekends
+//        Remind on weekends at 20.00
+//        20 may
+//        Next month
+//        Tomorrow evening
+//        At evening 7.30 pm
+//        In 3 days in the morning
+//        Thu 7 pm (if today monday)
+//        Thu 7 pm (if today wed)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -186,11 +205,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     @objc func toggleScreenshotState() {
         if self.isScreenshotShowed {
+            self.isScreenshotShowed = false
             self.windowManager.hideWindow(.screenshot)
         } else {
+            self.isScreenshotShowed = true
             self.windowManager.activateWindow(.screenshot)
         }
-        self.isScreenshotShowed.toggle()
     }
 
     @objc func toggleDebugState() {
