@@ -43,9 +43,14 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     private var items: [ItemModel] = []
 
     private let imageStorage: ImageStorageServiceProtocol
+    private let notifications: NotificationsServiceProtocol
 
-    init(imageStorage: ImageStorageServiceProtocol) {
+    init(
+        imageStorage: ImageStorageServiceProtocol,
+        notifications: NotificationsServiceProtocol
+    ) {
         self.imageStorage = imageStorage
+        self.notifications = notifications
         self.loadItems()
     }
 
@@ -71,6 +76,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     func removeItem(id: String) {
         if let index = self.items.firstIndex(where: { $0.id == id }) {
             let item = self.items[index]
+            self.notifications.removeNotification(item: item)
             self.items.remove(at: index)
 
             _ = self.imageStorage.removeImage(name: item.imageName)

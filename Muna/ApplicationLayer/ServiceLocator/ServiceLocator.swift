@@ -18,8 +18,11 @@ class ServiceLocator {
 
     init() {
         self.imageStorage = ImageStorageService()
-        self.itemsDatabase = ItemsDatabaseService(imageStorage: self.imageStorage)
-        self.savingService = SavingProcessingService(database: self.itemsDatabase)
         self.notifications = NotificationsService()
+        self.itemsDatabase = ItemsDatabaseService(
+            imageStorage: self.imageStorage,
+            notifications: self.notifications
+        )
+        self.savingService = SavingProcessingService(database: self.itemsDatabase)
     }
 }
