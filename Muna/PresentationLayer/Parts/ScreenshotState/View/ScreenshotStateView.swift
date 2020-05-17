@@ -92,7 +92,7 @@ class ScreenshotStateView: View {
 
         self.delegate?.saveImage(withRect: self.screenshotFrame)
 
-        self.reminderSetupPopup.frame = self.positionForView(
+        self.reminderSetupPopup.frame = self.positionForTaskCreationView(
             rect: self.reminderSetupPopup.frame,
             aroundRect: self.screenshotFrame
         )
@@ -101,7 +101,47 @@ class ScreenshotStateView: View {
         self.layoutSubtreeIfNeeded()
     }
 
-    private func positionForView(rect: CGRect, aroundRect: CGRect) -> NSRect {
+    private func positionForTaskCreationView(rect: CGRect, aroundRect: CGRect) -> NSRect {
+        var newRect = rect
+        let rightSpace = self.bounds.maxX - aroundRect.maxX
+        let leftSpace = aroundRect.minX
+        let topSpace = aroundRect.minY
+        let bottomSpace = self.bounds.maxY - aroundRect.maxY
+
+        newRect.origin.y = aroundRect.minY
+
+        let isEnoughRightSpace = rightSpace >= rect.width + 16
+        let isEnoughLeftSpace = leftSpace >= rect.width + 16
+        let isEnoughTopSpace = topSpace >= rect.height + 16
+        let isEnoughBottomSpace = bottomSpace >= rect.height + 16
+
+        if !isEnoughRightSpace, !isEnoughLeftSpace, !isEnoughTopSpace, !isEnoughBottomSpace {
+            let centerX = aroundRect.midX - newRect.width / 2
+            let centerY = aroundRect.midY - newRect.height / 2
+            newRect.origin = CGPoint(x: centerX, y: centerY)
+            return newRect
+        }
+
+        if isEnoughRightSpace {
+            newRect.origin.x = aroundRect.maxX + 16
+        }
+
+        if isEnoughLeftSpace && !isEnoughRightSpace {
+            newRect.origin.x = aroundRect.minX - newRect.width - 16
+        }
+
+        if isEnoughTopSpace && !isEnoughLeftSpace && !isEnoughRightSpace {
+            newRect.origin.y = aroundRect.minY - newRect.height - 16
+        }
+
+        if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace && !isEnoughTopSpace {
+            newRect.origin.y = aroundRect.maxY + 16
+        }
+
+        return newRect
+    }
+
+    private func positionForShortcutsView(rect: CGRect, aroundRect: CGRect) -> NSRect {
         var newRect = rect
         let rightSpace = self.bounds.maxX - aroundRect.maxX
         let leftSpace = aroundRect.minX
@@ -155,7 +195,7 @@ class ScreenshotStateView: View {
     }
 
     func showShortcutsView(aroundViewFrame frame: NSRect) {
-        self.taskCreateShortCutsView.frame = self.positionForView(
+        self.taskCreateShortCutsView.frame = self.positionForShortcutsView(
             rect: self.taskCreateShortCutsView.frame,
             aroundRect: frame
         )
