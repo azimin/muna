@@ -151,11 +151,19 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             let indexPath = self.collectionView.indexPath(for: item) {
             self.selectIndexPath(indexPath: indexPath, completion: nil)
 
+            let itemModel = self.groupedData.item(at: indexPath)
+
             self.capturedView = item.view
-            self.capturedItem = self.groupedData.item(at: indexPath)
-            // TODO: Work with menu
+            self.capturedItem = itemModel
+
             let menu = NSMenu(title: "ControlMenu")
-            menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
+
+            let completeItem = NSMenuItem(
+                title: itemModel.isComplited ? "Uncomplete" : "Complete",
+                action: #selector(self.completeActiveItemAction),
+                keyEquivalent: "↩"
+            )
+            completeItem.keyEquivalentModifierMask = []
 
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
@@ -163,6 +171,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: "⌫")
             deleteItem.keyEquivalentModifierMask = []
 
+            menu.addItem(completeItem)
             menu.addItem(previewItem)
             menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
