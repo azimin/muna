@@ -11,6 +11,7 @@
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E747C246B4AB60070EABA /* SavingProcessingService.swift */; };
 		233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */; };
+		233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233EFAA224718D1D00656CE9 /* ViewHolder.swift */; };
 		233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DA2469D8AC004DD671 /* ENTimeParser.swift */; };
 		233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DC246A0494004DD671 /* MunaChrono.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
@@ -99,6 +100,7 @@
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		233E747C246B4AB60070EABA /* SavingProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingProcessingService.swift; sourceTree = "<group>"; };
 		233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenshotStateViewController+Shortcuts.swift"; sourceTree = "<group>"; };
+		233EFAA224718D1D00656CE9 /* ViewHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHolder.swift; sourceTree = "<group>"; };
 		233F53DA2469D8AC004DD671 /* ENTimeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeParser.swift; sourceTree = "<group>"; };
 		233F53DC246A0494004DD671 /* MunaChrono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MunaChrono.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 				9FE0F53C247075600046A5C4 /* SavingProcessing */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		233EFAA124718CFD00656CE9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				233EFAA224718D1D00656CE9 /* ViewHolder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		23435AC72464A61F00B4DE50 /* ScreenshotState */ = {
@@ -482,6 +492,7 @@
 		9F4A8CED245DAC7500EA2E1E /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				233EFAA124718CFD00656CE9 /* Helpers */,
 				9FC06BEF2460CE4C008D4D3C /* Parts */,
 				9F8CCC7F245DB47B00E0F102 /* UI */,
 			);
@@ -979,6 +990,7 @@
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
+				233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */,
 				23561B432461ED8800097E4A /* ParsedResult.swift in Sources */,
 				9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,

@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class ScreenShotStateViewController: NSViewController {
+class ScreenShotStateViewController: NSViewController, ViewHolder {
+    typealias ViewType = ScreenshotStateView
+
     var windowId: CGWindowID?
 
     private var tmpCGImage: CGImage?
@@ -58,11 +60,11 @@ class ScreenShotStateViewController: NSViewController {
         }
 
         self.makeScreenshot { [unowned self] image in
-            (self.view as! ScreenshotStateView).screenshotImageView.image = image
-            (self.view as! ScreenshotStateView).screenshotImageView.isHidden = false
+            self.rootView.screenshotImageView.image = image
+            self.rootView.screenshotImageView.isHidden = false
 
             self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
-            (self.view as! ScreenshotStateView).startDash()
+            self.rootView.startDash()
         }
     }
 
