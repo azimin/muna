@@ -38,12 +38,14 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     override func updateLayer() {
         super.updateLayer()
         self.metainformationPlate.material = Theme.current.visualEffectMaterial
+
+        self.deadlineLabel.textColor = NSColor.color(.titleAccent)
+        self.commentLabel.textColor = NSColor.color(.title60AccentAlpha)
     }
 
     private func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.borderWidth = 1
-        self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
         self.backgroundView.layer?.cornerRadius = 12
         self.backgroundView.layer?.masksToBounds = true
         self.backgroundView.snp.makeConstraints { maker in
@@ -78,10 +80,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             maker.top.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         }
 
-        self.deadlineLabel.textColor = NSColor.color(.titleAccent)
         self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
-
-        self.commentLabel.textColor = NSColor.color(.title60AccentAlpha)
         self.metainformationStackView.addArrangedSubview(self.commentLabel)
 
         self.metainformationPlate.addSubview(self.completionButton)

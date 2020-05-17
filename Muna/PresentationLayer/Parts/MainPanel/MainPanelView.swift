@@ -46,6 +46,11 @@ class MainPanelView: NSView {
     override func updateLayer() {
         super.updateLayer()
         self.visualView.material = Theme.current.visualEffectMaterial
+        self.visualOverlayView.backgroundColor = NSColor.color(.lightForegroundOverlay)
+
+        self.backgroundView.layer?.borderColor = CGColor.color(.separator)
+        self.topSeparator.backgroundColor = NSColor.color(.separator)
+        self.bottomSeparator.backgroundColor = NSColor.color(.separator)
     }
 
     func setup() {
@@ -53,7 +58,6 @@ class MainPanelView: NSView {
         self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-        self.backgroundView.layer?.borderColor = CGColor.color(.separator)
         self.backgroundView.layer?.borderWidth = 0.5
 
         self.backgroundView.addSubview(self.visualView)
@@ -64,7 +68,6 @@ class MainPanelView: NSView {
         }
 
         self.backgroundView.addSubview(self.visualOverlayView)
-        self.visualOverlayView.backgroundColor = NSColor.color(.lightForegroundOverlay)
         self.visualOverlayView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
@@ -81,7 +84,6 @@ class MainPanelView: NSView {
         self.segmentControl.action = #selector(self.segmentChanged)
 
         self.backgroundView.addSubview(self.topSeparator)
-        self.topSeparator.backgroundColor = NSColor.color(.separator)
         self.topSeparator.snp.makeConstraints { maker in
             maker.top.equalTo(self.segmentControl.snp.bottom).inset(-16)
             maker.leading.trailing.equalToSuperview()
@@ -95,7 +97,6 @@ class MainPanelView: NSView {
         }
 
         self.backgroundView.addSubview(self.bottomSeparator)
-        self.bottomSeparator.backgroundColor = NSColor.color(.separator)
         self.bottomSeparator.snp.makeConstraints { maker in
             maker.bottom.equalTo(self.bottomBar.snp.top)
             maker.leading.trailing.equalToSuperview()
