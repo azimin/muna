@@ -39,17 +39,6 @@ class NotificationsService: NotificationsServiceProtocol {
         notificationContent.categoryIdentifier = "item"
         notificationContent.userInfo = ["item_id": item.id]
 
-        do {
-            let attachement = try UNNotificationAttachment(
-                identifier: "image",
-                url: ServiceLocator.shared.imageStorage.urlOfImage(name: item.imageName),
-                options: nil
-            )
-            notificationContent.attachments = [attachement]
-        } catch {
-            print(error)
-        }
-
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: timeInterval,
             repeats: false
