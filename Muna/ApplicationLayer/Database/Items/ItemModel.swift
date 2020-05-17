@@ -52,6 +52,7 @@ class ItemModel: ItemModelProtocol, Codable {
                 self.completionDate = nil
             }
             self.itemsDatabaseService?.saveItems()
+            self.itemsDatabaseService?.itemUpdated.value = self.id
         }
     }
 

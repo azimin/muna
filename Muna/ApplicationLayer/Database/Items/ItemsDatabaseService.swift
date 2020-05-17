@@ -9,6 +9,8 @@
 import Cocoa
 
 protocol ItemsDatabaseServiceProtocol: AnyObject {
+    var itemUpdated: Observable<String?> { get }
+
     func item(by id: String) -> ItemModel?
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
 
@@ -33,6 +35,8 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         case noDeadline
         case completed
     }
+
+    let itemUpdated = Observable<String?>(nil)
 
     private var key: String = "ud_main_data_items"
     private let defaults = UserDefaults.standard

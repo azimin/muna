@@ -156,8 +156,15 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             // TODO: Work with menu
             let menu = NSMenu(title: "ControlMenu")
             menu.addItem(NSMenuItem(title: "Complete", action: nil, keyEquivalent: ""))
-            menu.addItem(NSMenuItem(title: "Preview", action: #selector(self.previewAction), keyEquivalent: ""))
-            menu.addItem(NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: ""))
+
+            let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
+            previewItem.keyEquivalentModifierMask = []
+
+            let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: "⌫")
+            deleteItem.keyEquivalentModifierMask = []
+
+            menu.addItem(previewItem)
+            menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
         } else {
             return super.rightMouseUp(with: event)
@@ -166,6 +173,23 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     @objc func previewAction() {
         self.popUpController.show()
+    }
+
+    @objc
+    func completeActiveItemAction() {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+        item.isComplited = true
+
+        self.selectIndexPath(indexPath: indexPath, completion: nil)
     }
 
     @objc

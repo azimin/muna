@@ -16,6 +16,7 @@ extension MainPanelViewController {
         case nextSection
         case deleteItem
         case previewItem
+        case complete
 
         var item: ShortcutItem {
             switch self {
@@ -31,6 +32,8 @@ extension MainPanelViewController {
                 return ShortcutItem(key: .delete, modifiers: [])
             case .previewItem:
                 return ShortcutItem(key: .space, modifiers: [])
+            case .complete:
+                return ShortcutItem(key: .return, modifiers: [])
             }
         }
     }

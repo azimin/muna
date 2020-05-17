@@ -22,6 +22,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     let commentLabel = Label(fontStyle: .medium, size: 14)
 
     private var isComplited: Bool = false
+    private var itemObservable: ObserverTokenProtocol?
 
     init() {
         super.init(frame: .zero)
@@ -34,6 +35,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     func reuse() {
         self.item = nil
+        self.itemObservable?.removeObserving()
     }
 
     override func updateLayer() {
@@ -155,6 +157,14 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         item.toggleSeen()
 
         self.updateStyle()
+
+        self.itemObservable = ServiceLocator.shared.itemsDatabase.itemUpdated.observeNew(self, closure: { [weak self] id in
+            guard let self = self else { return }
+            if id != nil, self.item?.id == id {
+                self.isComplited = item.isComplited
+                self.updateStyle()
+            }
+        })
     }
 }
 

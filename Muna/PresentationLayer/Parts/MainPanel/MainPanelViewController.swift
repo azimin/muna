@@ -84,6 +84,10 @@ class MainPanelViewController: NSViewController {
             return { [weak self] in
                 self?.rootView.spaceClicked()
             }
+        case .complete:
+            return { [weak self] in
+                self?.rootView.mainContentView.completeActiveItemAction()
+            }
         }
     }
 
