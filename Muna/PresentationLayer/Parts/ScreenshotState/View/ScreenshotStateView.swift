@@ -30,6 +30,8 @@ class ScreenshotStateView: View {
 
     var screenshotFrame = CGRect.zero
 
+    private var isShortcutsViewShowed = false
+
     init(delegate: ScreenshotStateViewDelegate?, savingService: SavingProcessingService) {
         self.delegate = delegate
         self.reminderSetupPopup = TaskCreateView(savingProcessingService: savingService)
@@ -37,6 +39,8 @@ class ScreenshotStateView: View {
         super.init(frame: .zero)
 
         self.reminderSetupPopup.delegate = self
+
+        self.taskCreateShortCutsView.closeButton.action = #selector(self.handleCloseShortcutsButton)
 
         self.setupInitialLayout()
     }
@@ -193,6 +197,13 @@ class ScreenshotStateView: View {
     func showShortcutsView(aroundViewFrame frame: NSRect) {
         self.setPositionForTaskCreateShortcuts(aroundRect: self.reminderSetupPopup.frame)
         self.taskCreateShortCutsView.isHidden = false
+        self.isShortcutsViewShowed = true
+    }
+
+    @objc
+    private func handleCloseShortcutsButton() {
+        self.taskCreateShortCutsView.isHidden = true
+        self.isShortcutsViewShowed = false
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
@@ -209,6 +220,10 @@ class ScreenshotStateView: View {
 
 extension ScreenshotStateView: TaskCreateViewDelegate {
     func shortcutsButtonTapped() {
-        self.showShortcutsView(aroundViewFrame: self.reminderSetupPopup.frame)
+        if self.isShortcutsViewShowed {
+            self.handleCloseShortcutsButton()
+        } else {
+            self.showShortcutsView(aroundViewFrame: self.reminderSetupPopup.frame)
+        }
     }
 }
