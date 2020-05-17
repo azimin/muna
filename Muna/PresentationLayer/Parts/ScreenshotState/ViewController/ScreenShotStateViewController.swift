@@ -21,10 +21,25 @@ class ScreenShotStateViewController: NSViewController {
 
     private let savingProcessingService: SavingProcessingService
 
+    private var shortcutsController: ShortcutsController?
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         self.savingProcessingService = ServiceLocator.shared.savingService
 
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+
+        var shortcutActions: [ShortcutAction] = []
+        for shortcut in Shortcut.allCases {
+            let action = self.actionForShortcut(shortcut)
+            shortcutActions.append(.init(
+                item: shortcut.item,
+                action: action
+            ))
+        }
+
+        self.shortcutsController = ShortcutsController(
+            shortcutActions: shortcutActions
+        )
     }
 
     required init?(coder: NSCoder) {
@@ -99,6 +114,13 @@ class ScreenShotStateViewController: NSViewController {
         let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
 
         completion(image)
+    }
+
+    func actionForShortcut(_ shortcut: Shortcut) -> VoidBlock? {
+        switch shortcut {
+        case .closeItem:
+            return nil
+        }
     }
 }
 
