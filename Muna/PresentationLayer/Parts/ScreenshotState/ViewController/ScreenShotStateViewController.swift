@@ -29,7 +29,17 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         self.savingProcessingService = ServiceLocator.shared.savingService
 
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        self.view = ScreenshotStateView(delegate: self, savingService: self.savingProcessingService)
+    }
+
+    private func setup() {
         var shortcutActions: [ShortcutAction] = []
         for shortcut in Shortcut.allCases {
             let action = self.actionForShortcut(shortcut)
@@ -42,14 +52,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         self.shortcutsController = ShortcutsController(
             shortcutActions: shortcutActions
         )
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func loadView() {
-        self.view = ScreenshotStateView(delegate: self, savingService: self.savingProcessingService)
+        self.shortcutsController?.start()
     }
 
     // MARK: - Mouse events
@@ -90,9 +93,15 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     // MARK: - Show hide
 
+    func show() {
+        self.setup()
+    }
+
     func hide(completion: VoidBlock?) {
         self.isNeededToDrawFrame = true
         self.rootView.hideVisuals()
+        self.shortcutsController?.stop()
+        self.shortcutsController = nil
         completion?()
     }
 

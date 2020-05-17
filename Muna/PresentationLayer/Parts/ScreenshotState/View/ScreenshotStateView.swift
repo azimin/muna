@@ -94,7 +94,7 @@ class ScreenshotStateView: View {
 
         self.setPositionForReminderPopupSetup()
         self.reminderSetupPopup.isHidden = false
-        self.reminderSetupPopup.window?.makeFirstResponder(self.reminderSetupPopup)
+        self.window?.makeFirstResponder(self.reminderSetupPopup)
     }
 
     private func setPositionForReminderPopupSetup() {
@@ -217,7 +217,13 @@ class ScreenshotStateView: View {
         return super.performKeyEquivalent(with: event)
     }
 
-    func handleCloseShortcut() {}
+    func handleCloseShortcut() {
+        if self.isShortcutsViewShowed {
+            self.handleCloseShortcutsButton()
+        } else {
+            self.delegate?.escapeWasTapped()
+        }
+    }
 }
 
 extension ScreenshotStateView: TaskCreateViewDelegate {
