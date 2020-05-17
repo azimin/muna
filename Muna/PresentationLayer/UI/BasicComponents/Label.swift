@@ -9,12 +9,27 @@
 import Cocoa
 
 class Label: NSTextField {
+    // NOT SUPPORTED YET
+    private var adjustsFontSizeToFitWidth: Bool = false
+
+    private var recommendedFont: NSFont?
+    private var shouldCaptureFont: Bool = true
+
     var text: String {
         set {
             self.stringValue = newValue
+            self.adjustIfNeeded(text: newValue)
         }
         get {
             return self.stringValue
+        }
+    }
+
+    override var font: NSFont? {
+        didSet {
+            if self.shouldCaptureFont {
+                self.recommendedFont = self.font
+            }
         }
     }
 
@@ -33,6 +48,48 @@ class Label: NSTextField {
         self.isEditable = false
         self.isBezeled = false
         self.backgroundColor = NSColor.clear
+    }
+
+    override func layout() {
+        super.layout()
+        self.adjustIfNeeded(text: self.text)
+    }
+
+    private func adjustIfNeeded(text: String) {
+        guard self.adjustsFontSizeToFitWidth, let font = self.recommendedFont else {
+            return
+        }
+
+        var currentFontSize = (font.fontDescriptor.fontAttributes[NSFontDescriptor.AttributeName.size] as? CGFloat) ?? 3
+        self.shouldCaptureFont = false
+
+        while true {
+            if currentFontSize < 3.5 {
+                break
+            }
+
+            let newFont = NSFont(
+                descriptor: font.fontDescriptor,
+                size: currentFontSize
+            ) ?? NSFont.systemFont(ofSize: currentFontSize)
+
+            let size = (text as NSString).size(
+                withAttributes: [NSAttributedString.Key.font: newFont]
+            )
+
+            if size.width <= self.frame.width {
+                break
+            }
+
+            currentFontSize -= 0.5
+        }
+
+        self.font = NSFont(
+            descriptor: font.fontDescriptor,
+            size: currentFontSize
+        )
+
+        self.shouldCaptureFont = true
     }
 
     required init?(coder: NSCoder) {
