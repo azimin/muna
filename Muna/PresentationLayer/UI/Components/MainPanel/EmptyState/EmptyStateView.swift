@@ -22,12 +22,14 @@ class EmptyStateView: View {
         size: 20
     )
     .withAligment(.center)
+    .withTextColorStyle(.title60AccentAlpha)
 
     let actionLabel = Label(
         fontStyle: .medium,
         size: 14
     )
     .withAligment(.center)
+    .withTextColorStyle(.title60AccentAlpha)
 
     var shortcutView: NSView?
 
@@ -38,12 +40,6 @@ class EmptyStateView: View {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateLayer() {
-        super.updateLayer()
-        self.titelLabel.textColor = NSColor.color(.title60AccentAlpha)
-        self.actionLabel.textColor = NSColor.color(.title60AccentAlpha)
     }
 
     private func setup() {

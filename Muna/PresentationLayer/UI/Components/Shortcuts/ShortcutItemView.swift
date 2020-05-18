@@ -10,8 +10,13 @@ import Cocoa
 
 class ShortcutItemView: View {
     let imageView = ImageView().withIsHidden(true)
-    let iconLabel = Label(fontStyle: .bold, size: 11).withIsHidden(true)
-    let label = Label(fontStyle: .bold, size: 11).withIsHidden(true)
+    let iconLabel = Label(fontStyle: .bold, size: 11)
+        .withIsHidden(true)
+        .withTextColorStyle(.titleAccent)
+
+    let label = Label(fontStyle: .bold, size: 11)
+        .withIsHidden(true)
+        .withTextColorStyle(.titleAccent)
 
     init(modifierFlags: NSEvent.ModifierFlags) {
         let iconString: String
@@ -47,8 +52,6 @@ class ShortcutItemView: View {
 
     override func updateLayer() {
         super.updateLayer()
-        self.iconLabel.textColor = NSColor.color(.titleAccent)
-        self.label.textColor = NSColor.color(.titleAccent)
         self.imageView.image = self.imageView.image?.tint(color: NSColor.color(.titleAccent))
     }
 

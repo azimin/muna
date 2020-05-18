@@ -13,12 +13,15 @@ class MainPanelView: NSView {
     let backgroundView = View()
     let visualView = NSVisualEffectView()
     let visualOverlayView = View()
+        .withBackgroundColorStyle(.lightForegroundOverlay)
 
     let segmentControl = NSSegmentedControl(labels: ["Uncompleted", "No deadline", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
     let topSeparator = View()
+        .withBackgroundColorStyle(.separator)
     let mainContentView = MainPanelContentView()
 
     let bottomSeparator = View()
+        .withBackgroundColorStyle(.separator)
     let bottomBar = PanelBottomBarView()
 
     override init(frame: NSRect) {
@@ -46,11 +49,7 @@ class MainPanelView: NSView {
     override func updateLayer() {
         super.updateLayer()
         self.visualView.material = Theme.current.visualEffectMaterial
-        self.visualOverlayView.backgroundColor = NSColor.color(.lightForegroundOverlay)
-
         self.backgroundView.layer?.borderColor = CGColor.color(.separator)
-        self.topSeparator.backgroundColor = NSColor.color(.separator)
-        self.bottomSeparator.backgroundColor = NSColor.color(.separator)
     }
 
     func setup() {

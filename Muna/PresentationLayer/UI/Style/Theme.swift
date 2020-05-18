@@ -8,6 +8,8 @@
 
 import Cocoa
 
+private var currentTheme = Theme.current
+
 enum Theme {
     case dark
     case light
@@ -30,6 +32,13 @@ enum Theme {
             return .dark
         case .light:
             return .light
+        }
+    }
+
+    static func checkThemeUpdateIfNeeded() {
+        if currentTheme != Theme.current {
+            NSView.updateAllStyles()
+            currentTheme = Theme.current
         }
     }
 }

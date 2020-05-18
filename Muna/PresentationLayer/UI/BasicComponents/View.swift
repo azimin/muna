@@ -28,6 +28,18 @@ class View: NSView {
         }
     }
 
+    func withBackgroundColorStyle(_ colorStyle: ColorStyle) -> Self {
+        self.createStyleAction(style: colorStyle) { [weak self] style in
+            self?.backgroundColor = NSColor.color(style)
+        }
+        return self
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        Theme.checkThemeUpdateIfNeeded()
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

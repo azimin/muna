@@ -10,7 +10,9 @@ import Cocoa
 
 extension Label {
     func withTextColorStyle(_ colorStyle: ColorStyle) -> Self {
-        self.textColor = colorStyle.color
+        self.createStyleAction(style: colorStyle) { [weak self] style in
+            self?.textColor = NSColor.color(style)
+        }
         return self
     }
 

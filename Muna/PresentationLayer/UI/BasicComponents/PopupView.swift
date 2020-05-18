@@ -13,7 +13,7 @@ class PopupView: View {
     let vialPlateOverlay = View()
 
     let closeButton = Button()
-        .withImageName("icon_close")
+        .withImageName("icon_close", color: .title60Accent)
 
     init() {
         super.init(frame: .zero)
@@ -27,7 +27,6 @@ class PopupView: View {
     override func updateLayer() {
         super.updateLayer()
         self.vialPlate.material = Theme.current.visualEffectMaterial
-        _ = self.closeButton.withImageName("icon_close", color: .title60Accent)
     }
 
     func setup() {

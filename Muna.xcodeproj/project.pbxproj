@@ -42,6 +42,7 @@
 		9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */; };
 		9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */; };
 		9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75E24731D9C00DFBB05 /* DateItem.swift */; };
+		9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */; };
 		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
 		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D482246875B000395C44 /* EmptyStateView.swift */; };
@@ -153,6 +154,7 @@
 		9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemPresentationConfigurator.swift; sourceTree = "<group>"; };
 		9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
 		9F1CB75E24731D9C00DFBB05 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
+		9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+StyleHolder.swift"; sourceTree = "<group>"; };
 		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		9F33D47524684D5C00395C44 /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA07F512460820400654D36 /* NSView+Extensions.swift */,
+				9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */,
 				9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */,
 				9FA07F682460C16000654D36 /* NSColor+Hex.swift */,
 				9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */,
@@ -1138,6 +1141,7 @@
 				9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
+				9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */,
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,

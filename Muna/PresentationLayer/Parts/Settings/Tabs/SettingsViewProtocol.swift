@@ -11,7 +11,11 @@ import Cocoa
 protocol SettingsViewProtocol {}
 
 extension SettingsViewProtocol {
+    var firstPartframeWidth: CGFloat {
+        return 230
+    }
+
     var frameWidth: CGFloat {
-        return 320
+        return 560
     }
 }

@@ -26,7 +26,7 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         self.titlesView.backgroundColor = .red
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
-            maker.width.equalTo(120)
+            maker.width.equalTo(self.firstPartframeWidth)
             maker.height.equalTo(250)
         }
 

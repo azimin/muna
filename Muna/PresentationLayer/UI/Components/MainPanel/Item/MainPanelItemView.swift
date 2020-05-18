@@ -14,12 +14,19 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     var imageView = ImageView()
     let metainformationPlate = NSVisualEffectView()
+
     let metainformationPlateOverlay = View()
+        .withBackgroundColorStyle(.lightForegroundOverlay)
+
     let metainformationStackView = NSStackView()
 
     let completionButton = Button().withImageName("reminder-off")
+
     let deadlineLabel = Label(fontStyle: .heavy, size: 16)
+        .withTextColorStyle(.titleAccent)
+
     let commentLabel = Label(fontStyle: .medium, size: 14)
+        .withTextColorStyle(.title60AccentAlpha)
 
     private var isComplited: Bool = false
     private var itemObservable: ObserverTokenProtocol?
@@ -41,10 +48,6 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     override func updateLayer() {
         super.updateLayer()
         self.metainformationPlate.material = Theme.current.visualEffectMaterial
-        self.metainformationPlateOverlay.backgroundColor = NSColor.color(.lightForegroundOverlay)
-
-        self.deadlineLabel.textColor = NSColor.color(.titleAccent)
-        self.commentLabel.textColor = NSColor.color(.title60AccentAlpha)
     }
 
     private func setup() {
@@ -113,7 +116,10 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     func updateStyle() {
         let imageName = self.isComplited ? "reminder-on" : "reminder-off"
-        _ = self.completionButton.withImageName(imageName, color: .titleAccent)
+        self.completionButton.update(
+            imageName: imageName,
+            colorStyle: .titleAccent
+        )
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {

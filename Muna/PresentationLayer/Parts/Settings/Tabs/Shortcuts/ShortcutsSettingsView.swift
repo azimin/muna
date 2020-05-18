@@ -12,6 +12,13 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
+    let launchOnStartupLabel = Label(
+        fontStyle: .medium,
+        size: 14
+    )
+    .withTextColorStyle(.titleAccent)
+    .withText("Hi there, it's a test")
+
     init() {
         super.init(frame: .zero)
         self.setup()
@@ -23,19 +30,25 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
 
     private func setup() {
         self.addSubview(self.titlesView)
-        self.titlesView.backgroundColor = .red
+//        self.titlesView.backgroundColor = .red
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
-            maker.width.equalTo(120)
+            maker.width.equalTo(self.firstPartframeWidth)
             maker.height.equalTo(500)
         }
 
         self.addSubview(self.settingsView)
-        self.settingsView.backgroundColor = .blue
+//        self.settingsView.backgroundColor = .blue
         self.settingsView.snp.makeConstraints { maker in
             maker.leading.equalTo(self.titlesView.snp.trailing)
             maker.trailing.top.bottom.equalToSuperview()
             maker.width.equalTo(self.frameWidth - 120)
+        }
+
+        self.titlesView.addSubview(self.launchOnStartupLabel)
+//        self.launchOnStartupLabel.backgroundColor = NSColor.white
+        self.launchOnStartupLabel.snp.makeConstraints { maker in
+            maker.center.equalToSuperview()
         }
     }
 }

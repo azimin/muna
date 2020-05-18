@@ -14,6 +14,7 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
         fontStyle: .medium,
         size: 20
     )
+    .withTextColorStyle(.title60AccentAlpha)
 
     let redArrowView = View()
 
@@ -29,11 +30,6 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateLayer() {
-        super.updateLayer()
-        self.label.textColor = NSColor.color(.title60AccentAlpha)
     }
 
     private func setup() {

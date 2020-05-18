@@ -16,10 +16,22 @@ extension Button {
         return self
     }
 
+    func update(imageName: String, colorStyle: ColorStyle? = nil) {
+        if let colorStyle = colorStyle {
+            self.image = NSImage(named: NSImage.Name(imageName))?
+                .tint(color: NSColor.color(colorStyle))
+        } else {
+            self.image = NSImage(named: NSImage.Name(imageName))
+        }
+    }
+
     @discardableResult
     func withImageName(_ name: String, color: ColorStyle? = nil) -> Self {
         if let color = color {
-            self.image = NSImage(named: NSImage.Name(name))?.tint(color: NSColor.color(color))
+            self.createStyleAction(style: color) { [weak self] style in
+                self?.image = NSImage(named: NSImage.Name(name))?
+                    .tint(color: NSColor.color(style))
+            }
         } else {
             self.image = NSImage(named: NSImage.Name(name))
         }

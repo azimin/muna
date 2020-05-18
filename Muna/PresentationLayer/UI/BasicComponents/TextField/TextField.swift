@@ -14,7 +14,8 @@ protocol TextFieldDelegate: AnyObject {
 
 class TextField: View, NSTextFieldDelegate {
     let textField = ActionedTextField()
-    let clearButton = Button().withImageName("icon_text_field_clear")
+    let clearButton = Button()
+        .withImageName("icon_text_field_clear", color: .titleAccent)
 
     private(set) var isInFocus: Bool = false
 
@@ -50,11 +51,6 @@ class TextField: View, NSTextFieldDelegate {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateLayer() {
-        super.updateLayer()
-        _ = self.clearButton.withImageName("icon_text_field_clear", color: .titleAccent)
     }
 
     func setup() {
