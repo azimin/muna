@@ -193,52 +193,22 @@ class ScreenshotStateView: View {
         if isEnoughTopSpace {
             newRect.origin.x = aroundRect.midX - newRect.width / 2
             newRect.origin.y = aroundRect.minY - 16 - newRect.height
-
-            if self.bounds.minX > newRect.origin.x {
-                newRect.origin.x = self.bounds.minX + 16
-            }
-            if self.bounds.maxX < newRect.maxX {
-                newRect.origin.x = self.bounds.maxX - 16 - newRect.width
-            }
-
-            if !self.screenshotFrame.intersects(newRect) {
-                return newRect
-            }
         }
 
-        if isEnoughBottomSpace {
+        if isEnoughBottomSpace, !isEnoughTopSpace {
             newRect.origin.x = aroundRect.midX - newRect.width / 2
             newRect.origin.y = aroundRect.maxY + 16
-
-            if self.bounds.minX > newRect.origin.x {
-                newRect.origin.x = self.bounds.minX + 16
-            }
-
-            if self.bounds.maxX < newRect.maxX {
-                newRect.origin.x = self.bounds.maxX - 16 - newRect.width
-            }
-
-            if !self.screenshotFrame.intersects(newRect) {
-                return newRect
-            }
         }
 
-        if isEnoughRightSpaceFromScreenshot {
-            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
-            newRect.origin.x = self.screenshotFrame.maxX + 16
-
-            if !aroundRect.intersects(newRect) {
-                return newRect
-            }
+        if self.bounds.minX > newRect.origin.x {
+            newRect.origin.x = self.bounds.minX + 16
+        }
+        if self.bounds.maxX < newRect.maxX {
+            newRect.origin.x = self.bounds.maxX - 16 - newRect.width
         }
 
-        if isEnoughLeftSpaceFromScreenshot {
-            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
-            newRect.origin.x = self.screenshotFrame.minX - 16 - newRect.width
-
-            if !aroundRect.intersects(newRect) {
-                return newRect
-            }
+        if !self.screenshotFrame.intersects(newRect) {
+            return newRect
         }
 
         if isEnoughLeftSpaceFromScreenshot, isEnoughTopSpace {
@@ -281,15 +251,41 @@ class ScreenshotStateView: View {
             }
         }
 
+        if isEnoughRightSpaceFromScreenshot {
+            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
+            newRect.origin.x = self.screenshotFrame.maxX + 16
+
+            if !aroundRect.intersects(newRect) {
+                return newRect
+            }
+        }
+
+        if isEnoughLeftSpaceFromScreenshot {
+            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
+            newRect.origin.x = self.screenshotFrame.minX - 16 - newRect.width
+
+            if !aroundRect.intersects(newRect) {
+                return newRect
+            }
+        }
+
         if isEnoughTopSpaceFromScreenshot {
             newRect.origin.x = self.screenshotFrame.midX - newRect.width / 2
             newRect.origin.y = self.screenshotFrame.minY - newRect.height - 16
+
+            if !aroundRect.intersects(newRect) {
+                newRect.origin.x = aroundRect.maxX + 16
+            }
             return newRect
         }
 
         if isEnoughBottomSpaceFromScreenshot {
             newRect.origin.x = self.screenshotFrame.midX - newRect.width / 2
             newRect.origin.y = self.screenshotFrame.maxY + 16
+
+            if !aroundRect.intersects(newRect) {
+                newRect.origin.x = aroundRect.maxX + 16
+            }
             return newRect
         }
 
