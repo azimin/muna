@@ -16,6 +16,7 @@ class PopupView: View {
 
     let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
+        .withBackgroundColorStyle(.foregroundOverlay)
 
     let closeButton = Button()
         .withImageName("icon_close", color: .title60Accent)
@@ -35,6 +36,7 @@ class PopupView: View {
     override func updateLayer() {
         super.updateLayer()
         self.vialPlate.material = Theme.current.visualEffectMaterial
+        self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
     }
 
     func setup(forStyle style: Style) {
@@ -58,8 +60,6 @@ class PopupView: View {
         }
         self.vialPlateOverlay.layer?.cornerRadius = 12
         self.vialPlateOverlay.layer?.borderWidth = 1
-        self.vialPlateOverlay.layer?.borderColor = CGColor.color(.separator)
-        self.vialPlateOverlay.backgroundColor = NSColor.color(.foregroundOverlay)
 
         self.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { maker in
