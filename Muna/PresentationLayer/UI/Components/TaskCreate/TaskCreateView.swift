@@ -170,8 +170,8 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             self.mainOption?.update(style: .basic, animated: true)
             self.mainOption?.update(item: .init(
                 title: "No reminder",
-                subtitle: "Bla bla",
-                additionalText: "in 1 day"
+                subtitle: "",
+                additionalText: ""
             ))
         } else {
             self.mainOption?.update(style: .selected, animated: true)
