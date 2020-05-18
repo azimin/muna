@@ -171,6 +171,10 @@ class WindowManager {
             animate: false
         )
 
+        if let viewController = window.contentViewController as? ScreenShotStateViewController {
+            viewController.show()
+        }
+
         window.setIsVisible(true)
     }
 

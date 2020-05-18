@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class ScreenShotStateViewController: NSViewController {
+class ScreenShotStateViewController: NSViewController, ViewHolder {
+    typealias ViewType = ScreenshotStateView
+
     var windowId: CGWindowID?
 
     private var tmpCGImage: CGImage?
@@ -20,6 +22,8 @@ class ScreenShotStateViewController: NSViewController {
     var isNeededToDrawFrame = true
 
     private let savingProcessingService: SavingProcessingService
+
+    private var shortcutsController: ShortcutsController?
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         self.savingProcessingService = ServiceLocator.shared.savingService
@@ -35,6 +39,22 @@ class ScreenShotStateViewController: NSViewController {
         self.view = ScreenshotStateView(delegate: self, savingService: self.savingProcessingService)
     }
 
+    private func setup() {
+        var shortcutActions: [ShortcutAction] = []
+        for shortcut in Shortcut.allCases {
+            let action = self.actionForShortcut(shortcut)
+            shortcutActions.append(.init(
+                item: shortcut.item,
+                action: action
+            ))
+        }
+
+        self.shortcutsController = ShortcutsController(
+            shortcutActions: shortcutActions
+        )
+        self.shortcutsController?.start()
+    }
+
     // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
@@ -43,11 +63,11 @@ class ScreenShotStateViewController: NSViewController {
         }
 
         self.makeScreenshot { [unowned self] image in
-            (self.view as! ScreenshotStateView).screenshotImageView.image = image
-            (self.view as! ScreenshotStateView).screenshotImageView.isHidden = false
+            self.rootView.screenshotImageView.image = image
+            self.rootView.screenshotImageView.isHidden = false
 
             self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
-            (self.view as! ScreenshotStateView).startDash()
+            self.rootView.startDash()
         }
     }
 
@@ -56,7 +76,7 @@ class ScreenShotStateViewController: NSViewController {
             return
         }
         self.isNeededToDrawFrame = false
-        (self.view as! ScreenshotStateView).showVisuals()
+        rootView.showVisuals()
     }
 
     override func mouseDragged(with event: NSEvent) {
@@ -65,7 +85,7 @@ class ScreenShotStateViewController: NSViewController {
         }
 
         let point = self.view.convert(event.locationInWindow, from: nil)
-        (self.view as! ScreenshotStateView).continiouslyDrawDash(
+        self.rootView.continiouslyDrawDash(
             fromStartPoint: self.startedPoint,
             toPoint: point
         )
@@ -73,9 +93,15 @@ class ScreenShotStateViewController: NSViewController {
 
     // MARK: - Show hide
 
+    func show() {
+        self.setup()
+    }
+
     func hide(completion: VoidBlock?) {
         self.isNeededToDrawFrame = true
-        (self.view as! ScreenshotStateView).hideVisuals()
+        self.rootView.hideVisuals()
+        self.shortcutsController?.stop()
+        self.shortcutsController = nil
         completion?()
     }
 
@@ -99,6 +125,15 @@ class ScreenShotStateViewController: NSViewController {
         let image = NSImage(cgImage: cgImage, size: self.view.frame.size)
 
         completion(image)
+    }
+
+    func actionForShortcut(_ shortcut: Shortcut) -> VoidBlock? {
+        switch shortcut {
+        case .closeItem:
+            return { [weak self] in
+                self?.rootView.handleCloseShortcut()
+            }
+        }
     }
 }
 

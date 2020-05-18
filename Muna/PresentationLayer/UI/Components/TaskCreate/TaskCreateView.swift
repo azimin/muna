@@ -9,6 +9,10 @@
 import Cocoa
 import SwiftDate
 
+protocol TaskCreateViewDelegate: AnyObject {
+    func shortcutsButtonTapped()
+}
+
 class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     var mainOption: TaskReminderItemView?
 
@@ -29,21 +33,23 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     private let dateParser = MunaChrono()
     private let savingProcessingService: SavingProcessingService
 
+    weak var delegate: TaskCreateViewDelegate?
+
     init(savingProcessingService: SavingProcessingService) {
         self.savingProcessingService = savingProcessingService
 
-        super.init()
+        super.init(style: .withShortcutsButton)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setup() {
-        super.setup()
+    override func setup(forStyle style: Style) {
+        super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(220)
+            maker.width.equalTo(264)
         }
 
         self.addSubview(self.contentStackView)
@@ -86,6 +92,7 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
 
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
+        self.shortcutsButton.action = #selector(self.handleShortcutsButton)
 
         self.addMonitor()
 
@@ -257,20 +264,29 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     }
 
     func createTask() {
+        defer {
+            (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+        }
+
+        var itemToSave = SavingProcessingService.ItemToSave()
+
         guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
+            self.savingProcessingService.save(withItem: itemToSave)
             return
         }
 
         let parsedResult = self.parsedDates[self.selectedIndex]
 
-        let itemToSave = SavingProcessingService.ItemToSave(
-            dueDateString: reminderItem.title,
-            date: parsedResult.date,
-            comment: self.commentTextField.textField.stringValue
-        )
+        itemToSave.dueDateString = reminderItem.title
+        itemToSave.date = parsedResult.date
+        itemToSave.comment = self.commentTextField.textField.stringValue
+
         self.savingProcessingService.save(withItem: itemToSave)
-        // TODO: - Improve close process
-        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+    }
+
+    @objc
+    private func handleShortcutsButton() {
+        self.delegate?.shortcutsButtonTapped()
     }
 }
 

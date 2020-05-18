@@ -87,8 +87,8 @@ class TaskCreateShortcuts: PopupView {
 
     let contentStackView = NSStackView()
 
-    override func setup() {
-        super.setup()
+    override func setup(forStyle style: Style) {
+        super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
             maker.width.equalTo(self.frameWidth)

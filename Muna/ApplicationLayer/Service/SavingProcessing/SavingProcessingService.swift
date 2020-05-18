@@ -10,9 +10,9 @@ import Cocoa
 
 class SavingProcessingService {
     struct ItemToSave {
-        let dueDateString: String
-        let date: Date
-        let comment: String?
+        var dueDateString: String?
+        var date: Date?
+        var comment: String?
     }
 
     private var image: NSImage?

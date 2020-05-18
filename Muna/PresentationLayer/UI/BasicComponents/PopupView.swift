@@ -9,15 +9,23 @@
 import Cocoa
 
 class PopupView: View {
+    enum Style {
+        case withShortcutsButton
+        case withoutShortcutsButton
+    }
+
     let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
 
     let closeButton = Button()
         .withImageName("icon_close", color: .title60Accent)
 
-    init() {
+    let shortcutsButton = Button().withImageName("icon_cmd", color: .button)
+
+    init(style: Style) {
         super.init(frame: .zero)
-        self.setup()
+
+        self.setup(forStyle: style)
     }
 
     required init?(coder: NSCoder) {
@@ -29,7 +37,7 @@ class PopupView: View {
         self.vialPlate.material = Theme.current.visualEffectMaterial
     }
 
-    func setup() {
+    func setup(forStyle style: Style) {
         self.backgroundColor = NSColor.clear
 
         self.layer?.cornerRadius = 12
@@ -62,6 +70,18 @@ class PopupView: View {
                 right: 12
             ))
             maker.size.equalTo(CGSize(width: 16, height: 16))
+        }
+
+        switch style {
+        case .withShortcutsButton:
+            self.addSubview(self.shortcutsButton)
+            self.shortcutsButton.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(16)
+                make.trailing.equalTo(self.closeButton.snp.leading).offset(-16)
+                make.size.equalTo(14)
+            }
+        case .withoutShortcutsButton:
+            break
         }
     }
 }
