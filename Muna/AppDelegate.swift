@@ -55,6 +55,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
+        TimeParserTests.test()
+
 //        let currentTime = TimeZone.current.secondsFromGMT()
 //        let date = Date() + currentTime.seconds
 //        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
