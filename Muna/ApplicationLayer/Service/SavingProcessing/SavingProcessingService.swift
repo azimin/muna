@@ -10,9 +10,9 @@ import Cocoa
 
 class SavingProcessingService {
     struct ItemToSave {
-        let dueDateString: String
-        let date: Date
-        let comment: String?
+        var dueDateString: String?
+        var date: Date?
+        var comment: String?
     }
 
     private var image: NSImage?
@@ -27,16 +27,16 @@ class SavingProcessingService {
         self.image = image
     }
 
-    func save(withItem item: ItemToSave?) {
+    func save(withItem item: ItemToSave) {
         guard let image = self.image else {
             assertionFailure("Image is not provided")
             return
         }
         let itemModel = self.database.addItem(
             image: image,
-            dueDateString: item?.dueDateString,
-            dueDate: item?.date,
-            comment: item?.comment
+            dueDateString: item.dueDateString,
+            dueDate: item.date,
+            comment: item.comment
         )
         self.image = nil
 

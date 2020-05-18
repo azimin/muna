@@ -268,18 +268,19 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
         }
 
+        var itemToSave = SavingProcessingService.ItemToSave()
+
         guard let reminderItem = self.controller.item(by: self.selectedIndex) else {
-            self.savingProcessingService.save(withItem: nil)
+            self.savingProcessingService.save(withItem: itemToSave)
             return
         }
 
         let parsedResult = self.parsedDates[self.selectedIndex]
 
-        let itemToSave = SavingProcessingService.ItemToSave(
-            dueDateString: reminderItem.title,
-            date: parsedResult.date,
-            comment: self.commentTextField.textField.stringValue
-        )
+        itemToSave.dueDateString = reminderItem.title
+        itemToSave.date = parsedResult.date
+        itemToSave.comment = self.commentTextField.textField.stringValue
+
         self.savingProcessingService.save(withItem: itemToSave)
     }
 
