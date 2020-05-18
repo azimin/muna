@@ -40,9 +40,7 @@
 		9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */; };
 		9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */; };
 		9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */; };
-		9F1CB75924731D7000DFBB05 /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75824731D7000DFBB05 /* TimeType.swift */; };
 		9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */; };
-		9F1CB75D24731D9000DFBB05 /* PureDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75C24731D9000DFBB05 /* PureDay.swift */; };
 		9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75E24731D9C00DFBB05 /* DateItem.swift */; };
 		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
 		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -153,9 +151,7 @@
 		9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeParserTests.swift; sourceTree = "<group>"; };
 		9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemsTransformer.swift; sourceTree = "<group>"; };
 		9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemPresentationConfigurator.swift; sourceTree = "<group>"; };
-		9F1CB75824731D7000DFBB05 /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
 		9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
-		9F1CB75C24731D9000DFBB05 /* PureDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureDay.swift; sourceTree = "<group>"; };
 		9F1CB75E24731D9C00DFBB05 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
 		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		9F33D47524684D5C00395C44 /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
@@ -494,9 +490,7 @@
 		9F1CB76024731DA700DFBB05 /* SimpleTypes */ = {
 			isa = PBXGroup;
 			children = (
-				9F1CB75824731D7000DFBB05 /* TimeType.swift */,
 				9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */,
-				9F1CB75C24731D9000DFBB05 /* PureDay.swift */,
 				9F1CB75E24731D9C00DFBB05 /* DateItem.swift */,
 			);
 			path = SimpleTypes;
@@ -1087,7 +1081,6 @@
 				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
-				9F1CB75924731D7000DFBB05 /* TimeType.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
@@ -1101,7 +1094,6 @@
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
-				9F1CB75D24731D9000DFBB05 /* PureDay.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
 				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,

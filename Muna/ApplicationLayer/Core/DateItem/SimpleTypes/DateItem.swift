@@ -12,3 +12,19 @@ struct DateItem {
     var day: PureDay
     var timeType: TimeType
 }
+
+struct PureDay {
+    var day: Int
+    var month: Int
+    var year: Int
+}
+
+enum TimeType {
+    case noon
+    case afertnoon
+    case evening
+    case mindnight
+    case morning
+    case specificTime(timeIntervalSinceBeggininOfDay: TimeOfDay)
+    case allDay
+}
