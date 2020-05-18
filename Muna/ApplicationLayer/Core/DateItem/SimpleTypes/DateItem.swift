@@ -25,6 +25,6 @@ enum TimeType {
     case evening
     case mindnight
     case morning
-    case specificTime(timeIntervalSinceBeggininOfDay: TimeOfDay)
+    case specificTime(timeOfDay: TimeOfDay)
     case allDay
 }
