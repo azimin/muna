@@ -90,6 +90,11 @@ class TextField: View, NSTextFieldDelegate {
         self.clearButton.action = #selector(self.clear)
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.setBorder(isFocused: self.isInFocus)
+    }
+
     @objc
     func clear() {
         self.textField.stringValue = ""

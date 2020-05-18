@@ -10,8 +10,13 @@ import Cocoa
 
 class TaskDoneButton: Button {
     let separator = View()
+        .withBackgroundColorStyle(.separator)
+
     let overlay = View()
+        .withBackgroundColorStyle(.lightOverlay)
+
     let label = Label(fontStyle: .bold, size: 15)
+        .withTextColorStyle(.title60AccentAlpha)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -31,14 +36,12 @@ class TaskDoneButton: Button {
         }
 
         self.addSubview(self.separator)
-        self.separator.backgroundColor = NSColor.color(.separator)
         self.separator.snp.makeConstraints { maker in
             maker.leading.trailing.top.equalToSuperview()
             maker.height.equalTo(1)
         }
 
         self.addSubview(self.overlay)
-        self.overlay.backgroundColor = NSColor.color(.lightOverlay)
         self.overlay.snp.makeConstraints { maker in
             maker.top.equalTo(self.separator.snp.bottom)
             maker.leading.trailing.bottom.equalToSuperview()

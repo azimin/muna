@@ -78,7 +78,7 @@ enum ColorStyle {
             case .lightForegroundOverlay:
                 return NSColor.white.withAlphaComponent(0.3)
             case .lightOverlay:
-                return NSColor.white.withAlphaComponent(0.1)
+                return NSColor.black.withAlphaComponent(0.1)
             case .foregroundOverlay:
                 return NSColor.white.withAlphaComponent(0.5)
             case .grayBackground:
