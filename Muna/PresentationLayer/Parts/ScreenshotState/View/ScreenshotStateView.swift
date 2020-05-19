@@ -319,7 +319,7 @@ class ScreenshotStateView: View {
 
         self.screenshotImageView.image = nil
         self.reminderSetupPopup.isHidden = true
-        self.taskCreateShortCutsView.isHidden = true
+        self.handleCloseShortcutsButton()
         self.reminderSetupPopup.clear()
     }
 
