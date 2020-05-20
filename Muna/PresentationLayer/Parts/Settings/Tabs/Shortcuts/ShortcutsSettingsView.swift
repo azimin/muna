@@ -12,10 +12,6 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
-    let launchOnStartupLabel = Label(fontStyle: .medium, size: 14)
-        .withTextColorStyle(.titleAccent)
-        .withText("Hi there, it's a test")
-
     init() {
         super.init(frame: .zero)
         self.setup()
@@ -38,12 +34,6 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
             maker.leading.equalTo(self.titlesView.snp.trailing)
             maker.trailing.top.bottom.equalToSuperview()
             maker.width.equalTo(self.frameWidth - 120)
-        }
-
-        self.titlesView.addSubview(self.launchOnStartupLabel)
-        self.launchOnStartupLabel.snp.makeConstraints { maker in
-            maker.trailing.equalToSuperview().inset(22)
-            maker.top.equalToSuperview().inset(22)
         }
     }
 }

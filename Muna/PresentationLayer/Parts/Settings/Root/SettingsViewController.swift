@@ -94,13 +94,15 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.toolbar.selectedItemIdentifier = self.currentItem?.identifier
         self.window.title = newViewController.title ?? ""
 
+        let titlebarHeight = self.window.titlebarHeight
+
         self.window.setFrame(newFrame, display: true, animate: animate)
         self.window.contentView?.addSubview(newViewController.view)
         newViewController.view.frame = CGRect(
             x: 0,
             y: 0,
             width: newFrame.width,
-            height: newFrame.height
+            height: newFrame.height - titlebarHeight
         )
     }
 
@@ -117,7 +119,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
     private func frameFromView(newWiew: NSView) -> NSRect {
         var oldFrame = self.window.frame
-        let newSize = newWiew.fittingSize
+        var newSize = newWiew.fittingSize
+        newSize.height += self.window.titlebarHeight
 
         oldFrame.origin = NSPoint(
             x: oldFrame.origin.x - (newSize.width - oldFrame.width),
@@ -154,5 +157,12 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         toolbarItem.action = #selector(self.switchToolbarItem(_:))
 
         return toolbarItem
+    }
+}
+
+extension NSWindow {
+    var titlebarHeight: CGFloat {
+        let contentHeight = contentRect(forFrameRect: frame).height
+        return frame.height - contentHeight
     }
 }
