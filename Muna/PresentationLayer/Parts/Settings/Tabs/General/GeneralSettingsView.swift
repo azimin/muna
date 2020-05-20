@@ -18,6 +18,11 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         .withText("Startup:")
     let launchCheckbox = NSButton()
 
+    let historySizeLabel = Label(fontStyle: .medium, size: 14)
+        .withTextColorStyle(.titleAccent)
+        .withText("Completed item storage:")
+    let historySizeController = NSSlider()
+
     init() {
         super.init(frame: .zero)
         self.setup()
@@ -58,6 +63,44 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         self.launchCheckbox.target = self
         self.launchCheckbox.action = #selector(self.launchAtLoginToggle)
         self.updateLaunchButton()
+
+        self.titlesView.addSubview(self.historySizeLabel)
+        self.historySizeLabel.snp.makeConstraints { maker in
+            maker.trailing.equalToSuperview().inset(22)
+            maker.top.equalTo(self.launchCheckbox.snp.bottom).inset(-30)
+        }
+
+        self.settingsView.addSubview(self.historySizeController)
+        self.historySizeController.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().inset(0)
+            maker.centerY.equalTo(self.historySizeLabel.snp.centerY)
+            maker.width.equalTo(220)
+        }
+        self.historySizeController.sliderType = .linear
+        self.historySizeController.numberOfTickMarks = 3
+        self.historySizeController.allowsTickMarkValuesOnly = true
+
+        let dayLabel = Label(fontStyle: .medium, size: 12).withText("Day")
+        let weekLabel = Label(fontStyle: .medium, size: 12).withText("Week")
+        let monthLabel = Label(fontStyle: .medium, size: 12).withText("Month")
+
+        self.addSubview(dayLabel)
+        dayLabel.snp.makeConstraints { maker in
+            maker.centerX.equalTo(self.historySizeController.snp.leading).inset(8)
+            maker.top.equalTo(self.historySizeController.snp.bottom).inset(-6)
+        }
+
+        self.addSubview(weekLabel)
+        weekLabel.snp.makeConstraints { maker in
+            maker.centerX.equalTo(self.historySizeController.snp.centerX)
+            maker.top.equalTo(self.historySizeController.snp.bottom).inset(-6)
+        }
+
+        self.addSubview(monthLabel)
+        monthLabel.snp.makeConstraints { maker in
+            maker.centerX.equalTo(self.historySizeController.snp.trailing).inset(8)
+            maker.top.equalTo(self.historySizeController.snp.bottom).inset(-6)
+        }
     }
 
     @objc func launchAtLoginToggle() {
