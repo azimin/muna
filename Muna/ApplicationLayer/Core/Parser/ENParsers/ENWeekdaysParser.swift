@@ -29,7 +29,12 @@ class ENWeekdaysParser: Parser {
         "fri": 7,
         "saturday": 8,
         "sat": 8,
+        "weekends": 9,
     ]
+
+    private let weekendsOffset = [8, 1]
+
+    private let dateItemNumber = 3
 
     private var days: String {
         return self.weekDayOffset.keys.map { $0 }.joined(separator: "|")
@@ -49,41 +54,68 @@ class ENWeekdaysParser: Parser {
 
         let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1).lowercased()
 
-        var weekday: Int
-        if weekdayName != "tomorrow" {
+        var weekdays = [Int]()
+        if weekdayOffset == 9 {
+            self.weekendsOffset.forEach { weekdayOffset in
+                var weekday: Int
+                if weekdayOffset - today < 0 {
+                    weekday = (7 - today) + weekdayOffset
+                } else {
+                    weekday = weekdayOffset - today
+                }
+
+                if prefixGroup == "next" {
+                    weekday += 7
+                }
+
+                weekdays.append(weekday)
+            }
+        }
+
+        if weekdayName == "tomorrow" {
+            if parsedItem.refDate.hour < 12, prefixGroup != "after" {
+                weekdays.append(0)
+            }
+
+            if prefixGroup == "after" {
+                weekdays.append(weekdayOffset + 1)
+            } else {
+                weekdays.append(weekdayOffset)
+            }
+        }
+
+        if prefixGroup != "next" {
+            (0 ... self.dateItemNumber).forEach {
+                var weekday: Int
+                if weekdayOffset - today < 0 {
+                    weekday = (7 - today) + weekdayOffset
+                } else {
+                    weekday = weekdayOffset - today
+                }
+                weekday += 7 * $0
+                weekdays.append(weekday)
+            }
+        }
+
+        if prefixGroup == "next" {
+            var weekday: Int
             if weekdayOffset - today < 0 {
                 weekday = (7 - today) + weekdayOffset
             } else {
                 weekday = weekdayOffset - today
             }
-
-            if prefixGroup == "next" {
-                weekday += 7
-            }
-        } else {
-            weekday = weekdayOffset
-
-            if prefixGroup == "after" {
-                weekday += 1
-            }
+            weekday += 7
+            weekdays.append(weekday)
         }
 
-        let finalDate = parsedItem.refDate + weekday.days
-
-        var newParsedResult: [DateItem]
-        if !results.isEmpty {
-            newParsedResult = results.map {
-                var newResult = $0
-                newResult.day = PureDay(day: finalDate.day, month: finalDate.month, year: finalDate.year)
-                return newResult
-            }
-        } else {
-            newParsedResult = [
-                DateItem(day: PureDay(day: finalDate.day, month: finalDate.month, year: finalDate.year), timeType: .allDay),
-            ]
+        let finalDates = weekdays.map {
+            parsedItem.refDate + $0.days
         }
 
-        return newParsedResult
+        return finalDates.map {
+            let pureDay = PureDay(day: $0.day, month: $0.month, year: $0.year)
+            return DateItem(day: pureDay, timeType: .allDay)
+        }
     }
 }
 
