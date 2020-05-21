@@ -23,16 +23,16 @@ class ENWeekdaysParser: Parser {
         "wed": 4,
         "thursday": 5,
         "thurs": 5,
-        "thur": 6,
-        "thu": 6,
-        "friday": 7,
-        "fri": 7,
-        "saturday": 8,
-        "sat": 8,
-        "weekends": 9,
+        "thur": 5,
+        "thu": 5,
+        "friday": 6,
+        "fri": 6,
+        "saturday": 7,
+        "sat": 7,
+        "weekends": 8,
     ]
 
-    private let weekendsOffset = [8, 1]
+    private let weekendsOffset = [7, 1]
 
     private let dateItemNumber = 3
 
@@ -55,13 +55,13 @@ class ENWeekdaysParser: Parser {
         let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1).lowercased()
 
         var weekdays = [Int]()
-        if weekdayOffset == 9 {
-            self.weekendsOffset.forEach { weekdayOffset in
+        if weekdayOffset == 8 {
+            self.weekendsOffset.forEach { weekendDay in
                 var weekday: Int
-                if weekdayOffset - today < 0 {
-                    weekday = (7 - today) + weekdayOffset
+                if weekendDay - today < 0 {
+                    weekday = (7 - today) + weekendDay
                 } else {
-                    weekday = weekdayOffset - today
+                    weekday = weekendDay - today
                 }
 
                 if prefixGroup == "next" {
@@ -84,7 +84,7 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if prefixGroup != "next" {
+        if prefixGroup != "next", weekdayOffset != 8 {
             (0 ... self.dateItemNumber).forEach {
                 var weekday: Int
                 if weekdayOffset - today < 0 {
@@ -97,7 +97,7 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if prefixGroup == "next" {
+        if prefixGroup == "next", weekdayOffset != 8 {
             var weekday: Int
             if weekdayOffset - today < 0 {
                 weekday = (7 - today) + weekdayOffset
