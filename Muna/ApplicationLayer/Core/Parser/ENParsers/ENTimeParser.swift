@@ -61,15 +61,14 @@ class ENTimeParser: Parser {
                 if minutes < 10 || minutesOffset % 10 == 0 {
                     minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10)) + parsedItem.refDate.minute
                 } else {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes)) +
-                        parsedItem.refDate.minute
+                    minutesOffset += parsedItem.refDate.minute + parsedItem.refDate.minute
                 }
             } else {
                 minutesOffset = minutes
             }
         }
 
-        if prefix == "in" {
+        if prefix == "in", minutesOffset == 0 {
             minutesOffset = parsedItem.refDate.minute
         }
 
