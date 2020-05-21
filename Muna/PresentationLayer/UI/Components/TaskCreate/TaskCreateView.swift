@@ -296,7 +296,6 @@ extension TaskCreateView: TextFieldDelegate {
 
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
-        self.presentationDateItemTransformer.setup()
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {

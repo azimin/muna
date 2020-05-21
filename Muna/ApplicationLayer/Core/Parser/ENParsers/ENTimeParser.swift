@@ -52,17 +52,17 @@ class ENTimeParser: Parser {
             hoursOffset += 12
         }
 
-        var minutesOffset = parsedItem.refDate.minute
-
+        var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
             if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
                 parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == ".",
                 prefix == "in" {
                 if minutes < 10 || minutesOffset % 10 == 0 {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10))
+                    minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10)) + parsedItem.refDate.minute
                 } else {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes))
+                    minutesOffset += Int((60.0 / 100.0) * Double(minutes)) +
+                        parsedItem.refDate.minute
                 }
             } else {
                 minutesOffset = minutes
