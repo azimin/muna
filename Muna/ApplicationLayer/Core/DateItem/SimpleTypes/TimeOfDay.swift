@@ -26,7 +26,10 @@ struct TimeOfDay {
     func apply(to pureDay: PureDay) -> Date {
         let string = "\(pureDay.day):\(pureDay.month):\(pureDay.year) \(self.hours):\(self.minutes):\(self.seconds)"
 
-        guard let date = string.toDate("dd:MM:yyyy HH:mm:ss")?.date else {
+        guard let date = string.toDate(
+            "dd:MM:yyyy HH:mm:ss",
+            region: .current
+        )?.date else {
             assertionFailure("No date")
             return Date()
         }

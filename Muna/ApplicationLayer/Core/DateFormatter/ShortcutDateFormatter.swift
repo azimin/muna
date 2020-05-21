@@ -17,11 +17,14 @@ class ShortcutDateFormatter {
     }
 
     var title: String {
-        return "\(self.date.monthName(.short)), \(self.date.ordinalDay) \(self.date.weekdayName(.short))"
+        let month = self.date.representableDate().monthName(.short)
+        let day = self.date.representableDate().ordinalDay
+        let weekday = self.date.representableDate().weekdayName(.short)
+        return "\(month), \(day) \(weekday)"
     }
 
     var subtitle: String {
-        return self.date.toFormat("HH:mm")
+        return self.date.representableDate().toFormat("HH:mm")
     }
 
     var additionalText: String {
@@ -58,5 +61,20 @@ class ShortcutDateFormatter {
         }
 
         return ""
+    }
+}
+
+extension Date {
+    func representableDate() -> Date {
+        let format = DateFormatter()
+        format.dateFormat = "MM-dd-yyyy HH:mm"
+        let string = format.string(from: self)
+
+        if let date = string.toDate("MM-dd-yyyy HH:mm") {
+            return date.date
+        } else {
+            assertionFailure("Can't cast")
+            return Date()
+        }
     }
 }
