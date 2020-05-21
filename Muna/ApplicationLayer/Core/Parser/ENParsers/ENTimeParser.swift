@@ -77,12 +77,12 @@ class ENTimeParser: Parser {
         if !results.isEmpty {
             parsedResults = results.map {
                 var newItem = $0
-                if minutesOffset > 60 {
+                if minutesOffset >= 60 {
                     hoursOffset += 1
                     minutesOffset -= 60
                 }
 
-                if hoursOffset > 24 {
+                if hoursOffset >= 24 {
                     hoursOffset -= 24
                     newItem.day.day += 1
                 }
@@ -93,7 +93,7 @@ class ENTimeParser: Parser {
             }
         } else {
             var dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
-            if minutesOffset > 60 {
+            if minutesOffset >= 60 {
                 hoursOffset += 1
                 minutesOffset -= 60
             }
@@ -102,7 +102,7 @@ class ENTimeParser: Parser {
                 dayFromRefDate.day += 1
             }
 
-            if hoursOffset > 24 {
+            if hoursOffset >= 24 {
                 hoursOffset -= 24
                 dayFromRefDate.day += 1
             }
