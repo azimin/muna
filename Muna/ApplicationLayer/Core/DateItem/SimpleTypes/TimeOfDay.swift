@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TimeOfDay {
+struct TimeOfDay: Equatable {
     var hours: Int
     var minutes: Int
     var seconds: Int
@@ -35,5 +35,9 @@ struct TimeOfDay {
         }
 
         return date
+    }
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.hours == rhs.hours && lhs.minutes == rhs.minutes && lhs.seconds == rhs.seconds
     }
 }
