@@ -44,11 +44,16 @@ class ENTimeParser: Parser {
             prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased()
         }
 
+        if prefix == "in" {
+            hoursOffset = parsedItem.refDate.hour + hoursOffset
+        }
+
         if !partOfTheDay.isEmpty, partOfTheDay == "pm", prefix != "in" {
             hoursOffset += 12
         }
 
-        var minutesOffset = 0
+        var minutesOffset = parsedItem.refDate.minute
+
         (0 ... 8).forEach {
             if !parsedItem.match.isEmpty(atRangeIndex: $0) {
                 print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")

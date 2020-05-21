@@ -55,10 +55,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
-        TimeParserTests.test()
+//        TimeParserTests.test()
 
-//        let currentTime = TimeZone.current.secondsFromGMT()
-//        let date = Date() + currentTime.seconds
+        let currentTime = TimeZone.current.secondsFromGMT()
+        let date = Date() + currentTime.seconds
 //        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
 //        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
 //        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
@@ -68,9 +68,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
 //        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
 //        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
-//        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
-//        On weekends
-//        Remind on weekends at 20.00
+        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("On weekends", date: date)))\n")
+//        print("\(MunaChrono().parseFromString("Remind on weekends at 20.00", date: date)))\n")
 //        20 may
 //        Next month
 //        Tomorrow evening

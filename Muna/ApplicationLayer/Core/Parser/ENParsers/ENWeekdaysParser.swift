@@ -73,7 +73,7 @@ class ENWeekdaysParser: Parser {
         }
 
         if weekdayName == "tomorrow" {
-            if parsedItem.refDate.hour < 12, prefixGroup != "after" {
+            if parsedItem.refDate.hour < 6, prefixGroup != "after" {
                 weekdays.append(0)
             }
 
@@ -84,7 +84,7 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if prefixGroup != "next", weekdayOffset != 8 {
+        if prefixGroup != "next", weekdayOffset != 8, weekdayName != "tomorrow" {
             (0 ... self.dateItemNumber).forEach {
                 var weekday: Int
                 if weekdayOffset - today < 0 {
