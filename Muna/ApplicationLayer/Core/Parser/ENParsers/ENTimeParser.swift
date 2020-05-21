@@ -69,6 +69,10 @@ class ENTimeParser: Parser {
             }
         }
 
+        if prefix == "in" {
+            minutesOffset = parsedItem.refDate.minute
+        }
+
         let parsedTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
 
         var parsedResults = [DateItem]()
