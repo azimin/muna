@@ -23,13 +23,18 @@ class ENWeekdaysParser: Parser {
         "wed": 4,
         "thursday": 5,
         "thurs": 5,
-        "thur": 6,
-        "thu": 6,
-        "friday": 7,
-        "fri": 7,
-        "saturday": 8,
-        "sat": 8,
+        "thur": 5,
+        "thu": 5,
+        "friday": 6,
+        "fri": 6,
+        "saturday": 7,
+        "sat": 7,
+        "weekends": 8,
     ]
+
+    private let weekendsOffset = [7, 1]
+
+    private let dateItemNumber = 3
 
     private var days: String {
         return self.weekDayOffset.keys.map { $0 }.joined(separator: "|")
@@ -39,7 +44,7 @@ class ENWeekdaysParser: Parser {
         return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow|weekends)\\b"
     }
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
             return results
@@ -49,40 +54,81 @@ class ENWeekdaysParser: Parser {
 
         let prefixGroup = parsedItem.match.isEmpty(atRangeIndex: 1) ? "" : parsedItem.match.string(from: parsedItem.text, atRangeIndex: 1).lowercased()
 
-        var weekday: Int
-        if weekdayName != "tomorrow" {
+        var weekdays = [Int]()
+        if weekdayOffset == 8 {
+            self.weekendsOffset.forEach { weekendDay in
+                var weekday: Int
+                if weekendDay - today < 0 {
+                    weekday = (7 - today) + weekendDay
+                } else {
+                    weekday = weekendDay - today
+                }
+
+                if prefixGroup == "next" {
+                    weekday += 7
+                }
+
+                weekdays.append(weekday)
+            }
+        }
+
+        if weekdayName == "tomorrow" {
+            if parsedItem.refDate.hour < 6, prefixGroup != "after" {
+                weekdays.append(0)
+            }
+
+            if prefixGroup == "after" {
+                weekdays.append(weekdayOffset + 1)
+            } else {
+                weekdays.append(weekdayOffset)
+            }
+        }
+
+        if prefixGroup != "next", weekdayOffset != 8, weekdayName != "tomorrow" {
+            (0 ... self.dateItemNumber).forEach {
+                var weekday: Int
+                if weekdayOffset - today < 0 {
+                    weekday = (7 - today) + weekdayOffset
+                } else {
+                    weekday = weekdayOffset - today
+                }
+                weekday += 7 * $0
+                weekdays.append(weekday)
+            }
+        }
+
+        if prefixGroup == "next", weekdayOffset != 8 {
+            var weekday: Int
             if weekdayOffset - today < 0 {
                 weekday = (7 - today) + weekdayOffset
             } else {
                 weekday = weekdayOffset - today
             }
-
-            if prefixGroup == "next" {
-                weekday += 7
-            }
-        } else {
-            weekday = weekdayOffset
-
-            if prefixGroup == "after" {
-                weekday += 1
-            }
+            weekday += 7
+            weekdays.append(weekday)
         }
 
-        let finalDate = parsedItem.refDate + weekday.days
+        let finalDates = weekdays.map {
+            parsedItem.refDate + $0.days
+        }
 
-        var newParsedResult: [ParsedResult]
+        var finalResults = [DateItem]()
         if !results.isEmpty {
-            newParsedResult = results.map {
-                var newResult = $0
-                newResult.date = finalDate
-                newResult.range.append(parsedItem.match.range)
-                return newResult
+            finalDates.forEach { date in
+                results.forEach {
+                    var newDate = $0
+                    newDate.day = PureDay(day: date.day, month: date.month, year: date.year)
+                    finalResults.append(newDate)
+                }
             }
         } else {
-            newParsedResult = [ParsedResult(range: [parsedItem.match.range], date: finalDate, time: .init(timeUnit: .allDay, hours: nil))]
+            finalResults = finalDates.map {
+                let pureDay = PureDay(day: $0.day, month: $0.month, year: $0.year)
+                return DateItem(day: pureDay, timeType: .allDay)
+            }
         }
 
-        return newParsedResult
+        return finalResults
     }
 }
 
