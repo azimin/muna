@@ -62,38 +62,38 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         print("In 2h")
         print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
 
-//        print("Tomorrow")
-//        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
-//
-//        print("tomorrow")
-//        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
-//
-//        print("Yesterday at 5pm")
-//        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
-//
-//        print("5.30")
-//        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
-//
-//        print("5.30am")
-//        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
+        print("Tomorrow")
+        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
+
+        print("tomorrow")
+        print("\(MunaChrono().parseFromString("tomorrow", date: date))\n")
+
+        print("Yesterday at 5pm")
+        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
+
+        print("5.30")
+        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
+
+        print("5.30am")
+        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
 
         print("In 1.5h")
         print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
 
-//        print("On sun")
-//        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
-//
-//        print("Wed 8:30 pm")
-//        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
-//
-//        print("Next Friday 8 30 pm")
-//        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
-//
-//        print("On weekends")
-//        print("\(MunaChrono().parseFromString("On weekends", date: date)))\n")
-//
-//        print("Remind on weekends at 20.00")
-//        print("\(MunaChrono().parseFromString("Remind on weekends at 20.00", date: date)))\n")
+        print("On sun")
+        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
+
+        print("Wed 8:30 pm")
+        print("\(MunaChrono().parseFromString("Wed 8:30 pm", date: date)))\n")
+
+        print("Next Friday 8 30 pm")
+        print("\(MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)))\n")
+
+        print("On weekends")
+        print("\(MunaChrono().parseFromString("On weekends", date: date)))\n")
+
+        print("Remind on weekends at 20.00")
+        print("\(MunaChrono().parseFromString("Remind on weekends at 20.00", date: date)))\n")
 //        20 may
 //        Next month
 //        Tomorrow evening
