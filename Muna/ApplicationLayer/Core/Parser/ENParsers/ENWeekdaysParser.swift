@@ -39,7 +39,7 @@ class ENWeekdaysParser: Parser {
         return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(days)|tomorrow|weekends)\\b"
     }
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
             return results
@@ -70,16 +70,17 @@ class ENWeekdaysParser: Parser {
 
         let finalDate = parsedItem.refDate + weekday.days
 
-        var newParsedResult: [ParsedResult]
+        var newParsedResult: [DateItem]
         if !results.isEmpty {
             newParsedResult = results.map {
                 var newResult = $0
-                newResult.date = finalDate
-                newResult.range.append(parsedItem.match.range)
+                newResult.day = PureDay(day: finalDate.day, month: finalDate.month, year: finalDate.year)
                 return newResult
             }
         } else {
-            newParsedResult = [ParsedResult(range: [parsedItem.match.range], date: finalDate, time: .init(timeUnit: .allDay, hours: nil))]
+            newParsedResult = [
+                DateItem(day: PureDay(day: finalDate.day, month: finalDate.month, year: finalDate.year), timeType: .allDay),
+            ]
         }
 
         return newParsedResult

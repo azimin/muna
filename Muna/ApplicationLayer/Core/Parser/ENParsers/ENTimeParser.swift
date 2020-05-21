@@ -25,7 +25,7 @@ class ENTimeParser: Parser {
     private let seconds = 60
     private let hourInSeconds = 60 * 60
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [ParsedResult]) -> [ParsedResult] {
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) else {
             return results
         }
@@ -69,25 +69,26 @@ class ENTimeParser: Parser {
             }
         }
 
-        let time = hoursOffset * self.hourInSeconds + minutesOffset * self.seconds
-        let parsedTime = ParsedTime(
-            timeUnit: .specificTime,
-            hours: time
-        )
-        var parsedResults = [ParsedResult]()
+        let parsedTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
+
+        var parsedResults = [DateItem]()
+
         if !results.isEmpty {
             parsedResults = results.map {
                 var newTime = $0
-                newTime.range.append(parsedItem.match.range)
-                newTime.time = parsedTime
+                let newDate = parsedTime.apply(to: newTime.day)
+                newTime.day = PureDay(day: newDate.day, month: newDate.month, year: newDate.year)
+                newTime.timeType = .specificTime(timeOfDay: parsedTime)
+
                 return newTime
             }
         } else {
+            let dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
+            let newDate = parsedTime.apply(to: dayFromRefDate)
             parsedResults.append(
-                ParsedResult(
-                    range: [parsedItem.match.range],
-                    date: parsedItem.refDate,
-                    time: parsedTime
+                DateItem(
+                    day: PureDay(day: newDate.day, month: newDate.month, year: newDate.year),
+                    timeType: .specificTime(timeOfDay: parsedTime)
                 )
             )
         }

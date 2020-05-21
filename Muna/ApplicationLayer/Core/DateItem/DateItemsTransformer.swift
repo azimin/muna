@@ -9,7 +9,7 @@
 import Foundation
 
 class DateItemsTransformer {
-    private let dateItems: [DateItem]
+    private var dateItems: [DateItem]
     private let configurator: DateItemPresentationConfiguratorProtocol
 
     private(set) var dates: [Date] = []
@@ -26,6 +26,10 @@ class DateItemsTransformer {
         self.configurator = configurator
 
         self.setup()
+    }
+
+    func setDateItems(_ dateItems: [DateItem]) {
+        self.dateItems = dateItems
     }
 
     func setup() {

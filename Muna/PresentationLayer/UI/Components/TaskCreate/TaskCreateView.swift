@@ -16,7 +16,8 @@ protocol TaskCreateViewDelegate: AnyObject {
 class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
     var mainOption: TaskReminderItemView?
 
-    var parsedDates = [ParsedResult]()
+    var parsedDates = [DateItem]()
+    let presentationDateItemTransformer: DateItemsTransformer
 
     var options: [TaskReminderItemView] = []
 
@@ -37,6 +38,7 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
 
     init(savingProcessingService: SavingProcessingService) {
         self.savingProcessingService = savingProcessingService
+        self.presentationDateItemTransformer = DateItemsTransformer(dateItems: [], configurator: BasicDateItemPresentationConfigurator())
 
         super.init(style: .withShortcutsButton)
     }
@@ -275,10 +277,8 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
             return
         }
 
-        let parsedResult = self.parsedDates[self.selectedIndex]
-
         itemToSave.dueDateString = reminderItem.title
-        itemToSave.date = parsedResult.date
+        itemToSave.date = self.presentationDateItemTransformer.dates[self.selectedIndex]
         itemToSave.comment = self.commentTextField.textField.stringValue
 
         self.savingProcessingService.save(withItem: itemToSave)
@@ -295,8 +295,10 @@ extension TaskCreateView: TextFieldDelegate {
         let offset = TimeZone.current.secondsFromGMT()
 
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
+        self.presentationDateItemTransformer.setDateItems(self.parsedDates)
+        self.presentationDateItemTransformer.setup()
 
-        let items = self.parsedDates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
             guard let offset = result.date.difference(in: .day, from: Date()) else {
                 return nil
             }
