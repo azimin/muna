@@ -25,6 +25,10 @@ class WindowManager {
     private var windows = [WindowType: NSWindow]()
     private var windowVisibleStatus: [WindowType: Bool] = [:]
 
+    init() {
+        self.setup()
+    }
+
     private func windowState(_ windowType: WindowType) -> Bool {
         let status: Bool
         switch windowType {
@@ -242,5 +246,25 @@ class WindowManager {
         }
 
         self.changeWindowState(windowType, state: false)
+    }
+
+    private func setup() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.windowClosed),
+            name: NSWindow.willCloseNotification,
+            object: nil
+        )
+    }
+
+    @objc
+    func windowClosed(notification: NSNotification) {
+        for (key, value) in self.windows {
+            if let windowToClose = notification.object as? NSWindow,
+                value == windowToClose {
+                self.windows[key] = nil
+                self.windowVisibleStatus[key] = true
+            }
+        }
     }
 }
