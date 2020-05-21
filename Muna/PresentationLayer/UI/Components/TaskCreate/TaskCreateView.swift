@@ -296,17 +296,15 @@ extension TaskCreateView: TextFieldDelegate {
 
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
-        self.presentationDateItemTransformer.setup()
+        self.presentationDateItemTransformer.update()
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
-            guard let offset = result.date.difference(in: .day, from: Date()) else {
-                return nil
-            }
-            let time = result.date.toFormat("HH:mm")
+            let formatter = ShortcutDateFormatter(date: result)
+
             let item = RemindersOptionsController.ReminderItem(
-                title: "\(result.date.monthName(.short)), \(result.date.ordinalDay) \(result.date.weekdayName(.short))",
-                subtitle: time,
-                additionalText: "in \(offset) days"
+                title: formatter.title,
+                subtitle: formatter.subtitle,
+                additionalText: formatter.additionalText
             )
             return item
         }
