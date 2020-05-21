@@ -14,9 +14,10 @@ struct TimeOfDay {
     var seconds: Int
 
     init(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) {
-        if minutes > 59 {
-            print("Swag")
-        }
+        assert(hours >= 0 && hours < 24, "Hours 0..<24")
+        assert(minutes >= 0 && minutes < 60, "Minutes 0..<24")
+        assert(seconds >= 0 && seconds < 60, "Seconds 0..<24")
+
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
