@@ -84,7 +84,7 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if prefixGroup != "next", weekdayOffset != 8, weekdayName != "tomorrow" {
+        if prefixGroup != "next", weekdayOffset != 8, weekdayName != "tomorrow", weekdayName != "yesterday" {
             (0 ... self.dateItemNumber).forEach {
                 var weekday: Int
                 if weekdayOffset - today < 0 {
@@ -106,6 +106,10 @@ class ENWeekdaysParser: Parser {
             }
             weekday += 7
             weekdays.append(weekday)
+        }
+
+        if weekdayName == "yesterday" {
+            weekdays.append(weekdayOffset)
         }
 
         let finalDates = weekdays.map {
