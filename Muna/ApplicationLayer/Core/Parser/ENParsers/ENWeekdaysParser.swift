@@ -112,10 +112,23 @@ class ENWeekdaysParser: Parser {
             parsedItem.refDate + $0.days
         }
 
-        return finalDates.map {
-            let pureDay = PureDay(day: $0.day, month: $0.month, year: $0.year)
-            return DateItem(day: pureDay, timeType: .allDay)
+        var finalResults = [DateItem]()
+        if !results.isEmpty {
+            finalDates.forEach { date in
+                results.forEach {
+                    var newDate = $0
+                    newDate.day = PureDay(day: date.day, month: date.month, year: date.year)
+                    finalResults.append(newDate)
+                }
+            }
+        } else {
+            finalResults = finalDates.map {
+                let pureDay = PureDay(day: $0.day, month: $0.month, year: $0.year)
+                return DateItem(day: pureDay, timeType: .allDay)
+            }
         }
+
+        return finalResults
     }
 }
 
