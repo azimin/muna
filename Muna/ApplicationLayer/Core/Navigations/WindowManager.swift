@@ -9,7 +9,7 @@
 import Cocoa
 import Foundation
 
-enum WindowType: String {
+enum WindowType: String, Equatable {
     case panel
     case screenshot
     case debug
@@ -22,10 +22,41 @@ class WindowManager {
         return WindowManager.panelWindowFrameWidth
     }
 
-    var windows = [String: NSWindow]()
+    private var windows = [WindowType: NSWindow]()
+    private var windowVisibleStatus: [WindowType: Bool] = [:]
 
-    func activateWindow(_ windowType: WindowType) {
-        guard let window = self.windows[windowType.rawValue] else {
+    private func windowState(_ windowType: WindowType) -> Bool {
+        let status: Bool
+        switch windowType {
+        case .settings:
+            status = self.windows[windowType]?.isVisible ?? false
+        case .debug, .panel, .screenshot:
+            status = self.windowVisibleStatus[windowType] ?? false
+        }
+
+        return status
+    }
+
+    private func changeWindowState(_ windowType: WindowType, state: Bool) {
+        self.windowVisibleStatus[windowType] = state
+    }
+
+    func toggleWindow(_ windowType: WindowType) {
+        let status: Bool = self.windowState(windowType)
+
+        if status == false {
+            self.activateWindowIfNeeded(windowType)
+        } else {
+            self.hideWindowIfNeeded(windowType)
+        }
+    }
+
+    func activateWindowIfNeeded(_ windowType: WindowType) {
+        guard self.windowState(windowType) == false else {
+            return
+        }
+
+        guard let window = self.windows[windowType], windowType != .settings else {
             self.setupWindow(windowType)
             return
         }
@@ -40,6 +71,8 @@ class WindowManager {
         case .settings:
             self.showSettings(in: window)
         }
+
+        self.changeWindowState(windowType, state: true)
     }
 
     private func setupWindow(_ windowType: WindowType) {
@@ -95,7 +128,8 @@ class WindowManager {
             self.showSettings(in: window)
         }
 
-        self.windows[windowType.rawValue] = window
+        self.windows[windowType] = window
+        self.changeWindowState(windowType, state: true)
     }
 
     private func frameFor(_ windowType: WindowType) -> NSRect {
@@ -178,8 +212,12 @@ class WindowManager {
         window.setIsVisible(true)
     }
 
-    func hideWindow(_ windowType: WindowType) {
-        guard let window = self.windows[windowType.rawValue] else {
+    func hideWindowIfNeeded(_ windowType: WindowType) {
+        guard self.windowState(windowType) == true else {
+            return
+        }
+
+        guard let window = self.windows[windowType] else {
             assertionFailure("Window type: \(windowType.rawValue) wasn't active")
             return
         }
@@ -202,5 +240,7 @@ class WindowManager {
         case .settings:
             window.setIsVisible(false)
         }
+
+        self.changeWindowState(windowType, state: false)
     }
 }

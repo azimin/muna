@@ -201,65 +201,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
     }
 
-    var isPanelShowed = false
-    var isScreenshotShowed = false
-    var isDebugShowed = false
-    var isSettingsShowed = false
-
     @objc func closeApp() {
         NSApplication.shared.terminate(self)
     }
 
     @objc func hidePanelIfNeeded() {
-        if self.isPanelShowed {
-            self.windowManager.hideWindow(.panel)
-            self.isPanelShowed = false
-        }
+        self.windowManager.hideWindowIfNeeded(.panel)
     }
 
     @objc func hideScreenshotIfNeeded() {
-        if self.isScreenshotShowed {
-            self.windowManager.hideWindow(.screenshot)
-            self.isScreenshotShowed = false
-        }
+        self.windowManager.hideWindowIfNeeded(.screenshot)
     }
 
     @objc func togglePane() {
-        if self.isPanelShowed {
-            self.windowManager.hideWindow(.panel)
-        } else {
-            self.windowManager.activateWindow(.panel)
-            self.hideScreenshotIfNeeded()
-        }
-        self.isPanelShowed.toggle()
+        self.windowManager.toggleWindow(.panel)
     }
 
     @objc func toggleScreenshotState() {
-        if self.isScreenshotShowed {
-            self.isScreenshotShowed = false
-            self.windowManager.hideWindow(.screenshot)
-        } else {
-            self.isScreenshotShowed = true
-            self.windowManager.activateWindow(.screenshot)
-        }
+        self.windowManager.toggleWindow(.screenshot)
     }
 
     @objc func toggleDebugState() {
-        if self.isDebugShowed {
-            self.windowManager.hideWindow(.debug)
-        } else {
-            self.windowManager.activateWindow(.debug)
-        }
-        self.isDebugShowed.toggle()
+        self.windowManager.toggleWindow(.debug)
     }
 
     @objc func toggleSettingsState() {
-        if self.isSettingsShowed {
-            self.windowManager.hideWindow(.settings)
-        } else {
-            self.windowManager.activateWindow(.settings)
-        }
-        self.isSettingsShowed.toggle()
+        self.windowManager.toggleWindow(.settings)
     }
 
     // MARK: - User Notifications
