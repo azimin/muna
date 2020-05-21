@@ -72,24 +72,47 @@ class ENTimeParser: Parser {
             minutesOffset = parsedItem.refDate.minute
         }
 
-        let parsedTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
-
         var parsedResults = [DateItem]()
 
         if !results.isEmpty {
             parsedResults = results.map {
-                var newTime = $0
-                newTime.day = $0.day
-                newTime.timeType = .specificTime(timeOfDay: parsedTime)
+                var newItem = $0
+                if minutesOffset > 60 {
+                    hoursOffset += 1
+                    minutesOffset -= 60
+                }
 
-                return newTime
+                if hoursOffset > 24 {
+                    hoursOffset -= 24
+                    newItem.day.day += 1
+                }
+
+                let newTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
+                newItem.timeType = .specificTime(timeOfDay: newTime)
+                return newItem
             }
         } else {
-            let dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
+            var dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
+            if minutesOffset > 60 {
+                hoursOffset += 1
+                minutesOffset -= 60
+            }
+
+            if hoursOffset < parsedItem.refDate.day {
+                dayFromRefDate.day += 1
+            }
+
+            if hoursOffset > 24 {
+                hoursOffset -= 24
+                dayFromRefDate.day += 1
+            }
+
+            let newTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
+
             parsedResults.append(
                 DateItem(
                     day: dayFromRefDate,
-                    timeType: .specificTime(timeOfDay: parsedTime)
+                    timeType: .specificTime(timeOfDay: newTime)
                 )
             )
         }
