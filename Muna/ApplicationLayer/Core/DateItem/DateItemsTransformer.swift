@@ -25,14 +25,17 @@ class DateItemsTransformer {
         }
         self.configurator = configurator
 
-        self.setup()
+        self.update()
     }
 
     func setDateItems(_ dateItems: [DateItem]) {
         self.dateItems = dateItems
+        self.update()
     }
 
-    func setup() {
+    func update() {
+        self.dates = []
+
         let preferedItemsCount: Int
 
         if self.dateItems.count <= 1 {
