@@ -57,7 +57,14 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     // MARK: - Mouse events
 
+    override func cursorUpdate(with event: NSEvent) {
+        super.cursorUpdate(with: event)
+
+        NSCursor.crosshair.set()
+    }
+
     override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
         guard self.isNeededToDrawFrame else {
             return
         }
@@ -72,6 +79,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     }
 
     override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
         guard self.isNeededToDrawFrame else {
             return
         }
@@ -80,6 +88,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     }
 
     override func mouseDragged(with event: NSEvent) {
+        super.mouseDragged(with: event)
         guard self.isNeededToDrawFrame else {
             return
         }

@@ -52,21 +52,24 @@ class ENTimeParser: Parser {
             hoursOffset += 12
         }
 
-        var minutesOffset = parsedItem.refDate.minute
-
+        var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
             if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
                 parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == ".",
                 prefix == "in" {
-                if minutes < 10 || minutesOffset % 10 == 0 {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10))
+                if minutes < 10 {
+                    minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10)) + parsedItem.refDate.minute
                 } else {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes))
+                    minutesOffset += minutes + parsedItem.refDate.minute
                 }
             } else {
                 minutesOffset = minutes
             }
+        }
+
+        if prefix == "in", minutesOffset == 0 {
+            minutesOffset = parsedItem.refDate.minute
         }
 
         let parsedTime = TimeOfDay(hours: hoursOffset, minutes: minutesOffset, seconds: 0)
@@ -76,18 +79,16 @@ class ENTimeParser: Parser {
         if !results.isEmpty {
             parsedResults = results.map {
                 var newTime = $0
-                let newDate = parsedTime.apply(to: newTime.day)
-                newTime.day = PureDay(day: newDate.day, month: newDate.month, year: newDate.year)
+                newTime.day = $0.day
                 newTime.timeType = .specificTime(timeOfDay: parsedTime)
 
                 return newTime
             }
         } else {
             let dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
-            let newDate = parsedTime.apply(to: dayFromRefDate)
             parsedResults.append(
                 DateItem(
-                    day: PureDay(day: newDate.day, month: newDate.month, year: newDate.year),
+                    day: dayFromRefDate,
                     timeType: .specificTime(timeOfDay: parsedTime)
                 )
             )
