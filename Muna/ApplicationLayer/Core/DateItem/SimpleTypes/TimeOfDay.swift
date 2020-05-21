@@ -9,24 +9,27 @@
 import Foundation
 
 struct TimeOfDay {
-    var timeIntervalSinceBeggininOfDay: TimeInterval
-
-    init(timeIntervalSinceBeggininOfDay: TimeInterval) {
-        self.timeIntervalSinceBeggininOfDay = timeIntervalSinceBeggininOfDay
-    }
+    var hours: Int
+    var minutes: Int
+    var seconds: Int
 
     init(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) {
-        self.timeIntervalSinceBeggininOfDay = TimeInterval(
-            hours * 60 * 60 + minutes * 60 + seconds
-        )
+        if minutes > 59 {
+            print("Swag")
+        }
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
     }
 
     func apply(to pureDay: PureDay) -> Date {
-        guard let date = "\(pureDay.day):\(pureDay.month):\(pureDay.year)".toDate("dd:MM:yyyy")?.date else {
+        let string = "\(pureDay.day):\(pureDay.month):\(pureDay.year) \(self.hours):\(self.minutes):\(self.seconds)"
+
+        guard let date = string.toDate("dd:MM:yyyy HH:mm:ss")?.date else {
             assertionFailure("No date")
             return Date()
         }
 
-        return date.addingTimeInterval(self.timeIntervalSinceBeggininOfDay)
+        return date
     }
 }
