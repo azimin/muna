@@ -94,6 +94,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         print("Remind on weekends at 20.00")
         print("\(MunaChrono().parseFromString("Remind on weekends at 20.00", date: date)))\n")
+
+        print("In 4h")
+        print("\(MunaChrono().parseFromString("In 4h", date: date)))\n")
 //        20 may
 //        Next month
 //        Tomorrow evening

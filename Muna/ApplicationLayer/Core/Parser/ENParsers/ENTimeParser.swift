@@ -76,18 +76,16 @@ class ENTimeParser: Parser {
         if !results.isEmpty {
             parsedResults = results.map {
                 var newTime = $0
-                let newDate = parsedTime.apply(to: newTime.day)
-                newTime.day = PureDay(day: newDate.day, month: newDate.month, year: newDate.year)
+                newTime.day = $0.day
                 newTime.timeType = .specificTime(timeOfDay: parsedTime)
 
                 return newTime
             }
         } else {
             let dayFromRefDate = PureDay(day: parsedItem.refDate.day, month: parsedItem.refDate.month, year: parsedItem.refDate.year)
-            let newDate = parsedTime.apply(to: dayFromRefDate)
             parsedResults.append(
                 DateItem(
-                    day: PureDay(day: newDate.day, month: newDate.month, year: newDate.year),
+                    day: dayFromRefDate,
                     timeType: .specificTime(timeOfDay: parsedTime)
                 )
             )
