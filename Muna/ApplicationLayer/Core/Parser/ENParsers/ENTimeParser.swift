@@ -11,9 +11,9 @@ import Foundation
 class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(at|in)\\s*)?"
-            + "(([1-9]|1[0-9]|2[0-4]))"
+            + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
             + "(((\\.|\\:|\\：|\\s)([0-9]|[0-5][0-9]))?)"
-            + "(?:\\s*(a\\.m\\.|p\\.m\\.|am?|pm?|h?))?\\b"
+            + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|minutes?|am?|pm?|h?))?\\b"
     }
 
     let prefixGroup = 1
@@ -25,13 +25,29 @@ class ENTimeParser: Parser {
     private let seconds = 60
     private let hourInSeconds = 60 * 60
 
+    // swiftlint:disable cyclomatic_complexity
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) else {
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup) else {
             return results
         }
 
-        guard var hoursOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)) else {
-            return results
+        print(parsedItem.match.numberOfRanges)
+        (0 ... 8).forEach {
+            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+            }
+        }
+
+        var hoursOffset = 0
+        if !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
+            let hours = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)) {
+            hoursOffset = hours
+        }
+
+        var minutesOffset = 0
+        if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
+            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
+            minutesOffset = minutes
         }
 
         var partOfTheDay = ""
@@ -44,28 +60,40 @@ class ENTimeParser: Parser {
             prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased()
         }
 
-        if prefix == "in" {
-            hoursOffset = parsedItem.refDate.hour + hoursOffset
+        var minutesSeparator = ""
+        if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup) {
+            minutesSeparator = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup).lowercased()
         }
 
-        if !partOfTheDay.isEmpty, partOfTheDay == "pm", prefix != "in" {
+        if prefix == "in", partOfTheDay != "mins", partOfTheDay != "minutes" {
+            hoursOffset += parsedItem.refDate.hour
+        }
+
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+            minutesOffset = hoursOffset
+            hoursOffset = parsedItem.refDate.hour
+        }
+
+        if !partOfTheDay.isEmpty,
+            partOfTheDay == "pm" || partOfTheDay == "p.m.",
+            prefix != "in" {
             hoursOffset += 12
         }
 
-        var minutesOffset = 0
-        if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
-            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
-            if !parsedItem.match.isEmpty(atRangeIndex: self.minutesSeparatorGroup),
-                parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup) == ".",
+        if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup) {
+            if minutesSeparator == " ",
+                minutesSeparator == ".",
                 prefix == "in" {
-                if minutes < 10 {
-                    minutesOffset += Int((60.0 / 100.0) * Double(minutes * 10)) + parsedItem.refDate.minute
+                if minutesOffset < 10 {
+                    minutesOffset = Int((60.0 / 100.0) * Double(minutesOffset * 10)) + parsedItem.refDate.minute
                 } else {
-                    minutesOffset += minutes + parsedItem.refDate.minute
+                    minutesOffset += parsedItem.refDate.minute
                 }
-            } else {
-                minutesOffset = minutes
             }
+        }
+
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+            minutesOffset += parsedItem.refDate.minute
         }
 
         if prefix == "in", minutesOffset == 0 {

@@ -133,33 +133,15 @@ class TimeParserTests {
             )
         )
 
-        // next month
-        value = MunaChrono().parseFromString("next month", date: date)
-        assert(value.count > 1, "Should be at least 1")
-        self.validate(
-            item: value[0],
-            day: .init(day: 1, month: 6, year: 2020),
-            timeType: .allDay
-        )
-
         // in 5 mins
         value = MunaChrono().parseFromString("in 5 mins", date: date)
         assert(value.count == 1, "Should be 1")
         self.validate(
             item: value[0],
-            day: .init(day: 21, month: 6, year: 2020),
+            day: .init(day: 21, month: 5, year: 2020),
             timeType: .specificTime(
                 timeOfDay: .init(hours: 22, minutes: 35, seconds: 0)
             )
-        )
-
-        // mon morning
-        value = MunaChrono().parseFromString("mon morning", date: date)
-        assert(value.count > 1, "Should be at least 1")
-        self.validate(
-            item: value[0],
-            day: .init(day: 25, month: 6, year: 2020),
-            timeType: .morning
         )
 
         // 20.06
@@ -169,6 +151,24 @@ class TimeParserTests {
             item: value[0],
             day: .init(day: 20, month: 6, year: 2020),
             timeType: .allDay
+        )
+
+        // next month
+        value = MunaChrono().parseFromString("next month", date: date)
+        assert(value.count > 1, "Should be at least 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 1, month: 6, year: 2020),
+            timeType: .allDay
+        )
+
+        // mon morning
+        value = MunaChrono().parseFromString("mon morning", date: date)
+        assert(value.count > 1, "Should be at least 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 25, month: 6, year: 2020),
+            timeType: .morning
         )
 
         // 20 june

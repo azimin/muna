@@ -57,13 +57,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
-//        TimeParserTests.test()
+        TimeParserTests.test()
 
         let currentTime = TimeZone.current.secondsFromGMT()
         let date = Date() + currentTime.seconds
 //        print("In 2h")
 //        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
-
+//
+//        print("In 50 mins")
+//        print("\(MunaChrono().parseFromString("In 50 mins", date: date))\n")
+//
 //        print("Tomorrow")
 //        print("\(MunaChrono().parseFromString("Tomorrow", date: date))\n")
 //
@@ -81,11 +84,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //
 //        print("In 1.5h")
 //        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
-
+//
+//        print("In 4h")
+//        print("\(MunaChrono().parseFromString("In 4h", date: date))\n")
 //        print("In 1h")
 //        print("\(MunaChrono().parseFromString("In 1h", date: date))\n")
-        print("In 1.35h")
-        print("\(MunaChrono().parseFromString("In 1.35h", date: date))\n")
+//
+//        print("In 1.35h")
+//        print("\(MunaChrono().parseFromString("In 1.35h", date: date))\n")
 //
 //        print("On sun")
 //        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
