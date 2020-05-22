@@ -35,32 +35,73 @@ class ShortcutDateFormatter {
         guard let month = self.date.difference(in: .month, from: Date()),
             let days = self.date.difference(in: .day, from: Date()),
             let hours = self.date.difference(in: .hour, from: Date()),
-            let minutes = self.date.difference(in: .minute, from: Date()) else {
+            let minutes = self.date.difference(in: .minute, from: Date()),
+            let seconds = self.date.difference(in: .second, from: Date()) else {
             assertionFailure("Can't parse")
             return ""
         }
 
         if month > 0 {
             let sufix = month == 1 ? "month" : "months"
-            return "in \(month) \(sufix)"
+            let value = self.roundValue(
+                number: month,
+                correctionNumber: days,
+                correctionType: .days
+            )
+            return "in \(value) \(sufix)"
         }
 
         if days > 0 {
             let sufix = days == 1 ? "day" : "days"
-            return "in \(days) \(sufix)"
+            let value = self.roundValue(
+                number: days,
+                correctionNumber: hours,
+                correctionType: .hours
+            )
+            return "in \(value) \(sufix)"
         }
 
         if hours > 0 {
             let sufix = hours == 1 ? "hour" : "hours"
-            return "in \(hours) \(sufix)"
+            let value = self.roundValue(
+                number: hours,
+                correctionNumber: minutes,
+                correctionType: .minutes
+            )
+            return "in \(value) \(sufix)"
         }
 
         if minutes > 0 {
             let sufix = minutes == 1 ? "minute" : "minutes"
-            return "in \(minutes) \(sufix)"
+            let value = self.roundValue(
+                number: minutes,
+                correctionNumber: seconds,
+                correctionType: .seconds
+            )
+            return "in \(value) \(sufix)"
         }
 
         return ""
+    }
+
+    private enum ValueType {
+        case days
+        case hours
+        case minutes
+        case seconds
+    }
+
+    private func roundValue(number: Int, correctionNumber: Int, correctionType: ValueType) -> Int {
+        switch correctionType {
+        case .days:
+            return correctionNumber > 15 ? number + 1 : number
+        case .hours:
+            return correctionNumber > 12 ? number + 1 : number
+        case .minutes:
+            return correctionNumber > 30 ? number + 1 : number
+        case .seconds:
+            return correctionNumber > 30 ? number + 1 : number
+        }
     }
 }
 
