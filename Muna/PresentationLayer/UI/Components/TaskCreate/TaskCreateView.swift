@@ -124,22 +124,6 @@ class TaskCreateView: PopupView, RemindersOptionsControllerDelegate {
         })
     }
 
-    func selectPreveous() {
-        if self.selectedIndex > 0 {
-            self.options[self.selectedIndex].update(style: .notSelected)
-            self.selectedIndex -= 1
-        }
-        self.options[self.selectedIndex].update(style: .selected)
-    }
-
-    func selectNext() {
-        if self.selectedIndex < self.options.count - 1 {
-            self.options[self.selectedIndex].update(style: .notSelected)
-            self.selectedIndex += 1
-        }
-        self.options[self.selectedIndex].update(style: .selected)
-    }
-
     // MARK: - RemindersOptionsControllerDelegate
 
     func remindersOptionsControllerShowItems(

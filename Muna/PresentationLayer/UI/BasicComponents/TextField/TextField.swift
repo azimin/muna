@@ -54,6 +54,7 @@ class TextField: View, NSTextFieldDelegate {
     }
 
     func setup() {
+        self.backgroundColor = NSColor.color(.lightOverlay)
         self.layer?.cornerRadius = 4
         self.setBorder(isFocused: false)
 
