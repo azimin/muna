@@ -98,7 +98,7 @@ class ENTimeParser: Parser {
                 minutesOffset -= 60
             }
 
-            if hoursOffset < parsedItem.refDate.day {
+            if hoursOffset < parsedItem.refDate.hour, prefix != "in" {
                 dayFromRefDate.day += 1
             }
 

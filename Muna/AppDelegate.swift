@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
         UNUserNotificationCenter.current().delegate = self
 
-        TimeParserTests.test()
+//        TimeParserTests.test()
 
         self.registerNotificationsActions()
         self.setupUserDefaults()
