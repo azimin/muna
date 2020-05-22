@@ -94,13 +94,13 @@ class ShortcutDateFormatter {
     private func roundValue(number: Int, correctionNumber: Int, correctionType: ValueType) -> Int {
         switch correctionType {
         case .days:
-            return correctionNumber > 15 ? number + 1 : number
+            return number
         case .hours:
-            return correctionNumber > 12 ? number + 1 : number
+            return (correctionNumber - number * 24) > 12 ? number + 1 : number
         case .minutes:
-            return correctionNumber > 30 ? number + 1 : number
+            return (correctionNumber - number * 60) > 30 ? number + 1 : number
         case .seconds:
-            return correctionNumber > 30 ? number + 1 : number
+            return (correctionNumber - number * 60) > 30 ? number + 1 : number
         }
     }
 }
