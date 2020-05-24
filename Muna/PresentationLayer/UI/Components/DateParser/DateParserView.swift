@@ -40,6 +40,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
         self.mainOption = option
         self.mainOption?.infoLabel.text = ""
 
+        self.itemsStackView.addArrangedSubview(view)
         self.itemsStackView.addArrangedSubview(option)
         self.itemsStackView.setCustomSpacing(6, after: option)
 
@@ -113,7 +114,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 }
             }
 
-            self.layoutSubtreeIfNeeded()
+            self.superview?.layoutSubtreeIfNeeded()
         }, completionHandler: nil)
     }
 
@@ -148,7 +149,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             }
 
             self.mainOption = option
-            self.layoutSubtreeIfNeeded()
+            self.superview?.layoutSubtreeIfNeeded()
         }, completionHandler: {
             guard self.shouldRunCompletion else {
                 return
