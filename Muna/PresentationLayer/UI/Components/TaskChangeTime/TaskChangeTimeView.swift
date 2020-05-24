@@ -39,12 +39,13 @@ class TaskChangeTimeView: PopupView {
         super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(264)
+            maker.width.equalTo(300)
         }
 
         let insets = NSEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
 
         self.addSubview(self.reminderTextField)
+        self.reminderTextField.delegate = self
         self.reminderTextField.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview().inset(insets)
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)

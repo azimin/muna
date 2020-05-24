@@ -9,7 +9,7 @@
 import Cocoa
 
 class DebugView: View {
-    let contentView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+    let contentView = TaskChangeTimeView(itemModel: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first!)
 //    let contentView = TaskCreateShortcuts()
 
     init() {
