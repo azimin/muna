@@ -92,13 +92,13 @@ class TaskCreateView: PopupView {
     func addMonitor() {
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
-            if Shortcuts.preveousTime.item.validateWith(event: event) {
+            if DateParserView.Shortcuts.preveousTime.item.validateWith(event: event) {
                 self.controller.hilightPreveousItemsIfNeeded()
                 return nil
-            } else if Shortcuts.nextTime.item.validateWith(event: event) {
+            } else if DateParserView.Shortcuts.nextTime.item.validateWith(event: event) {
                 self.controller.hilightNextItemIfNeeded()
                 return nil
-            } else if self.reminderTextField.isInFocus, Shortcuts.acceptTime.item.validateWith(event: event) {
+            } else if self.reminderTextField.isInFocus, DateParserView.Shortcuts.acceptTime.item.validateWith(event: event) {
                 self.controller.selectItemIfNeeded()
                 return nil
             } else if Shortcuts.create.item.validateWith(event: event) {

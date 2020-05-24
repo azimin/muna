@@ -9,25 +9,16 @@
 import Foundation
 
 extension TaskCreateView {
-    enum Shortcuts {
-        case preveousTime
-        case nextTime
-        case acceptTime
+    enum Shortcuts: ViewShortcutProtocol {
         case nextField
         case create
 
         var item: ShortcutItem {
             switch self {
-            case .preveousTime:
-                return ShortcutItem(key: .upArrow, modifiers: [])
-            case .nextTime:
-                return ShortcutItem(key: .downArrow, modifiers: [])
             case .nextField:
                 return ShortcutItem(key: .tab, modifiers: [])
             case .create:
                 return ShortcutItem(key: .return, modifiers: [.shift])
-            case .acceptTime:
-                return ShortcutItem(key: .return, modifiers: [])
             }
         }
     }
