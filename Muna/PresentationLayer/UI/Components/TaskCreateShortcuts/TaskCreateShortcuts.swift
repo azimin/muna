@@ -35,16 +35,19 @@ class TaskCreateShortcuts: PopupView {
             .seletTimeInterval,
         ]
 
-        var shortcut: [TaskCreateView.Shortcuts] {
+        var shortcut: [ViewShortcutProtocol] {
             switch self {
             case .createCard:
-                return [.create]
+                return [TaskCreateView.Shortcuts.create]
             case .nextTextField:
-                return [.nextField]
+                return [TaskCreateView.Shortcuts.nextField]
             case .nextTimeInterval:
-                return [.preveousTime, .nextTime]
+                return [
+                    DateParserView.Shortcuts.preveousTime,
+                    DateParserView.Shortcuts.nextTime,
+                ]
             case .seletTimeInterval:
-                return [.acceptTime]
+                return [DateParserView.Shortcuts.acceptTime]
             }
         }
 

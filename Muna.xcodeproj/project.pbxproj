@@ -58,6 +58,8 @@
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
+		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
+		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
 		9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */; };
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
@@ -180,6 +182,8 @@
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
+		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
+		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
 		9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCreateView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateShortcuts.swift; sourceTree = "<group>"; };
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -541,6 +545,7 @@
 		9F33D4892468828100395C44 /* Shortcut */ = {
 			isa = PBXGroup;
 			children = (
+				9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */,
 				9F33D48A2468828F00395C44 /* ShortcutItem.swift */,
 				9F33D48C246883C900395C44 /* Key.swift */,
 				9F1526FE246DBF020037623B /* ShortcutAction.swift */,
@@ -605,6 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				9F693226247ABE4100FEBC0B /* DateParserView.swift */,
+				9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */,
 			);
 			path = DateParser;
 			sourceTree = "<group>";
@@ -1142,6 +1148,7 @@
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */,
+				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
 				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
@@ -1151,6 +1158,7 @@
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
+				9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */,
 				9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
 				239AB0AB24688E8E001526DA /* ImageStorageService.swift in Sources */,
