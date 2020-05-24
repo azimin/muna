@@ -40,7 +40,6 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
         self.mainOption = option
         self.mainOption?.infoLabel.text = ""
 
-        self.itemsStackView.addArrangedSubview(view)
         self.itemsStackView.addArrangedSubview(option)
         self.itemsStackView.setCustomSpacing(6, after: option)
 
