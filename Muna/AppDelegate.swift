@@ -115,8 +115,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         print("may 21st")
         print("\(MunaChrono().parseFromString("may 21st", date: date)))\n")
-//        20 may
-//        Next month
+
+        print("Next month")
+        print("\(MunaChrono().parseFromString("Next month", date: date)))\n")
+
 //        Tomorrow evening
 //        At evening 7.30 pm
 //        In 3 days in the morning
