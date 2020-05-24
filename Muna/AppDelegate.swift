@@ -57,7 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
-        TimeParserTests.test()
+//        TimeParserTests.test()
 
         let currentTime = TimeZone.current.secondsFromGMT()
         let date = Date() + currentTime.seconds
@@ -110,6 +110,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //
 //        print("In 4h")
 //        print("\(MunaChrono().parseFromString("In 4h", date: date)))\n")
+        print("20 may")
+        print("\(MunaChrono().parseFromString("20 may", date: date)))\n")
+
+        print("may 21st")
+        print("\(MunaChrono().parseFromString("may 21st", date: date)))\n")
 //        20 may
 //        Next month
 //        Tomorrow evening
@@ -192,7 +197,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         statusBarMenu.addItem(
-            withTitle: "About Mena",
+            withTitle: "About Muna",
             action: #selector(self.togglePane),
             keyEquivalent: ""
         )
