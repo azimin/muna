@@ -47,7 +47,7 @@ class TaskCreateView: PopupView {
         super.setup(forStyle: style)
 
         self.snp.makeConstraints { maker in
-            maker.width.equalTo(264)
+            maker.width.equalTo(300)
         }
 
         let insets = NSEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
