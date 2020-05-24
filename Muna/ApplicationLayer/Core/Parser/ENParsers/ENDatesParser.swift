@@ -106,6 +106,7 @@ class ENDatesParser: Parser {
                 var newItem = $0
                 let newDay = PureDay(day: day, month: monthInt, year: year)
                 newItem.day = newDay
+                newItem.timeType = .allDay
                 return newItem
             }
         } else {
@@ -116,6 +117,6 @@ class ENDatesParser: Parser {
                 )
             )
         }
-        return results
+        return parsedResults
     }
 }
