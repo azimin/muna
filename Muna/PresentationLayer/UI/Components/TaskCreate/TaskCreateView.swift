@@ -83,8 +83,6 @@ class TaskCreateView: PopupView {
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
         self.shortcutsButton.action = #selector(self.handleShortcutsButton)
-
-        self.addMonitor()
     }
 
     var downMonitor: Any?
@@ -108,6 +106,19 @@ class TaskCreateView: PopupView {
 
             return event
         })
+    }
+
+    override func viewDidUnhide() {
+        super.viewDidUnhide()
+        self.addMonitor()
+    }
+
+    override func viewDidHide() {
+        super.viewDidHide()
+        if let monitor = self.downMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        self.downMonitor = nil
     }
 
     func clear() {
