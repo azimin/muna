@@ -9,8 +9,8 @@
 import Cocoa
 
 class DateParserView: View, RemindersOptionsControllerDelegate {
-    var mainOption: TaskReminderItemView?
-    var options: [TaskReminderItemView] = []
+    var mainOption: DateParserItemView?
+    var options: [DateParserItemView] = []
     let itemsStackView = NSStackView(
         orientation: .vertical,
         distribution: .fill
@@ -36,7 +36,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             maker.edges.equalToSuperview()
         }
 
-        let option = TaskReminderItemView()
+        let option = DateParserItemView()
         self.mainOption = option
         self.mainOption?.infoLabel.text = ""
 
@@ -69,11 +69,11 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
         for (index, item) in items.enumerated() where index != 0 {
             subviewIndex += 1
-            let option: TaskReminderItemView
+            let option: DateParserItemView
             if self.options.count > index {
                 option = self.options[index]
             } else {
-                option = TaskReminderItemView()
+                option = DateParserItemView()
             }
             option.update(style: .notSelected, animated: true)
             option.update(item: item)

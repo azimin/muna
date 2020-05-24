@@ -1,5 +1,5 @@
 //
-//  TaskReminderItemView.swift
+//  DateParserItemView.swift
 //  Muna
 //
 //  Created by Alexander on 5/12/20.
@@ -9,7 +9,7 @@
 import Foundation
 import SnapKit
 
-class TaskReminderItemView: View {
+class DateParserItemView: View {
     enum Style {
         case basic
         case selected

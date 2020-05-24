@@ -60,10 +60,12 @@
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
 		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
+		9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322C247ACB3600FEBC0B /* CardPreviewDateFormatter.swift */; };
+		9F69322F247ACBCB00FEBC0B /* DateComparisonFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322E247ACBCB00FEBC0B /* DateComparisonFormatter.swift */; };
 		9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */; };
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
-		9F6E7BBF2477072E00A3D5EB /* ShortcutDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* ShortcutDateFormatter.swift */; };
+		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D5FF2464B63900695A19 /* StopableScrollView.swift */; };
 		9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D6022464B65900695A19 /* MainPanelView.swift */; };
@@ -90,7 +92,7 @@
 		9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */; };
 		9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */; };
 		9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */; };
-		9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */; };
+		9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */; };
 		9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */; };
 		9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */; };
 		9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */; };
@@ -184,10 +186,12 @@
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
+		9F69322C247ACB3600FEBC0B /* CardPreviewDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewDateFormatter.swift; sourceTree = "<group>"; };
+		9F69322E247ACBCB00FEBC0B /* DateComparisonFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComparisonFormatter.swift; sourceTree = "<group>"; };
 		9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCreateView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateShortcuts.swift; sourceTree = "<group>"; };
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
-		9F6E7BBE2477072E00A3D5EB /* ShortcutDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutDateFormatter.swift; sourceTree = "<group>"; };
+		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F99D5FF2464B63900695A19 /* StopableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopableScrollView.swift; sourceTree = "<group>"; };
 		9F99D6022464B65900695A19 /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
@@ -214,7 +218,7 @@
 		9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionedTextField.swift; sourceTree = "<group>"; };
 		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
 		9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDoneButton.swift; sourceTree = "<group>"; };
-		9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskReminderItemView.swift; sourceTree = "<group>"; };
+		9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserItemView.swift; sourceTree = "<group>"; };
 		9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsView.swift; sourceTree = "<group>"; };
@@ -609,10 +613,26 @@
 		9F693225247ABE3200FEBC0B /* DateParser */ = {
 			isa = PBXGroup;
 			children = (
+				9F693231247ACF9000FEBC0B /* SmallComponents */,
 				9F693226247ABE4100FEBC0B /* DateParserView.swift */,
 				9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */,
 			);
 			path = DateParser;
+			sourceTree = "<group>";
+		};
+		9F693230247ACF5200FEBC0B /* TaskChangeTime */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TaskChangeTime;
+			sourceTree = "<group>";
+		};
+		9F693231247ACF9000FEBC0B /* SmallComponents */ = {
+			isa = PBXGroup;
+			children = (
+				9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */,
+			);
+			name = SmallComponents;
 			sourceTree = "<group>";
 		};
 		9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */ = {
@@ -628,7 +648,9 @@
 		9F6E7BBD2477070500A3D5EB /* DateFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				9F6E7BBE2477072E00A3D5EB /* ShortcutDateFormatter.swift */,
+				9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */,
+				9F69322C247ACB3600FEBC0B /* CardPreviewDateFormatter.swift */,
+				9F69322E247ACBCB00FEBC0B /* DateComparisonFormatter.swift */,
 			);
 			path = DateFormatter;
 			sourceTree = "<group>";
@@ -656,6 +678,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9F693230247ACF5200FEBC0B /* TaskChangeTime */,
 				9F693225247ABE3200FEBC0B /* DateParser */,
 				9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */,
 				9FC9CDD02469B69D0018FAD7 /* TaskCreate */,
@@ -846,7 +869,6 @@
 			isa = PBXGroup;
 			children = (
 				9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */,
-				9FC9CDD62469F57F0018FAD7 /* TaskReminderItemView.swift */,
 			);
 			path = SmallComponents;
 			sourceTree = "<group>";
@@ -1134,7 +1156,8 @@
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
-				9F6E7BBF2477072E00A3D5EB /* ShortcutDateFormatter.swift in Sources */,
+				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
+				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
@@ -1182,6 +1205,7 @@
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
 				9F33D4882468826100395C44 /* ShortcutView.swift in Sources */,
+				9F69322F247ACBCB00FEBC0B /* DateComparisonFormatter.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
 				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
@@ -1192,7 +1216,7 @@
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
-				9FC9CDD72469F57F0018FAD7 /* TaskReminderItemView.swift in Sources */,
+				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,
 				9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,

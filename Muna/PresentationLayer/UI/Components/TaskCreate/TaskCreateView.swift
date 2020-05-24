@@ -172,7 +172,7 @@ extension TaskCreateView: TextFieldDelegate {
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
-            let formatter = ShortcutDateFormatter(date: result)
+            let formatter = DateParserFormatter(date: result)
 
             let item = RemindersOptionsController.ReminderItem(
                 title: formatter.title,

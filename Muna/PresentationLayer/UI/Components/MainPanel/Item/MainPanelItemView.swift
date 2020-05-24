@@ -136,7 +136,8 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     func update(item: ItemModel) {
         if let dueDate = item.dueDate {
-            self.deadlineLabel.stringValue = "End in: \(dueDate)"
+            let reminder = CardPreviewDateFormatter(date: dueDate)
+            self.deadlineLabel.stringValue = reminder.reminderText
         } else {
             self.deadlineLabel.stringValue = "No reminder"
         }

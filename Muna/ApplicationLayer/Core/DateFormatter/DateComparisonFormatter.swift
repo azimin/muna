@@ -1,35 +1,32 @@
 //
-//  ShortcutDateFormatter.swift
+//  DateComparisonFormatter.swift
 //  Muna
 //
-//  Created by Alexander on 5/21/20.
+//  Created by Alexander on 5/24/20.
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
 import Foundation
 import SwiftDate
 
-class ShortcutDateFormatter {
+class DateComparisonFormatter {
     private let date: Date
 
     init(date: Date) {
         self.date = date
     }
 
-    var title: String {
-        let month = self.date.representableDate().monthName(.short)
-        let day = self.date.representableDate().ordinalDay
-        let weekday = self.date.representableDate().weekdayName(.short)
-        return "\(month), \(day) \(weekday)"
-    }
+    var comparisonText: String {
+        let resultPrefix: String
+        let resultSuffix: String
+        var result: String = ""
 
-    var subtitle: String {
-        return self.date.representableDate().toFormat("HH:mm")
-    }
-
-    var additionalText: String {
-        guard self.date > Date() else {
-            return "passed"
+        if self.date > Date() {
+            resultPrefix = "in "
+            resultSuffix = ""
+        } else {
+            resultPrefix = ""
+            resultSuffix = " ago"
         }
 
         guard let month = self.date.difference(in: .month, from: Date()),
@@ -48,40 +45,36 @@ class ShortcutDateFormatter {
                 correctionNumber: days,
                 correctionType: .days
             )
-            return "in \(value) \(sufix)"
-        }
-
-        if days > 0 {
+            result = "\(value) \(sufix)"
+        } else if days > 0 {
             let sufix = days == 1 ? "day" : "days"
             let value = self.roundValue(
                 number: days,
                 correctionNumber: hours,
                 correctionType: .hours
             )
-            return "in \(value) \(sufix)"
-        }
-
-        if hours > 0 {
+            result = "in \(value) \(sufix)"
+        } else if hours > 0 {
             let sufix = hours == 1 ? "hour" : "hours"
             let value = self.roundValue(
                 number: hours,
                 correctionNumber: minutes,
                 correctionType: .minutes
             )
-            return "in \(value) \(sufix)"
-        }
-
-        if minutes > 0 {
+            result = "in \(value) \(sufix)"
+        } else if minutes > 0 {
             let sufix = minutes == 1 ? "minute" : "minutes"
             let value = self.roundValue(
                 number: minutes,
                 correctionNumber: seconds,
                 correctionType: .seconds
             )
-            return "in \(value) \(sufix)"
+            result = "in \(value) \(sufix)"
+        } else {
+            return ""
         }
 
-        return ""
+        return resultPrefix + result + resultSuffix
     }
 
     private enum ValueType {
@@ -101,21 +94,6 @@ class ShortcutDateFormatter {
             return (correctionNumber - number * 60) > 30 ? number + 1 : number
         case .seconds:
             return (correctionNumber - number * 60) > 30 ? number + 1 : number
-        }
-    }
-}
-
-extension Date {
-    func representableDate() -> Date {
-        let format = DateFormatter()
-        format.dateFormat = "MM-dd-yyyy HH:mm"
-        let string = format.string(from: self)
-
-        if let date = string.toDate("MM-dd-yyyy HH:mm") {
-            return date.date
-        } else {
-            assertionFailure("Can't cast")
-            return Date()
         }
     }
 }
