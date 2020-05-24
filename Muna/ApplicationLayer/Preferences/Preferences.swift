@@ -11,8 +11,9 @@ import MASShortcut
 
 class Preferences {
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
-    static var defaultShortcutScreenshotKey = "screenshot_full_short"
+    static var defaultShortcutScreenshotKey = "screenshot_part_short"
     static var defaultShortcutDebugKey = "ud_activation_debug_shortcut"
+    static var defaultShortcutFullscreenScreenshotKey = "screenshot_full_short"
 
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + t
@@ -22,10 +23,17 @@ class Preferences {
         ).masShortcut
 
         // cmd + shift + s
-        let defaultScreensshotShortcut = ShortcutItem(
+        let defaultScreenshotShortcut = ShortcutItem(
             key: .s,
             modifiers: [.command, .shift]
         ).masShortcut
+
+        // cmd + shift + f
+        let defaultShortcutFullscreenScreenshotShortcut = ShortcutItem(
+            key: .f,
+            modifiers: [.command, .shift]
+        )
+        .masShortcut
 
         // cmd + shift + d
         let defaultDebugShortcut = ShortcutItem(
@@ -44,7 +52,7 @@ class Preferences {
             UserDefaults.standard.set(data, forKey: defaultShortcutPanelKey)
         }
 
-        if let shortcut = defaultScreensshotShortcut,
+        if let shortcut = defaultScreenshotShortcut,
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
                 requiringSecureCoding: false
@@ -60,6 +68,15 @@ class Preferences {
             ) {
             result[Preferences.defaultShortcutDebugKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutDebugKey)
+        }
+
+        if let shortcut = defaultShortcutFullscreenScreenshotShortcut,
+            let data = try? NSKeyedArchiver.archivedData(
+                withRootObject: shortcut,
+                requiringSecureCoding: false
+            ) {
+            result[Preferences.defaultShortcutFullscreenScreenshotKey] = data as NSObject
+            UserDefaults.standard.set(data, forKey: defaultShortcutFullscreenScreenshotKey)
         }
 
         return result

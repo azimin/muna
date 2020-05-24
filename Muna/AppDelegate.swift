@@ -120,8 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("20 July")
 //        print("\(MunaChrono().parseFromString("20 July", date: date)))\n")
 
-        print("20 July at 13:00")
-        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
+//        print("20 July at 13:00")
+//        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
 
 //        print("20")
 //        print("\(MunaChrono().parseFromString("20", date: date)))\n")
@@ -143,6 +143,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.breakBinding(
             withDefaultsKey: Preferences.defaultShortcutPanelKey
         )
+
+        MASShortcutBinder.shared()?.breakBinding(
+            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey
+        )
     }
 
     func setupUserDefaults() {
@@ -161,6 +165,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
                 self.toggleScreenshotState()
+            }
+        )
+
+        MASShortcutBinder.shared()?.bindShortcut(
+            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
+            toAction: {
+                print("Executed")
             }
         )
 
