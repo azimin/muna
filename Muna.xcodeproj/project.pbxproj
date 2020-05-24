@@ -88,6 +88,7 @@
 		9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */; };
 		9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
+		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
@@ -217,6 +218,7 @@
 		9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersOptionsController.swift; sourceTree = "<group>"; };
 		9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutDescriptionView.swift; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
+		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelViewController.swift; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				9F025C0E24633D1700F05D81 /* Blocks.swift */,
+				9FBED389247B15160028483F /* Date+Time.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -643,6 +646,15 @@
 			name = SmallComponents;
 			sourceTree = "<group>";
 		};
+		9F693238247B12D100FEBC0B /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */,
+				9F693236247B106800FEBC0B /* ReminderItem.swift */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
 		9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,6 +805,7 @@
 		9FB8B522246372CA00BE7544 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9F693238247B12D100FEBC0B /* Reminders */,
 				9FE0F53A2470754B0046A5C4 /* Popup */,
 			);
 			path = Controllers;
@@ -868,8 +881,6 @@
 				9FC9CDD52469F5510018FAD7 /* SmallComponents */,
 				9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */,
 				9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */,
-				9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */,
-				9F693236247B106800FEBC0B /* ReminderItem.swift */,
 			);
 			path = TaskCreate;
 			sourceTree = "<group>";
@@ -1175,6 +1186,7 @@
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
 				9F693235247AD06500FEBC0B /* TaskChangeTimeView+Shortcuts.swift in Sources */,
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
+				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
 				9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */,
 				9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */,

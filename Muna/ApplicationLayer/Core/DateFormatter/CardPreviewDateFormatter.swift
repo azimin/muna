@@ -48,7 +48,7 @@ class CardPreviewDateFormatter {
     }
 
     var time: String {
-        return self.date.representableDate().toFormat("HH:mm")
+        return self.date.representableDate().timeSmartString(showMinutes: true)
     }
 
     var timeTillEvent: String {

@@ -24,7 +24,7 @@ class DateParserFormatter {
     }
 
     var subtitle: String {
-        return self.date.representableDate().toFormat("HH:mm")
+        return self.date.representableDate().timeSmartString(showMinutes: true)
     }
 
     var additionalText: String {

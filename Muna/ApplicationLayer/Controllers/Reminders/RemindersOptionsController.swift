@@ -121,7 +121,7 @@ class RemindersOptionsController {
 
 private extension RemindersOptionsController {
     static func predefineSuggestions(date: Date) -> [ReminderItem] {
-        return [
+        var values = [
             ReminderItem(
                 date: date + 5.minutes,
                 title: "In 5 mins",
@@ -140,24 +140,39 @@ private extension RemindersOptionsController {
                 subtitle: "",
                 additionalText: ""
             ),
-            ReminderItem(
-                date: date + 2.hours, // TODO: - Fix time
-                title: "In the evening",
-                subtitle: "",
-                additionalText: "7 pm" // TODO: Fixme use 7 pm or 19.00
-            ),
-            ReminderItem(
-                date: date + 5.hours,
-                title: "Tomorrow, 12 am", // TODO: - Fix
-                subtitle: "",
-                additionalText: "25 May" // TODO: - Fix
-            ),
-            ReminderItem(
-                date: date + 10.hours,
-                title: "On weekends",
-                subtitle: "",
-                additionalText: "Sat, 27 May"
-            ),
         ]
+
+        if let eveningDate = date.dateBySet(hour: 7, min: 0, secs: 0),
+            date < eveningDate {
+            values.append(
+                ReminderItem(
+                    date: eveningDate,
+                    title: "In the evening",
+                    subtitle: "",
+                    additionalText: eveningDate.timeSmartString(showMinutes: false)
+                )
+            )
+        }
+
+//        ReminderItem(
+//            date: date + 2.hours, // TODO: - Fix time
+//            title: "In the evening",
+//            subtitle: "",
+//            additionalText: "7 pm" // TODO: Fixme use 7 pm or 19.00
+//        ),
+//        ReminderItem(
+//        date: date + 5.hours,
+//        title: "Tomorrow, 12 am", // TODO: - Fix
+//        subtitle: "",
+//        additionalText: "25 May" // TODO: - Fix
+//        ),
+//        ReminderItem(
+//        date: date + 10.hours,
+//        title: "On weekends",
+//        subtitle: "",
+//        additionalText: "Sat, 27 May"
+//        ),
+
+        return values
     }
 }
