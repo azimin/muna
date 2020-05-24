@@ -1,20 +1,15 @@
 //
-//  TaskCreateView.swift
+//  TaskChangeTimeView.swift
 //  Muna
 //
-//  Created by Alexander on 5/11/20.
+//  Created by Alexander on 5/24/20.
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
 import Cocoa
 import SwiftDate
 
-protocol TaskCreateViewDelegate: AnyObject {
-    func shortcutsButtonTapped()
-    func closeScreenshot()
-}
-
-class TaskCreateView: PopupView {
+class TaskChangeTimeView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
@@ -22,23 +17,20 @@ class TaskCreateView: PopupView {
 
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView
-    let commentTextField = TextField(clearable: false)
 
     var controller = RemindersOptionsController(
-        behaviour: .emptyState
+        behaviour: .remindSuggestionsState
     )
 
     private let dateParser = MunaChrono()
-    private let savingProcessingService: SavingProcessingService
+    private let itemModel: ItemModel
 
-    weak var delegate: TaskCreateViewDelegate?
-
-    init(savingProcessingService: SavingProcessingService) {
+    init(itemModel: ItemModel) {
         self.datePrarserView = DateParserView(controller: self.controller)
-        self.savingProcessingService = savingProcessingService
+        self.itemModel = itemModel
         self.presentationDateItemTransformer = DateItemsTransformer(dateItems: [], configurator: BasicDateItemPresentationConfigurator())
 
-        super.init(style: .withShortcutsButton)
+        super.init(style: .withoutShortcutsButton)
     }
 
     required init?(coder: NSCoder) {
@@ -55,6 +47,7 @@ class TaskCreateView: PopupView {
         let insets = NSEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
 
         self.addSubview(self.reminderTextField)
+        self.reminderTextField.delegate = self
         self.reminderTextField.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview().inset(insets)
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
@@ -66,33 +59,34 @@ class TaskCreateView: PopupView {
             maker.top.equalTo(self.reminderTextField.snp.bottom).inset(-6)
         }
 
-        self.addSubview(self.commentTextField)
-        self.commentTextField.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(insets)
-            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
-        }
-
         self.reminderTextField.placeholder = "When to remind"
-        self.commentTextField.placeholder = "Comment"
-
-        self.reminderTextField.delegate = self
 
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { maker in
             maker.bottom.leading.trailing.equalToSuperview()
-            maker.top.equalTo(self.commentTextField.snp.bottom).inset(-32)
+            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-32)
         }
 
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
-        self.shortcutsButton.action = #selector(self.handleShortcutsButton)
+
+        self.addMonitor()
 
         self.controller.showItems(items: [], animated: false)
     }
 
     var downMonitor: Any?
 
+    func removeMonitor() {
+        if let monitor = self.downMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        self.downMonitor = nil
+    }
+
     func addMonitor() {
+        self.removeMonitor()
+
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
             if DateParserView.Shortcuts.preveousTime.item.validateWith(event: event) {
@@ -105,7 +99,7 @@ class TaskCreateView: PopupView {
                 self.controller.selectItemIfNeeded()
                 return nil
             } else if Shortcuts.create.item.validateWith(event: event) {
-                self.createTask()
+                self.updateWithNewTime()
                 return nil
             }
 
@@ -120,35 +114,33 @@ class TaskCreateView: PopupView {
 
     override func viewDidHide() {
         super.viewDidHide()
-        if let monitor = self.downMonitor {
-            NSEvent.removeMonitor(monitor)
-        }
-        self.downMonitor = nil
+        self.removeMonitor()
     }
 
     func clear() {
         self.reminderTextField.clear()
-        self.commentTextField.clear()
     }
 
     // MARK: - Saving
 
     @objc
     private func handleCloseButton() {
-        self.delegate?.closeScreenshot()
+        self.slowAlert()
+    }
+
+    func slowAlert() {
+        // TODO: - Implement logic
     }
 
     @objc
     private func handleDoneButton() {
-        self.createTask()
+        self.updateWithNewTime()
     }
 
-    func createTask() {
+    func updateWithNewTime() {
         defer {
-            self.delegate?.closeScreenshot()
+            self.slowAlert()
         }
-
-        var itemToSave = SavingProcessingService.ItemToSave()
 
         guard let item = self.controller.item(by: self.controller.selectedIndex) else {
             assertionFailure("No item for index")
@@ -156,22 +148,15 @@ class TaskCreateView: PopupView {
         }
 
         if let date = item.date {
-            itemToSave.dueDateString = self.reminderTextField.textField.stringValue
-            itemToSave.date = date
+            self.itemModel.dueDateString = self.reminderTextField.textField.stringValue
+            self.itemModel.dueDate = date
+            ServiceLocator.shared.itemsDatabase.saveItems()
         }
-
-        itemToSave.comment = self.commentTextField.textField.stringValue
-
-        self.savingProcessingService.save(withItem: itemToSave)
-    }
-
-    @objc
-    private func handleShortcutsButton() {
-        self.delegate?.shortcutsButtonTapped()
+        // TODO: - Update list
     }
 }
 
-extension TaskCreateView: TextFieldDelegate {
+extension TaskChangeTimeView: TextFieldDelegate {
     func textFieldTextDidChange(textField: TextField, text: String) {
         let offset = TimeZone.current.secondsFromGMT()
 

@@ -184,7 +184,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: {
-                    self.toggleSettingsState()
+                    self.toggleDebugState()
                 }
             )
 
