@@ -12,6 +12,7 @@ import Foundation
 enum WindowType: String, Equatable {
     case panel
     case screenshot
+    case fullScreenshot
     case debug
     case settings
 }
@@ -34,7 +35,7 @@ class WindowManager {
         switch windowType {
         case .settings:
             status = self.windows[windowType]?.isVisible ?? false
-        case .debug, .panel, .screenshot:
+        case .debug, .panel, .screenshot, .fullScreenshot:
             status = self.windowVisibleStatus[windowType] ?? false
         }
 
@@ -61,7 +62,7 @@ class WindowManager {
             case .settings:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
-            case .debug, .panel, .screenshot:
+            case .debug, .panel, .screenshot, .fullScreenshot:
                 break
             }
             return
@@ -78,7 +79,9 @@ class WindowManager {
         case .panel:
             self.showPanel(in: window)
         case .screenshot:
-            self.showScreenshotState(in: window)
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
+        case .fullScreenshot:
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
         case .settings:
             self.showSettings(in: window)
         }
@@ -101,7 +104,7 @@ class WindowManager {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window)
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
         case .panel:
             window = Panel(
                 contentRect: self.frameFor(.panel),
@@ -127,7 +130,20 @@ class WindowManager {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window)
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
+        case .fullScreenshot:
+            window = Panel(
+                contentRect: self.frameFor(.screenshot),
+                styleMask: [.nonactivatingPanel],
+                backing: .buffered,
+                defer: true
+            )
+            window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
+            window.contentViewController = ScreenShotStateViewController()
+            window.hasShadow = false
+            // Overlap dock, but not menu bar
+            window.level = .statusBar
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
         case .settings:
             window = NSWindow(
                 contentRect: self.frameFor(.settings),
@@ -153,7 +169,7 @@ class WindowManager {
         switch windowType {
         case .debug:
             frame = mainScreen.frame
-        case .screenshot:
+        case .screenshot, .fullScreenshot:
             frame = mainScreen.frame
         case .panel:
             frame = NSRect(
@@ -203,7 +219,7 @@ class WindowManager {
         window.setIsVisible(true)
     }
 
-    private func showScreenshotState(in window: NSWindow) {
+    private func showScreenshotState(in window: NSWindow, isNeededToMakeFullscreenScreenshot: Bool) {
         window.makeKeyAndOrderFront(nil)
 
         if let viewController = window.contentViewController as? ScreenShotStateViewController {
@@ -218,6 +234,10 @@ class WindowManager {
 
         if let viewController = window.contentViewController as? ScreenShotStateViewController {
             viewController.show()
+            if isNeededToMakeFullscreenScreenshot {
+                viewController.makeScreenshot()
+                viewController.isFullscreenScreenshotState = true
+            }
         }
 
         window.setIsVisible(true)
@@ -236,7 +256,7 @@ class WindowManager {
         switch windowType {
         case .debug:
             window.setIsVisible(false)
-        case .screenshot:
+        case .screenshot, .fullScreenshot:
             if let viewController = window.contentViewController as? ScreenShotStateViewController {
                 viewController.hide {
                     window.setIsVisible(false)

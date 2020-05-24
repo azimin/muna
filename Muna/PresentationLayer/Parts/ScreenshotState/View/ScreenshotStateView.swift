@@ -366,4 +366,8 @@ extension ScreenshotStateView: TaskCreateViewDelegate {
             self.showShortcutsView(aroundViewFrame: self.reminderSetupPopup.frame)
         }
     }
+
+    func closeScreenshot() {
+        self.delegate?.escapeWasTapped()
+    }
 }

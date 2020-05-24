@@ -120,8 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("20 July")
 //        print("\(MunaChrono().parseFromString("20 July", date: date)))\n")
 
-        print("20 July at 13:00")
-        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
+//        print("20 July at 13:00")
+//        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
 
 //        print("20")
 //        print("\(MunaChrono().parseFromString("20", date: date)))\n")
@@ -143,6 +143,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.breakBinding(
             withDefaultsKey: Preferences.defaultShortcutPanelKey
         )
+
+        MASShortcutBinder.shared()?.breakBinding(
+            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey
+        )
     }
 
     func setupUserDefaults() {
@@ -160,7 +164,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
+                self.hideScreenshotIfNeeded()
+                self.hideFullscreenScreenshotIfNeeded()
                 self.toggleScreenshotState()
+            }
+        )
+
+        MASShortcutBinder.shared()?.bindShortcut(
+            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
+            toAction: {
+                self.hideScreenshotIfNeeded()
+                self.hideFullscreenScreenshotIfNeeded()
+                self.toogleFullscreenScreenshotState()
             }
         )
 
@@ -240,12 +255,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.windowManager.hideWindowIfNeeded(.screenshot)
     }
 
+    @objc func hideFullscreenScreenshotIfNeeded() {
+        self.windowManager.hideWindowIfNeeded(.fullScreenshot)
+    }
+
     @objc func togglePane() {
         self.windowManager.toggleWindow(.panel)
     }
 
     @objc func toggleScreenshotState() {
         self.windowManager.toggleWindow(.screenshot)
+    }
+
+    @objc func toogleFullscreenScreenshotState() {
+        self.windowManager.toggleWindow(.fullScreenshot)
     }
 
     @objc func toggleDebugState() {

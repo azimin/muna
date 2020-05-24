@@ -13,6 +13,8 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     var windowId: CGWindowID?
 
+    var isFullscreenScreenshotState = false
+
     private var tmpCGImage: CGImage?
 
     private var mouseLocation: NSPoint { NSEvent.mouseLocation }
@@ -115,7 +117,25 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         completion?()
     }
 
-    // MARK: - Make screen shot
+    // MARK: - Make screenshot
+
+    func makeScreenshot() {
+        self.makeScreenshot { [unowned self] image in
+            guard self.isNeededToDrawFrame else {
+                return
+            }
+
+            self.isNeededToDrawFrame = false
+
+            self.rootView.screenshotImageView.image = image
+            self.rootView.screenshotImageView.isHidden = false
+
+            self.startedPoint = .zero
+            self.rootView.screenshotFrame = self.rootView.bounds
+
+            self.rootView.showVisuals()
+        }
+    }
 
     func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
         guard let windowId = self.windowId else {
@@ -150,7 +170,11 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
         self.isNeededToDrawFrame = true
-        (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
+        if self.isFullscreenScreenshotState {
+            (NSApplication.shared.delegate as? AppDelegate)?.hideFullscreenScreenshotIfNeeded()
+        } else {
+            (NSApplication.shared.delegate as? AppDelegate)?.hideScreenshotIfNeeded()
+        }
     }
 
     func saveImage(withRect rect: NSRect) {
