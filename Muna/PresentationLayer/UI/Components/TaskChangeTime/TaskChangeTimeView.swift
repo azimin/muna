@@ -71,6 +71,8 @@ class TaskChangeTimeView: PopupView {
         self.closeButton.action = #selector(self.handleCloseButton)
 
         self.addMonitor()
+
+        self.controller.showItems(items: [], animated: false)
     }
 
     var downMonitor: Any?
@@ -173,6 +175,6 @@ extension TaskChangeTimeView: TextFieldDelegate {
             return item
         }
 
-        self.controller.showItems(items: items)
+        self.controller.showItems(items: items, animated: true)
     }
 }

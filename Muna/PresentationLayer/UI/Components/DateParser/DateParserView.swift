@@ -53,7 +53,8 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
     func remindersOptionsControllerShowItems(
         _ controller: RemindersOptionsController,
-        items: [ReminderItem]
+        items: [ReminderItem],
+        animated: Bool
     ) {
         self.mainOption = self.options.first
         self.shouldRunCompletion = false
@@ -99,7 +100,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
         let numberOfItems = max(items.count, 1)
         NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.25
+            context.duration = animated ? 0.25 : 0
             context.allowsImplicitAnimation = true
 
             for optionIndex in 0 ..< numberOfItems {

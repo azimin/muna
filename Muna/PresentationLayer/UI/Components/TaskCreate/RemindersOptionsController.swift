@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import SwiftDate
 
 protocol RemindersOptionsControllerDelegate: AnyObject {
     func remindersOptionsControllerShowItems(
         _ controller: RemindersOptionsController,
-        items: [ReminderItem]
+        items: [ReminderItem],
+        animated: Bool
     )
 
     func remindersOptionsControllerHighliteItem(
@@ -44,7 +46,7 @@ class RemindersOptionsController {
 
     private var avialbleItems: [ReminderItem] = []
 
-    func showItems(items: [ReminderItem]) {
+    func showItems(items: [ReminderItem], animated: Bool) {
         self.isEditingState = true
 
         switch self.behaviour {
@@ -52,6 +54,8 @@ class RemindersOptionsController {
             self.avialbleItems = items
         case .remindSuggestionsState:
             if items.isEmpty {
+                self.avialbleItems = RemindersOptionsController
+                    .predefineSuggestions(date: Date())
             } else {
                 self.avialbleItems = items
             }
@@ -60,7 +64,8 @@ class RemindersOptionsController {
         self.selectedIndex = 0
         self.delegate?.remindersOptionsControllerShowItems(
             self,
-            items: self.avialbleItems
+            items: self.avialbleItems,
+            animated: animated
         )
     }
 
@@ -115,7 +120,44 @@ class RemindersOptionsController {
 }
 
 private extension RemindersOptionsController {
-    static func prefefineSuggestions(date: Date) -> [ReminderItem] {
-        return []
+    static func predefineSuggestions(date: Date) -> [ReminderItem] {
+        return [
+            ReminderItem(
+                date: date + 5.minutes,
+                title: "In 5 mins",
+                subtitle: "",
+                additionalText: ""
+            ),
+            ReminderItem(
+                date: date + 30.minutes,
+                title: "In 30 mins",
+                subtitle: "",
+                additionalText: ""
+            ),
+            ReminderItem(
+                date: date + 1.hours,
+                title: "In 1 hour",
+                subtitle: "",
+                additionalText: ""
+            ),
+            ReminderItem(
+                date: date + 2.hours, // TODO: - Fix time
+                title: "In the evening",
+                subtitle: "",
+                additionalText: "7 pm" // TODO: Fixme use 7 pm or 19.00
+            ),
+            ReminderItem(
+                date: date + 5.hours,
+                title: "Tomorrow, 12 am", // TODO: - Fix
+                subtitle: "",
+                additionalText: "25 May" // TODO: - Fix
+            ),
+            ReminderItem(
+                date: date + 10.hours,
+                title: "On weekends",
+                subtitle: "",
+                additionalText: "Sat, 27 May"
+            ),
+        ]
     }
 }

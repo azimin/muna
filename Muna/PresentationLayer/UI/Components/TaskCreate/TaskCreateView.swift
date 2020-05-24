@@ -86,6 +86,8 @@ class TaskCreateView: PopupView {
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
         self.shortcutsButton.action = #selector(self.handleShortcutsButton)
+
+        self.controller.showItems(items: [], animated: false)
     }
 
     var downMonitor: Any?
@@ -188,6 +190,6 @@ extension TaskCreateView: TextFieldDelegate {
             return item
         }
 
-        self.controller.showItems(items: items)
+        self.controller.showItems(items: items, animated: true)
     }
 }
