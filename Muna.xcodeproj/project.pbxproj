@@ -57,6 +57,7 @@
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
+		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */; };
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
@@ -178,6 +179,7 @@
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
+		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F6C1E72246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCreateView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateShortcuts.swift; sourceTree = "<group>"; };
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -599,6 +601,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9F693225247ABE3200FEBC0B /* DateParser */ = {
+			isa = PBXGroup;
+			children = (
+				9F693226247ABE4100FEBC0B /* DateParserView.swift */,
+			);
+			path = DateParser;
+			sourceTree = "<group>";
+		};
 		9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +650,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9F693225247ABE3200FEBC0B /* DateParser */,
 				9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */,
 				9FC9CDD02469B69D0018FAD7 /* TaskCreate */,
 				9F33D48424687F6A00395C44 /* Shortcuts */,
@@ -1166,6 +1177,7 @@
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
 				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
+				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
@@ -1328,7 +1340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1356,7 +1368,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

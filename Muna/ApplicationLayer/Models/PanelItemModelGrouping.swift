@@ -43,7 +43,6 @@ class PanelItemModelGrouping {
     private var names: [Int: Group] = [:]
     private var values: [Int: [ItemModel]] = [:]
 
-    // swiftlint:disable cyclomatic_complexity
     init(items: [ItemModel]) {
         var result: [Group: [ItemModel]] = [:]
         for key in Group.allCases {

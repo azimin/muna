@@ -57,6 +57,13 @@ class WindowManager {
 
     func activateWindowIfNeeded(_ windowType: WindowType) {
         guard self.windowState(windowType) == false else {
+            switch windowType {
+            case .settings:
+                NSApp.activate(ignoringOtherApps: true)
+                self.windows[windowType]?.makeKeyAndOrderFront(nil)
+            case .debug, .panel, .screenshot:
+                break
+            }
             return
         }
 

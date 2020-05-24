@@ -33,7 +33,10 @@ class ENTimeParser: Parser {
                 print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
             }
         }
-        guard (!parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)) && !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup) else {
+        guard (!parsedItem.match.isEmpty(atRangeIndex: self.hourGroup)
+            || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup))
+            && !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup)
+        else {
             return results
         }
 

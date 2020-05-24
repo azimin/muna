@@ -29,7 +29,7 @@ class RemindersOptionsController {
     weak var delegate: RemindersOptionsControllerDelegate?
 
     private var isEditingState: Bool = false
-    private var selectedIndex = 0
+    private(set) var selectedIndex = 0
 
     class ReminderItem {
         // left side

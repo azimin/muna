@@ -19,10 +19,13 @@ class PanelBottomBarView: View {
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
-    let shortcutsButton = Button().withImageName(
-        "icon_cmd",
-        color: .button
-    )
+    let shortcutsButton = Button()
+        .withImageName(
+            "icon_cmd",
+            color: .button
+        )
+        .withIsHidden(true)
+
     let settingsButton = Button().withImageName(
         "icon_settings_2",
         color: .button

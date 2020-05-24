@@ -43,7 +43,7 @@ class MainPanelViewController: NSViewController {
     }
 
     @objc func settingAction() {
-        print("Settings")
+        (NSApplication.shared.delegate as? AppDelegate)?.windowManager.activateWindowIfNeeded(.settings)
     }
 
     @objc func shortcutAction() {
