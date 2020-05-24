@@ -50,12 +50,12 @@ class ENDatesParser: Parser {
     private let postfixDayGroup = 8
 
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 9).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 9).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup)
             || !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup)
             || !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup)
@@ -82,7 +82,7 @@ class ENDatesParser: Parser {
         var monthInt = parsedItem.refDate.month
         var monthString = ""
         if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) {
-            if let monthOfYear = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup)) {
+            if let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
                 monthInt = monthOfYear
             } else {
                 monthString = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()
@@ -106,7 +106,6 @@ class ENDatesParser: Parser {
                 var newItem = $0
                 let newDay = PureDay(day: day, month: monthInt, year: year)
                 newItem.day = newDay
-                newItem.timeType = .allDay
                 return newItem
             }
         } else {

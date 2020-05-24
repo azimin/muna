@@ -110,14 +110,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //
 //        print("In 4h")
 //        print("\(MunaChrono().parseFromString("In 4h", date: date)))\n")
-        print("20 may")
-        print("\(MunaChrono().parseFromString("20 may", date: date)))\n")
+//        print("20 may")
+//        print("\(MunaChrono().parseFromString("20 may", date: date)))\n")
+//
+//        print("may 21st")
+//        print("\(MunaChrono().parseFromString("may 21st", date: date)))\n")
+//
+//        print("Next month")
+//        print("\(MunaChrono().parseFromString("Next month", date: date)))\n")
+//
+//        print("20 July")
+//        print("\(MunaChrono().parseFromString("20 July", date: date)))\n")
 
-        print("may 21st")
-        print("\(MunaChrono().parseFromString("may 21st", date: date)))\n")
+        print("20 July at 13:00")
+        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
 
-        print("Next month")
-        print("\(MunaChrono().parseFromString("Next month", date: date)))\n")
+//        print("20")
+//        print("\(MunaChrono().parseFromString("20", date: date)))\n")
 
 //        Tomorrow evening
 //        At evening 7.30 pm

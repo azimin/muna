@@ -34,7 +34,7 @@ struct ParsedResult {
 }
 
 struct ParsedItem {
-    let text: String
+    var text: String
     let match: NSTextCheckingResult
     let refDate: Date
 }
