@@ -8,7 +8,6 @@
 
 import Carbon
 
-// swiftlint:disable type_body_length file_length
 public enum Key {
     // MARK: - Letters
 
@@ -152,7 +151,6 @@ public enum Key {
 
     // MARK: - Initializers
 
-    // swiftlint:disable cyclomatic_complexity function_body_length
     public init?(string: String) {
         switch string.lowercased() {
         case "a": self = .a
@@ -272,7 +270,6 @@ public enum Key {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity function_body_length
     public init?(carbonKeyCode: UInt32) {
         switch carbonKeyCode {
         case UInt32(kVK_ANSI_A): self = .a

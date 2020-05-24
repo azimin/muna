@@ -141,7 +141,6 @@ class ScreenshotStateView: View {
         return newRect
     }
 
-    // swiftlint:disable cyclomatic_complexity
     private func positionForShortcutsView(rect: CGRect, aroundRect: CGRect) -> NSRect {
         var newRect = rect
         let rightSpace = self.bounds.maxX - aroundRect.maxX

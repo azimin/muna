@@ -9,7 +9,6 @@
 import Cocoa
 import SnapKit
 
-// swiftlint:disable type_body_length file_length
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
     private let headerHight: CGFloat = 28
     private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)

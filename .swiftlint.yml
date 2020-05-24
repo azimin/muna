@@ -5,8 +5,11 @@ disabled_rules:
     - function_parameter_count
     - force_cast
     - trailing_comma
+    - function_body_length
+    - cyclomatic_complexity
+    - file_length
+    - type_body_length
 line_length: 160
-function_body_length: 100
 type_name:
   max_length: 60
 nesting:

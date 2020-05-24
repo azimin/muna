@@ -13,7 +13,6 @@ protocol DateItemPresentationConfiguratorProtocol {
 }
 
 class BasicDateItemPresentationConfigurator: DateItemPresentationConfiguratorProtocol {
-    // swiftlint:disable cyclomatic_complexity
     func transform(timeType: TimeType, preferedAmount: Int) -> [TimeOfDay] {
         switch timeType {
         case let .specificTime(timeOfDay):

@@ -25,7 +25,6 @@ class ENTimeParser: Parser {
     private let seconds = 60
     private let hourInSeconds = 60 * 60
 
-    // swiftlint:disable cyclomatic_complexity
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup) else {
             return results
