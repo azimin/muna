@@ -164,6 +164,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
+                self.hideScreenshotIfNeeded()
+                self.hideFullscreenScreenshotIfNeeded()
                 self.toggleScreenshotState()
             }
         )
@@ -171,7 +173,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
             toAction: {
-                print("Executed")
+                self.hideScreenshotIfNeeded()
+                self.hideFullscreenScreenshotIfNeeded()
+                self.toogleFullscreenScreenshotState()
             }
         )
 
@@ -251,12 +255,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.windowManager.hideWindowIfNeeded(.screenshot)
     }
 
+    @objc func hideFullscreenScreenshotIfNeeded() {
+        self.windowManager.hideWindowIfNeeded(.fullScreenshot)
+    }
+
     @objc func togglePane() {
         self.windowManager.toggleWindow(.panel)
     }
 
     @objc func toggleScreenshotState() {
         self.windowManager.toggleWindow(.screenshot)
+    }
+
+    @objc func toogleFullscreenScreenshotState() {
+        self.windowManager.toggleWindow(.fullScreenshot)
     }
 
     @objc func toggleDebugState() {

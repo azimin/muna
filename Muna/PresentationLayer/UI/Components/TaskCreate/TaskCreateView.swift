@@ -11,6 +11,7 @@ import SwiftDate
 
 protocol TaskCreateViewDelegate: AnyObject {
     func shortcutsButtonTapped()
+    func closeScreenshot()
 }
 
 class TaskCreateView: PopupView {
@@ -130,8 +131,7 @@ class TaskCreateView: PopupView {
 
     @objc
     private func handleCloseButton() {
-        // TODO: - Improve
-        (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+        self.delegate?.closeScreenshot()
     }
 
     @objc
@@ -141,7 +141,7 @@ class TaskCreateView: PopupView {
 
     func createTask() {
         defer {
-            (NSApplication.shared.delegate as? AppDelegate)?.toggleScreenshotState()
+            self.delegate?.closeScreenshot()
         }
 
         var itemToSave = SavingProcessingService.ItemToSave()
