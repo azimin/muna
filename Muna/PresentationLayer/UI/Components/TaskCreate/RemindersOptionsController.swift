@@ -32,6 +32,8 @@ class RemindersOptionsController {
     private(set) var selectedIndex = 0
 
     class ReminderItem {
+        let date: Date?
+
         // left side
         let title: String
         let subtitle: String
@@ -39,7 +41,8 @@ class RemindersOptionsController {
         // right side
         let additionalText: String
 
-        init(title: String, subtitle: String, additionalText: String) {
+        init(date: Date?, title: String, subtitle: String, additionalText: String) {
+            self.date = date
             self.title = title
             self.subtitle = subtitle
             self.additionalText = additionalText
@@ -75,7 +78,7 @@ class RemindersOptionsController {
     }
 
     func item(by index: Int) -> ReminderItem? {
-        guard !self.avialbleItems.isEmpty else {
+        guard self.avialbleItems.count > index else {
             return nil
         }
         return self.avialbleItems[index]

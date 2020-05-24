@@ -67,11 +67,22 @@ class TaskChangeTimeView: PopupView {
 
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
+
+        self.addMonitor()
     }
 
     var downMonitor: Any?
 
+    func removeMonitor() {
+        if let monitor = self.downMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        self.downMonitor = nil
+    }
+
     func addMonitor() {
+        self.removeMonitor()
+
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
 
             if DateParserView.Shortcuts.preveousTime.item.validateWith(event: event) {
@@ -99,10 +110,7 @@ class TaskChangeTimeView: PopupView {
 
     override func viewDidHide() {
         super.viewDidHide()
-        if let monitor = self.downMonitor {
-            NSEvent.removeMonitor(monitor)
-        }
-        self.downMonitor = nil
+        self.removeMonitor()
     }
 
     func clear() {
@@ -130,15 +138,16 @@ class TaskChangeTimeView: PopupView {
             self.slowAlert()
         }
 
-        guard self.presentationDateItemTransformer.dates.count <= self.controller.selectedIndex else {
+        guard let item = self.controller.item(by: self.controller.selectedIndex) else {
             assertionFailure("No item for index")
             return
         }
 
-        self.itemModel.dueDateString = self.reminderTextField.textField.stringValue
-        self.itemModel.dueDate = self.presentationDateItemTransformer.dates[self.controller.selectedIndex]
-
-        ServiceLocator.shared.itemsDatabase.saveItems()
+        if let date = item.date {
+            self.itemModel.dueDateString = self.reminderTextField.textField.stringValue
+            self.itemModel.dueDate = date
+            ServiceLocator.shared.itemsDatabase.saveItems()
+        }
         // TODO: - Update list
     }
 }
@@ -154,6 +163,7 @@ extension TaskChangeTimeView: TextFieldDelegate {
             let formatter = DateParserFormatter(date: result)
 
             let item = RemindersOptionsController.ReminderItem(
+                date: result,
                 title: formatter.title,
                 subtitle: formatter.subtitle,
                 additionalText: formatter.additionalText

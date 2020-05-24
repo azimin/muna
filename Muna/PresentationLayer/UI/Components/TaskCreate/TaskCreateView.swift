@@ -146,13 +146,16 @@ class TaskCreateView: PopupView {
 
         var itemToSave = SavingProcessingService.ItemToSave()
 
-        guard self.presentationDateItemTransformer.dates.count <= self.controller.selectedIndex else {
+        guard let item = self.controller.item(by: self.controller.selectedIndex) else {
             assertionFailure("No item for index")
             return
         }
 
-        itemToSave.dueDateString = self.reminderTextField.textField.stringValue
-        itemToSave.date = self.presentationDateItemTransformer.dates[self.controller.selectedIndex]
+        if let date = item.date {
+            itemToSave.dueDateString = self.reminderTextField.textField.stringValue
+            itemToSave.date = date
+        }
+
         itemToSave.comment = self.commentTextField.textField.stringValue
 
         self.savingProcessingService.save(withItem: itemToSave)
@@ -175,6 +178,7 @@ extension TaskCreateView: TextFieldDelegate {
             let formatter = DateParserFormatter(date: result)
 
             let item = RemindersOptionsController.ReminderItem(
+                date: result,
                 title: formatter.title,
                 subtitle: formatter.subtitle,
                 additionalText: formatter.additionalText
