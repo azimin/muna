@@ -44,18 +44,78 @@ class ENDatesParser: Parser {
             + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z]))?\\b"
     }
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-//        let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
-//        guard let monthOffset = self.monthOffset[weekdayName] else {
-//            return results
-//        }
+    private let prefixGroup = 1
+    private let prefixDayGroup = 2
+    private let monthGroup = 6
+    private let postfixDayGroup = 8
 
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 8).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 9).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup)
+            || !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup)
+            || !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup)
+        else {
+            return results
+        }
+
+        var year = parsedItem.refDate.year
+
+        var prefix = ""
+        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup) {
+            prefix = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased()
+        }
+
+        var day = parsedItem.refDate.day
+        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup),
+            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixDayGroup)) {
+            day = monthDay
+        } else if !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup),
+            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.postfixDayGroup)) {
+            day = monthDay
+        }
+
+        var monthInt = parsedItem.refDate.month
+        var monthString = ""
+        if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) {
+            if let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
+                monthInt = monthOfYear
+            } else {
+                monthString = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()
             }
         }
-        return results
+
+        if prefix == "next", monthString == "month" {
+            monthInt += 1
+        } else if prefix == "next" {
+            year += 1
+        }
+
+        if monthInt > 12 {
+            monthInt = 1
+            year += 1
+        }
+
+        var parsedResults = [DateItem]()
+        if !results.isEmpty {
+            parsedResults = results.map {
+                var newItem = $0
+                let newDay = PureDay(day: day, month: monthInt, year: year)
+                newItem.day = newDay
+                return newItem
+            }
+        } else {
+            parsedResults.append(
+                DateItem(
+                    day: PureDay(day: day, month: monthInt, year: year),
+                    timeType: .allDay
+                )
+            )
+        }
+        return parsedResults
     }
 }

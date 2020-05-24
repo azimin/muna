@@ -25,17 +25,20 @@ class ENTimeParser: Parser {
     private let seconds = 60
     private let hourInSeconds = 60 * 60
 
+    // swiftlint:disable cyclomatic_complexity
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup) else {
+        print(parsedItem.match.numberOfRanges)
+        (0 ... 8).forEach {
+            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+            }
+        }
+        guard (!parsedItem.match.isEmpty(atRangeIndex: self.hourGroup)
+            || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup))
+            && !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup)
+        else {
             return results
         }
-
-//        print(parsedItem.match.numberOfRanges)
-//        (0 ... 8).forEach {
-//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-//            }
-//        }
 
         var hoursOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
