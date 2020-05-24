@@ -11,7 +11,7 @@ import Foundation
 protocol RemindersOptionsControllerDelegate: AnyObject {
     func remindersOptionsControllerShowItems(
         _ controller: RemindersOptionsController,
-        items: [RemindersOptionsController.ReminderItem]
+        items: [ReminderItem]
     )
 
     func remindersOptionsControllerHighliteItem(
@@ -26,39 +26,41 @@ protocol RemindersOptionsControllerDelegate: AnyObject {
 }
 
 class RemindersOptionsController {
+    enum Behaviour {
+        case emptyState
+        case remindSuggestionsState
+    }
+
     weak var delegate: RemindersOptionsControllerDelegate?
 
     private var isEditingState: Bool = false
     private(set) var selectedIndex = 0
 
-    class ReminderItem {
-        let date: Date?
+    private let behaviour: Behaviour
 
-        // left side
-        let title: String
-        let subtitle: String
-
-        // right side
-        let additionalText: String
-
-        init(date: Date?, title: String, subtitle: String, additionalText: String) {
-            self.date = date
-            self.title = title
-            self.subtitle = subtitle
-            self.additionalText = additionalText
-        }
+    init(behaviour: Behaviour) {
+        self.behaviour = behaviour
     }
 
     private var avialbleItems: [ReminderItem] = []
 
     func showItems(items: [ReminderItem]) {
         self.isEditingState = true
-        self.avialbleItems = items
-        self.selectedIndex = 0
 
+        switch self.behaviour {
+        case .emptyState:
+            self.avialbleItems = items
+        case .remindSuggestionsState:
+            if items.isEmpty {
+            } else {
+                self.avialbleItems = items
+            }
+        }
+
+        self.selectedIndex = 0
         self.delegate?.remindersOptionsControllerShowItems(
             self,
-            items: items
+            items: self.avialbleItems
         )
     }
 
@@ -109,5 +111,11 @@ class RemindersOptionsController {
             self,
             index: self.selectedIndex
         )
+    }
+}
+
+private extension RemindersOptionsController {
+    static func prefefineSuggestions(date: Date) -> [ReminderItem] {
+        return []
     }
 }

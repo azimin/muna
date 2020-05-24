@@ -86,7 +86,7 @@ class DateParserItemView: View {
         self.updateColors()
     }
 
-    func update(item: RemindersOptionsController.ReminderItem) {
+    func update(item: ReminderItem) {
         self.mainLabel.text = item.title
         self.secondLabel.text = item.subtitle
         self.infoLabel.text = item.additionalText

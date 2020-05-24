@@ -18,7 +18,9 @@ class TaskChangeTimeView: PopupView {
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView
 
-    var controller = RemindersOptionsController()
+    var controller = RemindersOptionsController(
+        behaviour: .remindSuggestionsState
+    )
 
     private let dateParser = MunaChrono()
     private let itemModel: ItemModel
@@ -159,10 +161,10 @@ extension TaskChangeTimeView: TextFieldDelegate {
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
-        let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        let items = self.presentationDateItemTransformer.dates.compactMap { result -> ReminderItem? in
             let formatter = DateParserFormatter(date: result)
 
-            let item = RemindersOptionsController.ReminderItem(
+            let item = ReminderItem(
                 date: result,
                 title: formatter.title,
                 subtitle: formatter.subtitle,

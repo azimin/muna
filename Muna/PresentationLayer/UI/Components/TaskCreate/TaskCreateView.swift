@@ -24,7 +24,9 @@ class TaskCreateView: PopupView {
     let datePrarserView: DateParserView
     let commentTextField = TextField(clearable: false)
 
-    var controller = RemindersOptionsController()
+    var controller = RemindersOptionsController(
+        behaviour: .emptyState
+    )
 
     private let dateParser = MunaChrono()
     private let savingProcessingService: SavingProcessingService
@@ -174,10 +176,10 @@ extension TaskCreateView: TextFieldDelegate {
         self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
-        let items = self.presentationDateItemTransformer.dates.compactMap { result -> RemindersOptionsController.ReminderItem? in
+        let items = self.presentationDateItemTransformer.dates.compactMap { result -> ReminderItem? in
             let formatter = DateParserFormatter(date: result)
 
-            let item = RemindersOptionsController.ReminderItem(
+            let item = ReminderItem(
                 date: result,
                 title: formatter.title,
                 subtitle: formatter.subtitle,

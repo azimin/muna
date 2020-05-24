@@ -53,7 +53,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
     func remindersOptionsControllerShowItems(
         _ controller: RemindersOptionsController,
-        items: [RemindersOptionsController.ReminderItem]
+        items: [ReminderItem]
     ) {
         self.mainOption = self.options.first
         self.shouldRunCompletion = false
