@@ -57,13 +57,25 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         self.shortcutsController?.start()
     }
 
-    // MARK: - Mouse events
+    private var timer: Timer?
 
-    override func cursorUpdate(with event: NSEvent) {
-        super.cursorUpdate(with: event)
-
-        NSCursor.crosshair.set()
+    func runUpdateOfCursor() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] _ in
+            self?.updateCursor()
+        }
     }
+
+    func stopUpdateOfCursor() {
+        self.timer?.invalidate()
+    }
+
+    func updateCursor() {
+        let propertyString = CFStringCreateWithCString(kCFAllocatorDefault, "SetsCursorInBackground", 0)
+        CGSSetConnectionProperty(_CGSDefaultConnection(), _CGSDefaultConnection(), propertyString, kCFBooleanTrue)
+        NSCursor.crosshair.push()
+    }
+
+    // MARK: - Mouse events
 
     override func mouseDown(with event: NSEvent) {
         super.mouseDown(with: event)
@@ -78,6 +90,8 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
             self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
             self.rootView.startDash()
         }
+
+        self.updateCursor()
     }
 
     override func mouseUp(with event: NSEvent) {
@@ -86,12 +100,17 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         guard self.isNeededToDrawFrame else {
             return
         }
+
         self.isNeededToDrawFrame = false
         rootView.showVisuals()
     }
 
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
+
+        self.stopUpdateOfCursor()
+        self.updateCursor()
+
         guard self.isNeededToDrawFrame else {
             return
         }
@@ -107,9 +126,11 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     func show() {
         self.setup()
+        self.runUpdateOfCursor()
     }
 
     func hide(completion: VoidBlock?) {
+        self.stopUpdateOfCursor()
         self.isNeededToDrawFrame = true
         self.rootView.hideVisuals()
         self.shortcutsController?.stop()
