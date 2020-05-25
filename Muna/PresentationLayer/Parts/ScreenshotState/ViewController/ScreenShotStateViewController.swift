@@ -61,28 +61,41 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     var shouldUpdateCourser: Bool = false
 
     func runUpdateOfCursor() {
-        self.stopUpdateOfCursor()
+        self.stopUpdateOfCursorTimer()
         self.shouldUpdateCourser = true
 
+        self.oldCursor = NSCursor.current
+
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] _ in
-            guard self?.shouldUpdateCourser == true else {
-                return
-            }
             self?.updateCursor()
         }
         RunLoop.main.add(self.timer!, forMode: .common)
     }
 
-    func stopUpdateOfCursor() {
+    func disaleUpdateScreenshot() {
         self.shouldUpdateCourser = false
+    }
+
+    func stopUpdateOfCursorTimer() {
         self.timer?.invalidate()
 
         let propertyString = CFStringCreateWithCString(kCFAllocatorDefault, "SetsCursorInBackground", 0)
         CGSSetConnectionProperty(_CGSDefaultConnection(), _CGSDefaultConnection(), propertyString, kCFBooleanTrue)
-        NSCursor.crosshair.pop()
+
+        if let cursor = self.oldCursor {
+            cursor.set()
+        } else {
+            NSCursor.crosshair.pop()
+        }
     }
 
+    var oldCursor: NSCursor?
+
     func updateCursor() {
+        guard self.shouldUpdateCourser == true else {
+            return
+        }
+
         let propertyString = CFStringCreateWithCString(kCFAllocatorDefault, "SetsCursorInBackground", 0)
         CGSSetConnectionProperty(_CGSDefaultConnection(), _CGSDefaultConnection(), propertyString, kCFBooleanTrue)
         NSCursor.crosshair.push()
@@ -103,8 +116,6 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
             self.startedPoint = self.view.convert(event.locationInWindow, from: nil)
             self.rootView.startDash()
         }
-
-        self.updateCursor()
     }
 
     override func mouseUp(with event: NSEvent) {
@@ -121,12 +132,13 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
 
-        self.stopUpdateOfCursor()
-        self.updateCursor()
+        self.stopUpdateOfCursorTimer()
 
         guard self.isNeededToDrawFrame else {
             return
         }
+
+        self.updateCursor()
 
         let point = self.view.convert(event.locationInWindow, from: nil)
         self.rootView.continiouslyDrawDash(
@@ -144,7 +156,9 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     }
 
     func hide(completion: VoidBlock?) {
-        self.stopUpdateOfCursor()
+        self.stopUpdateOfCursorTimer()
+        self.disaleUpdateScreenshot()
+
         self.isNeededToDrawFrame = true
         self.reset()
         completion?()
@@ -208,7 +222,6 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
-        self.stopUpdateOfCursor()
         self.isNeededToDrawFrame = true
         if self.isFullscreenScreenshotState {
             (NSApplication.shared.delegate as? AppDelegate)?.hideFullscreenScreenshotIfNeeded()
