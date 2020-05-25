@@ -58,15 +58,28 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     }
 
     private var timer: Timer?
+    var shouldUpdateCourser: Bool = false
 
     func runUpdateOfCursor() {
+        self.stopUpdateOfCursor()
+        self.shouldUpdateCourser = true
+
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] _ in
+            guard self?.shouldUpdateCourser == true else {
+                return
+            }
             self?.updateCursor()
         }
+        RunLoop.main.add(self.timer!, forMode: .common)
     }
 
     func stopUpdateOfCursor() {
+        self.shouldUpdateCourser = false
         self.timer?.invalidate()
+
+        let propertyString = CFStringCreateWithCString(kCFAllocatorDefault, "SetsCursorInBackground", 0)
+        CGSSetConnectionProperty(_CGSDefaultConnection(), _CGSDefaultConnection(), propertyString, kCFBooleanTrue)
+        NSCursor.crosshair.pop()
     }
 
     func updateCursor() {
@@ -126,16 +139,21 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     func show() {
         self.setup()
+        self.reset()
         self.runUpdateOfCursor()
     }
 
     func hide(completion: VoidBlock?) {
         self.stopUpdateOfCursor()
         self.isNeededToDrawFrame = true
+        self.reset()
+        completion?()
+    }
+
+    func reset() {
         self.rootView.hideVisuals()
         self.shortcutsController?.stop()
         self.shortcutsController = nil
-        completion?()
     }
 
     // MARK: - Make screenshot
@@ -190,6 +208,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
+        self.stopUpdateOfCursor()
         self.isNeededToDrawFrame = true
         if self.isFullscreenScreenshotState {
             (NSApplication.shared.delegate as? AppDelegate)?.hideFullscreenScreenshotIfNeeded()
