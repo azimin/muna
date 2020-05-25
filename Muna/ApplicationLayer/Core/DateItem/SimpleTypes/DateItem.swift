@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 struct DateItem {
     var day: PureDay
@@ -17,6 +18,19 @@ struct PureDay: Equatable {
     var day: Int
     var month: Int
     var year: Int
+
+    init(day: Int, month: Int, year: Int) {
+        self.day = day
+        self.month = month
+        self.year = year
+    }
+
+    init(date: Date) {
+        let presentable = date.representableDate()
+        self.day = presentable.day
+        self.month = presentable.month
+        self.year = presentable.year
+    }
 
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.day == rhs.day && lhs.month == rhs.month && lhs.year == rhs.year
