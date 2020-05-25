@@ -103,6 +103,14 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     // MARK: - Mouse events
 
+    override func cursorUpdate(with event: NSEvent) {
+        if self.shouldUpdateCourser {
+            self.updateCursor()
+        } else {
+            super.cursorUpdate(with: event)
+        }
+    }
+
     override func mouseDown(with event: NSEvent) {
         super.mouseDown(with: event)
         guard self.isNeededToDrawFrame else {
@@ -126,6 +134,8 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         }
 
         self.isNeededToDrawFrame = false
+        self.shouldUpdateCourser = false
+
         rootView.showVisuals()
     }
 
