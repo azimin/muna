@@ -39,9 +39,9 @@ class ENDatesParser: Parser {
 
     override var pattern: String {
         return "\\b(?:(next|this))?"
-            + "((0[0-9]|1[0-9]|2[0-9]|3[0-1])?)"
-            + "((\\.|\\s*(\(self.months)|[0-9]|1[0-2]|month))?)"
-            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z]))?\\b"
+            + "((0[1-9]|1[0-9]|2[0-9]|3[0-1])?)"
+            + "((\\.|\\s*(\(self.months)|[1-9]|1[0-2]|month))?)"
+            + "(\\s*(0[1-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z]))?\\b"
     }
 
     private let prefixGroup = 1
