@@ -163,6 +163,8 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         self.setup()
         self.reset()
 
+        self.shortcutsController?.start()
+
         if isFullscreenScreenshotState == false {
             self.runUpdateOfCursor()
         }
@@ -180,7 +182,6 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     func reset() {
         self.rootView.hideVisuals()
         self.shortcutsController?.stop()
-        self.shortcutsController = nil
     }
 
     // MARK: - Make screenshot
