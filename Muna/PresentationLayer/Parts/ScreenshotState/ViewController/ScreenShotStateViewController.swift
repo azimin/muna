@@ -116,6 +116,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     override func mouseDown(with event: NSEvent) {
         super.mouseDown(with: event)
+
         guard self.isNeededToDrawFrame else {
             return
         }

@@ -70,6 +70,7 @@
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
+		9F97D0C3247DA9C100358953 /* TaskChangeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */; };
 		9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D5FF2464B63900695A19 /* StopableScrollView.swift */; };
 		9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D6022464B65900695A19 /* MainPanelView.swift */; };
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
@@ -200,6 +201,7 @@
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeTimeViewController.swift; sourceTree = "<group>"; };
 		9F99D5FF2464B63900695A19 /* StopableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopableScrollView.swift; sourceTree = "<group>"; };
 		9F99D6022464B65900695A19 /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
@@ -741,6 +743,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		9F97D0C0247DA9A400358953 /* TimeChange */ = {
+			isa = PBXGroup;
+			children = (
+				9F97D0C1247DA9AE00358953 /* ViewController */,
+			);
+			path = TimeChange;
+			sourceTree = "<group>";
+		};
+		9F97D0C1247DA9AE00358953 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9F99D6012464B64B00695A19 /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,6 +838,7 @@
 				9FC9CDC424699E4B0018FAD7 /* Debug */,
 				23435AC72464A61F00B4DE50 /* ScreenshotState */,
 				9F025C10246346D700F05D81 /* ImagePreview */,
+				9F97D0C0247DA9A400358953 /* TimeChange */,
 				9FC06BF02460CE56008D4D3C /* MainPanel */,
 			);
 			path = Parts;
@@ -1253,6 +1272,7 @@
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
+				9F97D0C3247DA9C100358953 /* TaskChangeTimeViewController.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
