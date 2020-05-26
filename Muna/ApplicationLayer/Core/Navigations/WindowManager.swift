@@ -113,7 +113,7 @@ class WindowManager {
                 defer: false
             )
             window.backgroundColor = NSColor.clear
-            window.contentViewController = MainPanelViewController()
+            window.contentViewController = MainScreenViewController()
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar - 2
@@ -172,12 +172,13 @@ class WindowManager {
         case .screenshot, .fullScreenshot:
             frame = mainScreen.frame
         case .panel:
-            frame = NSRect(
-                x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-                y: mainScreen.frame.minY,
-                width: self.windowFrameWidth,
-                height: mainScreen.frame.height - 0
-            )
+            frame = mainScreen.frame
+//            NSRect(
+//                x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
+//                y: mainScreen.frame.minY,
+//                width: self.windowFrameWidth,
+//                height: mainScreen.frame.height - 0
+//            )
         case .settings:
             frame = NSRect(x: 0, y: 0, width: 300, height: 400)
         }
@@ -208,7 +209,7 @@ class WindowManager {
             animate: false
         )
 
-        if let viewController = window.contentViewController as? MainPanelViewController {
+        if let viewController = window.contentViewController as? MainScreenViewController {
             viewController.show()
         }
         window.setIsVisible(true)
@@ -264,7 +265,7 @@ class WindowManager {
             }
             self.windows[windowType] = nil
         case .panel:
-            if let viewController = window.contentViewController as? MainPanelViewController {
+            if let viewController = window.contentViewController as? MainScreenViewController {
                 viewController.hide {
                     window.setIsVisible(false)
                 }

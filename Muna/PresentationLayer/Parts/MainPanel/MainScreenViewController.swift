@@ -8,15 +8,15 @@
 
 import Cocoa
 
-class MainPanelViewController: NSViewController {
+class MainScreenViewController: NSViewController {
     var shortcutsController: ShortcutsController?
 
     var rootView: MainPanelView {
-        return self.view as! MainPanelView
+        return (self.view as! MainScreenView).mainPanelView
     }
 
     override func loadView() {
-        self.view = MainPanelView()
+        self.view = MainScreenView()
     }
 
     override func viewDidLoad() {

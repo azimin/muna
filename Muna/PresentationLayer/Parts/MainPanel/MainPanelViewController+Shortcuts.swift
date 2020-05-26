@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension MainPanelViewController {
+extension MainScreenViewController {
     enum Shortcut: CaseIterable {
         case preveousItem
         case nextItem
