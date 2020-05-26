@@ -158,12 +158,38 @@ private extension RemindersOptionsController {
         let tomorrow = (date + 1.days)
         if let time = configurator.transform(timeType: .allDay, preferedAmount: 1).first {
             let tomorrowDate = time.apply(to: .init(date: tomorrow))
+            let representable = tomorrowDate.representableDate()
+
+            let month = representable.monthName(.short)
+            let day = representable.ordinalDay
+
             values.append(
                 ReminderItem(
                     date: tomorrowDate,
-                    title: "Tomorrow",
+                    title: "Tomorrow (\(day) \(month))",
                     subtitle: "",
-                    additionalText: tomorrowDate.timeSmartString(showMinutes: false)
+                    additionalText: representable.timeSmartString(showMinutes: false)
+                )
+            )
+        }
+
+        var weekends = date
+        repeat {
+            let newDate = weekends + 1.days
+            weekends = newDate
+        } while weekends.isInWeekend == false
+
+        if let time = configurator.transform(timeType: .allDay, preferedAmount: 1).first {
+            let weekendsDate = time.apply(to: .init(date: weekends))
+            let representable = weekendsDate.representableDate()
+
+            let title = DateParserFormatter(date: weekendsDate).weekdayDayMonth
+            values.append(
+                ReminderItem(
+                    date: weekendsDate,
+                    title: title,
+                    subtitle: "",
+                    additionalText: representable.timeSmartString(showMinutes: false)
                 )
             )
         }

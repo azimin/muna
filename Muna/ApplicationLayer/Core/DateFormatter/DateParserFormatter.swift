@@ -16,11 +16,18 @@ class DateParserFormatter {
         self.date = date
     }
 
-    var title: String {
+    var monthDateWeekday: String {
         let month = self.date.representableDate().monthName(.short)
         let day = self.date.representableDate().ordinalDay
         let weekday = self.date.representableDate().weekdayName(.short)
         return "\(month), \(day) \(weekday)"
+    }
+
+    var weekdayDayMonth: String {
+        let month = self.date.representableDate().monthName(.short)
+        let day = self.date.representableDate().ordinalDay
+        let weekday = self.date.representableDate().weekdayName(.default)
+        return "\(weekday) (\(day) \(month))"
     }
 
     var subtitle: String {

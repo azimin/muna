@@ -168,7 +168,7 @@ extension TaskChangeTimeView: TextFieldDelegate {
 
             let item = ReminderItem(
                 date: result,
-                title: formatter.title,
+                title: formatter.monthDateWeekday,
                 subtitle: formatter.subtitle,
                 additionalText: formatter.additionalText
             )
