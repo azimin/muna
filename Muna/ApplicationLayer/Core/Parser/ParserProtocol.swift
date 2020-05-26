@@ -13,5 +13,5 @@ protocol ParserProtocol {
 
     func parse(fromText text: String, refDate: Date, into items: [DateItem]) -> [DateItem]
 
-    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem]
+    func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem]
 }

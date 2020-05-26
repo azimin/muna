@@ -49,13 +49,17 @@ class ENDatesParser: Parser {
     private let monthGroup = 6
     private let postfixDayGroup = 8
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-//        print(parsedItem.match.numberOfRanges)
-//        (0 ... 9).forEach {
-//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-//            }
-//        }
+    override func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem] {
+        return parsedItems.map { self.extract(fromParsedItem: $0, toParsedResult: results) }.flatMap { $0 }
+    }
+
+    private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+        print(parsedItem.match.numberOfRanges)
+        (0 ... 9).forEach {
+            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+            }
+        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup)
             || !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup)
             || !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup)

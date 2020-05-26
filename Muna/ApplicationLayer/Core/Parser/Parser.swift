@@ -22,14 +22,19 @@ class Parser: ParserProtocol {
             return items
         }
 
-        guard let match = regex.firstMatch(in: text, range: NSRange(location: 0, length: text.count)) else {
+        let matches = regex.matches(in: text, range: NSRange(location: 0, length: text.count))
+
+        guard !matches.isEmpty else {
             return items
         }
-        let item = ParsedItem(text: text, match: match, refDate: refDate)
-        return self.extract(fromParsedItem: item, toParsedResult: items)
+
+        let parsedItems = matches.map { match in
+            ParsedItem(text: text, match: match, refDate: refDate)
+        }
+        return self.extract(fromParsedItems: parsedItems, toParsedResult: items)
     }
 
-    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+    func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem] {
         return []
     }
 }
