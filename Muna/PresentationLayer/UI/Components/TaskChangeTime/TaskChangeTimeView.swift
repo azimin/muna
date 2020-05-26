@@ -64,7 +64,7 @@ class TaskChangeTimeView: PopupView {
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { maker in
             maker.bottom.leading.trailing.equalToSuperview()
-            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-32)
+            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
         }
 
         self.doneButton.action = #selector(self.handleDoneButton)

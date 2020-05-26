@@ -23,9 +23,9 @@ class DateParserItemView: View {
     let selectionView = View()
     let contentView = View()
     let iconImageView = ImageView()
-    let mainLabel = Label(fontStyle: .bold, size: 12)
-    let secondLabel = Label(fontStyle: .medium, size: 12)
-    let infoLabel = Label(fontStyle: .bold, size: 12)
+    let mainLabel = Label(fontStyle: .bold, size: 11)
+    let secondLabel = Label(fontStyle: .medium, size: 11)
+    let infoLabel = Label(fontStyle: .bold, size: 11)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
