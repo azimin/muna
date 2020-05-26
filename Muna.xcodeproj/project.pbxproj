@@ -72,6 +72,7 @@
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F97D0C3247DA9C100358953 /* TaskChangeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */; };
 		9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C4247DAE1C00358953 /* MainScreenView.swift */; };
+		9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */; };
 		9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D5FF2464B63900695A19 /* StopableScrollView.swift */; };
 		9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D6022464B65900695A19 /* MainPanelView.swift */; };
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
@@ -204,6 +205,7 @@
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeTimeViewController.swift; sourceTree = "<group>"; };
 		9F97D0C4247DAE1C00358953 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindLaterViewController.swift; sourceTree = "<group>"; };
 		9F99D5FF2464B63900695A19 /* StopableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopableScrollView.swift; sourceTree = "<group>"; };
 		9F99D6022464B65900695A19 /* MainPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelView.swift; sourceTree = "<group>"; };
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
@@ -749,15 +751,24 @@
 		9F97D0C0247DA9A400358953 /* TimeChange */ = {
 			isa = PBXGroup;
 			children = (
-				9F97D0C1247DA9AE00358953 /* ViewController */,
+				9F97D0C6247DB19000358953 /* ViewController */,
+				9F97D0C1247DA9AE00358953 /* View */,
 			);
 			path = TimeChange;
 			sourceTree = "<group>";
 		};
-		9F97D0C1247DA9AE00358953 /* ViewController */ = {
+		9F97D0C1247DA9AE00358953 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				9F97D0C2247DA9C100358953 /* TaskChangeTimeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9F97D0C6247DB19000358953 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1276,6 +1287,7 @@
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
+				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeViewController.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,

@@ -9,12 +9,38 @@
 import Cocoa
 import Foundation
 
-enum WindowType: String, Equatable {
+enum WindowType: Equatable, Hashable {
     case panel
     case screenshot
     case fullScreenshot
     case debug
     case settings
+    case remindLater(item: ItemModel)
+
+    var rawValue: String {
+        switch self {
+        case .panel:
+            return "panel"
+        case .screenshot:
+            return "panel"
+        case .fullScreenshot:
+            return "fullScreenshot"
+        case .debug:
+            return "debug"
+        case .settings:
+            return "settings"
+        case let .remindLater(item):
+            return "remindLater_\(item.id)"
+        }
+    }
+
+    static func == (lhs: WindowType, rhs: WindowType) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+
+    func hash(into hasher: inout Hasher) {
+        self.rawValue.hash(into: &hasher)
+    }
 }
 
 class WindowManager {
@@ -35,7 +61,7 @@ class WindowManager {
         switch windowType {
         case .settings:
             status = self.windows[windowType]?.isVisible ?? false
-        case .debug, .panel, .screenshot, .fullScreenshot:
+        case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
             status = self.windowVisibleStatus[windowType] ?? false
         }
 
@@ -62,7 +88,7 @@ class WindowManager {
             case .settings:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
-            case .debug, .panel, .screenshot, .fullScreenshot:
+            case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
                 break
             }
             return
@@ -84,6 +110,8 @@ class WindowManager {
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
         case .settings:
             self.showSettings(in: window)
+        case .remindLater:
+            self.showRemindLater(in: window)
         }
 
         self.changeWindowState(windowType, state: true)
@@ -92,6 +120,19 @@ class WindowManager {
     private func setupWindow(_ windowType: WindowType) {
         let window: NSWindow
         switch windowType {
+        case let .remindLater(item):
+            window = Panel(
+                contentRect: self.frameFor(windowType),
+                styleMask: [.nonactivatingPanel, .borderless],
+                backing: .buffered,
+                defer: false
+            )
+            window.backgroundColor = NSColor.clear
+            window.contentViewController = RemindLaterViewController(itemModel: item)
+            window.hasShadow = false
+            // Overlap dock, but not menu bar
+            window.level = .statusBar
+            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
         case .debug:
             window = Panel(
                 contentRect: self.frameFor(.debug),
@@ -173,12 +214,8 @@ class WindowManager {
             frame = mainScreen.frame
         case .panel:
             frame = mainScreen.frame
-//            NSRect(
-//                x: mainScreen.frame.minX + mainScreen.frame.width - self.windowFrameWidth,
-//                y: mainScreen.frame.minY,
-//                width: self.windowFrameWidth,
-//                height: mainScreen.frame.height - 0
-//            )
+        case .remindLater:
+            frame = mainScreen.frame
         case .settings:
             frame = NSRect(x: 0, y: 0, width: 300, height: 400)
         }
@@ -197,6 +234,21 @@ class WindowManager {
             animate: false
         )
 
+        window.setIsVisible(true)
+    }
+
+    private func showRemindLater(in window: NSWindow) {
+        window.makeKeyAndOrderFront(nil)
+
+        window.setFrame(
+            self.frameFor(.panel),
+            display: true,
+            animate: false
+        )
+
+        if let viewController = window.contentViewController as? MainScreenViewController {
+            viewController.show()
+        }
         window.setIsVisible(true)
     }
 
@@ -270,6 +322,9 @@ class WindowManager {
                     window.setIsVisible(false)
                 }
             }
+        case .remindLater:
+            window.setIsVisible(false)
+            self.windows[windowType] = nil
         case .settings:
             window.setIsVisible(false)
         }
