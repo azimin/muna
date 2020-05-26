@@ -154,12 +154,20 @@ private extension RemindersOptionsController {
             )
         }
 
-//        ReminderItem(
-//            date: date + 2.hours, // TODO: - Fix time
-//            title: "In the evening",
-//            subtitle: "",
-//            additionalText: "7 pm" // TODO: Fixme use 7 pm or 19.00
-//        ),
+        let configurator = BasicDateItemPresentationConfigurator()
+        let tomorrow = (date + 1.days)
+        if let time = configurator.transform(timeType: .allDay, preferedAmount: 1).first {
+            let tomorrowDate = time.apply(to: .init(date: tomorrow))
+            values.append(
+                ReminderItem(
+                    date: tomorrowDate,
+                    title: "Tomorrow",
+                    subtitle: "",
+                    additionalText: tomorrowDate.timeSmartString(showMinutes: false)
+                )
+            )
+        }
+
 //        ReminderItem(
 //        date: date + 5.hours,
 //        title: "Tomorrow, 12 am", // TODO: - Fix
