@@ -262,6 +262,7 @@ class WindowManager {
                     window.setIsVisible(false)
                 }
             }
+            self.windows[windowType] = nil
         case .panel:
             if let viewController = window.contentViewController as? MainPanelViewController {
                 viewController.hide {

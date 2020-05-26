@@ -28,6 +28,8 @@ class ShortcutsController: ShortcutsControllerProtocol {
     private var monitor: Any?
 
     func start() {
+        self.stop()
+
         self.shouldPerformKeys = true
         self.monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [weak self] (event) -> NSEvent? in
             guard let self = self else { return event }
@@ -45,11 +47,16 @@ class ShortcutsController: ShortcutsControllerProtocol {
         })
     }
 
+    deinit {
+        self.stop()
+    }
+
     func stop() {
         self.shouldPerformKeys = false
 
         if let monitor = self.monitor {
             NSEvent.removeMonitor(monitor)
+            self.monitor = nil
         }
     }
 

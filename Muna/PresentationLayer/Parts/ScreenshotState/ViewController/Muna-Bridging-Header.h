@@ -3,7 +3,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include <ApplicationServices/ApplicationServices.h>
 
 typedef int CGSConnectionID;
 CGError CGSSetConnectionProperty(CGSConnectionID cid, CGSConnectionID targetCID, CFStringRef key, CFTypeRef value);

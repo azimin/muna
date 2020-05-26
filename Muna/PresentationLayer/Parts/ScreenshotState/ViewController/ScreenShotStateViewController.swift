@@ -42,6 +42,9 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     }
 
     private func setup() {
+        self.shortcutsController?.stop()
+        self.shortcutsController = nil
+
         var shortcutActions: [ShortcutAction] = []
         for shortcut in Shortcut.allCases {
             let action = self.actionForShortcut(shortcut)
