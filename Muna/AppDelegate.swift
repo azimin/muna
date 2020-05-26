@@ -260,7 +260,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func togglePane() {
-        self.windowManager.toggleWindow(.panel)
+        self.windowManager.toggleWindow(.remindLater(item: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first!))
     }
 
     @objc func toggleScreenshotState() {

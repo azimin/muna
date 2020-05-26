@@ -20,6 +20,14 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
     var controller: RemindersOptionsController
 
+    var topSuperview: NSView? {
+        var superview = self as NSView?
+        while superview?.superview != nil {
+            superview = superview?.superview
+        }
+        return superview
+    }
+
     init(controller: RemindersOptionsController) {
         self.controller = controller
         super.init(frame: .zero)
@@ -115,7 +123,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 }
             }
 
-            self.superview?.layoutSubtreeIfNeeded()
+            self.topSuperview?.layoutSubtreeIfNeeded()
         }, completionHandler: nil)
     }
 
@@ -150,7 +158,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             }
 
             self.mainOption = option
-            self.superview?.layoutSubtreeIfNeeded()
+            self.topSuperview?.layoutSubtreeIfNeeded()
         }, completionHandler: {
             guard self.shouldRunCompletion else {
                 return
