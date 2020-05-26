@@ -12,7 +12,7 @@ class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(at|in)\\s*)?"
             + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
-            + "(((\\.|\\:|\\：|\\s)([0-9]|[0-5][0-9]))?)"
+            + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|minutes?|am?|pm?|h?))?\\b"
     }
 
@@ -33,9 +33,7 @@ class ENTimeParser: Parser {
                 print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
             }
         }
-        guard (!parsedItem.match.isEmpty(atRangeIndex: self.hourGroup)
-            || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup))
-            && !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup)
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
         else {
             return results
         }
