@@ -28,9 +28,9 @@ class Preferences {
             modifiers: [.command, .shift]
         ).masShortcut
 
-        // cmd + shift + f
+        // cmd + shift + j
         let defaultShortcutFullscreenScreenshotShortcut = ShortcutItem(
-            key: .f,
+            key: .j,
             modifiers: [.command, .shift]
         )
         .masShortcut

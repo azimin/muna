@@ -233,7 +233,7 @@ class WindowManager {
         )
 
         if let viewController = window.contentViewController as? ScreenShotStateViewController {
-            viewController.show()
+            viewController.show(isFullscreenScreenshotState: isNeededToMakeFullscreenScreenshot)
             if isNeededToMakeFullscreenScreenshot {
                 viewController.makeScreenshot()
                 viewController.isFullscreenScreenshotState = true

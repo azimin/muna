@@ -159,10 +159,13 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     // MARK: - Show hide
 
-    func show() {
+    func show(isFullscreenScreenshotState: Bool) {
         self.setup()
         self.reset()
-        self.runUpdateOfCursor()
+
+        if isFullscreenScreenshotState == false {
+            self.runUpdateOfCursor()
+        }
     }
 
     func hide(completion: VoidBlock?) {
