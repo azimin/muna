@@ -194,19 +194,6 @@ private extension RemindersOptionsController {
             )
         }
 
-//        ReminderItem(
-//        date: date + 5.hours,
-//        title: "Tomorrow, 12 am", // TODO: - Fix
-//        subtitle: "",
-//        additionalText: "25 May" // TODO: - Fix
-//        ),
-//        ReminderItem(
-//        date: date + 10.hours,
-//        title: "On weekends",
-//        subtitle: "",
-//        additionalText: "Sat, 27 May"
-//        ),
-
         return values
     }
 }
