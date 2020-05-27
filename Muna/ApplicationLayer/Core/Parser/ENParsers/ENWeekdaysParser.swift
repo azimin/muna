@@ -14,6 +14,7 @@ class ENWeekdaysParser: Parser {
         "sunday": 1,
         "sun": 1,
         "yesterday": -1,
+        "tom": 1,
         "tomorrow": 1,
         "monday": 2,
         "mon": 2,
@@ -72,7 +73,7 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if weekdayName == "tomorrow" {
+        if weekdayName == "tomorrow" || weekdayName == "tom" {
             if parsedItem.refDate.hour < 6, prefixGroup != "after" {
                 weekdays.append(0)
             }
@@ -84,7 +85,11 @@ class ENWeekdaysParser: Parser {
             }
         }
 
-        if prefixGroup != "next", weekdayOffset != 8, weekdayName != "tomorrow", weekdayName != "yesterday" {
+        if prefixGroup != "next",
+            weekdayOffset != 8,
+            weekdayName != "tomorrow",
+            weekdayName != "tom",
+            weekdayName != "yesterday" {
             (0 ... self.dateItemNumber).forEach {
                 var weekday: Int
                 if weekdayOffset - today < 0 {

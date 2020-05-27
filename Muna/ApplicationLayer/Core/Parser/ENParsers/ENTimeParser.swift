@@ -13,7 +13,7 @@ class ENTimeParser: Parser {
         return "\\b(?:(at|in)\\s*)?"
             + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
             + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
-            + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|minutes?|am?|pm?|h?))?\\b"
+            + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|min?|minutes?|am?|pm?|h?))?\\b"
     }
 
     let prefixGroup = 1
@@ -27,12 +27,12 @@ class ENTimeParser: Parser {
 
     // swiftlint:disable cyclomatic_complexity
     override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 8).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 8).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
         else {
             return results
@@ -65,11 +65,11 @@ class ENTimeParser: Parser {
             minutesSeparator = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup).lowercased()
         }
 
-        if prefix == "in", partOfTheDay != "mins", partOfTheDay != "minutes" {
+        if prefix == "in", partOfTheDay != "mins", partOfTheDay != "minutes", partOfTheDay != "min" {
             hoursOffset += parsedItem.refDate.hour
         }
 
-        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" || partOfTheDay == "min" {
             minutesOffset = hoursOffset
             hoursOffset = parsedItem.refDate.hour
         }
@@ -92,7 +92,7 @@ class ENTimeParser: Parser {
             }
         }
 
-        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" || partOfTheDay == "min" {
             minutesOffset += parsedItem.refDate.minute
         }
 
