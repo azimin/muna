@@ -13,7 +13,7 @@ class ENTimeParser: Parser {
         return "\\b(?:(at|in)\\s*)?"
             + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
             + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
-            + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|minutes?|am?|pm?|h?))?\\b"
+            + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|min?|minutes?|am?|pm?|h?))?\\b"
     }
 
     let prefixGroup = 1
