@@ -329,9 +329,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             }
         case .later:
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: 10)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: 10 * 60)
+                self.windowManager.toggleWindow(.remindLater(item: item))
+            } else {
+                assertionFailure("No item by id")
             }
-            print("Show later for task")
         }
 
         completionHandler()

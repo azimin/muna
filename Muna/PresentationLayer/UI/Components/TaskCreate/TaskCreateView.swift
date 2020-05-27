@@ -150,14 +150,16 @@ class TaskCreateView: PopupView {
 
         var itemToSave = SavingProcessingService.ItemToSave()
 
-        guard let item = self.controller.item(by: self.controller.selectedIndex) else {
-            assertionFailure("No item for index")
-            return
-        }
+        if self.controller.isEmpty == false {
+            guard let item = self.controller.item(by: self.controller.selectedIndex) else {
+                assertionFailure("No item for index")
+                return
+            }
 
-        if let date = item.date {
-            itemToSave.dueDateString = self.reminderTextField.textField.stringValue
-            itemToSave.date = date
+            if let date = item.date {
+                itemToSave.dueDateString = self.reminderTextField.textField.stringValue
+                itemToSave.date = date
+            }
         }
 
         itemToSave.comment = self.commentTextField.textField.stringValue

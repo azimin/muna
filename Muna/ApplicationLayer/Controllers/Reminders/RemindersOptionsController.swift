@@ -38,6 +38,10 @@ class RemindersOptionsController {
     private var isEditingState: Bool = false
     private(set) var selectedIndex = 0
 
+    var isEmpty: Bool {
+        return self.avialbleItems.isEmpty
+    }
+
     private let behaviour: Behaviour
 
     init(behaviour: Behaviour) {

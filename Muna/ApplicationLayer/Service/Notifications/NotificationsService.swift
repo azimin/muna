@@ -54,7 +54,7 @@ class NotificationsService: NotificationsServiceProtocol {
             if let error = error {
                 print("Error: \(error)")
             } else {
-                print("Success")
+                print("Notification will trigger at: \(timeInterval)")
             }
         })
     }
