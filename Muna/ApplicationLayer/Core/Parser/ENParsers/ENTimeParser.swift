@@ -65,11 +65,11 @@ class ENTimeParser: Parser {
             minutesSeparator = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesSeparatorGroup).lowercased()
         }
 
-        if prefix == "in", partOfTheDay != "mins", partOfTheDay != "minutes" {
+        if prefix == "in", partOfTheDay != "mins", partOfTheDay != "minutes", partOfTheDay != "min" {
             hoursOffset += parsedItem.refDate.hour
         }
 
-        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" || partOfTheDay == "min" {
             minutesOffset = hoursOffset
             hoursOffset = parsedItem.refDate.hour
         }
@@ -92,7 +92,7 @@ class ENTimeParser: Parser {
             }
         }
 
-        if partOfTheDay == "mins" || partOfTheDay == "minutes" {
+        if partOfTheDay == "mins" || partOfTheDay == "minutes" || partOfTheDay == "min" {
             minutesOffset += parsedItem.refDate.minute
         }
 
