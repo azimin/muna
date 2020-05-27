@@ -48,6 +48,10 @@ class TaskCreateView: PopupView {
     override func setup(forStyle style: Style) {
         super.setup(forStyle: style)
 
+        self.window?.initialFirstResponder = self.reminderTextField.textField
+        self.reminderTextField.textField.nextKeyView = self.commentTextField.textField
+        self.commentTextField.textField.nextKeyView = self.reminderTextField.textField
+
         self.snp.makeConstraints { maker in
             maker.width.equalTo(300)
         }
@@ -103,6 +107,7 @@ class TaskCreateView: PopupView {
                 return nil
             } else if self.reminderTextField.isInFocus, DateParserView.Shortcuts.acceptTime.item.validateWith(event: event) {
                 self.controller.selectItemIfNeeded()
+                self.reminderTextField.textField.nextKeyView = self.commentTextField.textField
                 return nil
             } else if Shortcuts.create.item.validateWith(event: event) {
                 self.createTask()
@@ -124,6 +129,10 @@ class TaskCreateView: PopupView {
             NSEvent.removeMonitor(monitor)
         }
         self.downMonitor = nil
+
+        self.window?.initialFirstResponder = nil
+        self.reminderTextField.textField.nextKeyView = nil
+        self.commentTextField.textField.nextKeyView = nil
     }
 
     func clear() {
