@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
-		232B2FAB2477CC550061801E /* ENDatesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B2FAA2477CC550061801E /* ENDatesParser.swift */; };
+		232B2FAB2477CC550061801E /* ENPostfixDatesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B2FAA2477CC550061801E /* ENPostfixDatesParser.swift */; };
 		233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E747C246B4AB60070EABA /* SavingProcessingService.swift */; };
 		233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */; };
 		233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233EFAA224718D1D00656CE9 /* ViewHolder.swift */; };
@@ -21,6 +21,7 @@
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
 		23561B492461F46600097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B482461F46600097E4A /* Parser.swift */; };
 		236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */; };
+		2374CE4F247F91E800EEBCF4 /* ENPrefixDatesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374CE4E247F91E800EEBCF4 /* ENPrefixDatesParser.swift */; };
 		239AB0A924688E8E001526DA /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239AB0A524688E8E001526DA /* ItemModel.swift */; };
 		239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239AB0A624688E8E001526DA /* ItemsDatabaseService.swift */; };
 		239AB0AB24688E8E001526DA /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239AB0A824688E8E001526DA /* ImageStorageService.swift */; };
@@ -136,7 +137,7 @@
 /* Begin PBXFileReference section */
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
-		232B2FAA2477CC550061801E /* ENDatesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesParser.swift; sourceTree = "<group>"; };
+		232B2FAA2477CC550061801E /* ENPostfixDatesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENPostfixDatesParser.swift; sourceTree = "<group>"; };
 		233E747C246B4AB60070EABA /* SavingProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingProcessingService.swift; sourceTree = "<group>"; };
 		233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenshotStateViewController+Shortcuts.swift"; sourceTree = "<group>"; };
 		233EFAA224718D1D00656CE9 /* ViewHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHolder.swift; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
 		23561B482461F46600097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		2374CE4E247F91E800EEBCF4 /* ENPrefixDatesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENPrefixDatesParser.swift; sourceTree = "<group>"; };
 		239AB0A524688E8E001526DA /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		239AB0A624688E8E001526DA /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
 		239AB0A824688E8E001526DA /* ImageStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
@@ -338,8 +340,9 @@
 			children = (
 				23561B462461EF3300097E4A /* ENWeekdaysParser.swift */,
 				233F53DA2469D8AC004DD671 /* ENTimeParser.swift */,
-				232B2FAA2477CC550061801E /* ENDatesParser.swift */,
+				232B2FAA2477CC550061801E /* ENPostfixDatesParser.swift */,
 				23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */,
+				2374CE4E247F91E800EEBCF4 /* ENPrefixDatesParser.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -1262,7 +1265,7 @@
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
 				9FE0F54024707EF70046A5C4 /* NotificationAction.swift in Sources */,
-				232B2FAB2477CC550061801E /* ENDatesParser.swift in Sources */,
+				232B2FAB2477CC550061801E /* ENPostfixDatesParser.swift in Sources */,
 				9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */,
 				9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
@@ -1295,6 +1298,7 @@
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeViewController.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
+				2374CE4F247F91E800EEBCF4 /* ENPrefixDatesParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
 				23561B492461F46600097E4A /* Parser.swift in Sources */,

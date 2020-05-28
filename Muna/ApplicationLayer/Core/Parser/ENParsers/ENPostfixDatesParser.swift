@@ -1,5 +1,5 @@
 //
-//  ENDatesParser.swift
+//  ENPostfixDatesParser.swift
 //  Muna
 //
 //  Created by Egor Petrov on 22.05.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ENDatesParser: Parser {
+class ENPostfixDatesParser: Parser {
     private let monthOffset = [
         "december": 12,
         "dec": 12,
@@ -39,15 +39,13 @@ class ENDatesParser: Parser {
 
     override var pattern: String {
         return "\\b(?:(next|this))?"
-            + "((0[1-9]|1[0-9]|2[0-9]|3[0-1])?)"
-            + "((\\.|\\s*(\(self.months)|[1-9]|1[0-2]|month))?)"
-            + "(\\s*(0[1-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z]))?\\b"
+            + "\\s(\(self.months)|[1-9]|1[0-2]|month)"
+            + "(\\s*(0[1-9]|1[0-9]|2[0-9]|3[0-1])(?:st|nd|rd|th)?)\\b"
     }
 
     private let prefixGroup = 1
-    private let prefixDayGroup = 2
-    private let monthGroup = 6
-    private let postfixDayGroup = 8
+    private let monthGroup = 2
+    private let postfixDayGroup = 4
 
     override func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem] {
         return parsedItems.map { self.extract(fromParsedItem: $0, toParsedResult: results) }.flatMap { $0 }
@@ -55,15 +53,20 @@ class ENDatesParser: Parser {
 
     private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         print(parsedItem.match.numberOfRanges)
-        (0 ... 6).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
-        guard !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup),
-            !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup)
-        else {
+//        (0 ... 4).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) else {
             return results
+        }
+        var monthInt = parsedItem.refDate.month
+        var monthString = ""
+        if let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
+            monthInt = monthOfYear
+        } else {
+            monthString = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()
         }
 
         var year = parsedItem.refDate.year
@@ -74,22 +77,9 @@ class ENDatesParser: Parser {
         }
 
         var day = parsedItem.refDate.day
-        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup),
-            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixDayGroup)) {
-            day = monthDay
-        } else if !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup),
+        if !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup),
             let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.postfixDayGroup)) {
             day = monthDay
-        }
-
-        var monthInt = parsedItem.refDate.month
-        var monthString = ""
-        if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) {
-            if let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
-                monthInt = monthOfYear
-            } else {
-                monthString = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()
-            }
         }
 
         if prefix == "next", monthString == "month" {
