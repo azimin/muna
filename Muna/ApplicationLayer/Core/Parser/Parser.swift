@@ -31,10 +31,11 @@ class Parser: ParserProtocol {
         let parsedItems = matches.map { match in
             ParsedItem(text: text, match: match, refDate: refDate)
         }
-        return self.extract(fromParsedItems: parsedItems, toParsedResult: items)
+
+        return parsedItems.map { self.extract(fromParsedItem: $0, toParsedResult: items) }.flatMap { $0 }
     }
 
-    func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem] {
+    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         return []
     }
 }

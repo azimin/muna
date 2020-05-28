@@ -47,11 +47,7 @@ class ENPostfixDatesParser: Parser {
     private let monthGroup = 2
     private let postfixDayGroup = 4
 
-    override func extract(fromParsedItems parsedItems: [ParsedItem], toParsedResult results: [DateItem]) -> [DateItem] {
-        return parsedItems.map { self.extract(fromParsedItem: $0, toParsedResult: results) }.flatMap { $0 }
-    }
-
-    private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         print(parsedItem.match.numberOfRanges)
 //        (0 ... 4).forEach {
 //            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
