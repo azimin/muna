@@ -59,7 +59,7 @@ class ENPostfixDatesParser: Parser {
 //            }
 //        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) else {
-            return results
+            return []
         }
         var monthInt = parsedItem.refDate.month
         var monthString = ""

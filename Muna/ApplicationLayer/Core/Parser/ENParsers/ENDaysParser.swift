@@ -29,7 +29,7 @@ class ENDaysParser: Parser {
 
         guard !parsedItem.match.isEmpty(atRangeIndex: self.dayOffsetGroup),
             let daysOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayOffsetGroup)) else {
-            return results
+            return []
         }
 
         var year = parsedItem.refDate.year

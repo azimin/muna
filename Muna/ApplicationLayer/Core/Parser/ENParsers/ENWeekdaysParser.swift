@@ -52,7 +52,7 @@ class ENWeekdaysParser: Parser {
     private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = self.weekDayOffset[weekdayName] else {
-            return results
+            return []
         }
 
         let today = parsedItem.refDate.weekday

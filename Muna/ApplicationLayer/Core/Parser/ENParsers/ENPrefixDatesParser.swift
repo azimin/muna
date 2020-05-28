@@ -61,7 +61,7 @@ class ENPrefixDatesParser: Parser {
         guard !parsedItem.match.isEmpty(atRangeIndex: self.dayGroup),
             let day = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup))
         else {
-            return results
+            return []
         }
 
         var year = parsedItem.refDate.year

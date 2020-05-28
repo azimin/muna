@@ -18,9 +18,6 @@ class ENTimeParser: Parser {
             + ")?"
             + ")?"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|min?|minutes?|am?|pm?|h?))?\\b"
-
-//            + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
-//            + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
     }
 
     let prefixGroup = 1
@@ -46,7 +43,7 @@ class ENTimeParser: Parser {
 //        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
         else {
-            return results
+            return []
         }
 
         var hoursOffset = 0
