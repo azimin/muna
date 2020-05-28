@@ -11,16 +11,23 @@ import Foundation
 class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(at|in)\\s*)?"
-            + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
-            + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
+            + "("
+            + "(\\d{1,2})"
+            + "("
+            + "(\\.|\\:|\\：)(\\d{1,2})"
+            + ")?"
+            + ")?"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|min?|minutes?|am?|pm?|h?))?\\b"
+
+//            + "(([0-9]|[0-5][0-9]|[1-9]|1[0-9]|2[0-4]))"
+//            + "(((\\.|\\:|\\：)([0-9]|[0-5][0-9]))?)"
     }
 
     let prefixGroup = 1
     let hourGroup = 3
-    let minutesSeparatorGroup = 6
-    let minutesGroup = 7
-    let partOfTheDayGroup = 8
+    let minutesSeparatorGroup = 5
+    let minutesGroup = 6
+    let partOfTheDayGroup = 7
 
     private let seconds = 60
     private let hourInSeconds = 60 * 60
@@ -31,12 +38,12 @@ class ENTimeParser: Parser {
 
     // swiftlint:disable cyclomatic_complexity
     private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
-//        print(parsedItem.match.numberOfRanges)
-//        (0 ... 8).forEach {
-//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-//            }
-//        }
+        print(parsedItem.match.numberOfRanges)
+        (0 ... 7).forEach {
+            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+            }
+        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
         else {
             return results
@@ -85,8 +92,7 @@ class ENTimeParser: Parser {
         }
 
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup) {
-            if minutesSeparator == " ",
-                minutesSeparator == ".",
+            if minutesSeparator == ".",
                 prefix == "in" {
                 if minutesOffset < 10 {
                     minutesOffset = Int((60.0 / 100.0) * Double(minutesOffset * 10)) + parsedItem.refDate.minute
