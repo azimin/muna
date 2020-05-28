@@ -12,10 +12,10 @@ class ENTimeParser: Parser {
     override var pattern: String {
         return "\\b(?:(at|in)\\s*)?"
             + "("
-            + "(\\d{1,2})"
-            + "("
-            + "(\\.|\\:|\\：)(\\d{1,2})"
-            + ")?"
+                + "(\\d{1,2})"
+                + "("
+                    + "(\\.|\\:|\\：)(\\d{1,2})"
+                + ")?"
             + ")?"
             + "(?:\\s*(a\\.m\\.|p\\.m\\.|mins?|min?|minutes?|am?|pm?|h?))?\\b"
 
@@ -39,11 +39,11 @@ class ENTimeParser: Parser {
     // swiftlint:disable cyclomatic_complexity
     private func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         print(parsedItem.match.numberOfRanges)
-        (0 ... 7).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        (0 ... 7).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
         else {
             return results

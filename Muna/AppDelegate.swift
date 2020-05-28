@@ -59,8 +59,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let currentTime = TimeZone.current.secondsFromGMT()
         let date = Date() + currentTime.seconds
-//        print("In 2h")
-//        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
+
+        print("In 2h")
+        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
 //
 //        print("In 50 mins")
 //        print("\(MunaChrono().parseFromString("In 50 mins", date: date))\n")
@@ -74,22 +75,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("Yesterday at 5pm")
 //        print("\(MunaChrono().parseFromString("Yesterday at 5pm", date: date))\n")
 //
-        print("5.30")
-        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
+//        print("5.30")
+//        print("\(MunaChrono().parseFromString("5.30", date: date))\n")
 //
-        print("5.30am")
-        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
+//        print("5.30am")
+//        print("\(MunaChrono().parseFromString("5.30am", date: date))\n")
 //
-        print("In 1.5h")
-        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
+//        print("In 1.5h")
+//        print("\(MunaChrono().parseFromString("In 1.5h", date: date))\n")
 //
 //        print("In 4h")
 //        print("\(MunaChrono().parseFromString("In 4h", date: date))\n")
 //        print("In 1h")
 //        print("\(MunaChrono().parseFromString("In 1h", date: date))\n")
 //
-        print("In 1.35h")
-        print("\(MunaChrono().parseFromString("In 1.35h", date: date))\n")
+//        print("In 1.35h")
+//        print("\(MunaChrono().parseFromString("In 1.35h", date: date))\n")
 //
 //        print("On sun")
 //        print("\(MunaChrono().parseFromString("On sun", date: date)))\n")
@@ -120,8 +121,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("20 July")
 //        print("\(MunaChrono().parseFromString("20 July", date: date)))\n")
 
-//        print("20 July at 13:00")
-//        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
+        print("20 July at 13:00")
+        print("\(MunaChrono().parseFromString("20 July at 13:00", date: date)))\n")
 
 //        print("In 2 days")
 //        print("\(MunaChrono().parseFromString("In 2 days", date: date)))\n")
