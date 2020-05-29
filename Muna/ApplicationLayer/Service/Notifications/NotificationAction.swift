@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import UserNotifications
 
 enum NotificationAction: String {
     case complete
     case later
+    case dismiss
+    case basicTap
 }

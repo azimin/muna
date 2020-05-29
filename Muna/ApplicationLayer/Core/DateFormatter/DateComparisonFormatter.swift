@@ -53,7 +53,7 @@ class DateComparisonFormatter {
                 correctionNumber: hours,
                 correctionType: .hours
             )
-            result = "in \(value) \(sufix)"
+            result = "\(value) \(sufix)"
         } else if hours > 0 {
             let sufix = hours == 1 ? "hour" : "hours"
             let value = self.roundValue(
@@ -61,7 +61,7 @@ class DateComparisonFormatter {
                 correctionNumber: minutes,
                 correctionType: .minutes
             )
-            result = "in \(value) \(sufix)"
+            result = "\(value) \(sufix)"
         } else if minutes > 0 {
             let sufix = minutes == 1 ? "minute" : "minutes"
             let value = self.roundValue(
@@ -69,7 +69,7 @@ class DateComparisonFormatter {
                 correctionNumber: seconds,
                 correctionType: .seconds
             )
-            result = "in \(value) \(sufix)"
+            result = "\(value) \(sufix)"
         } else {
             return ""
         }

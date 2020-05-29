@@ -22,7 +22,7 @@ enum WindowType: Equatable, Hashable {
         case .panel:
             return "panel"
         case .screenshot:
-            return "panel"
+            return "screenshot"
         case .fullScreenshot:
             return "fullScreenshot"
         case .debug:

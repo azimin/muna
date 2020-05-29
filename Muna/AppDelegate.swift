@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             object: nil
         )
 
-        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
+//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 6)
 
 //        TimeParserTests.test()
 
@@ -264,7 +264,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func togglePane() {
-        self.windowManager.toggleWindow(.remindLater(item: ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first!))
+        self.windowManager.toggleWindow(.panel)
     }
 
     @objc func toggleScreenshotState() {
@@ -315,9 +315,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        guard let action = NotificationAction(rawValue: response.actionIdentifier) else {
-            completionHandler()
-            return
+        let action: NotificationAction
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            action = .basicTap
+        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            action = .dismiss
+        } else {
+            guard let type = NotificationAction(rawValue: response.actionIdentifier) else {
+                completionHandler()
+                return
+            }
+            action = type
         }
 
         guard let itemId = response.notification.request.content.userInfo["item_id"] as? String else {
@@ -326,6 +334,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
 
         switch action {
+        case .basicTap:
+            print("Open panel and select item")
+        // TODO: Implement
         case .complete:
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 item.isComplited = true
@@ -337,8 +348,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
                 let dueDate = item.dueDate {
                 let sinceReminder = Date().timeIntervalSince(dueDate)
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60) // TODO: Fix me from 60 to 10 * 60
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
                 self.windowManager.toggleWindow(.remindLater(item: item))
+            } else {
+                assertionFailure("No item by id")
+            }
+        case .dismiss:
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
+                let dueDate = item.dueDate {
+                let sinceReminder = Date().timeIntervalSince(dueDate)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
             } else {
                 assertionFailure("No item by id")
             }
