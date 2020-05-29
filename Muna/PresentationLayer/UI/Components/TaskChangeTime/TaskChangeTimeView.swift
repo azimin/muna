@@ -125,11 +125,13 @@ class TaskChangeTimeView: PopupView {
 
     @objc
     private func handleCloseButton() {
-        self.slowAlert()
+        self.closeAlert()
     }
 
-    func slowAlert() {
-        // TODO: - Implement logic
+    func closeAlert() {
+        ServiceLocator.shared.windowManager.hideWindowIfNeeded(
+            .remindLater(item: self.itemModel)
+        )
     }
 
     @objc
@@ -139,7 +141,7 @@ class TaskChangeTimeView: PopupView {
 
     func updateWithNewTime() {
         defer {
-            self.slowAlert()
+            self.closeAlert()
         }
 
         guard let item = self.controller.item(by: self.controller.selectedIndex) else {
@@ -150,9 +152,10 @@ class TaskChangeTimeView: PopupView {
         if let date = item.date {
             self.itemModel.dueDateString = self.reminderTextField.textField.stringValue
             self.itemModel.dueDate = date
+
+            ServiceLocator.shared.notifications.sheduleNotification(item: self.itemModel)
             ServiceLocator.shared.itemsDatabase.saveItems()
         }
-        // TODO: - Update list
     }
 }
 

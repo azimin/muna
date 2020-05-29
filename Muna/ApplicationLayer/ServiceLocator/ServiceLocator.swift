@@ -15,6 +15,7 @@ class ServiceLocator {
     let itemsDatabase: ItemsDatabaseServiceProtocol
     let savingService: SavingProcessingService
     let notifications: NotificationsServiceProtocol
+    let windowManager: WindowManager
 
     init() {
         self.imageStorage = ImageStorageService()
@@ -24,5 +25,6 @@ class ServiceLocator {
             notifications: self.notifications
         )
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
+        self.windowManager = WindowManager()
     }
 }

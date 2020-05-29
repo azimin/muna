@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     var statusBarItem: NSStatusItem!
     var statusBarMenu: NSMenu!
 
-    let windowManager = WindowManager()
+    lazy var windowManager = ServiceLocator.shared.windowManager
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UNUserNotificationCenter.current().delegate = self
