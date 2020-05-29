@@ -101,15 +101,20 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.collectionView.reloadData()
         self.updateState()
 
+        let animated: Bool
+
         if let item = selectedItem,
             let indexPath = self.groupedData.indexPath(for: item) {
             selectedIndexPath = indexPath
+            animated = true
+        } else {
+            animated = false
         }
 
         if let indexPath = selectedIndexPath {
-            self.select(indexPath: indexPath)
+            self.select(indexPath: indexPath, animated: animated)
         } else {
-            self.select(indexPath: .init(item: 0, section: 0))
+            self.select(indexPath: .init(item: 0, section: 0), animated: false)
         }
     }
 
@@ -132,15 +137,22 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     private func selectFirstIndexIfNeeded() {
-        self.select(indexPath: .init(item: 0, section: 0))
+        self.select(indexPath: .init(item: 0, section: 0), animated: false)
     }
 
-    private func select(indexPath: IndexPath) {
+    private func select(indexPath: IndexPath, animated: Bool) {
         if self.collectionView.numberOfSections > indexPath.section, self.collectionView.numberOfItems(inSection: indexPath.section) > indexPath.item {
-            self.collectionView.selectItems(
-                at: .init(arrayLiteral: indexPath),
-                scrollPosition: .left
-            )
+            if animated {
+                self.selectIndexPath(
+                    indexPath: indexPath,
+                    completion: nil
+                )
+            } else {
+                self.collectionView.selectItems(
+                    at: .init(arrayLiteral: indexPath),
+                    scrollPosition: .left
+                )
+            }
         } else if self.collectionView.numberOfSections > 0, self.collectionView.numberOfItems(inSection: 0) > 0 {
             self.collectionView.selectItems(
                 at: .init(arrayLiteral: IndexPath(item: 0, section: 0)),
