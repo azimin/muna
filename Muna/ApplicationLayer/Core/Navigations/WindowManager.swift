@@ -10,7 +10,7 @@ import Cocoa
 import Foundation
 
 enum WindowType: Equatable, Hashable {
-    case panel
+    case panel(selectedItem: ItemModel?)
     case screenshot
     case fullScreenshot
     case debug
@@ -102,16 +102,16 @@ class WindowManager {
         switch windowType {
         case .debug:
             self.showDebug(in: window)
-        case .panel:
-            self.showPanel(in: window)
+        case let .panel(selectedItem):
+            self.showPanel(in: window, selectedItem: selectedItem)
         case .screenshot:
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
         case .fullScreenshot:
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
         case .settings:
             self.showSettings(in: window)
-        case .remindLater:
-            self.showRemindLater(in: window)
+        case let .remindLater(item):
+            self.showRemindLater(in: window, item: item)
         }
 
         self.changeWindowState(windowType, state: true)
@@ -146,9 +146,9 @@ class WindowManager {
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
-        case .panel:
+        case let .panel(selectedItem):
             window = Panel(
-                contentRect: self.frameFor(.panel),
+                contentRect: self.frameFor(windowType),
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered,
                 defer: false
@@ -158,7 +158,7 @@ class WindowManager {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar - 2
-            self.showPanel(in: window)
+            self.showPanel(in: window, selectedItem: selectedItem)
         case .screenshot:
             window = Panel(
                 contentRect: self.frameFor(.screenshot),
@@ -237,11 +237,11 @@ class WindowManager {
         window.setIsVisible(true)
     }
 
-    private func showRemindLater(in window: NSWindow) {
+    private func showRemindLater(in window: NSWindow, item: ItemModel) {
         window.makeKeyAndOrderFront(nil)
 
         window.setFrame(
-            self.frameFor(.panel),
+            self.frameFor(.remindLater(item: item)),
             display: true,
             animate: false
         )
@@ -252,17 +252,17 @@ class WindowManager {
         window.setIsVisible(true)
     }
 
-    private func showPanel(in window: NSWindow) {
+    private func showPanel(in window: NSWindow, selectedItem: ItemModel?) {
         window.makeKeyAndOrderFront(nil)
 
         window.setFrame(
-            self.frameFor(.panel),
+            self.frameFor(.panel(selectedItem: selectedItem)),
             display: true,
             animate: false
         )
 
         if let viewController = window.contentViewController as? MainScreenViewController {
-            viewController.show()
+            viewController.show(selectedItem: selectedItem)
         }
         window.setIsVisible(true)
     }

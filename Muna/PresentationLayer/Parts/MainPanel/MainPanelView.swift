@@ -126,7 +126,7 @@ class MainPanelView: NSView {
         }
     }
 
-    func show() {
+    func show(selectedItem: ItemModel? = nil) {
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
 
         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
@@ -137,7 +137,18 @@ class MainPanelView: NSView {
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
-        self.mainContentView.reloadData()
+        if let item = selectedItem, let filter = ServiceLocator.shared.itemsDatabase.itemFilter(by: item.id) {
+            switch filter {
+            case .completed:
+                self.segmentControl.selectedSegment = 2
+            case .uncompleted:
+                self.segmentControl.selectedSegment = 0
+            default:
+                assertionFailure("No segment")
+            }
+        }
+
+        self.mainContentView.reloadData(selectedItem: selectedItem)
     }
 
     func hide(completion: VoidBlock?) {

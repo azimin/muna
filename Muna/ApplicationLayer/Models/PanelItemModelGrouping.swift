@@ -36,6 +36,16 @@ class PanelItemModelGrouping {
         return self.values[indexPath.section]![indexPath.item]
     }
 
+    func indexPath(for item: ItemModel) -> IndexPath? {
+        for (key, value) in self.values {
+            if let index = value.firstIndex(where: { $0.id == item.id }) {
+                return IndexPath(item: index, section: key)
+            }
+        }
+
+        return nil
+    }
+
     func group(in section: Int) -> Group {
         return self.names[section]!
     }

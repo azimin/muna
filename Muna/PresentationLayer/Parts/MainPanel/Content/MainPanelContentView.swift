@@ -88,14 +88,23 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.scrollView.contentView.scroll(to: .zero)
     }
 
-    func reloadData() {
-        let selectedIndexPath = self.collectionView.selectionIndexPaths.first
+    func reloadData(selectedItem: ItemModel? = nil) {
+        var selectedIndexPath = self.collectionView.selectionIndexPaths.first
+
+        if let item = selectedItem, let filter = ServiceLocator.shared.itemsDatabase.itemFilter(by: item.id) {
+            self.selectedFilter = filter
+        }
 
         self.groupedData = PanelItemModelGrouping(
             items: ServiceLocator.shared.itemsDatabase.fetchItems(filter: self.selectedFilter)
         )
         self.collectionView.reloadData()
         self.updateState()
+
+        if let item = selectedItem,
+            let indexPath = self.groupedData.indexPath(for: item) {
+            selectedIndexPath = indexPath
+        }
 
         if let indexPath = selectedIndexPath {
             self.select(indexPath: indexPath)

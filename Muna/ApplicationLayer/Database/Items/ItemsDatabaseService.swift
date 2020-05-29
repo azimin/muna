@@ -13,6 +13,7 @@ protocol ItemsDatabaseServiceProtocol: AnyObject {
 
     func item(by id: String) -> ItemModel?
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
+    func itemFilter(by id: String) -> ItemsDatabaseService.Filter?
 
     @discardableResult
     func addItem(
@@ -70,6 +71,19 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             return items.filter { $0.isComplited == true }
         case .noDeadline:
             return items.filter { $0.dueDate == nil && $0.isComplited == false }
+        }
+    }
+
+    func itemFilter(by id: String) -> Filter? {
+        guard let item = self.items.first(where: { $0.id == id }) else {
+            assertionFailure("No filter")
+            return nil
+        }
+
+        if item.isComplited == false {
+            return .uncompleted
+        } else {
+            return .completed
         }
     }
 

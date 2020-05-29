@@ -252,7 +252,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func hidePanelIfNeeded() {
-        self.windowManager.hideWindowIfNeeded(.panel)
+        self.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
     }
 
     @objc func hideScreenshotIfNeeded() {
@@ -264,7 +264,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func togglePane() {
-        self.windowManager.toggleWindow(.panel)
+        self.windowManager.toggleWindow(.panel(selectedItem: nil))
     }
 
     @objc func toggleScreenshotState() {
@@ -335,8 +335,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         switch action {
         case .basicTap:
-            print("Open panel and select item")
-        // TODO: Implement
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
+            } else {
+                assertionFailure("No item by id")
+            }
+
         case .complete:
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 item.isComplited = true

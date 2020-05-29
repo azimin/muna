@@ -93,8 +93,8 @@ class MainScreenViewController: NSViewController {
 
     // MARK: - Show/Hide
 
-    func show() {
-        self.rootView.show()
+    func show(selectedItem: ItemModel? = nil) {
+        self.rootView.show(selectedItem: selectedItem)
         self.shortcutsController?.start()
     }
 
