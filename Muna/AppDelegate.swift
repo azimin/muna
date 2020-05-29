@@ -286,23 +286,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     // MARK: - User Notifications
 
     func registerNotificationsActions() {
-        let completeAction = UNNotificationAction(
-            identifier: NotificationAction.complete.rawValue,
-            title: "Complete",
-            options: .destructive
-        )
-
         let laterAction = UNNotificationAction(
             identifier: NotificationAction.later.rawValue,
             title: "Later",
-            options: .authenticationRequired
+            options: .foreground
         )
 
         let category = UNNotificationCategory(
             identifier: "item",
-            actions: [laterAction, completeAction],
+            actions: [laterAction],
             intentIdentifiers: [],
-            options: .customDismissAction
+            options: [.customDismissAction]
         )
 
         UNUserNotificationCenter.current().setNotificationCategories([category])
@@ -313,7 +307,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        completionHandler([.alert, .sound])
+        completionHandler([.alert, .sound, .badge])
     }
 
     func userNotificationCenter(
@@ -340,8 +334,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 assertionFailure("No item by id")
             }
         case .later:
-            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: 10 * 60)
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
+                let dueDate = item.dueDate {
+                let sinceReminder = Date().timeIntervalSince(dueDate)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60) // TODO: Fix me from 60 to 10 * 60
                 self.windowManager.toggleWindow(.remindLater(item: item))
             } else {
                 assertionFailure("No item by id")

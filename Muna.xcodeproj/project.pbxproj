@@ -161,6 +161,8 @@
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
+		539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (real app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (real app).xcconfig"; sourceTree = "<group>"; };
+		9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (test app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (test app).xcconfig"; sourceTree = "<group>"; };
 		9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStackView+Init.swift"; sourceTree = "<group>"; };
 		9F025C0924633C6F00F05D81 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
@@ -999,6 +1001,8 @@
 			children = (
 				39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */,
 				B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */,
+				539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */,
+				9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1318,7 +1322,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		239DC921245D95E8001FA50C /* Debug */ = {
+		239DC921245D95E8001FA50C /* Debug (Real App) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1376,7 +1380,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (Real App)";
 		};
 		239DC922245D95E8001FA50C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1431,9 +1435,9 @@
 			};
 			name = Release;
 		};
-		239DC924245D95E8001FA50C /* Debug */ = {
+		239DC924245D95E8001FA50C /* Debug (Real App) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */;
+			baseConfigurationReference = 539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1460,7 +1464,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
-			name = Debug;
+			name = "Debug (Real App)";
 		};
 		239DC925245D95E8001FA50C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1492,13 +1496,105 @@
 			};
 			name = Release;
 		};
+		9FD4C2932481B94A0027F71B /* Debug (Test App) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Test App)";
+		};
+		9FD4C2942481B94A0027F71B /* Debug (Test App) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = Muna/Configuration/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna.Debug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = "Debug (Test App)";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		239DC90B245D95E5001FA50C /* Build configuration list for PBXProject "Muna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				239DC921245D95E8001FA50C /* Debug */,
+				239DC921245D95E8001FA50C /* Debug (Real App) */,
+				9FD4C2932481B94A0027F71B /* Debug (Test App) */,
 				239DC922245D95E8001FA50C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1507,7 +1603,8 @@
 		239DC923245D95E8001FA50C /* Build configuration list for PBXNativeTarget "Muna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				239DC924245D95E8001FA50C /* Debug */,
+				239DC924245D95E8001FA50C /* Debug (Real App) */,
+				9FD4C2942481B94A0027F71B /* Debug (Test App) */,
 				239DC925245D95E8001FA50C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
