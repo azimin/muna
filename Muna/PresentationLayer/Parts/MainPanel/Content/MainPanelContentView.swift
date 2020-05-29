@@ -185,6 +185,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             )
             completeItem.keyEquivalentModifierMask = []
 
+            let reminderItem = NSMenuItem(
+                title: itemModel.dueDate == nil ? "Set Reminder" : "Edit Reminder",
+                action: #selector(self.editReminder),
+                keyEquivalent: "t"
+            )
+            reminderItem.keyEquivalentModifierMask = [.command]
+
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
 
@@ -192,7 +199,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             deleteItem.keyEquivalentModifierMask = []
 
             menu.addItem(completeItem)
+            menu.addItem(reminderItem)
+            menu.addItem(NSMenuItem.separator())
             menu.addItem(previewItem)
+            menu.addItem(NSMenuItem.separator())
             menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
         } else {
@@ -219,6 +229,21 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         item.isComplited.toggle()
 
         self.selectIndexPath(indexPath: indexPath, completion: nil)
+    }
+
+    @objc
+    func editReminder() {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+        print("Show edit item", item) // TODO: Implement show
     }
 
     @objc
