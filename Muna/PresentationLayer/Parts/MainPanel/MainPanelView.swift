@@ -137,7 +137,19 @@ class MainPanelView: NSView {
         self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
 
-        if let item = selectedItem, let filter = ServiceLocator.shared.itemsDatabase.itemFilter(by: item.id) {
+        if let item = selectedItem {
+            self.toggle(selectedItem: item)
+        } else {
+            self.mainContentView.reloadData(selectedItem: selectedItem)
+        }
+    }
+
+    func toggle(selectedItem: ItemModel? = nil) {
+        guard let item = selectedItem else {
+            return
+        }
+
+        if let filter = ServiceLocator.shared.itemsDatabase.itemFilter(by: item.id) {
             switch filter {
             case .completed:
                 self.segmentControl.selectedSegment = 2
@@ -148,7 +160,7 @@ class MainPanelView: NSView {
             }
         }
 
-        self.mainContentView.reloadData(selectedItem: selectedItem)
+        self.mainContentView.reloadData(selectedItem: item)
     }
 
     func hide(completion: VoidBlock?) {

@@ -98,6 +98,10 @@ class MainScreenViewController: NSViewController {
         self.shortcutsController?.start()
     }
 
+    func toggle(selectedItem: ItemModel? = nil) {
+        self.rootView.toggle(selectedItem: selectedItem)
+    }
+
     func hide(completion: VoidBlock?) {
         self.rootView.hide(completion: completion)
         self.shortcutsController?.stop()
