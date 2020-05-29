@@ -34,8 +34,12 @@ class NotificationsService: NotificationsServiceProtocol {
 
         let notificationContent = UNMutableNotificationContent()
 
-        notificationContent.subtitle = "Time to check pending items"
-        notificationContent.body = item.comment ?? ""
+        if let comment = item.comment, comment.isEmpty == false {
+            notificationContent.subtitle = "Time to check pending items"
+            notificationContent.body = comment
+        } else {
+            notificationContent.body = "Time to check pending items"
+        }
         notificationContent.categoryIdentifier = "item"
         notificationContent.userInfo = ["item_id": item.id]
 

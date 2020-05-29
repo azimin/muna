@@ -74,6 +74,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     }
 
     func removeItem(id: String) {
+        self.removeItem(id: id, shouldSave: true)
+    }
+
+    func removeItem(id: String, shouldSave: Bool) {
         if let index = self.items.firstIndex(where: { $0.id == id }) {
             let item = self.items[index]
             self.notifications.removeNotification(item: item)
@@ -83,7 +87,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         } else {
             assertionFailure("No id")
         }
-        self.saveItems()
+
+        if shouldSave {
+            self.saveItems()
+        }
     }
 
     @discardableResult
@@ -126,10 +133,9 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     private func removeItems() {
         for item in self.items {
             self.imageStorage.removeImage(name: item.imageName)
+            self.removeItem(id: item.id, shouldSave: false)
         }
-        UserDefaults.standard.removeObject(forKey: self.key)
-        UserDefaults.standard.synchronize()
-        self.items = []
+        self.saveItems()
     }
 
     private func loadItems() {

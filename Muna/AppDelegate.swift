@@ -23,14 +23,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     let windowManager = WindowManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
             if granted {
                 print("Approval granted to send notifications")
+                self.registerNotificationsActions()
             } else if let error = error {
                 print(error)
             }
         }
-        UNUserNotificationCenter.current().delegate = self
 
 //        TimeParserTests.test()
 
@@ -305,6 +306,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         UNUserNotificationCenter.current().setNotificationCategories([category])
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.alert, .sound])
     }
 
     func userNotificationCenter(

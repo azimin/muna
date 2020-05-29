@@ -235,6 +235,7 @@
 		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
 		9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDoneButton.swift; sourceTree = "<group>"; };
 		9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserItemView.swift; sourceTree = "<group>"; };
+		9FD4C29224812C890027F71B /* MunaMouseWorkaround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MunaMouseWorkaround.h; sourceTree = "<group>"; };
 		9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsView.swift; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 				233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */,
 				23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */,
 				9FEF9849247C60EB0047787A /* Muna-Bridging-Header.h */,
+				9FD4C29224812C890027F71B /* MunaMouseWorkaround.h */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1440,7 +1442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1471,7 +1473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
