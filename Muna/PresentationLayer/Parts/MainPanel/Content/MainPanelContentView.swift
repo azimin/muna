@@ -165,7 +165,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     var capturedItem: ItemModel?
 
     override func rightMouseUp(with event: NSEvent) {
-        let point = self.convert(event.locationInWindow, to: self.collectionView)
+        let point = self.window?.contentView?.convert(event.locationInWindow, to: self.collectionView) ?? .zero
 
         if let item = self.cellAt(point: point),
             let indexPath = self.collectionView.indexPath(for: item) {
