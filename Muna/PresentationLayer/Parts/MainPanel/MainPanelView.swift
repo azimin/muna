@@ -27,8 +27,6 @@ class MainPanelView: NSView {
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
-
-        self.window?.makeFirstResponder(self)
     }
 
     required init?(coder: NSCoder) {

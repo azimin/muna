@@ -70,7 +70,10 @@ class TaskChangeTimeView: PopupView {
             maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
         }
 
+        self.doneButton.target = self
         self.doneButton.action = #selector(self.handleDoneButton)
+
+        self.closeButton.target = self
         self.closeButton.action = #selector(self.handleCloseButton)
 
         self.addMonitor()

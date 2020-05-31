@@ -17,6 +17,7 @@ extension MainScreenViewController {
         case deleteItem
         case previewItem
         case complete
+        case editTime
 
         var item: ShortcutItem {
             switch self {
@@ -34,6 +35,8 @@ extension MainScreenViewController {
                 return ShortcutItem(key: .space, modifiers: [])
             case .complete:
                 return ShortcutItem(key: .return, modifiers: [])
+            case .editTime:
+                return ShortcutItem(key: .t, modifiers: [.command])
             }
         }
     }

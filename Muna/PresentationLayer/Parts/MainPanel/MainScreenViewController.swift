@@ -94,12 +94,18 @@ class MainScreenViewController: NSViewController {
             return { [weak self] in
                 self?.panelView.mainContentView.completeActiveItemAction()
             }
+        case .editTime:
+            return { [weak self] in
+                self?.panelView.mainContentView.editReminder()
+            }
         }
     }
 
     // MARK: - Show/Hide
 
     func show(selectedItem: ItemModel? = nil) {
+        self.view.window?.makeFirstResponder(self.view)
+
         self.panelView.show(selectedItem: selectedItem)
         self.shortcutsController?.start()
     }
