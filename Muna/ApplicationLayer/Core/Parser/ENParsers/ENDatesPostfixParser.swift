@@ -40,12 +40,12 @@ class ENDatesPostfixParser: Parser {
     override var pattern: String {
         return "\\b(?:(next|this))?"
             + "(\\s*(\(self.months)))"
-            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z])(?!(\\:\\d|\\.\\d)))?"
+            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z])(?!(\\:\\d|\\.\\d)))"
     }
 
     private let prefixGroup = 1
-    private let monthGroup = 6
-    private let dayGroup = 8
+    private let monthGroup = 3
+    private let dayGroup = 5
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)

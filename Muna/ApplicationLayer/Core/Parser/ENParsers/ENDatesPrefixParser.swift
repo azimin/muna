@@ -39,8 +39,10 @@ class ENDatesPrefixParser: Parser {
 
     override var pattern: String {
         return "\\b(?:(next|this))?"
-            + "(?<!(\\:|\\.))(0[0-9]|1[0-9]|2[0-9]|3[0-1])(?!(\\:\\d|\\.\\d))"
-            + "(\\s*(\(self.months))?)"
+//            + "(?<!(\\:|\\.))
+            + "(0[0-9]|1[0-9]|2[0-9]|3[0-1])"
+//        (?!(\\:\\d|\\.\\d))"
+            + "(\\s*(\(self.months)))"
     }
 
     private let prefixGroup = 1
@@ -48,12 +50,12 @@ class ENDatesPrefixParser: Parser {
     private let monthGroup = 4
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 4).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 4).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard
             !parsedItem.match.isEmpty(atRangeIndex: self.dayGroup),
             let day = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup)),
