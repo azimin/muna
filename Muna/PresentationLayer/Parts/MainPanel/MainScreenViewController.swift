@@ -136,6 +136,13 @@ class MainScreenViewController: NSViewController {
 
 extension MainScreenViewController: MainPanelContentViewDelegate {
     func mainPanelContentViewShouldShowTimeChange(itemModel: ItemModel) {
-        self.rootView.showChangeTimeView(itemModel: itemModel)
+        self.rootView.showChangeTimeView(
+            itemModel: itemModel,
+            closeHandler: CloseHandler(close: { [weak self] in
+                self?.rootView.hideChangeTimeView()
+                self?.shortcutsController?.start()
+            })
+        )
+        self.shortcutsController?.stop()
     }
 }

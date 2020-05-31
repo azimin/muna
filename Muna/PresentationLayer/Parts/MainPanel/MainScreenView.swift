@@ -30,15 +30,13 @@ class MainScreenView: NSView {
         }
     }
 
-    func showChangeTimeView(itemModel: ItemModel) {
+    func showChangeTimeView(itemModel: ItemModel, closeHandler: CloseHandler) {
         self.hideChangeTimeView()
 
         let changeTimeView = TaskChangeTimeGlobalView(
             itemModel: itemModel,
             style: .withImage,
-            closeHandler: .init(close: { [weak self] in
-                self?.hideChangeTimeView()
-            })
+            closeHandler: closeHandler
         )
 
         self.addSubview(changeTimeView)

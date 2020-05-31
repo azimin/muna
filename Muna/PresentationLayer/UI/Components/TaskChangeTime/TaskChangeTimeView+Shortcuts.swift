@@ -11,11 +11,14 @@ import Foundation
 extension TaskChangeTimeView {
     enum Shortcuts: ViewShortcutProtocol {
         case create
+        case close
 
         var item: ShortcutItem {
             switch self {
             case .create:
                 return ShortcutItem(key: .return, modifiers: [.shift])
+            case .close:
+                return ShortcutItem(key: .w, modifiers: [.command])
             }
         }
     }

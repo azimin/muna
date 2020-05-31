@@ -107,6 +107,9 @@ class TaskChangeTimeView: PopupView {
             } else if Shortcuts.create.item.validateWith(event: event) {
                 self.updateWithNewTime()
                 return nil
+            } else if Shortcuts.close.item.validateWith(event: event) {
+                self.closeAlert()
+                return nil
             }
 
             return event
