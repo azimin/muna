@@ -315,6 +315,7 @@ class WindowManager {
                     window.setIsVisible(false)
                 }
             }
+            window.close()
             self.windows[windowType] = nil
         case .panel:
             if let viewController = window.contentViewController as? MainScreenViewController {
