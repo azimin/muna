@@ -15,7 +15,7 @@ class ENDaysParser: Parser {
 
     let dayOffsetGroup = 1
 
-    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+    override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
         print(parsedItem.match.numberOfRanges)
         (0 ... 2).forEach {
             if !parsedItem.match.isEmpty(atRangeIndex: $0) {
@@ -25,7 +25,7 @@ class ENDaysParser: Parser {
 
         guard !parsedItem.match.isEmpty(atRangeIndex: self.dayOffsetGroup),
             let daysOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayOffsetGroup)) else {
-            return results
+            return nil
         }
 
         var year = parsedItem.refDate.year
@@ -42,22 +42,10 @@ class ENDaysParser: Parser {
             year += 1
         }
 
-        var parsedResults = [DateItem]()
-        if !results.isEmpty {
-            parsedResults = results.map {
-                var newItem = $0
-                let newDay = PureDay(day: day, month: month, year: year)
-                newItem.day = newDay
-                return newItem
-            }
-        } else {
-            parsedResults.append(
-                DateItem(
-                    day: PureDay(day: day, month: month, year: year),
-                    timeType: .allDay
-                )
-            )
-        }
-        return parsedResults
+        return ParsedResult(
+            refDate: parsedItem.refDate,
+            reservedComponents: [.year: year, .month: month, .day: day],
+            customComponents: [:]
+        )
     }
 }
