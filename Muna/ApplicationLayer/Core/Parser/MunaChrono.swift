@@ -9,7 +9,13 @@
 import Foundation
 
 class MunaChrono {
-    private let parsers = [ENTimeParser(), ENWeekdaysParser(), ENDatesPrefixParser(), ENDaysParser()]
+    private let parsers = [
+        ENTimeParser(),
+        ENWeekdaysParser(),
+        ENDatesPrefixParser(),
+        ENDatesPostfixParser(),
+        ENDaysParser(),
+    ]
 
     func parseFromString(_ string: String, date: Date) -> [DateItem] {
         var allParsedResults = [ParsedResult]()

@@ -1,5 +1,5 @@
 //
-//  ENDatesParser.swift
+//  ENDatesPostfixParser.swift
 //  Muna
 //
 //  Created by Egor Petrov on 22.05.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ENDatesParser: Parser {
+class ENDatesPostfixParser: Parser {
     private let monthOffset = [
         "december": 12,
         "dec": 12,
@@ -39,15 +39,13 @@ class ENDatesParser: Parser {
 
     override var pattern: String {
         return "\\b(?:(next|this))?"
-            + "((0[0-9]|1[0-9]|2[0-9]|3[0-1])?)"
-            + "((\\.|\\s*(\(self.months)|[0-9]|1[0-2]|month))?)"
-            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z]))?\\b"
+            + "(\\s*(\(self.months)))"
+            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z])(?!\\:\\d))?\\b"
     }
 
     private let prefixGroup = 1
-    private let prefixDayGroup = 2
     private let monthGroup = 6
-    private let postfixDayGroup = 8
+    private let dayGroup = 8
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)
@@ -56,9 +54,9 @@ class ENDatesParser: Parser {
 //                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
 //            }
 //        }
-        guard !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup)
-            || !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup)
-            || !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup)
+        guard
+            !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup),
+            var month = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()]
         else {
             return nil
         }
@@ -71,38 +69,25 @@ class ENDatesParser: Parser {
         }
 
         var day = parsedItem.refDate.day
-        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixDayGroup),
-            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixDayGroup)) {
-            day = monthDay
-        } else if !parsedItem.match.isEmpty(atRangeIndex: self.postfixDayGroup),
-            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.postfixDayGroup)) {
+        if !parsedItem.match.isEmpty(atRangeIndex: self.dayGroup),
+            let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup)) {
             day = monthDay
         }
 
-        var monthInt = parsedItem.refDate.month
-        var monthString = ""
-        if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) {
-            if let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
-                monthInt = monthOfYear
-            } else {
-                monthString = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()
-            }
-        }
-
-        if prefix == "next", monthString == "month" {
-            monthInt += 1
-        } else if prefix == "next" {
+        if month > 12 {
+            month = 1
             year += 1
         }
 
-        if monthInt > 12 {
-            monthInt = 1
+        if prefix == "next", month == parsedItem.refDate.month {
+            month += 1
+        } else if prefix == "next", month >= parsedItem.refDate.month {
             year += 1
         }
 
         return ParsedResult(
             refDate: parsedItem.refDate,
-            reservedComponents: [.year: year, .month: monthInt, .day: day],
+            reservedComponents: [.year: year, .month: month, .day: day],
             customComponents: [:]
         )
     }
