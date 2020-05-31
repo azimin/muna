@@ -8,29 +8,26 @@
 
 import Foundation
 
-enum ComponentUnit {
-    case year, month, day, hour, minute, second, millisecond, weekday, timeZoneOffset, meridiem
+enum ReserverdUnit: CaseIterable {
+    case year, month, day, hour, minute, weekday, partOfTheDay
 }
 
-enum TimeUnit: String {
+enum CustomUnits: CaseIterable {
     case noon
     case afertnoon
     case evening
     case mindnight
     case morning
-    case specificTime
+    case weekends
+    case tomorrow
     case allDay
 }
 
-struct ParsedTime {
-    let timeUnit: TimeUnit
-    let hours: Int?
-}
-
 struct ParsedResult {
-    var range: [NSRange]
-    var date: Date
-    var time: ParsedTime
+    var refDate: Date
+
+    var reservedComponents: [ReserverdUnit: Int]
+    var customComponents: [CustomUnits: String]
 }
 
 struct ParsedItem {
