@@ -67,5 +67,9 @@ class NotificationsService: NotificationsServiceProtocol {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
             withIdentifiers: [item.notificationId]
         )
+
+        UNUserNotificationCenter.current().removeDeliveredNotifications(
+            withIdentifiers: [item.notificationId]
+        )
     }
 }
