@@ -18,7 +18,7 @@ class ENWeekdaysParser: Parser {
         return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(self.days))\\b"
     }
 
-    func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
+    override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
         let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = weekdays[weekdayName] else {
             return nil

@@ -26,7 +26,7 @@ class ENTimeParser: Parser {
     private let hourInSeconds = 60 * 60
 
     // swiftlint:disable cyclomatic_complexity
-    func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
+    override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)
 //        (0 ... 8).forEach {
 //            if !parsedItem.match.isEmpty(atRangeIndex: $0) {

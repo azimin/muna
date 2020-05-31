@@ -15,7 +15,7 @@ class ENDaysParser: Parser {
 
     let dayOffsetGroup = 1
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
         print(parsedItem.match.numberOfRanges)
         (0 ... 2).forEach {
             if !parsedItem.match.isEmpty(atRangeIndex: $0) {

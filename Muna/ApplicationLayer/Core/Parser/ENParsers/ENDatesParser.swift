@@ -49,7 +49,7 @@ class ENDatesParser: Parser {
     private let monthGroup = 6
     private let postfixDayGroup = 8
 
-    override func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
+    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem] {
 //        print(parsedItem.match.numberOfRanges)
 //        (0 ... 9).forEach {
 //            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
