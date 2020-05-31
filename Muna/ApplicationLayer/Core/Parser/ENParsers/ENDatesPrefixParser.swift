@@ -39,7 +39,7 @@ class ENDatesPrefixParser: Parser {
 
     override var pattern: String {
         return "\\b(?:(next|this))?"
-            + "(?<!\\:)(0[0-9]|1[0-9]|2[0-9]|3[0-1])(?!\\:\\d)"
+            + "(?<!(\\:|\\.))(0[0-9]|1[0-9]|2[0-9]|3[0-1])(?!(\\:\\d|\\.\\d))"
             + "(\\s*(\(self.months))?)"
     }
 
