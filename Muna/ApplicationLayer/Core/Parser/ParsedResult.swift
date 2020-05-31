@@ -12,7 +12,26 @@ enum ReserverdUnit: CaseIterable {
     case year, month, day, hour, minute, weekday, partOfTheDay
 }
 
-enum CustomUnits: CaseIterable {
+let weekdays = [
+    "sunday": 1,
+    "sun": 1,
+    "monday": 2,
+    "mon": 2,
+    "tuesday": 3,
+    "tue": 3,
+    "wednesday": 4,
+    "wed": 4,
+    "thursday": 5,
+    "thurs": 5,
+    "thur": 5,
+    "thu": 5,
+    "friday": 6,
+    "fri": 6,
+    "saturday": 7,
+    "sat": 7,
+]
+
+enum CustomUnits: String, CaseIterable {
     case noon
     case afertnoon
     case evening
@@ -24,7 +43,7 @@ enum CustomUnits: CaseIterable {
 }
 
 struct ParsedResult {
-    var refDate: Date
+    let refDate: Date
 
     var reservedComponents: [ReserverdUnit: Int]
     var customComponents: [CustomUnits: String]
