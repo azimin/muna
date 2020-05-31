@@ -32,7 +32,12 @@ class ItemModel: ItemModelProtocol, Codable {
     var creationDate: Date
 
     var dueDateString: String?
-    var dueDate: Date?
+    var dueDate: Date? {
+        didSet {
+            self.itemsDatabaseService?.itemUpdated.value = self.id
+        }
+    }
+
     var comment: String?
 
     var notificationId: String

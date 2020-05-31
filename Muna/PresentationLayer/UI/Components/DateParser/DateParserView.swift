@@ -84,7 +84,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             } else {
                 option = DateParserItemView()
             }
-            option.update(style: .notSelected, animated: true)
+            option.update(style: .notSelected, animated: animated)
             option.update(item: item)
             option.isHidden = true
             self.itemsStackView.insertArrangedSubview(option, at: subviewIndex)
@@ -94,7 +94,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
         }
 
         if items.count == 0 {
-            self.mainOption?.update(style: .basic, animated: true)
+            self.mainOption?.update(style: .basic, animated: animated)
             self.mainOption?.update(item: .init(
                 date: nil,
                 title: "No reminder",
@@ -102,15 +102,13 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 additionalText: ""
             ))
         } else {
-            self.mainOption?.update(style: .selected, animated: true)
+            self.mainOption?.update(style: .selected, animated: animated)
             self.mainOption?.update(item: items[0])
         }
 
         let numberOfItems = max(items.count, 1)
-        NSAnimationContext.runAnimationGroup({ context in
-            context.duration = animated ? 0.25 : 0
-            context.allowsImplicitAnimation = true
 
+        let animationBlock = {
             for optionIndex in 0 ..< numberOfItems {
                 self.options[optionIndex].isHidden = false
             }
@@ -124,7 +122,17 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             }
 
             self.topSuperview?.layoutSubtreeIfNeeded()
-        }, completionHandler: nil)
+        }
+
+        if animated {
+            NSAnimationContext.runAnimationGroup({ context in
+                context.duration = 0.25
+                context.allowsImplicitAnimation = true
+                animationBlock()
+            }, completionHandler: nil)
+        } else {
+            animationBlock()
+        }
     }
 
     func remindersOptionsControllerHighliteItem(

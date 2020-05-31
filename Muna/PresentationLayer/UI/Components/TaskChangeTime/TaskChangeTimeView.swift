@@ -143,6 +143,12 @@ class TaskChangeTimeView: PopupView {
         }
     }
 
+    override func viewDidMoveToWindow() {
+        OperationQueue.main.addOperation {
+            self.window?.makeFirstResponder(self.reminderTextField.textField)
+        }
+    }
+
     func clear() {
         self.reminderTextField.clear()
     }

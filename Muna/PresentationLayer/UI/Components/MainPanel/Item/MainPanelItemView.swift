@@ -135,23 +135,12 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     private var item: ItemModel?
 
     func update(item: ItemModel) {
-        if let dueDate = item.dueDate {
-            let reminder = CardPreviewDateFormatter(date: dueDate)
-            self.deadlineLabel.stringValue = reminder.reminderText
-        } else {
-            self.deadlineLabel.stringValue = "No reminder"
-        }
+        self.updateDueDate(item: item)
 
         if let comment = item.comment, comment.isEmpty == false {
             self.commentLabel.isHidden = false
         } else {
             self.commentLabel.isHidden = true
-        }
-
-        if let dueDate = item.dueDate, dueDate < Date() {
-            self.deadlineLabel.textColor = NSColor.color(.redLight)
-        } else {
-            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
         }
 
         self.commentLabel.stringValue = item.comment ?? ""
@@ -170,8 +159,24 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             if id != nil, self.item?.id == id {
                 self.isComplited = item.isComplited
                 self.updateStyle()
+                self.updateDueDate(item: item)
             }
         })
+    }
+
+    private func updateDueDate(item: ItemModel) {
+        if let dueDate = item.dueDate {
+            let reminder = CardPreviewDateFormatter(date: dueDate)
+            self.deadlineLabel.stringValue = reminder.reminderText
+        } else {
+            self.deadlineLabel.stringValue = "No reminder"
+        }
+
+        if let dueDate = item.dueDate, dueDate < Date() {
+            self.deadlineLabel.textColor = NSColor.color(.redLight)
+        } else {
+            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
+        }
     }
 }
 
