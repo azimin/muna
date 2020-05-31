@@ -33,6 +33,7 @@
 		239DC91E245D95E8001FA50C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91C245D95E8001FA50C /* Main.storyboard */; };
 		23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */; };
 		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
+		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
 		9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */; };
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
@@ -164,6 +165,7 @@
 		239DC920245D95E8001FA50C /* Muna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muna.entitlements; sourceTree = "<group>"; };
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
 		539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (real app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (real app).xcconfig"; sourceTree = "<group>"; };
 		9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (test app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (test app).xcconfig"; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */,
 				231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */,
 				231E0C912484406D0018EB8F /* ENNumberDate.swift */,
+				23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -1301,6 +1304,7 @@
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */,
+				23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */,
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
