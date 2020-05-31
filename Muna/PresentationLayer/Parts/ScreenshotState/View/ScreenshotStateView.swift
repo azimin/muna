@@ -339,8 +339,7 @@ class ScreenshotStateView: View {
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        // esc
-        if event.keyCode == 53 {
+        if event.keyCode == Key.escape.carbonKeyCode {
             self.hideVisuals()
             self.delegate?.escapeWasTapped()
             return true

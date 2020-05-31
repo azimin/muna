@@ -28,10 +28,11 @@ class MainScreenViewController: NSViewController {
 
         var shortcutActions: [ShortcutAction] = []
         for shortcut in Shortcut.allCases {
-            let action = self.actionForShortcut(shortcut)
             shortcutActions.append(.init(
                 item: shortcut.item,
-                action: action
+                action: { [weak self] in
+                    self?.actionForShortcut(shortcut)
+                }
             ))
         }
 
@@ -53,51 +54,37 @@ class MainScreenViewController: NSViewController {
     }
 
     @objc func shortcutAction() {
-        print("Shortcut")
+        print("Shortcut info")
     }
 
-    func actionForShortcut(_ shortcut: Shortcut) -> VoidBlock? {
+    func actionForShortcut(_ shortcut: Shortcut) {
         switch shortcut {
         case .nextItem:
-            return { [weak self] in
-                self?.panelView.mainContentView.selectNext(
-                    nextSection: false
-                )
-            }
+            self.panelView.mainContentView.selectNext(
+                nextSection: false
+            )
         case .preveousItem:
-            return { [weak self] in
-                self?.panelView.mainContentView.selectPreveous(
-                    nextSection: false
-                )
-            }
+            self.panelView.mainContentView.selectPreveous(
+                nextSection: false
+            )
         case .nextSection:
-            return { [weak self] in
-                self?.panelView.mainContentView.selectNext(
-                    nextSection: true
-                )
-            }
+            self.panelView.mainContentView.selectNext(
+                nextSection: true
+            )
         case .preveousSection:
-            return { [weak self] in
-                self?.panelView.mainContentView.selectPreveous(
-                    nextSection: true
-                )
-            }
+            self.panelView.mainContentView.selectPreveous(
+                nextSection: true
+            )
         case .deleteItem:
-            return { [weak self] in
-                self?.panelView.mainContentView.deleteActiveItemAction()
-            }
+            self.panelView.mainContentView.deleteActiveItemAction()
         case .previewItem:
-            return { [weak self] in
-                self?.panelView.spaceClicked()
-            }
+            self.panelView.spaceClicked()
         case .complete:
-            return { [weak self] in
-                self?.panelView.mainContentView.completeActiveItemAction()
-            }
+            self.panelView.mainContentView.completeActiveItemAction()
         case .editTime:
-            return { [weak self] in
-                self?.panelView.mainContentView.editReminder()
-            }
+            self.panelView.mainContentView.editReminder()
+        case .close:
+            ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
         }
     }
 
@@ -124,7 +111,11 @@ class MainScreenViewController: NSViewController {
     // MARK: - Shorcuts
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        return self.shortcutsController?.performKeyEquivalent(with: event) ?? true
+        if self.shortcutsController?.performKeyEquivalent(with: event) == true {
+            return true
+        } else {
+            return super.performKeyEquivalent(with: event)
+        }
     }
 
     override func insertText(_ insertString: Any) {

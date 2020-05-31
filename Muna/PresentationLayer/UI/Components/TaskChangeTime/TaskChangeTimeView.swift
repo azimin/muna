@@ -116,6 +116,15 @@ class TaskChangeTimeView: PopupView {
         })
     }
 
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        if event.keyCode == Key.escape.carbonKeyCode {
+            self.closeAlert()
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
+    }
+
     override func viewDidUnhide() {
         super.viewDidUnhide()
         self.addMonitor()

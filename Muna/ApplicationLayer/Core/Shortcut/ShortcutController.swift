@@ -25,6 +25,11 @@ class ShortcutsController: ShortcutsControllerProtocol {
         self.shortcutActions = shortcutActions
     }
 
+    init(shortcutActions: [ShortcutAction], anotherController: ShortcutsController) {
+        anotherController.stop()
+        self.shortcutActions = shortcutActions + anotherController.shortcutActions
+    }
+
     private var monitor: Any?
 
     func start() {
@@ -62,16 +67,18 @@ class ShortcutsController: ShortcutsControllerProtocol {
 
     func performKeyEquivalent(with event: NSEvent) -> Bool {
         guard self.shouldPerformKeys else {
-            return true
+            return false
         }
 
+        var handled: Bool = false
         for shortcutAction in self.shortcutActions {
             if shortcutAction.item.validateWith(event: event) {
                 shortcutAction.action?()
+                handled = true
             }
         }
 
-        return true
+        return handled
     }
 
     func insertText(_ insertString: Any) -> Bool {

@@ -177,16 +177,6 @@ class MainPanelView: NSView {
         CATransaction.commit()
     }
 
-    override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        // esc
-        if event.keyCode == 53 {
-            (NSApplication.shared.delegate as? AppDelegate)?.hidePanelIfNeeded()
-            return true
-        }
-
-        return super.performKeyEquivalent(with: event)
-    }
-
     func spaceClicked() {
         if self.mainContentView.popUpController.isHidden {
             self.mainContentView.scrollView.stopScroll()
