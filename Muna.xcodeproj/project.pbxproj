@@ -10,6 +10,7 @@
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */; };
+		231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C912484406D0018EB8F /* ENNumberDate.swift */; };
 		232B2FAB2477CC550061801E /* ENDatesPostfixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */; };
 		233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E747C246B4AB60070EABA /* SavingProcessingService.swift */; };
 		233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */; };
@@ -138,6 +139,7 @@
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPrefixParser.swift; sourceTree = "<group>"; };
+		231E0C912484406D0018EB8F /* ENNumberDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENNumberDate.swift; sourceTree = "<group>"; };
 		232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPostfixParser.swift; sourceTree = "<group>"; };
 		233E747C246B4AB60070EABA /* SavingProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingProcessingService.swift; sourceTree = "<group>"; };
 		233EFA9F2471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenshotStateViewController+Shortcuts.swift"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */,
 				23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */,
 				231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */,
+				231E0C912484406D0018EB8F /* ENNumberDate.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -1245,6 +1248,7 @@
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
+				231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */,
 				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,

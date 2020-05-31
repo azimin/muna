@@ -40,7 +40,7 @@ class ENDatesPostfixParser: Parser {
     override var pattern: String {
         return "\\b(?:(next|this))?"
             + "(\\s*(\(self.months)))"
-            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z])(?!\\:\\d))?\\b"
+            + "(\\s*(0[0-9]|1[0-9]|2[0-9]|3[0-1])([a-z][a-z])(?!(\\:\\d|\\.\\d)))?"
     }
 
     private let prefixGroup = 1
