@@ -12,12 +12,21 @@ class RemindLaterViewController: NSViewController {
     let taskChangeView: TaskChangeTimeGlobalView
 
     init(itemModel: ItemModel) {
+        let closeHandler = CloseHandler(close: nil)
+
         self.taskChangeView = TaskChangeTimeGlobalView(
             itemModel: itemModel,
-            style: .withImage
+            style: .withImage,
+            closeHandler: closeHandler
         )
 
         super.init(nibName: nil, bundle: nil)
+
+        closeHandler.close = {
+            ServiceLocator.shared.windowManager.hideWindowIfNeeded(
+                .remindLater(item: itemModel)
+            )
+        }
     }
 
     required init?(coder: NSCoder) {

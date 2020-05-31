@@ -25,7 +25,10 @@ class TaskChangeTimeView: PopupView {
     private let dateParser = MunaChrono()
     private let itemModel: ItemModel
 
-    init(itemModel: ItemModel) {
+    private var closeHandler: CloseHandler?
+
+    init(itemModel: ItemModel, closeHandler: CloseHandler?) {
+        self.closeHandler = closeHandler
         self.datePrarserView = DateParserView(controller: self.controller)
         self.itemModel = itemModel
         self.presentationDateItemTransformer = DateItemsTransformer(dateItems: [], configurator: BasicDateItemPresentationConfigurator())
@@ -117,6 +120,14 @@ class TaskChangeTimeView: PopupView {
         self.removeMonitor()
     }
 
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        if newWindow != nil {
+            self.addMonitor()
+        } else {
+            self.removeMonitor()
+        }
+    }
+
     func clear() {
         self.reminderTextField.clear()
     }
@@ -129,9 +140,12 @@ class TaskChangeTimeView: PopupView {
     }
 
     func closeAlert() {
-        ServiceLocator.shared.windowManager.hideWindowIfNeeded(
-            .remindLater(item: self.itemModel)
-        )
+        guard let closeAction = self.closeHandler?.close else {
+            assertionFailure("No close handler")
+            return
+        }
+
+        closeAction()
     }
 
     @objc

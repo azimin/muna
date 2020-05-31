@@ -9,6 +9,10 @@
 import Cocoa
 import SnapKit
 
+protocol MainPanelContentViewDelegate: AnyObject {
+    func mainPanelContentViewShouldShowTimeChange(itemModel: ItemModel)
+}
+
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
     private let headerHight: CGFloat = 28
     private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
@@ -24,6 +28,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     let popUpController = PopUpController()
     let emptyStateView = EmptyStateView()
+
+    weak var delegate: MainPanelContentViewDelegate?
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -242,8 +248,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             return
         }
 
+        guard let delegate = self.delegate else {
+            assertionFailure("No delegate")
+            return
+        }
+
         let item = self.groupedData.item(at: indexPath)
-        print("Show edit item", item) // TODO: Implement show
+        delegate.mainPanelContentViewShouldShowTimeChange(itemModel: item)
     }
 
     @objc

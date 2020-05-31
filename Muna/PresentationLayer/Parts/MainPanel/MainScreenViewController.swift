@@ -11,8 +11,12 @@ import Cocoa
 class MainScreenViewController: NSViewController {
     var shortcutsController: ShortcutsController?
 
-    var rootView: MainPanelView {
+    var panelView: MainPanelView {
         return (self.view as! MainScreenView).mainPanelView
+    }
+
+    var rootView: MainScreenView {
+        return (self.view as! MainScreenView)
     }
 
     override func loadView() {
@@ -35,11 +39,13 @@ class MainScreenViewController: NSViewController {
             shortcutActions: shortcutActions
         )
 
-        self.rootView.bottomBar.settingsButton.target = self
-        self.rootView.bottomBar.settingsButton.action = #selector(self.settingAction)
+        self.panelView.bottomBar.settingsButton.target = self
+        self.panelView.bottomBar.settingsButton.action = #selector(self.settingAction)
 
-        self.rootView.bottomBar.shortcutsButton.target = self
-        self.rootView.bottomBar.shortcutsButton.action = #selector(self.shortcutAction)
+        self.panelView.bottomBar.shortcutsButton.target = self
+        self.panelView.bottomBar.shortcutsButton.action = #selector(self.shortcutAction)
+
+        self.panelView.mainContentView.delegate = self
     }
 
     @objc func settingAction() {
@@ -54,39 +60,39 @@ class MainScreenViewController: NSViewController {
         switch shortcut {
         case .nextItem:
             return { [weak self] in
-                self?.rootView.mainContentView.selectNext(
+                self?.panelView.mainContentView.selectNext(
                     nextSection: false
                 )
             }
         case .preveousItem:
             return { [weak self] in
-                self?.rootView.mainContentView.selectPreveous(
+                self?.panelView.mainContentView.selectPreveous(
                     nextSection: false
                 )
             }
         case .nextSection:
             return { [weak self] in
-                self?.rootView.mainContentView.selectNext(
+                self?.panelView.mainContentView.selectNext(
                     nextSection: true
                 )
             }
         case .preveousSection:
             return { [weak self] in
-                self?.rootView.mainContentView.selectPreveous(
+                self?.panelView.mainContentView.selectPreveous(
                     nextSection: true
                 )
             }
         case .deleteItem:
             return { [weak self] in
-                self?.rootView.mainContentView.deleteActiveItemAction()
+                self?.panelView.mainContentView.deleteActiveItemAction()
             }
         case .previewItem:
             return { [weak self] in
-                self?.rootView.spaceClicked()
+                self?.panelView.spaceClicked()
             }
         case .complete:
             return { [weak self] in
-                self?.rootView.mainContentView.completeActiveItemAction()
+                self?.panelView.mainContentView.completeActiveItemAction()
             }
         }
     }
@@ -94,16 +100,18 @@ class MainScreenViewController: NSViewController {
     // MARK: - Show/Hide
 
     func show(selectedItem: ItemModel? = nil) {
-        self.rootView.show(selectedItem: selectedItem)
+        self.panelView.show(selectedItem: selectedItem)
         self.shortcutsController?.start()
     }
 
     func toggle(selectedItem: ItemModel? = nil) {
-        self.rootView.toggle(selectedItem: selectedItem)
+        self.panelView.toggle(selectedItem: selectedItem)
     }
 
     func hide(completion: VoidBlock?) {
-        self.rootView.hide(completion: completion)
+        self.panelView.hide(completion: completion)
+        self.rootView.hideChangeTimeView()
+
         self.shortcutsController?.stop()
     }
 
@@ -117,5 +125,11 @@ class MainScreenViewController: NSViewController {
         if self.shortcutsController?.insertText(insertString) == false {
             super.insertText(insertString)
         }
+    }
+}
+
+extension MainScreenViewController: MainPanelContentViewDelegate {
+    func mainPanelContentViewShouldShowTimeChange(itemModel: ItemModel) {
+        self.rootView.showChangeTimeView(itemModel: itemModel)
     }
 }

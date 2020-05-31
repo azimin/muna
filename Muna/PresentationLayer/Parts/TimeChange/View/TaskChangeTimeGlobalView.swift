@@ -21,11 +21,14 @@ class TaskChangeTimeGlobalView: View {
     let itemModel: ItemModel
     let style: Style
 
-    init(itemModel: ItemModel, style: Style) {
+    init(itemModel: ItemModel, style: Style, closeHandler: CloseHandler?) {
         self.itemModel = itemModel
         self.style = style
 
-        self.taskView = TaskChangeTimeView(itemModel: itemModel)
+        self.taskView = TaskChangeTimeView(
+            itemModel: itemModel,
+            closeHandler: closeHandler
+        )
 
         super.init(frame: .zero)
 

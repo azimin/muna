@@ -126,14 +126,26 @@ class TaskCreateView: PopupView {
 
     override func viewDidHide() {
         super.viewDidHide()
-        if let monitor = self.downMonitor {
-            NSEvent.removeMonitor(monitor)
-        }
-        self.downMonitor = nil
+        self.removeMonitor()
 
         self.window?.initialFirstResponder = nil
         self.reminderTextField.textField.nextKeyView = nil
         self.commentTextField.textField.nextKeyView = nil
+    }
+
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        if newWindow != nil {
+            self.addMonitor()
+        } else {
+            self.removeMonitor()
+        }
+    }
+
+    func removeMonitor() {
+        if let monitor = self.downMonitor {
+            NSEvent.removeMonitor(monitor)
+        }
+        self.downMonitor = nil
     }
 
     func clear() {
