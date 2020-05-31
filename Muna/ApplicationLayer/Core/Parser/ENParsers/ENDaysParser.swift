@@ -16,12 +16,12 @@ class ENDaysParser: Parser {
     let dayOffsetGroup = 1
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 2).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 2).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
 
         guard !parsedItem.match.isEmpty(atRangeIndex: self.dayOffsetGroup),
             let daysOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayOffsetGroup)) else {
