@@ -11,7 +11,7 @@ import Foundation
 protocol ParserProtocol {
     var pattern: String { get }
 
-    func parse(fromText text: String, refDate: Date, into items: [DateItem]) -> [DateItem]
+    func parse(fromText text: String, refDate: Date) -> [ParsedResult]
 
-    func extract(fromParsedItem parsedItem: ParsedItem, toParsedResult results: [DateItem]) -> [DateItem]
+    func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult?
 }
