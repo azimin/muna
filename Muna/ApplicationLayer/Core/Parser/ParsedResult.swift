@@ -41,6 +41,16 @@ enum CustomUnits: String, CaseIterable {
     case tomorrow
     case yesterday
     case tom
+
+    static var partOfTheDay: Set<String> {
+        return [
+            CustomUnits.noon.rawValue,
+            CustomUnits.afertnoon.rawValue,
+            CustomUnits.evening.rawValue,
+            CustomUnits.mindnight.rawValue,
+            CustomUnits.morning.rawValue,
+        ]
+    }
 }
 
 enum TagUnit: String {
