@@ -15,6 +15,11 @@ class Preferences {
     static var defaultShortcutDebugKey = "ud_activation_debug_shortcut"
     static var defaultShortcutFullscreenScreenshotKey = "screenshot_full_short"
 
+    static var defaultScreenshotShortcutItem = ShortcutItem(
+        key: .two,
+        modifiers: [.command, .shift]
+    )
+
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + w
         let defaultActivationShortcut = ShortcutItem(
@@ -22,13 +27,10 @@ class Preferences {
             modifiers: [.command, .shift]
         ).masShortcut
 
-        // cmd + shift + 1
-        let defaultScreenshotShortcut = ShortcutItem(
-            key: .two,
-            modifiers: [.command, .shift]
-        ).masShortcut
-
         // cmd + shift + 2
+        let defaultScreenshotShortcut = defaultScreenshotShortcutItem.masShortcut
+
+        // cmd + shift + 1
         let defaultShortcutFullscreenScreenshotShortcut = ShortcutItem(
             key: .one,
             modifiers: [.command, .shift]
