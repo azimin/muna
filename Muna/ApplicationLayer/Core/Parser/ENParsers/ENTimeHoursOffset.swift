@@ -36,6 +36,8 @@ class ENTimeHoursOffset: Parser {
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
+        hourOffset += parsedItem.refDate.hour
+
         var minutesOffset = parsedItem.refDate.minute
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
@@ -44,6 +46,11 @@ class ENTimeHoursOffset: Parser {
             } else {
                 minutesOffset += minutes
             }
+        }
+
+        if minutesOffset > 60 {
+            hourOffset += 1
+            minutesOffset -= 60
         }
 
         if hourOffset >= 24 {
