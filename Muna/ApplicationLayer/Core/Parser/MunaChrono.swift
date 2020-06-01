@@ -32,7 +32,8 @@ class MunaChrono {
 //        allParsedResults.forEach {
 //            print($0)
 //        }
-        _ = self.merge(allParsedResults)
+        let timeOffset = self.merge(allParsedResults)
+
         return []
     }
 
@@ -53,6 +54,51 @@ class MunaChrono {
                 newResults = [$0]
                 theBiggestRange = $0.matchRange
             }
+        }
+
+        let times = parsedResult.filter {
+            $0.tagUnit.keys.contains(.ENTimeParser)
+        }
+
+        theBiggestRange = NSRange()
+        var timesResult = [ParsedResult]()
+        times.forEach {
+            print($0.matchRange.length)
+            if $0.matchRange.length == theBiggestRange.length {
+                timesResult.append($0)
+            }
+
+            if $0.matchRange.length > theBiggestRange.length {
+                timesResult = [$0]
+                theBiggestRange = $0.matchRange
+            }
+        }
+
+        newResults = newResults.map {
+            var newResult = $0
+            timesResult.forEach { time in
+                if newResult.reservedComponents.keys.contains(.hour) {
+                    return
+                }
+
+                if newResult.matchRange.intersection(time.matchRange) != nil {
+                    return
+                }
+
+                guard let hour = time.reservedComponents[.hour] else {
+                    return
+                }
+
+                newResult.reservedComponents[.hour] = hour
+                newResult.reservedComponents[.minute] = 0
+
+                guard let minutes = time.reservedComponents[.minute] else {
+                    return
+                }
+
+                newResult.reservedComponents[.minute] = minutes
+            }
+            return newResult
         }
 
         print(newResults)

@@ -133,6 +133,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         print("20.06")
         print("\(MunaChrono().parseFromString("20.06", date: date)))\n")
 
+        print("In 2 days 13:00")
+        print("\(MunaChrono().parseFromString("In 2 days 13:00", date: date)))\n")
+
 //        Tomorrow evening
 //        At evening 7.30 pm
 //        In 3 days in the morning
