@@ -33,20 +33,17 @@ class ENTimeParser: Parser {
 //                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
 //            }
 //        }
-        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup) || !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup)
+        guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
+            var hoursOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)),
+            hoursOffset < 24
         else {
             return nil
         }
 
-        var hoursOffset = 0
-        if !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
-            let hours = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)) {
-            hoursOffset = hours
-        }
-
         var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
-            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
+            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)),
+            minutes < 60 {
             minutesOffset = minutes
         }
 
