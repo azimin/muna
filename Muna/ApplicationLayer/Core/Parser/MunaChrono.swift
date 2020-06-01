@@ -29,9 +29,34 @@ class MunaChrono {
             allParsedResults += $0.parse(fromText: string, refDate: date)
         }
 
-        allParsedResults.forEach {
-            print($0)
+//        allParsedResults.forEach {
+//            print($0)
+//        }
+        _ = self.merge(allParsedResults)
+        return []
+    }
+
+    func merge(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
+        let timeOffset = parsedResult.filter {
+            $0.tagUnit.keys.contains(.ENTimeHoursOffset) || $0.tagUnit.keys.contains(.ENTimeMintuesOffsetParser) || $0.tagUnit.keys.contains(.ENDaysParser)
         }
+
+        var theBiggestRange = NSRange()
+        var newResults = [ParsedResult]()
+
+        timeOffset.forEach {
+            if $0.matchRange.length == theBiggestRange.length {
+                newResults.append($0)
+            }
+
+            if $0.matchRange.length > theBiggestRange.length {
+                newResults = [$0]
+                theBiggestRange = $0.matchRange
+            }
+        }
+
+        print(newResults)
+
         return []
     }
 }
