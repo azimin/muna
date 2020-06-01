@@ -43,11 +43,26 @@ enum CustomUnits: String, CaseIterable {
     case tom
 }
 
+enum TagUnit: String {
+    case ENTimeParser
+    case ENWeekdaysParser
+    case ENDatesPrefixParser
+    case ENDatesPostfixParser
+    case ENDaysParser
+    case ENNumberDate
+    case ENTimeHoursOffset
+    case ENCustomWordsParser
+    case ENTimeMintuesOffsetParser
+    case ENMonthOffsetParser
+}
+
 struct ParsedResult {
     let refDate: Date
 
+    var matchRange: NSRange
     var reservedComponents: [ReserverdUnit: Int]
     var customComponents: [String]
+    var tagUnit: [TagUnit: Bool]
 }
 
 struct ParsedItem {

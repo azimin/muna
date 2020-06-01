@@ -28,8 +28,10 @@ class ENCustomWordsParser: Parser {
 
         return ParsedResult(
             refDate: parsedItem.refDate,
+            matchRange: parsedItem.match.range,
             reservedComponents: [:],
-            customComponents: [word]
+            customComponents: [word],
+            tagUnit: [.ENCustomWordsParser: true]
         )
     }
 }

@@ -70,6 +70,7 @@ class ENTimeHoursOffset: Parser {
 
         return ParsedResult(
             refDate: parsedItem.refDate,
+            matchRange: parsedItem.match.range,
             reservedComponents: [
                 .year: year,
                 .month: month,
@@ -77,7 +78,8 @@ class ENTimeHoursOffset: Parser {
                 .hour: hourOffset,
                 .minute: minutesOffset,
             ],
-            customComponents: []
+            customComponents: [],
+            tagUnit: [.ENTimeHoursOffset: true]
         )
     }
 }

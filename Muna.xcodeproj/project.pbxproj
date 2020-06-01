@@ -477,8 +477,8 @@
 			isa = PBXGroup;
 			children = (
 				23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */,
-				23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */,
 				23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */,
+				23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */,
 			);
 			path = OffsetParsers;
 			sourceTree = "<group>";

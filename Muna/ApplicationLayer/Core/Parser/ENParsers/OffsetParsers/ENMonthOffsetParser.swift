@@ -41,8 +41,10 @@ class ENMonthOffsetParser: Parser {
 
         return ParsedResult(
             refDate: parsedItem.refDate,
+            matchRange: parsedItem.match.range,
             reservedComponents: [.year: year, .month: month],
-            customComponents: []
+            customComponents: [],
+            tagUnit: [.ENMonthOffsetParser: true]
         )
     }
 }
