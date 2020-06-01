@@ -63,10 +63,7 @@ class ENTimeParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             reservedComponents: [.hour: hoursOffset, .minute: minutesOffset],
-            customComponents: [
-                :
-
-            ]
+            customComponents: []
         )
     }
 }

@@ -43,7 +43,7 @@ class ENNumberDate: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             reservedComponents: [.year: year, .month: month, .day: day],
-            customComponents: [:]
+            customComponents: []
         )
     }
 }

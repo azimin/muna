@@ -91,7 +91,7 @@ class ENDatesPrefixParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             reservedComponents: [.year: year, .month: monthInt, .day: day],
-            customComponents: [:]
+            customComponents: []
         )
     }
 }

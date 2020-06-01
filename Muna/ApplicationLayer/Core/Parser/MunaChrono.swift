@@ -17,6 +17,7 @@ class MunaChrono {
         ENDaysParser(),
         ENNumberDate(),
         ENTimeHoursOffset(),
+        ENCustomWordsParser(),
     ]
 
     func parseFromString(_ string: String, date: Date) -> [DateItem] {

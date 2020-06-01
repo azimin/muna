@@ -39,7 +39,7 @@ class ENWeekdaysParser: Parser {
             weekday += 7
         }
 
-        return ParsedResult(refDate: parsedItem.refDate, reservedComponents: [.weekday: weekday], customComponents: [:])
+        return ParsedResult(refDate: parsedItem.refDate, reservedComponents: [.weekday: weekday], customComponents: [])
     }
 }
 

@@ -39,14 +39,15 @@ enum CustomUnits: String, CaseIterable {
     case morning
     case weekends
     case tomorrow
-    case allDay
+    case yesterday
+    case tom
 }
 
 struct ParsedResult {
     let refDate: Date
 
     var reservedComponents: [ReserverdUnit: Int]
-    var customComponents: [CustomUnits: String]
+    var customComponents: [String]
 }
 
 struct ParsedItem {
