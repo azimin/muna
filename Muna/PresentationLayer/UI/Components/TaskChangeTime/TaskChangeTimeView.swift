@@ -22,7 +22,7 @@ class TaskChangeTimeView: PopupView {
         behaviour: .remindSuggestionsState
     )
 
-    private let dateParser = MunaChrono()
+    private let dateProcessingService = DateProcesingService()
     private let itemModel: ItemModel
 
     private var closeHandler: CloseHandler?
@@ -198,7 +198,7 @@ extension TaskChangeTimeView: TextFieldDelegate {
     func textFieldTextDidChange(textField: TextField, text: String) {
         let offset = TimeZone.current.secondsFromGMT()
 
-        self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
+        self.parsedDates = self.dateProcessingService.getDate(from: text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> ReminderItem? in

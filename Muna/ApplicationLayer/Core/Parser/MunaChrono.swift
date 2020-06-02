@@ -23,7 +23,7 @@ class MunaChrono {
         ENMonthOffsetParser(),
     ]
 
-    func parseFromString(_ string: String, date: Date) -> [DateItem] {
+    func parseFromString(_ string: String, date: Date) -> [ParsedResult] {
         var allParsedResults = [ParsedResult]()
 
         self.parsers.forEach {
@@ -46,7 +46,7 @@ class MunaChrono {
         print(dates)
 
         guard dates.isEmpty else {
-            return []
+            return dates
         }
 
         let weekdays = self.mergeWeekdays(allParsedResults)
@@ -54,7 +54,7 @@ class MunaChrono {
         print(weekdays)
 
         guard weekdays.isEmpty else {
-            return []
+            return dates
         }
 
         let customWeekdays = self.mergeCustomDays(allParsedResults)
@@ -62,14 +62,20 @@ class MunaChrono {
         print(customWeekdays)
 
         guard customWeekdays.isEmpty else {
-            return []
+            return dates
         }
 
         let numberedDates = self.mergeNumberDates(allParsedResults)
 
         print(numberedDates)
 
-        return []
+        guard numberedDates.isEmpty else {
+            return numberedDates
+        }
+
+        let time = self.mergeTime(allParsedResults)
+
+        return time
     }
 
     func mergeTimeOffsets(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
@@ -237,6 +243,32 @@ class MunaChrono {
         return newDates
     }
 
+    private func mergeTime(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
+        var theBiggestRange = NSRange()
+        let parsedTime = parsedResult.filter {
+            $0.tagUnit.keys.contains(.ENTimeParser)
+        }
+        var newTime = [ParsedResult]()
+        parsedTime.forEach {
+            if $0.matchRange.length == theBiggestRange.length {
+                newTime.append($0)
+            }
+
+            if $0.matchRange.length > theBiggestRange.length {
+                newTime = [$0]
+                theBiggestRange = $0.matchRange
+            }
+        }
+
+        let customTimeWords = parsedResult.filter {
+            $0.tagUnit.keys.contains(.ENCustomPartOfTheDayWordsParser)
+        }
+
+        newTime.append(contentsOf: customTimeWords)
+
+        return newTime
+    }
+
     private func appendTime(to parsedResult: [ParsedResult], fromAllResults allResults: [ParsedResult]) -> [ParsedResult] {
         var theBiggestRange = NSRange()
         let parsedTime = allResults.filter {
@@ -266,36 +298,11 @@ class MunaChrono {
                 if isIntersects {
                     return
                 }
+
                 isIntersects = result.matchRange.intersection(time.matchRange) != nil
             }
             return !isIntersects
         }
-
-//        return parsedResult.map {
-//            var newDate = $0
-//            newTime.forEach { time in
-//                if newDate.reservedComponents.keys.contains(.hour) {
-//                    return
-//                }
-//
-//                if newDate.matchRange.intersection(time.matchRange) != nil {
-//                    return
-//                }
-//
-//                guard let hour = time.reservedComponents[.hour] else {
-//                    return
-//                }
-//
-//                newDate.reservedComponents[.hour] = hour
-//                newDate.reservedComponents[.minute] = 0
-//
-//                guard let minutes = time.reservedComponents[.minute] else {
-//                    return
-//                }
-//
-//                newDate.reservedComponents[.minute] = minutes
-//            }
-//            return newDate
 
         if newTime.isEmpty {
             return parsedResult

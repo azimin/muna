@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */; };
+		23069402248645E200C41F4F /* DateProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23069401248645E200C41F4F /* DateProcessingService.swift */; };
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */; };
@@ -143,6 +144,7 @@
 
 /* Begin PBXFileReference section */
 		230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomPartOfTheDayWordsParser.swift; sourceTree = "<group>"; };
+		23069401248645E200C41F4F /* DateProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProcessingService.swift; sourceTree = "<group>"; };
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPrefixParser.swift; sourceTree = "<group>"; };
@@ -287,6 +289,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23069400248645D200C41F4F /* DateProcessingService */ = {
+			isa = PBXGroup;
+			children = (
+				23069401248645E200C41F4F /* DateProcessingService.swift */,
+			);
+			path = DateProcessingService;
+			sourceTree = "<group>";
+		};
 		2317E9E32464A69200E017A3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +328,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
 				9FE0F53C247075600046A5C4 /* SavingProcessing */,
 			);
@@ -1327,6 +1338,7 @@
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
+				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
