@@ -23,6 +23,7 @@ class ENMonthOffsetParser: Parser {
             return nil
         }
 
+        let day = parsedItem.refDate.day
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
@@ -42,7 +43,7 @@ class ENMonthOffsetParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
-            reservedComponents: [.year: year, .month: month],
+            reservedComponents: [.year: year, .month: month, .day: day],
             customComponents: [],
             tagUnit: [.ENMonthOffsetParser: true]
         )

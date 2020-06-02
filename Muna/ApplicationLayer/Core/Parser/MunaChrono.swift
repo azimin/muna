@@ -65,7 +65,10 @@ class MunaChrono {
 
     func mergeTimeOffsets(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
         let timeOffset = parsedResult.filter {
-            $0.tagUnit.keys.contains(.ENTimeHoursOffset) || $0.tagUnit.keys.contains(.ENTimeMintuesOffsetParser) || $0.tagUnit.keys.contains(.ENDaysParser)
+            $0.tagUnit.keys.contains(.ENTimeHoursOffset)
+                || $0.tagUnit.keys.contains(.ENTimeMintuesOffsetParser)
+                || $0.tagUnit.keys.contains(.ENDaysParser)
+                || $0.tagUnit.keys.contains(.ENMonthOffsetParser)
         }
 
         var theBiggestRange = NSRange()
