@@ -254,18 +254,72 @@ class MunaChrono {
             }
         }
 
-        return parsedResult.map {
-            var newDate = $0
-            newTime.forEach { time in
+        let customTimeWords = allResults.filter {
+            $0.tagUnit.keys.contains(.ENCustomPartOfTheDayWordsParser)
+        }
+
+        newTime.append(contentsOf: customTimeWords)
+
+        newTime = newTime.filter { time in
+            var isIntersects = false
+            parsedResult.forEach { result in
+                if isIntersects {
+                    return
+                }
+                isIntersects = result.matchRange.intersection(time.matchRange) != nil
+            }
+            return !isIntersects
+        }
+
+//        return parsedResult.map {
+//            var newDate = $0
+//            newTime.forEach { time in
+//                if newDate.reservedComponents.keys.contains(.hour) {
+//                    return
+//                }
+//
+//                if newDate.matchRange.intersection(time.matchRange) != nil {
+//                    return
+//                }
+//
+//                guard let hour = time.reservedComponents[.hour] else {
+//                    return
+//                }
+//
+//                newDate.reservedComponents[.hour] = hour
+//                newDate.reservedComponents[.minute] = 0
+//
+//                guard let minutes = time.reservedComponents[.minute] else {
+//                    return
+//                }
+//
+//                newDate.reservedComponents[.minute] = minutes
+//            }
+//            return newDate
+
+        if newTime.isEmpty {
+            return parsedResult
+        }
+
+        var finalResults = [ParsedResult]()
+        newTime.forEach { time in
+            parsedResult.forEach {
+                var newDate = $0
                 if newDate.reservedComponents.keys.contains(.hour) {
+                    finalResults.append(newDate)
                     return
                 }
 
                 if newDate.matchRange.intersection(time.matchRange) != nil {
+                    finalResults.append(newDate)
                     return
                 }
 
                 guard let hour = time.reservedComponents[.hour] else {
+                    if !time.customPartOfTheDayComponents.isEmpty {
+                        newDate.customPartOfTheDayComponents.append(contentsOf: time.customPartOfTheDayComponents)
+                    }
+                    finalResults.append(newDate)
                     return
                 }
 
@@ -273,12 +327,15 @@ class MunaChrono {
                 newDate.reservedComponents[.minute] = 0
 
                 guard let minutes = time.reservedComponents[.minute] else {
+                    finalResults.append(newDate)
                     return
                 }
 
                 newDate.reservedComponents[.minute] = minutes
+
+                finalResults.append(newDate)
             }
-            return newDate
         }
+        return finalResults
     }
 }
