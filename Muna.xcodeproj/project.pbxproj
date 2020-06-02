@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */; };
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */; };
@@ -141,6 +142,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomPartOfTheDayWordsParser.swift; sourceTree = "<group>"; };
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPrefixParser.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */,
 				231E0C912484406D0018EB8F /* ENNumberDate.swift */,
 				23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */,
+				230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -1339,6 +1342,7 @@
 				9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */,
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
+				230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,

@@ -1,16 +1,16 @@
 //
-//  ENCustomWordsParser.swift
+//  ENCustomPartOfTheDayWordsParser.swift
 //  Muna
 //
-//  Created by Egor Petrov on 01.06.2020.
+//  Created by Egor Petrov on 02.06.2020.
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
 import Foundation
 
-class ENCustomDayWordsParser: Parser {
+class ENCustomPartOfTheDayWordsParser: Parser {
     var customUnits: String {
-        return CustomDayWords.allCases.map { $0.rawValue }.joined(separator: "|")
+        return CustomDayPartWords.allCases.map { $0.rawValue }.joined(separator: "|")
     }
 
     override var pattern: String {
@@ -25,7 +25,8 @@ class ENCustomDayWordsParser: Parser {
         }
 
         let word = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.wordItem).lowercased()
-        guard let dayComponent = CustomDayWords(rawValue: word) else {
+
+        guard let partOfTheDayComponent = CustomDayPartWords(rawValue: word) else {
             return nil
         }
 
@@ -33,9 +34,9 @@ class ENCustomDayWordsParser: Parser {
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [:],
-            customDayComponents: [dayComponent],
-            customPartOfTheDayComponents: [],
-            tagUnit: [.ENCustomDayWordsParser: true]
+            customDayComponents: [],
+            customPartOfTheDayComponents: [partOfTheDayComponent],
+            tagUnit: [.ENCustomPartOfTheDayWordsParser: true]
         )
     }
 }

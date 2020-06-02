@@ -73,7 +73,8 @@ enum TagUnit: String {
     case ENDaysParser
     case ENNumberDate
     case ENTimeHoursOffset
-    case ENCustomWordsParser
+    case ENCustomDayWordsParser
+    case ENCustomPartOfTheDayWordsParser
     case ENTimeMintuesOffsetParser
     case ENMonthOffsetParser
 }

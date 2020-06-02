@@ -18,6 +18,7 @@ class MunaChrono {
         ENNumberDate(),
         ENTimeHoursOffset(),
         ENCustomDayWordsParser(),
+        ENCustomPartOfTheDayWordsParser(),
         ENTimeMintuesOffsetParser(),
         ENMonthOffsetParser(),
     ]
@@ -53,6 +54,14 @@ class MunaChrono {
         print(weekdays)
 
         guard weekdays.isEmpty else {
+            return []
+        }
+
+        let customWeekdays = self.mergeCustomDays(allParsedResults)
+
+        print(customWeekdays)
+
+        guard customWeekdays.isEmpty else {
             return []
         }
 
@@ -206,27 +215,27 @@ class MunaChrono {
         return newDates
     }
 
-//    func mergeCustomDays(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
-//        let parsedDates = parsedResult.filter {
-//            $0.tagUnit.keys.contains(.ENCustomWordsParser)
-//        }
-//
-//        var theBiggestRange = NSRange()
-//        var newDates = [ParsedResult]()
-//        parsedDates.forEach {
-//            if $0.matchRange.length == theBiggestRange.length {
-//                newDates.append($0)
-//            }
-//
-//            if $0.matchRange.length > theBiggestRange.length {
-//                newDates = [$0]
-//                theBiggestRange = $0.matchRange
-//            }
-//        }
-//
-//        newDates = self.appendTime(to: newDates, fromAllResults: parsedResult)
-//
-//    }
+    func mergeCustomDays(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
+        let parsedDates = parsedResult.filter {
+            $0.tagUnit.keys.contains(.ENCustomDayWordsParser)
+        }
+
+        var theBiggestRange = NSRange()
+        var newDates = [ParsedResult]()
+        parsedDates.forEach {
+            if $0.matchRange.length == theBiggestRange.length {
+                newDates.append($0)
+            }
+
+            if $0.matchRange.length > theBiggestRange.length {
+                newDates = [$0]
+                theBiggestRange = $0.matchRange
+            }
+        }
+
+        newDates = self.appendTime(to: newDates, fromAllResults: parsedResult)
+        return newDates
+    }
 
     private func appendTime(to parsedResult: [ParsedResult], fromAllResults allResults: [ParsedResult]) -> [ParsedResult] {
         var theBiggestRange = NSRange()
