@@ -35,15 +35,11 @@ class MunaChrono {
 //        }
         let timeOffset = self.mergeTimeOffsets(allParsedResults)
 
-        print(timeOffset)
-
         guard timeOffset.isEmpty else {
-            return []
+            return timeOffset
         }
 
         let dates = self.mergeDates(allParsedResults)
-
-        print(dates)
 
         guard dates.isEmpty else {
             return dates
@@ -51,23 +47,17 @@ class MunaChrono {
 
         let weekdays = self.mergeWeekdays(allParsedResults)
 
-        print(weekdays)
-
         guard weekdays.isEmpty else {
-            return dates
+            return weekdays
         }
 
         let customWeekdays = self.mergeCustomDays(allParsedResults)
 
-        print(customWeekdays)
-
         guard customWeekdays.isEmpty else {
-            return dates
+            return customWeekdays
         }
 
         let numberedDates = self.mergeNumberDates(allParsedResults)
-
-        print(numberedDates)
 
         guard numberedDates.isEmpty else {
             return numberedDates

@@ -20,7 +20,7 @@ class ENNumberDate: Parser {
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)
-//        (0 ... 3).forEach {
+//        (0 ... 6).forEach {
 //            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
 //                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
 //            }
