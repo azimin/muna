@@ -11,12 +11,12 @@ import SwiftDate
 
 class ENNumberDate: Parser {
     override var pattern: String {
-        return "\\b((?<!(\\:|\\.))0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+        return "\\b((?<!(\\:|\\.))(0[1-9]|1[0-9]|2[0-9]|3[0-1]))"
             + "(\\.((0[1-9]|1[0-2])(?!(\\:\\d|\\.\\d))))?\\b"
     }
 
     let dayGroup = 1
-    let monthGroup = 3
+    let monthGroup = 6
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)
