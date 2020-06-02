@@ -91,7 +91,8 @@ class ENDatesPostfixParser: Parser {
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [.year: year, .month: month, .day: day],
-            customComponents: [],
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENDatesPostfixParser: true]
         )
     }

@@ -17,7 +17,7 @@ class MunaChrono {
         ENDaysParser(),
         ENNumberDate(),
         ENTimeHoursOffset(),
-        ENCustomWordsParser(),
+        ENCustomDayWordsParser(),
         ENTimeMintuesOffsetParser(),
         ENMonthOffsetParser(),
     ]

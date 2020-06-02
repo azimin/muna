@@ -43,7 +43,8 @@ class ENWeekdaysParser: Parser {
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [.weekday: weekday],
-            customComponents: [],
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENWeekdaysParser: true]
         )
     }

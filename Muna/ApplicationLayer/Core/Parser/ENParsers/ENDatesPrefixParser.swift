@@ -92,7 +92,8 @@ class ENDatesPrefixParser: Parser {
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [.year: year, .month: monthInt, .day: day],
-            customComponents: [],
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENDatesPrefixParser: true]
         )
     }

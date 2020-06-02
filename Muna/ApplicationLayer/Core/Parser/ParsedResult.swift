@@ -83,7 +83,8 @@ struct ParsedResult {
 
     var matchRange: NSRange
     var reservedComponents: [ReserverdUnit: Int]
-    var customComponents: [String]
+    var customDayComponents: [CustomDayWords]
+    var customPartOfTheDayComponents: [CustomDayPartWords]
     var tagUnit: [TagUnit: Bool]
 }
 

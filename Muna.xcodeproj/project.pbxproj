@@ -34,7 +34,7 @@
 		23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */; };
 		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
-		23FA25272484CEFC00CD69C4 /* ENCustomWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomWordsParser.swift */; };
+		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
 		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
 		23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */; };
 		9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */; };
@@ -170,7 +170,7 @@
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
-		23FA25262484CEFC00CD69C4 /* ENCustomWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomWordsParser.swift; sourceTree = "<group>"; };
+		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
 		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
 		23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENMonthOffsetParser.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 				23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */,
 				231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */,
 				231E0C912484406D0018EB8F /* ENNumberDate.swift */,
-				23FA25262484CEFC00CD69C4 /* ENCustomWordsParser.swift */,
+				23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -1263,7 +1263,7 @@
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
-				23FA25272484CEFC00CD69C4 /* ENCustomWordsParser.swift in Sources */,
+				23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,

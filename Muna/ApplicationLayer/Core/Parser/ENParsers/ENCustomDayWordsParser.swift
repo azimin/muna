@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ENCustomWordsParser: Parser {
+class ENCustomDayWordsParser: Parser {
     var customUnits: String {
         return CustomDayWords.allCases.map { $0.rawValue }.joined(separator: "|")
     }
@@ -24,13 +24,16 @@ class ENCustomWordsParser: Parser {
             return nil
         }
 
-        let word = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.wordItem).lowercased()
+        guard let dayComponent = CustomDayWords(rawValue: parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.wordItem).lowercased()) else {
+            return nil
+        }
 
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [:],
-            customComponents: [word],
+            customDayComponents: [dayComponent],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENCustomWordsParser: true]
         )
     }

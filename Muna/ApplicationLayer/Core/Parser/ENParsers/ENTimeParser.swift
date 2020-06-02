@@ -61,7 +61,8 @@ class ENTimeParser: Parser {
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
             reservedComponents: [.hour: hoursOffset, .minute: minutesOffset],
-            customComponents: [],
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENTimeParser: true]
         )
     }

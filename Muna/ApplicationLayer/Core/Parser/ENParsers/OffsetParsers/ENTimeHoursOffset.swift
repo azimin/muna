@@ -78,7 +78,8 @@ class ENTimeHoursOffset: Parser {
                 .hour: hourOffset,
                 .minute: minutesOffset,
             ],
-            customComponents: [],
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
             tagUnit: [.ENTimeHoursOffset: true]
         )
     }
