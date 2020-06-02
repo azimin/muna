@@ -10,7 +10,7 @@ import Foundation
 
 class ENCustomWordsParser: Parser {
     var customUnits: String {
-        return CustomUnits.allCases.map { $0.rawValue }.joined(separator: "|")
+        return CustomDayWords.allCases.map { $0.rawValue }.joined(separator: "|")
     }
 
     override var pattern: String {

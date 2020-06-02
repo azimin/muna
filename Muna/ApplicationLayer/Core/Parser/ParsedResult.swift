@@ -31,24 +31,36 @@ let weekdays = [
     "sat": 7,
 ]
 
-enum CustomUnits: String, CaseIterable {
-    case noon
-    case afertnoon
-    case evening
-    case mindnight
-    case morning
+enum CustomDayWords: String, CaseIterable {
     case weekends
     case tomorrow
     case yesterday
     case tom
 
+    static var day: Set<String> {
+        return [
+            CustomDayWords.weekends.rawValue,
+            CustomDayWords.tom.rawValue,
+            CustomDayWords.tomorrow.rawValue,
+            CustomDayWords.yesterday.rawValue,
+        ]
+    }
+}
+
+enum CustomDayPartWords: String, CaseIterable {
+    case noon
+    case afertnoon
+    case evening
+    case mindnight
+    case morning
+
     static var partOfTheDay: Set<String> {
         return [
-            CustomUnits.noon.rawValue,
-            CustomUnits.afertnoon.rawValue,
-            CustomUnits.evening.rawValue,
-            CustomUnits.mindnight.rawValue,
-            CustomUnits.morning.rawValue,
+            CustomDayPartWords.noon.rawValue,
+            CustomDayPartWords.afertnoon.rawValue,
+            CustomDayPartWords.evening.rawValue,
+            CustomDayPartWords.mindnight.rawValue,
+            CustomDayPartWords.morning.rawValue,
         ]
     }
 }
