@@ -31,22 +31,62 @@ let weekdays = [
     "sat": 7,
 ]
 
-enum CustomUnits: String, CaseIterable {
+enum CustomDayWords: String, CaseIterable {
+    case weekends
+    case tomorrow
+    case yesterday
+    case tom
+
+    static var day: Set<String> {
+        return [
+            CustomDayWords.weekends.rawValue,
+            CustomDayWords.tom.rawValue,
+            CustomDayWords.tomorrow.rawValue,
+            CustomDayWords.yesterday.rawValue,
+        ]
+    }
+}
+
+enum CustomDayPartWords: String, CaseIterable {
     case noon
     case afertnoon
     case evening
     case mindnight
     case morning
-    case weekends
-    case tomorrow
-    case allDay
+
+    static var partOfTheDay: Set<String> {
+        return [
+            CustomDayPartWords.noon.rawValue,
+            CustomDayPartWords.afertnoon.rawValue,
+            CustomDayPartWords.evening.rawValue,
+            CustomDayPartWords.mindnight.rawValue,
+            CustomDayPartWords.morning.rawValue,
+        ]
+    }
+}
+
+enum TagUnit: String {
+    case ENTimeParser
+    case ENWeekdaysParser
+    case ENDatesPrefixParser
+    case ENDatesPostfixParser
+    case ENDaysParser
+    case ENNumberDate
+    case ENTimeHoursOffset
+    case ENCustomDayWordsParser
+    case ENCustomPartOfTheDayWordsParser
+    case ENTimeMintuesOffsetParser
+    case ENMonthOffsetParser
 }
 
 struct ParsedResult {
     let refDate: Date
 
+    var matchRange: NSRange
     var reservedComponents: [ReserverdUnit: Int]
-    var customComponents: [CustomUnits: String]
+    var customDayComponents: [CustomDayWords]
+    var customPartOfTheDayComponents: [CustomDayPartWords]
+    var tagUnit: [TagUnit: Bool]
 }
 
 struct ParsedItem {

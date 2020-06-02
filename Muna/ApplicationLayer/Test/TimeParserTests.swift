@@ -15,7 +15,7 @@ class TimeParserTests {
         print(date)
 
         // in 4h
-        var value = MunaChrono().parseFromString("In 4h", date: date)
+        var value = DateProcesingService().getDate(from: "In 4h", date: date)
         assert(value.count == 1, "Should be one")
         self.validate(
             item: value.first!,
@@ -26,7 +26,7 @@ class TimeParserTests {
         )
 
         // in 1h
-        value = MunaChrono().parseFromString("In 1h", date: date)
+        value = DateProcesingService().getDate(from: "In 1h", date: date)
         assert(value.count == 1, "Should be one")
         self.validate(
             item: value.first!,
@@ -37,7 +37,7 @@ class TimeParserTests {
         )
 
         // Tomorrow
-        value = MunaChrono().parseFromString("Tomorrow", date: date)
+        value = DateProcesingService().getDate(from: "Tomorrow", date: date)
         assert(value.count == 1, "Should be one")
         self.validate(
             item: value.first!,
@@ -46,7 +46,7 @@ class TimeParserTests {
         )
 
         // tomorrow
-        value = MunaChrono().parseFromString("tomorrow", date: date)
+        value = DateProcesingService().getDate(from: "tomorrow", date: date)
         assert(value.count == 1, "Should be one")
         self.validate(
             item: value.first!,
@@ -55,7 +55,7 @@ class TimeParserTests {
         )
 
         // weekends
-        value = MunaChrono().parseFromString("weekends", date: date)
+        value = DateProcesingService().getDate(from: "weekends", date: date)
         assert(value.count >= 2, "Should be at least two")
         self.validate(
             item: value[0],
@@ -70,7 +70,7 @@ class TimeParserTests {
         )
 
         // weekends 5 pm
-        value = MunaChrono().parseFromString("weekends 5 pm", date: date)
+        value = DateProcesingService().getDate(from: "weekends 5 pm", date: date)
         assert(value.count >= 2, "Should be at least two")
         self.validate(
             item: value[0],
@@ -89,7 +89,7 @@ class TimeParserTests {
         )
 
         // on sun
-        value = MunaChrono().parseFromString("on sun", date: date)
+        value = DateProcesingService().getDate(from: "on sun", date: date)
         assert(value.count > 2, "Should be at least 2")
         self.validate(
             item: value[0],
@@ -104,7 +104,7 @@ class TimeParserTests {
         )
 
         // Fri 20
-        value = MunaChrono().parseFromString("Fri 20", date: date)
+        value = DateProcesingService().getDate(from: "Fri 20", date: date)
         assert(value.count >= 2, "Should be at least 2")
         self.validate(
             item: value[0],
@@ -123,7 +123,7 @@ class TimeParserTests {
         )
 
         // Next Friday 8 30 pm
-        value = MunaChrono().parseFromString("Next Friday 8 30 pm", date: date)
+        value = DateProcesingService().getDate(from: "Next Friday 8 30 pm", date: date)
         assert(value.count == 1, "Should be 1")
         self.validate(
             item: value[0],
@@ -134,7 +134,7 @@ class TimeParserTests {
         )
 
         // in 5 mins
-        value = MunaChrono().parseFromString("in 5 mins", date: date)
+        value = DateProcesingService().getDate(from: "in 5 mins", date: date)
         assert(value.count == 1, "Should be 1")
         self.validate(
             item: value[0],
@@ -145,8 +145,8 @@ class TimeParserTests {
         )
 
         // 20.06
-        value = MunaChrono().parseFromString("20.06", date: date)
-        assert(value.count == 1, "Should be 1")
+        value = DateProcesingService().getDate(from: "20.06", date: date)
+        assert(value.count > 1, "Should be at least 2")
         self.validate(
             item: value[0],
             day: .init(day: 20, month: 6, year: 2020),
@@ -154,7 +154,7 @@ class TimeParserTests {
         )
 
         // next month
-        value = MunaChrono().parseFromString("next month", date: date)
+        value = DateProcesingService().getDate(from: "next month", date: date)
         assert(value.count > 1, "Should be at least 1")
         self.validate(
             item: value[0],
@@ -163,7 +163,7 @@ class TimeParserTests {
         )
 
         // mon morning
-        value = MunaChrono().parseFromString("mon morning", date: date)
+        value = DateProcesingService().getDate(from: "mon morning", date: date)
         assert(value.count > 1, "Should be at least 1")
         self.validate(
             item: value[0],
@@ -172,7 +172,7 @@ class TimeParserTests {
         )
 
         // 20 june
-        value = MunaChrono().parseFromString("20 june", date: date)
+        value = DateProcesingService().getDate(from: "20 june", date: date)
         assert(value.count == 1, "Should be 1")
         self.validate(
             item: value[0],
@@ -181,7 +181,7 @@ class TimeParserTests {
         )
 
         // tomorrow evening
-        value = MunaChrono().parseFromString("tomorrow evening", date: date)
+        value = DateProcesingService().getDate(from: "tomorrow evening", date: date)
         assert(value.count == 1, "Should be 1")
         self.validate(
             item: value[0],

@@ -11,16 +11,16 @@ import SwiftDate
 
 class ENNumberDate: Parser {
     override var pattern: String {
-        return "\\b(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
-            + "\\.((0[1-9]|1[0-2])(?!(\\:\\d|\\.\\d)))?\\b"
+        return "\\b((?<!(\\:|\\.))(0[1-9]|1[0-9]|2[0-9]|3[0-1]))"
+            + "(\\.((0[1-9]|1[0-2])(?!(\\:\\d|\\.\\d))))?\\b"
     }
 
-    let dayGroup = 2
-    let monthGroup = 3
+    let dayGroup = 1
+    let monthGroup = 6
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
 //        print(parsedItem.match.numberOfRanges)
-//        (0 ... 3).forEach {
+//        (0 ... 6).forEach {
 //            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
 //                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
 //            }
@@ -42,8 +42,11 @@ class ENNumberDate: Parser {
 
         return ParsedResult(
             refDate: parsedItem.refDate,
+            matchRange: parsedItem.match.range,
             reservedComponents: [.year: year, .month: month, .day: day],
-            customComponents: [:]
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
+            tagUnit: [.ENNumberDate: true]
         )
     }
 }

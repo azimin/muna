@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */; };
+		23069402248645E200C41F4F /* DateProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23069401248645E200C41F4F /* DateProcessingService.swift */; };
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */; };
@@ -34,6 +36,9 @@
 		23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */; };
 		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
+		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
+		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
+		23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */; };
 		9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */; };
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
@@ -138,6 +143,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomPartOfTheDayWordsParser.swift; sourceTree = "<group>"; };
+		23069401248645E200C41F4F /* DateProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProcessingService.swift; sourceTree = "<group>"; };
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPrefixParser.swift; sourceTree = "<group>"; };
@@ -167,6 +174,9 @@
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
+		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
+		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
+		23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENMonthOffsetParser.swift; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
 		539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (real app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (real app).xcconfig"; sourceTree = "<group>"; };
 		9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (test app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (test app).xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +289,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23069400248645D200C41F4F /* DateProcessingService */ = {
+			isa = PBXGroup;
+			children = (
+				23069401248645E200C41F4F /* DateProcessingService.swift */,
+			);
+			path = DateProcessingService;
+			sourceTree = "<group>";
+		};
 		2317E9E32464A69200E017A3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +328,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
 				9FE0F53C247075600046A5C4 /* SavingProcessing */,
 			);
@@ -348,13 +367,15 @@
 		23561B452461EEB500097E4A /* ENParsers */ = {
 			isa = PBXGroup;
 			children = (
+				23FA252C2484D9F200CD69C4 /* OffsetParsers */,
 				23561B462461EF3300097E4A /* ENWeekdaysParser.swift */,
 				233F53DA2469D8AC004DD671 /* ENTimeParser.swift */,
 				232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */,
 				23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */,
 				231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */,
 				231E0C912484406D0018EB8F /* ENNumberDate.swift */,
-				23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */,
+				23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */,
+				230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */,
 			);
 			path = ENParsers;
 			sourceTree = "<group>";
@@ -464,6 +485,16 @@
 				23A6B2A124660A36006A7A4D /* WindowManager.swift */,
 			);
 			path = Navigations;
+			sourceTree = "<group>";
+		};
+		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
+			isa = PBXGroup;
+			children = (
+				23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */,
+				23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */,
+				23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */,
+			);
+			path = OffsetParsers;
 			sourceTree = "<group>";
 		};
 		9F025C0D24633D0F00F05D81 /* Helpers */ = {
@@ -1225,6 +1256,7 @@
 				236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */,
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */,
+				23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */,
 				9F6C1E73246C7FF4003D5AD2 /* TaskCreateView+Shortcuts.swift in Sources */,
 				9FE0F537247023000046A5C4 /* ShortcutsSettingsViewController.swift in Sources */,
 				23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */,
@@ -1245,6 +1277,7 @@
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
+				23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,
@@ -1305,6 +1338,7 @@
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
+				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
@@ -1320,11 +1354,13 @@
 				9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */,
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
+				230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
+				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
 				23561B492461F46600097E4A /* Parser.swift in Sources */,

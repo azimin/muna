@@ -20,12 +20,12 @@ class ENTimeHoursOffset: Parser {
     let minutesGroup = 3
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 5).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 5).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
             var hourOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup))
         else {
@@ -36,6 +36,8 @@ class ENTimeHoursOffset: Parser {
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
+        hourOffset += parsedItem.refDate.hour
+
         var minutesOffset = parsedItem.refDate.minute
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
@@ -44,6 +46,11 @@ class ENTimeHoursOffset: Parser {
             } else {
                 minutesOffset += minutes
             }
+        }
+
+        if minutesOffset > 60 {
+            hourOffset += 1
+            minutesOffset -= 60
         }
 
         if hourOffset >= 24 {
@@ -63,6 +70,7 @@ class ENTimeHoursOffset: Parser {
 
         return ParsedResult(
             refDate: parsedItem.refDate,
+            matchRange: parsedItem.match.range,
             reservedComponents: [
                 .year: year,
                 .month: month,
@@ -70,7 +78,9 @@ class ENTimeHoursOffset: Parser {
                 .hour: hourOffset,
                 .minute: minutesOffset,
             ],
-            customComponents: [:]
+            customDayComponents: [],
+            customPartOfTheDayComponents: [],
+            tagUnit: [.ENTimeHoursOffset: true]
         )
     }
 }

@@ -28,7 +28,7 @@ class TaskCreateView: PopupView {
         behaviour: .emptyState
     )
 
-    private let dateParser = MunaChrono()
+    private let dateProcessingService = DateProcesingService()
     private let savingProcessingService: SavingProcessingService
 
     weak var delegate: TaskCreateViewDelegate?
@@ -199,7 +199,7 @@ extension TaskCreateView: TextFieldDelegate {
     func textFieldTextDidChange(textField: TextField, text: String) {
         let offset = TimeZone.current.secondsFromGMT()
 
-        self.parsedDates = self.dateParser.parseFromString(text, date: Date() + offset.seconds)
+        self.parsedDates = self.dateProcessingService.getDate(from: text, date: Date() + offset.seconds)
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> ReminderItem? in
