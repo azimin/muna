@@ -39,10 +39,15 @@ class ENWeekdaysParser: Parser {
             weekday += 7
         }
 
+        let newDate = parsedItem.refDate + weekday.days
+        let day = newDate.day
+        let month = newDate.month
+        let year = newDate.year
+
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
-            reservedComponents: [.weekday: weekday],
+            reservedComponents: [.day: day, .month: month, .year: year],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
             tagUnit: [.ENWeekdaysParser: true]
