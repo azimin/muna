@@ -144,7 +144,6 @@ class TaskCreateView: PopupView {
     }
 
     func removeMonitor() {
-        print("Remove monitor", self)
         if let monitor = self.downMonitor {
             NSEvent.removeMonitor(monitor)
         }
