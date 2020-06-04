@@ -53,7 +53,7 @@ class ENTimeParser: Parser {
         }
 
         if !partOfTheDay.isEmpty,
-            partOfTheDay == "pm" || partOfTheDay == "p.m." {
+            partOfTheDay == "pm" || partOfTheDay == "p.m." && hoursOffset < 12 {
             hoursOffset += 12
         }
 
