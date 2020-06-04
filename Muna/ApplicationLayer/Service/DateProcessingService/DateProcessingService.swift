@@ -14,6 +14,8 @@ class DateProcesingService {
 
     let numberOfAvailableDays = 3
 
+    private let weekendsOffset = [7, 1]
+
     func getDate(from string: String, date: Date) -> [DateItem] {
         let parsedResults = self.parser.parseFromString(string, date: date)
 
@@ -134,7 +136,7 @@ class DateProcesingService {
             case .yesterday:
                 date = [parsedResult.refDate - 1.days]
             case .weekends:
-                date = []
+                date = self.makeWeekendsFromDate(parsedResult.refDate)
             }
             return date.map {
                 return PureDay(date: $0)
@@ -197,5 +199,18 @@ class DateProcesingService {
         }
 
         return finalResult
+    }
+
+    func makeWeekendsFromDate(_ date: Date) -> [Date] {
+        return self.weekendsOffset.map { weekendDay in
+            var weekday: Int
+            if weekendDay - date.weekday < 0 {
+                weekday = (7 - date.weekday) + weekendDay
+            } else {
+                weekday = weekendDay - date.weekday
+            }
+
+            return date + weekday.days
+        }
     }
 }
