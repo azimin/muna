@@ -35,7 +35,7 @@ class SavingProcessingService {
         let itemModel = self.database.addItem(
             image: image,
             dueDateString: item.dueDateString,
-            dueDate: Date().addingTimeInterval(5), // TODO: FIxitem.date,
+            dueDate: item.date,
             comment: item.comment
         )
         self.image = nil
