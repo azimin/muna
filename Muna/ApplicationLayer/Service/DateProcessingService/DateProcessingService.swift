@@ -157,10 +157,10 @@ class DateProcesingService {
         let newPureDays = pureDays.flatMap { $0 }
 
         var finalResult = [DateItem]()
-        parsedResult.customPartOfTheDayComponents.forEach { partOfTheDay in
-            newPureDays.forEach {
+        if newPureDays.isEmpty {
+            finalResult = parsedResult.customPartOfTheDayComponents.map {
                 let timeType: TimeType
-                switch partOfTheDay {
+                switch $0 {
                 case .afertnoon:
                     timeType = .afertnoon
                 case .evening:
@@ -172,8 +172,27 @@ class DateProcesingService {
                 case .noon:
                     timeType = .noon
                 }
+                return DateItem(day: PureDay(date: parsedResult.refDate), timeType: timeType)
+            }
+        } else {
+            parsedResult.customPartOfTheDayComponents.forEach { partOfTheDay in
+                newPureDays.forEach {
+                    let timeType: TimeType
+                    switch partOfTheDay {
+                    case .afertnoon:
+                        timeType = .afertnoon
+                    case .evening:
+                        timeType = .evening
+                    case .mindnight:
+                        timeType = .mindnight
+                    case .morning:
+                        timeType = .morning
+                    case .noon:
+                        timeType = .noon
+                    }
 
-                finalResult.append(DateItem(day: $0, timeType: timeType))
+                    finalResult.append(DateItem(day: $0, timeType: timeType))
+                }
             }
         }
 
