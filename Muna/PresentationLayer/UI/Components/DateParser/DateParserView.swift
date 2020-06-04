@@ -44,13 +44,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             maker.edges.equalToSuperview()
         }
 
-        let option = DateParserItemView(itemSelected: { [weak self] option in
-            if let index = self?.options.firstIndex(of: option) {
-                self?.controller.selectItem(at: index)
-            } else {
-                assertionFailure("Wrong index")
-            }
-        })
+        let option = DateParserItemView(delegate: self)
         self.mainOption = option
         self.mainOption?.infoLabel.text = ""
 
@@ -88,13 +82,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             if self.options.count > index {
                 option = self.options[index]
             } else {
-                option = DateParserItemView(itemSelected: { [weak self] option in
-                    if let index = self?.options.firstIndex(of: option) {
-                        self?.controller.selectItem(at: index)
-                    } else {
-                        assertionFailure("Wrong index")
-                    }
-                })
+                option = DateParserItemView(delegate: self)
             }
             option.update(style: .notSelected, animated: animated)
             option.update(item: item)
@@ -112,7 +100,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 title: "No reminder",
                 subtitle: "",
                 additionalText: ""
-                ))
+            ))
         } else {
             self.mainOption?.update(style: .selected, animated: animated)
             self.mainOption?.update(item: items[0])
@@ -183,7 +171,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             guard self.shouldRunCompletion else {
                 return
             }
-            
+
             var offset = 0
             for optionIndex in 0 ..< self.options.count where optionIndex != index {
                 self.options[optionIndex - offset].removeFromSuperview()
@@ -191,5 +179,20 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 offset += 1
             }
         })
+    }
+}
+
+extension DateParserView: DateParserItemViewDelegate {
+    func dateParserItemSelectedState(item: DateParserItemView) {
+        if let index = self.options.firstIndex(of: item) {
+            self.controller.selectItem(at: index)
+        } else {
+            assertionFailure("Wrong index")
+        }
+    }
+
+    func dateParserItemHighlitedState(item: DateParserItemView, highlited: Bool) {
+        self.options.forEach { $0.itemHighlighted = false }
+        item.itemHighlighted = true
     }
 }

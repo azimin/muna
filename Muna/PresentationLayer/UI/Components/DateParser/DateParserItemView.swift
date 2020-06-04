@@ -9,6 +9,11 @@
 import Foundation
 import SnapKit
 
+protocol DateParserItemViewDelegate: AnyObject {
+    func dateParserItemSelectedState(item: DateParserItemView)
+    func dateParserItemHighlitedState(item: DateParserItemView, highlited: Bool)
+}
+
 class DateParserItemView: NSControl {
     enum Style {
         case basic
@@ -16,11 +21,17 @@ class DateParserItemView: NSControl {
         case notSelected
     }
 
+    weak var delegate: DateParserItemViewDelegate?
+
+    var itemHighlighted: Bool = false {
+        didSet {
+            self.updateColors()
+        }
+    }
+
     private var mouseHighlighted = false {
         didSet {
-            if self.mouseHighlighted != oldValue {
-                self.updateColors()
-            }
+            self.delegate?.dateParserItemHighlitedState(item: self, highlited: mouseHighlighted)
         }
     }
 
@@ -36,7 +47,7 @@ class DateParserItemView: NSControl {
 
     override func mouseUp(with event: NSEvent) {
         super.mouseUp(with: event)
-        self.itemSelected?(self)
+        self.delegate?.dateParserItemSelectedState(item: self)
     }
 
     var contentViewConstraint: Constraint?
@@ -50,11 +61,8 @@ class DateParserItemView: NSControl {
     let secondLabel = Label(fontStyle: .medium, size: 11)
     let infoLabel = Label(fontStyle: .bold, size: 11)
 
-    typealias SelectedAction = (_ value: DateParserItemView) -> Void
-    private var itemSelected: SelectedAction?
-
-    init(itemSelected: SelectedAction?) {
-        self.itemSelected = itemSelected
+    init(delegate: DateParserItemViewDelegate) {
+        self.delegate = delegate
         super.init(frame: .zero)
         self.setup()
     }
@@ -146,7 +154,7 @@ class DateParserItemView: NSControl {
     }
 
     func updateColors() {
-        if self.mouseHighlighted, self.style != .basic {
+        if self.itemHighlighted, self.style != .basic {
             self.selectionView.backgroundColor = NSColor.color(.blueSelected).withAlphaComponent(0.3)
         } else {
             self.selectionView.backgroundColor = NSColor.color(.clear)
