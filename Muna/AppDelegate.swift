@@ -147,6 +147,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         print("At evening 7.30 pm")
         print("\(MunaChrono().parseFromString("At evening 7.30 pm", date: date)))\n")
+
+        print("11 am")
+        print("\(MunaChrono().parseFromString("11 am", date: date)))\n")
 //        In 3 days in the morning
 //        Thu 7 pm (if today monday)
 //        Thu 7 pm (if today wed)

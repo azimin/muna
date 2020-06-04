@@ -166,6 +166,10 @@ class MunaChrono {
                         newDate.matchRange.upperBound == time.matchRange.upperBound {
                         finalResult.append(time)
                     }
+
+                    if newDate.matchRange.length < time.matchRange.length {
+                        newDate = time
+                    }
                     return
                 }
 

@@ -65,7 +65,7 @@ class ENTimeParser: Parser {
                 .minute: minutesOffset,
                 .day: parsedItem.refDate.day,
                 .month: parsedItem.refDate.month,
-                .year: parsedItem.refDate.day,
+                .year: parsedItem.refDate.year,
             ],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
