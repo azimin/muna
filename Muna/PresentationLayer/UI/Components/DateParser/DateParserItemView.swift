@@ -9,11 +9,34 @@
 import Foundation
 import SnapKit
 
-class DateParserItemView: View {
+class DateParserItemView: NSControl {
     enum Style {
         case basic
         case selected
         case notSelected
+    }
+
+    private var mouseHighlighted = false {
+        didSet {
+            if self.mouseHighlighted != oldValue {
+                self.updateColors()
+            }
+        }
+    }
+
+    override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        self.mouseHighlighted = true
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+        self.mouseHighlighted = false
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
+        self.itemSelected?(self)
     }
 
     var contentViewConstraint: Constraint?
@@ -27,9 +50,32 @@ class DateParserItemView: View {
     let secondLabel = Label(fontStyle: .medium, size: 11)
     let infoLabel = Label(fontStyle: .bold, size: 11)
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    typealias SelectedAction = (_ value: DateParserItemView) -> Void
+    private var itemSelected: SelectedAction?
+
+    init(itemSelected: SelectedAction?) {
+        self.itemSelected = itemSelected
+        super.init(frame: .zero)
         self.setup()
+    }
+
+    private var trackingArea: NSTrackingArea?
+
+    override func layout() {
+        super.layout()
+
+        if let trackingArea = self.trackingArea {
+            self.removeTrackingArea(trackingArea)
+        }
+
+        let trackingArea = NSTrackingArea(
+            rect: self.bounds,
+            options: [.activeAlways, .mouseEnteredAndExited],
+            owner: self,
+            userInfo: nil
+        )
+        self.addTrackingArea(trackingArea)
+        self.trackingArea = trackingArea
     }
 
     required init?(coder: NSCoder) {
@@ -100,7 +146,11 @@ class DateParserItemView: View {
     }
 
     func updateColors() {
-        self.selectionView.backgroundColor = NSColor.color(.clear)
+        if self.mouseHighlighted, self.style != .basic {
+            self.selectionView.backgroundColor = NSColor.color(.blueSelected).withAlphaComponent(0.3)
+        } else {
+            self.selectionView.backgroundColor = NSColor.color(.clear)
+        }
         self.mainLabel.textColor = NSColor.color(.titleAccent)
         self.infoLabel.textColor = NSColor.color(.titleAccent).withAlphaComponent(0.8)
 

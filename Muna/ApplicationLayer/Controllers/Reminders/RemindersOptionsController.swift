@@ -110,6 +110,24 @@ class RemindersOptionsController {
         }
     }
 
+    func selectItem(at index: Int) {
+        guard self.isEditingState else {
+            return
+        }
+
+        guard self.avialbleItems.count > index else {
+            assertionFailure("Wrong index")
+            return
+        }
+
+        self.selectedIndex = index
+        self.isEditingState = false
+        self.delegate?.remindersOptionsControllerSelectItem(
+            self,
+            index: self.selectedIndex
+        )
+    }
+
     func selectItemIfNeeded() {
         guard self.isEditingState else {
             return
