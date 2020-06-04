@@ -28,7 +28,7 @@ class DateProcesingService {
                 return mapFromDate(result)
             }
 
-            return []
+            return mapFromCustomWords(result)
         }
         .flatMap { $0 }
         return items
@@ -123,5 +123,60 @@ class DateProcesingService {
 
             return DateItem(day: pureDay, timeType: timeType)
         }
+    }
+
+    func mapFromCustomWords(_ parsedResult: ParsedResult) -> [DateItem] {
+        let pureDays = parsedResult.customDayComponents.map { dayComponent -> [PureDay] in
+            let date: [Date]
+            switch dayComponent {
+            case .tom, .tomorrow:
+                date = [parsedResult.refDate + 1.days]
+            case .yesterday:
+                date = [parsedResult.refDate - 1.days]
+            case .weekends:
+                date = []
+            }
+            return date.map {
+                return PureDay(date: $0)
+            }
+        }
+
+        if let hour = parsedResult.reservedComponents[.hour], let minute = parsedResult.reservedComponents[.minute] {
+            let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            return pureDays
+                .flatMap { $0 }
+                .map { DateItem(day: $0, timeType: .specificTime(timeOfDay: timeOfDay)) }
+        }
+
+        guard !parsedResult.customPartOfTheDayComponents.isEmpty else {
+            return pureDays
+                .flatMap { $0 }
+                .map { DateItem(day: $0, timeType: .allDay) }
+        }
+
+        let newPureDays = pureDays.flatMap { $0 }
+
+        var finalResult = [DateItem]()
+        parsedResult.customPartOfTheDayComponents.forEach { partOfTheDay in
+            newPureDays.forEach {
+                let timeType: TimeType
+                switch partOfTheDay {
+                case .afertnoon:
+                    timeType = .afertnoon
+                case .evening:
+                    timeType = .evening
+                case .mindnight:
+                    timeType = .mindnight
+                case .morning:
+                    timeType = .morning
+                case .noon:
+                    timeType = .noon
+                }
+
+                finalResult.append(DateItem(day: $0, timeType: timeType))
+            }
+        }
+
+        return finalResult
     }
 }
