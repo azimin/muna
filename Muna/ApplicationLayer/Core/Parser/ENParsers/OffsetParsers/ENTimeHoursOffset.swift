@@ -48,12 +48,12 @@ class ENTimeHoursOffset: Parser {
             }
         }
 
-        if minutesOffset > 60 {
+        while minutesOffset > 60 {
             hourOffset += 1
             minutesOffset -= 60
         }
 
-        if hourOffset >= 24 {
+        while hourOffset >= 24 {
             hourOffset -= 24
             day += 1
         }
