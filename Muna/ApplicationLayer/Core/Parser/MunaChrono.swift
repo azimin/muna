@@ -113,6 +113,10 @@ class MunaChrono {
             }
         }
 
+        guard !newDates.isEmpty else {
+            return newDates
+        }
+
         newDates = self.appendTime(to: newDates, fromAllResults: parsedResult)
 
         return newDates
