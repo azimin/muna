@@ -93,7 +93,9 @@ class TaskCreateView: PopupView {
     var downMonitor: Any?
 
     func addMonitor() {
-        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+        self.removeMonitor()
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [weak self] (event) -> NSEvent? in
+            guard let self = self else { return event }
 
             if DateParserView.Shortcuts.preveousTime.item.validateWith(event: event) {
                 self.controller.hilightPreveousItemsIfNeeded()
@@ -142,6 +144,7 @@ class TaskCreateView: PopupView {
     }
 
     func removeMonitor() {
+        print("Remove monitor", self)
         if let monitor = self.downMonitor {
             NSEvent.removeMonitor(monitor)
         }

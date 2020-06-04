@@ -93,7 +93,8 @@ class TaskChangeTimeView: PopupView {
     func addMonitor() {
         self.removeMonitor()
 
-        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { (event) -> NSEvent? in
+        self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [weak self] (event) -> NSEvent? in
+            guard let self = self else { return event }
 
             if DateParserView.Shortcuts.preveousTime.item.validateWith(event: event) {
                 self.controller.hilightPreveousItemsIfNeeded()
