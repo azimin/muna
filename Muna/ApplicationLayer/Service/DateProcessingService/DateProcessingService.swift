@@ -78,7 +78,6 @@ class DateProcesingService {
                 case .noon:
                     timeType = .noon
                 }
-                print(timeType)
 
                 return DateItem(day: pureDay, timeType: timeType)
             }
@@ -139,7 +138,7 @@ class DateProcesingService {
                 date = self.makeWeekendsFromDate(parsedResult.refDate)
             }
             return date.map {
-                return PureDay(date: $0)
+                return PureDay(day: $0.day, month: $0.month, year: $0.year)
             }
         }
 
