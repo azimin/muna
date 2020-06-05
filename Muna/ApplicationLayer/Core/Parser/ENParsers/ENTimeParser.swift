@@ -27,12 +27,12 @@ class ENTimeParser: Parser {
 
     // swiftlint:disable cyclomatic_complexity
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
-        print(parsedItem.match.numberOfRanges)
-        (0 ... 8).forEach {
-            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
-                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
-            }
-        }
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 8).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
             var hoursOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup)),
             hoursOffset < 24
@@ -53,8 +53,12 @@ class ENTimeParser: Parser {
         }
 
         if !partOfTheDay.isEmpty,
-            partOfTheDay == "pm" || partOfTheDay == "p.m." && hoursOffset < 12 {
-            hoursOffset += 12
+            partOfTheDay == "pm" || partOfTheDay == "p.m." {
+            if hoursOffset == 12 {
+                hoursOffset -= 12
+            } else if hoursOffset < 12 {
+                hoursOffset += 12
+            }
         }
 
         return ParsedResult(
