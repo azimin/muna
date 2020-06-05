@@ -138,6 +138,9 @@ class ScreenshotStateView: View {
             newRect.origin.y = aroundRect.maxY + 16
         }
 
+        if !isEnoughBottomSpace {
+            newRect.origin.y = self.bounds.maxY - newRect.height - 16
+        }
         return newRect
     }
 
