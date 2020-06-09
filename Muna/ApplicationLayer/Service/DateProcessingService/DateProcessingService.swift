@@ -174,11 +174,15 @@ class DateProcesingService {
             let date: [Date]
             switch dayComponent {
             case .tom, .tomorrow:
-                date = [parsedResult.refDate + 1.days]
+                var additionalDay = 0
+                if let prefix = parsedResult.prefix, prefix == .after {
+                    additionalDay = 1
+                }
+                date = [parsedResult.refDate + 1.days + additionalDay.days]
             case .yesterday:
                 date = [parsedResult.refDate - 1.days]
             case .weekends:
-                date = self.makeWeekendsFromDate(parsedResult.refDate)
+                date = self.makeWeekendsFromDate(parsedResult.refDate, prefix: parsedResult.prefix)
             }
             return date.map {
                 return PureDay(day: $0.day, month: $0.month, year: $0.year)
@@ -243,13 +247,17 @@ class DateProcesingService {
         return finalResult
     }
 
-    func makeWeekendsFromDate(_ date: Date) -> [Date] {
+    func makeWeekendsFromDate(_ date: Date, prefix: DatePrefix?) -> [Date] {
         return self.weekendsOffset.map { weekendDay in
             var weekday: Int
             if weekendDay - date.weekday < 0 {
                 weekday = (7 - date.weekday) + weekendDay
             } else {
                 weekday = weekendDay - date.weekday
+            }
+
+            if let prefix = prefix, prefix == .next {
+                weekday += 7
             }
 
             return date + weekday.days
