@@ -11,14 +11,21 @@ import Foundation
 class ENMonthOffsetParser: Parser {
     override var pattern: String {
         return "\\b(?:(in|next|past|this)\\s*)"
+            + "(?:(\\d{1,}))?"
             + "(\\s*(months|month))\\b"
     }
 
     let prefixGroup = 1
     let numberOfMonthsGroup = 2
-    let monthGroup = 3
+    let monthGroup = 4
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 4).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup) else {
             return nil
         }
@@ -27,7 +34,7 @@ class ENMonthOffsetParser: Parser {
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
-        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup) {
+        if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup), parsedItem.match.isEmpty(atRangeIndex: self.numberOfMonthsGroup) {
             if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased() == "next" {
                 month += 1
             } else if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased() == "past" {
@@ -35,7 +42,12 @@ class ENMonthOffsetParser: Parser {
             }
         }
 
-        if month > 12 {
+        if !parsedItem.match.isEmpty(atRangeIndex: self.numberOfMonthsGroup),
+            let monthsOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfMonthsGroup)) {
+            month += monthsOffset
+        }
+
+        while month > 12 {
             month -= 12
             year += 1
         }
