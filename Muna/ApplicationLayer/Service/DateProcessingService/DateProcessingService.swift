@@ -37,6 +37,49 @@ class DateProcesingService {
     }
 
     func mapFromWeekdays(_ result: ParsedResult) -> [DateItem] {
+        guard result.prefix == nil else {
+            guard
+                let day = result.reservedComponents[.day],
+                let month = result.reservedComponents[.month],
+                let year = result.reservedComponents[.year]
+            else {
+                assertionFailure("One of the element doesn't provided")
+                return []
+            }
+
+            let hour = result.reservedComponents[.hour] ?? 0
+            let minute = result.reservedComponents[.minute] ?? 0
+
+            let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+
+            let pureDay = PureDay(day: day, month: month, year: year)
+
+            if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
+                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay))]
+            }
+
+            guard !result.customPartOfTheDayComponents.isEmpty else {
+                return [DateItem(day: pureDay, timeType: .allDay)]
+            }
+
+            return result.customPartOfTheDayComponents.map {
+                let timeType: TimeType
+                switch $0 {
+                case .afertnoon:
+                    timeType = .afertnoon
+                case .evening:
+                    timeType = .evening
+                case .mindnight:
+                    timeType = .mindnight
+                case .morning:
+                    timeType = .morning
+                case .noon:
+                    timeType = .noon
+                }
+
+                return DateItem(day: pureDay, timeType: timeType)
+            }
+        }
         let items = (0 ... self.numberOfAvailableDays).compactMap { numberOfElement -> [DateItem] in
             guard
                 let day = result.reservedComponents[.day],

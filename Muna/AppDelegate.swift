@@ -58,8 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
 //        TimeParserTests.test()
 
-//        let currentTime = TimeZone.current.secondsFromGMT()
-//        let date = Date() + currentTime.seconds
+        let currentTime = TimeZone.current.secondsFromGMT()
+        let date = Date() + currentTime.seconds
 //        print("In 2h")
 //        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
 //
@@ -154,10 +154,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //        print("june 21 13:25")
 //        print("\(MunaChrono().parseFromString("june 21 13:25", date: date)))\n")
 
-        let date = "06-04-2020 16:23".toDate("MM-dd-yyyy HH:mm")!.date
-        print(date)
+        print("next friday")
+        print("\(MunaChrono().parseFromString("next friday", date: date)))\n")
 
-        print("\(DateProcesingService().getDate(from: "tomorrow 2pm", date: date)))\n")
+//        let date = "06-04-2020 16:23".toDate("MM-dd-yyyy HH:mm")!.date
+//        print(date)
+//
+//        print("\(DateProcesingService().getDate(from: "tomorrow 2pm", date: date)))\n")
 
 //
 //        print("june 30 13:25")
