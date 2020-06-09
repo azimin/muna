@@ -79,6 +79,13 @@ enum TagUnit: String {
     case ENMonthOffsetParser
 }
 
+enum DatePrefix: String, CaseIterable {
+    case next
+    case this
+    case after
+    case past
+}
+
 struct ParsedResult {
     let refDate: Date
 
@@ -87,6 +94,7 @@ struct ParsedResult {
     var customDayComponents: [CustomDayWords]
     var customPartOfTheDayComponents: [CustomDayPartWords]
     var tagUnit: [TagUnit: Bool]
+    var prefix: DatePrefix?
 }
 
 struct ParsedItem {

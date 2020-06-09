@@ -14,11 +14,21 @@ class ENWeekdaysParser: Parser {
         return weekdays.keys.map { $0 }.joined(separator: "|")
     }
 
+    private var prefixes: String {
+        return DatePrefix.allCases.map { $0.rawValue }.joined(separator: "|")
+    }
+
     override var pattern: String {
-        return "\\b(?:on\\s*?)?(?:(next|this|after))?\\s*(\(self.days))\\b"
+        return "\\b(?:on\\s*?)?(?:(\(self.prefixes)))?\\s*(\(self.days))\\b"
     }
 
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
+//        print(parsedItem.match.numberOfRanges)
+//        (0 ... 1).forEach {
+//            if !parsedItem.match.isEmpty(atRangeIndex: $0) {
+//                print("\(parsedItem.match.string(from: parsedItem.text, atRangeIndex: $0)) at index: \($0)")
+//            }
+//        }
         let weekdayName = parsedItem.match.string(from: parsedItem.text, atRangeIndex: 2).lowercased()
         guard let weekdayOffset = weekdays[weekdayName] else {
             return nil
@@ -50,7 +60,8 @@ class ENWeekdaysParser: Parser {
             reservedComponents: [.day: day, .month: month, .year: year],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
-            tagUnit: [.ENWeekdaysParser: true]
+            tagUnit: [.ENWeekdaysParser: true],
+            prefix: DatePrefix(rawValue: prefixGroup)
         )
     }
 }
