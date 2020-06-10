@@ -178,7 +178,17 @@ class DateProcesingService {
                 if let prefix = parsedResult.prefix, prefix == .after {
                     additionalDay = 1
                 }
-                date = [parsedResult.refDate + 1.days + additionalDay.days]
+                if parsedResult.refDate.hour < 6 {
+                    date = [
+                        parsedResult.refDate + additionalDay.days,
+                        parsedResult.refDate + 1.days + additionalDay.days,
+                    ]
+                } else {
+                    date = [
+                        parsedResult.refDate + additionalDay.days,
+                        parsedResult.refDate + 1.days + additionalDay.days,
+                    ]
+                }
             case .yesterday:
                 date = [parsedResult.refDate - 1.days]
             case .weekends:
