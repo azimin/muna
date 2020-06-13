@@ -67,6 +67,13 @@
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
+		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
+		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
+		9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E452494EDB700A34379 /* OnboardingIntroViewController.swift */; };
+		9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */; };
+		9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */; };
+		9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E4C249501A100A34379 /* OnboardingButton.swift */; };
+		9F581E502495116D00A34379 /* onboarding_part_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */; };
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
 		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
@@ -213,6 +220,13 @@
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
+		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		9F581E452494EDB700A34379 /* OnboardingIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroViewController.swift; sourceTree = "<group>"; };
+		9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViewController.swift; sourceTree = "<group>"; };
+		9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupViewController.swift; sourceTree = "<group>"; };
+		9F581E4C249501A100A34379 /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
+		9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_1.mp4; sourceTree = "<group>"; };
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
@@ -674,11 +688,80 @@
 		9F4A8CF0245DACA800EA2E1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F581E4E2495115D00A34379 /* OnboardingVideos */,
 				239DC919245D95E8001FA50C /* Preview Content */,
 				239DC91C245D95E8001FA50C /* Main.storyboard */,
 				239DC917245D95E8001FA50C /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9F581E3B2494E87C00A34379 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E3C2494E88D00A34379 /* Root */,
+				9F581E412494ED0F00A34379 /* Items */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		9F581E3C2494E88D00A34379 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E3D2494E89600A34379 /* OnboardingView.swift */,
+				9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		9F581E412494ED0F00A34379 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E422494ED2300A34379 /* Intro */,
+				9F581E432494ED2700A34379 /* Step */,
+				9F581E442494ED2D00A34379 /* FinalSetup */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		9F581E422494ED2300A34379 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E452494EDB700A34379 /* OnboardingIntroViewController.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		9F581E432494ED2700A34379 /* Step */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */,
+			);
+			path = Step;
+			sourceTree = "<group>";
+		};
+		9F581E442494ED2D00A34379 /* FinalSetup */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */,
+			);
+			path = FinalSetup;
+			sourceTree = "<group>";
+		};
+		9F581E4B2495019200A34379 /* OnboardingButton */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E4C249501A100A34379 /* OnboardingButton.swift */,
+			);
+			path = OnboardingButton;
+			sourceTree = "<group>";
+		};
+		9F581E4E2495115D00A34379 /* OnboardingVideos */ = {
+			isa = PBXGroup;
+			children = (
+				9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */,
+			);
+			path = OnboardingVideos;
 			sourceTree = "<group>";
 		};
 		9F693225247ABE3200FEBC0B /* DateParser */ = {
@@ -760,6 +843,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9F581E4B2495019200A34379 /* OnboardingButton */,
 				9F693230247ACF5200FEBC0B /* TaskChangeTime */,
 				9F693225247ABE3200FEBC0B /* DateParser */,
 				9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */,
@@ -901,6 +985,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				9F581E3B2494E87C00A34379 /* Onboarding */,
 				9F152704246DD7800037623B /* Settings */,
 				9FC9CDC424699E4B0018FAD7 /* Debug */,
 				23435AC72464A61F00B4DE50 /* ScreenshotState */,
@@ -1127,6 +1212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F581E502495116D00A34379 /* onboarding_part_1.mp4 in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
@@ -1257,6 +1343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */,
+				9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */,
 				236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */,
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */,
@@ -1269,6 +1356,7 @@
 				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
+				9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */,
 				23561B432461ED8800097E4A /* ParsedResult.swift in Sources */,
@@ -1283,6 +1371,7 @@
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
 				23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
+				9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
@@ -1304,6 +1393,7 @@
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
 				23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */,
+				9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */,
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
@@ -1323,6 +1413,7 @@
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,
+				9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */,
 				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
@@ -1343,6 +1434,7 @@
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
+				9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
@@ -1628,7 +1720,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -16,6 +16,18 @@ extension Button {
         return self
     }
 
+    func withText(_ text: String) -> Self {
+        self.title = text
+        return self
+    }
+
+    func withTextColorStyle(_ colorStyle: ColorStyle) -> Self {
+        self.createStyleAction(style: colorStyle) { [weak self] style in
+            self?.colorStyle = style
+        }
+        return self
+    }
+
     func update(imageName: String, colorStyle: ColorStyle? = nil) {
         if let colorStyle = colorStyle {
             self.image = NSImage(named: NSImage.Name(imageName))?

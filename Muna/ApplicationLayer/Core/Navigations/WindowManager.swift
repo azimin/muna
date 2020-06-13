@@ -15,6 +15,7 @@ enum WindowType: Equatable, Hashable {
     case fullScreenshot
     case debug
     case settings
+    case onboarding
     case remindLater(item: ItemModel)
 
     var rawValue: String {
@@ -29,6 +30,8 @@ enum WindowType: Equatable, Hashable {
             return "debug"
         case .settings:
             return "settings"
+        case .onboarding:
+            return "onboarding"
         case let .remindLater(item):
             return "remindLater_\(item.id)"
         }
@@ -59,7 +62,7 @@ class WindowManager {
     private func windowState(_ windowType: WindowType) -> Bool {
         let status: Bool
         switch windowType {
-        case .settings:
+        case .settings, .onboarding:
             status = self.windows[windowType]?.isVisible ?? false
         case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
             status = self.windowVisibleStatus[windowType] ?? false
@@ -85,7 +88,7 @@ class WindowManager {
     func activateWindowIfNeeded(_ windowType: WindowType) {
         guard self.windowState(windowType) == false else {
             switch windowType {
-            case .settings:
+            case .settings, .onboarding:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
             case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
@@ -108,6 +111,8 @@ class WindowManager {
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
         case .fullScreenshot:
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
+        case .onboarding:
+            self.showOnboarding(in: window)
         case .settings:
             self.showSettings(in: window)
         case let .remindLater(item):
@@ -185,6 +190,17 @@ class WindowManager {
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
+        case .onboarding:
+            window = NSWindow(
+                contentRect: self.frameFor(.onboarding),
+                styleMask: [.closable, .titled],
+                backing: .buffered,
+                defer: true
+            )
+            window.titlebarAppearsTransparent = true
+            window.isReleasedWhenClosed = false
+            window.contentViewController = OnboardingViewController()
+            self.showSettings(in: window)
         case .settings:
             window = NSWindow(
                 contentRect: self.frameFor(.settings),
@@ -192,6 +208,7 @@ class WindowManager {
                 backing: .buffered,
                 defer: true
             )
+            window.isReleasedWhenClosed = false
             window.contentViewController = SettingsViewController()
             self.showSettings(in: window)
         }
@@ -216,6 +233,8 @@ class WindowManager {
             frame = mainScreen.frame
         case .remindLater:
             frame = mainScreen.frame
+        case .onboarding:
+            frame = NSRect(x: 0, y: 0, width: 640, height: 640)
         case .settings:
             frame = NSRect(x: 0, y: 0, width: 300, height: 400)
         }
@@ -264,6 +283,11 @@ class WindowManager {
         if let viewController = window.contentViewController as? MainScreenViewController {
             viewController.show(selectedItem: selectedItem)
         }
+        window.setIsVisible(true)
+    }
+
+    private func showOnboarding(in window: NSWindow) {
+        NSApp.activate(ignoringOtherApps: true)
         window.setIsVisible(true)
     }
 
@@ -328,6 +352,8 @@ class WindowManager {
             self.windows[windowType] = nil
         case .settings:
             window.setIsVisible(false)
+        case .onboarding:
+            window.setIsVisible(false)
         }
 
         self.changeWindowState(windowType, state: false)
@@ -347,8 +373,8 @@ class WindowManager {
         for (key, value) in self.windows {
             if let windowToClose = notification.object as? NSWindow,
                 value == windowToClose {
+                self.windowVisibleStatus[key] = false
                 self.windows[key] = nil
-                self.windowVisibleStatus[key] = true
             }
         }
     }

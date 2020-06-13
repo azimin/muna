@@ -223,7 +223,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: {
-                    self.toggleDebugState()
+                    self.windowManager.toggleWindow(.onboarding)
                 }
             )
 
