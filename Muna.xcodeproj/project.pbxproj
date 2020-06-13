@@ -73,7 +73,7 @@
 		9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */; };
 		9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */; };
 		9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E4C249501A100A34379 /* OnboardingButton.swift */; };
-		9F581E502495116D00A34379 /* onboarding_part_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */; };
+		9F581E52249524B300A34379 /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F581E51249524B300A34379 /* onboarding_part_1.mov */; };
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
 		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
@@ -226,7 +226,7 @@
 		9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViewController.swift; sourceTree = "<group>"; };
 		9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupViewController.swift; sourceTree = "<group>"; };
 		9F581E4C249501A100A34379 /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
-		9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_1.mp4; sourceTree = "<group>"; };
+		9F581E51249524B300A34379 /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
@@ -759,7 +759,7 @@
 		9F581E4E2495115D00A34379 /* OnboardingVideos */ = {
 			isa = PBXGroup;
 			children = (
-				9F581E4F2495116D00A34379 /* onboarding_part_1.mp4 */,
+				9F581E51249524B300A34379 /* onboarding_part_1.mov */,
 			);
 			path = OnboardingVideos;
 			sourceTree = "<group>";
@@ -1212,7 +1212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F581E502495116D00A34379 /* onboarding_part_1.mp4 in Resources */,
+				9F581E52249524B300A34379 /* onboarding_part_1.mov in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,

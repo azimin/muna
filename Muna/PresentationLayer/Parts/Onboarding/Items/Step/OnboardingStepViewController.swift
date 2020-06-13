@@ -6,6 +6,7 @@
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
+import AVKit
 import Cocoa
 
 class OnboardingStepViewController: NSViewController, OnboardingContainerProtocol {
@@ -31,7 +32,7 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
 
     var onNext: VoidBlock?
 
-    private let videoView = View()
+    private let videoView = AVPlayerView()
 
     private let titleLabel = Label(fontStyle: .bold, size: 26)
         .withAligment(.left)
@@ -68,11 +69,18 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         }
 
         self.view.addSubview(self.videoView)
-        self.videoView.backgroundColor = NSColor.black
+        self.videoView.controlsStyle = .none
         self.videoView.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(16)
             maker.width.equalToSuperview()
             maker.width.equalTo(self.videoView.snp.height).multipliedBy(1.6)
+        }
+
+        if let url = Bundle.main.url(forResource: "onboarding_part_1", withExtension: "mov") {
+            self.videoView.player = AVPlayer(url: url)
+            self.videoView.player?.play()
+        } else {
+            assertionFailure("No file")
         }
 
         self.view.addSubview(self.titleLabel)
@@ -98,9 +106,21 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
 
         self.continueButton.target = self
         self.continueButton.action = #selector(self.buttonAction(sender:))
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.play),
+            name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+            object: nil
+        )
     }
 
     @objc func buttonAction(sender: NSButton) {
         self.onNext?()
+    }
+
+    @objc func play() {
+        self.videoView.player?.seek(to: .zero)
+        self.videoView.player?.play()
     }
 }
