@@ -36,6 +36,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
     }
 
     private var currentStep: Step?
+    private var currentViewController: NSViewController?
 
     var window: NSWindow {
         return self.view.window!
@@ -67,13 +68,13 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
     // MARK: - Control
 
     func setView(for step: Step, animate: Bool) {
-        if let oldItem = self.currentStep {
+        if let oldItem = self.currentStep, let oldViewController = self.currentViewController {
             if oldItem == step {
                 return
             }
 
-            let oldViewController = self.viewController(for: oldItem)
             oldViewController.view.removeFromSuperview()
+            oldViewController.removeFromParent()
         }
 
         self.currentStep = step
@@ -85,13 +86,16 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         let newFrame = self.frameFromView(newWiew: newViewController.view)
 
         self.window.setFrame(newFrame, display: true, animate: animate)
+        self.addChild(newViewController)
         self.window.contentView?.addSubview(newViewController.view)
+
         newViewController.view.frame = CGRect(
             x: 0,
             y: 0,
             width: newFrame.width,
             height: newFrame.height
         )
+        self.currentViewController = newViewController
     }
 
     // MARK: - Helpers
@@ -101,9 +105,16 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         case .intro:
             return OnboardingIntroViewController()
         case .howToCapture:
-            return OnboardingStepViewController()
-        default:
-            return OnboardingStepViewController()
+            return OnboardingStepViewController(style: .howToCapture)
+        case .howToRemind:
+            return OnboardingStepViewController(style: .howToRemind)
+        case .howToSeeItems:
+            return OnboardingStepViewController(style: .howToSeeItems)
+        case .howToGetReminder:
+            return OnboardingStepViewController(style: .howToGetReminder)
+        case .final:
+            // TODO: Fix
+            return OnboardingIntroViewController()
         }
     }
 
@@ -113,8 +124,8 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         newSize.height += self.window.titlebarHeight
 
         oldFrame.origin = NSPoint(
-            x: oldFrame.origin.x - (newSize.width - oldFrame.width),
-            y: oldFrame.origin.y - (newSize.height - oldFrame.height)
+            x: oldFrame.origin.x - (newSize.width - oldFrame.width) / 2,
+            y: oldFrame.origin.y - (newSize.height - oldFrame.height) / 2
         )
         oldFrame.size = newSize
 

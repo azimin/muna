@@ -71,11 +71,10 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
         }
 
         self.continueButton.target = self
-        self.continueButton.action = #selector(self.next)
+        self.continueButton.action = #selector(self.buttonAction(sender:))
     }
 
-    @objc
-    func next() {
+    @objc func buttonAction(sender: NSButton) {
         self.onNext?()
     }
 }

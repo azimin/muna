@@ -9,18 +9,49 @@
 import Cocoa
 
 class OnboardingStepViewController: NSViewController, OnboardingContainerProtocol {
+    enum Style {
+        case howToCapture
+        case howToRemind
+        case howToSeeItems
+        case howToGetReminder
+
+        var title: String {
+            switch self {
+            case .howToCapture:
+                return "Capture important context"
+            case .howToRemind:
+                return "Ask to remind"
+            case .howToSeeItems:
+                return "Check items"
+            case .howToGetReminder:
+                return "Get reminder"
+            }
+        }
+    }
+
     var onNext: VoidBlock?
 
-    let videoView = View()
+    private let videoView = View()
 
-    let titleLabel = Label(fontStyle: .bold, size: 26)
+    private let titleLabel = Label(fontStyle: .bold, size: 26)
         .withAligment(.left)
         .withTextColorStyle(.titleAccent)
 
-    let contentView = View()
+    private let contentView = View()
 
-    let continueButton = OnboardingButton()
+    private let continueButton = OnboardingButton()
         .withText("Next")
+
+    private let style: Style
+
+    init(style: Style) {
+        self.style = style
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         self.view = View()
@@ -37,13 +68,15 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         }
 
         self.view.addSubview(self.videoView)
+        self.videoView.backgroundColor = NSColor.black
         self.videoView.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(16)
             maker.width.equalToSuperview()
-            maker.height.equalTo(self.videoView.snp.width).multipliedBy(1.6)
+            maker.width.equalTo(self.videoView.snp.height).multipliedBy(1.6)
         }
 
         self.view.addSubview(self.titleLabel)
+        self.titleLabel.text = self.style.title
         self.titleLabel.snp.makeConstraints { maker in
             maker.top.equalTo(self.videoView.snp.bottom).inset(-24)
             maker.leading.equalToSuperview().inset(24)
@@ -62,5 +95,12 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
             maker.trailing.equalToSuperview().inset(24)
             maker.bottom.equalToSuperview().inset(24)
         }
+
+        self.continueButton.target = self
+        self.continueButton.action = #selector(self.buttonAction(sender:))
+    }
+
+    @objc func buttonAction(sender: NSButton) {
+        self.onNext?()
     }
 }
