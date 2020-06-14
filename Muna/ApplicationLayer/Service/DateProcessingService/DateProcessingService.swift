@@ -55,11 +55,11 @@ class DateProcesingService {
             let pureDay = PureDay(day: day, month: month, year: year)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
-                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay))]
+                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
             }
 
             guard !result.customPartOfTheDayComponents.isEmpty else {
-                return [DateItem(day: pureDay, timeType: .allDay)]
+                return [DateItem(day: pureDay, timeType: .allDay, offset: result.dateOffset)]
             }
 
             return result.customPartOfTheDayComponents.map {
@@ -77,7 +77,7 @@ class DateProcesingService {
                     timeType = .noon
                 }
 
-                return DateItem(day: pureDay, timeType: timeType)
+                return DateItem(day: pureDay, timeType: timeType, offset: result.dateOffset)
             }
         }
         let items = (0 ... self.numberOfAvailableDays).compactMap { numberOfElement -> [DateItem] in
@@ -100,11 +100,11 @@ class DateProcesingService {
             pureDay = PureDay(day: newDate.day, month: newDate.month, year: newDate.year)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
-                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay))]
+                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
             }
 
             guard !result.customPartOfTheDayComponents.isEmpty else {
-                return [DateItem(day: pureDay, timeType: .allDay)]
+                return [DateItem(day: pureDay, timeType: .allDay, offset: result.dateOffset)]
             }
 
             return result.customPartOfTheDayComponents.map {
@@ -122,7 +122,7 @@ class DateProcesingService {
                     timeType = .noon
                 }
 
-                return DateItem(day: pureDay, timeType: timeType)
+                return DateItem(day: pureDay, timeType: timeType, offset: result.dateOffset)
             }
         }
 
@@ -143,11 +143,11 @@ class DateProcesingService {
 
         if let hour = result.reservedComponents[.hour], let minute = result.reservedComponents[.minute] {
             let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
-            return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay))]
+            return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
         }
 
         guard !result.customPartOfTheDayComponents.isEmpty else {
-            return [DateItem(day: pureDay, timeType: .allDay)]
+            return [DateItem(day: pureDay, timeType: .allDay, offset: result.dateOffset)]
         }
 
         return result.customPartOfTheDayComponents.map {
@@ -165,7 +165,7 @@ class DateProcesingService {
                 timeType = .noon
             }
 
-            return DateItem(day: pureDay, timeType: timeType)
+            return DateItem(day: pureDay, timeType: timeType, offset: result.dateOffset)
         }
     }
 
@@ -203,13 +203,13 @@ class DateProcesingService {
             let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
             return pureDays
                 .flatMap { $0 }
-                .map { DateItem(day: $0, timeType: .specificTime(timeOfDay: timeOfDay)) }
+                .map { DateItem(day: $0, timeType: .specificTime(timeOfDay: timeOfDay), offset: parsedResult.dateOffset) }
         }
 
         guard !parsedResult.customPartOfTheDayComponents.isEmpty else {
             return pureDays
                 .flatMap { $0 }
-                .map { DateItem(day: $0, timeType: .allDay) }
+                .map { DateItem(day: $0, timeType: .allDay, offset: parsedResult.dateOffset) }
         }
 
         let newPureDays = pureDays.flatMap { $0 }
@@ -230,7 +230,7 @@ class DateProcesingService {
                 case .noon:
                     timeType = .noon
                 }
-                return DateItem(day: PureDay(date: parsedResult.refDate), timeType: timeType)
+                return DateItem(day: PureDay(date: parsedResult.refDate), timeType: timeType, offset: parsedResult.dateOffset)
             }
         } else {
             parsedResult.customPartOfTheDayComponents.forEach { partOfTheDay in
@@ -249,7 +249,7 @@ class DateProcesingService {
                         timeType = .noon
                     }
 
-                    finalResult.append(DateItem(day: $0, timeType: timeType))
+                    finalResult.append(DateItem(day: $0, timeType: timeType, offset: parsedResult.dateOffset))
                 }
             }
         }
