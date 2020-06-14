@@ -36,6 +36,8 @@ class ENTimeMintuesOffsetParser: Parser {
         var day = parsedItem.refDate.day
         var hour = parsedItem.refDate.hour
 
+        let offset = DateOffset.minuts(minutes: minutesOffset)
+
         minutesOffset += parsedItem.refDate.minute
 
         if minutesOffset >= 60 {
@@ -71,7 +73,8 @@ class ENTimeMintuesOffsetParser: Parser {
             ],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
-            tagUnit: [.ENTimeMintuesOffsetParser: true]
+            tagUnit: [.ENTimeMintuesOffsetParser: true],
+            dateOffset: offset
         )
     }
 }
