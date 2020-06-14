@@ -48,7 +48,8 @@ class ENDaysParser: Parser {
             reservedComponents: [.year: year, .month: month, .day: day],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
-            tagUnit: [.ENDaysParser: true]
+            tagUnit: [.ENDaysParser: true],
+            dateOffset: .day(day: daysOffset)
         )
     }
 }
