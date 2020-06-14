@@ -42,6 +42,7 @@ class NotificationsService: NotificationsServiceProtocol {
         }
         notificationContent.categoryIdentifier = "item"
         notificationContent.userInfo = ["item_id": item.id]
+        notificationContent.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: timeInterval,
