@@ -34,9 +34,11 @@ class ENMonthOffsetParser: Parser {
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
+        var offset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.prefixGroup), parsedItem.match.isEmpty(atRangeIndex: self.numberOfMonthsGroup) {
             if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased() == "next" {
                 month += 1
+                offset = 1
             } else if parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.prefixGroup).lowercased() == "past" {
                 month -= 1
             }
@@ -45,6 +47,7 @@ class ENMonthOffsetParser: Parser {
         if !parsedItem.match.isEmpty(atRangeIndex: self.numberOfMonthsGroup),
             let monthsOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfMonthsGroup)) {
             month += monthsOffset
+            offset = monthsOffset
         }
 
         while month > 12 {
@@ -58,7 +61,8 @@ class ENMonthOffsetParser: Parser {
             reservedComponents: [.year: year, .month: month, .day: day],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
-            tagUnit: [.ENMonthOffsetParser: true]
+            tagUnit: [.ENMonthOffsetParser: true],
+            dateOffset: .month(month: offset)
         )
     }
 }

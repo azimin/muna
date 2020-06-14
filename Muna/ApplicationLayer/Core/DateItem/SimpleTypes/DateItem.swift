@@ -12,6 +12,7 @@ import SwiftDate
 struct DateItem {
     var day: PureDay
     var timeType: TimeType
+    var offset: DateOffset?
 }
 
 struct PureDay: Equatable {
