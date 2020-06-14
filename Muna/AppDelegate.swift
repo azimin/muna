@@ -247,10 +247,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.statusBarItem = statusBarItem
         self.statusBarMenu = statusBarMenu
 
+        let makeFullScreenshotItem = NSMenuItem(
+            title: "Make Full-screenshot",
+            action: #selector(self.toogleFullscreenScreenshotState),
+            keyEquivalent: "1"
+        )
+        makeFullScreenshotItem.keyEquivalentModifierMask = [.shift, .command]
+        statusBarMenu.addItem(makeFullScreenshotItem)
+
+        let makeSelectedAreaScreenshot = NSMenuItem(
+            title: "Make Selected Area Screenshot",
+            action: #selector(self.toggleScreenshotState),
+            keyEquivalent: "2"
+        )
+        makeSelectedAreaScreenshot.keyEquivalentModifierMask = [.shift, .command]
+        statusBarMenu.addItem(makeSelectedAreaScreenshot)
+
         let item = NSMenuItem(
             title: "Show items",
             action: #selector(self.togglePane),
-            keyEquivalent: "t"
+            keyEquivalent: "w"
         )
         item.keyEquivalentModifierMask = [.shift, .command]
         statusBarMenu.addItem(item)
