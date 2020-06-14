@@ -185,7 +185,6 @@ class DateProcesingService {
                     ]
                 } else {
                     date = [
-                        parsedResult.refDate + additionalDay.days,
                         parsedResult.refDate + 1.days + additionalDay.days,
                     ]
                 }
