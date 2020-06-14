@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 class ENDaysParser: Parser {
     override var pattern: String {
@@ -32,12 +33,14 @@ class ENDaysParser: Parser {
         var month = parsedItem.refDate.month
         var day = parsedItem.refDate.day + daysOffset
 
-        if day > parsedItem.refDate.monthDays {
-            day -= parsedItem.refDate.monthDays
+        var numberOfDaysInMonth = parsedItem.refDate.monthDays
+        while day > numberOfDaysInMonth {
+            day -= numberOfDaysInMonth
             month += 1
+            numberOfDaysInMonth = (parsedItem.refDate + month.months).monthDays
         }
 
-        if month > 12 {
+        while month > 12 {
             month -= 12
             year += 1
         }
