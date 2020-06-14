@@ -89,7 +89,7 @@ enum DatePrefix: String, CaseIterable {
 enum DateOffset {
     case month(month: Int)
     case day(day: Int)
-    case hour(hour: Int)
+    case hour(hour: Int, minutes: Int)
     case minuts(minutes: Int)
 }
 

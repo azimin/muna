@@ -36,14 +36,18 @@ class ENTimeHoursOffset: Parser {
         var month = parsedItem.refDate.month
         var year = parsedItem.refDate.year
 
+        let hoursOffsetToPass = hourOffset
         hourOffset += parsedItem.refDate.hour
 
         var minutesOffset = parsedItem.refDate.minute
+        var minutesOffsetToPass = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
             if minutes < 10 {
+                minutesOffsetToPass = Int((60.0 / 100.0) * Double(minutes * 10))
                 minutesOffset = Int((60.0 / 100.0) * Double(minutes * 10)) + parsedItem.refDate.minute
             } else {
+                minutesOffsetToPass = minutes
                 minutesOffset += minutes
             }
         }
@@ -80,7 +84,8 @@ class ENTimeHoursOffset: Parser {
             ],
             customDayComponents: [],
             customPartOfTheDayComponents: [],
-            tagUnit: [.ENTimeHoursOffset: true]
+            tagUnit: [.ENTimeHoursOffset: true],
+            dateOffset: .hour(hour: hoursOffsetToPass, minutes: minutesOffsetToPass)
         )
     }
 }
