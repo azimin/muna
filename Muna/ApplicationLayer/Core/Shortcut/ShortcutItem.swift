@@ -41,6 +41,10 @@ extension NSEvent.ModifierFlags {
     func splitToSingleFlags(discardNotImportant: Bool) -> [NSEvent.ModifierFlags] {
         var result: [NSEvent.ModifierFlags] = []
 
+        if self.contains(.command) {
+            result.append(.command)
+        }
+
         if self.contains(.capsLock) {
             result.append(.capsLock)
         }
@@ -51,10 +55,6 @@ extension NSEvent.ModifierFlags {
 
         if self.contains(.option) {
             result.append(.option)
-        }
-
-        if self.contains(.command) {
-            result.append(.command)
         }
 
         if self.contains(.numericPad), discardNotImportant == false {
