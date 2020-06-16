@@ -20,22 +20,25 @@ class Preferences {
         modifiers: [.command, .shift]
     )
 
+    static var defaultShortcutFullscreenScreenshotShortcutItem = ShortcutItem(
+        key: .one,
+        modifiers: [.command, .shift]
+    )
+
+    static var defaultActivationShortcutItem = ShortcutItem(
+        key: .w,
+        modifiers: [.command, .shift]
+    )
+
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + w
-        let defaultActivationShortcut = ShortcutItem(
-            key: .w,
-            modifiers: [.command, .shift]
-        ).masShortcut
+        let defaultActivationShortcut = defaultActivationShortcutItem.masShortcut
 
         // cmd + shift + 2
         let defaultScreenshotShortcut = defaultScreenshotShortcutItem.masShortcut
 
         // cmd + shift + 1
-        let defaultShortcutFullscreenScreenshotShortcut = ShortcutItem(
-            key: .one,
-            modifiers: [.command, .shift]
-        )
-        .masShortcut
+        let defaultShortcutFullscreenScreenshotShortcut = defaultShortcutFullscreenScreenshotShortcutItem.masShortcut
 
         // cmd + shift + d
         let defaultDebugShortcut = ShortcutItem(

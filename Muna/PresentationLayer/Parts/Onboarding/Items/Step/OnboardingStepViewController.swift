@@ -28,6 +28,19 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
                 return "Get reminder"
             }
         }
+
+        var videoName: String {
+            switch self {
+            case .howToCapture:
+                return "onboarding_part_1"
+            case .howToRemind:
+                return "onboarding_part_1"
+            case .howToSeeItems:
+                return "onboarding_part_1"
+            case .howToGetReminder:
+                return "onboarding_part_1"
+            }
+        }
     }
 
     var onNext: VoidBlock?
@@ -38,7 +51,7 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         .withAligment(.left)
         .withTextColorStyle(.titleAccent)
 
-    private let contentView = View()
+    private let contentView: View
 
     private let continueButton = OnboardingButton()
         .withText("Next")
@@ -47,6 +60,18 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
 
     init(style: Style) {
         self.style = style
+
+        switch self.style {
+        case .howToCapture:
+            self.contentView = OnboardingSubviewHowToCapture()
+        case .howToRemind:
+            self.contentView = OnboardingSubviewHowToRemind()
+        case .howToSeeItems:
+            self.contentView = OnboardingSubviewHowToSeeItems()
+        case .howToGetReminder:
+            self.contentView = OnboardingSubviewHowToGetReminder()
+        }
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -71,12 +96,12 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         self.view.addSubview(self.videoView)
         self.videoView.controlsStyle = .none
         self.videoView.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(16)
+            maker.top.equalToSuperview().inset(4)
             maker.width.equalToSuperview()
             maker.width.equalTo(self.videoView.snp.height).multipliedBy(1.6)
         }
 
-        if let url = Bundle.main.url(forResource: "onboarding_part_1", withExtension: "mov") {
+        if let url = Bundle.main.url(forResource: self.style.videoName, withExtension: "mov") {
             self.videoView.player = AVPlayer(url: url)
             self.videoView.player?.play()
         } else {

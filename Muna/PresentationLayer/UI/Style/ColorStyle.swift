@@ -30,6 +30,8 @@ enum ColorStyle {
     case separator
     case clear
 
+    case alwaysWhite
+
     var color: NSColor {
         switch Theme.current {
         case .dark:
@@ -62,6 +64,8 @@ enum ColorStyle {
                 return NSColor(hex: "FF2F2F")
             case .separator:
                 return NSColor.white.withAlphaComponent(0.13)
+            case .alwaysWhite:
+                return NSColor.white
             }
         case .light:
             switch self {
@@ -93,6 +97,8 @@ enum ColorStyle {
                 return NSColor(hex: "FF2F2F")
             case .separator:
                 return NSColor.black.withAlphaComponent(0.13)
+            case .alwaysWhite:
+                return NSColor.white
             }
         }
     }

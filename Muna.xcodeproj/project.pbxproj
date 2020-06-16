@@ -59,6 +59,10 @@
 		9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */; };
 		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
 		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F326FDC249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDB249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift */; };
+		9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDD249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift */; };
+		9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDF249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift */; };
+		9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FE1249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift */; };
 		9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D482246875B000395C44 /* EmptyStateView.swift */; };
 		9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48524687F8400395C44 /* ShortcutItemView.swift */; };
 		9F33D4882468826100395C44 /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D4872468826100395C44 /* ShortcutView.swift */; };
@@ -207,6 +211,10 @@
 		9F1CB75E24731D9C00DFBB05 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
 		9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+StyleHolder.swift"; sourceTree = "<group>"; };
 		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
+		9F326FDB249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToCapture.swift; sourceTree = "<group>"; };
+		9F326FDD249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToRemind.swift; sourceTree = "<group>"; };
+		9F326FDF249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToSeeItems.swift; sourceTree = "<group>"; };
+		9F326FE1249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToGetReminder.swift; sourceTree = "<group>"; };
 		9F33D47524684D5C00395C44 /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
 		9F33D47824684DA800395C44 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		9F33D47A2468554D00395C44 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
@@ -613,6 +621,17 @@
 			path = SimpleTypes;
 			sourceTree = "<group>";
 		};
+		9F326FDA249959BB0095DEA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F326FDB249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift */,
+				9F326FDD249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift */,
+				9F326FDF249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift */,
+				9F326FE1249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9F33D4812468759F00395C44 /* EmptyState */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +754,7 @@
 		9F581E432494ED2700A34379 /* Step */ = {
 			isa = PBXGroup;
 			children = (
+				9F326FDA249959BB0095DEA3 /* View */,
 				9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */,
 			);
 			path = Step;
@@ -1368,7 +1388,9 @@
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
+				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
+				9F326FDC249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift in Sources */,
 				23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
 				9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */,
@@ -1440,6 +1462,7 @@
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
+				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,
 				9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */,
@@ -1455,6 +1478,7 @@
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
+				9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
 				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
@@ -1720,7 +1744,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

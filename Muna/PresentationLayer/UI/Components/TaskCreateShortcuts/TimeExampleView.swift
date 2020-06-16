@@ -10,6 +10,7 @@ import Cocoa
 
 class TimeExampleView: View {
     let label = Label(fontStyle: .bold, size: 11)
+        .withTextColorStyle(.titleAccent)
 
     init() {
         super.init(frame: .zero)
@@ -20,9 +21,13 @@ class TimeExampleView: View {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+        self.backgroundColor = NSColor.color(.grayBackground)
+    }
+
     func setup() {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.grayBackground)
 
         self.addSubview(self.label)
         self.label.snp.makeConstraints { maker in

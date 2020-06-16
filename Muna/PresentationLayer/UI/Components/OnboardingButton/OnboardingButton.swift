@@ -30,6 +30,6 @@ class OnboardingButton: Button {
 
         self.font = FontStyle.customFont(style: .bold, size: 16)
 
-        _ = self.withTextColorStyle(.titleAccent)
+        _ = self.withTextColorStyle(.alwaysWhite)
     }
 }

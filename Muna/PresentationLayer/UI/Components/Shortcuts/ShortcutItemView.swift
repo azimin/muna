@@ -52,6 +52,7 @@ class ShortcutItemView: View {
 
     override func updateLayer() {
         super.updateLayer()
+        self.backgroundColor = NSColor.color(.grayBackground)
         self.imageView.image = self.imageView.image?.tint(color: NSColor.color(.titleAccent))
     }
 
@@ -93,7 +94,6 @@ class ShortcutItemView: View {
 
     func setup() {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.grayBackground)
 
         self.imageView.snp.makeConstraints { maker in
             maker.size.equalTo(11)
