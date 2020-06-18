@@ -24,7 +24,6 @@ class PanelBottomBarView: View {
             "icon_cmd",
             color: .button
         )
-        .withIsHidden(true)
 
     let settingsButton = Button().withImageName(
         "icon_settings_2",

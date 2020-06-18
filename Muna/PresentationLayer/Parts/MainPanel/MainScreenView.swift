@@ -14,6 +14,8 @@ class MainScreenView: NSView {
     let shortcutsView = MainPanelShortcutsView(style: .withShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
 
+    var isShortcutsShowed = false
+
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
@@ -48,6 +50,16 @@ class MainScreenView: NSView {
 
         self.changeTimeView = changeTimeView
         self.window?.makeFirstResponder(changeTimeView)
+    }
+
+    func toggleShortutsView() {
+        if self.isShortcutsShowed {
+            self.isShortcutsShowed.toggle()
+            self.hideShortcutsView()
+        } else {
+            self.isShortcutsShowed.toggle()
+            self.showShortcutsView()
+        }
     }
 
     func showShortcutsView() {

@@ -54,7 +54,7 @@ class MainScreenViewController: NSViewController {
     }
 
     @objc func shortcutAction() {
-        print("Shortcut info")
+        self.showShortcutsView()
     }
 
     func actionForShortcut(_ shortcut: Shortcut) {
@@ -97,12 +97,19 @@ class MainScreenViewController: NSViewController {
         self.shortcutsController?.start()
     }
 
+    func showShortcutsView() {
+        self.view.window?.makeFirstResponder(self.view)
+
+        self.rootView.toggleShortutsView()
+    }
+
     func toggle(selectedItem: ItemModel? = nil) {
         self.panelView.toggle(selectedItem: selectedItem)
     }
 
     func hide(completion: VoidBlock?) {
         self.panelView.hide(completion: completion)
+        self.rootView.hideShortcutsView()
         self.rootView.hideChangeTimeView()
 
         self.shortcutsController?.stop()
