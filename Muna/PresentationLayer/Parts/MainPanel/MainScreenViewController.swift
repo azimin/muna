@@ -40,6 +40,9 @@ class MainScreenViewController: NSViewController {
             shortcutActions: shortcutActions
         )
 
+        self.rootView.shortcutsView.closeButton.target = self
+        self.rootView.shortcutsView.closeButton.action = #selector(self.shortcutAction)
+
         self.panelView.bottomBar.settingsButton.target = self
         self.panelView.bottomBar.settingsButton.action = #selector(self.settingAction)
 
