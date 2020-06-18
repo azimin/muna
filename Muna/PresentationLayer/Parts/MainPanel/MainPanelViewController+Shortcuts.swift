@@ -9,7 +9,7 @@
 import Foundation
 
 extension MainScreenViewController {
-    enum Shortcut: CaseIterable {
+    enum Shortcut: CaseIterable, ViewShortcutProtocol {
         case preveousItem
         case nextItem
         case preveousSection

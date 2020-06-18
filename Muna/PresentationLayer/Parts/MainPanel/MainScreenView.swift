@@ -11,6 +11,7 @@ import SnapKit
 
 class MainScreenView: NSView {
     let mainPanelView = MainPanelView()
+    let shortcutsView = MainPanelShortcutsView(style: .withShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
 
     override init(frame: NSRect) {
@@ -49,11 +50,23 @@ class MainScreenView: NSView {
         self.window?.makeFirstResponder(changeTimeView)
     }
 
+    func showShortcutsView() {
+        self.addSubview(self.shortcutsView)
+        self.shortcutsView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(self.mainPanelView.snp.leading).offset(-16)
+        }
+    }
+
     func hideChangeTimeView() {
         guard let changeTimeView = self.changeTimeView else {
             return
         }
         changeTimeView.removeFromSuperview()
         self.changeTimeView = nil
+    }
+
+    func hideShortcutsView() {
+        self.shortcutsView.removeFromSuperview()
     }
 }
