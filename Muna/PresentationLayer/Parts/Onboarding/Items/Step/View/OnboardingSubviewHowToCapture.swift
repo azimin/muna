@@ -9,13 +9,13 @@
 import Foundation
 
 class OnboardingSubviewHowToCapture: View {
-    let partShorcutView = ShortcutView(item: Preferences.defaultScreenshotShortcutItem)
+    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultScreenshotShortcut.item)
 
     let partShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
         .withText("Capture Area")
 
-    let fullShorcutView = ShortcutView(item: Preferences.defaultShortcutFullscreenScreenshotShortcutItem)
+    let fullShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultShortcutFullscreenScreenshotShortcut.item)
 
     let fullShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)

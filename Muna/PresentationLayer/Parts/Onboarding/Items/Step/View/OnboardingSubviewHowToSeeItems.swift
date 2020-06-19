@@ -9,7 +9,7 @@
 import Foundation
 
 class OnboardingSubviewHowToSeeItems: View {
-    let panelShorcutView = ShortcutView(item: Preferences.defaultActivationShortcutItem)
+    let panelShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultActivationShortcut.item)
 
     let panelShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)

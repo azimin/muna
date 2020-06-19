@@ -15,30 +15,41 @@ class Preferences {
     static var defaultShortcutDebugKey = "ud_activation_debug_shortcut"
     static var defaultShortcutFullscreenScreenshotKey = "screenshot_full_short"
 
-    static var defaultScreenshotShortcutItem = ShortcutItem(
-        key: .two,
-        modifiers: [.command, .shift]
-    )
+    enum DefaultItems: ViewShortcutProtocol {
+        case defaultScreenshotShortcut
+        case defaultShortcutFullscreenScreenshotShortcut
+        case defaultActivationShortcut
 
-    static var defaultShortcutFullscreenScreenshotShortcutItem = ShortcutItem(
-        key: .one,
-        modifiers: [.command, .shift]
-    )
-
-    static var defaultActivationShortcutItem = ShortcutItem(
-        key: .w,
-        modifiers: [.command, .shift]
-    )
+        var item: ShortcutItem {
+            switch self {
+            case .defaultShortcutFullscreenScreenshotShortcut:
+                return ShortcutItem(
+                    key: .one,
+                    modifiers: [.command, .shift]
+                )
+            case .defaultScreenshotShortcut:
+                return ShortcutItem(
+                    key: .two,
+                    modifiers: [.command, .shift]
+                )
+            case .defaultActivationShortcut:
+                return ShortcutItem(
+                    key: .w,
+                    modifiers: [.command, .shift]
+                )
+            }
+        }
+    }
 
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + w
-        let defaultActivationShortcut = defaultActivationShortcutItem.masShortcut
+        let defaultActivationShortcut = DefaultItems.defaultActivationShortcut.item.masShortcut
 
         // cmd + shift + 2
-        let defaultScreenshotShortcut = defaultScreenshotShortcutItem.masShortcut
+        let defaultScreenshotShortcut = DefaultItems.defaultScreenshotShortcut.item.masShortcut
 
         // cmd + shift + 1
-        let defaultShortcutFullscreenScreenshotShortcut = defaultShortcutFullscreenScreenshotShortcutItem.masShortcut
+        let defaultShortcutFullscreenScreenshotShortcut = DefaultItems.defaultShortcutFullscreenScreenshotShortcut.item.masShortcut
 
         // cmd + shift + d
         let defaultDebugShortcut = ShortcutItem(

@@ -131,7 +131,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             self.emptyStateView.update(style: .noDeadline)
         case .uncompleted:
             self.emptyStateView.update(style: .noUncompletedItems(
-                shortcut: Preferences.defaultScreenshotShortcutItem)
+                shortcut: Preferences.DefaultItems.defaultScreenshotShortcut.item)
             )
         case .completed:
             self.emptyStateView.update(style: .noCompletedItems)

@@ -54,15 +54,14 @@ class MainScreenView: NSView {
 
     func toggleShortutsView() {
         if self.isShortcutsShowed {
-            self.isShortcutsShowed.toggle()
             self.hideShortcutsView()
         } else {
-            self.isShortcutsShowed.toggle()
             self.showShortcutsView()
         }
     }
 
     func showShortcutsView() {
+        self.isShortcutsShowed = true
         self.addSubview(self.shortcutsView)
         self.shortcutsView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -79,6 +78,7 @@ class MainScreenView: NSView {
     }
 
     func hideShortcutsView() {
+        self.isShortcutsShowed = false
         self.shortcutsView.removeFromSuperview()
     }
 }

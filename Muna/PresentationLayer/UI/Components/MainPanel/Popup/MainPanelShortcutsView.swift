@@ -14,20 +14,26 @@ class MainPanelShortcutsView: PopupView {
 
     enum DescriptionShortcut {
         case nextItem
+        case previousSection
         case nextSection
         case deleteItem
         case previewItem
         case complete
         case editTime
         case close
+        case makeFullScreenshot
+        case makeSelectedAreaShot
 
         static var values: [DescriptionShortcut] = [
             .nextItem,
             .nextSection,
+            .previousSection,
             .deleteItem,
             .previewItem,
             .complete,
             .editTime,
+            .makeFullScreenshot,
+            .makeSelectedAreaShot,
             .close,
         ]
 
@@ -39,10 +45,9 @@ class MainPanelShortcutsView: PopupView {
                     MainScreenViewController.Shortcut.preveousItem,
                 ]
             case .nextSection:
-                return [
-                    MainScreenViewController.Shortcut.nextSection,
-                    MainScreenViewController.Shortcut.preveousSection,
-                ]
+                return [MainScreenViewController.Shortcut.nextSection]
+            case .previousSection:
+                return [MainScreenViewController.Shortcut.preveousSection]
             case .deleteItem:
                 return [MainScreenViewController.Shortcut.deleteItem]
             case .previewItem:
@@ -53,6 +58,10 @@ class MainPanelShortcutsView: PopupView {
                 return [MainScreenViewController.Shortcut.editTime]
             case .close:
                 return [MainScreenViewController.Shortcut.close]
+            case .makeFullScreenshot:
+                return [Preferences.DefaultItems.defaultShortcutFullscreenScreenshotShortcut]
+            case .makeSelectedAreaShot:
+                return [Preferences.DefaultItems.defaultScreenshotShortcut]
             }
         }
 
@@ -61,7 +70,9 @@ class MainPanelShortcutsView: PopupView {
             case .nextItem:
                 return "Next/Previous item"
             case .nextSection:
-                return "Next/Previous section"
+                return "Next section"
+            case .previousSection:
+                return "Previous section"
             case .deleteItem:
                 return "Delete item"
             case .previewItem:
@@ -72,6 +83,10 @@ class MainPanelShortcutsView: PopupView {
                 return "Edit deadline"
             case .close:
                 return "Show/Close panel"
+            case .makeFullScreenshot:
+                return "Capture full-screenshot"
+            case .makeSelectedAreaShot:
+                return "Capture selected area"
             }
         }
 
@@ -80,7 +95,9 @@ class MainPanelShortcutsView: PopupView {
             case .nextItem:
                 return "Select the needed item"
             case .nextSection:
-                return "Switch between multiple sections"
+                return "Show the next sections"
+            case .previousSection:
+                return "Show the previous sections"
             case .deleteItem:
                 return "Delete unneeded task"
             case .previewItem:
@@ -90,6 +107,10 @@ class MainPanelShortcutsView: PopupView {
             case .editTime:
                 return "Edit deadline if for more time flexibility"
             case .close:
+                return ""
+            case .makeFullScreenshot:
+                return ""
+            case .makeSelectedAreaShot:
                 return ""
             }
         }
