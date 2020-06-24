@@ -18,7 +18,7 @@ class TaskCreateView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
-    let doneButton = TaskDoneButton()
+    let doneButton = PopupButton(style: .basic, title: "Done")
 
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView
@@ -79,7 +79,9 @@ class TaskCreateView: PopupView {
 
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { maker in
-            maker.bottom.leading.trailing.equalToSuperview()
+            maker.bottom.leading.trailing.equalToSuperview().inset(
+                NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            )
             maker.top.equalTo(self.commentTextField.snp.bottom).inset(-32)
         }
 

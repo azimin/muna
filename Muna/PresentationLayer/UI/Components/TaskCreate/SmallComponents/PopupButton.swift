@@ -8,19 +8,32 @@
 
 import Cocoa
 
-class TaskDoneButton: Button {
-    let separator = View()
-        .withBackgroundColorStyle(.separator)
+class PopupButton: Button {
+    enum Style {
+        case basic
+        case distructive
+    }
 
     let overlay = View()
-        .withBackgroundColorStyle(.lightOverlay)
 
-    let label = Label(fontStyle: .bold, size: 15)
+    let label = Label(fontStyle: .semibold, size: 13)
         .withTextColorStyle(.title60AccentAlpha)
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    private let style: Style
+
+    init(style: Style, title: String) {
+        switch style {
+        case .basic:
+            _ = self.overlay.withBackgroundColorStyle(.lightOverlay)
+        case .distructive:
+            _ = self.overlay.withBackgroundColorStyle(.distructiveOverlay)
+        }
+
+        self.style = style
+        super.init(frame: .zero)
         self.setup()
+
+        self.label.text = title
     }
 
     required init?(coder: NSCoder) {
@@ -32,23 +45,16 @@ class TaskDoneButton: Button {
 
         self.wantsLayer = true
         self.snp.makeConstraints { maker in
-            maker.height.equalTo(50)
-        }
-
-        self.addSubview(self.separator)
-        self.separator.snp.makeConstraints { maker in
-            maker.leading.trailing.top.equalToSuperview()
-            maker.height.equalTo(1)
+            maker.height.equalTo(32)
         }
 
         self.addSubview(self.overlay)
+        self.overlay.layer?.cornerRadius = 6
         self.overlay.snp.makeConstraints { maker in
-            maker.top.equalTo(self.separator.snp.bottom)
-            maker.leading.trailing.bottom.equalToSuperview()
+            maker.top.leading.trailing.bottom.equalToSuperview()
         }
 
         self.addSubview(self.label)
-        self.label.text = "Done"
         self.label.snp.makeConstraints { maker in
             maker.center.equalToSuperview()
         }

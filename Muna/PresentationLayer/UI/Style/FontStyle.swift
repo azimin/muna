@@ -10,6 +10,7 @@ import Cocoa
 
 enum FontStyle {
     case bold
+    case semibold
     case medium
     case heavy
     case regular
@@ -18,6 +19,8 @@ enum FontStyle {
         switch style {
         case .bold:
             return NSFont.systemFont(ofSize: size, weight: .bold)
+        case .semibold:
+            return NSFont.systemFont(ofSize: size, weight: .semibold)
         case .heavy:
             return NSFont.systemFont(ofSize: size, weight: .heavy)
         case .medium:

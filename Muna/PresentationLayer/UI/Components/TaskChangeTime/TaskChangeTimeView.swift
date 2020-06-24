@@ -13,7 +13,8 @@ class TaskChangeTimeView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
-    let doneButton = TaskDoneButton()
+    let removeTimeButton = PopupButton(style: .distructive, title: "Remove time")
+    let doneButton = PopupButton(style: .basic, title: "Done")
 
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView
@@ -64,11 +65,24 @@ class TaskChangeTimeView: PopupView {
 
         self.reminderTextField.placeholder = "When to remind"
 
+        self.addSubview(self.removeTimeButton)
+        self.removeTimeButton.snp.makeConstraints { maker in
+            maker.leading.trailing.equalToSuperview().inset(
+                NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            )
+            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-12)
+        }
+
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { maker in
-            maker.bottom.leading.trailing.equalToSuperview()
-            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
+            maker.bottom.leading.trailing.equalToSuperview().inset(
+                NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            )
+            maker.top.equalTo(self.removeTimeButton.snp.bottom).inset(-12)
         }
+
+        self.removeTimeButton.target = self
+        self.removeTimeButton.action = #selector(self.handleRemoveTimeButton)
 
         self.doneButton.target = self
         self.doneButton.action = #selector(self.handleDoneButton)
@@ -155,6 +169,19 @@ class TaskChangeTimeView: PopupView {
     }
 
     // MARK: - Saving
+
+    @objc
+    private func handleRemoveTimeButton() {
+        defer {
+            self.closeAlert()
+        }
+
+        self.itemModel.dueDateString = nil
+        self.itemModel.dueDate = nil
+
+        ServiceLocator.shared.notifications.removeNotification(item: self.itemModel)
+        ServiceLocator.shared.itemsDatabase.saveItems()
+    }
 
     @objc
     private func handleCloseButton() {

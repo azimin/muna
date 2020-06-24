@@ -120,7 +120,7 @@
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
 		9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */; };
 		9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */; };
-		9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */; };
+		9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* PopupButton.swift */; };
 		9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */; };
 		9FD95E7F2484115800ED4F05 /* CloseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD95E7E2484115800ED4F05 /* CloseHandler.swift */; };
 		9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */; };
@@ -278,7 +278,7 @@
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionedTextField.swift; sourceTree = "<group>"; };
 		9FC9CDD12469B6AA0018FAD7 /* TaskCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateView.swift; sourceTree = "<group>"; };
-		9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDoneButton.swift; sourceTree = "<group>"; };
+		9FC9CDD32469F3E20018FAD7 /* PopupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
 		9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserItemView.swift; sourceTree = "<group>"; };
 		9FD4C29224812C890027F71B /* MunaMouseWorkaround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MunaMouseWorkaround.h; sourceTree = "<group>"; };
 		9FD95E7E2484115800ED4F05 /* CloseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseHandler.swift; sourceTree = "<group>"; };
@@ -1092,7 +1092,7 @@
 		9FC9CDD52469F5510018FAD7 /* SmallComponents */ = {
 			isa = PBXGroup;
 			children = (
-				9FC9CDD32469F3E20018FAD7 /* TaskDoneButton.swift */,
+				9FC9CDD32469F3E20018FAD7 /* PopupButton.swift */,
 			);
 			path = SmallComponents;
 			sourceTree = "<group>";
@@ -1417,7 +1417,7 @@
 				9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
-				9FC9CDD42469F3E20018FAD7 /* TaskDoneButton.swift in Sources */,
+				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
@@ -1637,7 +1637,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1667,7 +1667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1756,7 +1756,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
