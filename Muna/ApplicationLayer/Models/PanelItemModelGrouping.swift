@@ -60,6 +60,11 @@ class PanelItemModelGrouping {
         }
 
         for item in items.sorted(by: { (first, second) -> Bool in
+            if let firstCompletionDate = first.completionDate,
+                let secondCompletionDate = second.completionDate {
+                return firstCompletionDate > secondCompletionDate
+            }
+
             if first.dueDate != nil, second.dueDate == nil {
                 return true
             }

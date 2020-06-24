@@ -540,7 +540,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         )
 
         let item = self.groupedData.item(at: indexPath)
-        cell.customSubview.update(item: item)
+
+        switch self.selectedFilter {
+        case .all, .noDeadline, .uncompleted:
+            cell.customSubview.update(item: item, style: .basic)
+        case .completed:
+            cell.customSubview.update(item: item, style: .completed)
+        }
 
         return cell
     }

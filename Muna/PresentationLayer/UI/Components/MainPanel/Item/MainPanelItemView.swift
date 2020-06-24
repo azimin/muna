@@ -10,6 +10,13 @@ import Cocoa
 import SnapKit
 
 final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
+    enum Style {
+        case basic
+        case completed
+    }
+
+    private var style: Style = .basic
+
     let backgroundView = View()
 
     var imageView = ImageView()
@@ -134,7 +141,8 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     private var item: ItemModel?
 
-    func update(item: ItemModel) {
+    func update(item: ItemModel, style: Style) {
+        self.style = style
         self.updateDueDate(item: item)
 
         if let comment = item.comment, comment.isEmpty == false {
@@ -172,7 +180,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             self.deadlineLabel.stringValue = "No reminder"
         }
 
-        if let dueDate = item.dueDate, dueDate < Date() {
+        if let dueDate = item.dueDate, dueDate < Date(), self.style != .completed {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
             self.deadlineLabel.textColor = NSColor.color(.titleAccent)
