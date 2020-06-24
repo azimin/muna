@@ -30,10 +30,10 @@ struct TimeOfDay: Equatable {
         guard let date = string.toDate(
             "dd:MM:yyyy HH:mm:ss",
             region: .currentIn(
-                locale: Locales.englishAmericanSamoa,
+                locale: Locales.englishUnitedStates,
                 calendar: Calendars.gregorian
             )
-        )?.date else {
+        )?.date.transformToClassicDate() else {
             assertionFailure("No date")
             return Date()
         }
