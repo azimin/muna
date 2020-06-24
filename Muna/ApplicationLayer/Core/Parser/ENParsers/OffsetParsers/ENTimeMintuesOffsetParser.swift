@@ -40,12 +40,12 @@ class ENTimeMintuesOffsetParser: Parser {
 
         minutesOffset += parsedItem.refDate.minute
 
-        if minutesOffset >= 60 {
+        while minutesOffset >= 60 {
             hour += 1
             minutesOffset -= 60
         }
 
-        if hour >= 24 {
+        while hour >= 24 {
             day += 1
             hour -= 24
         }
