@@ -40,7 +40,7 @@ class ReminderItem {
                 let sufix = minutes == 1 ? "minute" : "minutes"
                 additionalText = "in \(minutes) \(sufix)"
             case let .hour(hour, minutes):
-                let offset = Float(60) / Float(minutes)
+                let offset = minutes == 0 ? 0 : Float(60) / Float(minutes)
                 let offsetRounded = Int(round(offset * 10))
                 let sufix = (hour == 1 && offsetRounded == 0) ? "hour" : "hours"
 
