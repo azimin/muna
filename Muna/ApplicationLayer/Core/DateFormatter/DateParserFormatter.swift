@@ -46,15 +46,6 @@ class DateParserFormatter {
 
 extension Date {
     func representableDate() -> Date {
-        let format = DateFormatter()
-        format.dateFormat = "MM-dd-yyyy HH:mm"
-        let string = format.string(from: self)
-
-        if let date = string.toDate("MM-dd-yyyy HH:mm") {
-            return date.date
-        } else {
-            assertionFailure("Can't cast")
-            return Date()
-        }
+        return self
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 struct TimeOfDay: Equatable {
     var hours: Int
@@ -28,7 +29,10 @@ struct TimeOfDay: Equatable {
 
         guard let date = string.toDate(
             "dd:MM:yyyy HH:mm:ss",
-            region: .current
+            region: .currentIn(
+                locale: Locales.englishAmericanSamoa,
+                calendar: Calendars.gregorian
+            )
         )?.date else {
             assertionFailure("No date")
             return Date()
