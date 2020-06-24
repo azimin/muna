@@ -8,11 +8,16 @@
 
 import Foundation
 
+struct TransformedDate {
+    let date: Date
+    let offset: DateOffset?
+}
+
 class DateItemsTransformer {
     private var dateItems: [DateItem]
     private let configurator: DateItemPresentationConfiguratorProtocol
 
-    private(set) var dates: [Date] = []
+    private(set) var dates: [TransformedDate] = []
 
     init(
         dateItems: [DateItem],
@@ -53,7 +58,7 @@ class DateItemsTransformer {
             )
             for time in times {
                 let date = time.apply(to: item.day)
-                self.dates.append(date)
+                self.dates.append(TransformedDate(date: date, offset: item.offset))
             }
         }
     }

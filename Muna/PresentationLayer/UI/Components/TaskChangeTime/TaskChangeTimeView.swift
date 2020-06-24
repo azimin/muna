@@ -230,15 +230,7 @@ extension TaskChangeTimeView: TextFieldDelegate {
         self.presentationDateItemTransformer.setDateItems(self.parsedDates)
 
         let items = self.presentationDateItemTransformer.dates.compactMap { result -> ReminderItem? in
-            let formatter = DateParserFormatter(date: result)
-
-            let item = ReminderItem(
-                date: result,
-                title: formatter.monthDateWeekday,
-                subtitle: formatter.subtitle,
-                additionalText: formatter.additionalText
-            )
-            return item
+            ReminderItem(transformedDate: result)
         }
 
         self.controller.showItems(items: items, animated: true)
