@@ -17,7 +17,7 @@ class PopupButton: Button {
     let overlay = View()
 
     let label = Label(fontStyle: .semibold, size: 13)
-        .withTextColorStyle(.title60AccentAlpha)
+        .withTextColorStyle(.titleAccent)
 
     private let style: Style
 

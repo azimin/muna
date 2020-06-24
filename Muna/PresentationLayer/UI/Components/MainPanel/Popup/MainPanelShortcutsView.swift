@@ -10,7 +10,7 @@ import Cocoa
 import SwiftDate
 
 class MainPanelShortcutsView: PopupView {
-    private var frameWidth: CGFloat = 340
+    private var frameWidth: CGFloat = 400
 
     enum DescriptionShortcut {
         case nextItem

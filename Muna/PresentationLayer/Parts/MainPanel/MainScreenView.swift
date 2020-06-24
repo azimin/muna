@@ -11,7 +11,7 @@ import SnapKit
 
 class MainScreenView: NSView {
     let mainPanelView = MainPanelView()
-    let shortcutsView = MainPanelShortcutsView(style: .withShortcutsButton)
+    let shortcutsView = MainPanelShortcutsView(style: .withoutShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
 
     var isShortcutsShowed = false

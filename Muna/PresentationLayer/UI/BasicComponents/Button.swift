@@ -28,7 +28,7 @@ class Button: NSButton {
 
         self.isBordered = false
         cell.highlightedAction = { [weak self] flag in
-            self?.layer?.opacity = flag ? 0.7 : 1.0
+            self?.updateHighlight(isHighlighted: flag)
         }
     }
 
@@ -49,5 +49,9 @@ class Button: NSButton {
                     NSAttributedString.Key.font: self.font ?? NSFont.systemFont(ofSize: 16, weight: .bold),
                 ]
             )
+    }
+
+    func updateHighlight(isHighlighted: Bool) {
+        self.layer?.opacity = isHighlighted ? 0.7 : 1.0
     }
 }
