@@ -33,17 +33,6 @@ class MainPanelView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var isFirstLanch = true
-
-    override func layout() {
-        super.layout()
-
-        if self.isFirstLanch {
-            self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-            self.isFirstLanch = false
-        }
-    }
-
     override func updateLayer() {
         super.updateLayer()
         self.visualView.material = Theme.current.visualEffectMaterial
@@ -73,7 +62,7 @@ class MainPanelView: NSView {
         self.segmentControl.selectedSegment = 0
         self.segmentControl.segmentStyle = .capsule
         self.segmentControl.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(40)
+            maker.top.equalToSuperview().inset(18)
             maker.centerX.equalToSuperview()
             maker.width.equalTo(340)
         }
@@ -82,7 +71,7 @@ class MainPanelView: NSView {
 
         self.backgroundView.addSubview(self.topSeparator)
         self.topSeparator.snp.makeConstraints { maker in
-            maker.top.equalTo(self.segmentControl.snp.bottom).inset(-16)
+            maker.top.equalTo(self.segmentControl.snp.bottom).inset(-18)
             maker.leading.trailing.equalToSuperview()
             maker.height.equalTo(1)
         }
@@ -125,16 +114,6 @@ class MainPanelView: NSView {
     }
 
     func show(selectedItem: ItemModel? = nil) {
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-
-        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-        transform.fromValue = self.backgroundView.layer?.transform
-        transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
-        transform.duration = 0.25
-
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
-        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-
         if let item = selectedItem {
             self.toggle(selectedItem: item)
         } else {
@@ -161,20 +140,8 @@ class MainPanelView: NSView {
         self.mainContentView.reloadData(selectedItem: item)
     }
 
-    func hide(completion: VoidBlock?) {
+    func hide() {
         self.mainContentView.popover?.close()
-
-        CATransaction.begin()
-        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
-        transform.fromValue = self.backgroundView.layer?.transform
-        transform.toValue = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-        transform.duration = 0.25
-
-        self.backgroundView.layer?.transform = CATransform3DMakeTranslation(self.frame.width, 0, 0)
-
-        CATransaction.setCompletionBlock(completion)
-        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
-        CATransaction.commit()
     }
 
     func spaceClicked() {

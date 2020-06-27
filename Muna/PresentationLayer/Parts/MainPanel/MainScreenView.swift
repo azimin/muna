@@ -10,6 +10,7 @@ import Cocoa
 import SnapKit
 
 class MainScreenView: NSView {
+    let panelPresentationView = MainPanelPresentationAnimationView()
     let mainPanelView = MainPanelView()
     let shortcutsView = MainPanelShortcutsView(style: .withoutShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
@@ -26,9 +27,19 @@ class MainScreenView: NSView {
     }
 
     func setup() {
-        self.addSubview(self.mainPanelView)
-        self.mainPanelView.snp.makeConstraints { maker in
+        self.addSubview(self.panelPresentationView)
+        self.panelPresentationView.snp.makeConstraints { maker in
             maker.top.trailing.bottom.equalToSuperview()
+        }
+
+        self.panelPresentationView.addSubview(self.mainPanelView)
+        self.mainPanelView.wantsLayer = true
+        self.mainPanelView.layer?.cornerRadius = 12
+        self.mainPanelView.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview()
+            maker.top.trailing.bottom.equalToSuperview().inset(
+                NSEdgeInsets(top: 36, left: 12, bottom: 12, right: 12)
+            )
             maker.width.equalTo(WindowManager.panelWindowFrameWidth)
         }
     }

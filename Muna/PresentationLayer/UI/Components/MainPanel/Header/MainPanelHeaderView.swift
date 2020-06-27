@@ -11,10 +11,10 @@ import SnapKit
 
 final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSCollectionViewSectionHeaderView {
     let label = Label(
-        fontStyle: .medium,
+        fontStyle: .semibold,
         size: 20
     )
-    .withTextColorStyle(.title60AccentAlpha)
+    .withTextColorStyle(.titleAccent)
 
     let redArrowView = View()
 

@@ -97,6 +97,7 @@ class MainScreenViewController: NSViewController {
         self.view.window?.makeFirstResponder(self.view)
 
         self.panelView.show(selectedItem: selectedItem)
+        self.rootView.panelPresentationView.show()
         self.shortcutsController?.start()
     }
 
@@ -111,7 +112,8 @@ class MainScreenViewController: NSViewController {
     }
 
     func hide(completion: VoidBlock?) {
-        self.panelView.hide(completion: completion)
+        self.panelView.hide()
+        self.rootView.panelPresentationView.hide(completion: completion)
         self.rootView.hideShortcutsView()
         self.rootView.hideChangeTimeView()
 

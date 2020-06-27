@@ -72,6 +72,7 @@
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
+		9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
 		9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E452494EDB700A34379 /* OnboardingIntroViewController.swift */; };
@@ -229,6 +230,7 @@
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelPresentationAnimationView.swift; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */,
 				9F99D6012464B64B00695A19 /* Content */,
 				9F99D6022464B65900695A19 /* MainPanelView.swift */,
+				9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */,
 				9F97D0C4247DAE1C00358953 /* MainScreenView.swift */,
 			);
 			name = View;
@@ -1417,6 +1420,7 @@
 				9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
+				9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
