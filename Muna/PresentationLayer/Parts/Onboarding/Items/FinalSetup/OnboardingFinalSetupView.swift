@@ -137,7 +137,7 @@ class OnboardingFinalSetupView: NSView {
         self.addSubview(self.startupSettingItem)
         self.startupSettingItem.snp.makeConstraints { make in
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
-            make.trailing.equalToSuperview().inset(124)
+            make.trailing.equalToSuperview().inset(114)
             make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24)
         }
 
@@ -147,7 +147,7 @@ class OnboardingFinalSetupView: NSView {
         self.addSubview(self.notificationsSettingItem)
         self.notificationsSettingItem.snp.makeConstraints { make in
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
-            make.trailing.equalToSuperview().inset(124)
+            make.trailing.equalToSuperview().inset(114)
             make.top.equalTo(self.startupSettingItem.snp.bottom)
         }
 
@@ -157,7 +157,7 @@ class OnboardingFinalSetupView: NSView {
         self.addSubview(self.storageSettingItem)
         self.storageSettingItem.snp.makeConstraints { make in
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
-            make.trailing.equalToSuperview().inset(124)
+            make.trailing.equalToSuperview().inset(114)
             make.top.equalTo(self.notificationsSettingItem.snp.bottom)
         }
 
