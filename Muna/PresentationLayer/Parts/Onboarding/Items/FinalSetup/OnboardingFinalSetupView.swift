@@ -68,6 +68,19 @@ class OnboardingFinalSetupView: NSView {
     }
 
     private func setupInitialLayout() {
+        let string = "Setup Muna"
+        let attributedString = NSMutableAttributedString(
+            string: string,
+            attributes: [
+                .font: FontStyle.bold,
+                .foregroundColor: NSColor.white,
+            ]
+        )
+
+        let range = (string as NSString).range(of: "Muna")
+        attributedString.addAttributes([.foregroundColor: NSColor(hex: "72AEE4")], range: range)
+        self.introLabel.placeholderAttributedString = attributedString
+
         self.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 1103, height: 676))
         }
