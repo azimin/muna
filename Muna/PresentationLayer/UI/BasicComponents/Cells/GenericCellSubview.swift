@@ -6,16 +6,22 @@
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 public protocol GenericCellSubview {
     init()
 
     func setSelected(_ selected: Bool, animated: Bool)
     func setHighlighted(_ highlighted: Bool, animated: Bool)
+
+    func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes
 }
 
 extension GenericCellSubview {
     public func setSelected(_ selected: Bool, animated: Bool) {}
     public func setHighlighted(_ highlighted: Bool, animated: Bool) {}
+
+    func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
+        return layoutAttributes
+    }
 }

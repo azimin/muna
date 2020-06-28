@@ -48,10 +48,27 @@ class ImageStorageService: ImageStorageServiceProtocol {
         completion?(self.forceLoadImage(name: name))
     }
 
+    typealias CacheItem = (name: String, image: NSImage)
+    private var cache: [CacheItem] = []
+
+    func updateCacheIfNeeded() {
+        if self.cache.count > 50 {
+            self.cache.removeFirst(10)
+        }
+    }
+
     func forceLoadImage(name: String) -> NSImage? {
+        self.updateCacheIfNeeded()
+        if let image = self.cache.first(where: { $0.name == name })?.image {
+            return image
+        }
+
         let filename = self.getDocumentsDirectory().appendingPathComponent("images/\(name).jpeg")
         if let data = try? Data(contentsOf: filename) {
             let image = NSImage(data: data)
+            if let image = image {
+                self.cache.append((name, image))
+            }
             return image
         } else {
             return nil

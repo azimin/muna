@@ -58,7 +58,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         let layout = NSCollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
-        layout.estimatedItemSize = NSSize(width: 380, height: 100)
+        layout.estimatedItemSize = NSSize(
+            width: WindowManager.panelWindowFrameWidth,
+            height: 100
+        )
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -72,6 +75,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.collectionView.registerReusableCellWithClass(
             GenericCollectionViewItem<NewMainPanelItemView>.self
+        )
+
+        self.collectionView.registerReusableCellWithClass(
+            GenericCollectionViewItem<MainPanelItemView>.self
         )
 
         self.collectionView.registerReusableHeaderClass(
@@ -541,12 +548,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         )
 
         let item = self.groupedData.item(at: indexPath)
+        print(indexPath)
 
         switch self.selectedFilter {
         case .all, .noDeadline, .uncompleted:
-            cell.customSubview.update(item: item)
+            cell.customSubview.update(item: item, style: .basic)
         case .completed:
-            cell.customSubview.update(item: item)
+            cell.customSubview.update(item: item, style: .completed)
         }
 
         return cell
@@ -578,15 +586,14 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         return self.insetsForSection
     }
 
-    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        let item = self.groupedData.item(at: indexPath)
-        let size = NSSize(
-            width: collectionView.frame.size.width,
-            height: NewMainPanelItemView.calculateHeight(item: item)
-        )
-        print(indexPath, size)
-        return size
-    }
+//    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+//        let item = self.groupedData.item(at: indexPath)
+//        let size = NSSize(
+//            width: collectionView.frame.size.width,
+//            height: 100
+//        )
+//        return size
+//    }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         if let value = indexPaths.first {

@@ -10,7 +10,18 @@ import Cocoa
 import SnapKit
 
 final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
+    enum Style {
+        case basic
+        case completed
+    }
+
+    static var cachedHeight: [String: CGFloat] = [:]
+
     static func calculateHeight(item: ItemModel) -> CGFloat {
+        if let height = self.cachedHeight[item.id] {
+            return height
+        }
+
         guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
             assertionFailure("No image")
             return MainPanelItemMetainformationView.calculateHeight(item: item)
@@ -18,7 +29,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
         let maxFrame = CGSize(
             width: WindowManager.panelWindowFrameWidth - 16 * 2,
-            height: 162
+            height: 172
         )
         let maxRatio = maxFrame.width / maxFrame.height
 
@@ -33,7 +44,10 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             finalHeight = maxFrame.height
         }
 
-        return finalHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
+        let returnHegiht = finalHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
+
+        self.cachedHeight[item.id] = returnHegiht
+        return returnHegiht
     }
 
     let backgroundView = View()
@@ -98,7 +112,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.backgroundView.addSubview(self.metainformationView)
         self.metainformationView.snp.makeConstraints { maker in
             maker.top.equalTo(self.imageView.snp.bottom)
-            maker.trailing.leading.bottom.equalToSuperview()
+            maker.trailing.leading.equalToSuperview()
             self.metainformationHeightConstraint = maker.height.equalTo(100).constraint
         }
 
@@ -122,11 +136,15 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
+//        guard selected != self.isSelected else {
+//            return
+//        }
         self.isSelected = selected
+
         if selected {
             let transform = CATransform3DConcat(CATransform3DMakeScale(1, 1, 1), CATransform3DMakeTranslation(0, 0, 0))
             OperationQueue.main.addOperation {
-                self.animateTransformation(transformValue: transform)
+                self.animateTransformation(transformValue: transform, animated: animated)
             }
             self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
@@ -134,7 +152,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         } else {
             let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
             OperationQueue.main.addOperation {
-                self.animateTransformation(transformValue: transform)
+                self.animateTransformation(transformValue: transform, animated: animated)
             }
             self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.redDots)
@@ -142,7 +160,12 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         }
     }
 
-    func animateTransformation(transformValue: CATransform3D) {
+    func animateTransformation(transformValue: CATransform3D, animated: Bool) {
+        guard animated else {
+            self.backgroundView.layer?.transform = transformValue
+            return
+        }
+
         let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
         transform.fromValue = self.backgroundView.layer?.transform
         transform.toValue = transformValue
@@ -153,7 +176,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     private var item: ItemModel?
 
-    func update(item: ItemModel) {
+    func update(item: ItemModel, style: Style) {
         self.metainformationView.updateDueDate(item: item)
 
         if let comment = item.comment, comment.isEmpty == false {
@@ -189,5 +212,18 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
                 self.metainformationView.updateDueDate(item: item)
             }
         })
+    }
+
+    func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
+        guard let item = self.item else {
+            assertionFailure("No item")
+            return layoutAttributes
+        }
+
+        layoutAttributes.frame.size = CGSize(
+            width: layoutAttributes.frame.size.width,
+            height: NewMainPanelItemView.calculateHeight(item: item)
+        )
+        return layoutAttributes
     }
 }
