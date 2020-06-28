@@ -39,6 +39,8 @@
 		23ADE2D624A899F800A2D7F9 /* ShortcutPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */; };
 		23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2D724A8A3C500A2D7F9 /* SettingsShortcutView.swift */; };
 		23ADE2DC24A8A6C600A2D7F9 /* IconShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */; };
+		23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */; };
+		23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
@@ -197,6 +199,8 @@
 		23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreviewView.swift; sourceTree = "<group>"; };
 		23ADE2D724A8A3C500A2D7F9 /* SettingsShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsShortcutView.swift; sourceTree = "<group>"; };
 		23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconShortcutView.swift; sourceTree = "<group>"; };
+		23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherSettingsItem.swift; sourceTree = "<group>"; };
+		23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSettingsItem.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
@@ -587,6 +591,8 @@
 			children = (
 				9F15270C24701A3D0037623B /* Root */,
 				9F152707246DD7C80037623B /* Tabs */,
+				23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */,
+				23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1419,6 +1425,7 @@
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
+				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
@@ -1495,6 +1502,7 @@
 				23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */,
 				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
 				9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */,
+				23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
