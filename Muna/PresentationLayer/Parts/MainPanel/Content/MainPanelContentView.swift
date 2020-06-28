@@ -57,7 +57,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         let layout = NSCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 24
+        layout.minimumLineSpacing = 0
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self

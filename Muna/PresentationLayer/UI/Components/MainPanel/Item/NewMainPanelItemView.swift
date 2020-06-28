@@ -46,6 +46,8 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     private var isComplited: Bool = false
     private var itemObservable: ObserverTokenProtocol?
 
+    private var isSelected: Bool = false
+
     init() {
         super.init(frame: .zero)
         self.setup()
@@ -53,6 +55,17 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    var isFirstSetup = true
+
+    override func layout() {
+        super.layout()
+
+        if self.isFirstSetup {
+            self.isFirstSetup = false
+            self.setSelected(self.isSelected, animated: false)
+        }
     }
 
     func reuse() {
@@ -108,12 +121,17 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
+        self.isSelected = selected
         if selected {
-            self.backgroundView.layer?.borderWidth = 3
-            self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
-        } else {
-            self.backgroundView.layer?.borderWidth = 0
+            let transform = CATransform3DConcat(CATransform3DMakeScale(1, 1, 1), CATransform3DMakeTranslation(0, 0, 0))
+            self.backgroundView.layer?.transform = transform
+            self.backgroundView.layer?.borderWidth = 1
             self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
+        } else {
+            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))]
+            self.backgroundView.layer?.transform = transform
+            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderColor = CGColor.color(.redDots)
         }
     }
 
