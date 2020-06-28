@@ -12,6 +12,7 @@ enum ColorStyle {
     case titleAccent
     case title60Accent
     case title60AccentAlpha
+    case newTitle
 
     case button
 
@@ -69,9 +70,13 @@ enum ColorStyle {
                 return NSColor(hex: "525252").withAlphaComponent(0.5)
             case .alwaysWhite:
                 return NSColor.white
+            case .newTitle:
+                return NSColor(hex: "E3E4E4")
             }
         case .light:
             switch self {
+            case .newTitle:
+                return NSColor(hex: "E3E4E4")
             case .titleAccent:
                 return NSColor.black
             case .title60Accent:

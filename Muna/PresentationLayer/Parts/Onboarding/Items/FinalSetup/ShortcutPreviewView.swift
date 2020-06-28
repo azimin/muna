@@ -6,18 +6,19 @@
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class ShortcutPreviewView: NSView {
     let titleLabel = Label(fontStyle: .bold, size: 16)
         .withTextColorStyle(.titleAccent)
+        .withAligment(.center)
 
     let previewImageView = ImageView()
 
-    let shortcutView: ShortcutView
+    let shortcutView: SettingsShortcutView
 
     init(title: String, imageName: String, item: ShortcutItem) {
-        self.shortcutView = ShortcutView(item: item)
+        self.shortcutView = SettingsShortcutView(item: item)
         self.titleLabel.text = title
         self.previewImageView.image = NSImage(named: imageName)
 
@@ -46,6 +47,7 @@ class ShortcutPreviewView: NSView {
 
         self.addSubview(self.shortcutView)
         self.shortcutView.snp.makeConstraints { make in
+            make.top.equalTo(self.previewImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }

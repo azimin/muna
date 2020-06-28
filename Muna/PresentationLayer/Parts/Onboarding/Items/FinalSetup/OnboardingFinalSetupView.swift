@@ -86,7 +86,7 @@ class OnboardingFinalSetupView: NSView {
         }
 
         self.addSubview(self.separatorView)
-        self.separatorView.backgroundColor = NSColor(hex: "#5D5D5F")
+        self.separatorView.backgroundColor = ColorStyle.separator.color
         self.separatorView.snp.makeConstraints { make in
             make.leading.equalTo(self.descriptionLabel.snp.trailing).offset(36)
             make.top.bottom.equalToSuperview()
@@ -103,16 +103,12 @@ class OnboardingFinalSetupView: NSView {
         self.entireShortcutPreview.snp.makeConstraints { make in
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(73)
-            make.width.equalTo(175)
-            make.height.equalTo(203)
         }
 
         self.addSubview(self.selectedAreaShortcutPreview)
         self.selectedAreaShortcutPreview.snp.makeConstraints { make in
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.entireShortcutPreview.snp.trailing).offset(50)
-            make.width.equalTo(175)
-            make.height.equalTo(203)
         }
 
         self.addSubview(self.showPanelShortuctPreview)
@@ -120,8 +116,6 @@ class OnboardingFinalSetupView: NSView {
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.selectedAreaShortcutPreview.snp.trailing).offset(50)
             make.trailing.equalToSuperview().inset(73)
-            make.width.equalTo(175)
-            make.height.equalTo(203)
         }
 
         self.addSubview(self.continueButton)

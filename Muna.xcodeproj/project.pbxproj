@@ -37,6 +37,8 @@
 		23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */; };
 		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
 		23ADE2D624A899F800A2D7F9 /* ShortcutPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */; };
+		23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2D724A8A3C500A2D7F9 /* SettingsShortcutView.swift */; };
+		23ADE2DC24A8A6C600A2D7F9 /* IconShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
@@ -193,6 +195,8 @@
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreviewView.swift; sourceTree = "<group>"; };
+		23ADE2D724A8A3C500A2D7F9 /* SettingsShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsShortcutView.swift; sourceTree = "<group>"; };
+		23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconShortcutView.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
@@ -666,6 +670,8 @@
 			children = (
 				9F33D4872468826100395C44 /* ShortcutView.swift */,
 				9F33D48524687F8400395C44 /* ShortcutItemView.swift */,
+				23ADE2D724A8A3C500A2D7F9 /* SettingsShortcutView.swift */,
+				23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */,
 			);
 			path = Shortcuts;
 			sourceTree = "<group>";
@@ -1413,6 +1419,7 @@
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
+				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
@@ -1428,6 +1435,7 @@
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
+				23ADE2DC24A8A6C600A2D7F9 /* IconShortcutView.swift in Sources */,
 				9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */,
 				9F1526FD246DBDA30037623B /* ShortcutController.swift in Sources */,
 				9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */,
