@@ -126,6 +126,8 @@
 		9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD32469F3E20018FAD7 /* PopupButton.swift */; };
 		9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */; };
 		9FD95E7F2484115800ED4F05 /* CloseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD95E7E2484115800ED4F05 /* CloseHandler.swift */; };
+		9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDAB87424A9452C000B1158 /* MousePositionService.swift */; };
+		9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDAB87624A948D6000B1158 /* MainPanelItemSelectionView.swift */; };
 		9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */; };
 		9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */; };
 		9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */; };
@@ -288,6 +290,8 @@
 		9FC9CDD62469F57F0018FAD7 /* DateParserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserItemView.swift; sourceTree = "<group>"; };
 		9FD4C29224812C890027F71B /* MunaMouseWorkaround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MunaMouseWorkaround.h; sourceTree = "<group>"; };
 		9FD95E7E2484115800ED4F05 /* CloseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseHandler.swift; sourceTree = "<group>"; };
+		9FDAB87424A9452C000B1158 /* MousePositionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MousePositionService.swift; sourceTree = "<group>"; };
+		9FDAB87624A948D6000B1158 /* MainPanelItemSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemSelectionView.swift; sourceTree = "<group>"; };
 		9FE0F52D24701A7D0046A5C4 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		9FE0F53124701E380046A5C4 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		9FE0F534247022A60046A5C4 /* ShortcutsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsSettingsView.swift; sourceTree = "<group>"; };
@@ -979,7 +983,9 @@
 			children = (
 				9FA07F5B2460A5BF00654D36 /* MainPanelItemView.swift */,
 				9F3E6D4E24A8121C00CEFDBE /* NewMainPanelItemView.swift */,
+				9FDAB87424A9452C000B1158 /* MousePositionService.swift */,
 				9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */,
+				9FDAB87624A948D6000B1158 /* MainPanelItemSelectionView.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -1418,6 +1424,7 @@
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
+				9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */,
 				9F693235247AD06500FEBC0B /* TaskChangeTimeView+Shortcuts.swift in Sources */,
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
@@ -1453,6 +1460,7 @@
 				231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
+				9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,

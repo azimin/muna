@@ -99,6 +99,8 @@ class MainScreenViewController: NSViewController {
         self.panelView.show(selectedItem: selectedItem)
         self.rootView.panelPresentationView.show()
         self.shortcutsController?.start()
+
+        MousePositionService.shared.start()
     }
 
     func showShortcutsView() {
@@ -118,6 +120,8 @@ class MainScreenViewController: NSViewController {
         self.rootView.hideChangeTimeView()
 
         self.shortcutsController?.stop()
+
+        MousePositionService.shared.stop()
     }
 
     // MARK: - Shorcuts

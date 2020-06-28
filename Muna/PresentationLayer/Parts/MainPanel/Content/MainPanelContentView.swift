@@ -31,6 +31,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     weak var delegate: MainPanelContentViewDelegate?
 
+    private var mouseObservable: ObserverTokenProtocol?
+
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
@@ -82,6 +84,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
+        }
+
+        self.mouseObservable = MousePositionService.shared.mousePosition.observeNewAndCall(self) { mousePoint in
+            self.updateMousePoint(mousePoint)
         }
     }
 
@@ -171,6 +177,14 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     var capturedView: NSView?
     var capturedItem: ItemModel?
+
+    func updateMousePoint(_ point: CGPoint) {
+        for cell in self.collectionView.visibleItems() where cell.isSelected {
+            if let itemCell = cell as? GenericCollectionViewItem<NewMainPanelItemView> {
+                itemCell.customSubview.passMousePosition(point: point)
+            }
+        }
+    }
 
     override func rightMouseUp(with event: NSEvent) {
         let point = self.window?.contentView?.convert(event.locationInWindow, to: self.collectionView) ?? .zero

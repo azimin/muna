@@ -30,6 +30,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     }
 
     let backgroundView = View()
+    let selectionView = MainPanelItemSelectionView()
     var imageView = ImageView()
     var metainformationHeightConstraint: Constraint?
 
@@ -73,10 +74,15 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     private func setup() {
         self.addSubview(self.backgroundView)
         self.backgroundView.layer?.cornerRadius = 12
+        self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.07)
         self.backgroundView.layer?.masksToBounds = true
-        self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.15)
         self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+        }
+
+        self.backgroundView.addSubview(self.selectionView)
+        self.selectionView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
         }
 
         self.backgroundView.addSubview(self.imageView)
@@ -113,9 +119,6 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
-//        guard selected != self.isSelected else {
-//            return
-//        }
         self.isSelected = selected
 
         if selected {
@@ -123,18 +126,23 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
-            self.backgroundView.layer?.borderWidth = 0
-            self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
-            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.3)
+            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.15)
+            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderColor = CGColor.white.copy(alpha: 0.2)
+            self.selectionView.isHidden = false
         } else {
-            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
+            let transform = CATransform3DConcat(CATransform3DMakeScale(0.91, 0.91, 1), CATransform3DMakeTranslation(8, 8, 0))
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
+            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.07)
             self.backgroundView.layer?.borderWidth = 0
-            self.backgroundView.layer?.borderColor = CGColor.color(.redDots)
-            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.15)
+            self.selectionView.isHidden = true
         }
+    }
+
+    func passMousePosition(point: CGPoint) {
+        self.selectionView.passNewPosition(point: point)
     }
 
     func animateTransformation(transformValue: CATransform3D, animated: Bool) {

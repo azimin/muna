@@ -37,7 +37,7 @@ final class GenericCollectionViewItem<T: NSView>: NSCollectionViewItem, Reusable
 
     override public var isSelected: Bool {
         didSet {
-            self.customSubview.setSelected(self.isSelected, animated: false)
+            self.customSubview.setSelected(self.isSelected, animated: true)
         }
     }
 
