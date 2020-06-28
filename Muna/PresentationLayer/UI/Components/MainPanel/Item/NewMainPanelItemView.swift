@@ -127,7 +127,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
             self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.15)
-            self.backgroundView.layer?.borderWidth = 1
+            self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.white.copy(alpha: 0.2)
             self.selectionView.isHidden = false
         } else {
