@@ -39,6 +39,12 @@ class Label: NSTextField {
         self.setup()
     }
 
+    init(font: NSFont) {
+        super.init(frame: .zero)
+        self.font = font
+        self.setup()
+    }
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         self.setup()

@@ -14,7 +14,6 @@ class PanelBottomBarView: View {
         fontStyle: .heavy,
         size: 12
     )
-    .withText("Muna")
     .withTextColorStyle(.title60AccentAlpha)
 
     let buttonsStackView = NSStackView()

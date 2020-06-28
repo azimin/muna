@@ -70,7 +70,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.updateState()
 
         self.collectionView.registerReusableCellWithClass(
-            GenericCollectionViewItem<MainPanelItemView>.self
+            GenericCollectionViewItem<NewMainPanelItemView>.self
         )
 
         self.collectionView.registerReusableHeaderClass(
@@ -535,7 +535,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let cell = collectionView.dequeueReusableCellWithType(
-            GenericCollectionViewItem<MainPanelItemView>.self,
+            GenericCollectionViewItem<NewMainPanelItemView>.self,
             indexPath: indexPath
         )
 
@@ -543,9 +543,9 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         switch self.selectedFilter {
         case .all, .noDeadline, .uncompleted:
-            cell.customSubview.update(item: item, style: .basic)
+            cell.customSubview.update(item: item)
         case .completed:
-            cell.customSubview.update(item: item, style: .completed)
+            cell.customSubview.update(item: item)
         }
 
         return cell
@@ -578,9 +578,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+        let item = self.groupedData.item(at: indexPath)
         return NSSize(
             width: collectionView.frame.size.width,
-            height: 250
+            height: NewMainPanelItemView.calculateHeight(item: item)
         )
     }
 
