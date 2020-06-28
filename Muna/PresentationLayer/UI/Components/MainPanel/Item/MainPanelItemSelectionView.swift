@@ -22,14 +22,19 @@ class MainPanelItemSelectionView: View {
 
     private func setup() {
         self.layer?.addSublayer(self.gradient)
-        self.gradient.colors = [
-            CGColor.white.copy(alpha: 0)!,
-            CGColor.white.copy(alpha: 0.1)!,
-            CGColor.white.copy(alpha: 0)!,
-        ]
         self.gradient.locations = [0, 0, 1]
         self.gradient.startPoint = CGPoint(x: 0, y: 0)
         self.gradient.endPoint = CGPoint(x: 1, y: 1)
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+
+        self.gradient.colors = [
+            CGColor.color(.titleAccent).copy(alpha: 0)!,
+            CGColor.color(.titleAccent).copy(alpha: 0.1)!,
+            CGColor.color(.titleAccent).copy(alpha: 0)!,
+        ]
     }
 
     override func layout() {
