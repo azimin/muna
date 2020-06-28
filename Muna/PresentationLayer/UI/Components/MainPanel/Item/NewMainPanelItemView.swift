@@ -128,7 +128,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             self.backgroundView.layer?.borderWidth = 1
             self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
         } else {
-            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))]
+            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
             self.backgroundView.layer?.transform = transform
             self.backgroundView.layer?.borderWidth = 1
             self.backgroundView.layer?.borderColor = CGColor.color(.redDots)

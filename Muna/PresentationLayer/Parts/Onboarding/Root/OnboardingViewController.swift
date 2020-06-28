@@ -113,8 +113,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         case .howToGetReminder:
             return OnboardingStepViewController(style: .howToGetReminder)
         case .final:
-            // TODO: Fix
-            return OnboardingIntroViewController()
+            return OnboardingFinalSetupViewController()
         }
     }
 
