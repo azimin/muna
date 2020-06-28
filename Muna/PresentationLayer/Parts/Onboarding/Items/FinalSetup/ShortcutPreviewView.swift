@@ -9,7 +9,6 @@
 import Foundation
 
 class ShortcutPreviewView: NSView {
-
     let titleLabel = Label(fontStyle: .bold, size: 16)
         .withTextColorStyle(.titleAccent)
 
@@ -17,12 +16,15 @@ class ShortcutPreviewView: NSView {
 
     let shortcutView: ShortcutView
 
-    init(item: ShortcutItem) {
+    init(title: String, imageName: String, item: ShortcutItem) {
         self.shortcutView = ShortcutView(item: item)
+        self.titleLabel.text = title
+        self.previewImageView.image = NSImage(named: imageName)
 
         super.init(frame: .zero)
+        self.setup()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

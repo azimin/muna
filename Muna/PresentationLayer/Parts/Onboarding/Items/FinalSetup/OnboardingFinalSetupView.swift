@@ -30,6 +30,25 @@ class OnboardingFinalSetupView: NSView {
 
     let separatorView = View()
 
+    let shortuctsTilteLabel = Label(fontStyle: .bold, size: 24)
+        .withText("Shortucts")
+
+    let entireShortcutPreview = ShortcutPreviewView(
+        title: "Entire screen capture shortcut",
+        imageName: "Fullscreen",
+        item: Preferences.DefaultItems.defaultShortcutFullscreenScreenshotShortcut.item
+    )
+    let selectedAreaShortcutPreview = ShortcutPreviewView(
+        title: "Capture selected positon shorcut",
+        imageName: "Selected area",
+        item: Preferences.DefaultItems.defaultScreenshotShortcut.item
+    )
+    let showPanelShortuctPreview = ShortcutPreviewView(
+        title: "Show captured items shorcut",
+        imageName: "Panel",
+        item: Preferences.DefaultItems.defaultActivationShortcut.item
+    )
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
@@ -72,6 +91,37 @@ class OnboardingFinalSetupView: NSView {
             make.leading.equalTo(self.descriptionLabel.snp.trailing).offset(36)
             make.top.bottom.equalToSuperview()
             make.width.equalTo(1)
+        }
+
+        self.addSubview(self.shortuctsTilteLabel)
+        self.shortuctsTilteLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(32)
+            make.leading.equalToSuperview().offset(661)
+        }
+
+        self.addSubview(self.entireShortcutPreview)
+        self.entireShortcutPreview.snp.makeConstraints { make in
+            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.leading.equalTo(self.separatorView.snp.trailing).offset(73)
+            make.width.equalTo(175)
+            make.height.equalTo(203)
+        }
+
+        self.addSubview(self.selectedAreaShortcutPreview)
+        self.selectedAreaShortcutPreview.snp.makeConstraints { make in
+            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.leading.equalTo(self.entireShortcutPreview.snp.trailing).offset(50)
+            make.width.equalTo(175)
+            make.height.equalTo(203)
+        }
+
+        self.addSubview(self.showPanelShortuctPreview)
+        self.showPanelShortuctPreview.snp.makeConstraints { make in
+            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.leading.equalTo(self.selectedAreaShortcutPreview.snp.trailing).offset(50)
+            make.trailing.equalToSuperview().inset(73)
+            make.width.equalTo(175)
+            make.height.equalTo(203)
         }
 
         self.addSubview(self.continueButton)
