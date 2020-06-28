@@ -15,44 +15,22 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         case completed
     }
 
-    static var cachedHeight: [String: CGFloat] = [:]
+    private static var cachedHeight: [String: CGFloat] = [:]
+    static var imageHeight: CGFloat = 172
 
     static func calculateHeight(item: ItemModel) -> CGFloat {
         if let height = self.cachedHeight[item.id] {
             return height
         }
 
-        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
-            assertionFailure("No image")
-            return MainPanelItemMetainformationView.calculateHeight(item: item)
-        }
+        let height = NewMainPanelItemView.imageHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
 
-        let maxFrame = CGSize(
-            width: WindowManager.panelWindowFrameWidth - 16 * 2,
-            height: 172
-        )
-        let maxRatio = maxFrame.width / maxFrame.height
-
-        let size = image.size
-        let ratio = size.width / size.height
-
-        var finalHeight: CGFloat = 0
-
-        if ratio > maxRatio {
-            finalHeight = (size.width / ratio) / (size.width / maxFrame.width)
-        } else {
-            finalHeight = maxFrame.height
-        }
-
-        let returnHegiht = finalHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
-
-        self.cachedHeight[item.id] = returnHegiht
-        return returnHegiht
+        self.cachedHeight[item.id] = height
+        return height
     }
 
     let backgroundView = View()
     var imageView = ImageView()
-    var imageHeightConstraint: Constraint?
     var metainformationHeightConstraint: Constraint?
 
     let metainformationView = MainPanelItemMetainformationView()
@@ -106,14 +84,13 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.imageView.aspectRation = .resizeAspect
         self.imageView.snp.makeConstraints { maker in
             maker.top.leading.trailing.equalToSuperview()
-            self.imageHeightConstraint = maker.height.equalTo(100).constraint
+            maker.height.equalTo(NewMainPanelItemView.imageHeight)
         }
 
         self.backgroundView.addSubview(self.metainformationView)
         self.metainformationView.snp.makeConstraints { maker in
             maker.top.equalTo(self.imageView.snp.bottom)
-            maker.trailing.leading.equalToSuperview()
-            self.metainformationHeightConstraint = maker.height.equalTo(100).constraint
+            maker.trailing.leading.bottom.equalToSuperview()
         }
 
         self.metainformationView.completionButton.target = self
@@ -185,14 +162,6 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             self.metainformationView.commentLabel.isHidden = true
         }
 
-        let metainfoHeight = MainPanelItemMetainformationView.calculateHeight(item: item)
-        self.imageHeightConstraint?.update(
-            offset: NewMainPanelItemView.calculateHeight(item: item) - metainfoHeight
-        )
-        self.metainformationHeightConstraint?.update(
-            offset: metainfoHeight
-        )
-
         self.metainformationView.commentLabel.stringValue = item.comment ?? ""
         self.isComplited = item.isComplited
 
@@ -212,18 +181,5 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
                 self.metainformationView.updateDueDate(item: item)
             }
         })
-    }
-
-    func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
-        guard let item = self.item else {
-            assertionFailure("No item")
-            return layoutAttributes
-        }
-
-        layoutAttributes.frame.size = CGSize(
-            width: layoutAttributes.frame.size.width,
-            height: NewMainPanelItemView.calculateHeight(item: item)
-        )
-        return layoutAttributes
     }
 }

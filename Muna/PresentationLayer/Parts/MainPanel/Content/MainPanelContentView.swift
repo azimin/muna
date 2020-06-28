@@ -58,11 +58,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         let layout = NSCollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
-        layout.estimatedItemSize = NSSize(
-            width: WindowManager.panelWindowFrameWidth,
-            height: 100
-        )
-
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = layout
@@ -548,7 +543,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         )
 
         let item = self.groupedData.item(at: indexPath)
-        print(indexPath)
 
         switch self.selectedFilter {
         case .all, .noDeadline, .uncompleted:
@@ -586,80 +580,20 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         return self.insetsForSection
     }
 
-//    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-//        let item = self.groupedData.item(at: indexPath)
-//        let size = NSSize(
-//            width: collectionView.frame.size.width,
-//            height: 100
-//        )
-//        return size
-//    }
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+        let item = self.groupedData.item(at: indexPath)
+        let additionalHeight: CGFloat = (item.comment == nil) || (item.comment?.isEmpty == true) ? 44 : 62
+
+        let size = NSSize(
+            width: collectionView.frame.size.width,
+            height: NewMainPanelItemView.imageHeight + additionalHeight
+        )
+        return size
+    }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         if let value = indexPaths.first {
             self.selectIndexPath(indexPath: value, completion: nil)
         }
-    }
-}
-
-/// Simple single column layout, assuming only one section
-class SingleColumnLayout: NSCollectionViewLayout {
-    /// Height of each view in the collection
-    var height: CGFloat = 100
-
-    /// Padding is wrapped round each item, with double an extra bottom padding above the top item, and an extra top padding beneath the bottom
-    var padding = NSEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-
-    var itemCount: Int {
-        guard let collectionView = collectionView else {
-            return 0
-        }
-
-        return collectionView.numberOfItems(inSection: 0)
-    }
-
-    override func shouldInvalidateLayout(forBoundsChange newBounds: NSRect) -> Bool {
-        return true
-    }
-
-    override open func layoutAttributesForItem(at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes? {
-        let attributes = NSCollectionViewLayoutAttributes(forItemWith: indexPath)
-        guard let collectionView = collectionView else {
-            return attributes
-        }
-
-        let bounds = collectionView.bounds
-        let itemHeightWithPadding = self.height + self.padding.top + self.padding.bottom
-        let row = indexPath.item
-
-        attributes.frame = NSRect(x: self.padding.left, y: itemHeightWithPadding * CGFloat(row) + self.padding.top + self.padding.bottom, width: bounds.width - self.padding.left - self.padding.right, height: self.height)
-        attributes.zIndex = row
-
-        return attributes
-    }
-
-    // If you have lots of items, then you should probably do a 'proper' implementation here
-    override open func layoutAttributesForElements(in rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
-        var attributes = [NSCollectionViewLayoutAttributes]()
-
-        if self.itemCount > 0 {
-            for index in 0 ... (self.itemCount - 1) {
-                if let attribute = layoutAttributesForItem(at: NSIndexPath(forItem: index, inSection: 0) as IndexPath) {
-                    attributes.append(attribute)
-                }
-            }
-        }
-
-        return attributes
-    }
-
-    override open var collectionViewContentSize: NSSize {
-        guard let collectionView = collectionView else {
-            return NSSize.zero
-        }
-
-        let itemHeightWithPadding = self.height + self.padding.top + self.padding.bottom
-
-        return NSSize(width: collectionView.bounds.width, height: CGFloat(self.itemCount) * itemHeightWithPadding + self.padding.top + self.padding.bottom)
     }
 }

@@ -47,7 +47,7 @@ enum WindowType: Equatable, Hashable {
 }
 
 class WindowManager {
-    static let panelWindowFrameWidth: CGFloat = 380
+    static let panelWindowFrameWidth: CGFloat = 400
     var windowFrameWidth: CGFloat {
         return WindowManager.panelWindowFrameWidth
     }
