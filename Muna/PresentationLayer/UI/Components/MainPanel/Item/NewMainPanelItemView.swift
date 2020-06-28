@@ -58,6 +58,7 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     }
 
     var isFirstSetup = true
+    let scaleTrasnform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
 
     override func layout() {
         super.layout()
@@ -124,15 +125,30 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.isSelected = selected
         if selected {
             let transform = CATransform3DConcat(CATransform3DMakeScale(1, 1, 1), CATransform3DMakeTranslation(0, 0, 0))
-            self.backgroundView.layer?.transform = transform
-            self.backgroundView.layer?.borderWidth = 1
+            OperationQueue.main.addOperation {
+                self.animateTransformation(transformValue: transform)
+            }
+            self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
+            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.3)
         } else {
-            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))]
-            self.backgroundView.layer?.transform = transform
-            self.backgroundView.layer?.borderWidth = 1
+            let transform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
+            OperationQueue.main.addOperation {
+                self.animateTransformation(transformValue: transform)
+            }
+            self.backgroundView.layer?.borderWidth = 0
             self.backgroundView.layer?.borderColor = CGColor.color(.redDots)
+            self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.15)
         }
+    }
+
+    func animateTransformation(transformValue: CATransform3D) {
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = transformValue
+        transform.duration = 0.15
+        self.backgroundView.layer?.transform = transformValue
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
     }
 
     private var item: ItemModel?

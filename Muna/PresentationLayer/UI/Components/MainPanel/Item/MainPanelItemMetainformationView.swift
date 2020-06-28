@@ -21,7 +21,7 @@ class MainPanelItemMetainformationView: View {
             font: MainPanelItemMetainformationView.deadlineFont
         )
 
-        if let comment = item.comment {
+        if let comment = item.comment, comment.isEmpty == false {
             finalHeight += 4
             finalHeight += comment.height(
                 withConstrainedWidth: textWidth,
