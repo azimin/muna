@@ -49,6 +49,14 @@ class OnboardingFinalSetupView: NSView {
         item: Preferences.DefaultItems.defaultActivationShortcut.item
     )
 
+    let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
+        .withTextColorStyle(.alwaysWhite)
+        .withText("General")
+
+    let startupSettingItem = SwitcherSettingsItem()
+    let notificationsSettingItem = SliderSettingsItem()
+    let storageSettingItem = SliderSettingsItem()
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
@@ -116,6 +124,41 @@ class OnboardingFinalSetupView: NSView {
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.selectedAreaShortcutPreview.snp.trailing).offset(50)
             make.trailing.equalToSuperview().inset(73)
+        }
+
+        self.addSubview(self.settingsTitleLabel)
+        self.settingsTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(60)
+            make.centerX.equalTo(self.shortuctsTilteLabel)
+        }
+
+        self.startupSettingItem.titleLabel.text = "Launch on startup"
+        self.startupSettingItem.descriptionLabel.text = "Start Muna automatically after system restart"
+        self.addSubview(self.startupSettingItem)
+        self.startupSettingItem.snp.makeConstraints { make in
+            make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
+            make.trailing.equalToSuperview().inset(124)
+            make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24)
+        }
+
+        self.notificationsSettingItem.titleLabel.text = "Ping interval"
+        self.notificationsSettingItem.descriptionLabel.text = "Should remind again when you ignore reminder"
+        self.notificationsSettingItem.sliderSectionLabel.text = "Month"
+        self.addSubview(self.notificationsSettingItem)
+        self.notificationsSettingItem.snp.makeConstraints { make in
+            make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
+            make.trailing.equalToSuperview().inset(124)
+            make.top.equalTo(self.startupSettingItem.snp.bottom)
+        }
+
+        self.storageSettingItem.titleLabel.text = "History size"
+        self.storageSettingItem.descriptionLabel.text = "How long to keep complited items"
+        self.storageSettingItem.sliderSectionLabel.text = "Month"
+        self.addSubview(self.storageSettingItem)
+        self.storageSettingItem.snp.makeConstraints { make in
+            make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
+            make.trailing.equalToSuperview().inset(124)
+            make.top.equalTo(self.notificationsSettingItem.snp.bottom)
         }
 
         self.addSubview(self.continueButton)
