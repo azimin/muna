@@ -22,7 +22,7 @@ class MainPanelItemSelectionView: View {
 
     private func setup() {
         self.layer?.addSublayer(self.gradient)
-        self.gradient.locations = [0, 0, 1]
+        self.gradient.locations = [0, 1]
         self.gradient.startPoint = CGPoint(x: 0, y: 0)
         self.gradient.endPoint = CGPoint(x: 1, y: 1)
     }
@@ -30,10 +30,11 @@ class MainPanelItemSelectionView: View {
     override func updateLayer() {
         super.updateLayer()
 
+        let alpha: CGFloat = Theme.current == .light ? 0.25 : 0.1
+
         self.gradient.colors = [
-            CGColor.color(.titleAccent).copy(alpha: 0)!,
-            CGColor.color(.titleAccent).copy(alpha: 0.1)!,
-            CGColor.color(.titleAccent).copy(alpha: 0)!,
+            CGColor.color(.plateFullSelection).copy(alpha: alpha)!,
+            CGColor.color(.plateFullSelection).copy(alpha: 0)!,
         ]
     }
 

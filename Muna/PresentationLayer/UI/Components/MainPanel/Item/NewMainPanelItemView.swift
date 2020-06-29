@@ -126,14 +126,16 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
-            self.backgroundView.backgroundColor = NSColor.color(.titleAccent).withAlphaComponent(0.15)
+            let alpha: CGFloat = Theme.current == .light ? 0.35 : 0.15
+            self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = false
         } else {
             let transform = CATransform3DConcat(CATransform3DMakeScale(0.91, 0.91, 1), CATransform3DMakeTranslation(8, 8, 0))
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
-            self.backgroundView.backgroundColor = NSColor.color(.titleAccent).withAlphaComponent(0.07)
+            let alpha: CGFloat = Theme.current == .light ? 0.15 : 0.07
+            self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = true
         }
     }

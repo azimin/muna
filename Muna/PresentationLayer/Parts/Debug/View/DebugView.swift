@@ -57,21 +57,6 @@ class DebugView: View {
     var index = 0
 
     @objc func changeMaterial() {
-        let materials: [NSVisualEffectView.Material] = [
-            .light,
-            .dark,
-            .sidebar,
-            .underPageBackground,
-            .underWindowBackground,
-            .contentBackground,
-            .toolTip,
-            .fullScreenUI,
-            .hudWindow,
-            .windowBackground,
-            .sheet,
-            .headerView,
-        ]
-
         self.gradientView.material = NSVisualEffectView.Material(rawValue: self.index) ?? .light
         self.index += 1
     }
