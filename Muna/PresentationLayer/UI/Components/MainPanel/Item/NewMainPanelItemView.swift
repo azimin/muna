@@ -15,6 +15,8 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
         case completed
     }
 
+    private var style: Style = .basic
+
     private static var cachedHeight: [String: CGFloat] = [:]
     static var imageHeight: CGFloat = 172
 
@@ -130,7 +132,10 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = false
         } else {
-            let transform = CATransform3DConcat(CATransform3DMakeScale(0.91, 0.91, 1), CATransform3DMakeTranslation(8, 8, 0))
+            let scale: CGFloat = 0.93
+            let widthPaggination = (self.frame.width * (1 - scale)) / 2
+            let heightPaggination = (self.frame.height * (1 - scale)) / 2
+            let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
             }
@@ -161,7 +166,8 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
     private var item: ItemModel?
 
     func update(item: ItemModel, style: Style) {
-        self.metainformationView.updateDueDate(item: item)
+        self.style = style
+        self.metainformationView.updateDueDate(item: item, style: style)
 
         if let comment = item.comment, comment.isEmpty == false {
             self.metainformationView.commentLabel.isHidden = false
@@ -185,7 +191,10 @@ final class NewMainPanelItemView: View, GenericCellSubview, ReusableComponent {
             if id != nil, self.item?.id == id {
                 self.isComplited = item.isComplited
                 self.updateStyle()
-                self.metainformationView.updateDueDate(item: item)
+                self.metainformationView.updateDueDate(
+                    item: item,
+                    style: style
+                )
             }
         })
     }

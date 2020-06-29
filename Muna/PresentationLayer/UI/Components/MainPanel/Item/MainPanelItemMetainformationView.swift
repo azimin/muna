@@ -32,8 +32,8 @@ class MainPanelItemMetainformationView: View {
         return finalHeight + 12 * 2
     }
 
-    private static var deadlineFont = FontStyle.customFont(style: .heavy, size: 16)
-    private static var commentFont = FontStyle.customFont(style: .medium, size: 14)
+    private static var deadlineFont = FontStyle.customFont(style: .bold, size: 16)
+    private static var commentFont = FontStyle.customFont(style: .medium, size: 13)
 
     let metainformationStackView = NSStackView()
 
@@ -76,10 +76,16 @@ class MainPanelItemMetainformationView: View {
         }
     }
 
-    func updateDueDate(item: ItemModel) {
+    func updateDueDate(item: ItemModel, style: NewMainPanelItemView.Style) {
         self.deadlineLabel.stringValue = MainPanelItemMetainformationView.reminderText(
             item: item
         )
+
+        if let dueDate = item.dueDate, dueDate < Date(), style != .completed {
+            self.deadlineLabel.textColor = NSColor.color(.redLight)
+        } else {
+            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
+        }
     }
 
     private static func reminderText(item: ItemModel) -> String {

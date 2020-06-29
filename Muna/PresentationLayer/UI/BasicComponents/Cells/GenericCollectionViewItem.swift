@@ -40,8 +40,4 @@ final class GenericCollectionViewItem<T: NSView>: NSCollectionViewItem, Reusable
             self.customSubview.setSelected(self.isSelected, animated: true)
         }
     }
-
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
-        return self.customSubview.preferredLayoutAttributesFitting(layoutAttributes)
-    }
 }

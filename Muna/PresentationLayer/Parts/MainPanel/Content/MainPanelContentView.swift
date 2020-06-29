@@ -14,8 +14,8 @@ protocol MainPanelContentViewDelegate: AnyObject {
 }
 
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
-    private let headerHight: CGFloat = 28
-    private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    private let headerHight: CGFloat = 39
+    private let insetsForSection = NSEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
 
     let scrollView = StopableScrollView()
     let collectionView = NSCollectionView()
@@ -544,7 +544,11 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             indexPath: indexPath
         )
         let group = self.groupedData.group(in: indexPath.section)
-        header.label.stringValue = group.rawValue
+        let count = self.groupedData.numberOfItems(in: indexPath.section)
+        let sufix = count == 1 ? "item" : "items"
+
+        header.titleLabel.stringValue = group.rawValue
+        header.infoLabel.stringValue = "\(count) \(sufix)"
         header.redArrowView.isHidden = group != .passed
 
         return header
@@ -576,7 +580,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         if section == 0 {
             return NSSize(
                 width: collectionView.frame.size.width,
-                height: self.headerHight + 16
+                height: self.headerHight + 12
             )
         } else {
             return NSSize(
@@ -596,7 +600,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         let item = self.groupedData.item(at: indexPath)
-        let additionalHeight: CGFloat = (item.comment == nil) || (item.comment?.isEmpty == true) ? 44 : 62
+        let additionalHeight: CGFloat = (item.comment == nil) || (item.comment?.isEmpty == true) ? 44 : 64
 
         let size = NSSize(
             width: collectionView.frame.size.width,

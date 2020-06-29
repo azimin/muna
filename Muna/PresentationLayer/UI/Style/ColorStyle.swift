@@ -67,7 +67,7 @@ enum ColorStyle {
             case .blueSelected:
                 return NSColor(hex: "2C7DD3")
             case .redLight:
-                return NSColor(hex: "FF8484")
+                return NSColor(hex: "FD7D7D")
             case .redDots:
                 return NSColor(hex: "FF2F2F")
             case .separator:
