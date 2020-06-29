@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import CoreGraphics
 
 class SavingProcessingService {
     struct ItemToSave {
@@ -32,6 +33,17 @@ class SavingProcessingService {
             assertionFailure("Image is not provided")
             return
         }
+
+//        guard let data = image.tiffRepresentation(using: .jpeg, factor: 0.6),
+//            let imageRep = NSBitmapImageRep(data: data),
+//            let compressedData = imageRep.representation(using: NSBitmapImageRep.FileType.jpeg, properties: [:]),
+//            let compressedImage = NSImage(data: compressedData) else {
+//            assertionFailure("Can't compress image")
+//            return
+//        }
+//
+//        print("Size", image.size, compressedImage.size)
+
         let itemModel = self.database.addItem(
             image: image,
             dueDateString: item.dueDateString,
@@ -45,5 +57,18 @@ class SavingProcessingService {
                 item: itemModel
             )
         }
+    }
+}
+
+private extension NSImage {
+    func compressedJPEG(with factor: Double) -> Data? {
+        guard let tiff = tiffRepresentation else { return nil }
+        guard let imageRep = NSBitmapImageRep(data: tiff) else { return nil }
+
+        let options: [NSBitmapImageRep.PropertyKey: Any] = [
+            .compressionFactor: factor,
+        ]
+
+        return imageRep.representation(using: .jpeg, properties: options)
     }
 }

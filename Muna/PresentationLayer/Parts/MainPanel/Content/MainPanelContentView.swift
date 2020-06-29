@@ -217,6 +217,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
 
+            let copyItem = NSMenuItem(title: "Copy Image", action: #selector(self.copyAction), keyEquivalent: "")
+
             let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: "⌫")
             deleteItem.keyEquivalentModifierMask = []
 
@@ -224,6 +226,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             menu.addItem(reminderItem)
             menu.addItem(NSMenuItem.separator())
             menu.addItem(previewItem)
+            menu.addItem(copyItem)
             menu.addItem(NSMenuItem.separator())
             menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
@@ -234,6 +237,24 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     @objc func previewAction() {
         self.popUpController.show()
+    }
+
+    @objc func copyAction() {
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+
+        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
+            assertionFailure("No image")
+            return
+        }
+
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.writeObjects([image])
     }
 
     @objc
