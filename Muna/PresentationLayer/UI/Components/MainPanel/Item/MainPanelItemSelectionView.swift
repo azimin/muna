@@ -30,7 +30,7 @@ class MainPanelItemSelectionView: View {
     override func updateLayer() {
         super.updateLayer()
 
-        let alpha: CGFloat = Theme.current == .light ? 0.25 : 0.1
+        let alpha: CGFloat = Theme.current == .light ? 0.25 : 0.05
 
         self.gradient.colors = [
             CGColor.color(.plateFullSelection).copy(alpha: alpha)!,
