@@ -1,8 +1,8 @@
 //
-//  MainPanelItem.swift
+//  NewMainPanelItemView.swift
 //  Muna
 //
-//  Created by Alexander on 5/4/20.
+//  Created by Alexander on 6/28/20.
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
@@ -17,26 +17,31 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     private var style: Style = .basic
 
+    private static var cachedHeight: [String: CGFloat] = [:]
+    static var imageHeight: CGFloat = 172
+
+    static func calculateHeight(item: ItemModel) -> CGFloat {
+        if let height = self.cachedHeight[item.id] {
+            return height
+        }
+
+        let height = MainPanelItemView.imageHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
+
+        self.cachedHeight[item.id] = height
+        return height
+    }
+
     let backgroundView = View()
-
+    let selectionView = MainPanelItemSelectionView()
     var imageView = ImageView()
-    let metainformationPlate = NSVisualEffectView()
+    var metainformationHeightConstraint: Constraint?
 
-    let metainformationPlateOverlay = View()
-        .withBackgroundColorStyle(.lightForegroundOverlay)
-
-    let metainformationStackView = NSStackView()
-
-    let completionButton = Button().withImageName("reminder-off")
-
-    let deadlineLabel = Label(fontStyle: .heavy, size: 16)
-        .withTextColorStyle(.titleAccent)
-
-    let commentLabel = Label(fontStyle: .medium, size: 14)
-        .withTextColorStyle(.title60AccentAlpha)
+    let metainformationView = MainPanelItemMetainformationView()
 
     private var isComplited: Bool = false
     private var itemObservable: ObserverTokenProtocol?
+
+    private var isSelected: Bool = false
 
     init() {
         super.init(frame: .zero)
@@ -47,6 +52,18 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         fatalError("init(coder:) has not been implemented")
     }
 
+    var isFirstSetup = true
+    let scaleTrasnform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
+
+    override func layout() {
+        super.layout()
+
+        if self.isFirstSetup {
+            self.isFirstSetup = false
+            self.setSelected(self.isSelected, animated: false)
+        }
+    }
+
     func reuse() {
         self.item = nil
         self.itemObservable?.removeObserving()
@@ -54,64 +71,38 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     override func updateLayer() {
         super.updateLayer()
-        self.metainformationPlate.material = Theme.current.visualEffectMaterial
     }
 
     private func setup() {
         self.addSubview(self.backgroundView)
-        self.backgroundView.layer?.borderWidth = 1
         self.backgroundView.layer?.cornerRadius = 12
+        self.backgroundView.backgroundColor = NSColor.white.withAlphaComponent(0.07)
         self.backgroundView.layer?.masksToBounds = true
         self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
         }
 
+        self.backgroundView.addSubview(self.selectionView)
+        self.selectionView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+
         self.backgroundView.addSubview(self.imageView)
         self.imageView.imageScaling = .scaleProportionallyUpOrDown
+        self.imageView.aspectRation = .resizeAspect
         self.imageView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
+            maker.top.leading.trailing.equalToSuperview()
+            maker.height.equalTo(MainPanelItemView.imageHeight)
         }
 
-        self.backgroundView.addSubview(self.metainformationPlate)
-        self.metainformationPlate.blendingMode = .withinWindow
-        self.metainformationPlate.state = .active
-        self.metainformationPlate.layer?.maskedCorners = [
-            .layerMaxXMinYCorner, .layerMinXMinYCorner,
-        ]
-        self.metainformationPlate.layer?.cornerRadius = 12
-        self.metainformationPlate.wantsLayer = true
-        self.metainformationPlate.maskImage = NSImage(color: .black, size: .init(width: 1, height: 1))
-
-        self.metainformationPlate.snp.makeConstraints { maker in
-            maker.bottom.leading.trailing.equalToSuperview()
+        self.backgroundView.addSubview(self.metainformationView)
+        self.metainformationView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.imageView.snp.bottom)
+            maker.trailing.leading.bottom.equalToSuperview()
         }
 
-        self.metainformationPlate.addSubview(self.metainformationPlateOverlay)
-        self.metainformationPlateOverlay.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-
-        self.metainformationPlate.addSubview(self.metainformationStackView)
-        self.metainformationStackView.orientation = .vertical
-        self.metainformationStackView.spacing = 4
-        self.metainformationStackView.alignment = .leading
-        self.metainformationStackView.snp.makeConstraints { maker in
-            maker.top.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
-        }
-
-        self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
-        self.metainformationStackView.addArrangedSubview(self.commentLabel)
-
-        self.metainformationPlate.addSubview(self.completionButton)
-        self.completionButton.snp.makeConstraints { maker in
-            maker.leading.equalToSuperview().inset(12)
-            maker.size.equalTo(19)
-            maker.trailing.equalTo(self.metainformationStackView.snp.leading).inset(-12)
-            maker.top.equalTo(self.deadlineLabel.snp.top)
-        }
-
-        self.completionButton.target = self
-        self.completionButton.action = #selector(self.toggleCompletion)
+        self.metainformationView.completionButton.target = self
+        self.metainformationView.completionButton.action = #selector(self.toggleCompletion)
     }
 
     @objc
@@ -123,35 +114,68 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     func updateStyle() {
         let imageName = self.isComplited ? "reminder-on" : "reminder-off"
-        self.completionButton.update(
+        self.metainformationView.completionButton.update(
             imageName: imageName,
             colorStyle: .titleAccent
         )
     }
 
     func setSelected(_ selected: Bool, animated: Bool) {
+        self.isSelected = selected
+
         if selected {
-            self.backgroundView.layer?.borderWidth = 3
-            self.backgroundView.layer?.borderColor = CGColor.color(.blueSelected)
+            let transform = CATransform3DConcat(CATransform3DMakeScale(1, 1, 1), CATransform3DMakeTranslation(0, 0, 0))
+            OperationQueue.main.addOperation {
+                self.animateTransformation(transformValue: transform, animated: animated)
+            }
+            let alpha: CGFloat = Theme.current == .light ? 0.35 : 0.15
+            self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
+            self.selectionView.isHidden = false
         } else {
-            self.backgroundView.layer?.borderWidth = 0
-            self.backgroundView.layer?.borderColor = CGColor.color(.title60AccentAlpha)
+            let scale: CGFloat = 0.93
+            let widthPaggination = (self.frame.width * (1 - scale)) / 2
+            let heightPaggination = (self.frame.height * (1 - scale)) / 2
+            let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
+            OperationQueue.main.addOperation {
+                self.animateTransformation(transformValue: transform, animated: animated)
+            }
+            let alpha: CGFloat = Theme.current == .light ? 0.15 : 0.07
+            self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
+            self.selectionView.isHidden = true
         }
+    }
+
+    func passMousePosition(point: CGPoint) {
+        self.selectionView.passNewPosition(point: point)
+    }
+
+    func animateTransformation(transformValue: CATransform3D, animated: Bool) {
+        guard animated else {
+            self.backgroundView.layer?.transform = transformValue
+            return
+        }
+
+        let transform = CABasicAnimation(keyPath: #keyPath(CALayer.transform))
+        transform.fromValue = self.backgroundView.layer?.transform
+        transform.toValue = transformValue
+        transform.duration = 0.15
+        self.backgroundView.layer?.transform = transformValue
+        self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
     }
 
     private var item: ItemModel?
 
     func update(item: ItemModel, style: Style) {
         self.style = style
-        self.updateDueDate(item: item)
+        self.metainformationView.updateDueDate(item: item, style: style)
 
         if let comment = item.comment, comment.isEmpty == false {
-            self.commentLabel.isHidden = false
+            self.metainformationView.commentLabel.isHidden = false
         } else {
-            self.commentLabel.isHidden = true
+            self.metainformationView.commentLabel.isHidden = true
         }
 
-        self.commentLabel.stringValue = item.comment ?? ""
+        self.metainformationView.commentLabel.stringValue = item.comment ?? ""
         self.isComplited = item.isComplited
 
         let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName)
@@ -167,24 +191,12 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             if id != nil, self.item?.id == id {
                 self.isComplited = item.isComplited
                 self.updateStyle()
-                self.updateDueDate(item: item)
+                self.metainformationView.updateDueDate(
+                    item: item,
+                    style: style
+                )
             }
         })
-    }
-
-    private func updateDueDate(item: ItemModel) {
-        if let dueDate = item.dueDate {
-            let reminder = CardPreviewDateFormatter(date: dueDate)
-            self.deadlineLabel.stringValue = reminder.reminderText
-        } else {
-            self.deadlineLabel.stringValue = "No reminder"
-        }
-
-        if let dueDate = item.dueDate, dueDate < Date(), self.style != .completed {
-            self.deadlineLabel.textColor = NSColor.color(.redLight)
-        } else {
-            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
-        }
     }
 }
 

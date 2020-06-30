@@ -79,7 +79,7 @@
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
 		9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */; };
-		9F3E6D4F24A8121C00CEFDBE /* NewMainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4E24A8121C00CEFDBE /* NewMainPanelItemView.swift */; };
+		9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */; };
 		9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
@@ -109,7 +109,6 @@
 		9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F512460820400654D36 /* NSView+Extensions.swift */; };
 		9FA07F5524608CC400654D36 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5424608CC400654D36 /* Preferences.swift */; };
 		9FA07F5724609E0100654D36 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5624609E0100654D36 /* View.swift */; };
-		9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5B2460A5BF00654D36 /* MainPanelItemView.swift */; };
 		9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F5D2460A8AC00654D36 /* Label.swift */; };
 		9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F622460AB8800654D36 /* FontStyle.swift */; };
 		9FA07F652460AD2800654D36 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F642460AD2800654D36 /* ImageView.swift */; };
@@ -247,7 +246,7 @@
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelPresentationAnimationView.swift; sourceTree = "<group>"; };
-		9F3E6D4E24A8121C00CEFDBE /* NewMainPanelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainPanelItemView.swift; sourceTree = "<group>"; };
+		9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemView.swift; sourceTree = "<group>"; };
 		9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemMetainformationView.swift; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -278,7 +277,6 @@
 		9FA07F512460820400654D36 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		9FA07F5424608CC400654D36 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		9FA07F5624609E0100654D36 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		9FA07F5B2460A5BF00654D36 /* MainPanelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemView.swift; sourceTree = "<group>"; };
 		9FA07F5D2460A8AC00654D36 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		9FA07F622460AB8800654D36 /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		9FA07F642460AD2800654D36 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -999,8 +997,7 @@
 		9FA07F592460A5AD00654D36 /* Item */ = {
 			isa = PBXGroup;
 			children = (
-				9FA07F5B2460A5BF00654D36 /* MainPanelItemView.swift */,
-				9F3E6D4E24A8121C00CEFDBE /* NewMainPanelItemView.swift */,
+				9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */,
 				9FDAB87424A9452C000B1158 /* MousePositionService.swift */,
 				9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */,
 				9FDAB87624A948D6000B1158 /* MainPanelItemSelectionView.swift */,
@@ -1488,7 +1485,6 @@
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,
 				9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */,
-				9FA07F5C2460A5BF00654D36 /* MainPanelItemView.swift in Sources */,
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
 				9FD95E7F2484115800ED4F05 /* CloseHandler.swift in Sources */,
@@ -1539,7 +1535,7 @@
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
 				23561B492461F46600097E4A /* Parser.swift in Sources */,
-				9F3E6D4F24A8121C00CEFDBE /* NewMainPanelItemView.swift in Sources */,
+				9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */,
 				9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

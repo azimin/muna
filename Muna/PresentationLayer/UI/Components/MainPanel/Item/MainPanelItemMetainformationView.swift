@@ -76,7 +76,7 @@ class MainPanelItemMetainformationView: View {
         }
     }
 
-    func updateDueDate(item: ItemModel, style: NewMainPanelItemView.Style) {
+    func updateDueDate(item: ItemModel, style: MainPanelItemView.Style) {
         self.deadlineLabel.stringValue = MainPanelItemMetainformationView.reminderText(
             item: item
         )

@@ -59,7 +59,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         let layout = NSCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 8
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = layout
@@ -71,13 +71,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.updateState()
 
         self.collectionView.registerReusableCellWithClass(
-            GenericCollectionViewItem<NewMainPanelItemView>.self
-        )
-
-        self.collectionView.registerReusableCellWithClass(
             GenericCollectionViewItem<MainPanelItemView>.self
         )
-
         self.collectionView.registerReusableHeaderClass(
             MainPanelHeaderView.self
         )
@@ -180,7 +175,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func updateMousePoint(_ point: CGPoint) {
         for cell in self.collectionView.visibleItems() where cell.isSelected {
-            if let itemCell = cell as? GenericCollectionViewItem<NewMainPanelItemView> {
+            if let itemCell = cell as? GenericCollectionViewItem<MainPanelItemView> {
                 itemCell.customSubview.passMousePosition(point: point)
             }
         }
@@ -577,7 +572,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let cell = collectionView.dequeueReusableCellWithType(
-            GenericCollectionViewItem<NewMainPanelItemView>.self,
+            GenericCollectionViewItem<MainPanelItemView>.self,
             indexPath: indexPath
         )
 
@@ -625,7 +620,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         let size = NSSize(
             width: collectionView.frame.size.width,
-            height: NewMainPanelItemView.imageHeight + additionalHeight
+            height: MainPanelItemView.imageHeight + additionalHeight
         )
         return size
     }
