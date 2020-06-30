@@ -31,7 +31,7 @@ class ItemModel: ItemModelProtocol, Codable {
     var imageName: String
     var creationDate: Date
 
-    var numberOfTimeChanges: Int? = 0
+    var numberOfTimeChanges: Int?
 
     var dueDateString: String?
     var dueDate: Date? {
