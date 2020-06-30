@@ -38,6 +38,7 @@ class ImagePreviewViewController: NSViewController {
         self.view.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
+            maker.width.greaterThanOrEqualTo(self.image.size.width * 1.3).priority(.medium)
             maker.width.lessThanOrEqualTo(maxSize.width)
             maker.height.lessThanOrEqualTo(maxSize.height)
             maker.height.equalTo(self.imageView.snp.width).multipliedBy(proportion)

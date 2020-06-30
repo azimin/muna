@@ -347,7 +347,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         popover.contentViewController = ImagePreviewViewController(
             image: image,
             maxSize: CGSize(
-                width: screeSize.width * 0.5,
+                width: screeSize.width * 0.65,
                 height: screeSize.height * 0.8
             )
         )
