@@ -17,7 +17,7 @@ protocol ItemsDatabaseServiceProtocol: AnyObject {
 
     @discardableResult
     func addItem(
-        image: NSImage,
+        imageData: Data,
         dueDateString: String?,
         dueDate: Date?,
         comment: String?
@@ -109,13 +109,13 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     @discardableResult
     func addItem(
-        image: NSImage,
+        imageData: Data,
         dueDateString: String?,
         dueDate: Date?,
         comment: String?
     ) -> ItemModel? {
         let imageName = UUID().uuidString
-        guard self.imageStorage.saveImage(image: image, name: imageName) else {
+        guard self.imageStorage.saveImage(imageData: imageData, name: imageName) else {
             return nil
         }
 
@@ -170,7 +170,7 @@ extension ItemsDatabaseService {
         for i in 0 ..< count {
             let imageName = "img_\(Int.random(in: 1 ..< 11))"
             self.addItem(
-                image: NSImage(named: NSImage.Name(imageName))!,
+                imageData: NSImage(named: NSImage.Name(imageName))!.tiffRepresentation(using: .jpeg, factor: 0.83)!,
                 dueDateString: "in 2h",
                 dueDate: Date().addingTimeInterval(60 * 60 * Double(i)),
                 comment: "Hi there"

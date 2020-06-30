@@ -29,23 +29,35 @@ class SavingProcessingService {
     }
 
     func save(withItem item: ItemToSave) {
-        guard let image = self.image else {
+        // TODO: Do in background
+        // TODO: Add quaility selection in settings
+        guard let image = self.image,
+            let data = image.tiffRepresentation(using: .jpeg, factor: 0.83) else {
             assertionFailure("Image is not provided")
             return
         }
 
-//        guard let data = image.tiffRepresentation(using: .jpeg, factor: 0.6),
-//            let imageRep = NSBitmapImageRep(data: data),
-//            let compressedData = imageRep.representation(using: NSBitmapImageRep.FileType.jpeg, properties: [:]),
-//            let compressedImage = NSImage(data: compressedData) else {
-//            assertionFailure("Can't compress image")
-//            return
-//        }
-//
-//        print("Size", image.size, compressedImage.size)
+        let options = NSMutableDictionary()
+        options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailWithTransform as String)
+        options.setValue(2460 as NSNumber, forKey: kCGImageSourceThumbnailMaxPixelSize as String)
+        options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailFromImageAlways as String)
+
+        var imageData: Data?
+        if let imageSource = CGImageSourceCreateWithData(data as CFData, nil) {
+            let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)
+            if let image = image, let data = NSImage(cgImage: image, size: image.backingSize).tiffRepresentation(using: .jpeg, factor: 0.83) {
+                let imageRep = NSBitmapImageRep(data: data)
+                imageData = imageRep?.representation(using: .jpeg, properties: [:])
+            }
+        }
+
+        guard let covertedData = imageData else {
+            assertionFailure("Can't comress")
+            return
+        }
 
         let itemModel = self.database.addItem(
-            image: image,
+            imageData: covertedData,
             dueDateString: item.dueDateString,
             dueDate: item.date,
             comment: item.comment
@@ -70,5 +82,11 @@ private extension NSImage {
         ]
 
         return imageRep.representation(using: .jpeg, properties: options)
+    }
+}
+
+public extension CGImage {
+    var backingSize: NSSize {
+        return NSSize(width: width / 2, height: height / 2)
     }
 }

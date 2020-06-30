@@ -12,6 +12,7 @@ protocol ImageStorageServiceProtocol {
     func urlOfImage(name: String) -> URL
 
     func saveImage(image: NSImage, name: String) -> Bool
+    func saveImage(imageData: Data, name: String) -> Bool
     func loadImage(name: String, completion: ImageStorageService.Completion?)
     func forceLoadImage(name: String) -> NSImage?
 
@@ -32,6 +33,22 @@ class ImageStorageService: ImageStorageServiceProtocol {
                 attributes: nil
             )
             try data?.write(to: directoryUrl.appendingPathComponent("\(name).jpeg"))
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+
+    func saveImage(imageData: Data, name: String) -> Bool {
+        let directoryUrl = self.getDocumentsDirectory().appendingPathComponent("images")
+        do {
+            try FileManager.default.createDirectory(
+                at: directoryUrl,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+            try imageData.write(to: directoryUrl.appendingPathComponent("\(name).jpeg"))
             return true
         } catch {
             print(error.localizedDescription)

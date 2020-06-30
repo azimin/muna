@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             object: nil
         )
 
-//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 100)
+//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 1)
 
 //        TimeParserTests.test()
 
