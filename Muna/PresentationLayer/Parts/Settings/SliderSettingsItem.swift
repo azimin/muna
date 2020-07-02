@@ -8,13 +8,7 @@
 
 import Cocoa
 
-protocol SliderSettingsItemDelegate: AnyObject {
-    func sliderValueChanged(_ value: Int)
-}
-
 class SliderSettingsItem: View {
-    weak var delegate: SliderSettingsItemDelegate?
-
     let titleLabel = Label(fontStyle: .bold, size: 18)
         .withTextColorStyle(.alwaysWhite)
 
@@ -22,13 +16,11 @@ class SliderSettingsItem: View {
         .withTextColorStyle(.titleAccent)
 
     let sliderSectionLabel = Label(fontStyle: .medium, size: 14).withTextColorStyle(.titleAccent)
-    let slider = NSSlider(value: 3, minValue: 1, maxValue: 4, target: nil, action: nil)
+    let slider = NSSlider(value: 2, minValue: 0, maxValue: 3, target: nil, action: nil)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
-        self.slider.target = self
-        self.slider.action = #selector(self.sliderMoved)
         self.setup()
     }
 
@@ -108,24 +100,5 @@ class SliderSettingsItem: View {
             make.width.equalTo(1)
             make.centerY.equalTo(self.slider)
         }
-    }
-
-    @objc func sliderMoved() {
-        var newValue = self.slider.doubleValue
-        newValue.round(.up)
-        switch newValue {
-        case 1 ..< 2:
-            self.slider.doubleValue = 1
-        case 2 ..< 3:
-            self.slider.doubleValue = 2
-        case 3 ..< 4:
-            self.slider.doubleValue = 3
-        case 4:
-            self.slider.doubleValue = 4
-        default:
-            break
-        }
-
-        self.delegate?.sliderValueChanged(Int(newValue))
     }
 }
