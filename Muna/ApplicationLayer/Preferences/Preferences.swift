@@ -19,10 +19,10 @@ class Preferences {
     }
 
     enum PeriodOfStoring: String, CaseIterable {
-        case day
-        case week
-        case month
-        case year
+        case day = "Day"
+        case week = "Week"
+        case month = "Month"
+        case year = "Year"
     }
 
     enum Key: String {

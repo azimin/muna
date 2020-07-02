@@ -28,6 +28,9 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         self.rootView.notificationsSettingItem.slider.target = self
         self.rootView.notificationsSettingItem.slider.action = #selector(self.pingIntervalSliderChanged)
 
+        self.rootView.storageSettingItem.slider.target = self
+        self.rootView.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
+
         self.setupPeriodOfStoring()
         self.setupPingInterval()
     }
@@ -42,10 +45,10 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         case .day:
             self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
             self.rootView.storageSettingItem.slider.doubleValue = 0
-        case .month:
+        case .week:
             self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
             self.rootView.storageSettingItem.slider.doubleValue = 1
-        case .week:
+        case .month:
             self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
             self.rootView.storageSettingItem.slider.doubleValue = 2
         case .year:
@@ -106,5 +109,28 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         Preferences.pingInterval = value.rawValue
 
         self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+    }
+
+    @objc
+    func storagePeriodSliderChanged() {
+        var newValue = self.rootView.storageSettingItem.slider.doubleValue
+        newValue.round(.up)
+        switch newValue {
+        case 0 ..< 1:
+            self.rootView.storageSettingItem.slider.doubleValue = 0
+        case 1 ..< 2:
+            self.rootView.storageSettingItem.slider.doubleValue = 1
+        case 2 ..< 3:
+            self.rootView.storageSettingItem.slider.doubleValue = 2
+        case 3:
+            self.rootView.storageSettingItem.slider.doubleValue = 3
+        default:
+            break
+        }
+
+        let value = Preferences.PeriodOfStoring.allCases[Int(newValue)]
+        Preferences.periodOfStoring = value.rawValue
+
+        self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
     }
 }
