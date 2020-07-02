@@ -19,9 +19,19 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.rootView.startupSettingItem.switcher.state = Preferences.launchOnStartup ? .on : .off
+
+        self.rootView.startupSettingItem.switcher.target = self
+        self.rootView.startupSettingItem.switcher.action = #selector(self.switchStateChanged)
     }
 
     @objc func buttonAction(sender: NSButton) {
         self.onNext?()
+    }
+
+    @objc
+    func switchStateChanged() {
+        Preferences.launchOnStartup = self.rootView.startupSettingItem.switcher.state == .on
     }
 }

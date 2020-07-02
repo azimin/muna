@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import LaunchAtLogin
 import MASShortcut
 
 class Preferences {
@@ -103,5 +104,9 @@ class Preferences {
     }
 
     @UserDefaultsEntry(key: Key.launchOnStartup)
-    var launchOnStartup = false
+    static var launchOnStartup = false {
+        didSet {
+            LaunchAtLogin.isEnabled = self.launchOnStartup
+        }
+    }
 }
