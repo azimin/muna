@@ -11,8 +11,24 @@ import LaunchAtLogin
 import MASShortcut
 
 class Preferences {
+    enum PingInterval: String, CaseIterable {
+        case fiveMins = "Once in 5 mins"
+        case tenMins = "Once in 10 mins"
+        case halfAnHour = "Once in 30 mins"
+        case hour = "Once in hour"
+    }
+
+    enum PeriodOfStoring: String, CaseIterable {
+        case day
+        case week
+        case month
+        case year
+    }
+
     enum Key: String {
         case launchOnStartup
+        case periodOfStoring
+        case pingInterval
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -109,4 +125,10 @@ class Preferences {
             LaunchAtLogin.isEnabled = self.launchOnStartup
         }
     }
+
+    @UserDefaultsEntry(key: Key.periodOfStoring)
+    static var periodOfStoring = PeriodOfStoring.month
+
+    @UserDefaultsEntry(key: Key.pingInterval)
+    static var pingInterval = PingInterval.fiveMins
 }
