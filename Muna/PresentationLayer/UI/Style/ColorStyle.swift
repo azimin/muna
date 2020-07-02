@@ -14,6 +14,8 @@ enum ColorStyle {
     case title60AccentAlpha
     case newTitle
 
+    case plateFullSelection
+
     case button
 
     case backgroundOverlay
@@ -42,6 +44,8 @@ enum ColorStyle {
                 return NSColor.white
             case .title60Accent:
                 return NSColor(hex: "969696")
+            case .plateFullSelection:
+                return NSColor.white
             case .lightOverlay:
                 return NSColor.white.withAlphaComponent(0.1)
             case .distructiveOverlay:
@@ -63,7 +67,7 @@ enum ColorStyle {
             case .blueSelected:
                 return NSColor(hex: "2C7DD3")
             case .redLight:
-                return NSColor(hex: "FF8484")
+                return NSColor(hex: "FD7D7D")
             case .redDots:
                 return NSColor(hex: "FF2F2F")
             case .separator:
@@ -79,6 +83,8 @@ enum ColorStyle {
                 return NSColor(hex: "E3E4E4")
             case .titleAccent:
                 return NSColor.black
+            case .plateFullSelection:
+                return NSColor.white
             case .title60Accent:
                 return NSColor(hex: "666666")
             case .distructiveOverlay:
@@ -90,7 +96,7 @@ enum ColorStyle {
             case .backgroundOverlay:
                 return NSColor.black.withAlphaComponent(0.5)
             case .lightForegroundOverlay:
-                return NSColor.white.withAlphaComponent(0.3)
+                return NSColor.black.withAlphaComponent(0.2)
             case .lightOverlay:
                 return NSColor.black.withAlphaComponent(0.1)
             case .foregroundOverlay:

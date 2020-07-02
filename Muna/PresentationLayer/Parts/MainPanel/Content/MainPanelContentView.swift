@@ -14,8 +14,8 @@ protocol MainPanelContentViewDelegate: AnyObject {
 }
 
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
-    private let headerHight: CGFloat = 28
-    private let insetsForSection = NSEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    private let headerHight: CGFloat = 39
+    private let insetsForSection = NSEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
 
     let scrollView = StopableScrollView()
     let collectionView = NSCollectionView()
@@ -30,6 +30,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     let emptyStateView = EmptyStateView()
 
     weak var delegate: MainPanelContentViewDelegate?
+
+    private var mouseObservable: ObserverTokenProtocol?
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -57,8 +59,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         let layout = NSCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-
+        layout.minimumLineSpacing = 8
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = layout
@@ -70,15 +71,18 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.updateState()
 
         self.collectionView.registerReusableCellWithClass(
-            GenericCollectionViewItem<NewMainPanelItemView>.self
+            GenericCollectionViewItem<MainPanelItemView>.self
         )
-
         self.collectionView.registerReusableHeaderClass(
             MainPanelHeaderView.self
         )
 
         if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
             self.collectionView.setFrameSize(contentSize)
+        }
+
+        self.mouseObservable = MousePositionService.shared.mousePosition.observeNewAndCall(self) { mousePoint in
+            self.updateMousePoint(mousePoint)
         }
     }
 
@@ -169,6 +173,14 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     var capturedView: NSView?
     var capturedItem: ItemModel?
 
+    func updateMousePoint(_ point: CGPoint) {
+        for cell in self.collectionView.visibleItems() where cell.isSelected {
+            if let itemCell = cell as? GenericCollectionViewItem<MainPanelItemView> {
+                itemCell.customSubview.passMousePosition(point: point)
+            }
+        }
+    }
+
     override func rightMouseUp(with event: NSEvent) {
         let point = self.window?.contentView?.convert(event.locationInWindow, to: self.collectionView) ?? .zero
 
@@ -200,6 +212,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
 
+            let copyItem = NSMenuItem(title: "Copy Image", action: #selector(self.copyAction), keyEquivalent: "")
+
             let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: "⌫")
             deleteItem.keyEquivalentModifierMask = []
 
@@ -207,6 +221,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             menu.addItem(reminderItem)
             menu.addItem(NSMenuItem.separator())
             menu.addItem(previewItem)
+            menu.addItem(copyItem)
             menu.addItem(NSMenuItem.separator())
             menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
@@ -217,6 +232,24 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     @objc func previewAction() {
         self.popUpController.show()
+    }
+
+    @objc func copyAction() {
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            assertionFailure("No selected index")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+
+        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
+            assertionFailure("No image")
+            return
+        }
+
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.writeObjects([image])
     }
 
     @objc
@@ -314,7 +347,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         popover.contentViewController = ImagePreviewViewController(
             image: image,
             maxSize: CGSize(
-                width: screeSize.width * 0.5,
+                width: screeSize.width * 0.65,
                 height: screeSize.height * 0.8
             )
         )
@@ -527,7 +560,11 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             indexPath: indexPath
         )
         let group = self.groupedData.group(in: indexPath.section)
-        header.label.stringValue = group.rawValue
+        let count = self.groupedData.numberOfItems(in: indexPath.section)
+        let sufix = count == 1 ? "item" : "items"
+
+        header.titleLabel.stringValue = group.rawValue
+        header.infoLabel.stringValue = "\(count) \(sufix)"
         header.redArrowView.isHidden = group != .passed
 
         return header
@@ -535,7 +572,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let cell = collectionView.dequeueReusableCellWithType(
-            GenericCollectionViewItem<NewMainPanelItemView>.self,
+            GenericCollectionViewItem<MainPanelItemView>.self,
             indexPath: indexPath
         )
 
@@ -543,9 +580,9 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         switch self.selectedFilter {
         case .all, .noDeadline, .uncompleted:
-            cell.customSubview.update(item: item)
+            cell.customSubview.update(item: item, style: .basic)
         case .completed:
-            cell.customSubview.update(item: item)
+            cell.customSubview.update(item: item, style: .completed)
         }
 
         return cell
@@ -559,7 +596,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         if section == 0 {
             return NSSize(
                 width: collectionView.frame.size.width,
-                height: self.headerHight + 16
+                height: self.headerHight + 12
             )
         } else {
             return NSSize(
@@ -579,10 +616,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         let item = self.groupedData.item(at: indexPath)
-        return NSSize(
+        let additionalHeight: CGFloat = (item.comment == nil) || (item.comment?.isEmpty == true) ? 44 : 64
+
+        let size = NSSize(
             width: collectionView.frame.size.width,
-            height: NewMainPanelItemView.calculateHeight(item: item)
+            height: MainPanelItemView.imageHeight + additionalHeight
         )
+        return size
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {

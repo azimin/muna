@@ -6,7 +6,7 @@
 //  Copyright © 2020 Abstract. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 public protocol GenericCellSubview {
     init()

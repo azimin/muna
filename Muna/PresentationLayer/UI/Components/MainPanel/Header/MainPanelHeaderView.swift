@@ -10,11 +10,17 @@ import Cocoa
 import SnapKit
 
 final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSCollectionViewSectionHeaderView {
-    let label = Label(
+    let titleLabel = Label(
         fontStyle: .semibold,
-        size: 20
+        size: 18
     )
     .withTextColorStyle(.titleAccent)
+
+    let infoLabel = Label(
+        fontStyle: .medium,
+        size: 13
+    )
+    .withTextColorStyle(.title60Accent)
 
     let redArrowView = View()
 
@@ -33,20 +39,26 @@ final class MainPanelHeaderView: View, GenericCellSubview, ReusableView, NSColle
     }
 
     private func setup() {
-        self.addSubview(self.label)
-        self.label.snp.makeConstraints { maker in
+        self.addSubview(self.titleLabel)
+        self.titleLabel.snp.makeConstraints { maker in
             maker.leading.equalToSuperview().inset(
                 NSEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             )
-            maker.bottom.equalToSuperview().inset(4)
+        }
+
+        self.addSubview(self.infoLabel)
+        self.infoLabel.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.titleLabel.snp.leading)
+            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-2)
+            maker.bottom.equalToSuperview()
         }
 
         self.addSubview(self.redArrowView)
         self.redArrowView.backgroundColor = NSColor.color(.redDots)
         self.redArrowView.layer?.cornerRadius = 5
         self.redArrowView.snp.makeConstraints { maker in
-            maker.leading.equalTo(label.snp.trailing)
-            maker.top.equalTo(self.label.snp.top).inset(-2)
+            maker.leading.equalTo(titleLabel.snp.trailing)
+            maker.top.equalTo(self.titleLabel.snp.top).inset(-2)
             maker.size.equalTo(10)
         }
     }

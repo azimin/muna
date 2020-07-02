@@ -215,6 +215,8 @@ class TaskChangeTimeView: PopupView {
         if let date = item.date {
             self.itemModel.dueDateString = self.reminderTextField.textField.stringValue
             self.itemModel.dueDate = date
+            let value = self.itemModel.numberOfTimeChanges ?? 0
+            self.itemModel.numberOfTimeChanges = value + 1
 
             ServiceLocator.shared.notifications.sheduleNotification(item: self.itemModel)
             ServiceLocator.shared.itemsDatabase.saveItems()

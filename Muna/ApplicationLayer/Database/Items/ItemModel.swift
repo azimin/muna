@@ -31,6 +31,8 @@ class ItemModel: ItemModelProtocol, Codable {
     var imageName: String
     var creationDate: Date
 
+    var numberOfTimeChanges: Int?
+
     var dueDateString: String?
     var dueDate: Date? {
         didSet {
@@ -71,6 +73,7 @@ class ItemModel: ItemModelProtocol, Codable {
         case dueDateString
         case dueDate
         case comment
+        case numberOfTimeChanges
         case isComplited
         case notificationId
     }
