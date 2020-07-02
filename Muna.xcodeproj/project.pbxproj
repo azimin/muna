@@ -41,6 +41,7 @@
 		23ADE2DC24A8A6C600A2D7F9 /* IconShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */; };
 		23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */; };
 		23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */; };
+		23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
@@ -202,6 +203,7 @@
 		23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconShortcutView.swift; sourceTree = "<group>"; };
 		23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherSettingsItem.swift; sourceTree = "<group>"; };
 		23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSettingsItem.swift; sourceTree = "<group>"; };
+		23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEntry.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				23B6C78024ADAE1C0071ACA8 /* Storage */,
 				9FD95E7D2484114E00ED4F05 /* CloseHandler */,
 				9F6E7BBD2477070500A3D5EB /* DateFormatter */,
 				9F1CB7532473187200DFBB05 /* DateItem */,
@@ -539,6 +542,14 @@
 				23A6B2A124660A36006A7A4D /* WindowManager.swift */,
 			);
 			path = Navigations;
+			sourceTree = "<group>";
+		};
+		23B6C78024ADAE1C0071ACA8 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
@@ -1531,6 +1542,7 @@
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
+				23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */,
 				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
@@ -1796,7 +1808,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = 5MGEMLZRS4;
+				DEVELOPMENT_TEAM = G6LW789JHQ;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

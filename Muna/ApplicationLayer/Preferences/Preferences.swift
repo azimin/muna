@@ -10,6 +10,10 @@ import Foundation
 import MASShortcut
 
 class Preferences {
+    enum Key: String {
+        case launchOnStartup
+    }
+
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
     static var defaultShortcutScreenshotKey = "screenshot_part_short"
     static var defaultShortcutDebugKey = "ud_activation_debug_shortcut"
@@ -97,4 +101,7 @@ class Preferences {
 
         return result
     }
+
+    @UserDefaultsEntry(key: Key.launchOnStartup)
+    var launchOnStartup = false
 }
