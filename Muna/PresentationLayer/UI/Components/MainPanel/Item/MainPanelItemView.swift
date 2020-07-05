@@ -71,7 +71,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     override func updateLayer() {
         super.updateLayer()
-        self.backgroundView.layer?.borderColor = NSColor(hex: "64FF57").cgColor
+        self.backgroundView.layer?.borderColor = CGColor.color(.itemSelectionColor)
     }
 
     private func setup() {
