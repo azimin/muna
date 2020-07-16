@@ -71,6 +71,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
     override func updateLayer() {
         super.updateLayer()
+        self.backgroundView.layer?.borderColor = CGColor.color(.itemSelectionColor)
     }
 
     private func setup() {
@@ -131,6 +132,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             let alpha: CGFloat = Theme.current == .light ? 0.35 : 0.15
             self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = false
+            self.backgroundView.layer?.borderWidth = 2
         } else {
             let scale: CGFloat = 0.93
             let widthPaggination = (self.frame.width * (1 - scale)) / 2
@@ -142,6 +144,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
             let alpha: CGFloat = Theme.current == .light ? 0.15 : 0.07
             self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = true
+            self.backgroundView.layer?.borderWidth = 0
         }
     }
 
