@@ -43,16 +43,16 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
         switch value {
         case .day:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.storageSettingItem.slider.doubleValue = 0
         case .week:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.storageSettingItem.slider.doubleValue = 1
         case .month:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.storageSettingItem.slider.doubleValue = 2
         case .year:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.storageSettingItem.slider.doubleValue = 3
         }
     }
@@ -65,16 +65,16 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
         switch value {
         case .fiveMins:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.notificationsSettingItem.slider.doubleValue = 0
         case .tenMins:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.notificationsSettingItem.slider.doubleValue = 1
         case .halfAnHour:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.notificationsSettingItem.slider.doubleValue = 2
         case .hour:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.notificationsSettingItem.slider.doubleValue = 3
         }
     }
@@ -108,7 +108,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         let value = Preferences.PingInterval.allCases[Int(newValue)]
         Preferences.pingInterval = value.rawValue
 
-        self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue
+        self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
 
     @objc
@@ -131,6 +131,6 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         let value = Preferences.PeriodOfStoring.allCases[Int(newValue)]
         Preferences.periodOfStoring = value.rawValue
 
-        self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue
+        self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
 }

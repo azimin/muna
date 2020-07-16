@@ -56,6 +56,9 @@ class ReminderItem {
             case let .month(month):
                 let sufix = month == 1 ? "month" : "months"
                 additionalText = "in \(month) \(sufix)"
+            case let .week(week):
+                let sufix = week == 1 ? "week" : "weeks"
+                additionalText = "in \(week) \(sufix)"
             }
         } else {
             additionalText = formatter.additionalText

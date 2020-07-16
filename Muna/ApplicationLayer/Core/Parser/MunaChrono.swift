@@ -21,6 +21,7 @@ class MunaChrono {
         ENCustomPartOfTheDayWordsParser(),
         ENTimeMintuesOffsetParser(),
         ENMonthOffsetParser(),
+        ENWeekParser(),
     ]
 
     func parseFromString(_ string: String, date: Date) -> [ParsedResult] {
@@ -74,6 +75,7 @@ class MunaChrono {
                 || $0.tagUnit.keys.contains(.ENTimeMintuesOffsetParser)
                 || $0.tagUnit.keys.contains(.ENDaysParser)
                 || $0.tagUnit.keys.contains(.ENMonthOffsetParser)
+                || $0.tagUnit.keys.contains(.ENWeekParser)
         }
 
         var theBiggestRange = NSRange()

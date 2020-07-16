@@ -12,17 +12,17 @@ import MASShortcut
 
 class Preferences {
     enum PingInterval: String, CaseIterable {
-        case fiveMins = "Once in 5 mins"
-        case tenMins = "Once in 10 mins"
-        case halfAnHour = "Once in 30 mins"
-        case hour = "Once in hour"
+        case fiveMins = "once in 5 mins"
+        case tenMins = "once in 10 mins"
+        case halfAnHour = "once in 30 mins"
+        case hour = "once in hour"
     }
 
     enum PeriodOfStoring: String, CaseIterable {
-        case day = "Day"
-        case week = "Week"
-        case month = "Month"
-        case year = "Year"
+        case day
+        case week
+        case month
+        case year
     }
 
     enum Key: String {

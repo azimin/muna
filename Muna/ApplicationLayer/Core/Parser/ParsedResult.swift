@@ -77,6 +77,7 @@ enum TagUnit: String {
     case ENCustomPartOfTheDayWordsParser
     case ENTimeMintuesOffsetParser
     case ENMonthOffsetParser
+    case ENWeekParser
 }
 
 enum DatePrefix: String, CaseIterable {
@@ -88,6 +89,7 @@ enum DatePrefix: String, CaseIterable {
 
 enum DateOffset {
     case month(month: Int)
+    case week(week: Int)
     case day(day: Int)
     case hour(hour: Int, minutes: Int)
     case minuts(minutes: Int)
