@@ -106,14 +106,14 @@ class ScreenshotStateView: View {
         let rightSpace = self.bounds.maxX - aroundRect.maxX
         let leftSpace = aroundRect.minX
         let topSpace = aroundRect.minY
-        let bottomSpace = self.bounds.maxY - aroundRect.maxY
+        let bottomSpace = self.bounds.maxY - aroundRect.maxY - 120
 
-        newRect.origin.y = aroundRect.minY
+        newRect.origin.y = aroundRect.minY - 110
 
         let isEnoughRightSpace = rightSpace >= rect.width + 16
         let isEnoughLeftSpace = leftSpace >= rect.width + 16
         let isEnoughTopSpace = topSpace >= rect.height + 16
-        let isEnoughBottomSpace = bottomSpace >= rect.height + 16
+        let isEnoughBottomSpace = bottomSpace >= rect.height + 16 + 300
 
         if !isEnoughRightSpace, !isEnoughLeftSpace, !isEnoughTopSpace, !isEnoughBottomSpace {
             let centerX = aroundRect.midX - newRect.width / 2
@@ -135,11 +135,11 @@ class ScreenshotStateView: View {
         }
 
         if isEnoughBottomSpace && !isEnoughLeftSpace && !isEnoughRightSpace && !isEnoughTopSpace {
-            newRect.origin.y = aroundRect.maxY + 16
+            newRect.origin.y = aroundRect.maxY + 16 - 110
         }
 
         if !isEnoughBottomSpace {
-            newRect.origin.y = self.bounds.maxY - newRect.height - 16
+            newRect.origin.y = self.bounds.maxY - newRect.height - 110
         }
         return newRect
     }
