@@ -15,10 +15,7 @@ class OnboardingFinalSetupView: NSView {
         aspectRation: .resizeAspect
     )
 
-    let introLabel = Label(fontStyle: .bold, size: 28)
-        .withTextColorStyle(.titleAccent)
-        .withText("Setup Muna")
-        .withAligment(.center)
+    let introLabel = NSTextField()
 
     let descriptionLabel = Label(fontStyle: .regular, size: 20)
         .withTextColorStyle(.title60AccentAlpha)
@@ -61,6 +58,7 @@ class OnboardingFinalSetupView: NSView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
+        self.setupTilte()
         self.setupInitialLayout()
     }
 
@@ -68,20 +66,13 @@ class OnboardingFinalSetupView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateLayer() {
+        super.updateLayer()
+
+        self.setupTilte()
+    }
+
     private func setupInitialLayout() {
-        let string = "Setup Muna"
-        let attributedString = NSMutableAttributedString(
-            string: string,
-            attributes: [
-                .font: FontStyle.bold,
-                .foregroundColor: NSColor.white,
-            ]
-        )
-
-        let range = (string as NSString).range(of: "Muna")
-        attributedString.addAttributes([.foregroundColor: NSColor(hex: "72AEE4")], range: range)
-        self.introLabel.placeholderAttributedString = attributedString
-
         self.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 1103, height: 676))
         }
@@ -180,5 +171,28 @@ class OnboardingFinalSetupView: NSView {
             maker.trailing.equalToSuperview().inset(24)
             maker.bottom.equalToSuperview().inset(24)
         }
+    }
+
+    private func setupTilte() {
+        let string = "Setup Muna"
+        let attributedString = NSMutableAttributedString(
+            string: string,
+            attributes: [
+                .font: FontStyle.customFont(style: .bold, size: 28),
+                .foregroundColor: ColorStyle.titleAccent.color,
+            ]
+        )
+
+        var range = (string as NSString).range(of: "Muna")
+
+        attributedString.addAttributes([.foregroundColor: NSColor(hex: "72AEE4")], range: range)
+        range = (string as NSString).range(of: "Setup Muna")
+
+        attributedString.setAlignment(.center, range: range)
+        self.introLabel.alignment = .center
+        self.introLabel.isBezeled = false
+        self.introLabel.isEditable = false
+        self.introLabel.backgroundColor = .clear
+        self.introLabel.attributedStringValue = attributedString
     }
 }
