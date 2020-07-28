@@ -90,6 +90,7 @@
 		9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */; };
 		9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */; };
 		9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */; };
+		9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
 		9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E452494EDB700A34379 /* OnboardingIntroViewController.swift */; };
@@ -266,6 +267,7 @@
 		9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelPresentationAnimationView.swift; sourceTree = "<group>"; };
 		9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemView.swift; sourceTree = "<group>"; };
 		9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemMetainformationView.swift; sourceTree = "<group>"; };
+		9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Analytics.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -760,6 +762,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */,
 				9F1CB75024730AB500DFBB05 /* Test */,
 				233E747B246B4A800070EABA /* Service */,
 				239AB0AC24688EE6001526DA /* ServiceLocator */,
@@ -791,6 +794,14 @@
 				239DC917245D95E8001FA50C /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */,
+			);
+			path = AppDelegateExtensions;
 			sourceTree = "<group>";
 		};
 		9F581E3B2494E87C00A34379 /* Onboarding */ = {
@@ -1563,6 +1574,7 @@
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
+				9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,
 				9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,
