@@ -31,6 +31,7 @@ class OnboardingFinalSetupView: NSView {
     let separatorView = View()
 
     let shortuctsTilteLabel = Label(fontStyle: .bold, size: 24)
+        .withTextColorStyle(.titleAccent)
         .withText("Shortucts")
 
     let entireShortcutPreview = ShortcutPreviewView(
@@ -50,7 +51,7 @@ class OnboardingFinalSetupView: NSView {
     )
 
     let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
-        .withTextColorStyle(.alwaysWhite)
+        .withTextColorStyle(.titleAccent)
         .withText("General")
 
     let startupSettingItem = SwitcherSettingsItem()

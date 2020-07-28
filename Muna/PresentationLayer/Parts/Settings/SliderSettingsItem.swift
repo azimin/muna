@@ -10,10 +10,10 @@ import Cocoa
 
 class SliderSettingsItem: View {
     let titleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.alwaysWhite)
+        .withTextColorStyle(.titleAccent)
 
     let descriptionLabel = Label(fontStyle: .medium, size: 16)
-        .withTextColorStyle(.titleAccent)
+        .withTextColorStyle(.title60Accent)
 
     let sliderSectionLabel = Label(fontStyle: .medium, size: 14).withTextColorStyle(.titleAccent)
     let slider = NSSlider(value: 2, minValue: 0, maxValue: 3, target: nil, action: nil)
@@ -39,7 +39,7 @@ class SliderSettingsItem: View {
         self.addSubview(self.descriptionLabel)
         self.descriptionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.bottom.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
             make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
         }
 

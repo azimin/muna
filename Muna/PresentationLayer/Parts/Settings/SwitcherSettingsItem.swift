@@ -10,10 +10,10 @@ import Cocoa
 
 class SwitcherSettingsItem: View {
     let titleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.newTitle)
+        .withTextColorStyle(.titleAccent)
 
     let descriptionLabel = Label(fontStyle: .medium, size: 16)
-        .withTextColorStyle(.newTitle)
+        .withTextColorStyle(.title60Accent)
 
     let switcher = NSSwitch()
 
