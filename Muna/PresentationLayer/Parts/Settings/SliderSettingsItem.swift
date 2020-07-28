@@ -21,6 +21,7 @@ class SliderSettingsItem: View {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
+        self.layer?.masksToBounds = false
         self.setup()
     }
 
