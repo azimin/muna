@@ -38,12 +38,6 @@ class IconShortcutView: View {
         self.iconLabel.isHidden = false
     }
 
-    override func updateLayer() {
-        super.updateLayer()
-        self.backgroundColor = NSColor.color(.grayBackground)
-        self.imageView.image = self.imageView.image?.tint(color: NSColor.color(.newTitle))
-    }
-
     init(key: Key) {
         var text: String?
         var image: NSImage?

@@ -22,7 +22,7 @@ class SettingsShortcutView: View {
 
     func setup(item: ShortcutItem) {
         self.layer?.cornerRadius = 3
-        self.backgroundColor = NSColor.color(.grayBackground)
+        self.backgroundColor = NSColor.color(.lightForegroundOverlay)
 
         let stackView = NSStackView()
         stackView.spacing = 0
