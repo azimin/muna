@@ -68,6 +68,13 @@
 		9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */; };
 		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
 		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F2D340A24D0B9790049DD43 /* AnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */; };
+		9F2D340C24D0B9A50049DD43 /* AnalyticsValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */; };
+		9F2D340E24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */; };
+		9F2D341024D0B9F00049DD43 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */; };
+		9F2D341224D0BA310049DD43 /* StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D341124D0BA310049DD43 /* StorageServiceProtocol.swift */; };
+		9F2D341424D0BA4E0049DD43 /* UserDefaults+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D341324D0BA4E0049DD43 /* UserDefaults+Storage.swift */; };
+		9F2D341624D0BB460049DD43 /* TrackableScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D341524D0BB460049DD43 /* TrackableScreen.swift */; };
 		9F326FDC249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDB249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift */; };
 		9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDD249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift */; };
 		9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F326FDF249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift */; };
@@ -233,6 +240,13 @@
 		9F1CB75E24731D9C00DFBB05 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
 		9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+StyleHolder.swift"; sourceTree = "<group>"; };
 		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
+		9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
+		9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsValueProtocol.swift; sourceTree = "<group>"; };
+		9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsAdditionalServiceProtocol.swift; sourceTree = "<group>"; };
+		9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		9F2D341124D0BA310049DD43 /* StorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageServiceProtocol.swift; sourceTree = "<group>"; };
+		9F2D341324D0BA4E0049DD43 /* UserDefaults+Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Storage.swift"; sourceTree = "<group>"; };
+		9F2D341524D0BB460049DD43 /* TrackableScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableScreen.swift; sourceTree = "<group>"; };
 		9F326FDB249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToCapture.swift; sourceTree = "<group>"; };
 		9F326FDD249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToRemind.swift; sourceTree = "<group>"; };
 		9F326FDF249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubviewHowToSeeItems.swift; sourceTree = "<group>"; };
@@ -526,6 +540,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9F2D340824D0B95C0049DD43 /* Analytics */,
 				23B6C78024ADAE1C0071ACA8 /* Storage */,
 				9FD95E7D2484114E00ED4F05 /* CloseHandler */,
 				9F6E7BBD2477070500A3D5EB /* DateFormatter */,
@@ -549,6 +564,8 @@
 		23B6C78024ADAE1C0071ACA8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				9F2D341124D0BA310049DD43 /* StorageServiceProtocol.swift */,
+				9F2D341324D0BA4E0049DD43 /* UserDefaults+Storage.swift */,
 				23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */,
 			);
 			path = Storage;
@@ -666,6 +683,18 @@
 				9F1CB75E24731D9C00DFBB05 /* DateItem.swift */,
 			);
 			path = SimpleTypes;
+			sourceTree = "<group>";
+		};
+		9F2D340824D0B95C0049DD43 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */,
+				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
+				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
+				9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */,
+				9F2D341524D0BB460049DD43 /* TrackableScreen.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		9F326FDA249959BB0095DEA3 /* View */ = {
@@ -1420,6 +1449,7 @@
 				9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */,
 				9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */,
 				236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */,
+				9F2D341224D0BA310049DD43 /* StorageServiceProtocol.swift in Sources */,
 				9FE96BDB2465F495007D92B8 /* Label+Builder.swift in Sources */,
 				233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */,
 				23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */,
@@ -1443,6 +1473,7 @@
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
+				9F2D341024D0B9F00049DD43 /* AnalyticsService.swift in Sources */,
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
@@ -1475,6 +1506,7 @@
 				231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */,
 				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
+				9F2D340A24D0B9790049DD43 /* AnalyticsServiceProtocol.swift in Sources */,
 				9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */,
 				23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */,
 				9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */,
@@ -1486,6 +1518,7 @@
 				9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */,
 				23ADE2D624A899F800A2D7F9 /* ShortcutPreviewView.swift in Sources */,
 				23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */,
+				9F2D340C24D0B9A50049DD43 /* AnalyticsValueProtocol.swift in Sources */,
 				239AB0AB24688E8E001526DA /* ImageStorageService.swift in Sources */,
 				9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */,
 				9F33D483246875B000395C44 /* EmptyStateView.swift in Sources */,
@@ -1536,12 +1569,15 @@
 				9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */,
 				9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */,
 				23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */,
+				9F2D340E24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift in Sources */,
 				9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */,
 				9FE0F539247023210046A5C4 /* SettingsViewProtocol.swift in Sources */,
 				9FE96BD52465F3BF007D92B8 /* Button.swift in Sources */,
 				230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */,
+				9F2D341624D0BB460049DD43 /* TrackableScreen.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
+				9F2D341424D0BA4E0049DD43 /* UserDefaults+Storage.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */,
