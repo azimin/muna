@@ -259,7 +259,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("No selected index")
             return
         }
 
@@ -355,8 +354,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         popover.animates = true
 
         popover.show(
-            relativeTo: capturedView.frame,
-            of: self.collectionView,
+            relativeTo: NSRect(x: 0, y: 0, width: 0, height: 0),
+            of: capturedView,
             preferredEdge: .minX
         )
 
@@ -377,7 +376,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func popUpOnSelectedItem(forceShow: Bool) {
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("No selected index")
             return
         }
 
@@ -405,7 +403,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         guard let value = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("NO index path")
             return
         }
 
@@ -429,7 +426,6 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         guard let value = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("NO index path")
             return
         }
 

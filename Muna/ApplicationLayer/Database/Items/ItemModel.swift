@@ -70,6 +70,7 @@ class ItemModel: ItemModelProtocol, Codable {
         case id
         case imageName
         case creationDate
+        case completionDate
         case dueDateString
         case dueDate
         case comment

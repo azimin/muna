@@ -11,6 +11,7 @@ import Foundation
 class ServiceLocator {
     static var shared = ServiceLocator()
 
+    let analytics: AnalyticsServiceProtocol
     let imageStorage: ImageStorageServiceProtocol
     let itemsDatabase: ItemsDatabaseServiceProtocol
     let savingService: SavingProcessingService
@@ -26,5 +27,10 @@ class ServiceLocator {
         )
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
         self.windowManager = WindowManager()
+        self.analytics = AnalyticsService(
+            storage: UserDefaults.standard,
+            apmplitudeId: "fef18005e21e59f8b7252c5bb34708bd",
+            additionalServices: []
+        )
     }
 }

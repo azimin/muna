@@ -11,4 +11,6 @@ target 'Muna' do
   pod 'MASShortcut'
   pod 'SwiftyChrono'
   pod 'SwiftDate'
+
+  pod 'Amplitude'
 end

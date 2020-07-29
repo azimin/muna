@@ -39,6 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.setupUserDefaults()
         self.setupStatusBarItem()
         self.setupShortcuts()
+        self.logAnalytics()
 
         NotificationCenter.default.addObserver(
             self,
