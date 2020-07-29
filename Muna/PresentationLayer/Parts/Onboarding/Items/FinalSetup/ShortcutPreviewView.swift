@@ -42,7 +42,7 @@ class ShortcutPreviewView: NSView {
             make.leading.trailing.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(158)
-            make.height.equalTo(115)
+            make.height.equalTo(115) 
         }
 
         self.addSubview(self.shortcutView)
