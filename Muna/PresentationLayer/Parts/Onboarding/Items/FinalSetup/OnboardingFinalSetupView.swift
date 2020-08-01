@@ -34,17 +34,17 @@ class OnboardingFinalSetupView: NSView {
     let entireShortcutPreview = ShortcutPreviewView(
         title: "Entire screen capture shortcut",
         imageName: "Fullscreen",
-        item: Preferences.DefaultItems.defaultShortcutFullscreenScreenshotShortcut.item
+        itemUDKey: Preferences.defaultShortcutFullscreenScreenshotKey
     )
     let selectedAreaShortcutPreview = ShortcutPreviewView(
         title: "Capture selected positon shorcut",
         imageName: "Selected area",
-        item: Preferences.DefaultItems.defaultScreenshotShortcut.item
+        itemUDKey: Preferences.defaultShortcutScreenshotKey
     )
     let showPanelShortuctPreview = ShortcutPreviewView(
         title: "Show captured items shorcut",
         imageName: "Panel",
-        item: Preferences.DefaultItems.defaultActivationShortcut.item
+        itemUDKey: Preferences.defaultShortcutPanelKey
     )
 
     let settingsTitleLabel = Label(fontStyle: .bold, size: 24)

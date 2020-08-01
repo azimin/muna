@@ -12,6 +12,24 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
+    let entireShortcutPreview = ShortcutPreviewView(
+        title: "Entire screen capture shortcut",
+        imageName: "Fullscreen",
+        itemUDKey: Preferences.defaultShortcutFullscreenScreenshotKey
+    )
+
+    let selectedAreaShortcutPreview = ShortcutPreviewView(
+        title: "Capture selected positon shorcut",
+        imageName: "Selected area",
+        itemUDKey: Preferences.defaultShortcutScreenshotKey
+    )
+
+    let showPanelShortuctPreview = ShortcutPreviewView(
+        title: "Show captured items shorcut",
+        imageName: "Panel",
+        itemUDKey: Preferences.defaultShortcutPanelKey
+    )
+
     init() {
         super.init(frame: .zero)
         self.setup()
@@ -26,7 +44,7 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
             maker.width.equalTo(self.firstPartframeWidth)
-            maker.height.equalTo(500)
+            maker.height.equalTo(300)
         }
 
         self.addSubview(self.settingsView)
@@ -34,6 +52,24 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
             maker.leading.equalTo(self.titlesView.snp.trailing)
             maker.trailing.top.bottom.equalToSuperview()
             maker.width.equalTo(self.frameWidth - 120)
+        }
+
+        self.addSubview(self.entireShortcutPreview)
+        self.entireShortcutPreview.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(24)
+            make.leading.equalToSuperview().inset(40)
+        }
+
+        self.addSubview(self.selectedAreaShortcutPreview)
+        self.selectedAreaShortcutPreview.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(24)
+            make.centerX.equalToSuperview()
+        }
+
+        self.addSubview(self.showPanelShortuctPreview)
+        self.showPanelShortuctPreview.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(24)
+            make.trailing.equalToSuperview().inset(40)
         }
     }
 }

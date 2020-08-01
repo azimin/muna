@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MASShortcut
 
 class ShortcutPreviewView: NSView {
     let titleLabel = Label(fontStyle: .bold, size: 16)
@@ -15,10 +16,11 @@ class ShortcutPreviewView: NSView {
 
     let previewImageView = ImageView()
 
-    let shortcutView: SettingsShortcutView
+    let shortcutView: MASShortcutView
 
-    init(title: String, imageName: String, item: ShortcutItem) {
-        self.shortcutView = SettingsShortcutView(item: item)
+    init(title: String, imageName: String, itemUDKey: String) {
+        self.shortcutView = MASShortcutView()
+        self.shortcutView.associatedUserDefaultsKey = itemUDKey
         self.titleLabel.text = title
         self.previewImageView.image = NSImage(named: imageName)
 
@@ -42,7 +44,6 @@ class ShortcutPreviewView: NSView {
             make.leading.trailing.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(158)
-            make.height.equalTo(115) 
         }
 
         self.addSubview(self.shortcutView)
