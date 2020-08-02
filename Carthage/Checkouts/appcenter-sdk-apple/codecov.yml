@@ -1,0 +1,6 @@
+codecov:
+  bot: xabldint
+ignore:
+  - "Vendor/**/*"
+  - "AppCenter/AppCenterTests"
+  - "AppCenter*/AppCenter*Tests"
