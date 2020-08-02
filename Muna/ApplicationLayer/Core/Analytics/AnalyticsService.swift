@@ -7,6 +7,9 @@
 //
 
 import Amplitude
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import Foundation
 
 public class AnalyticsService: AnalyticsServiceProtocol {
@@ -27,6 +30,10 @@ public class AnalyticsService: AnalyticsServiceProtocol {
             Amplitude.instance().initializeApiKey(id)
             Amplitude.instance()?.trackingSessionEvents = true
             Amplitude.instance()?.setUserId(self.userId, startNewSession: true)
+            MSAppCenter.start("6b14925b-9fe0-4d27-a949-a3f0625a538a", withServices: [
+                MSAnalytics.self,
+                MSCrashes.self,
+            ])
             #if DEBUG
                 Amplitude.instance().optOut = true
             #else

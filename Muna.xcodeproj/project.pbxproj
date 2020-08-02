@@ -49,6 +49,14 @@
 		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
 		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
 		23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */; };
+		23FF7B0324D6E12E00EAAF3C /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7AFF24D6E12E00EAAF3C /* AppCenter.framework */; };
+		23FF7B0424D6E12E00EAAF3C /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0024D6E12E00EAAF3C /* AppCenterAnalytics.framework */; };
+		23FF7B0524D6E12E00EAAF3C /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0124D6E12E00EAAF3C /* AppCenterCrashes.framework */; };
+		23FF7B0624D6E12E00EAAF3C /* AppCenterPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0224D6E12E00EAAF3C /* AppCenterPush.framework */; };
+		23FF7B0724D6E14300EAAF3C /* AppCenter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7AFF24D6E12E00EAAF3C /* AppCenter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23FF7B0824D6E14300EAAF3C /* AppCenterAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0024D6E12E00EAAF3C /* AppCenterAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23FF7B0924D6E14300EAAF3C /* AppCenterCrashes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0124D6E12E00EAAF3C /* AppCenterCrashes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23FF7B0A24D6E14300EAAF3C /* AppCenterPush.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23FF7B0224D6E12E00EAAF3C /* AppCenterPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */; };
 		9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0924633C6F00F05D81 /* Panel.swift */; };
 		9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */; };
@@ -168,6 +176,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				23FF7B0724D6E14300EAAF3C /* AppCenter.framework in Embed Frameworks */,
+				23FF7B0824D6E14300EAAF3C /* AppCenterAnalytics.framework in Embed Frameworks */,
+				23FF7B0924D6E14300EAAF3C /* AppCenterCrashes.framework in Embed Frameworks */,
+				23FF7B0A24D6E14300EAAF3C /* AppCenterPush.framework in Embed Frameworks */,
 				9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -220,6 +232,12 @@
 		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
 		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
 		23FA252A2484D7AD00CD69C4 /* ENMonthOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENMonthOffsetParser.swift; sourceTree = "<group>"; };
+		23FF7AFF24D6E12E00EAAF3C /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Carthage/Build/Mac/AppCenter.framework; sourceTree = "<group>"; };
+		23FF7B0024D6E12E00EAAF3C /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = Carthage/Build/Mac/AppCenterAnalytics.framework; sourceTree = "<group>"; };
+		23FF7B0124D6E12E00EAAF3C /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Carthage/Build/Mac/AppCenterCrashes.framework; sourceTree = "<group>"; };
+		23FF7B0224D6E12E00EAAF3C /* AppCenterPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterPush.framework; path = Carthage/Build/Mac/AppCenterPush.framework; sourceTree = "<group>"; };
+		23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MunaDebug (Test App).entitlements"; sourceTree = "<group>"; };
+		23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MunaRelease.entitlements; sourceTree = "<group>"; };
 		39A334B2C7B762626D981AB2 /* Pods-Muna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug.xcconfig"; sourceTree = "<group>"; };
 		539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (real app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (real app).xcconfig"; sourceTree = "<group>"; };
 		9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.debug (test app).xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.debug (test app).xcconfig"; sourceTree = "<group>"; };
@@ -348,6 +366,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */,
+				23FF7B0324D6E12E00EAAF3C /* AppCenter.framework in Frameworks */,
+				23FF7B0424D6E12E00EAAF3C /* AppCenterAnalytics.framework in Frameworks */,
+				23FF7B0524D6E12E00EAAF3C /* AppCenterCrashes.framework in Frameworks */,
+				23FF7B0624D6E12E00EAAF3C /* AppCenterPush.framework in Frameworks */,
 				A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +543,8 @@
 		239DC912245D95E5001FA50C /* Muna */ = {
 			isa = PBXGroup;
 			children = (
+				23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */,
+				23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */,
 				239DC913245D95E5001FA50C /* AppDelegate.swift */,
 				239DC920245D95E8001FA50C /* Muna.entitlements */,
 				9F4A8CED245DAC7500EA2E1E /* PresentationLayer */,
@@ -1244,6 +1268,10 @@
 		DF9B4F4541A06E89BD25CA05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23FF7AFF24D6E12E00EAAF3C /* AppCenter.framework */,
+				23FF7B0024D6E12E00EAAF3C /* AppCenterAnalytics.framework */,
+				23FF7B0124D6E12E00EAAF3C /* AppCenterCrashes.framework */,
+				23FF7B0224D6E12E00EAAF3C /* AppCenterPush.framework */,
 				9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */,
 				C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */,
 			);
@@ -1405,6 +1433,10 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/LaunchAtLogin.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/AppCenter.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/AppCenterAnalytics.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/AppCenterCrashes.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/AppCenterPush.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -1741,7 +1773,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = 5MGEMLZRS4;
+				DEVELOPMENT_TEAM = G6LW789JHQ;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1766,12 +1798,12 @@
 			baseConfigurationReference = B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Muna/MunaRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = 5MGEMLZRS4;
+				DEVELOPMENT_TEAM = G6LW789JHQ;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1855,7 +1887,7 @@
 			baseConfigurationReference = 9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Muna/MunaDebug (Test App).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
