@@ -127,8 +127,8 @@ class Preferences {
     }
 
     @UserDefaultsEntry(key: Key.periodOfStoring)
-    static var periodOfStoring = PeriodOfStoring.month.rawValue.lowercased()
+    static var periodOfStoring = PeriodOfStoring.month.rawValue
 
     @UserDefaultsEntry(key: Key.pingInterval)
-    static var pingInterval = PingInterval.fiveMins.rawValue.lowercased()
+    static var pingInterval = PingInterval.fiveMins.rawValue
 }
