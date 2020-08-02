@@ -16,6 +16,7 @@ class Preferences {
         case tenMins = "once in 10 mins"
         case halfAnHour = "once in 30 mins"
         case hour = "once in hour"
+        case disabled
     }
 
     enum PeriodOfStoring: String, CaseIterable {
