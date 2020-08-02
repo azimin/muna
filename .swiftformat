@@ -2,3 +2,4 @@
 --wrapcollections before-first
 --stripunusedargs closure-only
 --exclude Pods
+--exclude Carthage

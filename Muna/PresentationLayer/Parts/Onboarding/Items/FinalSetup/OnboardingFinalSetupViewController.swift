@@ -36,9 +36,12 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     }
 
     private func setupPeriodOfStoring() {
-        guard let value = Preferences.PeriodOfStoring(rawValue: Preferences.periodOfStoring) else {
-            assertionFailure("Not supproted period of storing: \(Preferences.periodOfStoring)")
-            return
+        let value: Preferences.PeriodOfStoring
+        if let settingsValue = Preferences.PeriodOfStoring(rawValue: Preferences.periodOfStoring) {
+            value = settingsValue
+        } else {
+            assertionFailure("Not supproted period of storing: \(Preferences.pingInterval)")
+            value = .week
         }
 
         switch value {
@@ -58,9 +61,12 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     }
 
     private func setupPingInterval() {
-        guard let value = Preferences.PingInterval(rawValue: Preferences.pingInterval) else {
+        let value: Preferences.PingInterval
+        if let settingsValue = Preferences.PingInterval(rawValue: Preferences.pingInterval) {
+            value = settingsValue
+        } else {
             assertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
-            return
+            value = .fiveMins
         }
 
         switch value {
@@ -106,7 +112,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         }
 
         let value = Preferences.PingInterval.allCases[Int(newValue)]
-        Preferences.pingInterval = value.rawValue
+        Preferences.pingInterval = value.rawValue.lowercased()
 
         self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
@@ -129,7 +135,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         }
 
         let value = Preferences.PeriodOfStoring.allCases[Int(newValue)]
-        Preferences.periodOfStoring = value.rawValue
+        Preferences.periodOfStoring = value.rawValue.lowercased()
 
         self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
