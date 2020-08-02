@@ -97,7 +97,7 @@ class DateProcesingService {
 
             var pureDay = PureDay(day: day, month: month, year: year)
             let newDate = timeOfDay.apply(to: pureDay) + (numberOfElement * 7).days
-            pureDay = PureDay(day: newDate.day, month: newDate.month, year: newDate.year)
+            pureDay = PureDay(date: newDate)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
                 return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]

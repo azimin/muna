@@ -61,8 +61,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let currentTime = TimeZone.current.secondsFromGMT()
         let date = Date() + currentTime.seconds
-//        print("In 2h")
-//        print("\(MunaChrono().parseFromString("In 2h", date: date))\n")
+//        print("Sun")
+//        print("\(MunaChrono().parseFromString("Sun", date: date))\n")
 //
 //        print("In 50 mins")
 //        print("\(MunaChrono().parseFromString("In 50 mins", date: date))\n")
