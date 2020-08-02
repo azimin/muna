@@ -62,6 +62,17 @@ class Preferences {
         }
     }
 
+    static func setup() {
+        if let value = ProcessInfo().environment["RESET_DEFAULTS"], value == "1" {
+            self.resetDefaults()
+        }
+    }
+
+    private static func resetDefaults() {
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+    }
+
     static var defaultUserDefaults: [String: NSObject] {
         // cmd + shift + w
         let defaultActivationShortcut = DefaultItems.defaultActivationShortcut.item.masShortcut
@@ -127,7 +138,7 @@ class Preferences {
     }
 
     @UserDefaultsEntry(key: Key.periodOfStoring)
-    static var periodOfStoring = PeriodOfStoring.month.rawValue
+    static var periodOfStoring = PeriodOfStoring.week.rawValue
 
     @UserDefaultsEntry(key: Key.pingInterval)
     static var pingInterval = PingInterval.fiveMins.rawValue
