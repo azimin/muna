@@ -16,16 +16,23 @@ class ShortcutPreviewView: NSView {
 
     let previewImageView = ImageView()
 
-    let shortcutView: MASShortcutView
+    let shortcutView = MASShortcutView()
+
+    private let imageName: String
 
     init(title: String, imageName: String, itemUDKey: String) {
-        self.shortcutView = MASShortcutView()
+        self.imageName = imageName
         self.shortcutView.associatedUserDefaultsKey = itemUDKey
         self.titleLabel.text = title
         self.previewImageView.image = NSImage(named: imageName)
 
         super.init(frame: .zero)
         self.setup()
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        self.previewImageView.image = NSImage(named: self.imageName)
     }
 
     required init?(coder: NSCoder) {
