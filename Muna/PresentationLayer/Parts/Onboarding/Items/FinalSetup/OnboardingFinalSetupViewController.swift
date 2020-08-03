@@ -85,6 +85,9 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         case .hour:
             self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
             self.rootView.notificationsSettingItem.slider.doubleValue = 3
+        case .disabled:
+            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.notificationsSettingItem.slider.doubleValue = 4
         }
     }
 

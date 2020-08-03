@@ -272,12 +272,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         switch action {
         case .basicTap:
+            self.pingNotificationSetup(itemId: itemId)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
             } else {
                 assertionFailure("No item by id")
             }
-
         case .complete:
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 item.isComplited = true
@@ -286,24 +286,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 assertionFailure("No item by id")
             }
         case .later:
-            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
-                let dueDate = item.dueDate {
-                let sinceReminder = Date().timeIntervalSince(dueDate)
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
+            self.pingNotificationSetup(itemId: itemId)
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.toggleWindow(.remindLater(item: item))
             } else {
                 assertionFailure("No item by id")
             }
         case .dismiss:
-            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
-                let dueDate = item.dueDate {
-                let sinceReminder = Date().timeIntervalSince(dueDate)
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
-            } else {
-                assertionFailure("No item by id")
-            }
+            self.pingNotificationSetup(itemId: itemId)
         }
 
         completionHandler()
+    }
+
+    func pingNotificationSetup(itemId: String) {
+        if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
+            let dueDate = item.dueDate {
+            let sinceReminder = Date().timeIntervalSince(dueDate)
+
+            let value: Preferences.PingInterval
+            if let settingsValue = Preferences.PingInterval(rawValue: Preferences.pingInterval.lowercased()) {
+                value = settingsValue
+            } else {
+                assertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
+                value = .fiveMins
+            }
+
+            switch value {
+            case .fiveMins:
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5)
+            case .tenMins:
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
+            case .halfAnHour:
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30)
+            case .hour:
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60)
+            case .disabled:
+                break
+            }
+        } else {
+            assertionFailure("No item by id")
+        }
     }
 }

@@ -16,7 +16,7 @@ class SliderSettingsItem: View {
         .withTextColorStyle(.title60Accent)
 
     let sliderSectionLabel = Label(fontStyle: .medium, size: 14).withTextColorStyle(.titleAccent)
-    let slider = NSSlider(value: 2, minValue: 0, maxValue: 3, target: nil, action: nil)
+    let slider = NSSlider(value: 2, minValue: 0, maxValue: 4, target: nil, action: nil)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

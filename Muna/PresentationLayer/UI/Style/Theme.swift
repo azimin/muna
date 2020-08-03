@@ -10,7 +10,7 @@ import Cocoa
 
 private var currentTheme = Theme.current
 
-enum Theme {
+enum Theme: String {
     case dark
     case light
 

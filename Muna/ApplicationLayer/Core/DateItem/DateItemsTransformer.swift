@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 struct TransformedDate {
     let date: Date
@@ -58,7 +59,10 @@ class DateItemsTransformer {
             )
             for time in times {
                 let date = time.apply(to: item.day)
-                self.dates.append(TransformedDate(date: date, offset: item.offset))
+                let transformedDate = TransformedDate(date: date, offset: item.offset)
+                if date.isInFuture {
+                    self.dates.append(transformedDate)
+                }
             }
         }
     }

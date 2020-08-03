@@ -14,19 +14,19 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
 
     let entireShortcutPreview = ShortcutPreviewView(
         title: "Entire screen capture shortcut",
-        imageName: "Fullscreen",
+        imageName: "shortcuts_fullscreen",
         itemUDKey: Preferences.defaultShortcutFullscreenScreenshotKey
     )
 
     let selectedAreaShortcutPreview = ShortcutPreviewView(
         title: "Capture selected positon shorcut",
-        imageName: "Selected area",
+        imageName: "shortcuts_selected_area",
         itemUDKey: Preferences.defaultShortcutScreenshotKey
     )
 
     let showPanelShortuctPreview = ShortcutPreviewView(
         title: "Show captured items shorcut",
-        imageName: "Panel",
+        imageName: "shortcuts_panel",
         itemUDKey: Preferences.defaultShortcutPanelKey
     )
 
@@ -44,7 +44,7 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
             maker.width.equalTo(self.firstPartframeWidth)
-            maker.height.equalTo(300)
+            maker.height.equalTo(260)
         }
 
         self.addSubview(self.settingsView)

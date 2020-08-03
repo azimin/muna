@@ -10,22 +10,29 @@ import Cocoa
 import MASShortcut
 
 class ShortcutPreviewView: NSView {
-    let titleLabel = Label(fontStyle: .bold, size: 16)
-        .withTextColorStyle(.titleAccent)
+    let titleLabel = Label(fontStyle: .medium, size: 16)
+        .withTextColorStyle(.title60Accent)
         .withAligment(.center)
 
     let previewImageView = ImageView()
 
-    let shortcutView: MASShortcutView
+    let shortcutView = MASShortcutView()
+
+    private let imageName: String
 
     init(title: String, imageName: String, itemUDKey: String) {
-        self.shortcutView = MASShortcutView()
+        self.imageName = imageName
         self.shortcutView.associatedUserDefaultsKey = itemUDKey
         self.titleLabel.text = title
-        self.previewImageView.image = NSImage(named: imageName)
 
         super.init(frame: .zero)
         self.setup()
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        let suffix = Theme.current.rawValue
+        self.previewImageView.image = NSImage(named: self.imageName + "_" + suffix)
     }
 
     required init?(coder: NSCoder) {
