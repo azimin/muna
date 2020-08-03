@@ -44,7 +44,7 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
             maker.width.equalTo(self.firstPartframeWidth)
-            maker.height.equalTo(300)
+            maker.height.equalTo(260)
         }
 
         self.addSubview(self.settingsView)
