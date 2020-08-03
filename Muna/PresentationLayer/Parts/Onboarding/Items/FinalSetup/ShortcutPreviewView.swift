@@ -24,7 +24,6 @@ class ShortcutPreviewView: NSView {
         self.imageName = imageName
         self.shortcutView.associatedUserDefaultsKey = itemUDKey
         self.titleLabel.text = title
-        self.previewImageView.image = NSImage(named: imageName)
 
         super.init(frame: .zero)
         self.setup()
@@ -32,7 +31,8 @@ class ShortcutPreviewView: NSView {
 
     override func updateLayer() {
         super.updateLayer()
-        self.previewImageView.image = NSImage(named: self.imageName)
+        let suffix = Theme.current.rawValue
+        self.previewImageView.image = NSImage(named: self.imageName + "_" + suffix)
     }
 
     required init?(coder: NSCoder) {
