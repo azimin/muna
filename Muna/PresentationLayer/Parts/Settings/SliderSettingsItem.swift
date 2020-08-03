@@ -51,7 +51,7 @@ class SliderSettingsItem: View {
     }
 
     func setup() {
-        for sector in 0 ... Int(self.slider.maxValue) {
+        for _ in 0 ... Int(self.slider.maxValue) {
             let view = View()
             view.backgroundColor = ColorStyle.separator.color
             self.addSubview(view, positioned: .below, relativeTo: self.slider)
@@ -81,7 +81,7 @@ class SliderSettingsItem: View {
         self.slider.snp.makeConstraints { make in
             make.top.equalTo(self.sliderSectionLabel.snp.bottom).offset(4)
             make.trailing.equalToSuperview()
-            make.width.equalTo(80)
+            make.width.equalTo(105)
         }
 
         self.sliderSectionLabel.snp.remakeConstraints { make in
