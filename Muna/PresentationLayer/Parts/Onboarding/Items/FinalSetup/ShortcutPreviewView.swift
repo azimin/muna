@@ -10,8 +10,8 @@ import Cocoa
 import MASShortcut
 
 class ShortcutPreviewView: NSView {
-    let titleLabel = Label(fontStyle: .bold, size: 16)
-        .withTextColorStyle(.titleAccent)
+    let titleLabel = Label(fontStyle: .medium, size: 16)
+        .withTextColorStyle(.title60Accent)
         .withAligment(.center)
 
     let previewImageView = ImageView()
