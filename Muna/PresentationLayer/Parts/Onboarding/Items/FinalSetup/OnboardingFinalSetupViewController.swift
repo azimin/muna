@@ -31,6 +31,9 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         self.rootView.storageSettingItem.slider.target = self
         self.rootView.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
 
+        self.rootView.continueButton.target = self
+        self.rootView.continueButton.action = #selector(self.buttonAction)
+
         self.setupPeriodOfStoring()
         self.setupPingInterval()
     }
@@ -86,7 +89,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     }
 
     @objc func buttonAction(sender: NSButton) {
-        self.onNext?()
+        ServiceLocator.shared.windowManager.toggleWindow(.onboarding)
     }
 
     @objc
