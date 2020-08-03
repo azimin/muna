@@ -52,8 +52,8 @@ class OnboardingFinalSetupView: NSView {
         .withText("General")
 
     let startupSettingItem = SwitcherSettingsItem()
-    let notificationsSettingItem = SliderSettingsItem()
-    let storageSettingItem = SliderSettingsItem()
+    let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
+    let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

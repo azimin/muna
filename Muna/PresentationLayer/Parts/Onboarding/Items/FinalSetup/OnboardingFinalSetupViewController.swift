@@ -111,8 +111,10 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
             self.rootView.notificationsSettingItem.slider.doubleValue = 1
         case 2 ..< 3:
             self.rootView.notificationsSettingItem.slider.doubleValue = 2
-        case 3:
+        case 3 ..< 4:
             self.rootView.notificationsSettingItem.slider.doubleValue = 3
+        case 4:
+            self.rootView.notificationsSettingItem.slider.doubleValue = 4
         default:
             break
         }

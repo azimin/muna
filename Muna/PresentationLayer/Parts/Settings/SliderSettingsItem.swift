@@ -18,8 +18,13 @@ class SliderSettingsItem: View {
     let sliderSectionLabel = Label(fontStyle: .medium, size: 14).withTextColorStyle(.titleAccent)
     let slider = NSSlider(value: 2, minValue: 0, maxValue: 4, target: nil, action: nil)
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    var sliderSectionsViews = [View]()
+
+    init(minValue: Double, maxValue: Double) {
+        self.slider.minValue = minValue
+        self.slider.maxValue = maxValue
+
+        super.init(frame: .zero)
 
         self.layer?.masksToBounds = false
         self.setup()
@@ -29,7 +34,30 @@ class SliderSettingsItem: View {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layout() {
+        super.layout()
+        let sliderSectorWidth = self.slider.frame.size.width / CGFloat(self.slider.maxValue + 1)
+        let markPositionInSector = sliderSectorWidth / 2 - 0.5
+
+        for sector in Int(self.slider.minValue) ... Int(self.slider.maxValue) {
+            let view = self.sliderSectionsViews[sector]
+            let xPosition = sliderSectorWidth * CGFloat(sector + 1) - markPositionInSector + self.slider.frame.minX
+            let yPosition = self.slider.frame.midY - 10.5
+            let point = CGPoint(x: xPosition, y: yPosition)
+            view.frame = CGRect(origin: point, size: CGSize(width: 1, height: 21))
+            view.layoutSubtreeIfNeeded()
+            self.sliderSectionsViews[sector] = view
+        }
+    }
+
     func setup() {
+        for sector in 0 ... Int(self.slider.maxValue) {
+            let view = View()
+            view.backgroundColor = ColorStyle.separator.color
+            self.addSubview(view, positioned: .below, relativeTo: self.slider)
+            self.sliderSectionsViews.append(view)
+        }
+
         self.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -59,47 +87,6 @@ class SliderSettingsItem: View {
         self.sliderSectionLabel.snp.remakeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.centerX.equalTo(self.slider)
-        }
-
-        let viewSector1 = View()
-        viewSector1.backgroundColor = ColorStyle.separator.color
-        let viewSector2 = View()
-        viewSector2.backgroundColor = ColorStyle.separator.color
-        let viewSector3 = View()
-        viewSector3.backgroundColor = ColorStyle.separator.color
-        let viewSector4 = View()
-        viewSector4.backgroundColor = ColorStyle.separator.color
-
-        self.addSubview(viewSector1, positioned: .below, relativeTo: self.slider)
-        viewSector1.snp.makeConstraints { make in
-            make.leading.equalTo(self.slider).offset(6.5)
-            make.height.equalTo(21)
-            make.width.equalTo(1)
-            make.centerY.equalTo(self.slider)
-        }
-
-        self.addSubview(viewSector2, positioned: .below, relativeTo: self.slider)
-        viewSector2.snp.makeConstraints { make in
-            make.leading.equalTo(self.slider).offset(28.5)
-            make.height.equalTo(21)
-            make.width.equalTo(1)
-            make.centerY.equalTo(self.slider)
-        }
-
-        self.addSubview(viewSector3, positioned: .below, relativeTo: self.slider)
-        viewSector3.snp.makeConstraints { make in
-            make.leading.equalTo(self.slider).offset(50.5)
-            make.height.equalTo(21)
-            make.width.equalTo(1)
-            make.centerY.equalTo(self.slider)
-        }
-
-        self.addSubview(viewSector4, positioned: .below, relativeTo: self.slider)
-        viewSector4.snp.makeConstraints { make in
-            make.leading.equalTo(self.slider).offset(72)
-            make.height.equalTo(21)
-            make.width.equalTo(1)
-            make.centerY.equalTo(self.slider)
         }
     }
 }
