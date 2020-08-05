@@ -56,6 +56,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         Preferences.setup()
+
+        if Preferences.isNeededToShowOnboarding {
+            ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

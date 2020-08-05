@@ -145,6 +145,6 @@ class Preferences {
     @UserDefaultsEntry(wrappedValue: PingInterval.fiveMins.rawValue, key: Key.pingInterval)
     static var pingInterval
 
-    @UserDefaultsEntry(wrappedValue: false, key: Key.isNeededToShowOnboarding)
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowOnboarding)
     static var isNeededToShowOnboarding
 }
