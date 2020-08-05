@@ -116,7 +116,7 @@ class RemindersOptionsController {
         }
 
         guard self.avialbleItems.count > index else {
-            assertionFailure("Wrong index")
+            appAssertionFailure("Wrong index")
             return
         }
 

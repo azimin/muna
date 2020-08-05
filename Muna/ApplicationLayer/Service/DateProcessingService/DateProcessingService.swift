@@ -43,7 +43,7 @@ class DateProcesingService {
                 let month = result.reservedComponents[.month],
                 let year = result.reservedComponents[.year]
             else {
-                assertionFailure("One of the element doesn't provided")
+                appAssertionFailure("One of the element doesn't provided")
                 return []
             }
 
@@ -86,7 +86,7 @@ class DateProcesingService {
                 let month = result.reservedComponents[.month],
                 let year = result.reservedComponents[.year]
             else {
-                assertionFailure("One of the element doesn't provided")
+                appAssertionFailure("One of the element doesn't provided")
                 return []
             }
 
@@ -135,7 +135,7 @@ class DateProcesingService {
             let month = result.reservedComponents[.month],
             let year = result.reservedComponents[.year]
         else {
-            assertionFailure("One of the element doesn't provided")
+            appAssertionFailure("One of the element doesn't provided")
             return []
         }
 

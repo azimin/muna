@@ -33,7 +33,7 @@ class SavingProcessingService {
         // TODO: Add quaility selection in settings
         guard let image = self.image,
             let data = image.tiffRepresentation(using: .jpeg, factor: 0.83) else {
-            assertionFailure("Image is not provided")
+            appAssertionFailure("Image is not provided")
             return
         }
 
@@ -52,7 +52,7 @@ class SavingProcessingService {
         }
 
         guard let covertedData = imageData else {
-            assertionFailure("Can't comress")
+            appAssertionFailure("Can't comress")
             return
         }
 

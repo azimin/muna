@@ -53,7 +53,7 @@ extension Date {
         if let date = string.toDate("MM-dd-yyyy HH:mm") {
             return date.date
         } else {
-            assertionFailure("Can't cast")
+            appAssertionFailure("Can't cast")
             return Date()
         }
     }
@@ -66,7 +66,7 @@ extension Date {
         if let date = format.date(from: dateString) {
             return date
         } else {
-            assertionFailure("Can't cast")
+            appAssertionFailure("Can't cast")
             return Date()
         }
     }

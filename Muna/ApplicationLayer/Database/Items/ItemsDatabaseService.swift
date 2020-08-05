@@ -76,7 +76,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     func itemFilter(by id: String) -> Filter? {
         guard let item = self.items.first(where: { $0.id == id }) else {
-            assertionFailure("No filter")
+            appAssertionFailure("No filter")
             return nil
         }
 
@@ -99,7 +99,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
             _ = self.imageStorage.removeImage(name: item.imageName)
         } else {
-            assertionFailure("No id")
+            appAssertionFailure("No id")
         }
 
         if shouldSave {

@@ -142,6 +142,7 @@
 		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */; };
 		9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */; };
+		9FC3F89424DB0FB000BC0693 /* AssertionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
@@ -331,6 +332,7 @@
 		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionsHandler.swift; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9FC3F89224DB0FA700BC0693 /* Assertions */,
 				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
 				9FE0F53C247075600046A5C4 /* SavingProcessing */,
@@ -1156,6 +1159,14 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		9FC3F89224DB0FA700BC0693 /* Assertions */ = {
+			isa = PBXGroup;
+			children = (
+				9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */,
+			);
+			path = Assertions;
+			sourceTree = "<group>";
+		};
 		9FC9CDC424699E4B0018FAD7 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -1633,6 +1644,7 @@
 				23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */,
 				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
+				9FC3F89424DB0FB000BC0693 /* AssertionsHandler.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
 				23561B492461F46600097E4A /* Parser.swift in Sources */,
 				9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */,

@@ -140,7 +140,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         case .completed:
             self.emptyStateView.update(style: .noCompletedItems)
         default:
-            assertionFailure("Not supported")
+            appAssertionFailure("Not supported")
             self.emptyStateView.update(style: .noUncompletedItems(shortcut: nil))
         }
     }
@@ -236,14 +236,14 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     @objc func copyAction() {
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("No selected index")
+            appAssertionFailure("No selected index")
             return
         }
 
         let item = self.groupedData.item(at: indexPath)
 
         guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
-            assertionFailure("No image")
+            appAssertionFailure("No image")
             return
         }
 
@@ -275,12 +275,12 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("No selected index")
+            appAssertionFailure("No selected index")
             return
         }
 
         guard let delegate = self.delegate else {
-            assertionFailure("No delegate")
+            appAssertionFailure("No delegate")
             return
         }
 
@@ -295,7 +295,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
-            assertionFailure("No selected index")
+            appAssertionFailure("No selected index")
             return
         }
 
@@ -327,17 +327,17 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         guard let capturedView = self.capturedView,
             let capturedItem = self.capturedItem else {
-            assertionFailure("No captured view")
+            appAssertionFailure("No captured view")
             return
         }
 
         guard let screeSize = self.window?.screen?.frame else {
-            assertionFailure("No screen size")
+            appAssertionFailure("No screen size")
             return
         }
 
         guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: capturedItem.imageName) else {
-            assertionFailure("No image")
+            appAssertionFailure("No image")
             return
         }
 
@@ -381,7 +381,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.selectIndexPath(indexPath: indexPath, completion: {
             guard let item = self.collectionView.item(at: indexPath) else {
-                assertionFailure("No item")
+                appAssertionFailure("No item")
                 return
             }
             self.capturedView = item.view

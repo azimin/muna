@@ -34,7 +34,7 @@ class DateComparisonFormatter {
             let hours = self.date.difference(in: .hour, from: Date()),
             let minutes = self.date.difference(in: .minute, from: Date()),
             let seconds = self.date.difference(in: .second, from: Date()) else {
-            assertionFailure("Can't parse")
+            appAssertionFailure("Can't parse")
             return ""
         }
 

@@ -210,13 +210,13 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     func makeScreenshot(completion: @escaping (NSImage?) -> Void) {
         guard let windowId = self.windowId else {
-            assertionFailure("Window id is nil")
+            appAssertionFailure("Window id is nil")
             completion(nil)
             return
         }
 
         guard let cgImage = CGWindowListCreateImage(NSScreen.main!.frame, .optionOnScreenBelowWindow, windowId, .bestResolution) else {
-            assertionFailure("Screenshot handling is failed")
+            appAssertionFailure("Screenshot handling is failed")
             completion(nil)
             return
         }
@@ -250,7 +250,7 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
 
     func saveImage(withRect rect: NSRect) {
         guard let cgImage = self.tmpCGImage else {
-            assertionFailure("Image for save is nil")
+            appAssertionFailure("Image for save is nil")
             return
         }
 
@@ -262,7 +262,7 @@ extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
         )
 
         guard let croppedImage = cgImage.cropping(to: newRect) else {
-            assertionFailure("Image processing is failed")
+            appAssertionFailure("Image processing is failed")
             return
         }
 

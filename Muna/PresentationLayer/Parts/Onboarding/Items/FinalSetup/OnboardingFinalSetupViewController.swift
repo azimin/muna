@@ -43,7 +43,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         if let settingsValue = Preferences.PeriodOfStoring(rawValue: Preferences.periodOfStoring.lowercased()) {
             value = settingsValue
         } else {
-            assertionFailure("Not supproted period of storing: \(Preferences.pingInterval)")
+            appAssertionFailure("Not supproted period of storing: \(Preferences.pingInterval)")
             value = .week
         }
 
@@ -68,7 +68,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         if let settingsValue = Preferences.PingInterval(rawValue: Preferences.pingInterval.lowercased()) {
             value = settingsValue
         } else {
-            assertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
+            appAssertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
             value = .fiveMins
         }
 

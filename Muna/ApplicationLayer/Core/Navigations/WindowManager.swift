@@ -219,7 +219,7 @@ class WindowManager {
 
     private func frameFor(_ windowType: WindowType) -> NSRect {
         guard let mainScreen = NSScreen.main else {
-            assertionFailure("No main screen")
+            appAssertionFailure("No main screen")
             return .zero
         }
 
@@ -326,7 +326,7 @@ class WindowManager {
         }
 
         guard let window = self.windows[windowType] else {
-            assertionFailure("Window type: \(windowType.rawValue) wasn't active")
+            appAssertionFailure("Window type: \(windowType.rawValue) wasn't active")
             return
         }
 

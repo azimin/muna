@@ -32,7 +32,7 @@ extension Date {
             options: 0,
             locale: Locale.current
         ) else {
-            assertionFailure("Some problem")
+            appAssertionFailure("Some problem")
             return false
         }
         return dateFormat.firstIndex(of: "a") == nil

@@ -27,7 +27,7 @@ class IconShortcutView: View {
         case .control:
             iconString = Key.control.description
         default:
-            assertionFailure("No supported key")
+            appAssertionFailure("No supported key")
             iconString = ""
         }
         super.init(frame: .zero)

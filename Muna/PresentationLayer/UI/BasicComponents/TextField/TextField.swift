@@ -117,7 +117,7 @@ class TextField: View, NSTextFieldDelegate {
 
     func controlTextDidChange(_ obj: Notification) {
         guard let textField = obj.object as? ActionedTextField else {
-            assertionFailure("Wrong object")
+            appAssertionFailure("Wrong object")
             return
         }
 

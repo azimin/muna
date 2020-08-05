@@ -69,7 +69,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     @objc
     func switchToolbarItem(_ toolbarItem: NSToolbarItem) {
         guard let item = ToolbarItem(rawValue: toolbarItem.itemIdentifier.rawValue) else {
-            assertionFailure("No supported item")
+            appAssertionFailure("No supported item")
             return
         }
 
@@ -147,7 +147,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         guard let item = ToolbarItem(rawValue: itemIdentifier.rawValue) else {
-            assertionFailure("Not correct identifier")
+            appAssertionFailure("Not correct identifier")
             return nil
         }
 

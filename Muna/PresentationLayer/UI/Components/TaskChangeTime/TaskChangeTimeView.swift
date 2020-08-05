@@ -190,7 +190,7 @@ class TaskChangeTimeView: PopupView {
 
     func closeAlert() {
         guard let closeAction = self.closeHandler?.close else {
-            assertionFailure("No close handler")
+            appAssertionFailure("No close handler")
             return
         }
 
@@ -208,7 +208,7 @@ class TaskChangeTimeView: PopupView {
         }
 
         guard let item = self.controller.item(by: self.controller.selectedIndex) else {
-            assertionFailure("No item for index")
+            appAssertionFailure("No item for index")
             return
         }
 

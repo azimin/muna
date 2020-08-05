@@ -9,7 +9,7 @@
 import Foundation
 
 class ServiceLocator {
-    static var shared = ServiceLocator()
+    static var shared: ServiceLocator!
 
     let analytics: AnalyticsServiceProtocol
     let imageStorage: ImageStorageServiceProtocol
@@ -18,7 +18,10 @@ class ServiceLocator {
     let notifications: NotificationsServiceProtocol
     let windowManager: WindowManager
 
-    init() {
+    let assertionHandler: AssertionHandler
+
+    init(assertionHandler: AssertionHandler) {
+        self.assertionHandler = assertionHandler
         self.imageStorage = ImageStorageService()
         self.notifications = NotificationsService()
         self.itemsDatabase = ItemsDatabaseService(
