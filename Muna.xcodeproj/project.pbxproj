@@ -141,6 +141,7 @@
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */; };
+		9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
@@ -329,6 +330,7 @@
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 			isa = PBXGroup;
 			children = (
 				23D8B8812487C809007573B5 /* fridge.icns */,
+				9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */,
 				239DC91F245D95E8001FA50C /* Info.plist */,
 			);
 			path = Configuration;
@@ -1360,6 +1363,7 @@
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
 				23D8B8822487C809007573B5 /* fridge.icns in Resources */,
+				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
