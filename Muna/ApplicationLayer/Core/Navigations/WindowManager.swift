@@ -66,6 +66,10 @@ class WindowManager: WindowManagerProtocol {
             return
         }
 
+        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
+            "type": windowType.analytics,
+        ])
+
         guard let window = self.windows[windowType], windowType != .settings else {
             self.setupWindow(windowType)
             return
@@ -87,10 +91,6 @@ class WindowManager: WindowManagerProtocol {
         case let .remindLater(item):
             self.showRemindLater(in: window, item: item)
         }
-
-        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
-            "type": windowType.analytics,
-        ])
 
         self.changeWindowState(windowType, state: true)
     }
