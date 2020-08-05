@@ -18,6 +18,25 @@ enum WindowType: Equatable, Hashable {
     case onboarding
     case remindLater(item: ItemModel)
 
+    var analytics: String {
+        switch self {
+        case let .panel(item):
+            return item == nil ? "panel" : "panel_selected_item"
+        case .screenshot:
+            return "screenshot"
+        case .fullScreenshot:
+            return "fullScreenshot"
+        case .debug:
+            return "debug"
+        case .settings:
+            return "settings"
+        case .onboarding:
+            return "onboarding"
+        case .remindLater:
+            return "remindLater"
+        }
+    }
+
     var rawValue: String {
         switch self {
         case .panel:
@@ -118,6 +137,10 @@ class WindowManager {
         case let .remindLater(item):
             self.showRemindLater(in: window, item: item)
         }
+
+        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
+            "type": windowType.analytics,
+        ])
 
         self.changeWindowState(windowType, state: true)
     }

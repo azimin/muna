@@ -69,6 +69,18 @@ class SavingProcessingService {
                 item: itemModel
             )
         }
+
+        var properties: [AnyHashable: AnalyticsValueProtocol] = [:]
+        if let date = item.date, let dueDateString = item.dueDateString {
+            properties["due_date"] = date.toFormat("dd MMM yyyy HH:mm")
+            properties["current_date"] = Date().toFormat("dd MMM yyyy HH:mm")
+            properties["due_date_string"] = dueDateString
+        }
+
+        ServiceLocator.shared.analytics.logEvent(
+            name: "Item Created",
+            properties: properties
+        )
     }
 }
 
