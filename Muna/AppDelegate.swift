@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func handleAssertion(error: NSError) {
         var properties: [AnyHashable: AnalyticsValueProtocol] = [:]
-        properties["error"] = error.domain
+
         for (key, value) in error.userInfo {
             if let fitValue = value as? AnalyticsValueProtocol {
                 properties[key] = fitValue
