@@ -178,7 +178,7 @@ class TaskCreateView: PopupView {
 
         if self.controller.isEmpty == false {
             guard let item = self.controller.item(by: self.controller.selectedIndex) else {
-                assertionFailure("No item for index")
+                appAssertionFailure("No item for index")
                 return
             }
 

@@ -141,6 +141,9 @@
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */; };
+		9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */; };
+		9FC3F89424DB0FB000BC0693 /* AssertionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */; };
+		9FC3F89624DB156200BC0693 /* WindowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC3F89524DB156200BC0693 /* WindowType.swift */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
@@ -329,6 +332,9 @@
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionsHandler.swift; sourceTree = "<group>"; };
+		9FC3F89524DB156200BC0693 /* WindowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowType.swift; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -416,6 +422,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9FC3F89224DB0FA700BC0693 /* Assertions */,
 				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
 				9FE0F53C247075600046A5C4 /* SavingProcessing */,
@@ -543,10 +550,7 @@
 		239DC912245D95E5001FA50C /* Muna */ = {
 			isa = PBXGroup;
 			children = (
-				23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */,
-				23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */,
 				239DC913245D95E5001FA50C /* AppDelegate.swift */,
-				239DC920245D95E8001FA50C /* Muna.entitlements */,
 				9F4A8CED245DAC7500EA2E1E /* PresentationLayer */,
 				9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */,
 				9F4A8CEF245DAC9000EA2E1E /* Configuration */,
@@ -583,6 +587,7 @@
 			isa = PBXGroup;
 			children = (
 				23A6B2A124660A36006A7A4D /* WindowManager.swift */,
+				9FC3F89524DB156200BC0693 /* WindowType.swift */,
 			);
 			path = Navigations;
 			sourceTree = "<group>";
@@ -804,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				23D8B8812487C809007573B5 /* fridge.icns */,
+				9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */,
 				239DC91F245D95E8001FA50C /* Info.plist */,
 			);
 			path = Configuration;
@@ -812,6 +818,7 @@
 		9F4A8CF0245DACA800EA2E1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FC3F89724DB16B800BC0693 /* Entitlements */,
 				9F581E4E2495115D00A34379 /* OnboardingVideos */,
 				239DC919245D95E8001FA50C /* Preview Content */,
 				239DC91C245D95E8001FA50C /* Main.storyboard */,
@@ -1153,6 +1160,24 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		9FC3F89224DB0FA700BC0693 /* Assertions */ = {
+			isa = PBXGroup;
+			children = (
+				9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */,
+			);
+			path = Assertions;
+			sourceTree = "<group>";
+		};
+		9FC3F89724DB16B800BC0693 /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */,
+				23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */,
+				239DC920245D95E8001FA50C /* Muna.entitlements */,
+			);
+			path = Entitlements;
+			sourceTree = "<group>";
+		};
 		9FC9CDC424699E4B0018FAD7 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,6 +1385,7 @@
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
 				23D8B8822487C809007573B5 /* fridge.icns in Resources */,
+				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1532,6 +1558,7 @@
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
 				9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */,
 				9F693235247AD06500FEBC0B /* TaskChangeTimeView+Shortcuts.swift in Sources */,
+				9FC3F89624DB156200BC0693 /* WindowType.swift in Sources */,
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
@@ -1629,6 +1656,7 @@
 				23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */,
 				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
 				9F025C14246346F900F05D81 /* ImagePreviewViewController.swift in Sources */,
+				9FC3F89424DB0FB000BC0693 /* AssertionsHandler.swift in Sources */,
 				9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */,
 				23561B492461F46600097E4A /* Parser.swift in Sources */,
 				9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */,
@@ -1768,7 +1796,7 @@
 			baseConfigurationReference = 539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Muna/Resources/Entitlements/Muna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1798,7 +1826,7 @@
 			baseConfigurationReference = B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/MunaRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Muna/Resources/Entitlements/MunaRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1887,7 +1915,7 @@
 			baseConfigurationReference = 9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Muna/MunaDebug (Test App).entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Muna/Resources/Entitlements/MunaDebug (Test App).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

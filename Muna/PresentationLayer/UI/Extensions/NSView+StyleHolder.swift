@@ -49,7 +49,7 @@ extension NSView {
         let tmpAddress = String(format: "%p", unsafeBitCast(self, to: Int.self))
 
         if NSView._myComputedProperty[tmpAddress] != nil {
-            assertionFailure("Style already exists")
+            appAssertionFailure("Style already exists")
         }
 
         NSView._myComputedProperty[tmpAddress] = ObjectHolder(

@@ -21,7 +21,7 @@ enum Theme: String {
         } else if type == "Light" {
             return .light
         } else {
-            assertionFailure("No style")
+            appAssertionFailure("No style")
             return .dark
         }
     }

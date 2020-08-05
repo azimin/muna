@@ -9,44 +9,13 @@
 import Cocoa
 import Foundation
 
-enum WindowType: Equatable, Hashable {
-    case panel(selectedItem: ItemModel?)
-    case screenshot
-    case fullScreenshot
-    case debug
-    case settings
-    case onboarding
-    case remindLater(item: ItemModel)
-
-    var rawValue: String {
-        switch self {
-        case .panel:
-            return "panel"
-        case .screenshot:
-            return "screenshot"
-        case .fullScreenshot:
-            return "fullScreenshot"
-        case .debug:
-            return "debug"
-        case .settings:
-            return "settings"
-        case .onboarding:
-            return "onboarding"
-        case let .remindLater(item):
-            return "remindLater_\(item.id)"
-        }
-    }
-
-    static func == (lhs: WindowType, rhs: WindowType) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
-
-    func hash(into hasher: inout Hasher) {
-        self.rawValue.hash(into: &hasher)
-    }
+protocol WindowManagerProtocol {
+    func toggleWindow(_ windowType: WindowType)
+    func activateWindowIfNeeded(_ windowType: WindowType)
+    func hideWindowIfNeeded(_ windowType: WindowType)
 }
 
-class WindowManager {
+class WindowManager: WindowManagerProtocol {
     static let panelWindowFrameWidth: CGFloat = 400
     var windowFrameWidth: CGFloat {
         return WindowManager.panelWindowFrameWidth
@@ -96,6 +65,10 @@ class WindowManager {
             }
             return
         }
+
+        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
+            "type": windowType.analytics,
+        ])
 
         guard let window = self.windows[windowType], windowType != .settings else {
             self.setupWindow(windowType)
@@ -219,7 +192,7 @@ class WindowManager {
 
     private func frameFor(_ windowType: WindowType) -> NSRect {
         guard let mainScreen = NSScreen.main else {
-            assertionFailure("No main screen")
+            appAssertionFailure("No main screen")
             return .zero
         }
 
@@ -326,7 +299,7 @@ class WindowManager {
         }
 
         guard let window = self.windows[windowType] else {
-            assertionFailure("Window type: \(windowType.rawValue) wasn't active")
+            appAssertionFailure("Window type: \(windowType.rawValue) wasn't active")
             return
         }
 

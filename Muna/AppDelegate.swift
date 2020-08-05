@@ -14,7 +14,7 @@ import SwiftyChrono
 import UserNotifications
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -22,7 +22,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     lazy var windowManager = ServiceLocator.shared.windowManager
 
+    func handleAssertion(error: NSError) {
+        var properties: [AnyHashable: AnalyticsValueProtocol] = [:]
+
+        for (key, value) in error.userInfo {
+            if let fitValue = value as? AnalyticsValueProtocol {
+                properties[key] = fitValue
+            }
+        }
+
+        ServiceLocator.shared.analytics.logEvent(
+            name: "Assertion",
+            properties: properties
+        )
+        print(error)
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        ServiceLocator.shared = ServiceLocator(
+            assertionHandler: AssertionHandler(assertionErrorHandler: self)
+        )
+
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
             if granted {
@@ -280,21 +300,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
             } else {
-                assertionFailure("No item by id")
+                appAssertionFailure("No item by id")
             }
         case .complete:
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 item.isComplited = true
                 ServiceLocator.shared.itemsDatabase.saveItems()
             } else {
-                assertionFailure("No item by id")
+                appAssertionFailure("No item by id")
             }
         case .later:
             self.pingNotificationSetup(itemId: itemId)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.toggleWindow(.remindLater(item: item))
             } else {
-                assertionFailure("No item by id")
+                appAssertionFailure("No item by id")
             }
         case .dismiss:
             self.pingNotificationSetup(itemId: itemId)
@@ -312,7 +332,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             if let settingsValue = Preferences.PingInterval(rawValue: Preferences.pingInterval.lowercased()) {
                 value = settingsValue
             } else {
-                assertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
+                appAssertionFailure("Not supproted pingInterval: \(Preferences.pingInterval)")
                 value = .fiveMins
             }
 
@@ -329,7 +349,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 break
             }
         } else {
-            assertionFailure("No item by id")
+            appAssertionFailure("No item by id")
         }
     }
 }

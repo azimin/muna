@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>916094385080-u09jsdoalnq5vrvdcad83odd0ne9u48k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.916094385080-u09jsdoalnq5vrvdcad83odd0ne9u48k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDmoVi39ZMGvd1PV6Roq7Mh5IVdhYoMTS8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>916094385080</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Abstract.Muna</string>
+	<key>PROJECT_ID</key>
+	<string>muna-26990</string>
+	<key>STORAGE_BUCKET</key>
+	<string>muna-26990.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:916094385080:ios:eec843533cadb9e5f0ed4d</string>
+	<key>DATABASE_URL</key>
+	<string>https://muna-26990.firebaseio.com</string>
+</dict>
+</plist>

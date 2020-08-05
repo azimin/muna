@@ -34,7 +34,7 @@ struct TimeOfDay: Equatable {
                 calendar: Calendars.gregorian
             )
         )?.date.transformToClassicDate() else {
-            assertionFailure("No date")
+            appAssertionFailure("No date")
             return Date()
         }
 

@@ -36,7 +36,7 @@ class ShortcutItemView: View {
             iconString = Key.control.description
             textString = "Control"
         default:
-            assertionFailure("No supported key")
+            appAssertionFailure("No supported key")
             iconString = ""
             textString = "Unknown"
         }

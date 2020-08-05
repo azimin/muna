@@ -105,7 +105,7 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
             self.videoView.player = AVPlayer(url: url)
             self.videoView.player?.play()
         } else {
-            assertionFailure("No file")
+            appAssertionFailure("No file")
         }
 
         self.view.addSubview(self.titleLabel)

@@ -18,7 +18,7 @@ class Parser: ParserProtocol {
         do {
             regex = try NSRegularExpression(pattern: self.pattern, options: .caseInsensitive)
         } catch {
-            assertionFailure("Couldnt allocate regex: \(error)")
+            appAssertionFailure("Couldnt allocate regex: \(error)")
             return []
         }
         var results = [ParsedResult]()

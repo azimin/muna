@@ -109,7 +109,7 @@ class MainPanelView: NSView {
         case 2:
             self.mainContentView.switchContent(filter: .completed)
         default:
-            assertionFailure("Unsupported index")
+            appAssertionFailure("Unsupported index")
         }
     }
 
@@ -133,7 +133,7 @@ class MainPanelView: NSView {
             case .uncompleted:
                 self.segmentControl.selectedSegment = 0
             default:
-                assertionFailure("No segment")
+                appAssertionFailure("No segment")
             }
         }
 

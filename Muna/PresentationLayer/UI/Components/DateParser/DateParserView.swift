@@ -72,7 +72,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             let index = self.itemsStackView.arrangedSubviews.firstIndex(of: option) {
             subviewIndex = index
         } else {
-            assertionFailure("No index")
+            appAssertionFailure("No index")
             subviewIndex = 0
         }
 
@@ -187,7 +187,7 @@ extension DateParserView: DateParserItemViewDelegate {
         if let index = self.options.firstIndex(of: item) {
             self.controller.selectItem(at: index)
         } else {
-            assertionFailure("Wrong index")
+            appAssertionFailure("Wrong index")
         }
     }
 
