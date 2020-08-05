@@ -143,6 +143,7 @@
 		9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */; };
 		9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */; };
 		9FC3F89424DB0FB000BC0693 /* AssertionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */; };
+		9FC3F89624DB156200BC0693 /* WindowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC3F89524DB156200BC0693 /* WindowType.swift */; };
 		9FC9CDC724699E8A0018FAD7 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC624699E8A0018FAD7 /* TextField.swift */; };
 		9FC9CDC924699EF30018FAD7 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDC824699EF30018FAD7 /* DebugView.swift */; };
 		9FC9CDCB2469A00B0018FAD7 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */; };
@@ -333,6 +334,7 @@
 		9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionsHandler.swift; sourceTree = "<group>"; };
+		9FC3F89524DB156200BC0693 /* WindowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowType.swift; sourceTree = "<group>"; };
 		9FC9CDC624699E8A0018FAD7 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9FC9CDC824699EF30018FAD7 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		9FC9CDCA2469A00B0018FAD7 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				23A6B2A124660A36006A7A4D /* WindowManager.swift */,
+				9FC3F89524DB156200BC0693 /* WindowType.swift */,
 			);
 			path = Navigations;
 			sourceTree = "<group>";
@@ -1547,6 +1550,7 @@
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
 				9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */,
 				9F693235247AD06500FEBC0B /* TaskChangeTimeView+Shortcuts.swift in Sources */,
+				9FC3F89624DB156200BC0693 /* WindowType.swift in Sources */,
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,

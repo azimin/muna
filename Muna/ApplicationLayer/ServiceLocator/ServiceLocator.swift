@@ -16,7 +16,7 @@ class ServiceLocator {
     let itemsDatabase: ItemsDatabaseServiceProtocol
     let savingService: SavingProcessingService
     let notifications: NotificationsServiceProtocol
-    let windowManager: WindowManager
+    let windowManager: WindowManagerProtocol
 
     let assertionHandler: AssertionHandler
 
