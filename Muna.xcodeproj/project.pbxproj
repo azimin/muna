@@ -550,10 +550,7 @@
 		239DC912245D95E5001FA50C /* Muna */ = {
 			isa = PBXGroup;
 			children = (
-				23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */,
-				23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */,
 				239DC913245D95E5001FA50C /* AppDelegate.swift */,
-				239DC920245D95E8001FA50C /* Muna.entitlements */,
 				9F4A8CED245DAC7500EA2E1E /* PresentationLayer */,
 				9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */,
 				9F4A8CEF245DAC9000EA2E1E /* Configuration */,
@@ -821,6 +818,7 @@
 		9F4A8CF0245DACA800EA2E1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FC3F89724DB16B800BC0693 /* Entitlements */,
 				9F581E4E2495115D00A34379 /* OnboardingVideos */,
 				239DC919245D95E8001FA50C /* Preview Content */,
 				239DC91C245D95E8001FA50C /* Main.storyboard */,
@@ -1168,6 +1166,16 @@
 				9FC3F89324DB0FB000BC0693 /* AssertionsHandler.swift */,
 			);
 			path = Assertions;
+			sourceTree = "<group>";
+		};
+		9FC3F89724DB16B800BC0693 /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				23FF7B0C24D6E89700EAAF3C /* MunaRelease.entitlements */,
+				23FF7B0B24D6E88500EAAF3C /* MunaDebug (Test App).entitlements */,
+				239DC920245D95E8001FA50C /* Muna.entitlements */,
+			);
+			path = Entitlements;
 			sourceTree = "<group>";
 		};
 		9FC9CDC424699E4B0018FAD7 /* Debug */ = {
@@ -1788,7 +1796,7 @@
 			baseConfigurationReference = 539BEFA1B396300C7E709D67 /* Pods-Muna.debug (real app).xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/Muna.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Muna/Resources/Entitlements/Muna.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1818,7 +1826,7 @@
 			baseConfigurationReference = B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Muna/MunaRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Muna/Resources/Entitlements/MunaRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1907,7 +1915,7 @@
 			baseConfigurationReference = 9824E55F7EC7272AFEF1E154 /* Pods-Muna.debug (test app).xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Muna/MunaDebug (Test App).entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Muna/Resources/Entitlements/MunaDebug (Test App).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
