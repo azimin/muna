@@ -30,6 +30,7 @@ class Preferences {
         case launchOnStartup
         case periodOfStoring
         case pingInterval
+        case isNeededToShowOnboarding
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -138,9 +139,12 @@ class Preferences {
         }
     }
 
-    @UserDefaultsEntry(key: Key.periodOfStoring)
-    static var periodOfStoring = PeriodOfStoring.week.rawValue
+    @UserDefaultsEntry(wrappedValue: PeriodOfStoring.week.rawValue, key: Key.periodOfStoring)
+    static var periodOfStoring
 
-    @UserDefaultsEntry(key: Key.pingInterval)
-    static var pingInterval = PingInterval.fiveMins.rawValue
+    @UserDefaultsEntry(wrappedValue: PingInterval.fiveMins.rawValue, key: Key.pingInterval)
+    static var pingInterval
+
+    @UserDefaultsEntry(wrappedValue: false, key: Key.isNeededToShowOnboarding)
+    static var isNeededToShowOnboarding
 }
