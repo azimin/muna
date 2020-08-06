@@ -17,4 +17,3 @@ class AboutSettingsViewController: NSViewController {
         self.title = "About"
     }
 }
-

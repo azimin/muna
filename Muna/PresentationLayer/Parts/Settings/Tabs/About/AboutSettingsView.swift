@@ -37,4 +37,3 @@ class AboutSettingsView: View, SettingsViewProtocol {
         }
     }
 }
-
