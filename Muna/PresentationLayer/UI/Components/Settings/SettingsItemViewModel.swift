@@ -9,6 +9,8 @@
 import Foundation
 
 protocol SettingsItemViewModelDelegate: AnyObject {
+    func launchOnStartupSwitcherSetup(withValue value: Bool)
+
     func pingIntervalSliderSetup(withValue value: Double, title: String)
     func periodOfStoringSliderSetup(withValue value: Double, title: String)
 }
@@ -63,54 +65,24 @@ class SettingsItemViewModel {
             self.delegate?.pingIntervalSliderSetup(withValue: 4, title: value.rawValue.capitalized)
         }
     }
+}
 
-    func switchStateChanged() {
-        Preferences.launchOnStartup = self.rootView.settingsItemView.startupSettingItem.switcher.state == .on
+extension SettingsItemViewModel: SettingsItemViewDelegate {
+    func launchOnStartupSwitchChanged(onState state: NSControl.StateValue) {
+        Preferences.launchOnStartup = state == .on
     }
 
-    func pingIntervalSliderChanged() {
-        var newValue = self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue
-        newValue.round(.up)
-        switch newValue {
-        case 0 ..< 1:
-            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 0
-        case 1 ..< 2:
-            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 1
-        case 2 ..< 3:
-            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 2
-        case 3 ..< 4:
-            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 3
-        case 4:
-            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 4
-        default:
-            break
-        }
+    func pingIntervalSliderChanged(onValue value: Int) {
+        let preferencesValue = Preferences.PingInterval.allCases[value]
+        Preferences.pingInterval = preferencesValue.rawValue.lowercased()
 
-        let value = Preferences.PingInterval.allCases[Int(newValue)]
-        Preferences.pingInterval = value.rawValue.lowercased()
-
-        self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+        self.delegate?.pingIntervalSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
     }
 
-    func storagePeriodSliderChanged() {
-        var newValue = self.rootView.settingsItemView.storageSettingItem.slider.doubleValue
-        newValue.round(.up)
-        switch newValue {
-        case 0 ..< 1:
-            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 0
-        case 1 ..< 2:
-            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 1
-        case 2 ..< 3:
-            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 2
-        case 3:
-            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 3
-        default:
-            break
-        }
+    func periodOfStoringSliderChanged(onValue value: Int) {
+        let preferencesValue = Preferences.PeriodOfStoring.allCases[value]
+        Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
 
-        let value = Preferences.PeriodOfStoring.allCases[Int(newValue)]
-        Preferences.periodOfStoring = value.rawValue.lowercased()
-
-        self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+        self.delegate?.periodOfStoringSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
     }
 }

@@ -9,18 +9,15 @@
 import Cocoa
 import SnapKit
 
-protocol SettingsItemViewDelegate: class {
-
+protocol SettingsItemViewDelegate: AnyObject {
     func launchOnStartupSwitchChanged(onState state: NSSlider.StateValue)
 
     func pingIntervalSliderChanged(onValue value: Int)
     func periodOfStoringSliderChanged(onValue value: Int)
-    
 }
 
 class SettingsItemView: NSView {
-
-    weak var delegate: SettingsItemViewModelDelegate?
+    weak var delegate: SettingsItemViewDelegate?
 
     let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
         .withTextColorStyle(.titleAccent)
@@ -33,9 +30,7 @@ class SettingsItemView: NSView {
     let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
     let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
 
-    init(isNeededShowTitle: Bool, delegate: SettingsItemViewModelDelegate?) {
-        self.delegate = delegate
-
+    init(isNeededShowTitle: Bool) {
         super.init(frame: .zero)
 
         self.settingsTitleLabel.isHidden = !isNeededShowTitle
@@ -48,6 +43,15 @@ class SettingsItemView: NSView {
             self.startupSettingItemTopConstraintToSuperView?.activate()
             self.startupSettingItemTopConstraintToTitleLabel?.deactivate()
         }
+
+        self.startupSettingItem.switcher.target = self
+        self.startupSettingItem.switcher.action = #selector(self.switchStateChanged)
+
+        self.notificationsSettingItem.slider.target = self
+        self.notificationsSettingItem.slider.action = #selector(self.pingIntervalSliderChanged)
+
+        self.storageSettingItem.slider.target = self
+        self.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
     }
 
     required init?(coder: NSCoder) {
@@ -93,5 +97,40 @@ class SettingsItemView: NSView {
             make.top.equalTo(self.notificationsSettingItem.snp.bottom)
             make.bottom.equalToSuperview()
         }
+    }
+
+    @objc
+    func switchStateChanged() {
+        self.delegate?.launchOnStartupSwitchChanged(onState: self.startupSettingItem.switcher.state)
+    }
+
+    @objc
+    func pingIntervalSliderChanged() {
+        var newValue = self.notificationsSettingItem.slider.doubleValue
+        newValue.round(.up)
+        self.delegate?.pingIntervalSliderChanged(onValue: Int(newValue))
+    }
+
+    @objc
+    func storagePeriodSliderChanged() {
+        var newValue = self.storageSettingItem.slider.doubleValue
+        newValue.round(.up)
+        self.delegate?.periodOfStoringSliderChanged(onValue: Int(newValue))
+    }
+}
+
+extension SettingsItemView: SettingsItemViewModelDelegate {
+    func launchOnStartupSwitcherSetup(withValue value: Bool) {
+        self.startupSettingItem.switcher.state = value ? .on : .off
+    }
+
+    func pingIntervalSliderSetup(withValue value: Double, title: String) {
+        self.notificationsSettingItem.slider.doubleValue = value
+        self.notificationsSettingItem.sliderSectionLabel.text = title
+    }
+
+    func periodOfStoringSliderSetup(withValue value: Double, title: String) {
+        self.storageSettingItem.slider.doubleValue = value
+        self.storageSettingItem.sliderSectionLabel.text = title
     }
 }
