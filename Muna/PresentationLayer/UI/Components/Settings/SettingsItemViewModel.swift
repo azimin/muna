@@ -39,13 +39,13 @@ class SettingsItemViewModel {
 
         switch value {
         case .day:
-            self.delegate?.periodOfStoringSliderSetup(withValue: 0, title: value.rawValue.capitalized)
+            self.delegate?.periodOfStoringSliderSetup(withValue: 0, title: value.rawValue)
         case .week:
-            self.delegate?.periodOfStoringSliderSetup(withValue: 1, title: value.rawValue.capitalized)
+            self.delegate?.periodOfStoringSliderSetup(withValue: 1, title: value.rawValue)
         case .month:
-            self.delegate?.periodOfStoringSliderSetup(withValue: 2, title: value.rawValue.capitalized)
+            self.delegate?.periodOfStoringSliderSetup(withValue: 2, title: value.rawValue)
         case .year:
-            self.delegate?.periodOfStoringSliderSetup(withValue: 3, title: value.rawValue.capitalized)
+            self.delegate?.periodOfStoringSliderSetup(withValue: 3, title: value.rawValue)
         }
     }
 
@@ -60,15 +60,15 @@ class SettingsItemViewModel {
 
         switch value {
         case .fiveMins:
-            self.delegate?.pingIntervalSliderSetup(withValue: 0, title: value.rawValue.capitalized)
+            self.delegate?.pingIntervalSliderSetup(withValue: 0, title: value.rawValue)
         case .tenMins:
-            self.delegate?.pingIntervalSliderSetup(withValue: 1, title: value.rawValue.capitalized)
+            self.delegate?.pingIntervalSliderSetup(withValue: 1, title: value.rawValue)
         case .halfAnHour:
-            self.delegate?.pingIntervalSliderSetup(withValue: 2, title: value.rawValue.capitalized)
+            self.delegate?.pingIntervalSliderSetup(withValue: 2, title: value.rawValue)
         case .hour:
-            self.delegate?.pingIntervalSliderSetup(withValue: 3, title: value.rawValue.capitalized)
+            self.delegate?.pingIntervalSliderSetup(withValue: 3, title: value.rawValue)
         case .disabled:
-            self.delegate?.pingIntervalSliderSetup(withValue: 4, title: value.rawValue.capitalized)
+            self.delegate?.pingIntervalSliderSetup(withValue: 4, title: value.rawValue)
         }
     }
 }

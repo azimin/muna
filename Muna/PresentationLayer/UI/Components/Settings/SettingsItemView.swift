@@ -126,11 +126,11 @@ extension SettingsItemView: SettingsItemViewModelDelegate {
 
     func pingIntervalSliderSetup(withValue value: Double, title: String) {
         self.notificationsSettingItem.slider.doubleValue = value
-        self.notificationsSettingItem.sliderSectionLabel.text = title
+        self.notificationsSettingItem.sliderSectionLabel.text = title.capitalized
     }
 
     func periodOfStoringSliderSetup(withValue value: Double, title: String) {
         self.storageSettingItem.slider.doubleValue = value
-        self.storageSettingItem.sliderSectionLabel.text = title
+        self.storageSettingItem.sliderSectionLabel.text = title.capitalized
     }
 }
