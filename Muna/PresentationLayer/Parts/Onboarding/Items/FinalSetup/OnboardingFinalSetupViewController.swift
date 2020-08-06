@@ -20,16 +20,16 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.rootView.startupSettingItem.switcher.state = Preferences.launchOnStartup ? .on : .off
+        self.rootView.settingsItemView.startupSettingItem.switcher.state = Preferences.launchOnStartup ? .on : .off
 
-        self.rootView.startupSettingItem.switcher.target = self
-        self.rootView.startupSettingItem.switcher.action = #selector(self.switchStateChanged)
+        self.rootView.settingsItemView.startupSettingItem.switcher.target = self
+        self.rootView.settingsItemView.startupSettingItem.switcher.action = #selector(self.switchStateChanged)
 
-        self.rootView.notificationsSettingItem.slider.target = self
-        self.rootView.notificationsSettingItem.slider.action = #selector(self.pingIntervalSliderChanged)
+        self.rootView.settingsItemView.notificationsSettingItem.slider.target = self
+        self.rootView.settingsItemView.notificationsSettingItem.slider.action = #selector(self.pingIntervalSliderChanged)
 
-        self.rootView.storageSettingItem.slider.target = self
-        self.rootView.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
+        self.rootView.settingsItemView.storageSettingItem.slider.target = self
+        self.rootView.settingsItemView.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
 
         self.rootView.continueButton.target = self
         self.rootView.continueButton.action = #selector(self.buttonAction)
@@ -49,17 +49,17 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
         switch value {
         case .day:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.storageSettingItem.slider.doubleValue = 0
+            self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 0
         case .week:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.storageSettingItem.slider.doubleValue = 1
+            self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 1
         case .month:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.storageSettingItem.slider.doubleValue = 2
+            self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 2
         case .year:
-            self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.storageSettingItem.slider.doubleValue = 3
+            self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 3
         }
     }
 
@@ -74,20 +74,20 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
         switch value {
         case .fiveMins:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.notificationsSettingItem.slider.doubleValue = 0
+            self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 0
         case .tenMins:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.notificationsSettingItem.slider.doubleValue = 1
+            self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 1
         case .halfAnHour:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.notificationsSettingItem.slider.doubleValue = 2
+            self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 2
         case .hour:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.notificationsSettingItem.slider.doubleValue = 3
+            self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 3
         case .disabled:
-            self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
-            self.rootView.notificationsSettingItem.slider.doubleValue = 4
+            self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 4
         }
     }
 
@@ -97,24 +97,24 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
     @objc
     func switchStateChanged() {
-        Preferences.launchOnStartup = self.rootView.startupSettingItem.switcher.state == .on
+        Preferences.launchOnStartup = self.rootView.settingsItemView.startupSettingItem.switcher.state == .on
     }
 
     @objc
     func pingIntervalSliderChanged() {
-        var newValue = self.rootView.notificationsSettingItem.slider.doubleValue
+        var newValue = self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue
         newValue.round(.up)
         switch newValue {
         case 0 ..< 1:
-            self.rootView.notificationsSettingItem.slider.doubleValue = 0
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 0
         case 1 ..< 2:
-            self.rootView.notificationsSettingItem.slider.doubleValue = 1
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 1
         case 2 ..< 3:
-            self.rootView.notificationsSettingItem.slider.doubleValue = 2
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 2
         case 3 ..< 4:
-            self.rootView.notificationsSettingItem.slider.doubleValue = 3
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 3
         case 4:
-            self.rootView.notificationsSettingItem.slider.doubleValue = 4
+            self.rootView.settingsItemView.notificationsSettingItem.slider.doubleValue = 4
         default:
             break
         }
@@ -122,22 +122,22 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         let value = Preferences.PingInterval.allCases[Int(newValue)]
         Preferences.pingInterval = value.rawValue.lowercased()
 
-        self.rootView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+        self.rootView.settingsItemView.notificationsSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
 
     @objc
     func storagePeriodSliderChanged() {
-        var newValue = self.rootView.storageSettingItem.slider.doubleValue
+        var newValue = self.rootView.settingsItemView.storageSettingItem.slider.doubleValue
         newValue.round(.up)
         switch newValue {
         case 0 ..< 1:
-            self.rootView.storageSettingItem.slider.doubleValue = 0
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 0
         case 1 ..< 2:
-            self.rootView.storageSettingItem.slider.doubleValue = 1
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 1
         case 2 ..< 3:
-            self.rootView.storageSettingItem.slider.doubleValue = 2
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 2
         case 3:
-            self.rootView.storageSettingItem.slider.doubleValue = 3
+            self.rootView.settingsItemView.storageSettingItem.slider.doubleValue = 3
         default:
             break
         }
@@ -145,6 +145,6 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         let value = Preferences.PeriodOfStoring.allCases[Int(newValue)]
         Preferences.periodOfStoring = value.rawValue.lowercased()
 
-        self.rootView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
+        self.rootView.settingsItemView.storageSettingItem.sliderSectionLabel.text = value.rawValue.capitalized
     }
 }

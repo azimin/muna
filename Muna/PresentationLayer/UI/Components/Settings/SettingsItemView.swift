@@ -1,0 +1,70 @@
+//
+//  SettingsItemView.swift
+//  Muna
+//
+//  Created by Egor Petrov on 06.08.2020.
+//  Copyright © 2020 Abstract. All rights reserved.
+//
+
+import Cocoa
+import SnapKit
+
+class SettingsItemView: NSView {
+    let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
+        .withTextColorStyle(.titleAccent)
+        .withText("General")
+
+    let startupSettingItem = SwitcherSettingsItem()
+    let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
+    let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+
+        self.setupInitialLayout()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupInitialLayout() {
+        self.addSubview(self.settingsTitleLabel)
+        self.settingsTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
+            make.centerX.equalToSuperview()
+        }
+
+        self.startupSettingItem.titleLabel.text = "Launch on startup"
+        self.startupSettingItem.descriptionLabel.text = "Start Muna automatically after system restart"
+        self.addSubview(self.startupSettingItem)
+        self.startupSettingItem.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24)
+        }
+
+        self.notificationsSettingItem.titleLabel.text = "Ping interval"
+        self.notificationsSettingItem.descriptionLabel.text = "Should remind again when you ignore reminder"
+        self.notificationsSettingItem.sliderSectionLabel.text = "Month"
+        self.addSubview(self.notificationsSettingItem)
+        self.notificationsSettingItem.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(self.startupSettingItem.snp.bottom)
+        }
+
+        self.storageSettingItem.titleLabel.text = "History size"
+        self.storageSettingItem.descriptionLabel.text = "How long to keep complited items"
+        self.storageSettingItem.sliderSectionLabel.text = "Month"
+        self.addSubview(self.storageSettingItem)
+        self.storageSettingItem.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(self.notificationsSettingItem.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+    }
+}
