@@ -12,6 +12,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     enum ToolbarItem: String, CaseIterable {
         case general = "General"
         case shortcuts = "Shortcuts"
+        case about = "About"
 
         var identifier: NSToolbarItem.Identifier {
             return NSToolbarItem.Identifier(self.rawValue)
@@ -24,12 +25,15 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
                 return NSImage(named: "setting_toolbar_general_\(themeSufix)")
             case .shortcuts:
                 return NSImage(named: "setting_toolbar_shortcuts_\(themeSufix)")
+            case .about:
+                return NSImage(named: "setting_toolbar_about")
             }
         }
     }
 
     private let generalViewController = GeneralSettingsViewController()
     private let shortcutsViewController = ShortcutsSettingsViewController()
+    private let aboutViewController = AboutSettingsViewController()
 
     private var currentItem: ToolbarItem?
     let toolbar = NSToolbar(identifier: NSToolbar.Identifier("settings"))
@@ -123,6 +127,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
             return self.generalViewController
         case .shortcuts:
             return self.shortcutsViewController
+        case .about:
+            return self.aboutViewController
         }
     }
 
@@ -143,17 +149,22 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     // MARK: - Toolbar
 
     var toolbarItems: [ToolbarItem: NSToolbarItem] = [:]
+    var itemsIdentifiers: [NSToolbarItem.Identifier] = {
+        var values = ToolbarItem.allCases.map { $0.identifier }
+        values.insert(.flexibleSpace, at: values.count - 1)
+        return values
+    }()
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return ToolbarItem.allCases.map { $0.identifier }
+        return self.itemsIdentifiers
     }
 
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return ToolbarItem.allCases.map { $0.identifier }
+        return self.itemsIdentifiers
     }
 
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return ToolbarItem.allCases.map { $0.identifier }
+        return self.itemsIdentifiers
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
