@@ -18,11 +18,12 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         }
 
         var image: NSImage? {
+            let themeSufix = Theme.current == .dark ? "dark" : "light"
             switch self {
             case .general:
-                return NSImage(named: NSImage.preferencesGeneralName)
+                return NSImage(named: "setting_toolbar_general_\(themeSufix)")
             case .shortcuts:
-                return NSImage(named: NSImage.slideshowTemplateName)
+                return NSImage(named: "setting_toolbar_shortcuts_\(themeSufix)")
             }
         }
     }
@@ -46,6 +47,14 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     }
 
     var isFirstAppear = true
+
+    override func viewWillLayout() {
+        super.viewWillLayout()
+
+        for (key, value) in self.toolbarItems {
+            value.image = key.image
+        }
+    }
 
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -133,6 +142,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
     // MARK: - Toolbar
 
+    var toolbarItems: [ToolbarItem: NSToolbarItem] = [:]
+
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return ToolbarItem.allCases.map { $0.identifier }
     }
@@ -155,6 +166,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         toolbarItem.label = item.rawValue
         toolbarItem.image = item.image
         toolbarItem.action = #selector(self.switchToolbarItem(_:))
+
+        self.toolbarItems[item] = toolbarItem
 
         return toolbarItem
     }
