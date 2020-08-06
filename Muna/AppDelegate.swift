@@ -241,7 +241,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func toggleSettingsState() {
-        self.windowManager.toggleWindow(.settings)
+        self.windowManager.activateWindowIfNeeded(.settings)
     }
 
     // MARK: - User Notifications
