@@ -18,8 +18,14 @@ protocol SettingsItemViewModelDelegate: AnyObject {
 class SettingsItemViewModel {
     weak var delegate: SettingsItemViewModelDelegate?
 
-    init(delegate: SettingsItemViewModelDelegate?) {
-        self.delegate = delegate
+    func setup() {
+        self.setupLaunchOnStartup()
+        self.setupPeriodOfStoring()
+        self.setupPingInterval()
+    }
+
+    private func setupLaunchOnStartup() {
+        self.delegate?.launchOnStartupSwitcherSetup(withValue: Preferences.launchOnStartup)
     }
 
     private func setupPeriodOfStoring() {
