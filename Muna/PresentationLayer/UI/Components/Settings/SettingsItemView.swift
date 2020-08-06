@@ -107,14 +107,40 @@ class SettingsItemView: NSView {
     @objc
     func pingIntervalSliderChanged() {
         var newValue = self.notificationsSettingItem.slider.doubleValue
-        newValue.round(.up)
+        switch newValue {
+        case 0 ..< 0.6:
+            newValue = 0
+        case 0.6 ..< 1, 1 ..< 1.6:
+            newValue = 1
+        case 1.6 ..< 2, 2 ..< 2.6:
+            newValue = 2
+        case 2.6 ..< 3, 3 ..< 3.6:
+            newValue = 3
+        case 3.6 ..< 4, 4:
+            newValue = 4
+        default:
+            break
+        }
+
         self.delegate?.pingIntervalSliderChanged(onValue: Int(newValue))
     }
 
     @objc
     func storagePeriodSliderChanged() {
         var newValue = self.storageSettingItem.slider.doubleValue
-        newValue.round(.up)
+        switch newValue {
+        case 0 ..< 0.6:
+            newValue = 0
+        case 0.6 ..< 1, 1 ..< 1.6:
+            newValue = 1
+        case 1.6 ..< 2, 2 ..< 2.6:
+            newValue = 2
+        case 2.6 ..< 3, 3:
+            newValue = 3
+        default:
+            break
+        }
+
         self.delegate?.periodOfStoringSliderChanged(onValue: Int(newValue))
     }
 }
