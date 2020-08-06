@@ -43,6 +43,7 @@
 		23ADE2DC24A8A6C600A2D7F9 /* IconShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */; };
 		23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */; };
 		23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */; };
+		23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */; };
 		23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
@@ -230,6 +231,7 @@
 		23ADE2DB24A8A6C600A2D7F9 /* IconShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconShortcutView.swift; sourceTree = "<group>"; };
 		23ADE2DD24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherSettingsItem.swift; sourceTree = "<group>"; };
 		23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSettingsItem.swift; sourceTree = "<group>"; };
+		23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemViewModel.swift; sourceTree = "<group>"; };
 		23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEntry.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */,
+				23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1646,6 +1649,7 @@
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
 				9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */,
+				23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,
 				9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */,
 				9FE96BDD2465F54B007D92B8 /* NSStackView+Builder.swift in Sources */,

@@ -9,7 +9,19 @@
 import Cocoa
 import SnapKit
 
+protocol SettingsItemViewDelegate: class {
+
+    func launchOnStartupSwitchChanged(onState state: NSSlider.StateValue)
+
+    func pingIntervalSliderChanged(onValue value: Int)
+    func periodOfStoringSliderChanged(onValue value: Int)
+    
+}
+
 class SettingsItemView: NSView {
+
+    weak var delegate: SettingsItemViewModelDelegate?
+
     let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
         .withTextColorStyle(.titleAccent)
         .withText("General")
@@ -21,7 +33,9 @@ class SettingsItemView: NSView {
     let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
     let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
 
-    init(isNeededShowTitle: Bool) {
+    init(isNeededShowTitle: Bool, delegate: SettingsItemViewModelDelegate?) {
+        self.delegate = delegate
+
         super.init(frame: .zero)
 
         self.settingsTitleLabel.isHidden = !isNeededShowTitle
