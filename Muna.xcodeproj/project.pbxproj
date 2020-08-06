@@ -21,6 +21,7 @@
 		233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DA2469D8AC004DD671 /* ENTimeParser.swift */; };
 		233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DC246A0494004DD671 /* MunaChrono.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
+		2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */; };
 		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
@@ -205,6 +206,7 @@
 		233F53DA2469D8AC004DD671 /* ENTimeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeParser.swift; sourceTree = "<group>"; };
 		233F53DC246A0494004DD671 /* MunaChrono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MunaChrono.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
+		2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
 		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
@@ -445,6 +447,14 @@
 				2317E9E32464A69200E017A3 /* ViewController */,
 			);
 			path = ScreenshotState;
+			sourceTree = "<group>";
+		};
+		2343A2DB24DC3B3400F9C6FC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		23561B442461EEAD00097E4A /* Parser */ = {
@@ -985,6 +995,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2343A2DB24DC3B3400F9C6FC /* Settings */,
 				9F581E4B2495019200A34379 /* OnboardingButton */,
 				9F693230247ACF5200FEBC0B /* TaskChangeTime */,
 				9F693225247ABE3200FEBC0B /* DateParser */,
@@ -1545,6 +1556,7 @@
 				9F2D341024D0B9F00049DD43 /* AnalyticsService.swift in Sources */,
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
+				2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
