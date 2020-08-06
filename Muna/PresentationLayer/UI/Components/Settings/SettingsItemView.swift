@@ -15,13 +15,25 @@ class SettingsItemView: NSView {
         .withText("General")
 
     let startupSettingItem = SwitcherSettingsItem()
+    private var startupSettingItemTopConstraintToSuperView: Constraint?
+    private var startupSettingItemTopConstraintToTitleLabel: Constraint?
+
     let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
     let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    init(isNeededShowTitle: Bool) {
+        super.init(frame: .zero)
 
+        self.settingsTitleLabel.isHidden = !isNeededShowTitle
         self.setupInitialLayout()
+
+        if isNeededShowTitle {
+            self.startupSettingItemTopConstraintToSuperView?.deactivate()
+            self.startupSettingItemTopConstraintToTitleLabel?.activate()
+        } else {
+            self.startupSettingItemTopConstraintToSuperView?.activate()
+            self.startupSettingItemTopConstraintToTitleLabel?.deactivate()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -43,7 +55,8 @@ class SettingsItemView: NSView {
         self.startupSettingItem.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24)
+            self.startupSettingItemTopConstraintToTitleLabel = make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24).constraint
+            self.startupSettingItemTopConstraintToSuperView = make.top.equalToSuperview().offset(24).constraint
         }
 
         self.notificationsSettingItem.titleLabel.text = "Ping interval"
