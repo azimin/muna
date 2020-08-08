@@ -9,20 +9,36 @@
 import Cocoa
 
 class SliderSettingsItem: View {
-    let titleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.titleAccent)
+    let titleLabel: Label
 
-    let descriptionLabel = Label(fontStyle: .medium, size: 16)
-        .withTextColorStyle(.title60Accent)
+    let descriptionLabel: Label
 
     let sliderSectionLabel = Label(fontStyle: .medium, size: 14).withTextColorStyle(.titleAccent)
     let slider = NSSlider(value: 2, minValue: 0, maxValue: 4, target: nil, action: nil)
 
     var sliderSectionsViews = [View]()
 
-    init(minValue: Double, maxValue: Double) {
+    init(minValue: Double, maxValue: Double, style: SettingsItemView.Style) {
         self.slider.minValue = minValue
         self.slider.maxValue = maxValue
+
+        let titleSize: CGFloat
+        let descriptionSize: CGFloat
+
+        switch style {
+        case .big:
+            titleSize = 18
+            descriptionSize = 16
+        case .small:
+            titleSize = 14
+            descriptionSize = 12
+        }
+
+        self.titleLabel = Label(fontStyle: .bold, size: titleSize)
+            .withTextColorStyle(.titleAccent)
+
+        self.descriptionLabel = Label(fontStyle: .medium, size: descriptionSize)
+            .withTextColorStyle(.title60Accent)
 
         super.init(frame: .zero)
 

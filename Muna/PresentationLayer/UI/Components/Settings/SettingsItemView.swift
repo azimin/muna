@@ -17,20 +17,29 @@ protocol SettingsItemViewDelegate: AnyObject {
 }
 
 class SettingsItemView: NSView {
+    enum Style {
+        case big
+        case small
+    }
+
     weak var delegate: SettingsItemViewDelegate?
 
     let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
         .withTextColorStyle(.titleAccent)
         .withText("General")
 
-    let startupSettingItem = SwitcherSettingsItem()
+    let startupSettingItem: SwitcherSettingsItem
     private var startupSettingItemTopConstraintToSuperView: Constraint?
     private var startupSettingItemTopConstraintToTitleLabel: Constraint?
 
-    let notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4)
-    let storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3)
+    let notificationsSettingItem: SliderSettingsItem
+    let storageSettingItem: SliderSettingsItem
 
-    init(isNeededShowTitle: Bool) {
+    init(isNeededShowTitle: Bool, style: Style) {
+        self.startupSettingItem = SwitcherSettingsItem(style: style)
+        self.notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4, style: style)
+        self.storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3, style: style)
+
         super.init(frame: .zero)
 
         self.settingsTitleLabel.isHidden = !isNeededShowTitle

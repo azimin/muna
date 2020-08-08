@@ -9,16 +9,32 @@
 import Cocoa
 
 class SwitcherSettingsItem: View {
-    let titleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.titleAccent)
+    let titleLabel: Label
 
-    let descriptionLabel = Label(fontStyle: .medium, size: 16)
-        .withTextColorStyle(.title60Accent)
+    let descriptionLabel: Label
 
     let switcher = NSSwitch()
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
+    init(style: SettingsItemView.Style) {
+        let titleSize: CGFloat
+        let descriptionSize: CGFloat
+
+        switch style {
+        case .big:
+            titleSize = 18
+            descriptionSize = 16
+        case .small:
+            titleSize = 14
+            descriptionSize = 12
+        }
+
+        self.titleLabel = Label(fontStyle: .bold, size: titleSize)
+            .withTextColorStyle(.titleAccent)
+
+        self.descriptionLabel = Label(fontStyle: .medium, size: descriptionSize)
+            .withTextColorStyle(.title60Accent)
+
+        super.init(frame: .zero)
 
         self.setup()
     }

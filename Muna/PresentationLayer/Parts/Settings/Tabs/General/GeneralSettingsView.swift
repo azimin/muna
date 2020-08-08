@@ -11,7 +11,7 @@ import LaunchAtLogin
 
 class GeneralSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
-    let settingsItemView = SettingsItemView(isNeededShowTitle: false)
+    let settingsItemView = SettingsItemView(isNeededShowTitle: false, style: .small)
 
     init() {
         super.init(frame: .zero)
@@ -26,15 +26,14 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         self.addSubview(self.titlesView)
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
-            maker.height.equalTo(250)
+            maker.height.equalTo(230)
         }
 
         self.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(40)
             make.trailing.equalToSuperview().inset(40)
-            make.bottom.equalToSuperview().inset(40)
             make.width.equalTo(self.frameWidth)
         }
     }

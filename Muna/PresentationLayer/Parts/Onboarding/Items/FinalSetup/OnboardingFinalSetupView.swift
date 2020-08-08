@@ -47,7 +47,7 @@ class OnboardingFinalSetupView: NSView {
         itemUDKey: Preferences.defaultShortcutPanelKey
     )
 
-    let settingsItemView = SettingsItemView(isNeededShowTitle: true)
+    let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
