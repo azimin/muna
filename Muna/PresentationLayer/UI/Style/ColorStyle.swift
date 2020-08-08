@@ -90,7 +90,7 @@ enum ColorStyle {
             case .plateFullSelection:
                 return NSColor.white
             case .itemSelectionColor:
-                return NSColor(hex: "46FF57")
+                return NSColor(hex: "62E86E")
             case .title60Accent:
                 return NSColor(hex: "666666")
             case .distructiveOverlay:
@@ -102,7 +102,7 @@ enum ColorStyle {
             case .backgroundOverlay:
                 return NSColor.black.withAlphaComponent(0.5)
             case .lightForegroundOverlay:
-                return NSColor.black.withAlphaComponent(0.2)
+                return NSColor.black.withAlphaComponent(0.1)
             case .lightOverlay:
                 return NSColor.black.withAlphaComponent(0.1)
             case .foregroundOverlay:
