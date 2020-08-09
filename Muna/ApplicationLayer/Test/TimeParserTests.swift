@@ -149,13 +149,23 @@ class TimeParserTests {
         assert(value.count > 1, "Should be at least 2")
         self.validate(
             item: value[0],
+            day: .init(
+                day: 21,
+                month: 5,
+                year: 2020
+            ),
+            timeType: .specificTime(timeOfDay: .init(hours: 20, minutes: 6, seconds: 0))
+        )
+
+        self.validate(
+            item: value[1],
             day: .init(day: 20, month: 6, year: 2020),
             timeType: .allDay
         )
 
         // next month
         value = DateProcesingService().getDate(from: "next month", date: date)
-        assert(value.count > 1, "Should be at least 1")
+        assert(value.count >= 1, "Should be at least 1")
         self.validate(
             item: value[0],
             day: .init(day: 1, month: 6, year: 2020),
@@ -167,7 +177,7 @@ class TimeParserTests {
         assert(value.count > 1, "Should be at least 1")
         self.validate(
             item: value[0],
-            day: .init(day: 25, month: 6, year: 2020),
+            day: .init(day: 25, month: 5, year: 2020),
             timeType: .morning
         )
 
