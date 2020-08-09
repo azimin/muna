@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftDate
 
 protocol ItemsDatabaseServiceProtocol: AnyObject {
     var itemUpdated: Observable<String?> { get }
@@ -69,7 +70,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         let date = Date()
 
         self.items.removeAll(where: { item in
-            let deltaBetweenDates = item.creationDate.timeIntervalSince1970 - date.timeIntervalSince1970
+            guard let completionDate = item.dueDate else {
+                return false
+            }
+            let deltaBetweenDates = date.timeIntervalSince1970 - completionDate.timeIntervalSince1970
 
             switch dateCapturingItems {
             case .day:
