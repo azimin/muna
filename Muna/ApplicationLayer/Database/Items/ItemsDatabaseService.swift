@@ -43,6 +43,10 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     private let defaults = UserDefaults.standard
     private var items: [ItemModel] = []
 
+    private var dateCapturingItems: Preferences.PeriodOfStoring {
+        return Preferences.storingPeriod
+    }
+
     private let imageStorage: ImageStorageServiceProtocol
     private let notifications: NotificationsServiceProtocol
 
@@ -61,6 +65,33 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     func fetchItems(filter: Filter) -> [ItemModel] {
         let items = self.items.filter { $0.isDeleted == false }
+
+        let date = Date()
+
+        self.items.removeAll(where: { item in
+            let deltaBetweenDates = item.creationDate.timeIntervalSince1970 - date.timeIntervalSince1970
+
+            switch dateCapturingItems {
+            case .day:
+                if deltaBetweenDates >= 86400 {
+                    return true
+                }
+            case .week:
+                if deltaBetweenDates >= 604_800 {
+                    return true
+                }
+            case .month:
+                if deltaBetweenDates >= 2_592_000 {
+                    return true
+                }
+            case .year:
+                if deltaBetweenDates >= 31_536_000 {
+                    return true
+                }
+            }
+            return false
+        })
+        self.saveItems()
 
         switch filter {
         case .all:

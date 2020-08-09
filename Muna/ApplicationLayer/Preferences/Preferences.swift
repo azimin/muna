@@ -147,4 +147,12 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowOnboarding)
     static var isNeededToShowOnboarding
+
+    static var storingPeriod: PeriodOfStoring {
+        guard let periodOfStoring = PeriodOfStoring(rawValue: periodOfStoring) else {
+            appAssertionFailure("Period of storing is not presented: \(Preferences.periodOfStoring)")
+            return .month
+        }
+        return periodOfStoring
+    }
 }
