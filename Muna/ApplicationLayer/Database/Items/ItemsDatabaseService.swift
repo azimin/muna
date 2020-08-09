@@ -73,19 +73,19 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
             switch dateCapturingItems {
             case .day:
-                if deltaBetweenDates >= 86400 {
+                if deltaBetweenDates >= PresentationLayerConstants.oneDayInSeconds {
                     return true
                 }
             case .week:
-                if deltaBetweenDates >= 604_800 {
+                if deltaBetweenDates >= PresentationLayerConstants.weekInSeconds {
                     return true
                 }
             case .month:
-                if deltaBetweenDates >= 2_592_000 {
+                if deltaBetweenDates >= PresentationLayerConstants.oneMonthInSeconds {
                     return true
                 }
             case .year:
-                if deltaBetweenDates >= 31_536_000 {
+                if deltaBetweenDates >= PresentationLayerConstants.oneYearInSeconds {
                     return true
                 }
             }

@@ -45,6 +45,7 @@
 		23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */; };
 		23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */; };
 		23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */; };
+		23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
@@ -235,6 +236,7 @@
 		23ADE2DF24A8B2CF00A2D7F9 /* SliderSettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSettingsItem.swift; sourceTree = "<group>"; };
 		23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemViewModel.swift; sourceTree = "<group>"; };
 		23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEntry.swift; sourceTree = "<group>"; };
+		23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationLayerConstants.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
@@ -619,6 +621,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		23B9865724E05E1900AF1BDD /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +819,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				23B9865724E05E1900AF1BDD /* Constants */,
 				9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */,
 				9F1CB75024730AB500DFBB05 /* Test */,
 				233E747B246B4A800070EABA /* Service */,
@@ -1660,6 +1671,7 @@
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,
 				9FA07F5E2460A8AC00654D36 /* Label.swift in Sources */,
 				2392996A249AA4090090BDD8 /* MainPanelShortcutsView.swift in Sources */,
+				23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
