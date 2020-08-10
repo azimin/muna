@@ -13,6 +13,8 @@ protocol SettingsItemViewModelDelegate: AnyObject {
 
     func pingIntervalSliderSetup(withValue value: Double, title: String)
     func periodOfStoringSliderSetup(withValue value: Double, title: String)
+
+    func showAlert(forValue value: Int)
 }
 
 class SettingsItemViewModel {
@@ -111,28 +113,21 @@ extension SettingsItemViewModel: SettingsItemViewDelegate {
         }
 
         if value < self.previousPeriodOfStoringValue {
-            let alert = NSAlert()
-            alert.messageText = "Are you sure?"
-            alert.informativeText = "You changing the period of storing to less than present it will remove old items. This cannot be undone"
-            alert.alertStyle = .warning
-            alert.addButton(withTitle: "Cancel")
-            alert.addButton(withTitle: "Ok")
-            
-            if let window = NSApplication.shared.windows.first {
-                alert.beginSheetModal(for: window) { [unowned self] response in
-                    if response == .alertFirstButtonReturn {
-                        let previousValue = Preferences.PeriodOfStoring.allCases[self.previousPeriodOfStoringValue]
-                        self.delegate?.periodOfStoringSliderSetup(withValue: Double(self.previousPeriodOfStoringValue), title: previousValue.rawValue)
-                    }
-                    if response == .alertSecondButtonReturn {
-                        Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
-                        self.previousPeriodOfStoringValue = value
-                    }
-                }
-            }
+            self.delegate?.showAlert(forValue: value)
         } else {
             self.previousPeriodOfStoringValue = value
             self.delegate?.periodOfStoringSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
         }
+    }
+
+    func periodOfStoringCancelTap() {
+        let previousValue = Preferences.PeriodOfStoring.allCases[self.previousPeriodOfStoringValue]
+        self.delegate?.periodOfStoringSliderSetup(withValue: Double(self.previousPeriodOfStoringValue), title: previousValue.rawValue)
+    }
+
+    func periodOfStoringOkTap(withValue value: Int) {
+        let preferencesValue = Preferences.PeriodOfStoring.allCases[value]
+        Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
+        self.previousPeriodOfStoringValue = value
     }
 }

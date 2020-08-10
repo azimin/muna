@@ -14,6 +14,9 @@ protocol SettingsItemViewDelegate: AnyObject {
 
     func pingIntervalSliderChanged(onValue value: Int)
     func periodOfStoringSliderChanged(onValue value: Int, isNeededToUpdate: Bool)
+
+    func periodOfStoringCancelTap()
+    func periodOfStoringOkTap(withValue value: Int)
 }
 
 class SettingsItemView: NSView {
@@ -157,6 +160,26 @@ class SettingsItemView: NSView {
 }
 
 extension SettingsItemView: SettingsItemViewModelDelegate {
+    func showAlert(forValue value: Int) {
+        let alert = NSAlert()
+        alert.messageText = "Are you sure?"
+        alert.informativeText = "You changing the period of storing to less than present it will remove old items. This cannot be undone"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Ok")
+        alert.addButton(withTitle: "Cancel")
+
+        if let window = self.window {
+            alert.beginSheetModal(for: window) { [unowned self] response in
+                if response == .alertFirstButtonReturn {
+                    self.delegate?.periodOfStoringOkTap(withValue: value)
+                }
+                if response == .alertSecondButtonReturn {
+                    self.delegate?.periodOfStoringCancelTap()
+                }
+            }
+        }
+    }
+
     func launchOnStartupSwitcherSetup(withValue value: Bool) {
         self.startupSettingItem.switcher.state = value ? .on : .off
     }
