@@ -111,6 +111,11 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.isComplited.toggle()
         self.item?.isComplited = self.isComplited
         self.updateStyle()
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemComplete,
+            byShortcut: false
+        )
     }
 
     func updateStyle() {

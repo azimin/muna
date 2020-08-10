@@ -145,6 +145,11 @@ class MainPanelView: NSView {
     }
 
     func spaceClicked() {
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemPreview,
+            byShortcut: true
+        )
+
         if self.mainContentView.popUpController.isHidden {
             self.mainContentView.scrollView.stopScroll()
         }
