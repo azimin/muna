@@ -292,6 +292,12 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.editReminder(byShortcut: false)
     }
 
+    func closePopUpIfNeeded() -> Bool {
+        let isHidden = self.popUpController.isHidden
+        self.popUpController.hide()
+        return !isHidden
+    }
+
     @objc
     func editReminder(byShortcut: Bool) {
         guard self.groupedData.totalNumberOfItems > 0 else {

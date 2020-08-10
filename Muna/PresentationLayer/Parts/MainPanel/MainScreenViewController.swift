@@ -87,7 +87,9 @@ class MainScreenViewController: NSViewController {
         case .editTime:
             self.panelView.mainContentView.editReminder(byShortcut: true)
         case .close:
-            ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+            if self.panelView.mainContentView.closePopUpIfNeeded() == false {
+                ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+            }
         }
     }
 

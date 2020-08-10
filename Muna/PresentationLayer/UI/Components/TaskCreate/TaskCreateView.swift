@@ -111,7 +111,7 @@ class TaskCreateView: PopupView {
                 self.commentTextField.textField.nextKeyView = self.reminderTextField.textField
                 return nil
             } else if Shortcuts.create.item.validateWith(event: event) {
-                self.createTask()
+                self.createTask(byShortcut: true)
                 return nil
             }
 
@@ -166,10 +166,10 @@ class TaskCreateView: PopupView {
 
     @objc
     private func handleDoneButton() {
-        self.createTask()
+        self.createTask(byShortcut: false)
     }
 
-    func createTask() {
+    func createTask(byShortcut: Bool) {
         defer {
             self.delegate?.closeScreenshot()
         }
@@ -190,12 +190,16 @@ class TaskCreateView: PopupView {
 
         itemToSave.comment = self.commentTextField.textField.stringValue
 
-        self.savingProcessingService.save(withItem: itemToSave)
+        self.savingProcessingService.save(withItem: itemToSave, byShortcut: byShortcut)
     }
 
     @objc
     private func handleShortcutsButton() {
         self.delegate?.shortcutsButtonTapped()
+        ServiceLocator.shared.analytics.executeControl(
+            control: .captureShortcuts,
+            byShortcut: false
+        )
     }
 }
 
