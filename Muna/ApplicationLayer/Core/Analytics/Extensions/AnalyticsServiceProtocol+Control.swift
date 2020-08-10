@@ -25,7 +25,7 @@ extension AnalyticsServiceProtocol {
             name: "Control Executed",
             properties: [
                 "type": control.propertiesEventName,
-                "by_shortcut": byShortcut
+                "by_shortcut": byShortcut,
             ]
         )
     }

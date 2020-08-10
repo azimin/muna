@@ -69,8 +69,8 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
         let date = Date()
 
-        self.items.removeAll(where: { item in
-            guard let completionDate = item.dueDate else {
+        let itemsToDelete = self.items.filter { item in
+            guard let completionDate = item.completionDate else {
                 return false
             }
             let deltaBetweenDates = date.timeIntervalSince1970 - completionDate.timeIntervalSince1970
@@ -94,7 +94,13 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
                 }
             }
             return false
-        })
+        }
+        for item in itemsToDelete {
+            self.removeItem(id: item.id)
+        }
+        self.items.removeAll { (item) -> Bool in
+            itemsToDelete.contains(where: { $0.id == item.id })
+        }
         self.saveItems()
 
         switch filter {
