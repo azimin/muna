@@ -20,6 +20,16 @@ enum AnalyticsControl: String, AnalyticsPropertyNameProtocol {
 }
 
 extension AnalyticsServiceProtocol {
+    func reachOnboardingStep(step: Int, stepType: OnboardingViewController.Step) {
+        self.logEvent(
+            name: "Onboarding Step Showed",
+            properties: [
+                "step": step,
+                "step_type": stepType,
+            ]
+        )
+    }
+
     func executeControl(control: AnalyticsControl, byShortcut: Bool) {
         self.logEvent(
             name: "Control Executed",
