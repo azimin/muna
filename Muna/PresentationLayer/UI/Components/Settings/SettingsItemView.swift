@@ -13,7 +13,7 @@ protocol SettingsItemViewDelegate: AnyObject {
     func launchOnStartupSwitchChanged(onState state: NSSlider.StateValue)
 
     func pingIntervalSliderChanged(onValue value: Int)
-    func periodOfStoringSliderChanged(onValue value: Int)
+    func periodOfStoringSliderChanged(onValue value: Int, isNeededToUpdate: Bool)
 }
 
 class SettingsItemView: NSView {
@@ -150,7 +150,9 @@ class SettingsItemView: NSView {
             break
         }
 
-        self.delegate?.periodOfStoringSliderChanged(onValue: Int(newValue))
+        let event = NSApplication.shared.currentEvent
+        let isNeededToUpdate = event?.type == NSEvent.EventType.leftMouseUp
+        self.delegate?.periodOfStoringSliderChanged(onValue: Int(newValue), isNeededToUpdate: isNeededToUpdate)
     }
 }
 

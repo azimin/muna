@@ -18,6 +18,10 @@ protocol SettingsItemViewModelDelegate: AnyObject {
 class SettingsItemViewModel {
     weak var delegate: SettingsItemViewModelDelegate?
 
+    private var previousPeriodOfStoringValue = 0
+
+    var isNeededToWritePreviousValue = true
+
     func setup() {
         self.setupLaunchOnStartup()
         self.setupPeriodOfStoring()
@@ -37,16 +41,28 @@ class SettingsItemViewModel {
             value = .week
         }
 
+        let previousValue: Int
         switch value {
         case .day:
+            previousValue = 0
             self.delegate?.periodOfStoringSliderSetup(withValue: 0, title: value.rawValue)
         case .week:
+            previousValue = 1
             self.delegate?.periodOfStoringSliderSetup(withValue: 1, title: value.rawValue)
         case .month:
+            previousValue = 2
             self.delegate?.periodOfStoringSliderSetup(withValue: 2, title: value.rawValue)
         case .year:
+            previousValue = 2
             self.delegate?.periodOfStoringSliderSetup(withValue: 3, title: value.rawValue)
         }
+
+        guard self.isNeededToWritePreviousValue else {
+            return
+        }
+
+        self.isNeededToWritePreviousValue = false
+        self.previousPeriodOfStoringValue = previousValue
     }
 
     private func setupPingInterval() {
@@ -85,10 +101,38 @@ extension SettingsItemViewModel: SettingsItemViewDelegate {
         self.delegate?.pingIntervalSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
     }
 
-    func periodOfStoringSliderChanged(onValue value: Int) {
+    func periodOfStoringSliderChanged(onValue value: Int, isNeededToUpdate: Bool) {
         let preferencesValue = Preferences.PeriodOfStoring.allCases[value]
-        Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
 
         self.delegate?.periodOfStoringSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
+
+        guard isNeededToUpdate else {
+            return
+        }
+
+        if value < self.previousPeriodOfStoringValue {
+            let alert = NSAlert()
+            alert.messageText = "Are you sure?"
+            alert.informativeText = "You changing the period of storing to less than present it will remove old items. This cannot be undone"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: "Ok")
+            
+            if let window = NSApplication.shared.windows.first {
+                alert.beginSheetModal(for: window) { [unowned self] response in
+                    if response == .alertFirstButtonReturn {
+                        let previousValue = Preferences.PeriodOfStoring.allCases[self.previousPeriodOfStoringValue]
+                        self.delegate?.periodOfStoringSliderSetup(withValue: Double(self.previousPeriodOfStoringValue), title: previousValue.rawValue)
+                    }
+                    if response == .alertSecondButtonReturn {
+                        Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
+                        self.previousPeriodOfStoringValue = value
+                    }
+                }
+            }
+        } else {
+            self.previousPeriodOfStoringValue = value
+            self.delegate?.periodOfStoringSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
+        }
     }
 }
