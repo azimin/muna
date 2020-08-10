@@ -117,6 +117,7 @@ extension SettingsItemViewModel: SettingsItemViewDelegate {
         } else {
             self.previousPeriodOfStoringValue = value
             self.delegate?.periodOfStoringSliderSetup(withValue: Double(value), title: preferencesValue.rawValue)
+            Preferences.periodOfStoring = preferencesValue.rawValue.lowercased()
         }
     }
 
