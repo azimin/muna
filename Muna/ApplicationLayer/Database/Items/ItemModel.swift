@@ -48,11 +48,19 @@ class ItemModel: ItemModelProtocol, Codable {
     var isComplited: Bool {
         didSet {
             if self.isComplited {
+                ServiceLocator.shared.analytics.increasePersonProperty(
+                    name: "number_of_items_completed",
+                    by: 1
+                )
                 ServiceLocator.shared.notifications.removeNotification(
                     item: self
                 )
                 self.completionDate = Date()
             } else {
+                ServiceLocator.shared.analytics.increasePersonProperty(
+                    name: "number_of_items_completed",
+                    by: -1
+                )
                 ServiceLocator.shared.notifications.sheduleNotification(
                     item: self
                 )

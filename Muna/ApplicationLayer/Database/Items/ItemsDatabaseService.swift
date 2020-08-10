@@ -133,6 +133,11 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             self.items.remove(at: index)
 
             _ = self.imageStorage.removeImage(name: item.imageName)
+
+            ServiceLocator.shared.analytics.increasePersonProperty(
+                name: "number_of_items_deleted",
+                by: 1
+            )
         } else {
             appAssertionFailure("No id")
         }

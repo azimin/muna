@@ -77,6 +77,11 @@ class SavingProcessingService {
             properties["due_date_string"] = dueDateString
         }
 
+        ServiceLocator.shared.analytics.increasePersonProperty(
+            name: "number_of_created_items",
+            by: 1
+        )
+
         ServiceLocator.shared.analytics.logEvent(
             name: "Item Created",
             properties: properties
