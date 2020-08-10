@@ -301,7 +301,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.selectIndexPath(indexPath: indexPath, completion: {
             let item = self.groupedData.item(at: indexPath)
-            ServiceLocator.shared.itemsDatabase.removeItem(id: item.id)
+            ServiceLocator.shared.itemsDatabase.removeItem(
+                id: item.id,
+                shouldTrack: true
+            )
             self.reloadData()
         })
     }
