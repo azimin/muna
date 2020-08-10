@@ -108,7 +108,6 @@
 		9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */; };
 		9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */; };
 		9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E4C249501A100A34379 /* OnboardingButton.swift */; };
-		9F581E52249524B300A34379 /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F581E51249524B300A34379 /* onboarding_part_1.mov */; };
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
 		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
@@ -122,6 +121,9 @@
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
+		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
+		9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */; };
+		9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */; };
 		9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */; };
 		9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C4247DAE1C00358953 /* MainScreenView.swift */; };
 		9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */; };
@@ -304,7 +306,6 @@
 		9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViewController.swift; sourceTree = "<group>"; };
 		9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupViewController.swift; sourceTree = "<group>"; };
 		9F581E4C249501A100A34379 /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
-		9F581E51249524B300A34379 /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
@@ -318,6 +319,9 @@
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
+		9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_2.mov; sourceTree = "<group>"; };
+		9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_3.mov; sourceTree = "<group>"; };
 		9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeTimeGlobalView.swift; sourceTree = "<group>"; };
 		9F97D0C4247DAE1C00358953 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindLaterViewController.swift; sourceTree = "<group>"; };
@@ -930,7 +934,9 @@
 		9F581E4E2495115D00A34379 /* OnboardingVideos */ = {
 			isa = PBXGroup;
 			children = (
-				9F581E51249524B300A34379 /* onboarding_part_1.mov */,
+				9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */,
+				9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */,
+				9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */,
 			);
 			path = OnboardingVideos;
 			sourceTree = "<group>";
@@ -1419,12 +1425,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F581E52249524B300A34379 /* onboarding_part_1.mov in Resources */,
+				9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
 				23D8B8822487C809007573B5 /* fridge.icns in Resources */,
+				9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */,
 				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
+				9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

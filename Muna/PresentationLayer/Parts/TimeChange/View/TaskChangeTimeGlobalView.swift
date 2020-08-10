@@ -51,11 +51,28 @@ class TaskChangeTimeGlobalView: View {
 
         switch self.style {
         case .withImage:
+            let image = ServiceLocator.shared.imageStorage.forceLoadImage(
+                name: self.itemModel.imageName
+            )
+            self.imageView.image = image
+
             self.addSubview(self.imageContentView)
             self.imageContentView.snp.makeConstraints { maker in
                 maker.top.equalToSuperview()
                 maker.centerX.equalToSuperview()
-                maker.size.equalTo(CGSize(width: 175, height: 116))
+                if let size = image?.size {
+                    if size.width > size.height * 1.6 {
+                        let coef = 320 / size.width
+                        let height = (size.height * coef)
+                        maker.width.equalTo(320)
+                        maker.height.equalTo(height)
+                    } else {
+                        let coef = 200 / size.height
+                        let width = (size.width * coef)
+                        maker.width.equalTo(width)
+                        maker.height.equalTo(200)
+                    }
+                }
             }
 
             self.imageContentView.addSubview(self.imageView)
@@ -74,9 +91,5 @@ class TaskChangeTimeGlobalView: View {
                 maker.edges.equalToSuperview()
             }
         }
-
-        self.imageView.image = ServiceLocator.shared.imageStorage.forceLoadImage(
-            name: self.itemModel.imageName
-        )
     }
 }
