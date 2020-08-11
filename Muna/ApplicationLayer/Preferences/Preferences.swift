@@ -31,6 +31,7 @@ class Preferences {
         case periodOfStoring
         case pingInterval
         case isNeededToShowOnboarding
+        case isFirstAskToPermissions
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -147,6 +148,9 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowOnboarding)
     static var isNeededToShowOnboarding
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isFirstAskToPermissions)
+    static var isFirstAskToPermissions
 
     static var storingPeriod: PeriodOfStoring {
         guard let periodOfStoring = PeriodOfStoring(rawValue: periodOfStoring) else {

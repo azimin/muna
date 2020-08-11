@@ -26,7 +26,12 @@ final class PermissionsService: PermissionsServiceProtocol {
 
     func checkPermissions() -> Bool {
         guard self.canRecordScreen else {
-            ServiceLocator.shared.windowManager.activateWindowIfNeeded(.permissionsAlert)
+            if Preferences.isFirstAskToPermissions {
+                CGWindowListCreateImage(.zero, .optionOnScreenBelowWindow, kCGNullWindowID, .bestResolution)
+                Preferences.isFirstAskToPermissions = false
+            } else {
+                ServiceLocator.shared.windowManager.activateWindowIfNeeded(.permissionsAlert)
+            }
 
             return false
         }
