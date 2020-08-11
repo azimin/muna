@@ -24,7 +24,10 @@ class WindowManager: WindowManagerProtocol {
     private var windows = [WindowType: NSWindow]()
     private var windowVisibleStatus: [WindowType: Bool] = [:]
 
-    init() {
+    private let betaKey: BetaKeyService
+
+    init(betaKey: BetaKeyService) {
+        self.betaKey = betaKey
         self.setup()
     }
 
@@ -55,6 +58,11 @@ class WindowManager: WindowManagerProtocol {
     }
 
     func activateWindowIfNeeded(_ windowType: WindowType) {
+        if self.betaKey.isEntered == false, windowType != .onboarding {
+            self.activateWindowIfNeeded(.onboarding)
+            return
+        }
+
         guard self.windowState(windowType) == false else {
             switch windowType {
             case .settings, .onboarding, .permissionsAlert:
