@@ -72,6 +72,11 @@ class MainScreenView: NSView {
     }
 
     func showShortcutsView() {
+        ServiceLocator.shared.analytics.executeControl(
+            control: .panelShortcuts,
+            byShortcut: false
+        )
+
         self.isShortcutsShowed = true
         self.addSubview(self.shortcutsView)
         self.shortcutsView.snp.makeConstraints { make in

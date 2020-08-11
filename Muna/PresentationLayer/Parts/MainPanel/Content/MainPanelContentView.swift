@@ -197,14 +197,14 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
             let completeItem = NSMenuItem(
                 title: itemModel.isComplited ? "Uncomplete" : "Complete",
-                action: #selector(self.completeActiveItemAction),
+                action: #selector(self.completeActiveItemActionWithoutShortcut),
                 keyEquivalent: "↩"
             )
             completeItem.keyEquivalentModifierMask = []
 
             let reminderItem = NSMenuItem(
                 title: itemModel.dueDate == nil ? "Set Reminder" : "Edit Reminder",
-                action: #selector(self.editReminder),
+                action: #selector(self.editReminderWithoutShortcut),
                 keyEquivalent: "t"
             )
             reminderItem.keyEquivalentModifierMask = [.command]
@@ -214,7 +214,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
             let copyItem = NSMenuItem(title: "Copy Image", action: #selector(self.copyAction), keyEquivalent: "")
 
-            let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemAction), keyEquivalent: "⌫")
+            let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemActionWithoutShortcut), keyEquivalent: "⌫")
             deleteItem.keyEquivalentModifierMask = []
 
             menu.addItem(completeItem)
@@ -231,6 +231,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     @objc func previewAction() {
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemPreview,
+            byShortcut: false
+        )
         self.popUpController.show()
     }
 
@@ -250,10 +254,20 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         let pb = NSPasteboard.general
         pb.clearContents()
         pb.writeObjects([image])
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemCopy,
+            byShortcut: false
+        )
     }
 
     @objc
-    func completeActiveItemAction() {
+    private func completeActiveItemActionWithoutShortcut() {
+        self.completeActiveItemAction(byShortcut: false)
+    }
+
+    @objc
+    func completeActiveItemAction(byShortcut: Bool) {
         guard self.groupedData.totalNumberOfItems > 0 else {
             return
         }
@@ -266,10 +280,26 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         item.isComplited.toggle()
 
         self.selectIndexPath(indexPath: indexPath, completion: nil)
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemComplete,
+            byShortcut: byShortcut
+        )
     }
 
     @objc
-    func editReminder() {
+    private func editReminderWithoutShortcut() {
+        self.editReminder(byShortcut: false)
+    }
+
+    func closePopUpIfNeeded() -> Bool {
+        let isHidden = self.popUpController.isHidden
+        self.popUpController.hide()
+        return !isHidden
+    }
+
+    @objc
+    func editReminder(byShortcut: Bool) {
         guard self.groupedData.totalNumberOfItems > 0 else {
             return
         }
@@ -286,10 +316,19 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         let item = self.groupedData.item(at: indexPath)
         delegate.mainPanelContentViewShouldShowTimeChange(itemModel: item)
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemEditTime,
+            byShortcut: byShortcut
+        )
     }
 
     @objc
-    func deleteActiveItemAction() {
+    private func deleteActiveItemActionWithoutShortcut() {
+        self.deleteActiveItemAction(byShortcut: false)
+    }
+
+    func deleteActiveItemAction(byShortcut: Bool) {
         guard self.groupedData.totalNumberOfItems > 0 else {
             return
         }
@@ -301,7 +340,16 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         self.selectIndexPath(indexPath: indexPath, completion: {
             let item = self.groupedData.item(at: indexPath)
-            ServiceLocator.shared.itemsDatabase.removeItem(id: item.id)
+
+            ServiceLocator.shared.analytics.executeControl(
+                control: .itemDelete,
+                byShortcut: byShortcut
+            )
+
+            ServiceLocator.shared.itemsDatabase.removeItem(
+                id: item.id,
+                shouldTrack: true
+            )
             self.reloadData()
         })
     }

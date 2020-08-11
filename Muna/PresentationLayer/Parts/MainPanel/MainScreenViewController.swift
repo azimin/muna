@@ -79,15 +79,17 @@ class MainScreenViewController: NSViewController {
                 nextSection: true
             )
         case .deleteItem:
-            self.panelView.mainContentView.deleteActiveItemAction()
+            self.panelView.mainContentView.deleteActiveItemAction(byShortcut: true)
         case .previewItem:
             self.panelView.spaceClicked()
         case .complete:
-            self.panelView.mainContentView.completeActiveItemAction()
+            self.panelView.mainContentView.completeActiveItemAction(byShortcut: true)
         case .editTime:
-            self.panelView.mainContentView.editReminder()
+            self.panelView.mainContentView.editReminder(byShortcut: true)
         case .close:
-            ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+            if self.panelView.mainContentView.closePopUpIfNeeded() == false {
+                ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+            }
         }
     }
 

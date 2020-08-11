@@ -15,7 +15,7 @@ protocol OnboardingContainerProtocol {
 typealias OnboardingContainerViewController = OnboardingContainerProtocol & NSViewController
 
 class OnboardingViewController: NSViewController, NSToolbarDelegate {
-    enum Step: String, CaseIterable {
+    enum Step: String, CaseIterable, AnalyticsPropertyNameProtocol {
         case intro
         case howToCapture
         case howToRemind
@@ -70,6 +70,13 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
     // MARK: - Control
 
     func setView(for step: Step, animate: Bool) {
+        if let index = Step.allCases.firstIndex(of: step) {
+            ServiceLocator.shared.analytics.reachOnboardingStep(
+                step: index,
+                stepType: step
+            )
+        }
+
         if let oldItem = self.currentStep, let oldViewController = self.currentViewController {
             if oldItem == step {
                 return

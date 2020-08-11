@@ -23,7 +23,7 @@ protocol ItemsDatabaseServiceProtocol: AnyObject {
         dueDate: Date?,
         comment: String?
     ) -> ItemModel?
-    func removeItem(id: String)
+    func removeItem(id: String, shouldTrack: Bool)
 
     func saveItems()
 
@@ -69,8 +69,8 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
         let date = Date()
 
-        self.items.removeAll(where: { item in
-            guard let completionDate = item.dueDate else {
+        let itemsToDelete = self.items.filter { item in
+            guard let completionDate = item.completionDate else {
                 return false
             }
             let deltaBetweenDates = date.timeIntervalSince1970 - completionDate.timeIntervalSince1970
@@ -94,7 +94,17 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
                 }
             }
             return false
-        })
+        }
+        for item in itemsToDelete {
+            self.removeItem(
+                id: item.id,
+                shouldTrack: false,
+                shouldSave: false
+            )
+        }
+        self.items.removeAll { (item) -> Bool in
+            itemsToDelete.contains(where: { $0.id == item.id })
+        }
         self.saveItems()
 
         switch filter {
@@ -122,17 +132,24 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         }
     }
 
-    func removeItem(id: String) {
-        self.removeItem(id: id, shouldSave: true)
+    func removeItem(id: String, shouldTrack: Bool) {
+        self.removeItem(id: id, shouldTrack: shouldTrack, shouldSave: true)
     }
 
-    func removeItem(id: String, shouldSave: Bool) {
+    func removeItem(id: String, shouldTrack: Bool, shouldSave: Bool) {
         if let index = self.items.firstIndex(where: { $0.id == id }) {
             let item = self.items[index]
             self.notifications.removeNotification(item: item)
             self.items.remove(at: index)
 
             _ = self.imageStorage.removeImage(name: item.imageName)
+
+            if shouldTrack {
+                ServiceLocator.shared.analytics.increasePersonProperty(
+                    name: "number_of_items_deleted",
+                    by: 1
+                )
+            }
         } else {
             appAssertionFailure("No id")
         }
@@ -182,7 +199,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     private func removeItems() {
         for item in self.items {
             self.imageStorage.removeImage(name: item.imageName)
-            self.removeItem(id: item.id, shouldSave: false)
+            self.removeItem(id: item.id, shouldTrack: false, shouldSave: false)
         }
         self.saveItems()
     }

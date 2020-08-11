@@ -28,7 +28,7 @@ class SavingProcessingService {
         self.image = image
     }
 
-    func save(withItem item: ItemToSave) {
+    func save(withItem item: ItemToSave, byShortcut: Bool) {
         // TODO: Do in background
         // TODO: Add quaility selection in settings
         guard let image = self.image,
@@ -75,11 +75,22 @@ class SavingProcessingService {
             properties["due_date"] = date.toFormat("dd MMM yyyy HH:mm")
             properties["current_date"] = Date().toFormat("dd MMM yyyy HH:mm")
             properties["due_date_string"] = dueDateString
+            properties["by_shortcut"] = byShortcut
         }
+
+        ServiceLocator.shared.analytics.increasePersonProperty(
+            name: "number_of_created_items",
+            by: 1
+        )
 
         ServiceLocator.shared.analytics.logEvent(
             name: "Item Created",
             properties: properties
+        )
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemCreate,
+            byShortcut: byShortcut
         )
     }
 }

@@ -126,6 +126,8 @@
 		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
 		9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */; };
 		9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */; };
+		9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */; };
+		9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */; };
 		9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */; };
 		9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C4247DAE1C00358953 /* MainScreenView.swift */; };
 		9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */; };
@@ -326,6 +328,8 @@
 		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
 		9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_2.mov; sourceTree = "<group>"; };
 		9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_3.mov; sourceTree = "<group>"; };
+		9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_4.mov; sourceTree = "<group>"; };
+		9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsServiceProtocol+Control.swift"; sourceTree = "<group>"; };
 		9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeTimeGlobalView.swift; sourceTree = "<group>"; };
 		9F97D0C4247DAE1C00358953 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindLaterViewController.swift; sourceTree = "<group>"; };
@@ -646,14 +650,6 @@
 			path = PermissionsService;
 			sourceTree = "<group>";
 		};
-		23DAE38424E29E9200D3B1AD /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,7 +768,7 @@
 		9F2D340824D0B95C0049DD43 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				23DAE38424E29E9200D3B1AD /* Helpers */,
+				9F93D9A724E1D48C00CBBF5E /* Extensions */,
 				9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */,
 				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
 				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
@@ -959,6 +955,7 @@
 				9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */,
 				9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */,
 				9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */,
+				9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */,
 			);
 			path = OnboardingVideos;
 			sourceTree = "<group>";
@@ -1081,6 +1078,15 @@
 				9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */,
 				9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */,
 				9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9F93D9A724E1D48C00CBBF5E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */,
+				9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1448,6 +1454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */,
+				9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
@@ -1617,6 +1624,7 @@
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
 				2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */,
+				9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
 				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,

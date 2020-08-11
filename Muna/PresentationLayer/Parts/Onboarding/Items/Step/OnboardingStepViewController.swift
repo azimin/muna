@@ -38,7 +38,7 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
             case .howToSeeItems:
                 return "onboarding_part_3"
             case .howToGetReminder:
-                return "onboarding_part_1"
+                return "onboarding_part_4"
             }
         }
     }
