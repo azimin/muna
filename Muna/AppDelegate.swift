@@ -231,11 +231,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func toggleScreenshotState() {
-        self.windowManager.toggleWindow(.screenshot)
+        if ServiceLocator.shared.permissionsService.checkPermissions() {
+            self.windowManager.toggleWindow(.screenshot)
+        }
     }
 
     @objc func toogleFullscreenScreenshotState() {
-        self.windowManager.toggleWindow(.fullScreenshot)
+        if ServiceLocator.shared.permissionsService.checkPermissions() {
+            self.windowManager.toggleWindow(.fullScreenshot)
+        }
     }
 
     @objc func toggleDebugState() {
