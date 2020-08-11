@@ -80,6 +80,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         if Preferences.isNeededToShowOnboarding {
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
         }
+
+        ServiceLocator.shared.permissionsService.checkPermissions()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

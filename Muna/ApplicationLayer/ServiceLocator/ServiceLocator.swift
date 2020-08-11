@@ -16,6 +16,7 @@ class ServiceLocator {
     let itemsDatabase: ItemsDatabaseServiceProtocol
     let savingService: SavingProcessingService
     let notifications: NotificationsServiceProtocol
+    let permissionsService: PermissionsServiceProtocol
     let windowManager: WindowManagerProtocol
 
     let assertionHandler: AssertionHandler
@@ -30,6 +31,7 @@ class ServiceLocator {
         )
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
         self.windowManager = WindowManager()
+        self.permissionsService = PermissionsService()
         self.analytics = AnalyticsService(
             storage: UserDefaults.standard,
             apmplitudeId: "fef18005e21e59f8b7252c5bb34708bd",

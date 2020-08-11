@@ -31,7 +31,7 @@ class WindowManager: WindowManagerProtocol {
     private func windowState(_ windowType: WindowType) -> Bool {
         let status: Bool
         switch windowType {
-        case .settings, .onboarding:
+        case .settings, .onboarding, .permissionsAlert:
             status = self.windows[windowType]?.isVisible ?? false
         case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
             status = self.windowVisibleStatus[windowType] ?? false
@@ -57,7 +57,7 @@ class WindowManager: WindowManagerProtocol {
     func activateWindowIfNeeded(_ windowType: WindowType) {
         guard self.windowState(windowType) == false else {
             switch windowType {
-            case .settings, .onboarding:
+            case .settings, .onboarding, .permissionsAlert:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
             case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
@@ -90,6 +90,8 @@ class WindowManager: WindowManagerProtocol {
             self.showSettings(in: window)
         case let .remindLater(item):
             self.showRemindLater(in: window, item: item)
+        case .permissionsAlert:
+            self.showPermissionsAlert()
         }
 
         self.changeWindowState(windowType, state: true)
@@ -184,6 +186,16 @@ class WindowManager: WindowManagerProtocol {
             window.isReleasedWhenClosed = false
             window.contentViewController = SettingsViewController()
             self.showSettings(in: window)
+        case .permissionsAlert:
+            // TODO: - Remove it
+            window = NSWindow(
+                contentRect: self.frameFor(.settings),
+                styleMask: [.closable, .titled],
+                backing: .buffered,
+                defer: true
+            )
+            window.isReleasedWhenClosed = false
+            self.showPermissionsAlert()
         }
 
         self.windows[windowType] = window
@@ -200,7 +212,7 @@ class WindowManager: WindowManagerProtocol {
         switch windowType {
         case .debug:
             frame = mainScreen.frame
-        case .screenshot, .fullScreenshot:
+        case .screenshot, .fullScreenshot, .permissionsAlert:
             frame = mainScreen.frame
         case .panel:
             frame = mainScreen.frame
@@ -242,6 +254,32 @@ class WindowManager: WindowManagerProtocol {
             viewController.show()
         }
         window.setIsVisible(true)
+    }
+
+    private func showPermissionsAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Muna requires screen recording permissions"
+        alert.informativeText = """
+        To working properly on macOS
+
+        Please open the Security & Privacy in Settings app and enable Muna in Screen Recording Section
+        """
+        alert.alertStyle = .informational
+        let openSettingsButton = alert.addButton(withTitle: "Open Security & Privacy")
+        alert.addButton(withTitle: "Cancel")
+        openSettingsButton.keyEquivalent = "\r"
+
+        let value = alert.runModal()
+
+        switch value {
+        case .alertFirstButtonReturn:
+            let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!
+            NSWorkspace.shared.open(url)
+        case .alertSecondButtonReturn:
+            print("second")
+        default:
+            appAssertionFailure("\(value) in alert in permissions alert is not supported")
+        }
     }
 
     private func showPanel(in window: NSWindow, selectedItem: ItemModel?) {
@@ -326,6 +364,8 @@ class WindowManager: WindowManagerProtocol {
         case .settings:
             window.setIsVisible(false)
         case .onboarding:
+            window.setIsVisible(false)
+        case .permissionsAlert:
             window.setIsVisible(false)
         }
 
