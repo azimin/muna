@@ -16,6 +16,7 @@ enum WindowType: Equatable, Hashable {
     case settings
     case onboarding
     case remindLater(item: ItemModel)
+    case permissionsAlert
 
     var analytics: String {
         switch self {
@@ -33,6 +34,8 @@ enum WindowType: Equatable, Hashable {
             return "onboarding"
         case .remindLater:
             return "remindLater"
+        case .permissionsAlert:
+            return "permissionsAlert"
         }
     }
 
@@ -52,6 +55,8 @@ enum WindowType: Equatable, Hashable {
             return "onboarding"
         case let .remindLater(item):
             return "remindLater_\(item.id)"
+        case .permissionsAlert:
+            return "permissionsAlert"
         }
     }
 

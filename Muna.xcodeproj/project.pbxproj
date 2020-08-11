@@ -48,6 +48,8 @@
 		23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */; };
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
+		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
+		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
 		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
 		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
@@ -244,6 +246,8 @@
 		23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationLayerConstants.swift; sourceTree = "<group>"; };
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
+		23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersmissionsService.swift; sourceTree = "<group>"; };
+		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+LogPermissions.swift"; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
 		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
 		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
@@ -443,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				9F33FC4E24E335BA00942BFD /* Beta */,
+				23DAE37E24E2896200D3B1AD /* PermissionsService */,
 				9FC3F89224DB0FA700BC0693 /* Assertions */,
 				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
@@ -638,6 +643,14 @@
 				23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		23DAE37E24E2896200D3B1AD /* PermissionsService */ = {
+			isa = PBXGroup;
+			children = (
+				23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */,
+			);
+			path = PermissionsService;
 			sourceTree = "<group>";
 		};
 		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
@@ -1083,6 +1096,7 @@
 		9F93D9A724E1D48C00CBBF5E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */,
 				9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */,
 			);
 			path = Extensions;
@@ -1617,6 +1631,7 @@
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
+				23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */,
 				9F2D341024D0B9F00049DD43 /* AnalyticsService.swift in Sources */,
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
@@ -1645,6 +1660,7 @@
 				9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
+				23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */,
 				9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,

@@ -80,6 +80,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         if Preferences.isNeededToShowOnboarding {
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
         }
+
+        let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
+        ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+        _ = ServiceLocator.shared.permissionsService.checkPermissions()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -229,11 +233,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func toggleScreenshotState() {
-        self.windowManager.toggleWindow(.screenshot)
+        if ServiceLocator.shared.permissionsService.checkPermissions() {
+            self.windowManager.toggleWindow(.screenshot)
+        }
     }
 
     @objc func toogleFullscreenScreenshotState() {
-        self.windowManager.toggleWindow(.fullScreenshot)
+        if ServiceLocator.shared.permissionsService.checkPermissions() {
+            self.windowManager.toggleWindow(.fullScreenshot)
+        }
     }
 
     @objc func toggleDebugState() {
