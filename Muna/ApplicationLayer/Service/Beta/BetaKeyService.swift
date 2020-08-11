@@ -30,7 +30,7 @@ class BetaKeyService {
     }
 
     func validate(key: String) -> Bool {
-        return key == "11"
+        return keys.contains(key)
     }
 }
 
@@ -134,5 +134,5 @@ var keys: [String] = [
     "gpMJGeKyTc",
     "dP5WBx8vrt",
     "VCkpeSXPvq",
-    "ZJTpn23537"
+    "ZJTpn23537",
 ]
