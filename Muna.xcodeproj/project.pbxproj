@@ -95,6 +95,7 @@
 		9F33D4882468826100395C44 /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D4872468826100395C44 /* ShortcutView.swift */; };
 		9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48A2468828F00395C44 /* ShortcutItem.swift */; };
 		9F33D48D246883C900395C44 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48C246883C900395C44 /* Key.swift */; };
+		9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33FC4F24E335C200942BFD /* BetaKeyService.swift */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
@@ -294,6 +295,7 @@
 		9F33D4872468826100395C44 /* ShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutView.swift; sourceTree = "<group>"; };
 		9F33D48A2468828F00395C44 /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		9F33D48C246883C900395C44 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		9F33FC4F24E335C200942BFD /* BetaKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaKeyService.swift; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9F33FC4E24E335BA00942BFD /* Beta */,
 				9FC3F89224DB0FA700BC0693 /* Assertions */,
 				23069400248645D200C41F4F /* DateProcessingService */,
 				9FE0F53B247075530046A5C4 /* Notifications */,
@@ -805,6 +808,14 @@
 				9F1526FC246DBDA30037623B /* ShortcutController.swift */,
 			);
 			path = Shortcut;
+			sourceTree = "<group>";
+		};
+		9F33FC4E24E335BA00942BFD /* Beta */ = {
+			isa = PBXGroup;
+			children = (
+				9F33FC4F24E335C200942BFD /* BetaKeyService.swift */,
+			);
+			path = Beta;
 			sourceTree = "<group>";
 		};
 		9F3BC1442461D098002B6217 /* Models */ = {
@@ -1594,6 +1605,7 @@
 				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
+				9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */,
 				9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */,

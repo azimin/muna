@@ -17,6 +17,7 @@ class ServiceLocator {
     let savingService: SavingProcessingService
     let notifications: NotificationsServiceProtocol
     let windowManager: WindowManagerProtocol
+    let betaKey: BetaKeyService
 
     let assertionHandler: AssertionHandler
 
@@ -24,12 +25,13 @@ class ServiceLocator {
         self.assertionHandler = assertionHandler
         self.imageStorage = ImageStorageService()
         self.notifications = NotificationsService()
+        self.betaKey = BetaKeyService()
         self.itemsDatabase = ItemsDatabaseService(
             imageStorage: self.imageStorage,
             notifications: self.notifications
         )
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
-        self.windowManager = WindowManager()
+        self.windowManager = WindowManager(betaKey: self.betaKey)
         self.analytics = AnalyticsService(
             storage: UserDefaults.standard,
             apmplitudeId: "fef18005e21e59f8b7252c5bb34708bd",

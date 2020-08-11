@@ -26,6 +26,8 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
         .withText("Modern way of creating remidners without breaking context")
         .withAligment(.center)
 
+    let betaCode = TextField(clearable: false)
+
     let continueButton = OnboardingButton()
         .withText("Start")
 
@@ -70,11 +72,28 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
             maker.centerX.equalToSuperview()
         }
 
+        self.view.addSubview(self.betaCode)
+        self.betaCode.placeholder = "Beta Key"
+        self.betaCode.snp.makeConstraints { make in
+            make.bottom.equalTo(self.continueButton.snp.top).inset(-20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(180)
+        }
+
         self.continueButton.target = self
         self.continueButton.action = #selector(self.buttonAction(sender:))
     }
 
     @objc func buttonAction(sender: NSButton) {
-        self.onNext?()
+        let betaKey = self.betaCode.textField.stringValue
+        if ServiceLocator.shared.betaKey.validate(key: betaKey) {
+            ServiceLocator.shared.betaKey.key = betaKey
+            self.onNext?()
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "Please enter valid Beta Key"
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+        }
     }
 }
