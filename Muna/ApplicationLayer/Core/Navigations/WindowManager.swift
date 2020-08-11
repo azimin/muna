@@ -273,10 +273,15 @@ class WindowManager: WindowManagerProtocol {
 
         switch value {
         case .alertFirstButtonReturn:
-            let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!
+            guard let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture") else {
+                appAssertionFailure("Settings url is not supproted")
+                return
+            }
             NSWorkspace.shared.open(url)
+
+            ServiceLocator.shared.analytics.logEvent(name: "Permission Alert Open Settings Tap")
         case .alertSecondButtonReturn:
-            print("second")
+            ServiceLocator.shared.analytics.logEvent(name: "Permission Alert Cancel Tap")
         default:
             appAssertionFailure("\(value) in alert in permissions alert is not supported")
         }

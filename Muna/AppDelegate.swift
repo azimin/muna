@@ -81,7 +81,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
         }
 
-        ServiceLocator.shared.permissionsService.checkPermissions()
+        let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
+        ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+        _ = ServiceLocator.shared.permissionsService.checkPermissions()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -49,6 +49,7 @@
 		23D8B8822487C809007573B5 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
+		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
 		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
 		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
@@ -243,6 +244,7 @@
 		23D8B8812487C809007573B5 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersmissionsService.swift; sourceTree = "<group>"; };
+		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+LogPermissions.swift"; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
 		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
 		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
@@ -644,6 +646,14 @@
 			path = PermissionsService;
 			sourceTree = "<group>";
 		};
+		23DAE38424E29E9200D3B1AD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		23FA252C2484D9F200CD69C4 /* OffsetParsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,6 +772,7 @@
 		9F2D340824D0B95C0049DD43 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				23DAE38424E29E9200D3B1AD /* Helpers */,
 				9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */,
 				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
 				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
@@ -1629,6 +1640,7 @@
 				9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
+				23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */,
 				9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
