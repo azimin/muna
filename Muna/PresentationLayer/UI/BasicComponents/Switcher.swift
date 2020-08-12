@@ -30,6 +30,7 @@ class Switcher: NSControl {
         } else {
             let button = NSButton()
             button.setButtonType(.switch)
+            button.title = ""
             return button
         }
     }()
