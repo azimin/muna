@@ -92,8 +92,8 @@ class SettingsItemViewModel {
 }
 
 extension SettingsItemViewModel: SettingsItemViewDelegate {
-    func launchOnStartupSwitchChanged(onState state: NSControl.StateValue) {
-        Preferences.launchOnStartup = state == .on
+    func launchOnStartupSwitchChanged(onState state: Bool) {
+        Preferences.launchOnStartup = state
     }
 
     func pingIntervalSliderChanged(onValue value: Int) {

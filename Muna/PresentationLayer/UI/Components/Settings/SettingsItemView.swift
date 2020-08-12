@@ -10,7 +10,7 @@ import Cocoa
 import SnapKit
 
 protocol SettingsItemViewDelegate: AnyObject {
-    func launchOnStartupSwitchChanged(onState state: NSSlider.StateValue)
+    func launchOnStartupSwitchChanged(onState state: Bool)
 
     func pingIntervalSliderChanged(onValue value: Int)
     func periodOfStoringSliderChanged(onValue value: Int, isNeededToUpdate: Bool)
@@ -113,7 +113,7 @@ class SettingsItemView: NSView {
 
     @objc
     func switchStateChanged() {
-        self.delegate?.launchOnStartupSwitchChanged(onState: self.startupSettingItem.switcher.state)
+        self.delegate?.launchOnStartupSwitchChanged(onState: self.startupSettingItem.switcher.checked)
     }
 
     @objc
@@ -181,7 +181,7 @@ extension SettingsItemView: SettingsItemViewModelDelegate {
     }
 
     func launchOnStartupSwitcherSetup(withValue value: Bool) {
-        self.startupSettingItem.switcher.state = value ? .on : .off
+        self.startupSettingItem.switcher.checked = value
     }
 
     func pingIntervalSliderSetup(withValue value: Double, title: String) {

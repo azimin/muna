@@ -13,7 +13,7 @@ class SwitcherSettingsItem: View {
 
     let descriptionLabel: Label
 
-    let switcher = NSSwitch()
+    let switcher = Switcher()
 
     init(style: SettingsItemView.Style) {
         let titleSize: CGFloat

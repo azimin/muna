@@ -181,6 +181,7 @@
 		9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */; };
 		9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE024660235007D92B8 /* ButtonCell.swift */; };
 		9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */; };
+		9FFA5B9624E453BD004670F0 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFA5B9524E453BD004670F0 /* Switcher.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
 
@@ -386,6 +387,7 @@
 		9FE96BE024660235007D92B8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		9FEF9849247C60EB0047787A /* Muna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Muna-Bridging-Header.h"; sourceTree = "<group>"; };
+		9FFA5B9524E453BD004670F0 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
 		C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1069,6 +1071,7 @@
 				9FC9CDC524699E7C0018FAD7 /* TextField */,
 				9FA07F5624609E0100654D36 /* View.swift */,
 				9FA07F5D2460A8AC00654D36 /* Label.swift */,
+				9FFA5B9524E453BD004670F0 /* Switcher.swift */,
 				9FA07F642460AD2800654D36 /* ImageView.swift */,
 				9F025C0924633C6F00F05D81 /* Panel.swift */,
 				9FE96BD42465F3BF007D92B8 /* Button.swift */,
@@ -1676,6 +1679,7 @@
 				9FA07F732460C31B00654D36 /* ReusableView.swift in Sources */,
 				233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
+				9FFA5B9624E453BD004670F0 /* Switcher.swift in Sources */,
 				9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */,
 				9F693233247AD00600FEBC0B /* TaskChangeTimeView.swift in Sources */,
 				9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */,
