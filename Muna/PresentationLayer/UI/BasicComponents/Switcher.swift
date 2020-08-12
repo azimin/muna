@@ -24,13 +24,30 @@ class Switcher: NSControl {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let switcher = NSSwitch()
+    private let switcher: NSView = {
+        if #available(OSX 10.15, *) {
+            return NSSwitch()
+        } else {
+            let button = NSButton()
+            button.setButtonType(.switch)
+            return button
+        }
+    }()
 
     private func updateState() {
         if let action = self.action, let target = self.target {
             self.sendAction(action, to: target)
         }
-        self.switcher.state = self.checked ? .on : .off
+
+        if #available(OSX 10.15, *) {
+            if let view = self.switcher as? NSSwitch {
+                view.state = self.checked ? .on : .off
+            }
+        } else {
+            if let view = self.switcher as? NSButton {
+                view.state = self.checked ? .on : .off
+            }
+        }
     }
 
     private func setup() {
@@ -38,21 +55,32 @@ class Switcher: NSControl {
         self.switcher.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
-        self.switcher.target = self
-        self.switcher.action = #selector(self.switchStateChanged)
+
+        if #available(OSX 10.15, *) {
+            if let view = self.switcher as? NSSwitch {
+                view.target = self
+                view.action = #selector(self.switchStateChanged)
+            }
+        } else {
+            if let view = self.switcher as? NSButton {
+                view.target = self
+                view.action = #selector(self.switchStateChanged)
+            }
+        }
 
         self.updateState()
     }
 
     @objc
     private func switchStateChanged() {
-        switch self.switcher.state {
-        case .on:
-            self.checked = true
-        case .off:
-            self.checked = false
-        default:
-            self.checked = false
+        if #available(OSX 10.15, *) {
+            if let view = self.switcher as? NSSwitch {
+                self.checked = view.state == .on ? true : false
+            }
+        } else {
+            if let view = self.switcher as? NSButton {
+                self.checked = view.state == .on ? true : false
+            }
         }
     }
 }
