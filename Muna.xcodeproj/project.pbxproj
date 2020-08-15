@@ -46,7 +46,6 @@
 		23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */; };
 		23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */; };
 		23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */; };
-		23D8B8822487C809007573B5 /* fridge@2x.icns in Resources */ = {isa = PBXBuildFile; fileRef = 23D8B8812487C809007573B5 /* fridge@2x.icns */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
 		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
@@ -98,7 +97,6 @@
 		9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48A2468828F00395C44 /* ShortcutItem.swift */; };
 		9F33D48D246883C900395C44 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48C246883C900395C44 /* Key.swift */; };
 		9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33FC4F24E335C200942BFD /* BetaKeyService.swift */; };
-		9F3AAE7F24E846D8000453C0 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9F3AAE7E24E846D8000453C0 /* fridge.icns */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
 		9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */; };
@@ -302,7 +300,6 @@
 		9F33D48A2468828F00395C44 /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		9F33D48C246883C900395C44 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		9F33FC4F24E335C200942BFD /* BetaKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaKeyService.swift; sourceTree = "<group>"; };
-		9F3AAE7E24E846D8000453C0 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
 		9F3BC14B2461F031002B6217 /* NSCollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -874,7 +871,6 @@
 		9F4A8CEF245DAC9000EA2E1E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				9F3AAE7E24E846D8000453C0 /* fridge.icns */,
 				23D8B8812487C809007573B5 /* fridge@2x.icns */,
 				9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */,
 				239DC91F245D95E8001FA50C /* Info.plist */,
@@ -1473,10 +1469,8 @@
 				9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */,
 				9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
-				9F3AAE7F24E846D8000453C0 /* fridge.icns in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
-				23D8B8822487C809007573B5 /* fridge@2x.icns in Resources */,
 				9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */,
 				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
 				9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */,
@@ -1904,7 +1898,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1936,7 +1930,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2027,7 +2021,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = G6LW789JHQ;
 				ENABLE_HARDENED_RUNTIME = YES;
