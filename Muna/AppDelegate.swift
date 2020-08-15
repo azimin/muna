@@ -15,6 +15,8 @@ import UserNotifications
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
+    static let notificationCenter = UNUserNotificationCenter.current()
+
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -43,8 +45,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             assertionHandler: AssertionHandler(assertionErrorHandler: self)
         )
 
-        ServiceLocator.shared.notificationCenter.delegate = self
-        ServiceLocator.shared.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
+        AppDelegate.notificationCenter.delegate = self
+        AppDelegate.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
             if granted {
                 print("Approval granted to send notifications")
                 self.registerNotificationsActions()
@@ -267,7 +269,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             options: [.customDismissAction]
         )
 
-        ServiceLocator.shared.notificationCenter.setNotificationCategories([category])
+        AppDelegate.notificationCenter.setNotificationCategories([category])
     }
 
     func userNotificationCenter(

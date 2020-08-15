@@ -55,7 +55,7 @@ class NotificationsService: NotificationsServiceProtocol {
             trigger: trigger
         )
 
-        ServiceLocator.shared.notificationCenter.add(request, withCompletionHandler: { error in
+        AppDelegate.notificationCenter.add(request, withCompletionHandler: { error in
             if let error = error {
                 print("Error: \(error)")
             } else {
@@ -65,11 +65,11 @@ class NotificationsService: NotificationsServiceProtocol {
     }
 
     func removeNotification(item: ItemModelProtocol) {
-        ServiceLocator.shared.notificationCenter.removePendingNotificationRequests(
+        AppDelegate.notificationCenter.removePendingNotificationRequests(
             withIdentifiers: [item.notificationId]
         )
 
-        ServiceLocator.shared.notificationCenter.removeDeliveredNotifications(
+        AppDelegate.notificationCenter.removeDeliveredNotifications(
             withIdentifiers: [item.notificationId]
         )
     }
