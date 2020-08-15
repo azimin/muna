@@ -1416,8 +1416,8 @@
 				239DC90E245D95E5001FA50C /* Resources */,
 				9F2682C32471BEF000B79D03 /* Carthage */,
 				AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */,
-				9F2682C42471BF4500B79D03 /* LaunchAtLogin */,
 				9F2682C22471BEE100B79D03 /* Embed Frameworks */,
+				9F2682C42471BF4500B79D03 /* LaunchAtLogin */,
 			);
 			buildRules = (
 			);
