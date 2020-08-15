@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class ServiceLocator {
     static var shared: ServiceLocator!
@@ -19,12 +20,14 @@ class ServiceLocator {
     let permissionsService: PermissionsServiceProtocol
     let windowManager: WindowManagerProtocol
     let betaKey: BetaKeyService
+    let notificationCenter: UNUserNotificationCenter
 
     let assertionHandler: AssertionHandler
 
     init(assertionHandler: AssertionHandler) {
         self.assertionHandler = assertionHandler
         self.imageStorage = ImageStorageService()
+        self.notificationCenter = UNUserNotificationCenter.current()
         self.notifications = NotificationsService()
         self.betaKey = BetaKeyService()
         self.itemsDatabase = ItemsDatabaseService(

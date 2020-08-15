@@ -43,8 +43,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             assertionHandler: AssertionHandler(assertionErrorHandler: self)
         )
 
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
+        ServiceLocator.shared.notificationCenter.delegate = self
+        ServiceLocator.shared.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
             if granted {
                 print("Approval granted to send notifications")
                 self.registerNotificationsActions()
@@ -267,7 +267,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             options: [.customDismissAction]
         )
 
-        UNUserNotificationCenter.current().setNotificationCategories([category])
+        ServiceLocator.shared.notificationCenter.setNotificationCategories([category])
     }
 
     func userNotificationCenter(
