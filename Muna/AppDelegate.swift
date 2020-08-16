@@ -60,6 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         self.setupStatusBarItem()
         self.setupShortcuts()
         self.logAnalytics()
+        self.scheduleMissingNotifications()
 
         NotificationCenter.default.addObserver(
             self,
@@ -83,6 +84,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+    }
+
+    func scheduleMissingNotifications() {
+        for item in ServiceLocator.shared.itemsDatabase.fetchItems(filter: .uncompleted) {
+            if let date = item.dueDate, date.isInPast {
+                self.pingNotificationSetup(itemId: item.id, onlyIfMissing: true)
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -262,7 +271,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             appAssertionFailure("No item id")
             return
         }
-        self.pingNotificationSetup(itemId: itemId)
+        self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
     }
 
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
@@ -274,14 +283,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         print(notification.activationType.rawValue)
         switch notification.activationType {
         case .contentsClicked:
-            self.pingNotificationSetup(itemId: itemId)
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
             } else {
                 appAssertionFailure("No item by id")
             }
         case .actionButtonClicked:
-            self.pingNotificationSetup(itemId: itemId)
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.toggleWindow(.remindLater(item: item))
             } else {
@@ -292,7 +301,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
     }
 
-    func pingNotificationSetup(itemId: String) {
+    func pingNotificationSetup(itemId: String, onlyIfMissing: Bool) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
             let dueDate = item.dueDate {
             let sinceReminder = Date().timeIntervalSince(dueDate)
@@ -307,13 +316,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
             switch value {
             case .fiveMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5, onlyIfMissing: onlyIfMissing)
             case .tenMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10, onlyIfMissing: onlyIfMissing)
             case .halfAnHour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30, onlyIfMissing: onlyIfMissing)
             case .hour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60, onlyIfMissing: onlyIfMissing)
             case .disabled:
                 break
             }

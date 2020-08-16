@@ -11,17 +11,17 @@ import SwiftDate
 
 protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
-    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval)
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool)
 
     func removeNotification(item: ItemModelProtocol)
 }
 
 class NotificationsService: NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol) {
-        self.sheduleNotification(item: item, offset: 0)
+        self.sheduleNotification(item: item, offset: 0, onlyIfMissing: false)
     }
 
-    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval) {
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool) {
         guard let dueDate = item.dueDate else {
             return
         }
@@ -31,7 +31,14 @@ class NotificationsService: NotificationsServiceProtocol {
             return
         }
 
-        let newDueDate = Date(timeIntervalSinceNow: timeInterval)
+        if onlyIfMissing {
+            if NSUserNotificationCenter.default.scheduledNotifications.contains(where: { $0.identifier == item.notificationId }) {
+                print("Not missing")
+                return
+            }
+        }
+
+        let newDueDate = Date().addingTimeInterval(15) // Date(timeIntervalSinceNow: timeInterval)
 
         let notification = NSUserNotification()
         notification.title = "Muna"
