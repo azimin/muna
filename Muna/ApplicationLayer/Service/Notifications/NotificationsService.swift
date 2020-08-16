@@ -31,7 +31,7 @@ class NotificationsService: NotificationsServiceProtocol {
             return
         }
 
-        let newDueDate = Date().addingTimeInterval(10) // Date(timeIntervalSinceNow: timeInterval)
+        let newDueDate = Date(timeIntervalSinceNow: timeInterval)
 
         let notification = NSUserNotification()
         notification.title = "Muna"

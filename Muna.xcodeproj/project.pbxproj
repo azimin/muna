@@ -1887,7 +1887,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
