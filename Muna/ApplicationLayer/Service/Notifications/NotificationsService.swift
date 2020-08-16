@@ -8,69 +8,63 @@
 
 import Foundation
 import SwiftDate
-import UserNotifications
 
 protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
-    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval)
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool)
 
     func removeNotification(item: ItemModelProtocol)
 }
 
 class NotificationsService: NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol) {
-        self.sheduleNotification(item: item, offset: 0)
+        self.sheduleNotification(item: item, offset: 0, onlyIfMissing: false)
     }
 
-    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval) {
+    func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool) {
         guard let dueDate = item.dueDate else {
             return
         }
 
-        let timeInterval = dueDate.timeIntervalSince(Date()) + offset
+        let timeInterval = dueDate.timeIntervalSinceNow + offset
         guard timeInterval > 0 else {
             return
         }
 
-        let notificationContent = UNMutableNotificationContent()
+        if onlyIfMissing {
+            if NSUserNotificationCenter.default.scheduledNotifications.contains(where: { $0.identifier == item.notificationId }) {
+                print("Not missing")
+                return
+            }
+        }
+
+        let newDueDate = Date().addingTimeInterval(15) // Date(timeIntervalSinceNow: timeInterval)
+
+        let notification = NSUserNotification()
+        notification.title = "Muna"
+        notification.subtitle = "Time to check pending items"
 
         if let comment = item.comment, comment.isEmpty == false {
-            notificationContent.subtitle = "Time to check pending items"
-            notificationContent.body = comment
-        } else {
-            notificationContent.body = "Time to check pending items"
+            notification.informativeText = comment
         }
-        notificationContent.categoryIdentifier = "item"
-        notificationContent.userInfo = ["item_id": item.id]
-        notificationContent.sound = .default
+        notification.identifier = item.notificationId
+        notification.userInfo = ["item_id": item.id]
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.deliveryDate = newDueDate
+        notification.hasActionButton = true
+        notification.actionButtonTitle = "Preview"
 
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: timeInterval,
-            repeats: false
-        )
-
-        let request = UNNotificationRequest(
-            identifier: item.notificationId,
-            content: notificationContent,
-            trigger: trigger
-        )
-
-        AppDelegate.notificationCenter.add(request, withCompletionHandler: { error in
-            if let error = error {
-                print("Error: \(error)")
-            } else {
-                print("Notification will trigger at: \(timeInterval)")
-            }
-        })
+        NSUserNotificationCenter.default.scheduleNotification(notification)
+        print(NSUserNotificationCenter.default.scheduledNotifications)
     }
 
     func removeNotification(item: ItemModelProtocol) {
-        AppDelegate.notificationCenter.removePendingNotificationRequests(
-            withIdentifiers: [item.notificationId]
-        )
+        for item in NSUserNotificationCenter.default.deliveredNotifications.filter({ $0.identifier == item.notificationId }) {
+            NSUserNotificationCenter.default.removeDeliveredNotification(item)
+        }
 
-        AppDelegate.notificationCenter.removeDeliveredNotifications(
-            withIdentifiers: [item.notificationId]
-        )
+        for item in NSUserNotificationCenter.default.scheduledNotifications.filter({ $0.identifier == item.notificationId }) {
+            NSUserNotificationCenter.default.removeScheduledNotification(item)
+        }
     }
 }

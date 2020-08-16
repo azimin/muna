@@ -11,12 +11,9 @@ import LaunchAtLogin
 import MASShortcut
 import SwiftDate
 import SwiftyChrono
-import UserNotifications
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
-    static let notificationCenter = UNUserNotificationCenter.current()
-
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -45,23 +42,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             assertionHandler: AssertionHandler(assertionErrorHandler: self)
         )
 
-        AppDelegate.notificationCenter.delegate = self
-        AppDelegate.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
-            if granted {
-                print("Approval granted to send notifications")
-                self.registerNotificationsActions()
-            } else if let error = error {
-                print(error)
-            }
-        }
+//        AppDelegate.notificationCenter.delegate = self
+//        AppDelegate.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
+//            if granted {
+//                print("Approval granted to send notifications")
+//                self.registerNotificationsActions()
+//            } else if let error = error {
+//                print(error)
+//            }
+//        }
+
+        NSUserNotificationCenter.default.delegate = self
 
         TimeParserTests.test()
 
-        self.registerNotificationsActions()
         self.setupUserDefaults()
         self.setupStatusBarItem()
         self.setupShortcuts()
         self.logAnalytics()
+        self.scheduleMissingNotifications()
 
         NotificationCenter.default.addObserver(
             self,
@@ -85,6 +84,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+    }
+
+    func scheduleMissingNotifications() {
+        for item in ServiceLocator.shared.itemsDatabase.fetchItems(filter: .uncompleted) {
+            if let date = item.dueDate, date.isInPast {
+                self.pingNotificationSetup(itemId: item.id, onlyIfMissing: true)
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -255,84 +262,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     // MARK: - User Notifications
 
-    func registerNotificationsActions() {
-        let laterAction = UNNotificationAction(
-            identifier: NotificationAction.later.rawValue,
-            title: "Later",
-            options: .foreground
-        )
-
-        let category = UNNotificationCategory(
-            identifier: "item",
-            actions: [laterAction],
-            intentIdentifiers: [],
-            options: [.customDismissAction]
-        )
-
-        AppDelegate.notificationCenter.setNotificationCategories([category])
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+        return true
     }
 
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        completionHandler([.alert, .sound, .badge])
-    }
-
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse,
-        withCompletionHandler completionHandler: @escaping () -> Void
-    ) {
-        let action: NotificationAction
-        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            action = .basicTap
-        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-            action = .dismiss
-        } else {
-            guard let type = NotificationAction(rawValue: response.actionIdentifier) else {
-                completionHandler()
-                return
-            }
-            action = type
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
+        guard let itemId = notification.userInfo?["item_id"] as? String else {
+            appAssertionFailure("No item id")
+            return
         }
+        self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
+    }
 
-        guard let itemId = response.notification.request.content.userInfo["item_id"] as? String else {
-            completionHandler()
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+        guard let itemId = notification.userInfo?["item_id"] as? String else {
+            appAssertionFailure("No item id")
             return
         }
 
-        switch action {
-        case .basicTap:
-            self.pingNotificationSetup(itemId: itemId)
+        print(notification.activationType.rawValue)
+        switch notification.activationType {
+        case .contentsClicked:
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
             } else {
                 appAssertionFailure("No item by id")
             }
-        case .complete:
-            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-                item.isComplited = true
-                ServiceLocator.shared.itemsDatabase.saveItems()
-            } else {
-                appAssertionFailure("No item by id")
-            }
-        case .later:
-            self.pingNotificationSetup(itemId: itemId)
+        case .actionButtonClicked:
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
             if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
                 self.windowManager.toggleWindow(.remindLater(item: item))
             } else {
                 appAssertionFailure("No item by id")
             }
-        case .dismiss:
-            self.pingNotificationSetup(itemId: itemId)
+        default:
+            break
         }
-
-        completionHandler()
     }
 
-    func pingNotificationSetup(itemId: String) {
+    func pingNotificationSetup(itemId: String, onlyIfMissing: Bool) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
             let dueDate = item.dueDate {
             let sinceReminder = Date().timeIntervalSince(dueDate)
@@ -347,13 +316,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
             switch value {
             case .fiveMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5, onlyIfMissing: onlyIfMissing)
             case .tenMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10, onlyIfMissing: onlyIfMissing)
             case .halfAnHour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30, onlyIfMissing: onlyIfMissing)
             case .hour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60, onlyIfMissing: onlyIfMissing)
             case .disabled:
                 break
             }
