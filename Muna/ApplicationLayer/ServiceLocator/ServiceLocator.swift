@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UserNotifications
 
 class ServiceLocator {
     static var shared: ServiceLocator!

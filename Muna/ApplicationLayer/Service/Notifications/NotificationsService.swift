@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftDate
-import UserNotifications
 
 protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
@@ -27,50 +26,36 @@ class NotificationsService: NotificationsServiceProtocol {
             return
         }
 
-        let timeInterval = dueDate.timeIntervalSince(Date()) + offset
+        let timeInterval = dueDate.timeIntervalSinceNow + offset
         guard timeInterval > 0 else {
             return
         }
 
-        let notificationContent = UNMutableNotificationContent()
+        let newDueDate = Date(timeIntervalSinceNow: timeInterval)
+
+        let notification = NSUserNotification()
 
         if let comment = item.comment, comment.isEmpty == false {
-            notificationContent.subtitle = "Time to check pending items"
-            notificationContent.body = comment
+            notification.subtitle = "Time to check pending items"
+            notification.informativeText = comment
         } else {
-            notificationContent.body = "Time to check pending items"
+            notification.subtitle = "Time to check pending items"
         }
-        notificationContent.categoryIdentifier = "item"
-        notificationContent.userInfo = ["item_id": item.id]
-        notificationContent.sound = .default
+        notification.identifier = item.notificationId
+        notification.userInfo = ["item_id": item.id]
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.deliveryDate = newDueDate
 
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: timeInterval,
-            repeats: false
-        )
-
-        let request = UNNotificationRequest(
-            identifier: item.notificationId,
-            content: notificationContent,
-            trigger: trigger
-        )
-
-        AppDelegate.notificationCenter.add(request, withCompletionHandler: { error in
-            if let error = error {
-                print("Error: \(error)")
-            } else {
-                print("Notification will trigger at: \(timeInterval)")
-            }
-        })
+        NSUserNotificationCenter.default.scheduleNotification(notification)
     }
 
     func removeNotification(item: ItemModelProtocol) {
-        AppDelegate.notificationCenter.removePendingNotificationRequests(
-            withIdentifiers: [item.notificationId]
-        )
+        for item in NSUserNotificationCenter.default.deliveredNotifications.filter({ $0.identifier == item.notificationId }) {
+            NSUserNotificationCenter.default.removeDeliveredNotification(item)
+        }
 
-        AppDelegate.notificationCenter.removeDeliveredNotifications(
-            withIdentifiers: [item.notificationId]
-        )
+        for item in NSUserNotificationCenter.default.scheduledNotifications.filter({ $0.identifier == item.notificationId }) {
+            NSUserNotificationCenter.default.removeScheduledNotification(item)
+        }
     }
 }

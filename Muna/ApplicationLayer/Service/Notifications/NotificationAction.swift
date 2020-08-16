@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UserNotifications
 
 enum NotificationAction: String {
     case complete
