@@ -31,22 +31,24 @@ class NotificationsService: NotificationsServiceProtocol {
             return
         }
 
-        let newDueDate = Date(timeIntervalSinceNow: timeInterval)
+        let newDueDate = Date().addingTimeInterval(10) // Date(timeIntervalSinceNow: timeInterval)
 
         let notification = NSUserNotification()
+        notification.title = "Muna"
+        notification.subtitle = "Time to check pending items"
 
         if let comment = item.comment, comment.isEmpty == false {
-            notification.subtitle = "Time to check pending items"
             notification.informativeText = comment
-        } else {
-            notification.subtitle = "Time to check pending items"
         }
         notification.identifier = item.notificationId
         notification.userInfo = ["item_id": item.id]
         notification.soundName = NSUserNotificationDefaultSoundName
         notification.deliveryDate = newDueDate
+        notification.hasActionButton = true
+        notification.actionButtonTitle = "Preview"
 
         NSUserNotificationCenter.default.scheduleNotification(notification)
+        print(NSUserNotificationCenter.default.scheduledNotifications)
     }
 
     func removeNotification(item: ItemModelProtocol) {

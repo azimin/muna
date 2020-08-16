@@ -257,12 +257,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         return true
     }
 
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
+        guard let itemId = notification.userInfo?["item_id"] as? String else {
+            appAssertionFailure("No item id")
+            return
+        }
+        self.pingNotificationSetup(itemId: itemId)
+    }
+
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
         guard let itemId = notification.userInfo?["item_id"] as? String else {
             appAssertionFailure("No item id")
             return
         }
 
+        print(notification.activationType.rawValue)
         switch notification.activationType {
         case .contentsClicked:
             self.pingNotificationSetup(itemId: itemId)
@@ -271,62 +280,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             } else {
                 appAssertionFailure("No item by id")
             }
+        case .actionButtonClicked:
+            self.pingNotificationSetup(itemId: itemId)
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                self.windowManager.toggleWindow(.remindLater(item: item))
+            } else {
+                appAssertionFailure("No item by id")
+            }
         default:
             break
         }
     }
-
-//    func userNotificationCenter(
-//        _ center: UNUserNotificationCenter,
-//        didReceive response: UNNotificationResponse,
-//        withCompletionHandler completionHandler: @escaping () -> Void
-//    ) {
-//        let action: NotificationAction
-//        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-//            action = .basicTap
-//        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-//            action = .dismiss
-//        } else {
-//            guard let type = NotificationAction(rawValue: response.actionIdentifier) else {
-//                completionHandler()
-//                return
-//            }
-//            action = type
-//        }
-//
-//        guard let itemId = response.notification.request.content.userInfo["item_id"] as? String else {
-//            completionHandler()
-//            return
-//        }
-//
-//        switch action {
-//        case .basicTap:
-//            self.pingNotificationSetup(itemId: itemId)
-//            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-//                self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
-//            } else {
-//                appAssertionFailure("No item by id")
-//            }
-//        case .complete:
-//            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-//                item.isComplited = true
-//                ServiceLocator.shared.itemsDatabase.saveItems()
-//            } else {
-//                appAssertionFailure("No item by id")
-//            }
-//        case .later:
-//            self.pingNotificationSetup(itemId: itemId)
-//            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
-//                self.windowManager.toggleWindow(.remindLater(item: item))
-//            } else {
-//                appAssertionFailure("No item by id")
-//            }
-//        case .dismiss:
-//            self.pingNotificationSetup(itemId: itemId)
-//        }
-//
-//        completionHandler()
-//    }
 
     func pingNotificationSetup(itemId: String) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
