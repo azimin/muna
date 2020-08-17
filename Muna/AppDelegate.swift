@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
         Preferences.setup()
 
-        if Preferences.isNeededToShowOnboarding {
+        if Preferences.isNeededToShowOnboarding || ServiceLocator.shared.betaKey.isEntered == false {
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
         }
 
