@@ -20,7 +20,7 @@ final class PermissionsService: PermissionsServiceProtocol {
         return windows.allSatisfy { window in
             let windowName = window[kCGWindowName as String] as? String
             let isSharingEnabled = window[kCGWindowSharingState as String] as? Int
-            return windowName != nil || isSharingEnabled == 1
+            return windowName != nil || isSharingEnabled == 1 || isSharingEnabled == 2
         }
     }
 
