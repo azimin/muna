@@ -46,12 +46,6 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         self.view = OnboardingView()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        Preferences.isNeededToShowOnboarding = false
-    }
-
     var isFirstAppear = true
 
     override func viewDidAppear() {

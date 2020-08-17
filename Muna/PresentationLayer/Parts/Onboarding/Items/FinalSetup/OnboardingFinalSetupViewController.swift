@@ -41,6 +41,7 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     }
 
     @objc func buttonAction(sender: NSButton) {
+        Preferences.isNeededToShowOnboarding = false
         ServiceLocator.shared.windowManager.toggleWindow(.onboarding)
     }
 }
