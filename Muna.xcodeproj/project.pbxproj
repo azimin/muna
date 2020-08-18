@@ -2015,7 +2015,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna.Debug;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Muna Test";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

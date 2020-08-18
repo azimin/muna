@@ -66,7 +66,7 @@ class SettingsItemView: NSView {
         self.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
 
         if needToShake {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.startupSettingItem.shake()
             }
         }
