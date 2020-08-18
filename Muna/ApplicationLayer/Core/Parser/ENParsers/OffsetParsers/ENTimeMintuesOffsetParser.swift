@@ -12,7 +12,7 @@ class ENTimeMintuesOffsetParser: Parser {
     override var pattern: String {
         return "\\b(?:in\\s*)"
             + "(\\d{1,})"
-            + "(\\s*(mins|minutes?))?\\b"
+            + "(\\s*(min|mins|minutes?))?\\b"
     }
 
     private let minutesGroup = 1

@@ -34,33 +34,38 @@ class MunaChrono {
 //        allParsedResults.forEach {
 //            print($0)
 //        }
-        let timeOffset = self.mergeTimeOffsets(allParsedResults)
+        var timeOffset = self.mergeTimeOffsets(allParsedResults)
 
         guard timeOffset.isEmpty else {
+            timeOffset.sort(by: { $0.matchRange.length > $1.matchRange.length })
             return timeOffset
         }
 
-        let dates = self.mergeDates(allParsedResults)
+        var dates = self.mergeDates(allParsedResults)
 
         guard dates.isEmpty else {
+            dates.sort(by: { $0.matchRange.length > $1.matchRange.length })
             return dates
         }
 
-        let weekdays = self.mergeWeekdays(allParsedResults)
+        var weekdays = self.mergeWeekdays(allParsedResults)
 
         guard weekdays.isEmpty else {
+            weekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
             return weekdays
         }
 
-        let customWeekdays = self.mergeCustomDays(allParsedResults)
+        var customWeekdays = self.mergeCustomDays(allParsedResults)
 
         guard customWeekdays.isEmpty else {
+            customWeekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
             return customWeekdays
         }
 
-        let numberedDates = self.mergeNumberDates(allParsedResults)
+        var numberedDates = self.mergeNumberDates(allParsedResults)
 
         guard numberedDates.isEmpty else {
+            numberedDates.sort(by: { $0.matchRange.length > $1.matchRange.length })
             return numberedDates
         }
 
