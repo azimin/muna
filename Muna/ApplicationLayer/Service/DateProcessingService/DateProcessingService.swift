@@ -52,9 +52,12 @@ class DateProcesingService {
 
             let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
 
-            let pureDay = PureDay(day: day, month: month, year: year)
+            var pureDay = PureDay(day: day, month: month, year: year)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
+                if pureDay.day == result.refDate.day, hour < result.refDate.hour {
+                    pureDay.day += 1
+                }
                 return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
             }
 
@@ -100,6 +103,9 @@ class DateProcesingService {
             pureDay = PureDay(date: newDate)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
+                if pureDay.day == result.refDate.day, hour < result.refDate.hour {
+                    pureDay.day += 1
+                }
                 return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
             }
 
@@ -139,10 +145,13 @@ class DateProcesingService {
             return []
         }
 
-        let pureDay = PureDay(day: day, month: month, year: year)
+        var pureDay = PureDay(day: day, month: month, year: year)
 
         if let hour = result.reservedComponents[.hour], let minute = result.reservedComponents[.minute] {
             let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            if pureDay.day == result.refDate.day, hour < result.refDate.hour {
+                pureDay.day += 1
+            }
             return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
         }
 
@@ -202,6 +211,13 @@ class DateProcesingService {
             let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
             return pureDays
                 .flatMap { $0 }
+                .map {
+                    if $0.day == parsedResult.refDate.day, hour < parsedResult.refDate.hour {
+                        return PureDay(day: $0.day + 1, month: $0.month, year: $0.year)
+                    } else {
+                        return $0
+                    }
+                }
                 .map { DateItem(day: $0, timeType: .specificTime(timeOfDay: timeOfDay), offset: parsedResult.dateOffset) }
         }
 
