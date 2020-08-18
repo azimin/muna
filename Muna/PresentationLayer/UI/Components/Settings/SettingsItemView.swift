@@ -38,7 +38,7 @@ class SettingsItemView: NSView {
     let notificationsSettingItem: SliderSettingsItem
     let storageSettingItem: SliderSettingsItem
 
-    init(isNeededShowTitle: Bool, style: Style) {
+    init(isNeededShowTitle: Bool, style: Style, needToShake: Bool) {
         self.startupSettingItem = SwitcherSettingsItem(style: style)
         self.notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4, style: style)
         self.storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3, style: style)
@@ -64,6 +64,12 @@ class SettingsItemView: NSView {
 
         self.storageSettingItem.slider.target = self
         self.storageSettingItem.slider.action = #selector(self.storagePeriodSliderChanged)
+
+        if needToShake {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.startupSettingItem.shake()
+            }
+        }
     }
 
     required init?(coder: NSCoder) {

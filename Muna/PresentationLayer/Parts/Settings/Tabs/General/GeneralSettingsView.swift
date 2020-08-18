@@ -11,7 +11,7 @@ import LaunchAtLogin
 
 class GeneralSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
-    let settingsItemView = SettingsItemView(isNeededShowTitle: false, style: .small)
+    let settingsItemView = SettingsItemView(isNeededShowTitle: false, style: .small, needToShake: false)
 
     init() {
         super.init(frame: .zero)

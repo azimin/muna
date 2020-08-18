@@ -103,6 +103,7 @@
 		9F581E482494EDC000A34379 /* OnboardingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */; };
 		9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */; };
 		9F581E4D249501A100A34379 /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E4C249501A100A34379 /* OnboardingButton.swift */; };
+		9F68FD0E24EC87BA00DF927E /* NSView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */; };
 		9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693226247ABE4100FEBC0B /* DateParserView.swift */; };
 		9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */; };
 		9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */; };
@@ -299,6 +300,7 @@
 		9F581E472494EDC000A34379 /* OnboardingStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViewController.swift; sourceTree = "<group>"; };
 		9F581E492494EDCA00A34379 /* OnboardingFinalSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupViewController.swift; sourceTree = "<group>"; };
 		9F581E4C249501A100A34379 /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
+		9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Animation.swift"; sourceTree = "<group>"; };
 		9F693226247ABE4100FEBC0B /* DateParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserView.swift; sourceTree = "<group>"; };
 		9F693228247AC59100FEBC0B /* DateParserView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateParserView+Shortcuts.swift"; sourceTree = "<group>"; };
 		9F69322A247AC5D300FEBC0B /* ViewShortcutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShortcutProtocol.swift; sourceTree = "<group>"; };
@@ -1072,6 +1074,7 @@
 				9F025C0B24633C8500F05D81 /* CGRect+Extensions.swift */,
 				9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */,
 				9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */,
+				9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1595,6 +1598,7 @@
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */,
+				9F68FD0E24EC87BA00DF927E /* NSView+Animation.swift in Sources */,
 				9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */,
 				9FA07F5524608CC400654D36 /* Preferences.swift in Sources */,
 				233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */,
@@ -1997,7 +2001,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = G6LW789JHQ;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
