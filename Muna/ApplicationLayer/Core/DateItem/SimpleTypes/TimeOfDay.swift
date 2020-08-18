@@ -9,7 +9,7 @@
 import Foundation
 import SwiftDate
 
-struct TimeOfDay: Equatable {
+struct TimeOfDay: Equatable, Comparable {
     var hours: Int
     var minutes: Int
     var seconds: Int
@@ -43,5 +43,21 @@ struct TimeOfDay: Equatable {
 
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.hours == rhs.hours && lhs.minutes == rhs.minutes && lhs.seconds == rhs.seconds
+    }
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.hours < rhs.hours && lhs.minutes < rhs.minutes && lhs.seconds < rhs.seconds
+    }
+
+    static func > (lhs: Self, rhs: Self) -> Bool {
+        return lhs.hours > rhs.hours && lhs.minutes > rhs.minutes && lhs.seconds > rhs.seconds
+    }
+
+    static func <= (lhs: Self, rhs: Self) -> Bool {
+        return lhs.hours <= rhs.hours && lhs.minutes <= rhs.minutes && lhs.seconds <= rhs.seconds
+    }
+
+    static func >= (lhs: Self, rhs: Self) -> Bool {
+        return lhs.hours >= rhs.hours && lhs.minutes >= rhs.minutes && lhs.seconds >= rhs.seconds
     }
 }

@@ -50,15 +50,29 @@ class DateProcesingService {
             let hour = result.reservedComponents[.hour] ?? 0
             let minute = result.reservedComponents[.minute] ?? 0
 
-            let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            var timeOfDay = TimeOfDay(hours: hour, minutes: minute)
 
             var pureDay = PureDay(day: day, month: month, year: year)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
+                var dateItems = [DateItem]()
                 if pureDay.day == result.refDate.day, hour < result.refDate.hour {
-                    pureDay.day += 1
+                    if hour < result.refDate.hour, hour < 12 {
+                        timeOfDay.hours += 12
+                        dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                        timeOfDay.hours -= 12
+                    }
+
+                    if hour < result.refDate.hour {
+                        pureDay.day += 1
+                        dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                        pureDay.day -= 1
+                    }
+                } else {
+                    dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
                 }
-                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
+
+                return dateItems
             }
 
             guard !result.customPartOfTheDayComponents.isEmpty else {
@@ -96,17 +110,31 @@ class DateProcesingService {
             let hour = result.reservedComponents[.hour] ?? 0
             let minute = result.reservedComponents[.minute] ?? 0
 
-            let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            var timeOfDay = TimeOfDay(hours: hour, minutes: minute)
 
             var pureDay = PureDay(day: day, month: month, year: year)
             let newDate = timeOfDay.apply(to: pureDay) + (numberOfElement * 7).days
             pureDay = PureDay(date: newDate)
 
             if result.reservedComponents[.hour] != nil, result.reservedComponents[.minute] != nil {
+                var dateItems = [DateItem]()
                 if pureDay.day == result.refDate.day, hour < result.refDate.hour {
-                    pureDay.day += 1
+                    if hour < result.refDate.hour, hour < 12 {
+                        timeOfDay.hours += 12
+                        dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                        timeOfDay.hours -= 12
+                    }
+
+                    if hour < result.refDate.hour {
+                        pureDay.day += 1
+                        dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                        pureDay.day -= 1
+                    }
+                } else {
+                    dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
                 }
-                return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
+
+                return dateItems
             }
 
             guard !result.customPartOfTheDayComponents.isEmpty else {
@@ -148,11 +176,25 @@ class DateProcesingService {
         var pureDay = PureDay(day: day, month: month, year: year)
 
         if let hour = result.reservedComponents[.hour], let minute = result.reservedComponents[.minute] {
-            let timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            var timeOfDay = TimeOfDay(hours: hour, minutes: minute)
+            var dateItems = [DateItem]()
             if pureDay.day == result.refDate.day, hour < result.refDate.hour {
-                pureDay.day += 1
+                if hour < result.refDate.hour, hour < 12 {
+                    timeOfDay.hours += 12
+                    dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                    timeOfDay.hours -= 12
+                }
+
+                if hour < result.refDate.hour {
+                    pureDay.day += 1
+                    dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
+                    pureDay.day -= 1
+                }
+            } else {
+                dateItems.append(DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset))
             }
-            return [DateItem(day: pureDay, timeType: .specificTime(timeOfDay: timeOfDay), offset: result.dateOffset)]
+
+            return dateItems
         }
 
         guard !result.customPartOfTheDayComponents.isEmpty else {
