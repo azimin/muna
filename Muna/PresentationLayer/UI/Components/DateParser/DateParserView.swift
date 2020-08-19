@@ -149,19 +149,36 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
     private var shouldRunCompletion = false
 
     func remindersOptionsControllerSelectItemShouldExitEditState(_ controller: RemindersOptionsController, index: Int) -> Bool {
+        let option = self.options[index]
+
         switch controller.item(by: index)?.value {
         case .none, .date:
             break
         case .noItem:
             return false
         case .canNotFind:
-            let alert = NSAlert()
-            alert.messageText = "Reported"
-            alert.runModal()
+            let suggestion: String
+            switch controller.item(by: 0)?.value {
+            case .none, .noItem, .canNotFind:
+                suggestion = ""
+            case let .date(date):
+                suggestion = date?.toFormat("dd MMM yyyy HH:mm") ?? ""
+            }
+
+            ServiceLocator.shared.analytics.logEvent(
+                name: "Report missing time",
+                properties: [
+                    "text": self.controller.text,
+                    "date": Date().toFormat("dd MMM yyyy HH:mm"),
+                    "suggest": suggestion,
+                ]
+            )
+
+            option.mainLabel.text = "Reported"
+            option.infoLabel.text = ""
             return false
         }
 
-        let option = self.options[index]
         option.update(style: .basic, animated: true)
 
         self.shouldRunCompletion = true

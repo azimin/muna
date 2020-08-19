@@ -133,7 +133,7 @@ class RemindersOptionsController {
 
         let shouldExitEditState = self.delegate?.remindersOptionsControllerSelectItemShouldExitEditState(
             self,
-            index: self.selectedIndex
+            index: index
         ) ?? false
 
         if shouldExitEditState {
