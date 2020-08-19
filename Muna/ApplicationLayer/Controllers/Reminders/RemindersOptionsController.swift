@@ -145,19 +145,19 @@ private extension RemindersOptionsController {
     static func predefineSuggestions(date: Date) -> [ReminderItem] {
         var values = [
             ReminderItem(
-                date: date + 5.minutes,
+                value: .date(date: date + 5.minutes),
                 title: "In 5 mins",
                 subtitle: "",
                 additionalText: ""
             ),
             ReminderItem(
-                date: date + 30.minutes,
+                value: .date(date: date + 30.minutes),
                 title: "In 30 mins",
                 subtitle: "",
                 additionalText: ""
             ),
             ReminderItem(
-                date: date + 1.hours,
+                value: .date(date: date + 1.hours),
                 title: "In 1 hour",
                 subtitle: "",
                 additionalText: ""
@@ -168,7 +168,7 @@ private extension RemindersOptionsController {
             date < eveningDate {
             values.append(
                 ReminderItem(
-                    date: eveningDate,
+                    value: .date(date: eveningDate),
                     title: "In the evening",
                     subtitle: "",
                     additionalText: eveningDate.timeSmartString(showMinutes: false)
@@ -187,7 +187,7 @@ private extension RemindersOptionsController {
 
             values.append(
                 ReminderItem(
-                    date: tomorrowDate,
+                    value: .date(date: tomorrowDate),
                     title: "Tomorrow (\(day) \(month))",
                     subtitle: "",
                     additionalText: representable.timeSmartString(showMinutes: false)
@@ -208,7 +208,7 @@ private extension RemindersOptionsController {
             let title = DateParserFormatter(date: weekendsDate).weekdayDayMonth
             values.append(
                 ReminderItem(
-                    date: weekendsDate,
+                    value: .date(date: weekendsDate),
                     title: title,
                     subtitle: "",
                     additionalText: representable.timeSmartString(showMinutes: false)

@@ -96,7 +96,7 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
         if items.count == 0 {
             self.mainOption?.update(style: .basic, animated: animated)
             self.mainOption?.update(item: .init(
-                date: nil,
+                value: .noItem,
                 title: "No reminder",
                 subtitle: "",
                 additionalText: ""

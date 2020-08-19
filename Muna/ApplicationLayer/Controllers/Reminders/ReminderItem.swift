@@ -9,7 +9,13 @@
 import Foundation
 
 class ReminderItem {
-    let date: Date?
+    enum Value {
+        case canNotFind
+        case noItem
+        case date(date: Date?)
+    }
+
+    let value: Value
 
     // left side
     let title: String
@@ -18,8 +24,8 @@ class ReminderItem {
     // right side
     let additionalText: String
 
-    init(date: Date?, title: String, subtitle: String, additionalText: String) {
-        self.date = date
+    init(value: Value, title: String, subtitle: String, additionalText: String) {
+        self.value = value
         self.title = title
         self.subtitle = subtitle
         self.additionalText = additionalText
@@ -65,7 +71,7 @@ class ReminderItem {
         }
 
         self.init(
-            date: transformedDate.date,
+            value: .date(date: transformedDate.date),
             title: formatter.monthDateWeekday,
             subtitle: formatter.subtitle,
             additionalText: additionalText

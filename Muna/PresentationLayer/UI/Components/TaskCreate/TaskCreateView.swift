@@ -182,9 +182,14 @@ class TaskCreateView: PopupView {
                 return
             }
 
-            if let date = item.date {
-                itemToSave.dueDateString = self.reminderTextField.textField.stringValue
-                itemToSave.date = date
+            switch item.value {
+            case .canNotFind, .noItem:
+                break
+            case let .date(date):
+                if let date = date {
+                    itemToSave.dueDateString = self.reminderTextField.textField.stringValue
+                    itemToSave.date = date
+                }
             }
         }
 
