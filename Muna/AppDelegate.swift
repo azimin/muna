@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
         NSUserNotificationCenter.default.delegate = self
 
-        TimeParserTests.test()
+//        TimeParserTests.test()
 
         self.setupUserDefaults()
         self.setupStatusBarItem()
@@ -186,7 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         statusBarMenu.addItem(makeSelectedAreaScreenshot)
 
         let item = NSMenuItem(
-            title: "Show items",
+            title: "Show Items",
             action: #selector(self.togglePane),
             keyEquivalent: "w"
         )
@@ -200,6 +200,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         statusBarMenu.addItem(
             withTitle: "About Muna",
             action: #selector(self.togglePane),
+            keyEquivalent: ""
+        )
+
+        statusBarMenu.addItem(
+            withTitle: "Show Tutorial",
+            action: #selector(self.showOnboarding),
             keyEquivalent: ""
         )
 
@@ -238,6 +244,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
     @objc func togglePane() {
         self.windowManager.toggleWindow(.panel(selectedItem: nil))
+    }
+
+    @objc func showOnboarding() {
+        self.windowManager.activateWindowIfNeeded(.onboarding)
     }
 
     @objc func toggleScreenshotState() {

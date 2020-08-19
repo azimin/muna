@@ -79,6 +79,7 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
             make.centerX.equalToSuperview()
             make.width.equalTo(180)
         }
+        self.betaCode.isHidden = ServiceLocator.shared.betaKey.isEntered
 
         self.continueButton.target = self
         self.continueButton.action = #selector(self.buttonAction(sender:))
@@ -86,7 +87,9 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
 
     @objc func buttonAction(sender: NSButton) {
         let betaKey = self.betaCode.textField.stringValue
-        if ServiceLocator.shared.betaKey.validate(key: betaKey) {
+        if ServiceLocator.shared.betaKey.isEntered {
+            self.onNext?()
+        } else if ServiceLocator.shared.betaKey.validate(key: betaKey) {
             ServiceLocator.shared.betaKey.key = betaKey
             self.onNext?()
         } else {
