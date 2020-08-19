@@ -53,6 +53,7 @@ class DateParserItemView: NSControl {
     var contentViewConstraint: Constraint?
 
     private var style: Style = .basic
+    private var item: ReminderItem?
 
     let selectionView = View()
     let contentView = View()
@@ -144,6 +145,9 @@ class DateParserItemView: NSControl {
         self.mainLabel.text = item.title
         self.secondLabel.text = item.subtitle
         self.infoLabel.text = item.additionalText
+        self.item = item
+
+        self.updateColors()
     }
 
     func update(style: Style, animated: Bool = false) {
@@ -162,15 +166,33 @@ class DateParserItemView: NSControl {
         self.mainLabel.textColor = NSColor.color(.titleAccent)
         self.infoLabel.textColor = NSColor.color(.titleAccent).withAlphaComponent(0.8)
 
+        let iconName: String
+        let isRed: Bool
+        switch self.item?.value {
+        case .date, .noItem, .none:
+            iconName = "icon_remind"
+            isRed = false
+        case .canNotFind:
+            iconName = "icon_warning"
+            isRed = true
+            self.mainLabel.textColor = NSColor.color(.warning)
+        }
+
         switch self.style {
         case .basic:
-            self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .color(.blueSelected))
+            self.iconImageView.image = NSImage(named: NSImage.Name(iconName))?
+                .tint(color: .color(.blueSelected))
             self.mainLabel.textColor = NSColor.color(.blueSelected)
         case .selected:
-            self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: .color(.titleAccent))
+            self.iconImageView.image = NSImage(named: NSImage.Name(iconName))?
+                .tint(color: .color(isRed ? .warningSelected : .titleAccent))
             self.selectionView.backgroundColor = NSColor.color(.blueSelected)
+            if isRed {
+                self.mainLabel.textColor = NSColor.color(.warningSelected)
+            }
         case .notSelected:
-            self.iconImageView.image = NSImage(named: NSImage.Name("icon_remind"))?.tint(color: NSColor.color(.titleAccent))
+            self.iconImageView.image = NSImage(named: NSImage.Name(iconName))?
+                .tint(color: NSColor.color(isRed ? .warning : .titleAccent))
         }
     }
 

@@ -92,7 +92,7 @@ class TaskChangeTimeView: PopupView {
 
         self.addMonitor()
 
-        self.controller.showItems(items: [], animated: false)
+        self.controller.showItems(text: "", items: [], animated: false)
     }
 
     var downMonitor: Any?
@@ -241,6 +241,10 @@ extension TaskChangeTimeView: TextFieldDelegate {
             ReminderItem(transformedDate: result)
         }
 
-        self.controller.showItems(items: items, animated: true)
+        self.controller.showItems(
+            text: text,
+            items: items,
+            animated: true
+        )
     }
 }

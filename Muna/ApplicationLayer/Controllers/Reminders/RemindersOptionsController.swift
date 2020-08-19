@@ -21,10 +21,10 @@ protocol RemindersOptionsControllerDelegate: AnyObject {
         index: Int
     )
 
-    func remindersOptionsControllerSelectItem(
+    func remindersOptionsControllerSelectItemShouldExitEditState(
         _ controller: RemindersOptionsController,
         index: Int
-    )
+    ) -> Bool
 }
 
 class RemindersOptionsController {
@@ -49,9 +49,11 @@ class RemindersOptionsController {
     }
 
     private var avialbleItems: [ReminderItem] = []
+    private(set) var text: String = ""
 
-    func showItems(items: [ReminderItem], animated: Bool) {
+    func showItems(text: String, items: [ReminderItem], animated: Bool) {
         self.isEditingState = true
+        self.text = text
 
         switch self.behaviour {
         case .emptyState:
@@ -63,6 +65,15 @@ class RemindersOptionsController {
             } else {
                 self.avialbleItems = items
             }
+        }
+
+        if text.count >= 3 {
+            self.avialbleItems.append(
+                .init(value: .canNotFind,
+                      title: "Can't find correct option",
+                      subtitle: "",
+                      additionalText: "Report")
+            )
         }
 
         self.selectedIndex = 0
@@ -120,12 +131,15 @@ class RemindersOptionsController {
             return
         }
 
-        self.selectedIndex = index
-        self.isEditingState = false
-        self.delegate?.remindersOptionsControllerSelectItem(
+        let shouldExitEditState = self.delegate?.remindersOptionsControllerSelectItemShouldExitEditState(
             self,
             index: self.selectedIndex
-        )
+        ) ?? false
+
+        if shouldExitEditState {
+            self.isEditingState = false
+            self.selectedIndex = index
+        }
     }
 
     func selectItemIfNeeded() {
@@ -133,11 +147,14 @@ class RemindersOptionsController {
             return
         }
 
-        self.isEditingState = false
-        self.delegate?.remindersOptionsControllerSelectItem(
+        let shouldExitEditState = self.delegate?.remindersOptionsControllerSelectItemShouldExitEditState(
             self,
             index: self.selectedIndex
-        )
+        ) ?? false
+
+        if shouldExitEditState {
+            self.isEditingState = false
+        }
     }
 }
 

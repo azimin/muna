@@ -148,10 +148,19 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
     private var shouldRunCompletion = false
 
-    func remindersOptionsControllerSelectItem(
-        _ controller: RemindersOptionsController,
-        index: Int
-    ) {
+    func remindersOptionsControllerSelectItemShouldExitEditState(_ controller: RemindersOptionsController, index: Int) -> Bool {
+        switch controller.item(by: index)?.value {
+        case .none, .date:
+            break
+        case .noItem:
+            return false
+        case .canNotFind:
+            let alert = NSAlert()
+            alert.messageText = "Reported"
+            alert.runModal()
+            return false
+        }
+
         let option = self.options[index]
         option.update(style: .basic, animated: true)
 
@@ -179,6 +188,8 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
                 offset += 1
             }
         })
+
+        return true
     }
 }
 

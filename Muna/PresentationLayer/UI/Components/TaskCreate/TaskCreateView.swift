@@ -89,7 +89,7 @@ class TaskCreateView: PopupView {
         self.closeButton.action = #selector(self.handleCloseButton)
         self.shortcutsButton.action = #selector(self.handleShortcutsButton)
 
-        self.controller.showItems(items: [], animated: false)
+        self.controller.showItems(text: "", items: [], animated: false)
     }
 
     var downMonitor: Any?
@@ -219,6 +219,10 @@ extension TaskCreateView: TextFieldDelegate {
             ReminderItem(transformedDate: result)
         }
 
-        self.controller.showItems(items: items, animated: true)
+        self.controller.showItems(
+            text: text,
+            items: items,
+            animated: true
+        )
     }
 }
