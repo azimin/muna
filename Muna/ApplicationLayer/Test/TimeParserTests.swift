@@ -144,6 +144,28 @@ class TimeParserTests {
             )
         )
 
+        // 5 mins
+        value = DateProcesingService().getDate(from: "5 mins", date: date)
+        assert(value.count == 1, "Should be 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 21, month: 5, year: 2020),
+            timeType: .specificTime(
+                timeOfDay: .init(hours: 22, minutes: 35, seconds: 0)
+            )
+        )
+
+        // 5 min
+        value = DateProcesingService().getDate(from: "5 min", date: date)
+        assert(value.count == 1, "Should be 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 21, month: 5, year: 2020),
+            timeType: .specificTime(
+                timeOfDay: .init(hours: 22, minutes: 35, seconds: 0)
+            )
+        )
+
         // 20.06
         value = DateProcesingService().getDate(from: "20.06", date: date)
         assert(value.count > 1, "Should be at least 2")
