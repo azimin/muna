@@ -11,9 +11,12 @@ import LaunchAtLogin
 import MASShortcut
 import SwiftDate
 import SwiftyChrono
+import UserNotifications
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate, NSUserNotificationCenterDelegate, AssertionErrorHandlerProtocol {
+    static let notificationCenter = UNUserNotificationCenter.current()
+
     var window: NSWindow!
 
     var statusBarItem: NSStatusItem!
@@ -42,19 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             assertionHandler: AssertionHandler(assertionErrorHandler: self)
         )
 
-//        AppDelegate.notificationCenter.delegate = self
-//        AppDelegate.notificationCenter.requestAuthorization(options: [.sound, .alert, .badge]) { granted, error in
-//            if granted {
-//                print("Approval granted to send notifications")
-//                self.registerNotificationsActions()
-//            } else if let error = error {
-//                print(error)
-//            }
-//        }
-
         NSUserNotificationCenter.default.delegate = self
+        AppDelegate.notificationCenter.delegate = self
+        self.registerNotificationsActions()
 
-//        TimeParserTests.test()
+        //        TimeParserTests.test()
 
         self.setupUserDefaults()
         self.setupStatusBarItem()
@@ -270,7 +265,87 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         self.windowManager.activateWindowIfNeeded(.settings)
     }
 
+    // MARK: - Notifications
+
+    func registerNotificationsActions() {
+        let laterAction = UNNotificationAction(
+            identifier: NotificationAction.later.rawValue,
+            title: "Later",
+            options: .foreground
+        )
+
+        let category = UNNotificationCategory(
+            identifier: "item",
+            actions: [laterAction],
+            intentIdentifiers: [],
+            options: [.customDismissAction]
+        )
+
+        AppDelegate.notificationCenter.setNotificationCategories([category])
+    }
+
     // MARK: - User Notifications
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let action: NotificationAction
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            action = .basicTap
+        } else if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            action = .dismiss
+        } else {
+            guard let type = NotificationAction(rawValue: response.actionIdentifier) else {
+                completionHandler()
+                return
+            }
+            action = type
+        }
+
+        guard let itemId = response.notification.request.content.userInfo["item_id"] as? String else {
+            completionHandler()
+            return
+        }
+
+        switch action {
+        case .basicTap:
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                self.windowManager.activateWindowIfNeeded(.panel(selectedItem: item))
+            } else {
+                appAssertionFailure("No item by id")
+            }
+        case .complete:
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                item.isComplited = true
+                ServiceLocator.shared.itemsDatabase.saveItems()
+            } else {
+                appAssertionFailure("No item by id")
+            }
+        case .later:
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
+            if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId) {
+                self.windowManager.toggleWindow(.remindLater(item: item))
+            } else {
+                appAssertionFailure("No item by id")
+            }
+        case .dismiss:
+            self.pingNotificationSetup(itemId: itemId, onlyIfMissing: false)
+            completionHandler()
+        }
+    }
+
+    // MARK: - Old Notifications
 
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
         return true
