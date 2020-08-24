@@ -124,13 +124,15 @@ class NotificationsService: NotificationsServiceProtocol {
             NSUserNotificationCenter.default.removeScheduledNotification(item)
         }
 
-        AppDelegate.notificationCenter.removePendingNotificationRequests(
-            withIdentifiers: [item.notificationId]
-        )
+        if #available(OSX 10.15, *) {
+            AppDelegate.notificationCenter.removePendingNotificationRequests(
+                withIdentifiers: [item.notificationId]
+            )
 
-        AppDelegate.notificationCenter.removeDeliveredNotifications(
-            withIdentifiers: [item.notificationId]
-        )
+            AppDelegate.notificationCenter.removeDeliveredNotifications(
+                withIdentifiers: [item.notificationId]
+            )
+        }
     }
 
     private func alreadyPending(item: ItemModelProtocol, completion: @escaping (Bool) -> Void) {
