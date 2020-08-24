@@ -46,9 +46,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         NSUserNotificationCenter.default.delegate = self
-        AppDelegate.notificationCenter.delegate = self
-        self.registerNotificationsActions()
-
+        if #available(OSX 10.15, *) {
+            AppDelegate.notificationCenter.delegate = self
+            self.registerNotificationsActions()
+        }
         //        TimeParserTests.test()
 
         self.setupUserDefaults()
@@ -270,7 +271,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     func registerNotificationsActions() {
         let laterAction = UNNotificationAction(
             identifier: NotificationAction.later.rawValue,
-            title: "Later",
+            title: "Preview",
             options: .foreground
         )
 
@@ -385,6 +386,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             break
         }
     }
+
+    // MARK: - Ping
 
     func pingNotificationSetup(itemId: String, onlyIfMissing: Bool) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),

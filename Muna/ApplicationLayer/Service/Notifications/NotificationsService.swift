@@ -27,12 +27,50 @@ class NotificationsService: NotificationsServiceProtocol {
             self.alreadyPending(item: item) { isPending in
                 print("Is pending: \(isPending)")
                 if isPending == false {
-                    self.sheduleNotification(item: item, offset: offset)
+                    if #available(OSX 10.15, *) {
+                        self.sheduleNotification(item: item, offset: offset)
+                    } else {
+                        self.sheduleNotificationOld(item: item, offset: offset)
+                    }
                 }
             }
         } else {
-            self.sheduleNotification(item: item, offset: offset)
+            if #available(OSX 10.15, *) {
+                self.sheduleNotification(item: item, offset: offset)
+            } else {
+                self.sheduleNotificationOld(item: item, offset: offset)
+            }
         }
+    }
+
+    private func sheduleNotificationOld(item: ItemModelProtocol, offset: TimeInterval) {
+        guard let dueDate = item.dueDate else {
+            return
+        }
+
+        let timeInterval: TimeInterval = dueDate.timeIntervalSinceNow + offset
+        guard timeInterval > 0 else {
+            return
+        }
+
+        let newDueDate = Date(timeIntervalSinceNow: timeInterval)
+
+        let notification = NSUserNotification()
+        notification.title = "Muna"
+        notification.subtitle = "Time to check pending items"
+
+        if let comment = item.comment, comment.isEmpty == false {
+            notification.informativeText = comment
+        }
+        notification.identifier = item.notificationId
+        notification.userInfo = ["item_id": item.id]
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.deliveryDate = newDueDate
+        notification.hasActionButton = true
+        notification.actionButtonTitle = "Preview"
+
+        NSUserNotificationCenter.default.scheduleNotification(notification)
+        print(NSUserNotificationCenter.default.scheduledNotifications)
     }
 
     private func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval) {
@@ -96,15 +134,22 @@ class NotificationsService: NotificationsServiceProtocol {
     }
 
     private func alreadyPending(item: ItemModelProtocol, completion: @escaping (Bool) -> Void) {
-        AppDelegate.notificationCenter.getPendingNotificationRequests { request in
-            let contains: Bool = request.contains(where: { $0.identifier == item.notificationId })
-            if contains {
-                completion(contains)
-            } else {
-                AppDelegate.notificationCenter.getDeliveredNotifications { notifications in
-                    completion(notifications.contains(where: { $0.request.identifier == item.notificationId }))
+        if #available(OSX 10.15, *) {
+            AppDelegate.notificationCenter.getPendingNotificationRequests { request in
+                let contains: Bool = request.contains(where: { $0.identifier == item.notificationId })
+                if contains {
+                    completion(contains)
+                } else {
+                    AppDelegate.notificationCenter.getDeliveredNotifications { notifications in
+                        completion(notifications.contains(where: { $0.request.identifier == item.notificationId }))
+                    }
                 }
             }
+        } else {
+            let isPending =
+                NSUserNotificationCenter.default.scheduledNotifications.contains(where: { $0.identifier == item.notificationId }) ||
+                NSUserNotificationCenter.default.deliveredNotifications.contains(where: { $0.identifier == item.notificationId })
+            completion(isPending)
         }
     }
 }
