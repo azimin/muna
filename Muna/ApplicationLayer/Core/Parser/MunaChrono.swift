@@ -36,42 +36,52 @@ class MunaChrono {
 //        }
         var timeOffset = self.mergeTimeOffsets(allParsedResults)
 
-        guard timeOffset.isEmpty else {
-            timeOffset.sort(by: { $0.matchRange.length > $1.matchRange.length })
-            return timeOffset
-        }
+//        guard timeOffset.isEmpty else {
+//            timeOffset.sort(by: { $0.matchRange.length > $1.matchRange.length })
+//            return timeOffset
+//        }
 
-        var dates = self.mergeDates(allParsedResults)
+        timeOffset.append(contentsOf: self.mergeDates(allParsedResults))
 
-        guard dates.isEmpty else {
-            dates.sort(by: { $0.matchRange.length > $1.matchRange.length })
-            return dates
-        }
+//        guard dates.isEmpty else {
+//            dates.sort(by: { $0.matchRange.length > $1.matchRange.length })
+//            return dates
+//        }
 
-        var weekdays = self.mergeWeekdays(allParsedResults)
+        timeOffset.append(contentsOf: self.mergeWeekdays(allParsedResults))
 
-        guard weekdays.isEmpty else {
-            weekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
-            return weekdays
-        }
+//        guard weekdays.isEmpty else {
+//            weekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
+//            return weekdays
+//        }
 
-        var customWeekdays = self.mergeCustomDays(allParsedResults)
+        timeOffset.append(contentsOf: self.mergeCustomDays(allParsedResults))
 
-        guard customWeekdays.isEmpty else {
-            customWeekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
-            return customWeekdays
-        }
+//        guard customWeekdays.isEmpty else {
+//            customWeekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
+//            return customWeekdays
+//        }
 
-        var numberedDates = self.mergeNumberDates(allParsedResults)
+        timeOffset.append(contentsOf: self.mergeNumberDates(allParsedResults))
 
-        guard numberedDates.isEmpty else {
-            numberedDates.sort(by: { $0.matchRange.length > $1.matchRange.length })
-            return numberedDates
-        }
+//        guard numberedDates.isEmpty else {
+//            numberedDates.sort(by: { $0.matchRange.length > $1.matchRange.length })
+//            return numberedDates
+//        }
 
-        let time = self.mergeTime(allParsedResults)
+        timeOffset.append(contentsOf: self.mergeTime(allParsedResults))
 
-        return time
+        var length = 0
+        let dates = timeOffset.sorted(by: {
+            if $0.matchRange.length > $1.matchRange.length {
+                length = $0.matchRange.length
+                return true
+            }
+            return false
+        })
+            .filter { $0.matchRange.length >= length }
+
+        return dates
     }
 
     func mergeTimeOffsets(_ parsedResult: [ParsedResult]) -> [ParsedResult] {
@@ -171,6 +181,7 @@ class MunaChrono {
                     return
                 }
 
+                print("result: \(finalResult)")
                 if newDate.matchRange.intersection(time.matchRange) != nil {
                     if newDate.matchRange.length == time.matchRange.length,
                         newDate.matchRange.lowerBound == time.matchRange.lowerBound,

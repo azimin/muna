@@ -220,6 +220,24 @@ class TimeParserTests {
             day: .init(day: 22, month: 5, year: 2020),
             timeType: .evening
         )
+
+        // tomorrow evening
+        value = DateProcesingService().getDate(from: "tomorrow evening", date: date)
+        assert(value.count == 1, "Should be 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 22, month: 5, year: 2020),
+            timeType: .evening
+        )
+
+        // 20 march
+        value = DateProcesingService().getDate(from: "20 march", date: date)
+        assert(value.count == 1, "Should be 1")
+        self.validate(
+            item: value[0],
+            day: .init(day: 20, month: 3, year: 2020),
+            timeType: .allDay
+        )
     }
 
     static func validate(item: DateItem, day: PureDay, timeType: TimeType) {

@@ -10,7 +10,7 @@ import Foundation
 
 class ENWeekParser: Parser {
     override var pattern: String {
-        return "\\b(?:(in|next|past|this)\\s*)"
+        return "\\b(?:(in|next|past|this)\\s*)?"
             + "(?:(\\d{1,}))?"
             + "(\\s*(week|weeks))\\b"
     }
