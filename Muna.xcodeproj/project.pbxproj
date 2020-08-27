@@ -96,6 +96,9 @@
 		9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */; };
 		9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */; };
 		9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */; };
+		9F4E4F9B24F45BB70069DE9F /* HintsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9A24F45BB70069DE9F /* HintsService.swift */; };
+		9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9C24F45BC00069DE9F /* Hint.swift */; };
+		9F4E4FA024F45E5C0069DE9F /* HintList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9F24F45E5C0069DE9F /* HintList.swift */; };
 		9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
@@ -292,6 +295,9 @@
 		9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelPresentationAnimationView.swift; sourceTree = "<group>"; };
 		9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemView.swift; sourceTree = "<group>"; };
 		9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelItemMetainformationView.swift; sourceTree = "<group>"; };
+		9F4E4F9A24F45BB70069DE9F /* HintsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsService.swift; sourceTree = "<group>"; };
+		9F4E4F9C24F45BC00069DE9F /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
+		9F4E4F9F24F45E5C0069DE9F /* HintList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintList.swift; sourceTree = "<group>"; };
 		9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Analytics.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -589,6 +595,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9F4E4F9924F45BA40069DE9F /* HintsEngine */,
 				9F2D340824D0B95C0049DD43 /* Analytics */,
 				23B6C78024ADAE1C0071ACA8 /* Storage */,
 				9FD95E7D2484114E00ED4F05 /* CloseHandler */,
@@ -871,6 +878,24 @@
 				239DC917245D95E8001FA50C /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9F4E4F9924F45BA40069DE9F /* HintsEngine */ = {
+			isa = PBXGroup;
+			children = (
+				9F4E4F9E24F45E070069DE9F /* List */,
+				9F4E4F9C24F45BC00069DE9F /* Hint.swift */,
+				9F4E4F9A24F45BB70069DE9F /* HintsService.swift */,
+			);
+			path = HintsEngine;
+			sourceTree = "<group>";
+		};
+		9F4E4F9E24F45E070069DE9F /* List */ = {
+			isa = PBXGroup;
+			children = (
+				9F4E4F9F24F45E5C0069DE9F /* HintList.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */ = {
@@ -1604,6 +1629,7 @@
 				233EFAA324718D1D00656CE9 /* ViewHolder.swift in Sources */,
 				23561B432461ED8800097E4A /* ParsedResult.swift in Sources */,
 				9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */,
+				9F4E4FA024F45E5C0069DE9F /* HintList.swift in Sources */,
 				9FA07F692460C16000654D36 /* NSColor+Hex.swift in Sources */,
 				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
@@ -1682,6 +1708,7 @@
 				9FE0F54024707EF70046A5C4 /* NotificationAction.swift in Sources */,
 				232B2FAB2477CC550061801E /* ENDatesPostfixParser.swift in Sources */,
 				9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */,
+				9F4E4F9B24F45BB70069DE9F /* HintsService.swift in Sources */,
 				9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
@@ -1705,6 +1732,7 @@
 				2392996A249AA4090090BDD8 /* MainPanelShortcutsView.swift in Sources */,
 				23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
+				9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,

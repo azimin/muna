@@ -14,6 +14,7 @@ protocol NotificationsServiceProtocol {
     func sheduleNotification(item: ItemModelProtocol)
     func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool)
 
+    func cleanUpNotifications()
     func removeNotification(item: ItemModelProtocol)
 }
 
@@ -71,6 +72,34 @@ class NotificationsService: NotificationsServiceProtocol {
 
         NSUserNotificationCenter.default.scheduleNotification(notification)
         print(NSUserNotificationCenter.default.scheduledNotifications)
+    }
+
+    func cleanUpNotifications() {
+        guard #available(OSX 10.15, *) else {
+            return
+        }
+
+        let items = ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all)
+
+        AppDelegate.notificationCenter.getDeliveredNotifications { notifications in
+            var identifiersToRemove: [String] = []
+            for notification in notifications {
+                let identifier = notification.request.identifier
+                if let item = items.first(where: { $0.notificationId == identifier }) {
+                    if item.isComplited {
+                        identifiersToRemove.append(identifier)
+                    }
+
+                    if let date = item.dueDate, date.isInFuture {
+                        identifiersToRemove.append(identifier)
+                    }
+                } else {
+                    identifiersToRemove.append(identifier)
+                }
+            }
+
+            AppDelegate.notificationCenter.removeDeliveredNotifications(withIdentifiers: identifiersToRemove)
+        }
     }
 
     private func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval) {
