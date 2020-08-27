@@ -80,6 +80,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+
+        ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
+            print(activeApp)
+        }
     }
 
     func scheduleMissingNotifications() {
