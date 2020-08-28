@@ -48,6 +48,7 @@ class ENCustomDayWordsParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.location,
             reservedComponents: [:],
             customDayComponents: [dayComponent],
             customPartOfTheDayComponents: [],

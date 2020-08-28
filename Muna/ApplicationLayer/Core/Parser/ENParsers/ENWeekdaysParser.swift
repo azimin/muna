@@ -57,6 +57,7 @@ class ENWeekdaysParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.location,
             reservedComponents: [.day: day, .month: month, .year: year],
             customDayComponents: [],
             customPartOfTheDayComponents: [],

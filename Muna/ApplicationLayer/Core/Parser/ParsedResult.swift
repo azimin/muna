@@ -99,6 +99,7 @@ struct ParsedResult {
     let refDate: Date
 
     var matchRange: NSRange
+    var length: Int
     var reservedComponents: [ReserverdUnit: Int]
     var customDayComponents: [CustomDayWords]
     var customPartOfTheDayComponents: [CustomDayPartWords]
