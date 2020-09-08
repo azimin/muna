@@ -397,6 +397,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230417EA2507833900AEFF8F /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				23895FBE2507720200322248 /* splash_anim.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		23069400248645D200C41F4F /* DateProcessingService */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,7 +885,6 @@
 		9F4A8CEF245DAC9000EA2E1E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				23895FBE2507720200322248 /* splash_anim.json */,
 				9F3AAE8024E8560E000453C0 /* fridge.icns */,
 				9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */,
 				239DC91F245D95E8001FA50C /* Info.plist */,
@@ -888,6 +895,7 @@
 		9F4A8CF0245DACA800EA2E1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				230417EA2507833900AEFF8F /* Animations */,
 				9FC3F89724DB16B800BC0693 /* Entitlements */,
 				9F581E4E2495115D00A34379 /* OnboardingVideos */,
 				239DC919245D95E8001FA50C /* Preview Content */,
