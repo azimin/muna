@@ -47,6 +47,14 @@ class OnboardingFinalSetupView: NSView {
         itemUDKey: Preferences.defaultShortcutPanelKey
     )
 
+    let habitsTitleLabel = Label(fontStyle: .bold, size: 24)
+        .withTextColorStyle(.titleAccent)
+        .withText("Habits")
+
+    let habitsDescriptionLabel = Label(fontStyle: .medium, size: 16)
+        .withTextColorStyle(.title60Accent)
+        .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
+
     let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
 
     override init(frame frameRect: NSRect) {
@@ -125,9 +133,21 @@ class OnboardingFinalSetupView: NSView {
             make.trailing.equalToSuperview().inset(73)
         }
 
+        self.addSubview(self.habitsTitleLabel)
+        self.habitsTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self.shortuctsTilteLabel)
+            make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(24)
+        }
+
+        self.addSubview(self.habitsDescriptionLabel)
+        self.habitsTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self.shortuctsTilteLabel)
+            make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
+        }
+
         self.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
-            make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(60)
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(20)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
             make.trailing.equalToSuperview().inset(114)
         }

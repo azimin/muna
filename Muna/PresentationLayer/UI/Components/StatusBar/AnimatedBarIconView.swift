@@ -30,10 +30,6 @@ final class AnimatedBarIconView: View {
     }
 
     private func setupInitialLayout() {
-        self.snp.makeConstraints { make in
-            make.size.equalTo(21)
-        }
-
         self.addSubview(self.animationView)
         self.animationView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -48,26 +44,28 @@ final class AnimatedBarIconView: View {
     }
 
     func animateView() {
-        NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.25
-            context.allowsImplicitAnimation = true
-
-            self.centerYViewConstraint?.update(offset: -100)
-            self.layoutSubtreeIfNeeded()
-        },
-                                             completionHandler: { [weak self] in
-            self?.centerYViewConstraint?.update(offset: 100)
-
-            self?.animationView.play { _ in
-                NSAnimationContext.runAnimationGroup { context in
-                    context.duration = 0.25
-                    context.allowsImplicitAnimation = true
-
-                    self?.centerYViewConstraint?.update(offset: 0)
-
-                    self?.layoutSubtreeIfNeeded()
+        NSAnimationContext.runAnimationGroup(
+            { context in
+                context.duration = 0.25
+                context.allowsImplicitAnimation = true
+            
+                self.centerYViewConstraint?.update(offset: -100)
+                self.layoutSubtreeIfNeeded()
+            },
+             completionHandler: { [weak self] in
+                self?.centerYViewConstraint?.update(offset: 100)
+                
+                self?.animationView.play { _ in
+                    NSAnimationContext.runAnimationGroup { context in
+                        context.duration = 0.25
+                        context.allowsImplicitAnimation = true
+                        
+                        self?.centerYViewConstraint?.update(offset: 0)
+                        
+                        self?.layoutSubtreeIfNeeded()
+                    }
                 }
             }
-        })
+        )
     }
 }
