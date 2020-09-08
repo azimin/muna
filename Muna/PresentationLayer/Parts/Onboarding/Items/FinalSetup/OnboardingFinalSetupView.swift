@@ -57,6 +57,7 @@ class OnboardingFinalSetupView: NSView {
 
     let thingsHabitView = CheckboxWithImageSettingView(image: NSImage(named: "things"), title: "Things", initialState: .on)
     let notesHabitView = CheckboxWithImageSettingView(image: NSImage(named: "notes"), title: "Notes", initialState: .on)
+    let remindersHabitView = CheckboxWithImageSettingView(image: NSImage(named: "reminders"), title: "Reminders", initialState: .on)
 
     let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
 
@@ -151,13 +152,19 @@ class OnboardingFinalSetupView: NSView {
         self.addSubview(self.thingsHabitView)
         self.thingsHabitView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.trailing.equalTo(self.habitsTitleLabel.snp.centerX).inset(20)
+            make.centerX.equalTo(self.habitsTitleLabel)
         }
 
         self.addSubview(self.notesHabitView)
         self.notesHabitView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.leading.equalTo(self.habitsTitleLabel.snp.centerX).offset(20)
+            make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-20)
+        }
+
+        self.addSubview(self.remindersHabitView)
+        self.remindersHabitView.snp.makeConstraints { make in
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(20)
         }
 
         self.addSubview(self.settingsItemView)
