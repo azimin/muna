@@ -11,7 +11,9 @@ import Lottie
 import SnapKit
 
 final class AnimatedBarIconView: View {
-    private let imageView = ImageView(name: "icon_menu", aspectRation: .resize)
+    let button = Button(
+        image: NSImage(named: "icon_menu")!, target: nil, action: nil
+    )
     private var centerYViewConstraint: Constraint?
 
     private let animation = Animation.named("splash_anim")
@@ -35,8 +37,8 @@ final class AnimatedBarIconView: View {
             make.edges.equalToSuperview()
         }
 
-        self.addSubview(self.imageView)
-        self.imageView.snp.makeConstraints { make in
+        self.addSubview(self.button)
+        self.button.snp.makeConstraints { make in
             self.centerYViewConstraint = make.centerY.equalToSuperview().constraint
             make.centerX.equalToSuperview()
             make.size.equalTo(20)

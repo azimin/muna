@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CheckboxWithImageSettingView: View {
+final class CheckboxWithImageSettingView: Button {
     let imageView = ImageView()
 
     let checkboxButton = Button(checkboxWithTitle: "", target: nil, action: nil)
