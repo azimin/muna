@@ -145,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: { [unowned self] in
-                    self.animateView()
+                    self.windowManager.activateWindowIfNeeded(.onboarding)
                 }
             )
 

@@ -55,6 +55,9 @@ class OnboardingFinalSetupView: NSView {
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
 
+    let thingsHabitView = CheckboxWithImageSettingView(image: NSImage(named: "things"), title: "Things", initialState: .on)
+    let notesHabitView = CheckboxWithImageSettingView(image: NSImage(named: "notes"), title: "Notes", initialState: .on)
+
     let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
 
     override init(frame frameRect: NSRect) {
@@ -76,7 +79,7 @@ class OnboardingFinalSetupView: NSView {
 
     private func setupInitialLayout() {
         self.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 1103, height: 676))
+            make.size.equalTo(CGSize(width: 1103, height: 787))
         }
 
         self.addSubview(self.iconImage)
@@ -140,14 +143,26 @@ class OnboardingFinalSetupView: NSView {
         }
 
         self.addSubview(self.habitsDescriptionLabel)
-        self.habitsTitleLabel.snp.makeConstraints { make in
+        self.habitsDescriptionLabel.snp.makeConstraints { make in
             make.centerX.equalTo(self.shortuctsTilteLabel)
             make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
         }
 
+        self.addSubview(self.thingsHabitView)
+        self.thingsHabitView.snp.makeConstraints { make in
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.trailing.equalTo(self.habitsTitleLabel.snp.centerX).inset(20)
+        }
+
+        self.addSubview(self.notesHabitView)
+        self.notesHabitView.snp.makeConstraints { make in
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.leading.equalTo(self.habitsTitleLabel.snp.centerX).offset(20)
+        }
+
         self.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(20)
+            make.top.equalTo(self.notesHabitView.snp.bottom).offset(20)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
             make.trailing.equalToSuperview().inset(114)
         }

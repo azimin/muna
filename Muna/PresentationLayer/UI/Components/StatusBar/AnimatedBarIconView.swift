@@ -48,20 +48,20 @@ final class AnimatedBarIconView: View {
             { context in
                 context.duration = 0.25
                 context.allowsImplicitAnimation = true
-            
+
                 self.centerYViewConstraint?.update(offset: -100)
                 self.layoutSubtreeIfNeeded()
             },
-             completionHandler: { [weak self] in
+            completionHandler: { [weak self] in
                 self?.centerYViewConstraint?.update(offset: 100)
-                
+
                 self?.animationView.play { _ in
                     NSAnimationContext.runAnimationGroup { context in
                         context.duration = 0.25
                         context.allowsImplicitAnimation = true
-                        
+
                         self?.centerYViewConstraint?.update(offset: 0)
-                        
+
                         self?.layoutSubtreeIfNeeded()
                     }
                 }
