@@ -152,10 +152,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         #endif
     }
 
-    let view = AnimatedBarIconView()
+    let iconView = AnimatedBarIconView()
 
     func animateView() {
-        self.view.animateView()
+        self.iconView.animateView()
     }
 
     func setupStatusBarItem() {
@@ -167,7 +167,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let image = NSImage(named: NSImage.Name("icon_menu"))
         image?.isTemplate = true
-        statusBarItem.view = self.view
+        statusBarItem.view = self.iconView
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
