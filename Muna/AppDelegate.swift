@@ -80,6 +80,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
+
+        ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
+            print(activeApp)
+        }
     }
 
     func scheduleMissingNotifications() {
@@ -140,12 +144,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
-                toAction: {
-                    self.windowManager.toggleWindow(.onboarding)
+                toAction: { [unowned self] in
+                    self.animateView()
                 }
             )
 
         #endif
+    }
+
+    let iconView = AnimatedBarIconView()
+
+    func animateView() {
+        self.iconView.animateView()
     }
 
     func setupStatusBarItem() {
@@ -157,7 +167,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let image = NSImage(named: NSImage.Name("icon_menu"))
         image?.isTemplate = true
-        statusBarItem.button?.image = image
+        statusBarItem.view = self.iconView
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
