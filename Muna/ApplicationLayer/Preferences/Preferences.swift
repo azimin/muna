@@ -34,6 +34,7 @@ class Preferences {
         case isFirstAskToPermissions
         case splashOnThings
         case splashOnNotes
+        case splashOnReminders
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -159,6 +160,9 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.splashOnThings)
     static var splashOnThings
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.splashOnReminders)
+    static var splashOnReminders
 
     static var storingPeriod: PeriodOfStoring {
         guard let periodOfStoring = PeriodOfStoring(rawValue: periodOfStoring) else {

@@ -39,13 +39,13 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
 
         self.rootView.notesHabitView.checkboxButton.target = self
         self.rootView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
-        
+
         self.rootView.thingsHabitView.checkboxButton.target = self
         self.rootView.thingsHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 
         self.rootView.remindersHabitView.checkboxButton.target = self
-        self.rootView.remindersHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
-        
+        self.rootView.remindersHabitView.checkboxButton.action = #selector(self.splashOnRemindersActions)
+
         self.settingItemViewModel.setup()
     }
 
@@ -57,6 +57,11 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
     @objc
     func splashOnNotesActions(sender: NSButton) {
         Preferences.splashOnNotes = sender.state == .on
+    }
+
+    @objc
+    func splashOnRemindersActions(sender: NSButton) {
+        Preferences.splashOnReminders = sender.state == .on
     }
 
     @objc func buttonAction(sender: NSButton) {

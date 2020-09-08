@@ -55,9 +55,21 @@ class OnboardingFinalSetupView: NSView {
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
 
-    let thingsHabitView = CheckboxWithImageSettingView(image: NSImage(named: "things"), title: "Things", initialState: .on)
-    let notesHabitView = CheckboxWithImageSettingView(image: NSImage(named: "notes"), title: "Notes", initialState: .on)
-    let remindersHabitView = CheckboxWithImageSettingView(image: NSImage(named: "reminders"), title: "Reminders", initialState: .on)
+    let thingsHabitView = CheckboxWithImageSettingView(
+        image: NSImage(named: "things"),
+        title: "Things",
+        initialState: Preferences.splashOnThings ? .on : .off
+    )
+    let notesHabitView = CheckboxWithImageSettingView(
+        image: NSImage(named: "notes"),
+        title: "Notes",
+        initialState: Preferences.splashOnNotes ? .on : .off
+    )
+    let remindersHabitView = CheckboxWithImageSettingView(
+        image: NSImage(named: "reminders"),
+        title: "Reminders",
+        initialState: Preferences.splashOnReminders ? .on : .off
+    )
 
     let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
 

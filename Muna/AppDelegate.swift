@@ -82,7 +82,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
 
         ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
-            print(activeApp)
+            let isNeededToPlayAnimation: Bool
+            switch activeApp {
+            case .notes:
+                isNeededToPlayAnimation = Preferences.splashOnNotes
+            case .reminders:
+                isNeededToPlayAnimation = Preferences.splashOnReminders
+            case .things:
+                isNeededToPlayAnimation = Preferences.splashOnThings
+            }
+
+            if isNeededToPlayAnimation {
+                self.animateView()
+            }
         }
     }
 
