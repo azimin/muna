@@ -19,6 +19,7 @@ enum HintContent {
     case shortcut(shortcutItem: ShortcutItem)
     case image(image: NSImage)
     case video(name: String, aspectRatio: CGFloat)
+    case multiply(content: [HintContent])
 }
 
 struct Hint {

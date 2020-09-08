@@ -147,6 +147,7 @@
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
 		9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */; };
 		9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */; };
+		9FB3A1952507E0B10086CB05 /* PanelHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB3A1942507E0B10086CB05 /* PanelHintView.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
 		9FC06BF62460CEC8008D4D3C /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */; };
@@ -350,6 +351,7 @@
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersOptionsController.swift; sourceTree = "<group>"; };
 		9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutDescriptionView.swift; sourceTree = "<group>"; };
+		9FB3A1942507E0B10086CB05 /* PanelHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelHintView.swift; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
 		9FC06BF52460CEC8008D4D3C /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9FB3A1932507E0A60086CB05 /* Hint */,
 				23895FC2250773F100322248 /* StatusBar */,
 				2343A2DB24DC3B3400F9C6FC /* Settings */,
 				9F581E4B2495019200A34379 /* OnboardingButton */,
@@ -1236,6 +1239,14 @@
 				9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		9FB3A1932507E0A60086CB05 /* Hint */ = {
+			isa = PBXGroup;
+			children = (
+				9FB3A1942507E0B10086CB05 /* PanelHintView.swift */,
+			);
+			path = Hint;
 			sourceTree = "<group>";
 		};
 		9FB8B522246372CA00BE7544 /* Controllers */ = {
@@ -1788,6 +1799,7 @@
 				9F2D341624D0BB460049DD43 /* TrackableScreen.swift in Sources */,
 				9F99D6032464B65900695A19 /* MainPanelView.swift in Sources */,
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
+				9FB3A1952507E0B10086CB05 /* PanelHintView.swift in Sources */,
 				9F2D341424D0BA4E0049DD43 /* UserDefaults+Storage.swift in Sources */,
 				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
