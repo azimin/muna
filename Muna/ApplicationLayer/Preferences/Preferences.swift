@@ -32,6 +32,8 @@ class Preferences {
         case pingInterval
         case isNeededToShowOnboarding
         case isFirstAskToPermissions
+        case splashOnThings
+        case splashOnNotes
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -151,6 +153,12 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isFirstAskToPermissions)
     static var isFirstAskToPermissions
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.splashOnNotes)
+    static var splashOnNotes
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.splashOnThings)
+    static var splashOnThings
 
     static var storingPeriod: PeriodOfStoring {
         guard let periodOfStoring = PeriodOfStoring(rawValue: periodOfStoring) else {
