@@ -17,6 +17,7 @@ final class CheckboxWithImageSettingView: View {
         super.init(frame: .zero)
 
         self.imageView.image = image
+        self.imageView.aspectRation = .resize
 
         self.checkboxButton.title = title
         self.checkboxButton.state = initialState
@@ -31,9 +32,8 @@ final class CheckboxWithImageSettingView: View {
     private func setupInitialLayout() {
         self.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.size.equalTo(62)
-            make.top.equalToSuperview()
+            make.leading.top.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview().inset(5)
         }
 
         self.addSubview(self.checkboxButton)
