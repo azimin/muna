@@ -144,12 +144,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
-                toAction: {
-                    self.windowManager.toggleWindow(.onboarding)
+                toAction: { [unowned self] in
+                    self.animateView()
                 }
             )
 
         #endif
+    }
+
+    let view = AnimatedBarIconView()
+
+    func animateView() {
+        self.view.animateView()
     }
 
     func setupStatusBarItem() {
@@ -161,7 +167,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let image = NSImage(named: NSImage.Name("icon_menu"))
         image?.isTemplate = true
-        statusBarItem.button?.image = image
+        statusBarItem.view = self.view
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu

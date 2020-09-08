@@ -27,6 +27,8 @@
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
 		23561B492461F46600097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B482461F46600097E4A /* Parser.swift */; };
 		236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */; };
+		23895FBF2507720200322248 /* splash_anim.json in Resources */ = {isa = PBXBuildFile; fileRef = 23895FBE2507720200322248 /* splash_anim.json */; };
+		23895FC1250773EB00322248 /* AnimatedBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23895FC0250773EB00322248 /* AnimatedBarIconView.swift */; };
 		2392996A249AA4090090BDD8 /* MainPanelShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23929969249AA4090090BDD8 /* MainPanelShortcutsView.swift */; };
 		239AB0A924688E8E001526DA /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239AB0A524688E8E001526DA /* ItemModel.swift */; };
 		239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239AB0A624688E8E001526DA /* ItemsDatabaseService.swift */; };
@@ -213,6 +215,8 @@
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
 		23561B482461F46600097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		23895FBE2507720200322248 /* splash_anim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_anim.json; sourceTree = "<group>"; };
+		23895FC0250773EB00322248 /* AnimatedBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBarIconView.swift; sourceTree = "<group>"; };
 		23929969249AA4090090BDD8 /* MainPanelShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelShortcutsView.swift; sourceTree = "<group>"; };
 		239AB0A524688E8E001526DA /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		239AB0A624688E8E001526DA /* ItemsDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsDatabaseService.swift; sourceTree = "<group>"; };
@@ -495,6 +499,14 @@
 				230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */,
 			);
 			path = ENParsers;
+			sourceTree = "<group>";
+		};
+		23895FC2250773F100322248 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				23895FC0250773EB00322248 /* AnimatedBarIconView.swift */,
+			);
+			path = StatusBar;
 			sourceTree = "<group>";
 		};
 		23929968249AA3FA0090BDD8 /* Popup */ = {
@@ -865,6 +877,7 @@
 		9F4A8CEF245DAC9000EA2E1E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				23895FBE2507720200322248 /* splash_anim.json */,
 				9F3AAE8024E8560E000453C0 /* fridge.icns */,
 				9FC3F89024D886E700BC0693 /* GoogleService-Info.plist */,
 				239DC91F245D95E8001FA50C /* Info.plist */,
@@ -1045,6 +1058,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				23895FC2250773F100322248 /* StatusBar */,
 				2343A2DB24DC3B3400F9C6FC /* Settings */,
 				9F581E4B2495019200A34379 /* OnboardingButton */,
 				9F693230247ACF5200FEBC0B /* TaskChangeTime */,
@@ -1464,6 +1478,7 @@
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
 				9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */,
 				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
+				23895FBF2507720200322248 /* splash_anim.json in Resources */,
 				9F3AAE8124E8560E000453C0 /* fridge.icns in Resources */,
 				9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */,
 			);
@@ -1692,6 +1707,7 @@
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,
 				9FD95E7F2484115800ED4F05 /* CloseHandler.swift in Sources */,
 				9FE0F54024707EF70046A5C4 /* NotificationAction.swift in Sources */,
+				23895FC1250773EB00322248 /* AnimatedBarIconView.swift in Sources */,
 				232B2FAB2477CC550061801E /* ENDatesPostfixParser.swift in Sources */,
 				9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */,
 				9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */,
