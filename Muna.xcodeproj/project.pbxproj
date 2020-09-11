@@ -10,6 +10,8 @@
 		230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */; };
 		23069402248645E200C41F4F /* DateProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23069401248645E200C41F4F /* DateProcessingService.swift */; };
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
+		2317EFBA250B87B7005AF08E /* HabitsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317EFB9250B87B7005AF08E /* HabitsSettingsView.swift */; };
+		2317EFBC250B8879005AF08E /* HabitsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317EFBB250B8879005AF08E /* HabitsSettingsViewController.swift */; };
 		231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DCAC424686A3D009B7D80 /* OverlayView.swift */; };
 		231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */; };
 		231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E0C912484406D0018EB8F /* ENNumberDate.swift */; };
@@ -205,6 +207,8 @@
 		230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomPartOfTheDayWordsParser.swift; sourceTree = "<group>"; };
 		23069401248645E200C41F4F /* DateProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProcessingService.swift; sourceTree = "<group>"; };
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
+		2317EFB9250B87B7005AF08E /* HabitsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsSettingsView.swift; sourceTree = "<group>"; };
+		2317EFBB250B8879005AF08E /* HabitsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsSettingsViewController.swift; sourceTree = "<group>"; };
 		231DCAC424686A3D009B7D80 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		231E0C8F248426FA0018EB8F /* ENDatesPrefixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPrefixParser.swift; sourceTree = "<group>"; };
 		231E0C912484406D0018EB8F /* ENNumberDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENNumberDate.swift; sourceTree = "<group>"; };
@@ -443,6 +447,15 @@
 				2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2317EFB8250B87A2005AF08E /* Habits */ = {
+			isa = PBXGroup;
+			children = (
+				2317EFB9250B87B7005AF08E /* HabitsSettingsView.swift */,
+				2317EFBB250B8879005AF08E /* HabitsSettingsViewController.swift */,
+			);
+			path = Habits;
 			sourceTree = "<group>";
 		};
 		231DCAC324686A2C009B7D80 /* Subviews */ = {
@@ -753,6 +766,7 @@
 		9F152707246DD7C80037623B /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				2317EFB8250B87A2005AF08E /* Habits */,
 				9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */,
 				9FC5D7FA24DC9F800005B902 /* About */,
 				9F152706246DD7C40037623B /* General */,
@@ -1767,11 +1781,13 @@
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
 				9F33D4882468826100395C44 /* ShortcutView.swift in Sources */,
+				2317EFBC250B8879005AF08E /* HabitsSettingsViewController.swift in Sources */,
 				9F69322F247ACBCB00FEBC0B /* DateComparisonFormatter.swift in Sources */,
 				9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */,
 				9FA07F522460820400654D36 /* NSView+Extensions.swift in Sources */,
 				9F693237247B106800FEBC0B /* ReminderItem.swift in Sources */,
 				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
+				2317EFBA250B87B7005AF08E /* HabitsSettingsView.swift in Sources */,
 				9FC5D7FE24DC9FAF0005B902 /* AboutSettingsViewController.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
