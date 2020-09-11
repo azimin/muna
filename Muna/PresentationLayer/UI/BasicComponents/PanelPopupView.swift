@@ -11,7 +11,7 @@ import Cocoa
 class PanelPopupView: View {
     let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
-        .withBackgroundColorStyle(.foregroundOverlay)
+        .withBackgroundColorStyle(.lightForegroundOverlay)
 
     let closeButton = Button()
         .withImageName("icon_close", color: .title60Accent)
@@ -50,7 +50,6 @@ class PanelPopupView: View {
             maker.edges.equalToSuperview()
         }
         self.vialPlateOverlay.layer?.cornerRadius = 12
-        self.vialPlateOverlay.layer?.borderWidth = 1
 
         self.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { maker in
