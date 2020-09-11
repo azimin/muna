@@ -24,6 +24,8 @@ class MainPanelView: NSView {
         .withBackgroundColorStyle(.separator)
     let bottomBar = PanelBottomBarView()
 
+    var hintView: PanelHintView?
+
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.setup()
@@ -108,6 +110,7 @@ class MainPanelView: NSView {
             self.mainContentView.switchContent(filter: .noDeadline)
         case 2:
             self.mainContentView.switchContent(filter: .completed)
+//            self.showHint()
         default:
             appAssertionFailure("Unsupported index")
         }
@@ -154,5 +157,20 @@ class MainPanelView: NSView {
             self.mainContentView.scrollView.stopScroll()
         }
         self.mainContentView.popUpController.toggle()
+    }
+
+    // MARK: - Hint
+
+    private func showHint() {
+        self.hintView?.removeFromSuperview()
+        let hintView = PanelHintView(hintItem: .previewImage)
+        self.addSubview(hintView)
+        hintView.snp.makeConstraints { maker in
+            maker.bottom.equalTo(self.mainContentView.snp.bottom).inset(12)
+            maker.leading.trailing.equalToSuperview().inset(12)
+            maker.height.equalTo(250)
+        }
+
+        self.hintView = hintView
     }
 }

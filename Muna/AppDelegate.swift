@@ -314,6 +314,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
+        ServiceLocator.shared.notifications.cleanUpNotifications()
         completionHandler([.alert, .sound])
     }
 

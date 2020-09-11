@@ -30,6 +30,7 @@ enum ColorStyle {
 
     case blueSelected
 
+    case hint
     case warning
     case warningSelected
     case redLight
@@ -44,6 +45,8 @@ enum ColorStyle {
         switch Theme.current {
         case .dark:
             switch self {
+            case .hint:
+                return NSColor(hex: "FFE37D")
             case .titleAccent:
                 return NSColor.white
             case .warning, .warningSelected:
@@ -51,7 +54,7 @@ enum ColorStyle {
             case .title60Accent:
                 return NSColor(hex: "969696")
             case .itemSelectionColor:
-                return NSColor(hex: "64FF57")
+                return NSColor(hex: "68B7E2")
             case .plateFullSelection:
                 return NSColor.white
             case .lightOverlay:
@@ -87,6 +90,8 @@ enum ColorStyle {
             }
         case .light:
             switch self {
+            case .hint:
+                return NSColor(hex: "FFE37D")
             case .newTitle:
                 return NSColor(hex: "E3E4E4")
             case .warning:
