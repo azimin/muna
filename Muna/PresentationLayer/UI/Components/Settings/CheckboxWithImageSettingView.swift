@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CheckboxWithImageSettingView: Button {
+final class CheckboxWithImageSettingView: View {
     let imageView = ImageView()
 
     let checkboxButton = Button(checkboxWithTitle: "", target: nil, action: nil)
@@ -17,7 +17,7 @@ final class CheckboxWithImageSettingView: Button {
         super.init(frame: .zero)
 
         self.imageView.image = image
-        self.imageView.aspectRation = .resize
+        self.imageView.aspectRation = .resizeAspectFill
 
         self.checkboxButton.title = title
         self.checkboxButton.state = initialState
