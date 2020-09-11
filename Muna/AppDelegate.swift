@@ -9,6 +9,7 @@
 import Cocoa
 import LaunchAtLogin
 import MASShortcut
+import SnapKit
 import SwiftDate
 import SwiftyChrono
 import UserNotifications

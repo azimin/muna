@@ -170,13 +170,13 @@ class OnboardingFinalSetupView: NSView {
         self.addSubview(self.notesHabitView)
         self.notesHabitView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-20)
+            make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-30)
         }
 
         self.addSubview(self.remindersHabitView)
         self.remindersHabitView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(20)
+            make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(15)
         }
 
         self.addSubview(self.settingsItemView)
