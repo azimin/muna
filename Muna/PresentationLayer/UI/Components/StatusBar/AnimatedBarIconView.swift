@@ -11,9 +11,11 @@ import Lottie
 import SnapKit
 
 final class AnimatedBarIconView: View {
-    let button = Button(
-        image: NSImage(named: "icon_menu")!, target: nil, action: nil
-    )
+//    let button = ImageView(
+//        image: NSImage(named: "icon_menu")!, target: nil, action: nil
+//    )
+    let button = ImageView(name: "icon_menu")
+
     private var centerYViewConstraint: Constraint?
 
     private let animation = Animation.named("splash_anim")

@@ -180,9 +180,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let image = NSImage(named: NSImage.Name("icon_menu"))
         image?.isTemplate = true
-        statusBarItem.view = self.iconView
-        self.iconView.button.target = self
-        self.iconView.button.action = #selector(self.showMenu)
+        statusBarItem.button?.addSubview(self.iconView)
+        self.iconView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
@@ -289,11 +290,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     @objc func toggleSettingsState() {
         self.windowManager.activateWindowIfNeeded(.settings)
-    }
-
-    @objc func showMenu(sender: NSView) {
-        let p = NSPoint(x: 0, y: sender.frame.height + 10)
-        self.statusBarMenu.popUp(positioning: nil, at: p, in: sender)
     }
 
     // MARK: - Notifications
