@@ -110,7 +110,7 @@ class MainPanelView: NSView {
             self.mainContentView.switchContent(filter: .noDeadline)
         case 2:
             self.mainContentView.switchContent(filter: .completed)
-            self.showHint()
+//            self.showHint()
         default:
             appAssertionFailure("Unsupported index")
         }
