@@ -8,7 +8,10 @@
 
 import Foundation
 
-final class HabitsSettingsView: View {
+final class HabitsSettingsView: View, SettingsViewProtocol {
+    let titlesView = View()
+    let settingsView = View()
+
     let habitsTitleLabel = Label(fontStyle: .bold, size: 24)
         .withTextColorStyle(.titleAccent)
         .withText("Habits")
@@ -16,6 +19,7 @@ final class HabitsSettingsView: View {
     let habitsDescriptionLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
+        .withAligment(.center)
 
     let thingsHabitView = CheckboxWithImageSettingView(
         image: NSImage(named: "things"),
@@ -35,6 +39,8 @@ final class HabitsSettingsView: View {
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+
+        self.setupInitialLayout()
     }
 
     required init?(coder: NSCoder) {
@@ -42,6 +48,20 @@ final class HabitsSettingsView: View {
     }
 
     private func setupInitialLayout() {
+        self.addSubview(self.titlesView)
+        self.titlesView.snp.makeConstraints { maker in
+            maker.leading.top.bottom.equalToSuperview()
+            maker.width.equalTo(self.firstPartframeWidth)
+            maker.height.equalTo(260)
+        }
+
+        self.addSubview(self.settingsView)
+        self.settingsView.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.titlesView.snp.trailing)
+            maker.trailing.top.bottom.equalToSuperview()
+            maker.width.equalTo(self.frameWidth - 120)
+        }
+
         self.addSubview(self.habitsTitleLabel)
         self.habitsTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
