@@ -9,7 +9,7 @@
 import AVKit
 import Cocoa
 
-class PanelHintView: PopupView {
+class PanelHintView: PanelPopupView {
     let questionImage = ImageView(name: "icon_question")
 
     let titleLabel =
@@ -30,7 +30,7 @@ class PanelHintView: PopupView {
 
     init(hintItem: HintItem) {
         self.hintItem = hintItem
-        super.init(style: .withoutShortcutsButton)
+        super.init()
     }
 
     required init?(coder: NSCoder) {

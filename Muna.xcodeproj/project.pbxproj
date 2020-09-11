@@ -147,6 +147,7 @@
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
 		9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */; };
 		9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */; };
+		9FB3185A250B64AD00667A79 /* PanelPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB31859250B64AD00667A79 /* PanelPopupView.swift */; };
 		9FB3A1952507E0B10086CB05 /* PanelHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB3A1942507E0B10086CB05 /* PanelHintView.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
 		9FBED38A247B15160028483F /* Date+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBED389247B15160028483F /* Date+Time.swift */; };
@@ -351,6 +352,7 @@
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersOptionsController.swift; sourceTree = "<group>"; };
 		9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutDescriptionView.swift; sourceTree = "<group>"; };
+		9FB31859250B64AD00667A79 /* PanelPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelPopupView.swift; sourceTree = "<group>"; };
 		9FB3A1942507E0B10086CB05 /* PanelHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelHintView.swift; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		9FBED389247B15160028483F /* Date+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Time.swift"; sourceTree = "<group>"; };
@@ -1121,6 +1123,7 @@
 				9FE96BE024660235007D92B8 /* ButtonCell.swift */,
 				9F99D5FF2464B63900695A19 /* StopableScrollView.swift */,
 				9F6C1E77246C88E8003D5AD2 /* PopupView.swift */,
+				9FB31859250B64AD00667A79 /* PanelPopupView.swift */,
 			);
 			path = BasicComponents;
 			sourceTree = "<group>";
@@ -1696,6 +1699,7 @@
 				9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,
+				9FB3185A250B64AD00667A79 /* PanelPopupView.swift in Sources */,
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
 				9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */,
