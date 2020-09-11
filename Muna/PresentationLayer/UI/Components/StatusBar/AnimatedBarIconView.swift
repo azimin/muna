@@ -32,6 +32,10 @@ final class AnimatedBarIconView: View {
     }
 
     private func setupInitialLayout() {
+        self.snp.makeConstraints { make in
+            make.size.equalTo(21)
+        }
+
         self.addSubview(self.animationView)
         self.animationView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
