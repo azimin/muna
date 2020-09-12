@@ -9,12 +9,12 @@
 import Cocoa
 
 class PanelPopupView: View {
-    let vialPlate = NSVisualEffectView()
+//    let vialPlate = NSVisualEffectView()
     let vialPlateOverlay = View()
-        .withBackgroundColorStyle(.lightForegroundOverlay)
+        .withBackgroundColorStyle(.lightOverlay)
 
     let closeButton = Button()
-        .withImageName("icon_close", color: .title60Accent)
+        .withImageName("icon_close", color: .titleAccent)
 
     init() {
         super.init(frame: .zero)
@@ -27,25 +27,18 @@ class PanelPopupView: View {
 
     override func updateLayer() {
         super.updateLayer()
-        self.vialPlate.material = Theme.current.visualEffectMaterial
     }
 
     private func setup() {
-        self.backgroundColor = NSColor.clear
+//        self.backgroundColor = NSColor.black.withAlphaComponent(0.9)
+        self.backgroundColor = NSColor.white.withAlphaComponent(0.9)
 
         self.layer?.cornerRadius = 12
         self.layer?.masksToBounds = true
 
-        self.addSubview(self.vialPlate)
-        self.vialPlate.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-        self.vialPlate.wantsLayer = true
-        self.vialPlate.blendingMode = .behindWindow
-        self.vialPlate.state = .active
-        self.vialPlate.layer?.cornerRadius = 12
-
         self.addSubview(self.vialPlateOverlay)
+//        self.vialPlateOverlay.backgroundColor = NSColor.white.withAlphaComponent(0.5)
+        self.vialPlateOverlay.backgroundColor = NSColor.black.withAlphaComponent(0.3)
         self.vialPlateOverlay.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
