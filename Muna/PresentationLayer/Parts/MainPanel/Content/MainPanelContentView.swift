@@ -604,11 +604,20 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             indexPath: indexPath
         )
         let group = self.groupedData.group(in: indexPath.section)
-        let count = self.groupedData.numberOfItems(in: indexPath.section)
+        var count = self.groupedData.numberOfItems(in: indexPath.section)
+
+        let additionalSufix: String
+        if group == .completed {
+            count = ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems()
+            additionalSufix = " (including deleted)"
+        } else {
+            additionalSufix = ""
+        }
+
         let sufix = count == 1 ? "item" : "items"
 
         header.titleLabel.stringValue = group.rawValue
-        header.infoLabel.stringValue = "\(count) \(sufix)"
+        header.infoLabel.stringValue = "\(count) \(sufix)\(additionalSufix)"
         header.redArrowView.isHidden = group != .passed
 
         return header
