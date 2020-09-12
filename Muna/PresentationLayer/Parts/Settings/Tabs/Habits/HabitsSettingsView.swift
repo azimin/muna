@@ -12,11 +12,11 @@ final class HabitsSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
-    let habitsTitleLabel = Label(fontStyle: .bold, size: 24)
+    let habitsTitleLabel = Label(fontStyle: .bold, size: 16)
         .withTextColorStyle(.titleAccent)
         .withText("Habits")
 
-    let habitsDescriptionLabel = Label(fontStyle: .medium, size: 16)
+    let habitsDescriptionLabel = Label(fontStyle: .medium, size: 14)
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
         .withAligment(.center)
@@ -71,24 +71,24 @@ final class HabitsSettingsView: View, SettingsViewProtocol {
         self.addSubview(self.habitsDescriptionLabel)
         self.habitsDescriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(8)
         }
 
         self.addSubview(self.thingsHabitView)
         self.thingsHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(30)
             make.centerX.equalTo(self.habitsTitleLabel)
         }
 
         self.addSubview(self.notesHabitView)
         self.notesHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.top.equalTo(self.thingsHabitView.snp.top)
             make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-30)
         }
 
         self.addSubview(self.remindersHabitView)
         self.remindersHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.top.equalTo(self.thingsHabitView.snp.top)
             make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(15)
         }
     }
