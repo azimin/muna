@@ -14,6 +14,7 @@ class MainScreenView: NSView {
     let mainPanelView = MainPanelView()
     let shortcutsView = MainPanelShortcutsView(style: .withoutShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
+    var hintView: PanelHintView?
 
     var isShortcutsShowed = false
 
@@ -96,5 +97,38 @@ class MainScreenView: NSView {
     func hideShortcutsView() {
         self.isShortcutsShowed = false
         self.shortcutsView.removeFromSuperview()
+    }
+
+    // MARK: - Hint
+
+    private func hideHint() {
+        guard let hintView = self.hintView else {
+            return
+        }
+
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.5
+            hintView.animator().layer?.transform = CATransform3DMakeScale(0.01, 0.01, 1)
+        }, completionHandler: {
+            hintView.removeFromSuperview()
+        })
+    }
+
+    private func showHint() {
+        self.hintView?.removeFromSuperview()
+        let hintView = PanelHintView(hintItem: .previewImage)
+        self.addSubview(hintView)
+        hintView.snp.makeConstraints { maker in
+            maker.bottom.equalTo(self.mainPanelView.snp.bottom)
+            maker.width.equalTo(self.mainPanelView.snp.width)
+            maker.trailing.equalTo(self.mainPanelView.snp.leading).inset(-12)
+        }
+        self.hintView = hintView
+
+        hintView.layer?.transform = CATransform3DMakeScale(0.01, 0.01, 1)
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.5
+            hintView.animator().layer?.transform = CATransform3DMakeScale(0.5, 0.5, 1)
+        }
     }
 }

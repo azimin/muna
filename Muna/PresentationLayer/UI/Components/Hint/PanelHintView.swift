@@ -9,7 +9,7 @@
 import AVKit
 import Cocoa
 
-class PanelHintView: PanelPopupView {
+class PanelHintView: PopupView {
     let questionImage = ImageView(name: "icon_question")
 
     let titleLabel =
@@ -30,7 +30,8 @@ class PanelHintView: PanelPopupView {
 
     init(hintItem: HintItem) {
         self.hintItem = hintItem
-        super.init()
+        super.init(style: .withoutShortcutsButton)
+        self.setup()
     }
 
     required init?(coder: NSCoder) {
@@ -40,26 +41,27 @@ class PanelHintView: PanelPopupView {
     private func setup() {
         self.addSubview(self.questionImage)
         self.questionImage.snp.makeConstraints { maker in
-            maker.centerX.equalTo(self.closeButton.snp.centerX)
+            maker.centerY.equalTo(self.closeButton.snp.centerY)
             maker.leading.equalToSuperview().inset(12)
             maker.size.equalTo(20)
         }
 
         self.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { maker in
-            maker.centerX.equalTo(self.closeButton.snp.centerX)
-            maker.leading.equalTo(self.questionImage.snp.trailing).inset(8)
+            maker.centerY.equalTo(self.closeButton.snp.centerY)
+            maker.leading.equalTo(self.questionImage.snp.trailing).inset(-8)
         }
 
         self.addSubview(self.textLabel)
+        self.textLabel.text = self.hintItem.hint.text
         self.textLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(self.titleLabel.snp.bottom).inset(14)
+            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
             maker.leading.trailing.equalToSuperview().inset(12)
         }
 
         self.addSubview(self.contentStackView)
         self.contentStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.textLabel.snp.bottom).inset(14)
+            maker.top.equalTo(self.textLabel.snp.bottom).inset(-14)
             maker.leading.trailing.bottom.equalToSuperview().inset(12)
         }
 
@@ -71,7 +73,16 @@ class PanelHintView: PanelPopupView {
         default:
             self.addHintConent(content: self.hintItem.hint.content)
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.play),
+            name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+            object: nil
+        )
     }
+
+    var videoPlayer: AVPlayerView?
 
     private func addHintConent(content: HintContent) {
         switch content {
@@ -82,15 +93,16 @@ class PanelHintView: PanelPopupView {
         case let .image(image):
             let imageView = ImageView()
             imageView.image = image
-            self.contentStackView.addSubview(imageView)
+            self.contentStackView.addArrangedSubview(imageView)
         case let .shortcut(shortcutItem):
             let shortcutItemView = ShortcutView(item: shortcutItem)
-            self.contentStackView.addSubview(shortcutItemView)
+            self.contentStackView.addArrangedSubview(shortcutItemView)
         case let .video(name, aspectRatio):
             let videoView = AVPlayerView()
-            self.contentStackView.addSubview(videoView)
+            self.contentStackView.addArrangedSubview(videoView)
             videoView.controlsStyle = .none
             videoView.snp.makeConstraints { maker in
+                maker.width.equalToSuperview()
                 maker.width.equalTo(videoView.snp.height).multipliedBy(aspectRatio)
             }
             if let url = Bundle.main.url(forResource: name, withExtension: "mov") {
@@ -99,6 +111,17 @@ class PanelHintView: PanelPopupView {
             } else {
                 appAssertionFailure("No file")
             }
+
+            if self.videoPlayer != nil {
+                appAssertionFailure("Don't support > 1 video")
+            }
+
+            self.videoPlayer = videoView
         }
+    }
+
+    @objc func play() {
+        self.videoPlayer?.player?.seek(to: .zero)
+        self.videoPlayer?.player?.play()
     }
 }
