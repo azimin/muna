@@ -16,6 +16,9 @@ protocol ItemsDatabaseServiceProtocol: AnyObject {
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
     func itemFilter(by id: String) -> ItemsDatabaseService.Filter?
 
+    func fetchNumberOfCompletedItems() -> Int
+    func changeNumberOfCompletedItems(value: Int)
+
     @discardableResult
     func addItem(
         imageData: Data,
@@ -41,6 +44,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
     let itemUpdated = Observable<String?>(nil)
 
     private var key: String = "ud_main_data_items"
+    private var numberKey: String = "ud_main_data_items_number_of_completed"
     private let defaults = UserDefaults.standard
     private var items: [ItemModel] = []
 
@@ -212,6 +216,17 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             }
             self.items.forEach { $0.itemsDatabaseService = self }
         }
+    }
+
+    // MARK: - Completed items
+
+    func fetchNumberOfCompletedItems() -> Int {
+        return self.defaults.int(for: self.numberKey)
+    }
+
+    func changeNumberOfCompletedItems(value: Int) {
+        let oldValue = self.fetchNumberOfCompletedItems()
+        self.defaults.set(oldValue + value, forKey: self.numberKey)
     }
 }
 

@@ -55,6 +55,7 @@ class ItemModel: ItemModelProtocol, Codable {
                 ServiceLocator.shared.notifications.removeNotification(
                     item: self
                 )
+                self.itemsDatabaseService?.changeNumberOfCompletedItems(value: 1)
                 self.completionDate = Date()
             } else {
                 ServiceLocator.shared.analytics.increasePersonProperty(
@@ -64,6 +65,7 @@ class ItemModel: ItemModelProtocol, Codable {
                 ServiceLocator.shared.notifications.sheduleNotification(
                     item: self
                 )
+                self.itemsDatabaseService?.changeNumberOfCompletedItems(value: -1)
                 self.completionDate = nil
             }
             self.itemsDatabaseService?.saveItems()
