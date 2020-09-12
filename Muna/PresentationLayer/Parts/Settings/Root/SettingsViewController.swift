@@ -29,7 +29,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
             case .about:
                 return NSImage(named: "setting_toolbar_about")
             case .habits:
-                return nil
+                return NSImage(named: "setting_toolbar_habits_\(themeSufix)")
             }
         }
     }
