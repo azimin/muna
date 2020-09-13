@@ -17,6 +17,8 @@ class OnboardingFinalSetupView: NSView {
 
     let introLabel = NSTextField()
 
+    let contentView = View()
+
     let descriptionLabel = Label(fontStyle: .regular, size: 20)
         .withTextColorStyle(.title60AccentAlpha)
         .withText("Modern way of creating remidners without breaking context")
@@ -110,57 +112,63 @@ class OnboardingFinalSetupView: NSView {
             make.width.equalTo(1)
         }
 
-        self.addSubview(self.shortuctsTilteLabel)
-        self.shortuctsTilteLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
-            make.leading.equalToSuperview().offset(661)
+        self.addSubview(self.contentView)
+        self.contentView.snp.makeConstraints { maker in
+            maker.top.trailing.bottom.equalToSuperview()
+            maker.leading.equalTo(self.separatorView.snp.trailing)
         }
 
-        self.addSubview(self.entireShortcutPreview)
+        self.contentView.addSubview(self.shortuctsTilteLabel)
+        self.shortuctsTilteLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(32)
+            make.centerX.equalToSuperview()
+        }
+
+        self.contentView.addSubview(self.entireShortcutPreview)
         self.entireShortcutPreview.snp.makeConstraints { make in
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(73)
         }
 
-        self.addSubview(self.selectedAreaShortcutPreview)
+        self.contentView.addSubview(self.selectedAreaShortcutPreview)
         self.selectedAreaShortcutPreview.snp.makeConstraints { make in
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.entireShortcutPreview.snp.trailing).offset(50)
         }
 
-        self.addSubview(self.showPanelShortuctPreview)
+        self.contentView.addSubview(self.showPanelShortuctPreview)
         self.showPanelShortuctPreview.snp.makeConstraints { make in
             make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
             make.leading.equalTo(self.selectedAreaShortcutPreview.snp.trailing).offset(50)
             make.trailing.equalToSuperview().inset(73)
         }
 
-        self.addSubview(self.habitsTitleLabel)
+        self.contentView.addSubview(self.habitsTitleLabel)
         self.habitsTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(self.shortuctsTilteLabel)
+            make.centerX.equalToSuperview()
             make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(24)
         }
 
-        self.addSubview(self.habitsDescriptionLabel)
+        self.contentView.addSubview(self.habitsDescriptionLabel)
         self.habitsDescriptionLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(self.shortuctsTilteLabel)
+            make.centerX.equalToSuperview()
             make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
         }
 
-        self.addSubview(self.habitAppsView)
+        self.contentView.addSubview(self.habitAppsView)
         self.habitAppsView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.centerX.equalTo(self.habitsTitleLabel)
         }
 
-        self.addSubview(self.settingsItemView)
+        self.contentView.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
             make.top.equalTo(self.habitAppsView.snp.bottom).offset(20)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
             make.trailing.equalToSuperview().inset(114)
         }
 
-        self.addSubview(self.continueButton)
+        self.contentView.addSubview(self.continueButton)
         self.continueButton.snp.makeConstraints { maker in
             maker.trailing.equalToSuperview().inset(24)
             maker.bottom.equalToSuperview().inset(24)
