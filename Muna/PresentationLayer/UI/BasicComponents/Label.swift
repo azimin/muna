@@ -59,6 +59,15 @@ class Label: NSTextField {
     override func layout() {
         super.layout()
         self.adjustIfNeeded(text: self.text)
+
+        if let gradientLayer = self.gradientLayer {
+            gradientLayer.frame = bounds
+            gradientLayer.isHidden = false
+            let image = gradientLayer.getBitmapImage()
+            let color = NSColor(patternImage: image)
+            self.textColor = color
+            gradientLayer.isHidden = true
+        }
     }
 
     private func adjustIfNeeded(text: String) {
@@ -101,4 +110,46 @@ class Label: NSTextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    private var gradientLayer: CAGradientLayer?
+
+    func applyGradientText(colors: [CGColor]) {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.colors = colors
+        self.wantsLayer = true
+        layer?.addSublayer(gradient)
+        self.gradientLayer = gradient
+    }
+}
+
+extension CALayer {
+func getBitmapImage() -> NSImage {
+    let btmpImgRep =
+        NSBitmapImageRep(
+            bitmapDataPlanes: nil,
+            pixelsWide: Int(self.frame.width),
+            pixelsHigh: Int(self.frame.height),
+            bitsPerSample: 8,
+            samplesPerPixel: 4,
+            hasAlpha: true,
+            isPlanar: false,
+            colorSpaceName: .deviceRGB,
+            bytesPerRow: 0,
+            bitsPerPixel: 32
+    )
+
+    let ctx = NSGraphicsContext(bitmapImageRep: btmpImgRep!)
+    let cgContext = ctx!.cgContext
+
+    self.render(in: cgContext)
+
+    let cgImage = cgContext.makeImage()
+
+    let nsimage = NSImage(cgImage: cgImage!, size: CGSize(width: self.frame.width, height: self.frame.height))
+
+        return nsimage
+  }
 }

@@ -105,6 +105,7 @@
 		9F4E4F9B24F45BB70069DE9F /* HintsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9A24F45BB70069DE9F /* HintsService.swift */; };
 		9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9C24F45BC00069DE9F /* Hint.swift */; };
 		9F4E4FA024F45E5C0069DE9F /* HintList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9F24F45E5C0069DE9F /* HintList.swift */; };
+		9F4EB224250EA4C3002D29C0 /* SmartAssistentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */; };
 		9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
@@ -313,6 +314,7 @@
 		9F4E4F9A24F45BB70069DE9F /* HintsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsService.swift; sourceTree = "<group>"; };
 		9F4E4F9C24F45BC00069DE9F /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		9F4E4F9F24F45E5C0069DE9F /* HintList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintList.swift; sourceTree = "<group>"; };
+		9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAssistentView.swift; sourceTree = "<group>"; };
 		9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Analytics.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -954,6 +956,14 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		9F4EB222250EA4B0002D29C0 /* SmartAssistent */ = {
+			isa = PBXGroup;
+			children = (
+				9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */,
+			);
+			path = SmartAssistent;
+			sourceTree = "<group>";
+		};
 		9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1115,6 +1125,7 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9F4EB222250EA4B0002D29C0 /* SmartAssistent */,
 				9FB3A1932507E0A60086CB05 /* Hint */,
 				23895FC2250773F100322248 /* StatusBar */,
 				2343A2DB24DC3B3400F9C6FC /* Settings */,
@@ -1766,6 +1777,7 @@
 				231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
+				9F4EB224250EA4C3002D29C0 /* SmartAssistentView.swift in Sources */,
 				9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
