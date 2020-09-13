@@ -19,7 +19,7 @@ class OnboardingFinalSetupView: NSView {
 
     let contentView = View()
 
-    let descriptionLabel = Label(fontStyle: .regular, size: 20)
+    let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
         .withText("Modern way of creating remidners without breaking context")
         .withAligment(.center)
@@ -29,7 +29,7 @@ class OnboardingFinalSetupView: NSView {
 
     let separatorView = View()
 
-    let shortuctsTilteLabel = Label(fontStyle: .bold, size: 24)
+    let shortuctsTilteLabel = Label(fontStyle: .bold, size: 18)
         .withTextColorStyle(.titleAccent)
         .withText("Shortucts")
 
@@ -49,11 +49,11 @@ class OnboardingFinalSetupView: NSView {
         itemUDKey: Preferences.defaultShortcutPanelKey
     )
 
-    let habitsTitleLabel = Label(fontStyle: .bold, size: 24)
+    let habitsTitleLabel = Label(fontStyle: .bold, size: 18)
         .withTextColorStyle(.titleAccent)
         .withText("Habits")
 
-    let habitsDescriptionLabel = Label(fontStyle: .medium, size: 16)
+    let habitsDescriptionLabel = Label(fontStyle: .medium, size: 14)
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
 
@@ -80,13 +80,13 @@ class OnboardingFinalSetupView: NSView {
 
     private func setupInitialLayout() {
         self.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 1103, height: 787))
+            make.size.equalTo(CGSize(width: 1103, height: 678))
         }
 
         self.addSubview(self.iconImage)
         self.iconImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(104)
-            make.top.equalToSuperview().offset(219)
+            make.top.equalToSuperview().offset(188)
         }
 
         self.addSubview(self.introLabel)
@@ -120,25 +120,25 @@ class OnboardingFinalSetupView: NSView {
 
         self.contentView.addSubview(self.shortuctsTilteLabel)
         self.shortuctsTilteLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(22)
             make.centerX.equalToSuperview()
         }
 
         self.contentView.addSubview(self.entireShortcutPreview)
         self.entireShortcutPreview.snp.makeConstraints { make in
-            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(12)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(73)
         }
 
         self.contentView.addSubview(self.selectedAreaShortcutPreview)
         self.selectedAreaShortcutPreview.snp.makeConstraints { make in
-            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.entireShortcutPreview.snp.top)
             make.leading.equalTo(self.entireShortcutPreview.snp.trailing).offset(50)
         }
 
         self.contentView.addSubview(self.showPanelShortuctPreview)
         self.showPanelShortuctPreview.snp.makeConstraints { make in
-            make.top.equalTo(self.shortuctsTilteLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.entireShortcutPreview.snp.top)
             make.leading.equalTo(self.selectedAreaShortcutPreview.snp.trailing).offset(50)
             make.trailing.equalToSuperview().inset(73)
         }
@@ -146,19 +146,19 @@ class OnboardingFinalSetupView: NSView {
         self.contentView.addSubview(self.habitsTitleLabel)
         self.habitsTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(24)
+            make.top.equalTo(self.selectedAreaShortcutPreview.snp.bottom).offset(20)
         }
 
         self.contentView.addSubview(self.habitsDescriptionLabel)
         self.habitsDescriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(8)
         }
 
         self.contentView.addSubview(self.habitAppsView)
         self.habitAppsView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
+            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(12)
         }
 
         self.contentView.addSubview(self.settingsItemView)
@@ -168,10 +168,10 @@ class OnboardingFinalSetupView: NSView {
             make.trailing.equalToSuperview().inset(114)
         }
 
-        self.contentView.addSubview(self.continueButton)
-        self.continueButton.snp.makeConstraints { maker in
-            maker.trailing.equalToSuperview().inset(24)
-            maker.bottom.equalToSuperview().inset(24)
+        self.addSubview(self.continueButton)
+        self.continueButton.snp.makeConstraints { make in
+            make.centerX.equalTo(self.descriptionLabel.snp.centerX)
+            make.top.equalTo(self.descriptionLabel.snp.bottom).offset(28)
         }
     }
 
