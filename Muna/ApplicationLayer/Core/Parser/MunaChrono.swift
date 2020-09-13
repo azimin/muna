@@ -31,45 +31,17 @@ class MunaChrono {
             allParsedResults += $0.parse(fromText: string, refDate: date)
         }
 
-//        allParsedResults.forEach {
-//            print($0)
-//        }
         var timeOffset = self.mergeTimeOffsets(allParsedResults)
-
-//        guard timeOffset.isEmpty else {
-//            timeOffset.sort(by: { $0.matchRange.length > $1.matchRange.length })
-//            return timeOffset
-//        }
 
         timeOffset.append(contentsOf: self.mergeDates(allParsedResults))
 
-//        guard dates.isEmpty else {
-//            dates.sort(by: { $0.matchRange.length > $1.matchRange.length })
-//            return dates
-//        }
-
         timeOffset.append(contentsOf: self.mergeWeekdays(allParsedResults))
-
-//        guard weekdays.isEmpty else {
-//            weekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
-//            return weekdays
-//        }
 
         timeOffset.append(contentsOf: self.mergeCustomDays(allParsedResults))
 
-//        guard customWeekdays.isEmpty else {
-//            customWeekdays.sort(by: { $0.matchRange.length > $1.matchRange.length })
-//            return customWeekdays
-//        }
-
         timeOffset.append(contentsOf: self.mergeNumberDates(allParsedResults))
 
-//        guard numberedDates.isEmpty else {
-//            numberedDates.sort(by: { $0.matchRange.length > $1.matchRange.length })
-//            return numberedDates
-//        }
-
-//        timeOffset.append(contentsOf: self.mergeTime(allParsedResults))
+        timeOffset.append(contentsOf: self.mergeTime(allParsedResults))
 
         let length = timeOffset.max()?.length ?? 0
 
@@ -151,60 +123,7 @@ class MunaChrono {
             }
         }
 
-        theBiggestRange = NSRange()
-        let parsedTime = parsedResult.filter {
-            $0.tagUnit.keys.contains(.ENTimeParser)
-        }
-        var newTime = [ParsedResult]()
-        parsedTime.forEach {
-            if $0.matchRange.length == theBiggestRange.length {
-                newTime.append($0)
-            }
-
-            if $0.matchRange.length > theBiggestRange.length {
-                newTime = [$0]
-                theBiggestRange = $0.matchRange
-            }
-        }
-
-        var finalResult = [ParsedResult]()
-        newDates.forEach {
-            var newDate = $0
-            newTime.forEach { time in
-                if newDate.reservedComponents.keys.contains(.hour) {
-                    return
-                }
-
-                if newDate.matchRange.intersection(time.matchRange) != nil {
-                    if newDate.matchRange.length == time.matchRange.length,
-                        newDate.matchRange.lowerBound == time.matchRange.lowerBound,
-                        newDate.matchRange.upperBound == time.matchRange.upperBound {
-                        finalResult.append(time)
-                    }
-
-                    if newDate.matchRange.length < time.matchRange.length {
-                        newDate = time
-                    }
-                    return
-                }
-
-                guard let hour = time.reservedComponents[.hour] else {
-                    return
-                }
-
-                newDate.reservedComponents[.hour] = hour
-                newDate.reservedComponents[.minute] = 0
-
-                guard let minutes = time.reservedComponents[.minute] else {
-                    newDate.length += time.length
-                    return
-                }
-
-                newDate.length += time.length
-                newDate.reservedComponents[.minute] = minutes
-            }
-            finalResult.append(newDate)
-        }
+        let finalResult = self.appendTime(to: newDates, fromAllResults: parsedDates)
 
         return finalResult
     }
