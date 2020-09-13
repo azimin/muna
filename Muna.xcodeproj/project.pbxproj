@@ -150,6 +150,7 @@
 		9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */; };
 		9FA38EE3246B624B003F3046 /* RemindersOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */; };
 		9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */; };
+		9FAB1DA6250E60CB00DA4971 /* HabitAppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB1DA5250E60CB00DA4971 /* HabitAppsView.swift */; };
 		9FB3185A250B64AD00667A79 /* PanelPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB31859250B64AD00667A79 /* PanelPopupView.swift */; };
 		9FB3A1952507E0B10086CB05 /* PanelHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB3A1942507E0B10086CB05 /* PanelHintView.swift */; };
 		9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8B5202463672300BE7544 /* PopUpController.swift */; };
@@ -358,6 +359,7 @@
 		9FA07F722460C31B00654D36 /* NSCollectionView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		9FA38EE2246B624B003F3046 /* RemindersOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersOptionsController.swift; sourceTree = "<group>"; };
 		9FA7D260246C8D4D0082C4A9 /* ShortcutDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutDescriptionView.swift; sourceTree = "<group>"; };
+		9FAB1DA5250E60CB00DA4971 /* HabitAppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAppsView.swift; sourceTree = "<group>"; };
 		9FB31859250B64AD00667A79 /* PanelPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelPopupView.swift; sourceTree = "<group>"; };
 		9FB3A1942507E0B10086CB05 /* PanelHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelHintView.swift; sourceTree = "<group>"; };
 		9FB8B5202463672300BE7544 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */,
 				23AE669F24DC9667004FAAFE /* SettingsItemViewModel.swift */,
 				233E4B172507EDFD00A1243D /* CheckboxWithImageSettingView.swift */,
+				9FAB1DA5250E60CB00DA4971 /* HabitAppsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1803,6 +1806,7 @@
 				23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */,
+				9FAB1DA6250E60CB00DA4971 /* HabitAppsView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,

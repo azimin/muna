@@ -9,7 +9,7 @@
 import Foundation
 
 final class CheckboxWithImageSettingView: View {
-    let imageView = ImageView()
+    let imageView = ImageView(aspectRation: .resizeAspect)
 
     let checkboxButton = Button(checkboxWithTitle: "", target: nil, action: nil)
 
@@ -17,7 +17,6 @@ final class CheckboxWithImageSettingView: View {
         super.init(frame: .zero)
 
         self.imageView.image = image
-        self.imageView.aspectRation = .resizeAspect
         self.imageView.layer?.masksToBounds = false
         self.layer?.masksToBounds = false
 
@@ -34,16 +33,15 @@ final class CheckboxWithImageSettingView: View {
     private func setupInitialLayout() {
         self.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { make in
-            make.leading.top.greaterThanOrEqualToSuperview()
-            make.trailing.lessThanOrEqualToSuperview()
-            make.centerX.equalToSuperview()
+            make.leading.top.trailing.equalToSuperview()
             make.size.equalTo(60)
         }
 
         self.addSubview(self.checkboxButton)
         self.checkboxButton.snp.makeConstraints { make in
-            make.top.equalTo(self.imageView.snp.bottom).offset(10)
-            make.leading.bottom.trailing.equalToSuperview()
+            make.top.equalTo(self.imageView.snp.bottom).offset(8)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }

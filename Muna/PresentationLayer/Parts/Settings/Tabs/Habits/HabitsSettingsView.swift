@@ -21,21 +21,7 @@ final class HabitsSettingsView: View, SettingsViewProtocol {
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
         .withAligment(.center)
 
-    let thingsHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "things"),
-        title: "Things",
-        initialState: Preferences.splashOnThings ? .on : .off
-    )
-    let notesHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "notes"),
-        title: "Notes",
-        initialState: Preferences.splashOnNotes ? .on : .off
-    )
-    let remindersHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "reminders"),
-        title: "Reminders",
-        initialState: Preferences.splashOnReminders ? .on : .off
-    )
+    let habitAppsView = HabitAppsView()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -74,22 +60,10 @@ final class HabitsSettingsView: View, SettingsViewProtocol {
             make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(8)
         }
 
-        self.addSubview(self.thingsHabitView)
-        self.thingsHabitView.snp.makeConstraints { make in
+        self.addSubview(self.habitAppsView)
+        self.habitAppsView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(30)
             make.centerX.equalTo(self.habitsTitleLabel)
-        }
-
-        self.addSubview(self.notesHabitView)
-        self.notesHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.thingsHabitView.snp.top)
-            make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-30)
-        }
-
-        self.addSubview(self.remindersHabitView)
-        self.remindersHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.thingsHabitView.snp.top)
-            make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(15)
         }
     }
 }

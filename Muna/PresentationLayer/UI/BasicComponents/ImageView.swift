@@ -17,7 +17,8 @@ class ImageView: NSImageView {
         self.image = NSImage(named: NSImage.Name(name))
     }
 
-    init() {
+    init(aspectRation: CALayerContentsGravity = .resizeAspectFill) {
+        self.aspectRation = aspectRation
         super.init(frame: .zero)
     }
 

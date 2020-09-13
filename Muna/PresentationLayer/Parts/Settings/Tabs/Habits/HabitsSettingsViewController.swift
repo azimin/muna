@@ -18,14 +18,14 @@ class HabitsSettingsViewController: NSViewController, ViewHolder {
     override func viewDidLoad() {
         self.title = "About"
 
-        self.rootView.notesHabitView.checkboxButton.target = self
-        self.rootView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
+        self.rootView.habitAppsView.notesHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 
-        self.rootView.thingsHabitView.checkboxButton.target = self
-        self.rootView.thingsHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
+        self.rootView.habitAppsView.thingsHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.thingsHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 
-        self.rootView.remindersHabitView.checkboxButton.target = self
-        self.rootView.remindersHabitView.checkboxButton.action = #selector(self.splashOnRemindersActions)
+        self.rootView.habitAppsView.remindersHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.remindersHabitView.checkboxButton.action = #selector(self.splashOnRemindersActions)
     }
 
     @objc
