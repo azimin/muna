@@ -37,14 +37,14 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         self.rootView.continueButton.target = self
         self.rootView.continueButton.action = #selector(self.buttonAction)
 
-        self.rootView.notesHabitView.checkboxButton.target = self
-        self.rootView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
+        self.rootView.habitAppsView.notesHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 
-        self.rootView.thingsHabitView.checkboxButton.target = self
-        self.rootView.thingsHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
+        self.rootView.habitAppsView.thingsHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.thingsHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 
-        self.rootView.remindersHabitView.checkboxButton.target = self
-        self.rootView.remindersHabitView.checkboxButton.action = #selector(self.splashOnRemindersActions)
+        self.rootView.habitAppsView.remindersHabitView.checkboxButton.target = self
+        self.rootView.habitAppsView.remindersHabitView.checkboxButton.action = #selector(self.splashOnRemindersActions)
 
         self.settingItemViewModel.setup()
     }

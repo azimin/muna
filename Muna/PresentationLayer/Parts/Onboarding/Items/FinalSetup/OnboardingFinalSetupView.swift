@@ -55,21 +55,7 @@ class OnboardingFinalSetupView: NSView {
         .withTextColorStyle(.title60Accent)
         .withText("To learn habit of using new app we will remind about it ever time you will use next apps")
 
-    let thingsHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "things"),
-        title: "Things",
-        initialState: Preferences.splashOnThings ? .on : .off
-    )
-    let notesHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "notes"),
-        title: "Notes",
-        initialState: Preferences.splashOnNotes ? .on : .off
-    )
-    let remindersHabitView = CheckboxWithImageSettingView(
-        image: NSImage(named: "reminders"),
-        title: "Reminders",
-        initialState: Preferences.splashOnReminders ? .on : .off
-    )
+    let habitAppsView = HabitAppsView()
 
     let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
 
@@ -161,27 +147,15 @@ class OnboardingFinalSetupView: NSView {
             make.top.equalTo(self.habitsTitleLabel.snp.bottom).offset(24)
         }
 
-        self.addSubview(self.thingsHabitView)
-        self.thingsHabitView.snp.makeConstraints { make in
+        self.addSubview(self.habitAppsView)
+        self.habitAppsView.snp.makeConstraints { make in
             make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
             make.centerX.equalTo(self.habitsTitleLabel)
         }
 
-        self.addSubview(self.notesHabitView)
-        self.notesHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.trailing.equalTo(self.thingsHabitView.snp.leading).inset(-30)
-        }
-
-        self.addSubview(self.remindersHabitView)
-        self.remindersHabitView.snp.makeConstraints { make in
-            make.top.equalTo(self.habitsDescriptionLabel.snp.bottom).offset(15)
-            make.leading.equalTo(self.thingsHabitView.snp.trailing).offset(15)
-        }
-
         self.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
-            make.top.equalTo(self.notesHabitView.snp.bottom).offset(20)
+            make.top.equalTo(self.habitAppsView.snp.bottom).offset(20)
             make.leading.equalTo(self.separatorView.snp.trailing).offset(126)
             make.trailing.equalToSuperview().inset(114)
         }
