@@ -246,7 +246,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         let item = self.groupedData.item(at: indexPath)
 
-        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName) else {
+        guard let imageName = item.imageName, let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: imageName) else {
             appAssertionFailure("No image")
             return
         }
@@ -384,7 +384,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             return
         }
 
-        guard let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: capturedItem.imageName) else {
+        guard let imageName = capturedItem.imageName, let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: imageName) else {
             appAssertionFailure("No image")
             return
         }

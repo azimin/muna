@@ -186,8 +186,12 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.metainformationView.commentLabel.stringValue = item.comment ?? ""
         self.isComplited = item.isComplited
 
-        let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: item.imageName)
-        self.imageView.image = image
+        if let imageName = item.imageName {
+            let image = ServiceLocator.shared.imageStorage.forceLoadImage(
+                name: imageName
+            )
+            self.imageView.image = image
+        }
 
         self.item = item
         item.toggleSeen()

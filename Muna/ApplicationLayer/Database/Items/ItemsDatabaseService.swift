@@ -146,7 +146,9 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
             self.notifications.removeNotification(item: item)
             self.items.remove(at: index)
 
-            _ = self.imageStorage.removeImage(name: item.imageName)
+            if let imageName = item.imageName {
+                _ = self.imageStorage.removeImage(name: imageName)
+            }
 
             if shouldTrack {
                 ServiceLocator.shared.analytics.increasePersonProperty(
@@ -202,7 +204,9 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     private func removeItems() {
         for item in self.items {
-            self.imageStorage.removeImage(name: item.imageName)
+            if let imageName = item.imageName {
+                self.imageStorage.removeImage(name: imageName)
+            }
             self.removeItem(id: item.id, shouldTrack: false, shouldSave: false)
         }
         self.saveItems()
