@@ -54,8 +54,9 @@ class MainPanelPresentationAnimationView: View {
             transform.damping = 8
             transform.speed = 2
         case .smartAssistent:
-            transform.damping = 6
-            transform.speed = 2.2
+            transform.damping = 8.5
+            transform.speed = 1.5
+            transform.mass = 0.7
         }
         transform.fromValue = self.layer?.transform
         transform.toValue = CATransform3DMakeTranslation(0, 0, 0)
