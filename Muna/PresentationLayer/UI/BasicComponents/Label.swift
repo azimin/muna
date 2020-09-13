@@ -126,30 +126,30 @@ class Label: NSTextField {
 }
 
 extension CALayer {
-func getBitmapImage() -> NSImage {
-    let btmpImgRep =
-        NSBitmapImageRep(
-            bitmapDataPlanes: nil,
-            pixelsWide: Int(self.frame.width),
-            pixelsHigh: Int(self.frame.height),
-            bitsPerSample: 8,
-            samplesPerPixel: 4,
-            hasAlpha: true,
-            isPlanar: false,
-            colorSpaceName: .deviceRGB,
-            bytesPerRow: 0,
-            bitsPerPixel: 32
-    )
+    func getBitmapImage() -> NSImage {
+        let btmpImgRep =
+            NSBitmapImageRep(
+                bitmapDataPlanes: nil,
+                pixelsWide: Int(self.frame.width),
+                pixelsHigh: Int(self.frame.height),
+                bitsPerSample: 8,
+                samplesPerPixel: 4,
+                hasAlpha: true,
+                isPlanar: false,
+                colorSpaceName: .deviceRGB,
+                bytesPerRow: 0,
+                bitsPerPixel: 32
+            )
 
-    let ctx = NSGraphicsContext(bitmapImageRep: btmpImgRep!)
-    let cgContext = ctx!.cgContext
+        let ctx = NSGraphicsContext(bitmapImageRep: btmpImgRep!)
+        let cgContext = ctx!.cgContext
 
-    self.render(in: cgContext)
+        self.render(in: cgContext)
 
-    let cgImage = cgContext.makeImage()
+        let cgImage = cgContext.makeImage()
 
-    let nsimage = NSImage(cgImage: cgImage!, size: CGSize(width: self.frame.width, height: self.frame.height))
+        let nsimage = NSImage(cgImage: cgImage!, size: CGSize(width: self.frame.width, height: self.frame.height))
 
         return nsimage
-  }
+    }
 }

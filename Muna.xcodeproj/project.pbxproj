@@ -106,6 +106,7 @@
 		9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9C24F45BC00069DE9F /* Hint.swift */; };
 		9F4E4FA024F45E5C0069DE9F /* HintList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9F24F45E5C0069DE9F /* HintList.swift */; };
 		9F4EB224250EA4C3002D29C0 /* SmartAssistentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */; };
+		9F4EB22A250EB22D002D29C0 /* MainPanelBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4EB229250EB22D002D29C0 /* MainPanelBackgroundView.swift */; };
 		9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */; };
 		9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3D2494E89600A34379 /* OnboardingView.swift */; };
 		9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F581E3F2494E8A100A34379 /* OnboardingViewController.swift */; };
@@ -315,6 +316,7 @@
 		9F4E4F9C24F45BC00069DE9F /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		9F4E4F9F24F45E5C0069DE9F /* HintList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintList.swift; sourceTree = "<group>"; };
 		9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAssistentView.swift; sourceTree = "<group>"; };
+		9F4EB229250EB22D002D29C0 /* MainPanelBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelBackgroundView.swift; sourceTree = "<group>"; };
 		9F4FE40D24D0BE5300AAEC31 /* AppDelegate+Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Analytics.swift"; sourceTree = "<group>"; };
 		9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelContentView.swift; sourceTree = "<group>"; };
 		9F581E3D2494E89600A34379 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -731,10 +733,10 @@
 		9F025C11246346E600F05D81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F4EB228250EB21D002D29C0 /* MainPanelBackground */,
 				9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */,
 				9F99D6012464B64B00695A19 /* Content */,
-				9F99D6022464B65900695A19 /* MainPanelView.swift */,
-				9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */,
+				9F4EB227250EB1F5002D29C0 /* MainPanel */,
 				9F97D0C4247DAE1C00358953 /* MainScreenView.swift */,
 			);
 			name = View;
@@ -962,6 +964,23 @@
 				9F4EB223250EA4C3002D29C0 /* SmartAssistentView.swift */,
 			);
 			path = SmartAssistent;
+			sourceTree = "<group>";
+		};
+		9F4EB227250EB1F5002D29C0 /* MainPanel */ = {
+			isa = PBXGroup;
+			children = (
+				9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */,
+				9F99D6022464B65900695A19 /* MainPanelView.swift */,
+			);
+			path = MainPanel;
+			sourceTree = "<group>";
+		};
+		9F4EB228250EB21D002D29C0 /* MainPanelBackground */ = {
+			isa = PBXGroup;
+			children = (
+				9F4EB229250EB22D002D29C0 /* MainPanelBackgroundView.swift */,
+			);
+			path = MainPanelBackground;
 			sourceTree = "<group>";
 		};
 		9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */ = {
@@ -1722,6 +1741,7 @@
 				2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */,
 				9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
+				9F4EB22A250EB22D002D29C0 /* MainPanelBackgroundView.swift in Sources */,
 				9F326FE2249959FE0095DEA3 /* OnboardingSubviewHowToGetReminder.swift in Sources */,
 				239AB0A924688E8E001526DA /* ItemModel.swift in Sources */,
 				9F326FDC249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift in Sources */,
