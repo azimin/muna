@@ -99,7 +99,8 @@ class MainScreenViewController: NSViewController {
         self.view.window?.makeFirstResponder(self.view)
 
         self.panelView.show(selectedItem: selectedItem)
-        self.rootView.panelPresentationView.show()
+        self.rootView.mainPanelPresentationView.show()
+        self.rootView.assistenPanelPresentationView.show()
         self.shortcutsController?.start()
 
         MousePositionService.shared.start()
@@ -117,7 +118,8 @@ class MainScreenViewController: NSViewController {
 
     func hide(completion: VoidBlock?) {
         self.panelView.hide()
-        self.rootView.panelPresentationView.hide(completion: completion)
+        self.rootView.mainPanelPresentationView.hide(completion: completion)
+        self.rootView.assistenPanelPresentationView.hide(completion: nil)
         self.rootView.hideShortcutsView()
         self.rootView.hideChangeTimeView()
 

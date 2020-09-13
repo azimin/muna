@@ -23,6 +23,8 @@ class MainPanelBackgroundView: View {
     override func viewSetup() {
         super.viewSetup()
 
+        self.layer?.cornerRadius = 12
+
         self.addSubview(self.backgroundView)
         self.backgroundView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
