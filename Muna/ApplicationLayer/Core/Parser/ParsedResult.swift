@@ -95,7 +95,7 @@ enum DateOffset {
     case minuts(minutes: Int)
 }
 
-struct ParsedResult {
+struct ParsedResult: Comparable {
     let refDate: Date
 
     var matchRange: NSRange
@@ -106,6 +106,18 @@ struct ParsedResult {
     var tagUnit: [TagUnit: Bool]
     var dateOffset: DateOffset?
     var prefix: DatePrefix?
+
+    static func < (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length < rhs.length
+    }
+
+    static func == (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length == rhs.length
+    }
+
+    static func > (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length > rhs.length
+    }
 }
 
 struct ParsedItem {

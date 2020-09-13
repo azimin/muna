@@ -63,7 +63,7 @@ class ENTimeMintuesOffsetParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
-            length: parsedItem.match.range.location,
+            length: parsedItem.match.range.length,
             reservedComponents:
             [
                 .year: year,

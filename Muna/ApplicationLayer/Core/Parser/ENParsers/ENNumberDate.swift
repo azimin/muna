@@ -36,14 +36,14 @@ class ENNumberDate: Parser {
 
         var month = parsedItem.refDate.month
         if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup),
-            var newMonth = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup)) {
+            let newMonth = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup)) {
             month = newMonth
         }
 
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
-            length: parsedItem.match.range.location,
+            length: parsedItem.match.range.length,
             reservedComponents: [.year: year, .month: month, .day: day],
             customDayComponents: [],
             customPartOfTheDayComponents: [],

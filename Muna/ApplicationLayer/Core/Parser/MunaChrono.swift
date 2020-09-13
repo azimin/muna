@@ -69,17 +69,11 @@ class MunaChrono {
 //            return numberedDates
 //        }
 
-        timeOffset.append(contentsOf: self.mergeTime(allParsedResults))
+//        timeOffset.append(contentsOf: self.mergeTime(allParsedResults))
 
-        var length = 0
-        let dates = timeOffset.sorted(by: {
-            if $0.matchRange.length > $1.matchRange.length {
-                length = $0.matchRange.length
-                return true
-            }
-            return false
-        })
-            .filter { $0.matchRange.length >= length }
+        let length = timeOffset.max()?.length ?? 0
+
+        let dates = timeOffset.filter { $0.length == length }
 
         return dates
     }
@@ -181,7 +175,6 @@ class MunaChrono {
                     return
                 }
 
-                print("result: \(finalResult)")
                 if newDate.matchRange.intersection(time.matchRange) != nil {
                     if newDate.matchRange.length == time.matchRange.length,
                         newDate.matchRange.lowerBound == time.matchRange.lowerBound,
@@ -203,9 +196,11 @@ class MunaChrono {
                 newDate.reservedComponents[.minute] = 0
 
                 guard let minutes = time.reservedComponents[.minute] else {
+                    newDate.length += time.length
                     return
                 }
 
+                newDate.length += time.length
                 newDate.reservedComponents[.minute] = minutes
             }
             finalResult.append(newDate)
@@ -351,10 +346,12 @@ class MunaChrono {
 
                 guard let minutes = time.reservedComponents[.minute] else {
                     finalResults.append(newDate)
+                    newDate.length += time.length
                     return
                 }
 
                 newDate.reservedComponents[.minute] = minutes
+                newDate.length += time.length
 
                 finalResults.append(newDate)
             }
