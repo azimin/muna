@@ -9,7 +9,6 @@
 import Cocoa
 
 class HintViewController: NSViewController, ViewHolder {
-
     typealias ViewType = HintView
 
     override func loadView() {

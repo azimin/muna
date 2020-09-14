@@ -19,11 +19,11 @@ final class HintView: View {
 
         self.setupInitialLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupInitialLayout() {
         self.addSubview(self.partShorcutView)
         self.partShorcutView.snp.makeConstraints { make in

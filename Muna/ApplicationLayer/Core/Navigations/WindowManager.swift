@@ -13,6 +13,7 @@ protocol WindowManagerProtocol {
     func toggleWindow(_ windowType: WindowType)
     func activateWindowIfNeeded(_ windowType: WindowType)
     func hideWindowIfNeeded(_ windowType: WindowType)
+    func showHintPopover(sender: AnyObject)
 }
 
 class WindowManager: WindowManagerProtocol {
@@ -383,6 +384,19 @@ class WindowManager: WindowManagerProtocol {
         }
 
         self.changeWindowState(windowType, state: false)
+    }
+
+    func showHintPopover(sender: AnyObject) {
+        let controller = HintViewController()
+
+        let popover = NSPopover()
+        popover.contentViewController = controller
+        popover.contentSize = CGSize(width: 198, height: 44)
+
+        popover.behavior = .semitransient
+        popover.animates = true
+
+        popover.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
     }
 
     private func setup() {
