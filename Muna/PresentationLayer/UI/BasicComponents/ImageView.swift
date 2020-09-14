@@ -27,16 +27,15 @@ class ImageView: NSImageView {
     }
 
     override var image: NSImage? {
+        get {
+            return super.image
+        }
         set {
             self.layer = CALayer()
             self.layer?.contentsGravity = self.aspectRation
             self.layer?.contents = newValue
             self.wantsLayer = true
             super.image = newValue
-        }
-
-        get {
-            return super.image
         }
     }
 }

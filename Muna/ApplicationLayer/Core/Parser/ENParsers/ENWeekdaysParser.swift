@@ -119,7 +119,7 @@ extension String {
     }
 }
 
-let utcTimeZone: TimeZone = TimeZone(identifier: "UTC")!
+let utcTimeZone = TimeZone(identifier: "UTC")!
 
 private let noneZeroComponents: Set<Calendar.Component> = [.year, .month, .day]
 

@@ -22,6 +22,9 @@ class TextField: View, NSTextFieldDelegate {
     weak var delegate: TextFieldDelegate?
 
     var placeholder: String? {
+        get {
+            return self.textField.placeholderAttributedString?.string
+        }
         set {
             if let placeholder = newValue {
                 self.textField.placeholderAttributedString = NSAttributedString(
@@ -34,9 +37,6 @@ class TextField: View, NSTextFieldDelegate {
             } else {
                 self.textField.placeholderAttributedString = nil
             }
-        }
-        get {
-            return self.textField.placeholderAttributedString?.string
         }
     }
 

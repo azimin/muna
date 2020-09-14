@@ -16,12 +16,12 @@ class Label: NSTextField {
     private var shouldCaptureFont: Bool = true
 
     var text: String {
+        get {
+            return self.stringValue
+        }
         set {
             self.stringValue = newValue
             self.adjustIfNeeded(text: newValue)
-        }
-        get {
-            return self.stringValue
         }
     }
 

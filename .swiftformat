@@ -3,3 +3,4 @@
 --stripunusedargs closure-only
 --exclude Pods
 --exclude Carthage
+--disable initCoderUnavailable

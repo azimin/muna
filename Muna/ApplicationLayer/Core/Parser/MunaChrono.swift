@@ -174,7 +174,8 @@ class MunaChrono {
                 if newDate.matchRange.intersection(time.matchRange) != nil {
                     if newDate.matchRange.length == time.matchRange.length,
                         newDate.matchRange.lowerBound == time.matchRange.lowerBound,
-                        newDate.matchRange.upperBound == time.matchRange.upperBound {
+                        newDate.matchRange.upperBound == time.matchRange.upperBound
+                    {
                         finalResult.append(time)
                     }
 

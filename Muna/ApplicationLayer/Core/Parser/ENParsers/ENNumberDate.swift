@@ -36,7 +36,8 @@ class ENNumberDate: Parser {
 
         var month = parsedItem.refDate.month
         if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup),
-            var newMonth = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup)) {
+            var newMonth = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup))
+        {
             month = newMonth
         }
 

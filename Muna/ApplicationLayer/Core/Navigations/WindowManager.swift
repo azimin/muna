@@ -398,7 +398,8 @@ class WindowManager: WindowManagerProtocol {
     func windowClosed(notification: NSNotification) {
         for (key, value) in self.windows {
             if let windowToClose = notification.object as? NSWindow,
-                value == windowToClose {
+                value == windowToClose
+            {
                 self.windowVisibleStatus[key] = false
                 self.windows[key] = nil
             }

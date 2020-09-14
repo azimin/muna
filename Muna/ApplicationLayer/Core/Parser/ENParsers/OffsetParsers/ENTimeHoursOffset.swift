@@ -40,7 +40,8 @@ class ENTimeHoursOffset: Parser {
 
         var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
-            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
+            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup))
+        {
             if minutes < 10 {
                 minutesOffset = Int((60.0 / 100.0) * Double(minutes * 10))
             } else {

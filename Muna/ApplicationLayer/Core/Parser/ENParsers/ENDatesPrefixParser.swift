@@ -73,7 +73,8 @@ class ENDatesPrefixParser: Parser {
 
         var monthInt = parsedItem.refDate.month
         if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup),
-            let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()] {
+            let monthOfYear = self.monthOffset[parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.monthGroup).lowercased()]
+        {
             monthInt = monthOfYear
         }
 

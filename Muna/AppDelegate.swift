@@ -418,7 +418,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func pingNotificationSetup(itemId: String, onlyIfMissing: Bool) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
-            let dueDate = item.dueDate {
+            let dueDate = item.dueDate
+        {
             let sinceReminder = Date().timeIntervalSince(dueDate)
 
             let value: Preferences.PingInterval
