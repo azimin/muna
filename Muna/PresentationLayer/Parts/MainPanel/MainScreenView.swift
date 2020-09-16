@@ -17,7 +17,7 @@ class MainScreenView: NSView {
         style: .mainPanel
     )
     let mainPanelView = MainPanelView()
-    let assistentPanelView = MainPanelBackgroundView()
+    let assistentPanelView = AssistentPanelView()
     let shortcutsView = MainPanelShortcutsView(style: .withoutShortcutsButton)
     var changeTimeView: TaskChangeTimeGlobalView?
     var hintView: PanelHintView?

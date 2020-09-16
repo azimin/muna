@@ -59,7 +59,10 @@ class Label: NSTextField {
     override func layout() {
         super.layout()
         self.adjustIfNeeded(text: self.text)
+        self.applyGradient()
+    }
 
+    private func applyGradient() {
         if let gradientLayer = self.gradientLayer {
             gradientLayer.frame = bounds
             gradientLayer.isHidden = false
@@ -114,6 +117,8 @@ class Label: NSTextField {
     private var gradientLayer: CAGradientLayer?
 
     func applyGradientText(colors: [CGColor]) {
+        self.gradientLayer?.removeFromSuperlayer()
+
         let gradient = CAGradientLayer()
         gradient.frame = bounds
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -122,6 +127,8 @@ class Label: NSTextField {
         self.wantsLayer = true
         layer?.addSublayer(gradient)
         self.gradientLayer = gradient
+        self.gradientLayer?.isHidden = true
+        self.applyGradient()
     }
 }
 

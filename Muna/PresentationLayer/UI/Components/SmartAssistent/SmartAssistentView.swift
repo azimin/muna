@@ -21,6 +21,15 @@ class SmartAssistentView: View {
     let label = Label(fontStyle: .bold, size: 12)
         .withText("Smart Assistent")
 
+    override func updateLayer() {
+        super.updateLayer()
+
+        self.label.applyGradientText(colors: [
+            ColorStyle.assitentLeftColor.color.cgColor,
+            ColorStyle.assitentRightColor.color.cgColor,
+        ])
+    }
+
     override func viewSetup() {
         super.viewSetup()
 
@@ -38,11 +47,6 @@ class SmartAssistentView: View {
         }
 
         self.addSubview(self.label)
-        self.label.applyGradientText(colors: [
-            ColorStyle.assitentLeftColor.color.cgColor,
-            ColorStyle.assitentRightColor.color.cgColor,
-        ])
-
         self.label.snp.makeConstraints { make in
             make.top.trailing.bottom.equalToSuperview().inset(
                 NSEdgeInsets(top: 5, left: 0, bottom: 5, right: 8)

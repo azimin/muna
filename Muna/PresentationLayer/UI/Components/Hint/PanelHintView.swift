@@ -9,16 +9,53 @@
 import AVKit
 import Cocoa
 
-class PanelHintView: PopupView {
-    let questionImage = ImageView(name: "icon_question")
+enum AssistentItem {
+    case popularItem(item: ItemModel)
+    case usageHint(hint: Hint)
+    case shortcutOfTheDay(shortcut: ShortcutItem)
+
+    var name: String {
+        switch self {
+        case .popularItem:
+            return "Popular Item"
+        case .shortcutOfTheDay:
+            return "Shortcut of the day"
+        case .usageHint:
+            return "Usage Hint"
+        }
+    }
+
+    var nameColor: NSColor {
+        switch self {
+        case .popularItem:
+            return NSColor(hex: "8EF075")
+        case .shortcutOfTheDay:
+            return NSColor(hex: "7DBBFF")
+        case .usageHint:
+            return NSColor(hex: "FFE37D")
+        }
+    }
+
+    var title: String? {
+        switch self {
+        case let .popularItem(item):
+            return "You moved this item \(item.numberOfTimeChanges ?? 0) times"
+        case .shortcutOfTheDay:
+            return nil
+        case let .usageHint(hint):
+            return hint.text
+        }
+    }
+}
+
+class AssistentItemView: View {
+    let closeButton = Button()
+        .withImageName("icon_close", color: .title60Accent)
 
     let titleLabel =
         Label(fontStyle: .heavy, size: 16)
             .withTextColorStyle(.hint)
             .withText("Hint")
-
-    let textLabel = Label(fontStyle: .medium, size: 14)
-        .withTextColorStyle(.titleAccent)
 
     let contentStackView = NSStackView(
         orientation: .vertical,
