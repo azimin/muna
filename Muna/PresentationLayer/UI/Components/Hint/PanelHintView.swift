@@ -49,7 +49,7 @@ enum AssistentItem {
 
     var description: String? {
         switch self {
-        case let .popularItem:
+        case .popularItem:
             return "We suggest to complete it or think about better deadline"
         case .shortcutOfTheDay, .usageHint:
             return nil
@@ -61,6 +61,9 @@ class AssistentItemView: View {
     let closeButton = Button()
         .withImageName("icon_close", color: .title60Accent)
 
+    let backgroundView = View()
+        .withBackgroundColorStyle(.lightForegroundOverlay)
+
     let titleLabel =
         Label(fontStyle: .heavy, size: 16)
             .withTextColorStyle(.hint)
@@ -68,7 +71,7 @@ class AssistentItemView: View {
 
     let contentStackView = NSStackView(
         orientation: .vertical,
-        alignment: .centerX,
+        alignment: .leading,
         distribution: .fill
     )
 
@@ -85,27 +88,35 @@ class AssistentItemView: View {
     }
 
     private func setup() {
+        self.addSubview(self.backgroundView)
+        self.backgroundView.layer?.cornerRadius = 12
+        self.backgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         self.addSubview(self.closeButton)
-        self.closeButton.snp.makeConstraints { maker in
-            maker.top.trailing.equalToSuperview().inset(NSEdgeInsets(
+        self.closeButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(NSEdgeInsets(
                 top: 16,
                 left: 0,
                 bottom: 0,
                 right: 12
             ))
-            maker.size.equalTo(CGSize(width: 16, height: 16))
+            make.size.equalTo(CGSize(width: 16, height: 16))
         }
 
         self.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { maker in
-            maker.centerY.equalTo(self.closeButton.snp.centerY)
-            maker.leading.equalToSuperview().inset(12)
+        self.titleLabel.text = self.assistentItem.name
+        self.titleLabel.textColor = self.assistentItem.nameColor
+        self.titleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.closeButton.snp.centerY)
+            make.leading.equalToSuperview().inset(12)
         }
 
         self.addSubview(self.contentStackView)
-        self.contentStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
-            maker.leading.trailing.bottom.equalToSuperview().inset(12)
+        self.contentStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
+            make.leading.trailing.bottom.equalToSuperview().inset(12)
         }
 
         if let title = self.assistentItem.title {
@@ -126,9 +137,18 @@ class AssistentItemView: View {
         case let .usageHint(hintItem):
             self.setupWithHint(hintItem: hintItem)
         case let .shortcutOfTheDay(shortcut):
-            print(shortcut)
+            let shortcutView = ShortcutView(item: shortcut)
+            self.contentStackView.addArrangedSubview(shortcutView)
         case let .popularItem(item):
-            print(item)
+            let itemView = MainPanelItemView()
+            itemView.update(item: item, style: .basic)
+
+            let scale: CGFloat = 0.8
+            let widthPaggination = (self.frame.width * (1 - scale)) / 2
+            let heightPaggination = (self.frame.height * (1 - scale)) / 2
+            let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
+            itemView.layer?.transform = transform
+            self.contentStackView.addArrangedSubview(itemView)
         }
     }
 
