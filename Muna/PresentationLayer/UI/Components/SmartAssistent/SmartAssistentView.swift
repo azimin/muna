@@ -55,4 +55,15 @@ class SmartAssistentView: View {
             make.centerY.equalToSuperview()
         }
     }
+
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        self.backgroundView.alphaValue = 0.7
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
+        print(self.isMousePoint(event.locationInWindow, in: self.bounds))
+        self.backgroundView.alphaValue = 1
+    }
 }
