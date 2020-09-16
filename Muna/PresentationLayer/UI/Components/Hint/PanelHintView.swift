@@ -67,7 +67,7 @@ class AssistentItemView: View {
 
     init(hintItem: HintItem) {
         self.hintItem = hintItem
-        super.init(style: .withoutShortcutsButton)
+        super.init(frame: .zero)
         self.setup()
     }
 
@@ -76,31 +76,31 @@ class AssistentItemView: View {
     }
 
     private func setup() {
-        self.addSubview(self.questionImage)
-        self.questionImage.snp.makeConstraints { maker in
-            maker.centerY.equalTo(self.closeButton.snp.centerY)
-            maker.leading.equalToSuperview().inset(12)
-            maker.size.equalTo(20)
-        }
-
-        self.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { maker in
-            maker.centerY.equalTo(self.closeButton.snp.centerY)
-            maker.leading.equalTo(self.questionImage.snp.trailing).inset(-8)
-        }
-
-        self.addSubview(self.textLabel)
-        self.textLabel.text = self.hintItem.hint.text
-        self.textLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
-            maker.leading.trailing.equalToSuperview().inset(12)
-        }
-
-        self.addSubview(self.contentStackView)
-        self.contentStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.textLabel.snp.bottom).inset(-14)
-            maker.leading.trailing.bottom.equalToSuperview().inset(12)
-        }
+//        self.addSubview(self.questionImage)
+//        self.questionImage.snp.makeConstraints { maker in
+//            maker.centerY.equalTo(self.closeButton.snp.centerY)
+//            maker.leading.equalToSuperview().inset(12)
+//            maker.size.equalTo(20)
+//        }
+//
+//        self.addSubview(self.titleLabel)
+//        self.titleLabel.snp.makeConstraints { maker in
+//            maker.centerY.equalTo(self.closeButton.snp.centerY)
+//            maker.leading.equalTo(self.questionImage.snp.trailing).inset(-8)
+//        }
+//
+//        self.addSubview(self.textLabel)
+//        self.textLabel.text = self.hintItem.hint.text
+//        self.textLabel.snp.makeConstraints { maker in
+//            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
+//            maker.leading.trailing.equalToSuperview().inset(12)
+//        }
+//
+//        self.addSubview(self.contentStackView)
+//        self.contentStackView.snp.makeConstraints { maker in
+//            maker.top.equalTo(self.textLabel.snp.bottom).inset(-14)
+//            maker.leading.trailing.bottom.equalToSuperview().inset(12)
+//        }
 
         switch self.hintItem.hint.content {
         case let .multiply(content):
