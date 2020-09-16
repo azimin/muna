@@ -11,7 +11,7 @@ import Cocoa
 
 enum AssistentItem {
     case popularItem(item: ItemModel)
-    case usageHint(hint: Hint)
+    case usageHint(hintItem: HintItem)
     case shortcutOfTheDay(shortcut: ShortcutItem)
 
     var name: String {
@@ -42,8 +42,17 @@ enum AssistentItem {
             return "You moved this item \(item.numberOfTimeChanges ?? 0) times"
         case .shortcutOfTheDay:
             return nil
-        case let .usageHint(hint):
-            return hint.text
+        case let .usageHint(hintItem):
+            return hintItem.hint.text
+        }
+    }
+
+    var description: String? {
+        switch self {
+        case let .popularItem:
+            return "We suggest to complete it or think about better deadline"
+        case .shortcutOfTheDay, .usageHint:
+            return nil
         }
     }
 }
@@ -63,10 +72,10 @@ class AssistentItemView: View {
         distribution: .fill
     )
 
-    private let hintItem: HintItem
+    private let assistentItem: AssistentItem
 
-    init(hintItem: HintItem) {
-        self.hintItem = hintItem
+    init(assistentItem: AssistentItem) {
+        self.assistentItem = assistentItem
         super.init(frame: .zero)
         self.setup()
     }
@@ -76,39 +85,61 @@ class AssistentItemView: View {
     }
 
     private func setup() {
-//        self.addSubview(self.questionImage)
-//        self.questionImage.snp.makeConstraints { maker in
-//            maker.centerY.equalTo(self.closeButton.snp.centerY)
-//            maker.leading.equalToSuperview().inset(12)
-//            maker.size.equalTo(20)
-//        }
-//
-//        self.addSubview(self.titleLabel)
-//        self.titleLabel.snp.makeConstraints { maker in
-//            maker.centerY.equalTo(self.closeButton.snp.centerY)
-//            maker.leading.equalTo(self.questionImage.snp.trailing).inset(-8)
-//        }
-//
-//        self.addSubview(self.textLabel)
-//        self.textLabel.text = self.hintItem.hint.text
-//        self.textLabel.snp.makeConstraints { maker in
-//            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
-//            maker.leading.trailing.equalToSuperview().inset(12)
-//        }
-//
-//        self.addSubview(self.contentStackView)
-//        self.contentStackView.snp.makeConstraints { maker in
-//            maker.top.equalTo(self.textLabel.snp.bottom).inset(-14)
-//            maker.leading.trailing.bottom.equalToSuperview().inset(12)
-//        }
+        self.addSubview(self.closeButton)
+        self.closeButton.snp.makeConstraints { maker in
+            maker.top.trailing.equalToSuperview().inset(NSEdgeInsets(
+                top: 16,
+                left: 0,
+                bottom: 0,
+                right: 12
+            ))
+            maker.size.equalTo(CGSize(width: 16, height: 16))
+        }
 
-        switch self.hintItem.hint.content {
+        self.addSubview(self.titleLabel)
+        self.titleLabel.snp.makeConstraints { maker in
+            maker.centerY.equalTo(self.closeButton.snp.centerY)
+            maker.leading.equalToSuperview().inset(12)
+        }
+
+        self.addSubview(self.contentStackView)
+        self.contentStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
+            maker.leading.trailing.bottom.equalToSuperview().inset(12)
+        }
+
+        if let title = self.assistentItem.title {
+            let titleLabel = Label(fontStyle: .medium, size: 14)
+                .withTextColorStyle(.titleAccent)
+                .withText(title)
+            self.contentStackView.addArrangedSubview(titleLabel)
+        }
+
+        if let description = self.assistentItem.description {
+            let descriptionLabel = Label(fontStyle: .medium, size: 14)
+                .withTextColorStyle(.title60Accent)
+                .withText(description)
+            self.contentStackView.addArrangedSubview(descriptionLabel)
+        }
+
+        switch self.assistentItem {
+        case let .usageHint(hintItem):
+            self.setupWithHint(hintItem: hintItem)
+        case let .shortcutOfTheDay(shortcut):
+            print(shortcut)
+        case let .popularItem(item):
+            print(item)
+        }
+    }
+
+    func setupWithHint(hintItem: HintItem) {
+        switch hintItem.hint.content {
         case let .multiply(content):
             for item in content {
                 self.addHintConent(content: item)
             }
         default:
-            self.addHintConent(content: self.hintItem.hint.content)
+            self.addHintConent(content: hintItem.hint.content)
         }
 
         NotificationCenter.default.addObserver(
