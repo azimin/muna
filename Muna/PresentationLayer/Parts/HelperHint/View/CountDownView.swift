@@ -37,6 +37,9 @@ final class CountDownView: View {
 
         if self.isNeededToDrawPath {
             self.drawInitialPath(inRect: self.bounds)
+            self.countDownLayer.transform = CATransform3DMakeRotation(45, 0, 0, 1)
+            self.countDownLayer.frame.origin.y = -2
+            self.countDownLayer.frame.origin.x = 17
         }
     }
 
@@ -73,8 +76,8 @@ final class CountDownView: View {
         countDownPath.appendArc(
             withCenter: NSPoint(x: 14, y: 14),
             radius: 12,
-            startAngle: 3.0 * .pi / 2.0,
-            endAngle: 3.0 * .pi / 2.0 + .pi * 2.0,
+            startAngle: .pi / 2.0 * 3.0,
+            endAngle: .pi / 2 * 3.0 + .pi * 2.0,
             clockwise: true
         )
         self.countDownLayer.path = countDownPath.cgPath
