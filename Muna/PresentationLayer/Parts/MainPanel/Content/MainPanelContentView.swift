@@ -114,7 +114,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         let animated: Bool
 
         if let item = selectedItem,
-            let indexPath = self.groupedData.indexPath(for: item) {
+            let indexPath = self.groupedData.indexPath(for: item)
+        {
             selectedIndexPath = indexPath
             animated = true
         } else {
@@ -185,7 +186,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         let point = self.window?.contentView?.convert(event.locationInWindow, to: self.collectionView) ?? .zero
 
         if let item = self.cellAt(point: point),
-            let indexPath = self.collectionView.indexPath(for: item) {
+            let indexPath = self.collectionView.indexPath(for: item)
+        {
             self.selectIndexPath(indexPath: indexPath, completion: nil)
 
             let itemModel = self.groupedData.item(at: indexPath)
@@ -374,7 +376,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.popover = nil
 
         guard let capturedView = self.capturedView,
-            let capturedItem = self.capturedItem else {
+            let capturedItem = self.capturedItem
+        else {
             appAssertionFailure("No captured view")
             return
         }

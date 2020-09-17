@@ -101,7 +101,8 @@ class Preferences {
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
                 requiringSecureCoding: false
-            ) {
+            )
+        {
             result[Preferences.defaultShortcutPanelKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutPanelKey)
         }
@@ -110,7 +111,8 @@ class Preferences {
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
                 requiringSecureCoding: false
-            ) {
+            )
+        {
             result[Preferences.defaultShortcutScreenshotKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutScreenshotKey)
         }
@@ -119,7 +121,8 @@ class Preferences {
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
                 requiringSecureCoding: false
-            ) {
+            )
+        {
             result[Preferences.defaultShortcutDebugKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutDebugKey)
         }
@@ -128,7 +131,8 @@ class Preferences {
             let data = try? NSKeyedArchiver.archivedData(
                 withRootObject: shortcut,
                 requiringSecureCoding: false
-            ) {
+            )
+        {
             result[Preferences.defaultShortcutFullscreenScreenshotKey] = data as NSObject
             UserDefaults.standard.set(data, forKey: defaultShortcutFullscreenScreenshotKey)
         }

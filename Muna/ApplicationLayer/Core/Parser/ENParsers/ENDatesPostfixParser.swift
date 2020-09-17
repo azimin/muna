@@ -72,7 +72,8 @@ class ENDatesPostfixParser: Parser {
         if !parsedItem.match.isEmpty(atRangeIndex: self.dayGroup),
             let monthDay = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup)),
             day <= 31,
-            day > 0 {
+            day > 0
+        {
             day = monthDay
         }
 

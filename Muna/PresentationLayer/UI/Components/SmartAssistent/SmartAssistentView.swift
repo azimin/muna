@@ -21,6 +21,15 @@ class SmartAssistentView: View {
     let label = Label(fontStyle: .bold, size: 12)
         .withText("Smart Assistent")
 
+    override func updateLayer() {
+        super.updateLayer()
+
+        self.label.applyGradientText(colors: [
+            ColorStyle.assitentLeftColor.color.cgColor,
+            ColorStyle.assitentRightColor.color.cgColor,
+        ])
+    }
+
     override func viewSetup() {
         super.viewSetup()
 
@@ -38,11 +47,6 @@ class SmartAssistentView: View {
         }
 
         self.addSubview(self.label)
-        self.label.applyGradientText(colors: [
-            ColorStyle.assitentLeftColor.color.cgColor,
-            ColorStyle.assitentRightColor.color.cgColor,
-        ])
-
         self.label.snp.makeConstraints { make in
             make.top.trailing.bottom.equalToSuperview().inset(
                 NSEdgeInsets(top: 5, left: 0, bottom: 5, right: 8)
@@ -50,5 +54,16 @@ class SmartAssistentView: View {
             make.leading.equalTo(self.arrowIcon.snp.trailing).inset(-6)
             make.centerY.equalToSuperview()
         }
+    }
+
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        self.backgroundView.alphaValue = 0.7
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
+        print(self.isMousePoint(event.locationInWindow, in: self.bounds))
+        self.backgroundView.alphaValue = 1
     }
 }

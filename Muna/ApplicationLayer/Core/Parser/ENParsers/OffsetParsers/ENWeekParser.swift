@@ -45,7 +45,8 @@ class ENWeekParser: Parser {
         }
 
         if !parsedItem.match.isEmpty(atRangeIndex: self.numberOfWeeksGroup),
-            let weeksOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfWeeksGroup)) {
+            let weeksOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfWeeksGroup))
+        {
             day += 7 * weeksOffset
             offset = weeksOffset
         }

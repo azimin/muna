@@ -9,28 +9,77 @@
 import AVKit
 import Cocoa
 
-class PanelHintView: PopupView {
-    let questionImage = ImageView(name: "icon_question")
+enum AssistentItem {
+    case popularItem(item: ItemModel)
+    case usageHint(hintItem: HintItem)
+    case shortcutOfTheDay(shortcut: ShortcutItem)
+
+    var name: String {
+        switch self {
+        case .popularItem:
+            return "Popular Item"
+        case .shortcutOfTheDay:
+            return "Shortcut of the day"
+        case .usageHint:
+            return "Usage Hint"
+        }
+    }
+
+    var nameColor: NSColor {
+        switch self {
+        case .popularItem:
+            return NSColor(hex: "8EF075")
+        case .shortcutOfTheDay:
+            return NSColor(hex: "7DBBFF")
+        case .usageHint:
+            return NSColor(hex: "FFE37D")
+        }
+    }
+
+    var title: String? {
+        switch self {
+        case let .popularItem(item):
+            return "You moved this item \(item.numberOfTimeChanges ?? 0) times"
+        case .shortcutOfTheDay:
+            return nil
+        case let .usageHint(hintItem):
+            return hintItem.hint.text
+        }
+    }
+
+    var description: String? {
+        switch self {
+        case .popularItem:
+            return "We suggest to complete it or think about better deadline"
+        case .shortcutOfTheDay, .usageHint:
+            return nil
+        }
+    }
+}
+
+class AssistentItemView: View {
+    let closeButton = Button()
+        .withImageName("icon_close", color: .title60Accent)
+
+    let backgroundView = View()
+        .withBackgroundColorStyle(.lightForegroundOverlay)
 
     let titleLabel =
         Label(fontStyle: .heavy, size: 16)
             .withTextColorStyle(.hint)
             .withText("Hint")
 
-    let textLabel = Label(fontStyle: .medium, size: 14)
-        .withTextColorStyle(.titleAccent)
-
     let contentStackView = NSStackView(
         orientation: .vertical,
-        alignment: .centerX,
+        alignment: .leading,
         distribution: .fill
     )
 
-    private let hintItem: HintItem
+    private let assistentItem: AssistentItem
 
-    init(hintItem: HintItem) {
-        self.hintItem = hintItem
-        super.init(style: .withoutShortcutsButton)
+    init(assistentItem: AssistentItem) {
+        self.assistentItem = assistentItem
+        super.init(frame: .zero)
         self.setup()
     }
 
@@ -39,39 +88,78 @@ class PanelHintView: PopupView {
     }
 
     private func setup() {
-        self.addSubview(self.questionImage)
-        self.questionImage.snp.makeConstraints { maker in
-            maker.centerY.equalTo(self.closeButton.snp.centerY)
-            maker.leading.equalToSuperview().inset(12)
-            maker.size.equalTo(20)
+        self.addSubview(self.backgroundView)
+        self.backgroundView.layer?.cornerRadius = 12
+        self.backgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        self.addSubview(self.closeButton)
+        self.closeButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(NSEdgeInsets(
+                top: 16,
+                left: 0,
+                bottom: 0,
+                right: 12
+            ))
+            make.size.equalTo(CGSize(width: 16, height: 16))
         }
 
         self.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { maker in
-            maker.centerY.equalTo(self.closeButton.snp.centerY)
-            maker.leading.equalTo(self.questionImage.snp.trailing).inset(-8)
-        }
-
-        self.addSubview(self.textLabel)
-        self.textLabel.text = self.hintItem.hint.text
-        self.textLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
-            maker.leading.trailing.equalToSuperview().inset(12)
+        self.titleLabel.text = self.assistentItem.name
+        self.titleLabel.textColor = self.assistentItem.nameColor
+        self.titleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.closeButton.snp.centerY)
+            make.leading.equalToSuperview().inset(12)
         }
 
         self.addSubview(self.contentStackView)
-        self.contentStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.textLabel.snp.bottom).inset(-14)
-            maker.leading.trailing.bottom.equalToSuperview().inset(12)
+        self.contentStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabel.snp.bottom).inset(-14)
+            make.leading.trailing.bottom.equalToSuperview().inset(12)
         }
 
-        switch self.hintItem.hint.content {
+        if let title = self.assistentItem.title {
+            let titleLabel = Label(fontStyle: .medium, size: 14)
+                .withTextColorStyle(.titleAccent)
+                .withText(title)
+            self.contentStackView.addArrangedSubview(titleLabel)
+        }
+
+        if let description = self.assistentItem.description {
+            let descriptionLabel = Label(fontStyle: .medium, size: 14)
+                .withTextColorStyle(.title60Accent)
+                .withText(description)
+            self.contentStackView.addArrangedSubview(descriptionLabel)
+        }
+
+        switch self.assistentItem {
+        case let .usageHint(hintItem):
+            self.setupWithHint(hintItem: hintItem)
+        case let .shortcutOfTheDay(shortcut):
+            let shortcutView = ShortcutView(item: shortcut)
+            self.contentStackView.addArrangedSubview(shortcutView)
+        case let .popularItem(item):
+            let itemView = MainPanelItemView()
+            itemView.update(item: item, style: .basic)
+
+            let scale: CGFloat = 0.8
+            let widthPaggination = (self.frame.width * (1 - scale)) / 2
+            let heightPaggination = (self.frame.height * (1 - scale)) / 2
+            let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
+            itemView.layer?.transform = transform
+            self.contentStackView.addArrangedSubview(itemView)
+        }
+    }
+
+    func setupWithHint(hintItem: HintItem) {
+        switch hintItem.hint.content {
         case let .multiply(content):
             for item in content {
                 self.addHintConent(content: item)
             }
         default:
-            self.addHintConent(content: self.hintItem.hint.content)
+            self.addHintConent(content: hintItem.hint.content)
         }
 
         NotificationCenter.default.addObserver(
