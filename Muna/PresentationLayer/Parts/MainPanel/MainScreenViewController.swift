@@ -50,6 +50,36 @@ class MainScreenViewController: NSViewController {
         self.panelView.bottomBar.shortcutsButton.action = #selector(self.shortcutAction)
 
         self.panelView.mainContentView.delegate = self
+
+        self.panelView.bottomBar.smartAssistentView.pressAction = {
+            self.toggleSmartAssistent()
+        }
+    }
+
+    func toggleSmartAssistent() {
+        if self.smartAssistenIsOpen {
+            self.hideSmartAssistentIfNeeded()
+        } else {
+            self.showSmartAssistentIfNeeded()
+        }
+    }
+
+    private var smartAssistenIsOpen = false
+
+    private func showSmartAssistentIfNeeded() {
+        guard !self.smartAssistenIsOpen else {
+            return
+        }
+        self.rootView.assistenPanelPresentationView.show()
+        self.smartAssistenIsOpen = true
+    }
+
+    private func hideSmartAssistentIfNeeded() {
+        guard self.smartAssistenIsOpen else {
+            return
+        }
+        self.rootView.assistenPanelPresentationView.hide(completion: nil)
+        self.smartAssistenIsOpen = false
     }
 
     @objc func settingAction() {
@@ -100,7 +130,6 @@ class MainScreenViewController: NSViewController {
 
         self.panelView.show(selectedItem: selectedItem)
         self.rootView.mainPanelPresentationView.show()
-        self.rootView.assistenPanelPresentationView.show()
         self.shortcutsController?.start()
 
         MousePositionService.shared.start()
@@ -119,7 +148,7 @@ class MainScreenViewController: NSViewController {
     func hide(completion: VoidBlock?) {
         self.panelView.hide()
         self.rootView.mainPanelPresentationView.hide(completion: completion)
-        self.rootView.assistenPanelPresentationView.hide(completion: nil)
+        self.hideSmartAssistentIfNeeded()
         self.rootView.hideShortcutsView()
         self.rootView.hideChangeTimeView()
 

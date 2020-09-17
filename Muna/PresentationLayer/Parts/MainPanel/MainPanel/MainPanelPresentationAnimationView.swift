@@ -40,12 +40,14 @@ class MainPanelPresentationAnimationView: View {
         super.layout()
 
         if self.isFirstLanch {
+            self.isHidden = true
             self.layer?.transform = CATransform3DMakeTranslation(self.insets, 0, 0)
             self.isFirstLanch = false
         }
     }
 
     func show() {
+        self.isHidden = false
         self.layer?.transform = CATransform3DMakeTranslation(self.insets, 0, 0)
 
         let transform = CASpringAnimation(keyPath: #keyPath(CALayer.transform))

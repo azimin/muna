@@ -21,6 +21,8 @@ class SmartAssistentView: View {
     let label = Label(fontStyle: .bold, size: 12)
         .withText("Smart Assistent")
 
+    var pressAction: VoidBlock?
+
     override func updateLayer() {
         super.updateLayer()
 
@@ -63,7 +65,13 @@ class SmartAssistentView: View {
 
     override func mouseUp(with event: NSEvent) {
         super.mouseUp(with: event)
-        print(self.isMousePoint(event.locationInWindow, in: self.bounds))
+
+        if let point = self.window?.contentView?.convert(event.locationInWindow, to: self) {
+            // swiftlint:disable legacy_nsgeometry_functions
+            if NSPointInRect(point, self.bounds) {
+                self.pressAction?()
+            }
+        }
         self.backgroundView.alphaValue = 1
     }
 }
