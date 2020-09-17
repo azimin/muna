@@ -44,7 +44,7 @@ class HintViewController: NSViewController, ViewHolder {
     override func mouseEntered(with event: NSEvent) {
         super.mouseEntered(with: event)
         self.rootView.closeButton.isHidden = false
-        self.rootView.countDownView.isHidden = false
+        self.rootView.countDownView.isHidden = true
         self.timer?.invalidate()
     }
 
