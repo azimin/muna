@@ -13,7 +13,9 @@ protocol WindowManagerProtocol {
     func toggleWindow(_ windowType: WindowType)
     func activateWindowIfNeeded(_ windowType: WindowType)
     func hideWindowIfNeeded(_ windowType: WindowType)
+
     func showHintPopover(sender: AnyObject)
+    func closeHintPopover()
 }
 
 class WindowManager: WindowManagerProtocol {
