@@ -19,8 +19,6 @@ final class HintView: View {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
-        self.backgroundColor = ColorStyle.backgroundOverlay.color
-
         self.setupInitialLayout()
     }
 

@@ -43,14 +43,13 @@ final class CountDownView: View {
     private func setupInitialLayout() {
         self.addSubview(self.label)
         self.label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.center.equalToSuperview()
         }
     }
 
     private func drawInitialPath(inRect rect: NSRect) {
         self.backgroundCountDownLayer.lineWidth = 2
-        self.backgroundCountDownLayer.strokeColor = NSColor.windowBackgroundColor.withAlphaComponent(0.6).cgColor
-        self.backgroundCountDownLayer.strokeEnd = 1
+        self.backgroundCountDownLayer.strokeColor = ColorStyle.title60Accent.color.cgColor
         self.backgroundCountDownLayer.lineCap = .round
         self.backgroundCountDownLayer.fillColor = nil
 
@@ -66,20 +65,19 @@ final class CountDownView: View {
         self.layer?.addSublayer(self.backgroundCountDownLayer)
 
         self.countDownLayer.lineWidth = 2
-        self.countDownLayer.strokeColor = NSColor.windowBackgroundColor.cgColor
-        self.countDownLayer.strokeEnd = 1
+        self.countDownLayer.strokeColor = ColorStyle.titleAccent.color.cgColor
         self.countDownLayer.lineCap = .round
         self.countDownLayer.fillColor = nil
 
-        let countDownPath = NSBezierPath(
-            ovalIn: NSRect(
-                x: rect.origin.x + 2,
-                y: rect.origin.y + 2,
-                width: rect.width - 4,
-                height: rect.height - 4
-            )
+        let countDownPath = NSBezierPath()
+        countDownPath.appendArc(
+            withCenter: NSPoint(x: 14, y: 14),
+            radius: 12,
+            startAngle: 3.0 * .pi / 2.0,
+            endAngle: 3.0 * .pi / 2.0 + .pi * 2.0,
+            clockwise: true
         )
-        self.backgroundCountDownLayer.path = countDownPath.cgPath
+        self.countDownLayer.path = countDownPath.cgPath
         self.layer?.addSublayer(self.countDownLayer)
     }
 }
