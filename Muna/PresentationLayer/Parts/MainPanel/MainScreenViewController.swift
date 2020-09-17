@@ -118,7 +118,11 @@ class MainScreenViewController: NSViewController {
             self.panelView.mainContentView.editReminder(byShortcut: true)
         case .close:
             if self.panelView.mainContentView.closePopUpIfNeeded() == false {
-                ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+                if self.smartAssistenIsOpen {
+                    self.toggleSmartAssistent()
+                } else {
+                    ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+                }
             }
         }
     }
