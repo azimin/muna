@@ -12,7 +12,8 @@ import SnapKit
 final class HintView: View {
     let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultActivationShortcut.item)
 
-    let closeButton = Button(image: NSImage(named: "close")!, target: nil, action: nil)
+    let closeButton = Button()
+        .withImageName("close", color: .title60Accent)
 
     let countDownView = CountDownView()
 
@@ -45,10 +46,8 @@ final class HintView: View {
         self.addSubview(self.closeButton)
         self.closeButton.isHidden = true
         self.closeButton.snp.makeConstraints { make in
-            make.size.equalTo(28)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(8)
-            make.leading.equalTo(self.partShorcutView.snp.trailing).offset(8)
+            make.size.equalTo(20)
+            make.center.equalTo(self.countDownView)
         }
     }
 }
