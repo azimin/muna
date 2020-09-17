@@ -414,6 +414,7 @@ class WindowManager: WindowManagerProtocol {
     func closeHintPopover() {
         self.hintPopover?.close()
         self.hintPopover = nil
+        self.isNeededToShowPopup = true
     }
 
     private func setup() {
