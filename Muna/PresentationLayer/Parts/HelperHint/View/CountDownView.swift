@@ -49,18 +49,36 @@ final class CountDownView: View {
 
     private func drawInitialPath(inRect rect: NSRect) {
         self.backgroundCountDownLayer.lineWidth = 2
-        self.backgroundCountDownLayer.strokeColor = ColorStyle.title60AccentAlpha.color.cgColor
+        self.backgroundCountDownLayer.strokeColor = NSColor.windowBackgroundColor.withAlphaComponent(0.6).cgColor
         self.backgroundCountDownLayer.strokeEnd = 1
+        self.backgroundCountDownLayer.lineCap = .round
+        self.backgroundCountDownLayer.fillColor = nil
 
-        let backgroundPath = NSBezierPath(ovalIn: rect)
+        let backgroundPath = NSBezierPath(
+            ovalIn: NSRect(
+                x: rect.origin.x + 2,
+                y: rect.origin.y + 2,
+                width: rect.width - 4,
+                height: rect.height - 4
+            )
+        )
         self.backgroundCountDownLayer.path = backgroundPath.cgPath
         self.layer?.addSublayer(self.backgroundCountDownLayer)
 
         self.countDownLayer.lineWidth = 2
-        self.countDownLayer.strokeColor = ColorStyle.titleAccent.color.cgColor
+        self.countDownLayer.strokeColor = NSColor.windowBackgroundColor.cgColor
         self.countDownLayer.strokeEnd = 1
+        self.countDownLayer.lineCap = .round
+        self.countDownLayer.fillColor = nil
 
-        let countDownPath = NSBezierPath(ovalIn: rect)
+        let countDownPath = NSBezierPath(
+            ovalIn: NSRect(
+                x: rect.origin.x + 2,
+                y: rect.origin.y + 2,
+                width: rect.width - 4,
+                height: rect.height - 4
+            )
+        )
         self.backgroundCountDownLayer.path = countDownPath.cgPath
         self.layer?.addSublayer(self.countDownLayer)
     }
