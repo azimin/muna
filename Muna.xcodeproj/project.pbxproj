@@ -70,6 +70,7 @@
 		9F152703246DCE870037623B /* TimeExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152702246DCE870037623B /* TimeExampleView.swift */; };
 		9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152708246DD7D70037623B /* SettingsViewController.swift */; };
 		9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15270A246DD7DF0037623B /* SettingsView.swift */; };
+		9F18D5782513FD9400729B2C /* AssistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18D5772513FD9400729B2C /* AssistentService.swift */; };
 		9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */; };
 		9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */; };
 		9F1CB7572473190300DFBB05 /* DateItemPresentationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */; };
@@ -278,6 +279,7 @@
 		9F152702246DCE870037623B /* TimeExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeExampleView.swift; sourceTree = "<group>"; };
 		9F152708246DD7D70037623B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9F15270A246DD7DF0037623B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9F18D5772513FD9400729B2C /* AssistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistentService.swift; sourceTree = "<group>"; };
 		9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeParserTests.swift; sourceTree = "<group>"; };
 		9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemsTransformer.swift; sourceTree = "<group>"; };
 		9F1CB7562473190300DFBB05 /* DateItemPresentationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemPresentationConfigurator.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9F18D5762513FD7C00729B2C /* AssistentService */,
 				23C7C9C524F83FA8005110CB /* ActiveAppCheckService */,
 				9F33FC4E24E335BA00942BFD /* Beta */,
 				23DAE37E24E2896200D3B1AD /* PermissionsService */,
@@ -792,6 +795,14 @@
 				9F152708246DD7D70037623B /* SettingsViewController.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		9F18D5762513FD7C00729B2C /* AssistentService */ = {
+			isa = PBXGroup;
+			children = (
+				9F18D5772513FD9400729B2C /* AssistentService.swift */,
+			);
+			path = AssistentService;
 			sourceTree = "<group>";
 		};
 		9F1CB75024730AB500DFBB05 /* Test */ = {
@@ -1758,6 +1769,7 @@
 				9F326FDC249959DA0095DEA3 /* OnboardingSubviewHowToCapture.swift in Sources */,
 				23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */,
 				233EFAA02471894500656CE9 /* ScreenshotStateViewController+Shortcuts.swift in Sources */,
+				9F18D5782513FD9400729B2C /* AssistentService.swift in Sources */,
 				9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,

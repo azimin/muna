@@ -62,7 +62,7 @@ class AssistentItemView: View {
         .withImageName("icon_close", color: .title60Accent)
 
     let backgroundView = View()
-        .withBackgroundColorStyle(.lightForegroundOverlay)
+        .withBackgroundColorStyle(.lightOverlay)
 
     let titleLabel =
         Label(fontStyle: .heavy, size: 16)
