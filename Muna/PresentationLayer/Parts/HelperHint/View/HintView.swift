@@ -12,6 +12,8 @@ import SnapKit
 final class HintView: View {
     let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultActivationShortcut.item)
 
+    let countDownView = CountDownView()
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
@@ -30,7 +32,14 @@ final class HintView: View {
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().inset(12)
-            make.trailing.equalToSuperview().inset(20)
+        }
+
+        self.addSubview(self.countDownView)
+        self.countDownView.snp.makeConstraints { make in
+            make.size.equalTo(28)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(8)
+            make.leading.equalTo(self.partShorcutView.snp.trailing).offset(8)
         }
     }
 }

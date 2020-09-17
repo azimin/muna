@@ -18,6 +18,7 @@
 		2324AC4A24C10307005011D7 /* ENWeekParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2324AC4924C10307005011D7 /* ENWeekParser.swift */; };
 		2326DFAE250FD73200316D8B /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326DFAD250FD73200316D8B /* HintView.swift */; };
 		2326DFB1250FDE6700316D8B /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326DFB0250FDE6700316D8B /* HintViewController.swift */; };
+		2326DFB3250FE20A00316D8B /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326DFB2250FE20A00316D8B /* CountDownView.swift */; };
 		232B2FAB2477CC550061801E /* ENDatesPostfixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */; };
 		233E4B182507EDFD00A1243D /* CheckboxWithImageSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E4B172507EDFD00A1243D /* CheckboxWithImageSettingView.swift */; };
 		233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E747C246B4AB60070EABA /* SavingProcessingService.swift */; };
@@ -54,6 +55,7 @@
 		23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */; };
 		23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */; };
 		23C7C9C724F83FE3005110CB /* ActiveAppCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C7C9C624F83FE3005110CB /* ActiveAppCheckService.swift */; };
+		23D3875D25120CDD00762F6B /* NSBezierPath+CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
 		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
@@ -220,6 +222,7 @@
 		2324AC4924C10307005011D7 /* ENWeekParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekParser.swift; sourceTree = "<group>"; };
 		2326DFAD250FD73200316D8B /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		2326DFB0250FDE6700316D8B /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
+		2326DFB2250FE20A00316D8B /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPostfixParser.swift; sourceTree = "<group>"; };
 		233E4B172507EDFD00A1243D /* CheckboxWithImageSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxWithImageSettingView.swift; sourceTree = "<group>"; };
 		233E747C246B4AB60070EABA /* SavingProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingProcessingService.swift; sourceTree = "<group>"; };
@@ -258,6 +261,7 @@
 		23B6C78124ADAE260071ACA8 /* UserDefaultsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEntry.swift; sourceTree = "<group>"; };
 		23B9865824E05E8300AF1BDD /* PresentationLayerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationLayerConstants.swift; sourceTree = "<group>"; };
 		23C7C9C624F83FE3005110CB /* ActiveAppCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAppCheckService.swift; sourceTree = "<group>"; };
+		23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+CGPath.swift"; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersmissionsService.swift; sourceTree = "<group>"; };
 		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+LogPermissions.swift"; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				2326DFAD250FD73200316D8B /* HintView.swift */,
+				2326DFB2250FE20A00316D8B /* CountDownView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1218,6 +1223,7 @@
 				9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */,
 				9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */,
 				9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */,
+				23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1670,7 +1676,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat . --swiftversion 5\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "#if which swiftformat >/dev/null; then\n # swiftformat . --swiftversion 5\n#else\n#  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n# fi\n";
 		};
 		9F2682C32471BEF000B79D03 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1769,6 +1775,7 @@
 				9F2D341024D0B9F00049DD43 /* AnalyticsService.swift in Sources */,
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
+				2326DFB3250FE20A00316D8B /* CountDownView.swift in Sources */,
 				2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */,
 				9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
@@ -1873,6 +1880,7 @@
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
+				23D3875D25120CDD00762F6B /* NSBezierPath+CGPath.swift in Sources */,
 				9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */,
 				23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,

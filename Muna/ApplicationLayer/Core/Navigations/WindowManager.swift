@@ -27,6 +27,10 @@ class WindowManager: WindowManagerProtocol {
 
     private let betaKey: BetaKeyService
 
+    private var isNeededToShowPopup = true
+
+    private var hintPopover: NSPopover?
+
     init(betaKey: BetaKeyService) {
         self.betaKey = betaKey
         self.setup()
@@ -387,16 +391,29 @@ class WindowManager: WindowManagerProtocol {
     }
 
     func showHintPopover(sender: AnyObject) {
+        guard self.isNeededToShowPopup else { return }
+
+        self.isNeededToShowPopup = false
+
+        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
+            "type": "Hint popup",
+        ])
+
         let controller = HintViewController()
 
-        let popover = NSPopover()
-        popover.contentViewController = controller
-        popover.contentSize = CGSize(width: 198, height: 44)
+        self.hintPopover = NSPopover()
+        self.hintPopover?.contentViewController = controller
+        self.hintPopover?.contentSize = CGSize(width: 198, height: 44)
 
-        popover.behavior = .semitransient
-        popover.animates = true
+        self.hintPopover?.behavior = .semitransient
+        self.hintPopover?.animates = true
 
-        popover.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
+        self.hintPopover?.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
+    }
+
+    func closeHintPopover() {
+        self.hintPopover?.close()
+        self.hintPopover = nil
     }
 
     private func setup() {
