@@ -94,7 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             }
 
             if isNeededToPlayAnimation {
-                self.animateView()
+                ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
             }
         }
     }

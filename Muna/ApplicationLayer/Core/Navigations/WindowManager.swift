@@ -13,6 +13,9 @@ protocol WindowManagerProtocol {
     func toggleWindow(_ windowType: WindowType)
     func activateWindowIfNeeded(_ windowType: WindowType)
     func hideWindowIfNeeded(_ windowType: WindowType)
+
+    func showHintPopover(sender: AnyObject)
+    func closeHintPopover()
 }
 
 class WindowManager: WindowManagerProtocol {
@@ -25,6 +28,10 @@ class WindowManager: WindowManagerProtocol {
     private var windowVisibleStatus: [WindowType: Bool] = [:]
 
     private let betaKey: BetaKeyService
+
+    private var isNeededToShowPopup = true
+
+    private var hintPopover: NSPopover?
 
     init(betaKey: BetaKeyService) {
         self.betaKey = betaKey
@@ -383,6 +390,33 @@ class WindowManager: WindowManagerProtocol {
         }
 
         self.changeWindowState(windowType, state: false)
+    }
+
+    func showHintPopover(sender: AnyObject) {
+        guard self.isNeededToShowPopup else { return }
+
+        self.isNeededToShowPopup = false
+
+        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
+            "type": "Hint popup",
+        ])
+
+        let controller = HintViewController()
+
+        self.hintPopover = NSPopover()
+        self.hintPopover?.contentViewController = controller
+        self.hintPopover?.contentSize = CGSize(width: 198, height: 44)
+
+        self.hintPopover?.behavior = .semitransient
+        self.hintPopover?.animates = true
+
+        self.hintPopover?.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
+    }
+
+    func closeHintPopover() {
+        self.hintPopover?.close()
+        self.hintPopover = nil
+        self.isNeededToShowPopup = true
     }
 
     private func setup() {
