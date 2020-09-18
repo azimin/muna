@@ -97,15 +97,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
             let numberOfUncomplitedItems = database.fetchItems(filter: .uncompleted).count
 
-
             let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
-            
+
             let isBigGap = gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2
-            let isFinishedItemsBig = numberOfComplitedItems >= 15
-            let isALotOfUncomplitedItems = numberOfUncomplitedItems >= 6
+            let isFinishedItemsBig = numberOfComplitedItems <= 15
+            let isALotOfUncomplitedItems = numberOfUncomplitedItems <= 6
 
             if isNeededToPlayAnimation, (isBigGap || isFinishedItemsBig || isALotOfUncomplitedItems) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
                 }
             }
