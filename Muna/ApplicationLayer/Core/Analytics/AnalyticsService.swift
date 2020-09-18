@@ -28,8 +28,8 @@ public class AnalyticsService: AnalyticsServiceProtocol {
 
         if let id = apmplitudeId {
             Amplitude.instance().initializeApiKey(id)
-            Amplitude.instance()?.trackingSessionEvents = true
-            Amplitude.instance()?.setUserId(self.userId, startNewSession: true)
+            Amplitude.instance().trackingSessionEvents = true
+            Amplitude.instance().setUserId(self.userId, startNewSession: true)
             MSAppCenter.start("6b14925b-9fe0-4d27-a949-a3f0625a538a", withServices: [
                 MSAnalytics.self,
                 MSCrashes.self,
@@ -62,7 +62,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
     }
 
     public var deviceId: String? {
-        return Amplitude.instance()?.getDeviceId()
+        return Amplitude.instance().getDeviceId()
     }
 
     public func buildCohortPair() -> AnalyticsServiceProtocol.CohortPair {
@@ -113,8 +113,9 @@ public class AnalyticsService: AnalyticsServiceProtocol {
     public func setPersonProperty(name: String, value: AnalyticsValueProtocol) {
         let object = value.analyticsValue
 
-        let identify = AMPIdentify().set(name, value: object)
-        Amplitude.instance().identify(identify)
+        if let identify = AMPIdentify().set(name, value: object) {
+            Amplitude.instance().identify(identify)
+        }
         self.additionalServices.forEach { $0.setPersonProperty(name: name, value: object) }
 
         #if DEBUG
@@ -125,8 +126,9 @@ public class AnalyticsService: AnalyticsServiceProtocol {
     public func setPersonPropertyOnce(name: String, value: AnalyticsValueProtocol) {
         let object = value.analyticsValue
 
-        let identify = AMPIdentify().setOnce(name, value: object)
-        Amplitude.instance().identify(identify)
+        if let identify = AMPIdentify().setOnce(name, value: object) {
+            Amplitude.instance().identify(identify)
+        }
 
         let udKey = self.storageUserPropertiesKey(with: name)
         if self.storage.getBool(forKey: udKey) == nil {
@@ -144,8 +146,9 @@ public class AnalyticsService: AnalyticsServiceProtocol {
     }
 
     public func increasePersonProperty(name: String, by value: Int) {
-        let identify = AMPIdentify().add(name, value: value as NSObject)
-        Amplitude.instance().identify(identify)
+        if let identify = AMPIdentify().add(name, value: value as NSObject) {
+            Amplitude.instance().identify(identify)
+        }
 
         let udKey = self.storageUserPropertiesKey(with: name)
         let storedValue = self.storage.getInt(forKey: udKey)
