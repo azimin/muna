@@ -93,7 +93,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 isNeededToPlayAnimation = Preferences.splashOnThings
             }
 
-            if isNeededToPlayAnimation {
+            let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
+
+            if isNeededToPlayAnimation, gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2 {
                 ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
             }
         }
@@ -131,6 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.togglePane()
             }
         )
@@ -138,6 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()
                 self.hideFullscreenScreenshotIfNeeded()
                 self.toggleScreenshotState()
@@ -147,6 +151,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()
                 self.hideFullscreenScreenshotIfNeeded()
                 self.toogleFullscreenScreenshotState()
