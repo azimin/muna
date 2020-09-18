@@ -93,9 +93,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 isNeededToPlayAnimation = Preferences.splashOnThings
             }
 
-            let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
+            let database = ServiceLocator.shared.itemsDatabase
+            let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
+            let numberOfUncomplitedItems = database.fetchItems(filter: .uncompleted).count
 
-            if isNeededToPlayAnimation, gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2 {
+
+            let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
+            
+            let isBigGap = gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2
+            let isFinishedItemsBig = numberOfComplitedItems >= 15
+            let isALotOfUncomplitedItems = numberOfUncomplitedItems >= 6
+
+            if isNeededToPlayAnimation, (isBigGap || isFinishedItemsBig || isALotOfUncomplitedItems) {
                 ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
             }
         }
