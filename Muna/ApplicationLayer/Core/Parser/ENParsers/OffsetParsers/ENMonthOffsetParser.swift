@@ -10,7 +10,7 @@ import Foundation
 
 class ENMonthOffsetParser: Parser {
     override var pattern: String {
-        return "\\b(?:(in|next|past|this)\\s*)"
+        return "\\b(?:(in|next|past|this)\\s*)?"
             + "(?:(\\d{1,}))?"
             + "(\\s*(months|month))\\b"
     }
@@ -59,6 +59,7 @@ class ENMonthOffsetParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.length,
             reservedComponents: [.year: year, .month: month, .day: day],
             customDayComponents: [],
             customPartOfTheDayComponents: [],

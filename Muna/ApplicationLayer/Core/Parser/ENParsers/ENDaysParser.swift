@@ -49,6 +49,7 @@ class ENDaysParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.length,
             reservedComponents: [.year: year, .month: month, .day: day],
             customDayComponents: [],
             customPartOfTheDayComponents: [],

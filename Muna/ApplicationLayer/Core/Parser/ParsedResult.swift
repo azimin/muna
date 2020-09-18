@@ -95,16 +95,29 @@ enum DateOffset {
     case minuts(minutes: Int)
 }
 
-struct ParsedResult {
+struct ParsedResult: Comparable {
     let refDate: Date
 
     var matchRange: NSRange
+    var length: Int
     var reservedComponents: [ReserverdUnit: Int]
     var customDayComponents: [CustomDayWords]
     var customPartOfTheDayComponents: [CustomDayPartWords]
     var tagUnit: [TagUnit: Bool]
     var dateOffset: DateOffset?
     var prefix: DatePrefix?
+
+    static func < (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length < rhs.length
+    }
+
+    static func == (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length == rhs.length
+    }
+
+    static func > (lhs: ParsedResult, rhs: ParsedResult) -> Bool {
+        return lhs.length > rhs.length
+    }
 }
 
 struct ParsedItem {
