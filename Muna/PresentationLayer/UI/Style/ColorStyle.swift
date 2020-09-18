@@ -41,6 +41,12 @@ enum ColorStyle {
 
     case alwaysWhite
 
+    // MARK: Assisten
+
+    case assitentPlateBackground
+    case assitentLeftColor
+    case assitentRightColor
+
     var color: NSColor {
         switch Theme.current {
         case .dark:
@@ -87,6 +93,12 @@ enum ColorStyle {
                 return NSColor.white
             case .newTitle:
                 return NSColor(hex: "E3E4E4")
+            case .assitentPlateBackground:
+                return NSColor.white.withAlphaComponent(0.2)
+            case .assitentLeftColor:
+                return NSColor(hex: "D9ECBC")
+            case .assitentRightColor:
+                return NSColor(hex: "EBCBF6")
             }
         case .light:
             switch self {
@@ -134,6 +146,12 @@ enum ColorStyle {
                 return NSColor.black.withAlphaComponent(0.13)
             case .alwaysWhite:
                 return NSColor.white
+            case .assitentPlateBackground:
+                return NSColor.black.withAlphaComponent(0.2)
+            case .assitentLeftColor:
+                return NSColor(hex: "D9ECBC")
+            case .assitentRightColor:
+                return NSColor(hex: "EBCBF6")
             }
         }
     }

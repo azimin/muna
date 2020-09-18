@@ -182,7 +182,8 @@ private extension RemindersOptionsController {
         ]
 
         if let eveningDate = date.dateBySet(hour: 7, min: 0, secs: 0),
-            date < eveningDate {
+            date < eveningDate
+        {
             values.append(
                 ReminderItem(
                     value: .date(date: eveningDate),

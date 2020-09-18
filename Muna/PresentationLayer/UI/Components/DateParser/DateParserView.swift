@@ -69,7 +69,8 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
 
         var subviewIndex: Int
         if let option = self.mainOption,
-            let index = self.itemsStackView.arrangedSubviews.firstIndex(of: option) {
+            let index = self.itemsStackView.arrangedSubviews.firstIndex(of: option)
+        {
             subviewIndex = index
         } else {
             appAssertionFailure("No index")

@@ -93,8 +93,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 isNeededToPlayAnimation = Preferences.splashOnThings
             }
 
-            if isNeededToPlayAnimation {
-                self.animateView()
+            let database = ServiceLocator.shared.itemsDatabase
+            let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
+            let numberOfUncomplitedItems = database.fetchItems(filter: .uncompleted).count
+
+            let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
+
+            let isBigGap = gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2
+            let isFinishedItemsBig = numberOfComplitedItems <= 15
+            let isALotOfUncomplitedItems = numberOfUncomplitedItems <= 6
+
+            if isNeededToPlayAnimation, (isBigGap || isFinishedItemsBig || isALotOfUncomplitedItems) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
+                }
             }
         }
     }
@@ -131,6 +143,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.togglePane()
             }
         )
@@ -138,6 +151,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()
                 self.hideFullscreenScreenshotIfNeeded()
                 self.toggleScreenshotState()
@@ -147,6 +161,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
             toAction: {
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()
                 self.hideFullscreenScreenshotIfNeeded()
                 self.toogleFullscreenScreenshotState()
@@ -418,7 +433,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func pingNotificationSetup(itemId: String, onlyIfMissing: Bool) {
         if let item = ServiceLocator.shared.itemsDatabase.item(by: itemId),
-            let dueDate = item.dueDate {
+            let dueDate = item.dueDate
+        {
             let sinceReminder = Date().timeIntervalSince(dueDate)
 
             let value: Preferences.PingInterval

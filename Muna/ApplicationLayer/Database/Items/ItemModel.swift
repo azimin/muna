@@ -10,7 +10,7 @@ import Foundation
 
 protocol ItemModelProtocol {
     var id: String { get }
-    var imageName: String { get }
+    var imageName: String? { get }
 
     var dueDateString: String? { get }
     var dueDate: Date? { get }
@@ -28,7 +28,7 @@ protocol ItemModelProtocol {
 
 class ItemModel: ItemModelProtocol, Codable {
     var id: String
-    var imageName: String
+    var imageName: String?
     var creationDate: Date
 
     var numberOfTimeChanges: Int?
@@ -93,7 +93,7 @@ class ItemModel: ItemModelProtocol, Codable {
 
     init(
         id: String,
-        imageName: String,
+        imageName: String?,
         creationDate: Date,
         dueDateString: String?,
         dueDate: Date?,

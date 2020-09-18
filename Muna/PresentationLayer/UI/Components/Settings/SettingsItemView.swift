@@ -27,7 +27,7 @@ class SettingsItemView: NSView {
 
     weak var delegate: SettingsItemViewDelegate?
 
-    let settingsTitleLabel = Label(fontStyle: .bold, size: 24)
+    let settingsTitleLabel = Label(fontStyle: .bold, size: 18)
         .withTextColorStyle(.titleAccent)
         .withText("General")
 

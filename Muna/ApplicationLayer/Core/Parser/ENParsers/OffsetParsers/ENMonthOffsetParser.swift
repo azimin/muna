@@ -45,7 +45,8 @@ class ENMonthOffsetParser: Parser {
         }
 
         if !parsedItem.match.isEmpty(atRangeIndex: self.numberOfMonthsGroup),
-            let monthsOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfMonthsGroup)) {
+            let monthsOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.numberOfMonthsGroup))
+        {
             month += monthsOffset
             offset = monthsOffset
         }

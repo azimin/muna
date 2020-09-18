@@ -14,6 +14,9 @@ class BetaKeyService {
     }
 
     var key: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "beta_key")
+        }
         set {
             UserDefaults.standard.set(newValue, forKey: "beta_key")
 
@@ -23,9 +26,6 @@ class BetaKeyService {
                     value: value
                 )
             }
-        }
-        get {
-            return UserDefaults.standard.string(forKey: "beta_key")
         }
     }
 

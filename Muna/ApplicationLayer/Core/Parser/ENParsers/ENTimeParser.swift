@@ -43,7 +43,8 @@ class ENTimeParser: Parser {
         var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
             let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)),
-            minutes < 60 {
+            minutes < 60
+        {
             minutesOffset = minutes
         }
 
@@ -53,14 +54,16 @@ class ENTimeParser: Parser {
         }
 
         if !partOfTheDay.isEmpty,
-            partOfTheDay == "pm" || partOfTheDay == "p.m." {
+            partOfTheDay == "pm" || partOfTheDay == "p.m."
+        {
             if hoursOffset < 12 {
                 hoursOffset += 12
             }
         }
 
         if !partOfTheDay.isEmpty,
-            partOfTheDay == "am" || partOfTheDay == "a.m." {
+            partOfTheDay == "am" || partOfTheDay == "a.m."
+        {
             if hoursOffset == 12 {
                 hoursOffset -= 12
             }

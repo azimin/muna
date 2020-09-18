@@ -51,8 +51,13 @@ class TaskChangeTimeGlobalView: View {
 
         switch self.style {
         case .withImage:
+            guard let imageName = self.itemModel.imageName else {
+                appAssertionFailure("No image")
+                return
+            }
+
             let image = ServiceLocator.shared.imageStorage.forceLoadImage(
-                name: self.itemModel.imageName
+                name: imageName
             )
             self.imageView.image = image
 

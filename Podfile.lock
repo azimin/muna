@@ -1,17 +1,17 @@
 PODS:
-  - Amplitude (5.2.1)
-  - AppCenter (3.3.2):
-    - AppCenter/Analytics (= 3.3.2)
-    - AppCenter/Crashes (= 3.3.2)
-  - AppCenter/Analytics (3.3.2):
+  - Amplitude (7.0.0)
+  - AppCenter (3.3.4):
+    - AppCenter/Analytics (= 3.3.4)
+    - AppCenter/Crashes (= 3.3.4)
+  - AppCenter/Analytics (3.3.4):
     - AppCenter/Core
-  - AppCenter/Core (3.3.2)
-  - AppCenter/Crashes (3.3.2):
+  - AppCenter/Core (3.3.4)
+  - AppCenter/Crashes (3.3.4):
     - AppCenter/Core
   - lottie-ios (3.1.8)
   - MASShortcut (2.4.0)
   - SnapKit (5.0.1)
-  - SwiftDate (6.1.0)
+  - SwiftDate (6.2.0)
   - SwiftyChrono (1.1.0)
 
 DEPENDENCIES:
@@ -34,14 +34,14 @@ SPEC REPOS:
     - SwiftyChrono
 
 SPEC CHECKSUMS:
-  Amplitude: 9774e93d48d9f41f271a4479e06369a30ab31db1
-  AppCenter: aba7de06e4c2184f90dc84f7866bd07f82427d69
+  Amplitude: 4483086d17620fa0a6225f7455fcf0a90c9f1d19
+  AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   MASShortcut: d9e4909e878661cc42877cc9d6efbe638273ab57
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
+  SwiftDate: d117c3eb6beed72e47d3f4d1e3bc63fa1e66d7c3
   SwiftyChrono: 233460655232c082ced7ac0e3a6a3b23d57a077d
 
 PODFILE CHECKSUM: cf3432760b6daa47a17da19c94c67fbadacee35c
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.10.0.beta.1

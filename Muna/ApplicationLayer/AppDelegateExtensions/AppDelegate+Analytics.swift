@@ -29,7 +29,8 @@ extension AppDelegate {
         )
 
         if let dictionary = Bundle.main.infoDictionary,
-            let build = dictionary["CFBundleVersion"] as? String {
+            let build = dictionary["CFBundleVersion"] as? String
+        {
             ServiceLocator.shared.analytics.setPersonProperty(name: "build", value: build)
         }
 

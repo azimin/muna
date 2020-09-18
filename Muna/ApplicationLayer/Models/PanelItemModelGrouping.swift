@@ -61,7 +61,8 @@ class PanelItemModelGrouping {
 
         for item in items.sorted(by: { (first, second) -> Bool in
             if let firstCompletionDate = first.completionDate,
-                let secondCompletionDate = second.completionDate {
+                let secondCompletionDate = second.completionDate
+            {
                 return firstCompletionDate > secondCompletionDate
             }
 

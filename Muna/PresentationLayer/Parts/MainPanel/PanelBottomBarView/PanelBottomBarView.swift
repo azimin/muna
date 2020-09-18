@@ -10,11 +10,7 @@ import Cocoa
 import SnapKit
 
 class PanelBottomBarView: View {
-    let appNameLabel = Label(
-        fontStyle: .heavy,
-        size: 12
-    )
-    .withTextColorStyle(.title60AccentAlpha)
+    let smartAssistentView = SmartAssistentView()
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
@@ -43,8 +39,8 @@ class PanelBottomBarView: View {
             maker.height.equalTo(46)
         }
 
-        self.addSubview(self.appNameLabel)
-        self.appNameLabel.snp.makeConstraints { maker in
+        self.addSubview(self.smartAssistentView)
+        self.smartAssistentView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.leading.equalToSuperview().inset(16)
         }
