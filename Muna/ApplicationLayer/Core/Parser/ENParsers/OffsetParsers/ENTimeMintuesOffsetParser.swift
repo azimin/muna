@@ -10,7 +10,7 @@ import Foundation
 
 class ENTimeMintuesOffsetParser: Parser {
     override var pattern: String {
-        return "\\b(?:in\\s*)"
+        return "\\b(?:in\\s*)?"
             + "(\\d{1,})"
             + "(\\s*(min|mins|minutes?))?\\b"
     }
@@ -63,6 +63,7 @@ class ENTimeMintuesOffsetParser: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.length,
             reservedComponents:
             [
                 .year: year,

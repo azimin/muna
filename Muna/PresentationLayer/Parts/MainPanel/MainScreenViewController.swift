@@ -92,6 +92,8 @@ class MainScreenViewController: NSViewController {
 
     func actionForShortcut(_ shortcut: Shortcut) {
         switch shortcut {
+        case .showSmartAssistent:
+            self.toggleSmartAssistent()
         case .nextItem:
             self.panelView.mainContentView.selectNext(
                 nextSection: false

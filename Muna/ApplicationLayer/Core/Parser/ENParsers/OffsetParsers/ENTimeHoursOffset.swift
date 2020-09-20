@@ -10,7 +10,7 @@ import Foundation
 
 class ENTimeHoursOffset: Parser {
     override var pattern: String {
-        return "\\b(?:in\\s*)"
+        return "\\b(?:in\\s*)?"
             + "(\\d{1,})"
             + "(\\.(\\d{1,}))?"
             + "(\\s*(h?|hours?))?\\b"
@@ -27,7 +27,7 @@ class ENTimeHoursOffset: Parser {
 //            }
 //        }
         guard !parsedItem.match.isEmpty(atRangeIndex: self.hourGroup),
-            var hourOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup))
+            let hourOffset = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.hourGroup))
         else {
             return nil
         }
@@ -40,12 +40,12 @@ class ENTimeHoursOffset: Parser {
 
         var minutesOffset = 0
         if !parsedItem.match.isEmpty(atRangeIndex: self.minutesGroup),
-            let minutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup))
-        {
-            if minutes < 10 {
-                minutesOffset = Int((60.0 / 100.0) * Double(minutes * 10))
+            let parsedMinutes = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup)) {
+            let minutesLength = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.minutesGroup).count
+            if parsedMinutes < 10, minutesLength < 2 {
+                minutesOffset = Int((60.0 / 100.0) * Double(parsedMinutes * 10))
             } else {
-                minutesOffset = minutes
+                minutesOffset = parsedMinutes
             }
         }
 
@@ -75,6 +75,7 @@ class ENTimeHoursOffset: Parser {
         return ParsedResult(
             refDate: parsedItem.refDate,
             matchRange: parsedItem.match.range,
+            length: parsedItem.match.range.length,
             reservedComponents: [
                 .year: year,
                 .month: month,

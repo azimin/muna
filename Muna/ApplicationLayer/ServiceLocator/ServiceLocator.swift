@@ -19,6 +19,7 @@ class ServiceLocator {
     let permissionsService: PermissionsServiceProtocol
     let windowManager: WindowManagerProtocol
     let activeAppCheckService: ActiveAppCheckServiceProtocol
+    let assistent: AssistentServiceProtocol
     let betaKey: BetaKeyService
 
     let assertionHandler: AssertionHandler
@@ -36,6 +37,7 @@ class ServiceLocator {
         self.windowManager = WindowManager(betaKey: self.betaKey)
         self.permissionsService = PermissionsService()
         self.activeAppCheckService = ActiveAppCheckService()
+        self.assistent = AssistentService()
         self.analytics = AnalyticsService(
             storage: UserDefaults.standard,
             apmplitudeId: "fef18005e21e59f8b7252c5bb34708bd",

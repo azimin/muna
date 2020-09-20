@@ -51,16 +51,16 @@ class AssistentPanelView: MainPanelBackgroundView {
             maker.top.equalTo(self.titleLabel.snp.bottom).inset(-2)
         }
 
-//        self.scrollView.documentView = self.contentView
-//        self.addSubview(self.scrollView)
-//        self.scrollView.snp.makeConstraints { maker in
-//            maker.edges.equalToSuperview()
-//        }
+        self.scrollView.documentView = self.contentView
+        self.addSubview(self.scrollView)
+        self.scrollView.backgroundColor = .clear
+        self.scrollView.documentView?.layer?.backgroundColor = .clear
+        self.scrollView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
 
-        self.addSubview(self.contentView)
         self.contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(66)
-            make.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
         }
 
         let item = ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first

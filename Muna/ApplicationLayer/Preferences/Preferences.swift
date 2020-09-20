@@ -35,6 +35,7 @@ class Preferences {
         case splashOnThings
         case splashOnNotes
         case splashOnReminders
+        case lastActiveTimeInterval
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -175,4 +176,7 @@ class Preferences {
         }
         return periodOfStoring
     }
+
+    @UserDefaultsEntry(wrappedValue: Date().timeIntervalSince1970, key: Key.lastActiveTimeInterval)
+    static var lastActiveTimeInterval
 }

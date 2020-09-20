@@ -19,6 +19,7 @@ extension MainScreenViewController {
         case complete
         case editTime
         case close
+        case showSmartAssistent
 
         var item: ShortcutItem {
             switch self {
@@ -40,6 +41,8 @@ extension MainScreenViewController {
                 return ShortcutItem(key: .t, modifiers: [.command])
             case .close:
                 return ShortcutItem(key: .escape, modifiers: [])
+            case .showSmartAssistent:
+                return ShortcutItem(key: .s, modifiers: [.command])
             }
         }
     }
