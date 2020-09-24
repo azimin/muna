@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             let isFinishedItemsBig = numberOfComplitedItems <= 15
             let isALotOfUncomplitedItems = numberOfUncomplitedItems <= 6
 
-            if isNeededToPlayAnimation, (isBigGap || isFinishedItemsBig || isALotOfUncomplitedItems) {
+            if isNeededToPlayAnimation, isBigGap, isFinishedItemsBig || isALotOfUncomplitedItems {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
                 }
