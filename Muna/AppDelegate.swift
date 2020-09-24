@@ -101,7 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
             let isBigGap = gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2
             let isFinishedItemsBig = numberOfComplitedItems <= 15
-            let isALotOfUncomplitedItems = numberOfUncomplitedItems <= 6
+            let isALotOfUncomplitedItems = numberOfUncomplitedItems >= 6
 
             if isNeededToPlayAnimation, isBigGap, isFinishedItemsBig || isALotOfUncomplitedItems {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
