@@ -10,7 +10,7 @@ import Cocoa
 import SnapKit
 
 final class HintView: View {
-    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultActivationShortcut.item)
+    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultScreenshotShortcut.item)
 
     let closeButton = Button()
         .withImageName("close", color: .title60Accent)
