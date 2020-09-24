@@ -63,19 +63,19 @@ class AssistentPanelView: MainPanelBackgroundView {
             make.width.equalToSuperview()
         }
 
-        let item = ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first
-        let firstAssistent = AssistentItemView(assistentItem: .popularItem(item: item!))
-        let secondAssistent = AssistentItemView(assistentItem: .usageHint(hintItem: .previewImage))
-        let thirdAssistent = AssistentItemView(assistentItem: .shortcutOfTheDay(shortcut: .init(key: .t, modifiers: .command)))
-
-        self.contentView.addArrangedSubview(firstAssistent)
-        self.contentView.addArrangedSubview(secondAssistent)
-        self.contentView.addArrangedSubview(thirdAssistent)
-
-        for view in [firstAssistent, secondAssistent, thirdAssistent] {
-            view.snp.makeConstraints { make in
-                make.width.equalTo(WindowManager.panelWindowFrameWidth - 32)
-            }
-        }
+//        let item = ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).first
+//        let firstAssistent = AssistentItemView(assistentItem: .popularItem(item: item!))
+//        let secondAssistent = AssistentItemView(assistentItem: .usageHint(hintItem: .previewImage))
+//        let thirdAssistent = AssistentItemView(assistentItem: .shortcutOfTheDay(shortcut: .init(key: .t, modifiers: .command)))
+//
+//        self.contentView.addArrangedSubview(firstAssistent)
+//        self.contentView.addArrangedSubview(secondAssistent)
+//        self.contentView.addArrangedSubview(thirdAssistent)
+//
+//        for view in [firstAssistent, secondAssistent, thirdAssistent] {
+//            view.snp.makeConstraints { make in
+//                make.width.equalTo(WindowManager.panelWindowFrameWidth - 32)
+//            }
+//        }
     }
 }
