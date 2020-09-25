@@ -83,27 +83,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
 
         ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
+            let nowTime = Date().timeIntervalSince1970
             let isNeededToPlayAnimation: Bool
             switch activeApp {
             case .notes:
-                isNeededToPlayAnimation = Preferences.splashOnNotes
+                let isBigGap = nowTime - Preferences.hintShowedForNotesTimeInterval > PresentationLayerConstants.oneHourInSeconds * 2
+                isNeededToPlayAnimation = Preferences.splashOnNotes && isBigGap
+                if Preferences.splashOnNotes {
+                    Preferences.hintShowedForNotesTimeInterval = Date().timeIntervalSince1970
+                }
             case .reminders:
-                isNeededToPlayAnimation = Preferences.splashOnReminders
+                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
+                isNeededToPlayAnimation = Preferences.splashOnReminders && isBigGap
+                if Preferences.splashOnReminders {
+                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
+                }
             case .things:
-                isNeededToPlayAnimation = Preferences.splashOnThings
+                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
+                isNeededToPlayAnimation = Preferences.splashOnThings && isBigGap
+                if Preferences.splashOnThings {
+                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
+                }
             }
 
             let database = ServiceLocator.shared.itemsDatabase
             let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
-            let numberOfUncomplitedItems = database.fetchItems(filter: .uncompleted).count
+            let numberOfCreatedItems = database.fetchItems(filter: .uncompleted).filter { $0.dueDate != nil}.count
+            let theWholeNumberOfItems = numberOfComplitedItems + numberOfCreatedItems
 
-            let gapBetweenUses = Date().timeIntervalSince1970 - Preferences.lastActiveTimeInterval
+            let isBigGapAfterStart = nowTime - Preferences.lastActiveTimeInterval > PresentationLayerConstants.oneHourInSeconds
 
-            let isBigGap = gapBetweenUses >= PresentationLayerConstants.oneHourInSeconds * 2
-            let isFinishedItemsBig = numberOfComplitedItems <= 15
-            let isALotOfUncomplitedItems = numberOfUncomplitedItems >= 6
-
-            if isNeededToPlayAnimation, isBigGap, isFinishedItemsBig || isALotOfUncomplitedItems {
+            if isNeededToPlayAnimation, isBigGapAfterStart, theWholeNumberOfItems < 15 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
                 }

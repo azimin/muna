@@ -36,6 +36,8 @@ class Preferences {
         case splashOnNotes
         case splashOnReminders
         case lastActiveTimeInterval
+        case hintShowedForNotesTimeInterval
+        case hintShowedForRemindersTimeInterval
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -179,4 +181,10 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: Date().timeIntervalSince1970, key: Key.lastActiveTimeInterval)
     static var lastActiveTimeInterval
+
+    @UserDefaultsEntry(wrappedValue: Date().timeIntervalSince1970, key: Key.hintShowedForNotesTimeInterval)
+    static var hintShowedForNotesTimeInterval
+
+    @UserDefaultsEntry(wrappedValue: Date().timeIntervalSince1970, key: Key.hintShowedForRemindersTimeInterval)
+    static var hintShowedForRemindersTimeInterval
 }
