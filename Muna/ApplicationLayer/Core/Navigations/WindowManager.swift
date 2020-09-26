@@ -411,6 +411,11 @@ class WindowManager: WindowManagerProtocol {
         self.hintPopover?.animates = true
 
         self.hintPopover?.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
+
+        ServiceLocator.shared.analytics.increasePersonProperty(
+            name: "number_of_hint_showed",
+            by: 1
+        )
     }
 
     func closeHintPopover() {
