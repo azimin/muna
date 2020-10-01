@@ -133,6 +133,7 @@
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
+		9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
 		9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */; };
@@ -350,6 +351,7 @@
 		9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateShortcuts.swift; sourceTree = "<group>"; };
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
+		9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Transform.swift"; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
 		9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_2.mov; sourceTree = "<group>"; };
@@ -1246,6 +1248,7 @@
 				9F017FD52475CD1E004E3F5A /* NSStackView+Init.swift */,
 				9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */,
 				23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */,
+				9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1937,6 +1940,7 @@
 				23561B492461F46600097E4A /* Parser.swift in Sources */,
 				9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */,
 				9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */,
+				9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

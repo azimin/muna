@@ -215,7 +215,17 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
             return
         }
 
-        guard let cgImage = CGWindowListCreateImage(NSScreen.main!.frame, .optionOnScreenBelowWindow, windowId, .bestResolution) else {
+        guard let screen = self.view.window?.screen else {
+            appAssertionFailure("No screen")
+            completion(nil)
+            return
+        }
+
+        var rect = screen.frame
+        rect.origin.y = 0
+        let frame = screen.convertRectToPrimaryScreen(rect: rect)
+
+        guard let cgImage = CGWindowListCreateImage(frame, .optionOnScreenBelowWindow, windowId, .bestResolution) else {
             appAssertionFailure("Screenshot handling is failed")
             completion(nil)
             return
