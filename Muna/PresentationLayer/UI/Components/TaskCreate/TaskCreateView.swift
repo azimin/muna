@@ -48,10 +48,6 @@ class TaskCreateView: PopupView {
     override func setup(forStyle style: Style) {
         super.setup(forStyle: style)
 
-        self.snp.makeConstraints { maker in
-            maker.width.equalTo(300)
-        }
-
         let insets = NSEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
 
         self.addSubview(self.reminderTextField)

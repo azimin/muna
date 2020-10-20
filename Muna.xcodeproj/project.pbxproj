@@ -29,6 +29,7 @@
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
 		2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */; };
 		2351115B253F732400F6856D /* TextTaskCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115A253F732400F6856D /* TextTaskCreationViewController.swift */; };
+		2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115C253F78BF00F6856D /* TextTaskCreationView.swift */; };
 		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
@@ -236,6 +237,7 @@
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
 		2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
 		2351115A253F732400F6856D /* TextTaskCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationViewController.swift; sourceTree = "<group>"; };
+		2351115C253F78BF00F6856D /* TextTaskCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationView.swift; sourceTree = "<group>"; };
 		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				2351115A253F732400F6856D /* TextTaskCreationViewController.swift */,
+				2351115C253F78BF00F6856D /* TextTaskCreationView.swift */,
 			);
 			path = TextTaskCreation;
 			sourceTree = "<group>";
@@ -1897,6 +1900,7 @@
 				9F693237247B106800FEBC0B /* ReminderItem.swift in Sources */,
 				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
 				2317EFBA250B87B7005AF08E /* HabitsSettingsView.swift in Sources */,
+				2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */,
 				9FC5D7FE24DC9FAF0005B902 /* AboutSettingsViewController.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
