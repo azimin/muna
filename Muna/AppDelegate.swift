@@ -286,7 +286,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func hideFullscreenScreenshotIfNeeded() {
-        self.windowManager.hideWindowIfNeeded(.fullScreenshot)
+        self.windowManager.hideWindowIfNeeded(.textTaskCreation)
     }
 
     @objc func togglePane() {
@@ -304,9 +304,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func toogleFullscreenScreenshotState() {
-        if ServiceLocator.shared.permissionsService.checkPermissions() {
-            self.windowManager.toggleWindow(.fullScreenshot)
-        }
+        self.windowManager.toggleWindow(.textTaskCreation)
     }
 
     @objc func toggleDebugState() {

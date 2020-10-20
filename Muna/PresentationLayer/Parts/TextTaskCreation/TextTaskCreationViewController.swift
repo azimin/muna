@@ -15,9 +15,9 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
         self.view = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
     }
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
+    func hide(completion: VoidBlock?) {
+        self.rootView.clear()
 
-        ServiceLocator.shared.analytics.logEvent(name: "Text Task Creation Showed")
+        completion?()
     }
 }

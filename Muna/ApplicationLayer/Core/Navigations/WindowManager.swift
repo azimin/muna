@@ -43,7 +43,7 @@ class WindowManager: WindowManagerProtocol {
         switch windowType {
         case .settings, .onboarding, .permissionsAlert:
             status = self.windows[windowType]?.isVisible ?? false
-        case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
+        case .debug, .panel, .screenshot, .textTaskCreation, .remindLater:
             status = self.windowVisibleStatus[windowType] ?? false
         }
 
@@ -75,7 +75,7 @@ class WindowManager: WindowManagerProtocol {
             case .settings, .onboarding, .permissionsAlert:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
-            case .debug, .panel, .screenshot, .fullScreenshot, .remindLater:
+            case .debug, .panel, .screenshot, .textTaskCreation, .remindLater:
                 break
             }
             return
@@ -96,9 +96,9 @@ class WindowManager: WindowManagerProtocol {
         case let .panel(selectedItem):
             self.showPanel(in: window, selectedItem: selectedItem)
         case .screenshot:
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
-        case .fullScreenshot:
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
+            self.showScreenshotState(in: window)
+        case .textTaskCreation:
+            self.showTextCreationState(in: window)
         case .onboarding:
             self.showOnboarding(in: window)
         case .settings:
@@ -127,7 +127,7 @@ class WindowManager: WindowManagerProtocol {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
+            self.showScreenshotState(in: window)
         case .debug:
             window = Panel(
                 contentRect: self.frameFor(.debug),
@@ -140,7 +140,7 @@ class WindowManager: WindowManagerProtocol {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
+            self.showScreenshotState(in: window)
         case let .panel(selectedItem):
             window = Panel(
                 contentRect: self.frameFor(windowType),
@@ -166,20 +166,20 @@ class WindowManager: WindowManagerProtocol {
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: false)
-        case .fullScreenshot:
+            self.showScreenshotState(in: window)
+        case .textTaskCreation:
             window = Panel(
-                contentRect: self.frameFor(.screenshot),
+                contentRect: self.frameFor(.textTaskCreation),
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered,
                 defer: true
             )
             window.backgroundColor = NSColor.white.withAlphaComponent(0.001)
-            window.contentViewController = ScreenShotStateViewController()
+            window.contentViewController = TextTaskCreationViewController()
             window.hasShadow = false
             // Overlap dock, but not menu bar
             window.level = .statusBar
-            self.showScreenshotState(in: window, isNeededToMakeFullscreenScreenshot: true)
+            self.showTextCreationState(in: window)
         case .onboarding:
             window = NSWindow(
                 contentRect: self.frameFor(.onboarding),
@@ -227,12 +227,14 @@ class WindowManager: WindowManagerProtocol {
         switch windowType {
         case .debug:
             frame = mainScreen.frame
-        case .screenshot, .fullScreenshot, .permissionsAlert:
+        case .screenshot, .permissionsAlert:
             frame = mainScreen.frame
         case .panel:
             frame = mainScreen.frame
         case .remindLater:
             frame = mainScreen.frame
+        case .textTaskCreation:
+            frame = NSRect(x: 0, y: 0, width: 211, height: 269)
         case .onboarding:
             frame = NSRect(x: 0, y: 0, width: 640, height: 640)
         case .settings:
@@ -243,6 +245,18 @@ class WindowManager: WindowManagerProtocol {
     }
 
     // MARK: - Window showing
+
+    private func showTextCreationState(in window: NSWindow) {
+        window.makeKeyAndOrderFront(nil)
+
+        window.setFrame(
+            self.frameFor(.textTaskCreation),
+            display: true,
+            animate: false
+        )
+
+        window.setIsVisible(true)
+    }
 
     private func showDebug(in window: NSWindow) {
         window.makeKeyAndOrderFront(nil)
@@ -327,7 +341,7 @@ class WindowManager: WindowManagerProtocol {
         window.setIsVisible(true)
     }
 
-    private func showScreenshotState(in window: NSWindow, isNeededToMakeFullscreenScreenshot: Bool) {
+    private func showScreenshotState(in window: NSWindow) {
         window.makeKeyAndOrderFront(nil)
 
         if let viewController = window.contentViewController as? ScreenShotStateViewController {
@@ -341,11 +355,7 @@ class WindowManager: WindowManagerProtocol {
         )
 
         if let viewController = window.contentViewController as? ScreenShotStateViewController {
-            viewController.show(isFullscreenScreenshotState: isNeededToMakeFullscreenScreenshot)
-            if isNeededToMakeFullscreenScreenshot {
-                viewController.makeScreenshot()
-                viewController.isFullscreenScreenshotState = true
-            }
+            viewController.show(isFullscreenScreenshotState: false)
         }
 
         window.setIsVisible(true)
@@ -364,7 +374,7 @@ class WindowManager: WindowManagerProtocol {
         switch windowType {
         case .debug:
             window.setIsVisible(false)
-        case .screenshot, .fullScreenshot:
+        case .screenshot:
             if let viewController = window.contentViewController as? ScreenShotStateViewController {
                 viewController.hide {
                     window.setIsVisible(false)
@@ -381,6 +391,12 @@ class WindowManager: WindowManagerProtocol {
         case .remindLater:
             window.setIsVisible(false)
             self.windows[windowType] = nil
+        case .textTaskCreation:
+            if let viewController = window.contentViewController as? TextTaskCreationViewController {
+                viewController.hide {
+                    window.setIsVisible(false)
+                }
+            }
         case .settings:
             window.setIsVisible(false)
         case .onboarding:
