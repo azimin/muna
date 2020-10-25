@@ -10,7 +10,10 @@ import Cocoa
 
 final class TextTaskCreationView: View {
 
-    let taskCreationView = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+    let taskCreationView = TaskCreateView(
+        usage: .textCreation,
+        savingProcessingService: ServiceLocator.shared.savingService
+    )
 
     let taskCreateShortCutsView = TaskCreateShortcuts(style: .withoutShortcutsButton)
 
@@ -32,8 +35,8 @@ final class TextTaskCreationView: View {
 
         self.addSubview(self.taskCreationView)
         self.taskCreationView.snp.makeConstraints { make in
-            make.height.equalTo(269)
-            make.width.equalTo(211)
+            make.height.greaterThanOrEqualTo(269)
+            make.width.greaterThanOrEqualTo(211)
             make.center.equalToSuperview()
         }
     }

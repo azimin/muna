@@ -234,7 +234,12 @@ class WindowManager: WindowManagerProtocol {
         case .remindLater:
             frame = mainScreen.frame
         case .textTaskCreation:
-            frame = NSRect(x: 0, y: 0, width: 211, height: 269)
+            frame = NSRect(
+                x: (NSScreen.main?.frame.size.width ?? 0) / 2 - 320,
+                y: (NSScreen.main?.frame.size.height ?? 0) / 2 - 320,
+                width: 640,
+                height: 640
+            )
         case .onboarding:
             frame = NSRect(x: 0, y: 0, width: 640, height: 640)
         case .settings:
