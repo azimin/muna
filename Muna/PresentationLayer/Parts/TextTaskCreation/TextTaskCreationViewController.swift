@@ -9,51 +9,48 @@
 import Cocoa
 
 final class TextTaskCreationViewController: NSViewController, ViewHolder {
-    typealias ViewType = TaskCreateView
+    typealias ViewType = TextTaskCreationView
 
     override func loadView() {
-        self.view = TaskCreateView(savingProcessingService: ServiceLocator.shared.savingService)
+        self.view = TextTaskCreationView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.rootView.delegate = self
+
+        self.rootView.taskCreationView.delegate = self
     }
 
     func hide(completion: VoidBlock?) {
-        self.rootView.clear()
+        self.rootView.taskCreationView.clear()
 
         completion?()
     }
 
     @objc
     private func handleCloseShortcutsButton() {
-        self.taskCreateShortCutsView.isHidden = true
-        self.isShortcutsViewShowed = false
+        self.rootView.taskCreateShortCutsView.isHidden = true
+        self.rootView.isShortcutsViewShowed = false
     }
 
     func showShortcutsView(aroundViewFrame frame: NSRect) {
-        self.taskCreateShortCutsView.frame = self.positionForShortcutsView(
-            rect: self.taskCreateShortCutsView.frame,
-            aroundRect: frame
-        )
-        self.taskCreateShortCutsView.isHidden = false
-        self.isShortcutsViewShowed = true
-        self.layoutSubtreeIfNeeded()
+        self.rootView.taskCreateShortCutsView.frame.origin.x = self.rootView.taskCreationView.frame.maxX + 16
+        self.rootView.taskCreateShortCutsView.isHidden = false
+        self.rootView.isShortcutsViewShowed = true
+        self.rootView.layoutSubtreeIfNeeded()
     }
 }
 
 extension TextTaskCreationViewController: TaskCreateViewDelegate {
-    func shortcutsButtonTapped() {
-        if self.isShortcutsViewShowed {
-            self.handleCloseShortcutsButton()
-        } else {
-            self.showShortcutsView(aroundViewFrame: self.reminderSetupPopup.frame)
-        }
+    func closeScreenshot() {
+        ServiceLocator.shared.windowManager.hideWindowIfNeeded(.textTaskCreation)
     }
 
-    func closeScreenshot() {
-        self.delegate?.escapeWasTapped()
+    func shortcutsButtonTapped() {
+        if self.rootView.isShortcutsViewShowed {
+            self.handleCloseShortcutsButton()
+        } else {
+            self.showShortcutsView(aroundViewFrame: self.rootView.taskCreationView.frame)
+        }
     }
 }
