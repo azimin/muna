@@ -19,6 +19,8 @@ class TaskCreateView: PopupView {
         case screenshot
         case textCreation
     }
+    
+    let usage: Usage
 
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
@@ -42,6 +44,7 @@ class TaskCreateView: PopupView {
         usage: Usage = .screenshot,
         savingProcessingService: SavingProcessingService
     ) {
+        self.usage = usage
         self.datePrarserView = DateParserView(controller: self.controller)
         self.savingProcessingService = savingProcessingService
         self.presentationDateItemTransformer = DateItemsTransformer(dateItems: [], configurator: BasicDateItemPresentationConfigurator())
@@ -208,7 +211,13 @@ class TaskCreateView: PopupView {
             self.delegate?.closeScreenshot()
         }
 
-        var itemToSave = SavingProcessingService.ItemToSave()
+        var itemToSave: SavingProcessingService.ItemToSave
+        switch self.usage {
+        case .screenshot:
+            itemToSave = SavingProcessingService.ItemToSave(savingType: .screenshot)
+        case .textCreation:
+            itemToSave = SavingProcessingService.ItemToSave(savingType: .text)
+        }
 
         if self.controller.isEmpty == false {
             guard let item = self.controller.item(by: self.controller.selectedIndex) else {

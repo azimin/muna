@@ -10,7 +10,8 @@ import Cocoa
 import CoreGraphics
 
 class SavingProcessingService {
-    struct ItemToSave {
+    struct ItemToSave {        
+        var savingType: SavingType
         var dueDateString: String?
         var date: Date?
         var comment: String?
@@ -31,34 +32,43 @@ class SavingProcessingService {
     func save(withItem item: ItemToSave, byShortcut: Bool) {
         // TODO: Do in background
         // TODO: Add quaility selection in settings
-        guard let image = self.image,
-            let data = image.tiffRepresentation(using: .jpeg, factor: 0.83)
-        else {
-            appAssertionFailure("Image is not provided")
-            return
-        }
+        var convertedData: Data?
 
-        let options = NSMutableDictionary()
-        options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailWithTransform as String)
-        options.setValue(2460 as NSNumber, forKey: kCGImageSourceThumbnailMaxPixelSize as String)
-        options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailFromImageAlways as String)
-
-        var imageData: Data?
-        if let imageSource = CGImageSourceCreateWithData(data as CFData, nil) {
-            let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)
-            if let image = image, let data = NSImage(cgImage: image, size: image.backingSize).tiffRepresentation(using: .jpeg, factor: 0.83) {
-                let imageRep = NSBitmapImageRep(data: data)
-                imageData = imageRep?.representation(using: .jpeg, properties: [:])
+        switch item.savingType{
+        case .screenshot:
+            guard let image = self.image,
+                  let data = image.tiffRepresentation(using: .jpeg, factor: 0.83)
+            else {
+                appAssertionFailure("Image is not provided")
+                return
             }
-        }
 
-        guard let covertedData = imageData else {
-            appAssertionFailure("Can't comress")
-            return
+            let options = NSMutableDictionary()
+            options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailWithTransform as String)
+            options.setValue(2460 as NSNumber, forKey: kCGImageSourceThumbnailMaxPixelSize as String)
+            options.setValue(true as NSNumber, forKey: kCGImageSourceCreateThumbnailFromImageAlways as String)
+
+            var imageData: Data?
+            if let imageSource = CGImageSourceCreateWithData(data as CFData, nil) {
+                let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)
+                if let image = image, let data = NSImage(cgImage: image, size: image.backingSize).tiffRepresentation(using: .jpeg, factor: 0.83) {
+                    let imageRep = NSBitmapImageRep(data: data)
+                    imageData = imageRep?.representation(using: .jpeg, properties: [:])
+                }
+            }
+
+            guard let covertedData = imageData else {
+                appAssertionFailure("Can't comress")
+                return
+            }
+            convertedData = covertedData
+        case .text:
+            break
         }
 
         let itemModel = self.database.addItem(
-            imageData: covertedData,
+            imageData: convertedData,
+            savingType: item.savingType,
             dueDateString: item.dueDateString,
             dueDate: item.date,
             comment: item.comment
