@@ -261,8 +261,15 @@ extension ItemsDatabaseService {
                 imageData: NSImage(named: NSImage.Name(imageName))!.tiffRepresentation(using: .jpeg, factor: 0.83)!, savingType: .screenshot,
                 dueDateString: "in 2h",
                 dueDate: Date().addingTimeInterval(60 * 60 * Double(i)),
-                comment: "Hi there"
+                comment: String.randomString(length: Int.random(in: 5..<60))
             )
         }
+    }
+}
+
+extension String {
+    static func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
 }
