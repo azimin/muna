@@ -15,6 +15,13 @@ protocol TaskCreateViewDelegate: AnyObject {
 }
 
 class TaskCreateView: PopupView {
+    enum Usage {
+        case screenshot
+        case textCreation
+    }
+    
+    let usage: Usage
+
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
@@ -33,43 +40,80 @@ class TaskCreateView: PopupView {
 
     weak var delegate: TaskCreateViewDelegate?
 
-    init(savingProcessingService: SavingProcessingService) {
+    init(
+        usage: Usage = .screenshot,
+        savingProcessingService: SavingProcessingService
+    ) {
+        self.usage = usage
         self.datePrarserView = DateParserView(controller: self.controller)
         self.savingProcessingService = savingProcessingService
         self.presentationDateItemTransformer = DateItemsTransformer(dateItems: [], configurator: BasicDateItemPresentationConfigurator())
 
         super.init(style: .withShortcutsButton)
+
+        self.setup(usage: usage)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func setup(forStyle style: Style) {
-        super.setup(forStyle: style)
-
-        self.snp.makeConstraints { maker in
-            maker.width.equalTo(300)
-        }
-
+    func setup(usage: Usage) {
         let insets = NSEdgeInsets(top: 16, left: 12, bottom: 16, right: 12)
 
-        self.addSubview(self.reminderTextField)
-        self.reminderTextField.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(insets)
-            maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
-        }
+        switch usage {
+        case .screenshot:
+            self.addSubview(self.reminderTextField)
+            self.reminderTextField.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
+            }
 
-        self.addSubview(self.datePrarserView)
-        self.datePrarserView.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(insets)
-            maker.top.equalTo(self.reminderTextField.snp.bottom).inset(-6)
-        }
+            self.addSubview(self.datePrarserView)
+            self.datePrarserView.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.reminderTextField.snp.bottom).inset(-6)
+            }
 
-        self.addSubview(self.commentTextField)
-        self.commentTextField.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(insets)
-            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
+            self.addSubview(self.commentTextField)
+            self.commentTextField.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-6)
+            }
+
+            self.addSubview(self.doneButton)
+            self.doneButton.snp.makeConstraints { maker in
+                maker.bottom.leading.trailing.equalToSuperview().inset(
+                    NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+                )
+                maker.top.equalTo(self.commentTextField.snp.bottom).inset(-32)
+            }
+        case .textCreation:
+            self.addSubview(self.commentTextField)
+            self.commentTextField.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.closeButton.snp.bottom).offset(16)
+            }
+
+            self.addSubview(self.reminderTextField)
+            self.reminderTextField.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.commentTextField.snp.bottom).offset(6)
+            }
+
+            self.addSubview(self.datePrarserView)
+            self.datePrarserView.snp.makeConstraints { maker in
+                maker.leading.trailing.equalToSuperview().inset(insets)
+                maker.top.equalTo(self.reminderTextField.snp.bottom).offset(6)
+            }
+
+            self.addSubview(self.doneButton)
+            self.doneButton.snp.makeConstraints { maker in
+                maker.bottom.leading.trailing.equalToSuperview().inset(
+                    NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+                )
+                maker.top.greaterThanOrEqualTo(self.datePrarserView.snp.bottom).offset(16)
+            }
         }
 
         self.reminderTextField.placeholder = "When to remind"
@@ -77,13 +121,6 @@ class TaskCreateView: PopupView {
 
         self.reminderTextField.delegate = self
 
-        self.addSubview(self.doneButton)
-        self.doneButton.snp.makeConstraints { maker in
-            maker.bottom.leading.trailing.equalToSuperview().inset(
-                NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-            )
-            maker.top.equalTo(self.commentTextField.snp.bottom).inset(-32)
-        }
 
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
@@ -174,7 +211,13 @@ class TaskCreateView: PopupView {
             self.delegate?.closeScreenshot()
         }
 
-        var itemToSave = SavingProcessingService.ItemToSave()
+        var itemToSave: SavingProcessingService.ItemToSave
+        switch self.usage {
+        case .screenshot:
+            itemToSave = SavingProcessingService.ItemToSave(savingType: .screenshot)
+        case .textCreation:
+            itemToSave = SavingProcessingService.ItemToSave(savingType: .text)
+        }
 
         if self.controller.isEmpty == false {
             guard let item = self.controller.item(by: self.controller.selectedIndex) else {

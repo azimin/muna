@@ -11,7 +11,7 @@ import Foundation
 enum WindowType: Equatable, Hashable {
     case panel(selectedItem: ItemModel?)
     case screenshot
-    case fullScreenshot
+    case textTaskCreation
     case debug
     case settings
     case onboarding
@@ -24,8 +24,8 @@ enum WindowType: Equatable, Hashable {
             return item == nil ? "panel" : "panel_selected_item"
         case .screenshot:
             return "screenshot"
-        case .fullScreenshot:
-            return "fullScreenshot"
+        case .textTaskCreation:
+            return "textTaskCreation"
         case .debug:
             return "debug"
         case .settings:
@@ -45,8 +45,8 @@ enum WindowType: Equatable, Hashable {
             return "panel"
         case .screenshot:
             return "screenshot"
-        case .fullScreenshot:
-            return "fullScreenshot"
+        case .textTaskCreation:
+            return "textTaskCreation"
         case .debug:
             return "debug"
         case .settings:

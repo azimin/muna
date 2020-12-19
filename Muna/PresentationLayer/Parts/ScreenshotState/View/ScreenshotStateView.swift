@@ -50,6 +50,10 @@ class ScreenshotStateView: View {
     }
 
     func setupInitialLayout() {
+        self.reminderSetupPopup.snp.makeConstraints { maker in
+            maker.width.equalTo(300)
+        }
+
         self.addSubview(self.screenshotImageView)
         self.screenshotImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

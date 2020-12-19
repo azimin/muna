@@ -30,6 +30,8 @@ extension AnalyticsPropertyNameProtocol where Self: RawRepresentable, Self.RawVa
 enum TrackableScreen: String, AnalyticsPropertyNameProtocol {
     case itemsList
     case settings
+    case textTaskCreation
+    case screenshotTaskCreation
 
     // videoPost -> Video Post Showed
     var showEventName: String {

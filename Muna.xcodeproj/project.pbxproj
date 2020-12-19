@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,10 +28,13 @@
 		233F53DD246A0494004DD671 /* MunaChrono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233F53DC246A0494004DD671 /* MunaChrono.swift */; };
 		23435AC62464A56300B4DE50 /* ScreenShotStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */; };
 		2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */; };
+		2351115B253F732400F6856D /* TextTaskCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115A253F732400F6856D /* TextTaskCreationViewController.swift */; };
+		2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115C253F78BF00F6856D /* TextTaskCreationView.swift */; };
 		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
 		23561B492461F46600097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B482461F46600097E4A /* Parser.swift */; };
+		236B86B2258A9DF40096AD25 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 236B86B1258A9DF40096AD25 /* LaunchAtLogin */; };
 		236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */; };
 		23895FBF2507720200322248 /* splash_anim.json in Resources */ = {isa = PBXBuildFile; fileRef = 23895FBE2507720200322248 /* splash_anim.json */; };
 		23895FC1250773EB00322248 /* AnimatedBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23895FC0250773EB00322248 /* AnimatedBarIconView.swift */; };
@@ -81,8 +84,6 @@
 		9F1CB75B24731D7E00DFBB05 /* TimeOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75A24731D7E00DFBB05 /* TimeOfDay.swift */; };
 		9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75E24731D9C00DFBB05 /* DateItem.swift */; };
 		9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */; };
-		9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; };
-		9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F2D340A24D0B9790049DD43 /* AnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */; };
 		9F2D340C24D0B9A50049DD43 /* AnalyticsValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */; };
 		9F2D340E24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */; };
@@ -206,7 +207,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9F2682C12471BEE100B79D03 /* LaunchAtLogin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,6 +235,8 @@
 		233F53DC246A0494004DD671 /* MunaChrono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MunaChrono.swift; sourceTree = "<group>"; };
 		23435AC52464A56300B4DE50 /* ScreenShotStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotStateViewController.swift; sourceTree = "<group>"; };
 		2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
+		2351115A253F732400F6856D /* TextTaskCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationViewController.swift; sourceTree = "<group>"; };
+		2351115C253F78BF00F6856D /* TextTaskCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationView.swift; sourceTree = "<group>"; };
 		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
@@ -425,7 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F2682C02471BEE100B79D03 /* LaunchAtLogin.framework in Frameworks */,
+				236B86B2258A9DF40096AD25 /* LaunchAtLogin in Frameworks */,
 				A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +555,15 @@
 				9FAB1DA5250E60CB00DA4971 /* HabitAppsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		23511159253F730100F6856D /* TextTaskCreation */ = {
+			isa = PBXGroup;
+			children = (
+				2351115A253F732400F6856D /* TextTaskCreationViewController.swift */,
+				2351115C253F78BF00F6856D /* TextTaskCreationView.swift */,
+			);
+			path = TextTaskCreation;
 			sourceTree = "<group>";
 		};
 		23561B442461EEAD00097E4A /* Parser */ = {
@@ -1374,6 +1385,7 @@
 		9FC06BEF2460CE4C008D4D3C /* Parts */ = {
 			isa = PBXGroup;
 			children = (
+				23511159253F730100F6856D /* TextTaskCreation */,
 				2326DFAB250FD6B600316D8B /* HelperHint */,
 				9F581E3B2494E87C00A34379 /* Onboarding */,
 				9F152704246DD7800037623B /* Settings */,
@@ -1576,7 +1588,6 @@
 				239DC90C245D95E5001FA50C /* Sources */,
 				239DC90D245D95E5001FA50C /* Frameworks */,
 				239DC90E245D95E5001FA50C /* Resources */,
-				9F2682C32471BEF000B79D03 /* Carthage */,
 				AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */,
 				9F2682C22471BEE100B79D03 /* Embed Frameworks */,
 				9F2682C42471BF4500B79D03 /* LaunchAtLogin */,
@@ -1586,6 +1597,9 @@
 			dependencies = (
 			);
 			name = Muna;
+			packageProductDependencies = (
+				236B86B1258A9DF40096AD25 /* LaunchAtLogin */,
+			);
 			productName = Muna;
 			productReference = 239DC910245D95E5001FA50C /* Muna.app */;
 			productType = "com.apple.product-type.application";
@@ -1615,6 +1629,9 @@
 				Base,
 			);
 			mainGroup = 239DC907245D95E5001FA50C;
+			packageReferences = (
+				236B86B0258A9DF40096AD25 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = 239DC911245D95E5001FA50C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1703,25 +1720,6 @@
 			shellPath = /bin/sh;
 			shellScript = "#if which swiftformat >/dev/null; then\n # swiftformat . --swiftversion 5\n#else\n#  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n# fi\n";
 		};
-		9F2682C32471BEF000B79D03 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/LaunchAtLogin.framework",
-			);
-			name = Carthage;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		9F2682C42471BF4500B79D03 /* LaunchAtLogin */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1738,7 +1736,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Carthage/Build/Mac/LaunchAtLogin.framework/Resources/copy-helper.sh\"\n";
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
 		};
 		AD7BFAC98A8E1A1B6887BF07 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1801,6 +1799,7 @@
 				23ADE2DE24A8AFE700A2D7F9 /* SwitcherSettingsItem.swift in Sources */,
 				23ADE2D824A8A3C500A2D7F9 /* SettingsShortcutView.swift in Sources */,
 				2326DFB3250FE20A00316D8B /* CountDownView.swift in Sources */,
+				2351115B253F732400F6856D /* TextTaskCreationViewController.swift in Sources */,
 				2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */,
 				9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */,
 				9F69322D247ACB3600FEBC0B /* CardPreviewDateFormatter.swift in Sources */,
@@ -1888,6 +1887,7 @@
 				9F693237247B106800FEBC0B /* ReminderItem.swift in Sources */,
 				231DCAC524686A3D009B7D80 /* OverlayView.swift in Sources */,
 				2317EFBA250B87B7005AF08E /* HabitsSettingsView.swift in Sources */,
+				2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */,
 				9FC5D7FE24DC9FAF0005B902 /* AboutSettingsViewController.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
@@ -2250,6 +2250,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		236B86B0258A9DF40096AD25 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		236B86B1258A9DF40096AD25 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 236B86B0258A9DF40096AD25 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 239DC908245D95E5001FA50C /* Project object */;
 }

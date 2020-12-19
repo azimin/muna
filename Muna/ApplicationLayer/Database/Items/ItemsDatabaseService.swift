@@ -9,6 +9,11 @@
 import Cocoa
 import SwiftDate
 
+enum SavingType: String {
+    case screenshot
+    case text
+}
+
 protocol ItemsDatabaseServiceProtocol: AnyObject {
     var itemUpdated: Observable<String?> { get }
 
@@ -21,7 +26,8 @@ protocol ItemsDatabaseServiceProtocol: AnyObject {
 
     @discardableResult
     func addItem(
-        imageData: Data,
+        imageData: Data?,
+        savingType: SavingType,
         dueDateString: String?,
         dueDate: Date?,
         comment: String?
@@ -167,14 +173,25 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     @discardableResult
     func addItem(
-        imageData: Data,
+        imageData: Data?,
+        savingType: SavingType,
         dueDateString: String?,
         dueDate: Date?,
         comment: String?
     ) -> ItemModel? {
-        let imageName = UUID().uuidString
-        guard self.imageStorage.saveImage(imageData: imageData, name: imageName) else {
-            return nil
+
+        var imageName: String?
+        if savingType == .screenshot {
+            imageName = UUID().uuidString
+
+            guard let imageData = imageData else {
+                appAssertionFailure("Image data doesn't provided")
+                return nil
+            }
+
+            guard self.imageStorage.saveImage(imageData: imageData, name: imageName!) else {
+                return nil
+            }
         }
 
         let id = UUID().uuidString
@@ -241,7 +258,7 @@ extension ItemsDatabaseService {
         for i in 0 ..< count {
             let imageName = "img_\(Int.random(in: 1 ..< 11))"
             self.addItem(
-                imageData: NSImage(named: NSImage.Name(imageName))!.tiffRepresentation(using: .jpeg, factor: 0.83)!,
+                imageData: NSImage(named: NSImage.Name(imageName))!.tiffRepresentation(using: .jpeg, factor: 0.83)!, savingType: .screenshot,
                 dueDateString: "in 2h",
                 dueDate: Date().addingTimeInterval(60 * 60 * Double(i)),
                 comment: "Hi there"
