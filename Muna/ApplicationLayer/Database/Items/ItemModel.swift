@@ -32,6 +32,10 @@ class ItemModel: ItemModelProtocol, Codable {
     var creationDate: Date
 
     var numberOfTimeChanges: Int?
+    var commentHeight: CGFloat {
+        return self.commentHeightContainer ?? 0
+    }
+    var commentHeightContainer: CGFloat?
 
     var dueDateString: String?
     var dueDate: Date? {
@@ -40,7 +44,11 @@ class ItemModel: ItemModelProtocol, Codable {
         }
     }
 
-    var comment: String?
+    var comment: String? {
+        didSet {
+            self.calculateNumberOfLines()
+        }
+    }
 
     var notificationId: String
 
@@ -87,6 +95,7 @@ class ItemModel: ItemModelProtocol, Codable {
         case numberOfTimeChanges
         case isComplited
         case notificationId
+        case commentHeightContainer
     }
 
     weak var itemsDatabaseService: ItemsDatabaseServiceProtocol?
@@ -112,6 +121,7 @@ class ItemModel: ItemModelProtocol, Codable {
         self.isNew = isNew
         self.itemsDatabaseService = itemsDatabaseService
         self.notificationId = UUID().uuidString
+        self.calculateNumberOfLines()
     }
 
     func toggleComplited() {
@@ -120,5 +130,20 @@ class ItemModel: ItemModelProtocol, Codable {
 
     func toggleSeen() {
         self.isNew = false
+    }
+
+    private func calculateNumberOfLines() {
+        guard let comment = self.comment, comment.isEmpty == false else {
+            self.commentHeightContainer = 0
+            return
+        }
+
+        let width = WindowManager.panelWindowFrameWidth - 16 * 2
+        let textWidth = width - MainPanelItemMetainformationStyle.fullSpace
+
+        self.commentHeightContainer = comment.height(
+            withConstrainedWidth: textWidth,
+            font: MainPanelItemMetainformationStyle.commentFont
+        )
     }
 }

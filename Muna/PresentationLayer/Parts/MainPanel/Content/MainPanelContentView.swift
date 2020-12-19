@@ -672,11 +672,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
         let item = self.groupedData.item(at: indexPath)
-        let additionalHeight: CGFloat = (item.comment == nil) || (item.comment?.isEmpty == true) ? 44 : 64
 
         let size = NSSize(
             width: collectionView.frame.size.width,
-            height: MainPanelItemView.imageHeight + additionalHeight
+            height: MainPanelItemView.calculateHeight(item: item)
         )
         return size
     }

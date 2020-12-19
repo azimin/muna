@@ -8,42 +8,44 @@
 
 import Cocoa
 
+enum MainPanelItemMetainformationStyle {
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
+    static var commentFont = FontStyle.customFont(style: .bold, size: 16)
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
+    static var commentRightSpacing: CGFloat = 12
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
+    static var commentToCompleteItemSpacing: CGFloat = 12
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
+    static var completeItemLeftSpacingSpacing: CGFloat = 12
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
+    static var completeItemWidth: CGFloat = 19
+
+    static var fullSpace: CGFloat {
+        return self.commentRightSpacing + self.commentToCompleteItemSpacing + self.completeItemLeftSpacingSpacing + self.completeItemWidth
+    }
+}
+
 class MainPanelItemMetainformationView: View {
     static func calculateHeight(item: ItemModel) -> CGFloat {
-        let width = WindowManager.panelWindowFrameWidth - 16 * 2 - 12 * 2
-        let textWidth = width - 12 * 2 - 19
-
         var finalHeight: CGFloat = 0
+        finalHeight += 12 * 2 + 19 // Size of top/bottom insets and comments
+        finalHeight += item.commentHeight // comment
+        finalHeight += item.commentHeight > 0 ? 4 : 0 // space between comment and reminder
 
-        let reminderText = MainPanelItemMetainformationView.reminderText(item: item)
-        finalHeight += reminderText.height(
-            withConstrainedWidth: textWidth,
-            font: MainPanelItemMetainformationView.deadlineFont
-        )
-
-        if let comment = item.comment, comment.isEmpty == false {
-            finalHeight += 4
-            finalHeight += comment.height(
-                withConstrainedWidth: textWidth,
-                font: MainPanelItemMetainformationView.commentFont
-            )
-        }
-
-        return finalHeight + 12 * 2
+        return finalHeight
     }
 
     private static var deadlineFont = FontStyle.customFont(style: .bold, size: 16)
-    private static var commentFont = FontStyle.customFont(style: .medium, size: 13)
 
     let metainformationStackView = NSStackView()
 
     let completionButton = Button().withImageName("reminder-off")
 
     let deadlineLabel = Label(font: MainPanelItemMetainformationView.deadlineFont)
-        .withTextColorStyle(.titleAccent)
+        .withTextColorStyle(.title80AccentAlpha)
 
-    let commentLabel = Label(font: MainPanelItemMetainformationView.commentFont)
-        .withTextColorStyle(.title60AccentAlpha)
+    let commentLabel = Label(font: MainPanelItemMetainformationStyle.commentFont)
+        .withTextColorStyle(.titleAccent)
 
     init() {
         super.init(frame: .zero)
@@ -61,7 +63,14 @@ class MainPanelItemMetainformationView: View {
         self.metainformationStackView.alignment = .leading
         self.metainformationStackView.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(12)
-            maker.trailing.bottom.equalToSuperview().inset(NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
+            maker.trailing.bottom.equalToSuperview().inset(
+                NSEdgeInsets(
+                    top: 12,
+                    left: 0,
+                    bottom: 12,
+                    right: MainPanelItemMetainformationStyle.commentRightSpacing
+                )
+            )
         }
 
         self.metainformationStackView.addArrangedSubview(self.deadlineLabel)
@@ -69,9 +78,18 @@ class MainPanelItemMetainformationView: View {
 
         self.addSubview(self.completionButton)
         self.completionButton.snp.makeConstraints { maker in
-            maker.leading.equalToSuperview().inset(12)
-            maker.size.equalTo(19)
-            maker.trailing.equalTo(self.metainformationStackView.snp.leading).inset(-12)
+            maker.leading.equalToSuperview().inset(
+                MainPanelItemMetainformationStyle.completeItemLeftSpacingSpacing
+            )
+
+            maker.size.equalTo(
+                MainPanelItemMetainformationStyle.completeItemWidth
+            )
+
+            maker.trailing.equalTo(self.metainformationStackView.snp.leading).inset(
+                -MainPanelItemMetainformationStyle.commentToCompleteItemSpacing
+            )
+
             maker.top.equalTo(self.deadlineLabel.snp.top)
         }
     }
@@ -84,7 +102,7 @@ class MainPanelItemMetainformationView: View {
         if let dueDate = item.dueDate, dueDate < Date(), style != .completed {
             self.deadlineLabel.textColor = NSColor.color(.redLight)
         } else {
-            self.deadlineLabel.textColor = NSColor.color(.titleAccent)
+            self.deadlineLabel.textColor = NSColor.color(.title80AccentAlpha)
         }
     }
 
@@ -98,7 +116,7 @@ class MainPanelItemMetainformationView: View {
     }
 }
 
-private extension String {
+extension String {
     func height(withConstrainedWidth width: CGFloat, font: NSFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(

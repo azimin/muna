@@ -19,6 +19,7 @@ protocol WindowManagerProtocol {
 }
 
 class WindowManager: WindowManagerProtocol {
+    // DON'T CHANGE CACHING SIZE IS BASE ON IT, ASK ALEX
     static let panelWindowFrameWidth: CGFloat = 400
     var windowFrameWidth: CGFloat {
         return WindowManager.panelWindowFrameWidth

@@ -12,6 +12,7 @@ enum ColorStyle {
     case titleAccent
     case title60Accent
     case title60AccentAlpha
+    case title80AccentAlpha
     case newTitle
 
     case itemSelectionColor
@@ -71,6 +72,8 @@ enum ColorStyle {
                 return NSColor(hex: "9DA4AC")
             case .title60AccentAlpha:
                 return NSColor.white.withAlphaComponent(0.6)
+            case .title80AccentAlpha:
+                return NSColor.white.withAlphaComponent(0.8)
             case .backgroundOverlay:
                 return NSColor.black.withAlphaComponent(0.5)
             case .lightForegroundOverlay:
@@ -122,6 +125,8 @@ enum ColorStyle {
                 return NSColor(hex: "FF5555").withAlphaComponent(0.5)
             case .title60AccentAlpha:
                 return NSColor.black.withAlphaComponent(0.6)
+            case .title80AccentAlpha:
+                return NSColor.black.withAlphaComponent(0.8)
             case .button:
                 return NSColor(hex: "2D2729")
             case .backgroundOverlay:
