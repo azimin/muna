@@ -8,6 +8,7 @@
 
 import Cocoa
 import SnapKit
+import SwiftDate
 
 class MainPanelView: MainPanelBackgroundView {
     let segmentControl = NSSegmentedControl(labels: ["Uncompleted", "No deadline", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
@@ -18,6 +19,8 @@ class MainPanelView: MainPanelBackgroundView {
     let bottomSeparator = View()
         .withBackgroundColorStyle(.separator)
     let bottomBar = PanelBottomBarView()
+
+    var closePanelTime = Date()
 
     override func viewSetup() {
         super.viewSetup()
@@ -81,7 +84,8 @@ class MainPanelView: MainPanelBackgroundView {
         if let item = selectedItem {
             self.toggle(selectedItem: item)
         } else {
-            self.mainContentView.reloadData(selectedItem: selectedItem)
+            self.switchToFirstTabIfNeeded()
+            self.mainContentView.reloadData(selectedItem: nil)
         }
     }
 
@@ -106,6 +110,13 @@ class MainPanelView: MainPanelBackgroundView {
 
     func hide() {
         self.mainContentView.popover?.close()
+        self.closePanelTime = Date()
+    }
+
+    func switchToFirstTabIfNeeded() {
+        if abs(self.closePanelTime.timeIntervalSince(Date())) > 60 {
+            self.segmentControl.selectedSegment = 0
+        }
     }
 
     func spaceClicked() {
