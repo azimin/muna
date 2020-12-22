@@ -208,7 +208,14 @@ class TaskCreateView: PopupView {
 
     func createTask(byShortcut: Bool) {
         defer {
-            self.delegate?.closeScreenshot()
+            switch self.usage {
+            case .screenshot:
+                self.delegate?.closeScreenshot()
+            case .textCreation:
+                if self.usage == .textCreation, itemToSave.comment != nil, itemToSave.comment?.isEmpty != true {
+                    self.delegate?.closeScreenshot()
+                }
+            }
         }
 
         var itemToSave: SavingProcessingService.ItemToSave
@@ -237,6 +244,27 @@ class TaskCreateView: PopupView {
         }
 
         itemToSave.comment = self.commentTextField.textField.stringValue
+
+        if self.usage == .textCreation, (itemToSave.comment == nil || itemToSave.comment?.isEmpty == true) {
+            let shakeAnimation = CABasicAnimation(keyPath: "position")
+            shakeAnimation.duration = 0.07
+            shakeAnimation.repeatCount = 4
+            shakeAnimation.autoreverses = true
+            shakeAnimation.fromValue = NSValue(
+                point: CGPoint(
+                    x: self.commentTextField.frame.origin.x - 10,
+                    y: self.commentTextField.frame.origin.y
+                )
+            )
+            shakeAnimation.toValue = NSValue(
+                point: CGPoint(
+                    x: self.commentTextField.frame.origin.x + 10,
+                    y: self.commentTextField.frame.origin.y
+                )
+            )
+            self.commentTextField.layer?.add(shakeAnimation, forKey: nil)
+            return
+        }
 
         self.savingProcessingService.save(withItem: itemToSave, byShortcut: byShortcut)
     }
