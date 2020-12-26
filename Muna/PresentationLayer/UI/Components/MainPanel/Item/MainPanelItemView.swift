@@ -27,10 +27,14 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
 
         let height: CGFloat
 
-        if let savingType = item.savingType, savingType == .text {
+        if let savingType = item.savingType, savingType == .text  {
             height = MainPanelItemMetainformationView.calculateHeight(item: item)
         } else {
-           height = MainPanelItemView.imageHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
+            if item.imageName == nil {
+                height = MainPanelItemMetainformationView.calculateHeight(item: item)
+            } else {
+                height = MainPanelItemView.imageHeight + MainPanelItemMetainformationView.calculateHeight(item: item)
+            }
         }
         self.cachedHeight[item.id] = height
         return height
