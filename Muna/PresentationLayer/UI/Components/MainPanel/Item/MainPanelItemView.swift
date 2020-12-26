@@ -39,6 +39,8 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
     let backgroundView = View()
     let selectionView = MainPanelItemSelectionView()
     var imageView = ImageView()
+    private var imageViewHeightConstraint: Constraint?
+
     var metainformationHeightConstraint: Constraint?
 
     let metainformationView = MainPanelItemMetainformationView()
@@ -98,7 +100,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         self.imageView.aspectRation = .resizeAspect
         self.imageView.snp.makeConstraints { maker in
             maker.top.leading.trailing.equalToSuperview()
-            maker.height.equalTo(MainPanelItemView.imageHeight)
+            self.imageViewHeightConstraint = maker.height.equalTo(MainPanelItemView.imageHeight).constraint
         }
 
         self.backgroundView.addSubview(self.metainformationView)
@@ -196,6 +198,9 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
                 name: imageName
             )
             self.imageView.image = image
+            self.imageViewHeightConstraint?.update(offset: MainPanelItemView.imageHeight)
+        } else {
+            self.imageViewHeightConstraint?.update(offset: 0)
         }
 
         self.item = item
