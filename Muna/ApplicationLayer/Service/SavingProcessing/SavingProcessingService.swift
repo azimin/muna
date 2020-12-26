@@ -10,7 +10,7 @@ import Cocoa
 import CoreGraphics
 
 class SavingProcessingService {
-    struct ItemToSave {        
+    struct ItemToSave {
         var savingType: SavingType
         var dueDateString: String?
         var date: Date?

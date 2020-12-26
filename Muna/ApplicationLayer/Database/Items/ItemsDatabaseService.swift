@@ -9,7 +9,7 @@
 import Cocoa
 import SwiftDate
 
-enum SavingType: String {
+enum SavingType: String, Codable {
     case screenshot
     case text
 }
@@ -197,6 +197,7 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
         let id = UUID().uuidString
         let item = ItemModel(
             id: id,
+            savingType: savingType,
             imageName: imageName,
             creationDate: Date(),
             dueDateString: dueDateString,

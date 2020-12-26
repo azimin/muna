@@ -16,6 +16,8 @@ protocol ItemModelProtocol {
     var dueDate: Date? { get }
     var comment: String? { get }
 
+    var savingType: SavingType? { get }
+
     var notificationId: String { get }
 
     var isComplited: Bool { get }
@@ -30,6 +32,8 @@ class ItemModel: ItemModelProtocol, Codable {
     var id: String
     var imageName: String?
     var creationDate: Date
+
+    var savingType: SavingType?
 
     var numberOfTimeChanges: Int?
     var commentHeight: CGFloat {
@@ -102,6 +106,7 @@ class ItemModel: ItemModelProtocol, Codable {
 
     init(
         id: String,
+        savingType: SavingType?,
         imageName: String?,
         creationDate: Date,
         dueDateString: String?,
@@ -113,6 +118,7 @@ class ItemModel: ItemModelProtocol, Codable {
     ) {
         self.id = id
         self.imageName = imageName
+        self.savingType = savingType
         self.creationDate = creationDate
         self.dueDateString = dueDateString
         self.dueDate = dueDate
