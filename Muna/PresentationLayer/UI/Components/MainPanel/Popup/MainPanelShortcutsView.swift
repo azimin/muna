@@ -84,7 +84,7 @@ class MainPanelShortcutsView: PopupView {
             case .close:
                 return "Show/Close panel"
             case .makeFullScreenshot:
-                return "Capture full-screenshot"
+                return "Capture text note"
             case .makeSelectedAreaShot:
                 return "Capture selected area"
             }

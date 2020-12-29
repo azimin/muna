@@ -13,7 +13,7 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     let settingsView = View()
 
     let entireShortcutPreview = ShortcutPreviewView(
-        title: "Entire screen capture shortcut",
+        title: "Capture text note shortcut",
         imageName: "shortcuts_fullscreen",
         itemUDKey: Preferences.defaultShortcutFullscreenScreenshotKey
     )
