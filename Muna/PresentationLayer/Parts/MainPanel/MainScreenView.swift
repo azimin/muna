@@ -67,7 +67,7 @@ class MainScreenView: NSView {
 
         let changeTimeView = TaskChangeTimeGlobalView(
             itemModel: itemModel,
-            style: .withImage,
+            style: itemModel.savingTypeCasted == .screenshot ? .withImage : .withoutImage,
             closeHandler: closeHandler
         )
 

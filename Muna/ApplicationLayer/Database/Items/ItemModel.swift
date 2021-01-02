@@ -34,6 +34,9 @@ class ItemModel: ItemModelProtocol, Codable {
     var creationDate: Date
 
     var savingType: SavingType?
+    var savingTypeCasted: SavingType {
+        return self.savingType ?? .screenshot
+    }
 
     var numberOfTimeChanges: Int?
     var commentHeight: CGFloat {

@@ -221,9 +221,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
             menu.addItem(completeItem)
             menu.addItem(reminderItem)
-            menu.addItem(NSMenuItem.separator())
-            menu.addItem(previewItem)
-            menu.addItem(copyItem)
+
+            if itemModel.savingTypeCasted == .screenshot {
+                menu.addItem(NSMenuItem.separator())
+                menu.addItem(previewItem)
+                menu.addItem(copyItem)
+            }
+
             menu.addItem(NSMenuItem.separator())
             menu.addItem(deleteItem)
             NSMenu.popUpContextMenu(menu, with: event, for: item.view)
@@ -382,12 +386,17 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             return
         }
 
+        guard capturedItem.savingTypeCasted == .screenshot else {
+            return
+        }
+
         guard let screeSize = self.window?.screen?.frame else {
             appAssertionFailure("No screen size")
             return
         }
 
-        guard let imageName = capturedItem.imageName, let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: imageName) else {
+        guard let imageName = capturedItem.imageName,
+              let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: imageName) else {
             appAssertionFailure("No image")
             return
         }
