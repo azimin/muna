@@ -100,6 +100,7 @@ class ItemModel: ItemModelProtocol, Codable {
         case dueDate
         case comment
         case numberOfTimeChanges
+        case savingType
         case isComplited
         case notificationId
         case commentHeightContainer

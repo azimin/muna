@@ -237,6 +237,17 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
     }
 
     @objc func previewAction() {
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            appAssertionFailure("No selected index")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+
+        guard item.savingTypeCasted == .screenshot else {
+            return
+        }
+
         ServiceLocator.shared.analytics.executeControl(
             control: .itemPreview,
             byShortcut: false
@@ -251,6 +262,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         }
 
         let item = self.groupedData.item(at: indexPath)
+
+        guard item.savingTypeCasted == .screenshot else {
+            return
+        }
 
         guard let imageName = item.imageName, let image = ServiceLocator.shared.imageStorage.forceLoadImage(name: imageName) else {
             appAssertionFailure("No image")

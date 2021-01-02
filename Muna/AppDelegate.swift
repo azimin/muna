@@ -53,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
 //        TimeParserTests.test()
 
-        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 0)
+//        ServiceLocator.shared.itemsDatabase.generateFakeDataIfNeeded(count: 0)
 
         self.setupUserDefaults()
         self.setupStatusBarItem()
