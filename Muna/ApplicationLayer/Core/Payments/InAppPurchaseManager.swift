@@ -27,5 +27,27 @@ final class InAppPurchaseManager {
     }
 
     func completeTransaction() {
+        self.inAppPurchaseService.completeTransactions()
+    }
+
+    func buyProduct(_ productId: ProductIds) {
+        guard let product = monthlyProductItem.product else {
+            // TODO: Add product request
+            return
+        }
+
+        self.inAppPurchaseService.buyProduct(product) { result in
+            switch result {
+            case let .success(purchaseDetails):
+                // TODO: Save that user is pro
+                break
+            case let .failure(error):
+                appAssertionFailure("Error: \(error) on purchasing product: \(productId.rawValue)")
+            }
+        }
+    }
+
+    func restorePurchases() {
+        self.inAppPurchaseService.restorePurchases()
     }
 }

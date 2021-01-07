@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ProductIds: String {
+enum ProductIds: String, CaseIterable {
 
     case monthly = "com.Abstract.Muna.monthly"
 }

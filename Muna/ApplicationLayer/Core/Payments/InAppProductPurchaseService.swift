@@ -29,7 +29,7 @@ final class InAppProductPurchaseService {
         }
     }
 
-    func restorePurchases(_ completion: @escaping ([Purchase]) -> Void) {
+    func restorePurchases() {
         SwiftyStoreKit.restorePurchases { [weak self] results in
             for purchase in results.restoredPurchases where purchase.needsFinishTransaction {
                 // Deliver content from server, then:

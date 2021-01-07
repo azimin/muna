@@ -24,7 +24,7 @@ final class InAppProductsService: NSObject {
 
     private var onStatusChanged: ((Status) -> Void)?
 
-    func requestProducts(forIds ids: [String], _ onCompletion: ((Status) -> Void)?) {
+    func requestProducts(forIds ids: [ProductIds], _ onCompletion: ((Status) -> Void)?) {
         switch self.status {
         case .requesting:
             return
@@ -32,7 +32,7 @@ final class InAppProductsService: NSObject {
             break
         }
 
-        let skRequest = SKProductsRequest(productIdentifiers: Set(ids))
+        let skRequest = SKProductsRequest(productIdentifiers: Set(ids.map { $0.rawValue }))
         skRequest.delegate = self
 
         self.status = .requesting(skRequest)
