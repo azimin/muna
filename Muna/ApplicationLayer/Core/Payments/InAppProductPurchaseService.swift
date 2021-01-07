@@ -10,11 +10,16 @@ import StoreKit
 import SwiftyStoreKit
 
 final class InAppProductPurchaseService {
+    private let checkTransactions: ([Purchase]) -> Void
+
+    init(checkTransactions: @escaping ([Purchase]) -> Void) {
+        self.checkTransactions = checkTransactions
+    }
+
     func buyProduct(_ product: SKProduct, completion: @escaping (Result<PurchaseDetails, SKError>) -> Void) {
         SwiftyStoreKit.purchaseProduct(product) { result in
             switch result {
             case let .success(purchase):
-                completion(.success(purchase))
                 if purchase.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)
                 }
@@ -24,12 +29,24 @@ final class InAppProductPurchaseService {
         }
     }
 
-    func restorePurchases(_ competion: @escaping ([Purchase]) -> Void) {
-        SwiftyStoreKit.restorePurchases { results in
+    func restorePurchases(_ completion: @escaping ([Purchase]) -> Void) {
+        SwiftyStoreKit.restorePurchases { [weak self] results in
             for purchase in results.restoredPurchases where purchase.needsFinishTransaction {
                 // Deliver content from server, then:
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
+            self?.checkTransactions(results.restoredPurchases)
+        }
+    }
+
+    func completeTransactions() {
+        SwiftyStoreKit.completeTransactions { [weak self] purchases in
+            for purchase in purchases where purchase.needsFinishTransaction {
+                // Deliver content from server, then:
+                SwiftyStoreKit.finishTransaction(purchase.transaction)
+            }
+
+            self?.checkTransactions(purchases)
         }
     }
 }

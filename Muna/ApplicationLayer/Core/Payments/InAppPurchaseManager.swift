@@ -25,4 +25,7 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService = inAppPurchaseService
         self.inAppRecieptValidationService = inAppRecieptValidationService
     }
+
+    func completeTransaction() {
+    }
 }
