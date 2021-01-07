@@ -30,6 +30,8 @@
 		2343A2DD24DC3B4100F9C6FC /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */; };
 		2351115B253F732400F6856D /* TextTaskCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115A253F732400F6856D /* TextTaskCreationViewController.swift */; };
 		2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115C253F78BF00F6856D /* TextTaskCreationView.swift */; };
+		2354370E25A79CAE0096AB48 /* InAppProductItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354370D25A79CAE0096AB48 /* InAppProductItem.swift */; };
+		2354371125A79D5A0096AB48 /* ProductIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354371025A79D5A0096AB48 /* ProductIds.swift */; };
 		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
@@ -237,6 +239,8 @@
 		2343A2DC24DC3B4100F9C6FC /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
 		2351115A253F732400F6856D /* TextTaskCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationViewController.swift; sourceTree = "<group>"; };
 		2351115C253F78BF00F6856D /* TextTaskCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationView.swift; sourceTree = "<group>"; };
+		2354370D25A79CAE0096AB48 /* InAppProductItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppProductItem.swift; sourceTree = "<group>"; };
+		2354371025A79D5A0096AB48 /* ProductIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIds.swift; sourceTree = "<group>"; };
 		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
@@ -566,6 +570,15 @@
 			path = TextTaskCreation;
 			sourceTree = "<group>";
 		};
+		2354370C25A79C9B0096AB48 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				2354370D25A79CAE0096AB48 /* InAppProductItem.swift */,
+				2354371025A79D5A0096AB48 /* ProductIds.swift */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
 		23561B442461EEAD00097E4A /* Parser */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,6 +710,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2354370C25A79C9B0096AB48 /* Payments */,
 				9F4E4F9924F45BA40069DE9F /* HintsEngine */,
 				9F2D340824D0B95C0049DD43 /* Analytics */,
 				23B6C78024ADAE1C0071ACA8 /* Storage */,
@@ -1813,6 +1827,7 @@
 				9F581E402494E8A100A34379 /* OnboardingViewController.swift in Sources */,
 				9FA07F672460C0F900654D36 /* ColorStyle.swift in Sources */,
 				9F017FD62475CD1E004E3F5A /* NSStackView+Init.swift in Sources */,
+				2354371125A79D5A0096AB48 /* ProductIds.swift in Sources */,
 				9FB3185A250B64AD00667A79 /* PanelPopupView.swift in Sources */,
 				9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */,
 				239AB0AE24688EE6001526DA /* ServiceLocator.swift in Sources */,
@@ -1879,6 +1894,7 @@
 				9F3BC14C2461F031002B6217 /* NSCollectionView+Extensions.swift in Sources */,
 				9FA07F5724609E0100654D36 /* View.swift in Sources */,
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
+				2354370E25A79CAE0096AB48 /* InAppProductItem.swift in Sources */,
 				9F33D4882468826100395C44 /* ShortcutView.swift in Sources */,
 				2317EFBC250B8879005AF08E /* HabitsSettingsViewController.swift in Sources */,
 				9F69322F247ACBCB00FEBC0B /* DateComparisonFormatter.swift in Sources */,
