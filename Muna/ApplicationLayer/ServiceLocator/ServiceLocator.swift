@@ -21,6 +21,7 @@ class ServiceLocator {
     let activeAppCheckService: ActiveAppCheckServiceProtocol
     let assistent: AssistentServiceProtocol
     let betaKey: BetaKeyService
+    let inAppPurchaseManager: InAppPurchaseManager
 
     let assertionHandler: AssertionHandler
 
@@ -42,6 +43,16 @@ class ServiceLocator {
             storage: UserDefaults.standard,
             apmplitudeId: "fef18005e21e59f8b7252c5bb34708bd",
             additionalServices: []
+        )
+
+        let inAppReceiptValidationService = InAppRecieptValidationService()
+        let inAppPurchaseService = InAppProductPurchaseService()
+        let inAppProductsService = InAppProductsService()
+
+        self.inAppPurchaseManager = InAppPurchaseManager(
+            inAppProductsService: inAppProductsService,
+            inAppPurchaseService: inAppPurchaseService,
+            inAppRecieptValidationService: inAppReceiptValidationService
         )
     }
 }

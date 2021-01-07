@@ -10,11 +10,7 @@ import StoreKit
 import SwiftyStoreKit
 
 final class InAppProductPurchaseService {
-    private let checkTransactions: ([Purchase]) -> Void
-
-    init(checkTransactions: @escaping ([Purchase]) -> Void) {
-        self.checkTransactions = checkTransactions
-    }
+    var checkTransactions: (([Purchase]) -> Void)?
 
     func buyProduct(_ product: SKProduct, completion: @escaping (Result<PurchaseDetails, SKError>) -> Void) {
         SwiftyStoreKit.purchaseProduct(product) { result in
@@ -35,7 +31,7 @@ final class InAppProductPurchaseService {
                 // Deliver content from server, then:
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
-            self?.checkTransactions(results.restoredPurchases)
+            self?.checkTransactions?(results.restoredPurchases)
         }
     }
 
@@ -46,7 +42,7 @@ final class InAppProductPurchaseService {
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
 
-            self?.checkTransactions(purchases)
+            self?.checkTransactions?(purchases)
         }
     }
 }
