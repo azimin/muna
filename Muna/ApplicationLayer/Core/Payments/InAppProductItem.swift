@@ -8,7 +8,7 @@
 
 import StoreKit
 
-struct InAppItem {
+struct InAppProductItem {
 
     let id: String
 

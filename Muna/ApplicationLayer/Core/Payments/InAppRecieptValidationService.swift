@@ -8,7 +8,7 @@
 
 import SwiftyStoreKit
 
-final class InAppRecieptValidator {
+final class InAppRecieptValidationService {
 
     func validateSubscription(forProductId productId: String, _ completion: @escaping (Result<VerifySubscriptionResult, ReceiptError>) -> Void) {
         let recieptValidator: AppleReceiptValidator

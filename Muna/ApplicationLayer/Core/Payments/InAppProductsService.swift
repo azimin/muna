@@ -1,5 +1,5 @@
 //
-//  InAppPurchaseService.swift
+//  InAppProductsService.swift
 //  Muna
 //
 //  Created by Egor Petrov on 07.01.2021.
