@@ -32,6 +32,7 @@
 		2351115D253F78BF00F6856D /* TextTaskCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351115C253F78BF00F6856D /* TextTaskCreationView.swift */; };
 		2354370E25A79CAE0096AB48 /* InAppProductItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354370D25A79CAE0096AB48 /* InAppProductItem.swift */; };
 		2354371125A79D5A0096AB48 /* ProductIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354371025A79D5A0096AB48 /* ProductIds.swift */; };
+		2354371325A79E2D0096AB48 /* InAppPurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354371225A79E2D0096AB48 /* InAppPurchaseService.swift */; };
 		23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B402461ECB900097E4A /* ParserProtocol.swift */; };
 		23561B432461ED8800097E4A /* ParsedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B422461ED8800097E4A /* ParsedResult.swift */; };
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
@@ -241,6 +242,7 @@
 		2351115C253F78BF00F6856D /* TextTaskCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTaskCreationView.swift; sourceTree = "<group>"; };
 		2354370D25A79CAE0096AB48 /* InAppProductItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppProductItem.swift; sourceTree = "<group>"; };
 		2354371025A79D5A0096AB48 /* ProductIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIds.swift; sourceTree = "<group>"; };
+		2354371225A79E2D0096AB48 /* InAppPurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseService.swift; sourceTree = "<group>"; };
 		23561B402461ECB900097E4A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		23561B422461ED8800097E4A /* ParsedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedResult.swift; sourceTree = "<group>"; };
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 			children = (
 				2354370D25A79CAE0096AB48 /* InAppProductItem.swift */,
 				2354371025A79D5A0096AB48 /* ProductIds.swift */,
+				2354371225A79E2D0096AB48 /* InAppPurchaseService.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -1877,6 +1880,7 @@
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
 				9F4EB224250EA4C3002D29C0 /* SmartAssistentView.swift in Sources */,
+				2354371325A79E2D0096AB48 /* InAppPurchaseService.swift in Sources */,
 				9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
