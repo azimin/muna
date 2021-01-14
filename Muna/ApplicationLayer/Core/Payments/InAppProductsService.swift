@@ -25,6 +25,7 @@ final class InAppProductsService: NSObject {
     private var onStatusChanged: ((Status) -> Void)?
 
     func requestProducts(forIds ids: [ProductIds], _ onCompletion: ((Status) -> Void)?) {
+        self.onStatusChanged = onCompletion
         switch self.status {
         case .requesting:
             return

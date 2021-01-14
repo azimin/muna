@@ -122,6 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             }
         }
 
+        ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
     }
 
@@ -157,8 +158,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
-                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
-                self.togglePane()
+//                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
+//                self.togglePane()
+                ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
             }
         )
 

@@ -10,7 +10,7 @@ import Foundation
 
 final class InAppPurchaseManager {
 
-    private let monthlyProductItem = InAppProductItem(id: ProductIds.monthly.rawValue)
+    private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly.rawValue)
 
     private let inAppProductsService: InAppProductsService
     private let inAppPurchaseService: InAppProductPurchaseService
@@ -28,6 +28,18 @@ final class InAppPurchaseManager {
 
     func completeTransaction() {
         self.inAppPurchaseService.completeTransactions()
+    }
+
+    func loadProducts() {
+        self.inAppProductsService.requestProducts(forIds: [.monthly]) {
+            switch $0 {
+            case let .requested(products):
+                self.monthlyProductItem.product = products.first
+            default:
+                // TODO: Add loggging errors
+                break
+            }
+        }
     }
 
     func buyProduct(_ productId: ProductIds) {
