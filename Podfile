@@ -15,6 +15,7 @@ target 'Muna' do
   pod 'SwiftDate'
   pod 'lottie-ios'
   pod 'SwiftyStoreKit'
+  pod 'KeychainAccess'
 
   pod 'Amplitude'
 end

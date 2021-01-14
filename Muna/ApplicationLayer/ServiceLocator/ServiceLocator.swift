@@ -54,5 +54,7 @@ class ServiceLocator {
             inAppPurchaseService: inAppPurchaseService,
             inAppRecieptValidationService: inAppReceiptValidationService
         )
+
+        inAppProductsService.requestProducts(forIds: [.monthly], nil)
     }
 }

@@ -122,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             }
         }
 
-        ServiceLocator.shared.inAppPurchaseManager.loadProducts()
+//        ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
     }
 
