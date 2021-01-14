@@ -158,9 +158,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         MASShortcutBinder.shared()?.bindShortcut(
             withDefaultsKey: Preferences.defaultShortcutPanelKey,
             toAction: {
-//                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
-//                self.togglePane()
-                ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
+                Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
+                self.togglePane()
             }
         )
 
@@ -189,7 +188,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: { [unowned self] in
-                    self.windowManager.activateWindowIfNeeded(.onboarding)
+//                    self.windowManager.activateWindowIfNeeded(.onboarding)
+                    ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
                 }
             )
 
