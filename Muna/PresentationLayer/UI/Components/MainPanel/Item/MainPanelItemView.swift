@@ -152,7 +152,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
         } else {
             let scale: CGFloat = 0.93
             let widthPaggination = (self.frame.width * (1 - scale)) / 2
-            let heightPaggination = (self.frame.height * (1 - scale)) / 2
+            let heightPaggination = CGFloat(0) // (self.frame.height * (1 - scale)) / 2
             let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
             OperationQueue.main.addOperation {
                 self.animateTransformation(transformValue: transform, animated: animated)
