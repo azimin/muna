@@ -124,6 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
+        ServiceLocator.shared.inAppPurchaseManager.validateSubscription()
     }
 
     func scheduleMissingNotifications() {

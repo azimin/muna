@@ -25,6 +25,11 @@ final class InAppPurchaseManager {
         self.inAppProductsService = inAppProductsService
         self.inAppPurchaseService = inAppPurchaseService
         self.inAppRecieptValidationService = inAppRecieptValidationService
+
+        self.inAppPurchaseService.checkTransactions = { [weak self] purchases in
+            guard !purchases.isEmpty else { return }
+            self?.validateSubscription()
+        }
     }
 
     func completeTransaction() {
@@ -64,9 +69,6 @@ final class InAppPurchaseManager {
                     string: purchaseDetails.productId,
                     forKey: SecurityStorage.Key.productIdSubscription.rawValue
                 )
-                if purchaseDetails.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(purchaseDetails.transaction)
-                }
             case let .failure(error):
                 appAssertionFailure("Error: \(error) on purchasing product: \(productId.rawValue)")
             }
