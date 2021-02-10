@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyStoreKit
 
 final class InAppPurchaseManager {
 
@@ -30,13 +31,15 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.completeTransactions()
     }
 
-    func loadProducts() {
+    func loadProducts(_ completion: VoidBlock? = nil) {
         self.inAppProductsService.requestProducts(forIds: [.monthly]) {
             switch $0 {
             case let .requested(products):
                 self.monthlyProductItem.product = products.first
+                completion?()
+            case let .failed(error):
+                appAssertionFailure("Error on loading products: \(error)")
             default:
-                // TODO: Add loggging errors
                 break
             }
         }
@@ -44,15 +47,26 @@ final class InAppPurchaseManager {
 
     func buyProduct(_ productId: ProductIds) {
         guard let product = monthlyProductItem.product else {
-            // TODO: Add product request
+            self.loadProducts { [weak self] in
+                self?.buyProduct(productId)
+            }
             return
         }
 
         self.inAppPurchaseService.buyProduct(product) { result in
             switch result {
             case let .success(purchaseDetails):
-                // TODO: Save that user is pro
-                break
+                ServiceLocator.shared.securityStorage.save(
+                    bool: true,
+                    forKey: SecurityStorage.Key.isUserPro.rawValue
+                )
+                ServiceLocator.shared.securityStorage.save(
+                    string: purchaseDetails.productId,
+                    forKey: SecurityStorage.Key.productIdSubscription.rawValue
+                )
+                if purchaseDetails.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(purchaseDetails.transaction)
+                }
             case let .failure(error):
                 appAssertionFailure("Error: \(error) on purchasing product: \(productId.rawValue)")
             }
@@ -61,5 +75,42 @@ final class InAppPurchaseManager {
 
     func restorePurchases() {
         self.inAppPurchaseService.restorePurchases()
+    }
+
+    func validateSubscription() {
+        guard let productId = ServiceLocator.shared.securityStorage.getString(
+                forKey: SecurityStorage.Key.productIdSubscription.rawValue
+        ) else {
+            return
+        }
+        self.inAppRecieptValidationService.validateSubscription(forProductId: productId) { result in
+            switch result {
+            case let .success(successResult):
+                switch successResult {
+                case .expired, .notPurchased:
+                    ServiceLocator.shared.securityStorage.save(
+                        bool: false,
+                        forKey: SecurityStorage.Key.isUserPro.rawValue
+                    )
+                    ServiceLocator.shared.securityStorage.save(
+                        string: nil,
+                        forKey: SecurityStorage.Key.productIdSubscription.rawValue
+                    )
+                case let .purchased(_, items):
+                    ServiceLocator.shared.securityStorage.save(
+                        bool: true,
+                        forKey: SecurityStorage.Key.isUserPro.rawValue
+                    )
+                    items.forEach { item in
+                        ServiceLocator.shared.securityStorage.save(
+                            string: item.productId,
+                            forKey: SecurityStorage.Key.productIdSubscription.rawValue
+                        )
+                    }
+                }
+            case let .failure(error):
+                appAssertionFailure("Error on subscription validation: \(error)")
+            }
+        }
     }
 }

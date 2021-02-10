@@ -10,6 +10,11 @@ import Foundation
 import KeychainAccess
 
 final class SecurityStorage: StorageServiceProtocol {
+    enum Key: String {
+        case isUserPro
+        case productIdSubscription
+    }
+
     let keychain = Keychain(service: "com.abstract.muna")
 
     func save(string: String?, forKey key: String) {

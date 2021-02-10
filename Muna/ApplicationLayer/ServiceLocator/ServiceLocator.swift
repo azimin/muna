@@ -23,6 +23,8 @@ class ServiceLocator {
     let betaKey: BetaKeyService
     let inAppPurchaseManager: InAppPurchaseManager
 
+    let securityStorage: StorageServiceProtocol
+
     let assertionHandler: AssertionHandler
 
     init(assertionHandler: AssertionHandler) {
@@ -48,6 +50,12 @@ class ServiceLocator {
         let inAppReceiptValidationService = InAppRecieptValidationService()
         let inAppPurchaseService = InAppProductPurchaseService()
         let inAppProductsService = InAppProductsService()
+
+        #if DEBUG
+        self.securityStorage = UserDefaults.standard
+        #else
+        self.securityStorage = SecurityStorage()
+        #endif
 
         self.inAppPurchaseManager = InAppPurchaseManager(
             inAppProductsService: inAppProductsService,
