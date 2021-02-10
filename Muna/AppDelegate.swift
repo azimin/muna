@@ -189,9 +189,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             MASShortcutBinder.shared()?.bindShortcut(
                 withDefaultsKey: Preferences.defaultShortcutDebugKey,
                 toAction: { [unowned self] in
-//                    self.windowManager.activateWindowIfNeeded(.onboarding)
+                    self.windowManager.activateWindowIfNeeded(.onboarding)
 //                    ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
-                    ServiceLocator.shared.inAppPurchaseManager.loadProducts()
+//                    ServiceLocator.shared.inAppPurchaseManager.loadProducts()
                 }
             )
 
