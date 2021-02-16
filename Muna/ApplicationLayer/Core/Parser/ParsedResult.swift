@@ -87,7 +87,7 @@ enum DatePrefix: String, CaseIterable {
     case past
 }
 
-enum DateOffset {
+enum DateOffset: Comparable {
     case month(month: Int)
     case week(week: Int)
     case day(day: Int)

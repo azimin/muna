@@ -19,7 +19,7 @@ class DateProcesingService {
     func getDate(from string: String, date: Date) -> [DateItem] {
         let parsedResults = self.parser.parseFromString(string, date: date)
 
-        let items = parsedResults.map { result -> [DateItem] in
+        var items = parsedResults.map { result -> [DateItem] in
             if result.tagUnit.keys.contains(.ENWeekdaysParser) {
                 return mapFromWeekdays(result)
             }
@@ -33,6 +33,13 @@ class DateProcesingService {
             return mapFromCustomWords(result)
         }
         .flatMap { $0 }
+
+        items.sort { firstItem, secondItem in
+            guard let firstOffset = firstItem.offset, let secondOffset = secondItem.offset else {
+                return false
+            }
+            return firstOffset > secondOffset
+        }
         return items
     }
 
