@@ -113,7 +113,7 @@ class SettingsItemView: NSView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.top.equalTo(self.notificationsSettingItem.snp.bottom)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
     }
 
