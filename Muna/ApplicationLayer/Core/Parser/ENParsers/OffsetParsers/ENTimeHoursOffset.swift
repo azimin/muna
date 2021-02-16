@@ -12,7 +12,7 @@ class ENTimeHoursOffset: Parser {
     override var pattern: String {
         return "\\b(?:in\\s*)?"
             + "(\\d{1,})"
-            + "(\\.(\\d{1,}))?"
+            + "(\\.|\\,(\\d{1,}))?"
             + "(\\s*(h?|hours?))?\\b"
     }
 
