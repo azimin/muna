@@ -19,7 +19,7 @@ class TaskCreateView: PopupView {
         case screenshot
         case textCreation
     }
-    
+
     let usage: Usage
 
     var parsedDates = [DateItem]()

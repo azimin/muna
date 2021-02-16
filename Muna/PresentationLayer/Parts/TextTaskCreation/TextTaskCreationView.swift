@@ -40,4 +40,13 @@ final class TextTaskCreationView: View {
             make.center.equalToSuperview()
         }
     }
+
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        if event.keyCode == Key.escape.carbonKeyCode {
+            ServiceLocator.shared.windowManager.hideWindowIfNeeded(.textTaskCreation)
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
+    }
 }
