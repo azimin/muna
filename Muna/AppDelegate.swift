@@ -225,7 +225,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.statusBarMenu = statusBarMenu
 
         let makeFullScreenshotItem = NSMenuItem(
-            title: "Make Full-screenshot",
+            title: "Make a text task",
             action: #selector(self.toogleFullscreenScreenshotState),
             keyEquivalent: "1"
         )
@@ -463,13 +463,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
             switch value {
             case .fiveMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 5, onlyIfMissing: onlyIfMissing)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 5, onlyIfMissing: onlyIfMissing)
             case .tenMins:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 10, onlyIfMissing: onlyIfMissing)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 10, onlyIfMissing: onlyIfMissing)
             case .halfAnHour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 30, onlyIfMissing: onlyIfMissing)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 30, onlyIfMissing: onlyIfMissing)
             case .hour:
-                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60 * 60, onlyIfMissing: onlyIfMissing)
+                ServiceLocator.shared.notifications.sheduleNotification(item: item, offset: sinceReminder + 60, onlyIfMissing: onlyIfMissing)
             case .disabled:
                 break
             }
