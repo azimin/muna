@@ -56,6 +56,8 @@ class TaskChangeTimeGlobalView: View {
                 name: imageName
             )
             self.imageView.image = image
+            self.imageView.layer?.cornerRadius = 4
+
             let imageSideInstet: CGFloat = 12
 
             self.addSubview(self.imageContentView)
