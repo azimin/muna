@@ -121,7 +121,6 @@ class TaskCreateView: PopupView {
 
         self.reminderTextField.delegate = self
 
-
         self.doneButton.action = #selector(self.handleDoneButton)
         self.closeButton.action = #selector(self.handleCloseButton)
         self.shortcutsButton.action = #selector(self.handleShortcutsButton)

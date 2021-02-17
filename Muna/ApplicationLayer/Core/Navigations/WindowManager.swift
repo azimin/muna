@@ -403,6 +403,8 @@ class WindowManager: WindowManagerProtocol {
                     window.setIsVisible(false)
                 }
             }
+            window.close()
+            self.windows[windowType] = nil
         case .settings:
             window.setIsVisible(false)
         case .onboarding:

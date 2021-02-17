@@ -82,6 +82,10 @@ class ShortcutsController: ShortcutsControllerProtocol {
     }
 
     func insertText(_ insertString: Any) -> Bool {
+        guard self.shouldPerformKeys else {
+            return false
+        }
+
         guard let string = insertString as? String else {
             return false
         }
