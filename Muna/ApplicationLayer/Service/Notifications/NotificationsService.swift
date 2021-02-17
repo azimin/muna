@@ -24,6 +24,10 @@ class NotificationsService: NotificationsServiceProtocol {
     }
 
     func sheduleNotification(item: ItemModelProtocol, offset: TimeInterval, onlyIfMissing: Bool) {
+        guard item.isComplited == false else {
+            return
+        }
+
         if onlyIfMissing {
             self.alreadyPending(item: item) { isPending in
                 print("Is pending: \(isPending)")
