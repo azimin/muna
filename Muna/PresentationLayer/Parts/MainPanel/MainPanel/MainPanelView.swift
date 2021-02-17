@@ -27,7 +27,11 @@ class MainPanelView: MainPanelBackgroundView {
 
         self.backgroundView.addSubview(self.segmentControl)
         self.segmentControl.selectedSegment = 0
-        self.segmentControl.segmentStyle = .capsule
+
+        if #available(OSX 11.0, *) { } else {
+            self.segmentControl.segmentStyle = .capsule
+        }
+
         self.segmentControl.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(18)
             maker.centerX.equalToSuperview()

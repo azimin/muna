@@ -67,6 +67,10 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
 
+        if #available(OSX 11.0, *) {
+            self.window.toolbarStyle = .preference
+        }
+
         guard self.isFirstAppear else {
             return
         }
@@ -157,7 +161,6 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     var toolbarItems: [ToolbarItem: NSToolbarItem] = [:]
     var itemsIdentifiers: [NSToolbarItem.Identifier] = {
         var values = ToolbarItem.allCases.map { $0.identifier }
-        values.insert(.flexibleSpace, at: values.count - 1)
         return values
     }()
 
