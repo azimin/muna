@@ -84,6 +84,7 @@
 		9F152703246DCE870037623B /* TimeExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152702246DCE870037623B /* TimeExampleView.swift */; };
 		9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152708246DD7D70037623B /* SettingsViewController.swift */; };
 		9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15270A246DD7DF0037623B /* SettingsView.swift */; };
+		9F1769E125DD809200DADD05 /* ForceTransformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1769E025DD809200DADD05 /* ForceTransformView.swift */; };
 		9F18D5782513FD9400729B2C /* AssistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18D5772513FD9400729B2C /* AssistentService.swift */; };
 		9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */; };
 		9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */; };
@@ -304,6 +305,7 @@
 		9F152702246DCE870037623B /* TimeExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeExampleView.swift; sourceTree = "<group>"; };
 		9F152708246DD7D70037623B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9F15270A246DD7DF0037623B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9F1769E025DD809200DADD05 /* ForceTransformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceTransformView.swift; sourceTree = "<group>"; };
 		9F18D5772513FD9400729B2C /* AssistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistentService.swift; sourceTree = "<group>"; };
 		9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeParserTests.swift; sourceTree = "<group>"; };
 		9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemsTransformer.swift; sourceTree = "<group>"; };
@@ -1361,6 +1363,7 @@
 				9FDAB87424A9452C000B1158 /* MousePositionService.swift */,
 				9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */,
 				9FDAB87624A948D6000B1158 /* MainPanelItemSelectionView.swift */,
+				9F1769E025DD809200DADD05 /* ForceTransformView.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -1914,6 +1917,7 @@
 				9F33D48624687F8400395C44 /* ShortcutItemView.swift in Sources */,
 				2354370E25A79CAE0096AB48 /* InAppProductItem.swift in Sources */,
 				9F33D4882468826100395C44 /* ShortcutView.swift in Sources */,
+				9F1769E125DD809200DADD05 /* ForceTransformView.swift in Sources */,
 				2317EFBC250B8879005AF08E /* HabitsSettingsViewController.swift in Sources */,
 				9F69322F247ACBCB00FEBC0B /* DateComparisonFormatter.swift in Sources */,
 				9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */,

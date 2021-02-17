@@ -73,7 +73,7 @@ class TaskChangeTimeView: PopupView {
         self.reminderTextField.placeholder = "When to remind"
 
         self.addSubview(self.buttonsStack)
-        self.buttonsStack.spacing = 12
+        self.buttonsStack.spacing = 8
         self.buttonsStack.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview().inset(
                 NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)

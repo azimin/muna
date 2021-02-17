@@ -40,7 +40,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
         return height
     }
 
-    let backgroundView = View()
+    let backgroundView = ForceTransformView()
     let selectionView = MainPanelItemSelectionView()
     var imageView = ImageView()
     private var imageViewHeightConstraint: Constraint?
@@ -64,7 +64,6 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
     }
 
     var isFirstSetup = true
-    let scaleTrasnform = CATransform3DConcat(CATransform3DMakeScale(0.93, 0.93, 1), CATransform3DMakeTranslation(8, 8, 0))
 
     override func layout() {
         super.layout()
@@ -142,9 +141,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
 
         if selected {
             let transform = CATransform3DConcat(CATransform3DMakeScale(1, 1, 1), CATransform3DMakeTranslation(0, 0, 0))
-            OperationQueue.main.addOperation {
-                self.animateTransformation(transformValue: transform, animated: animated)
-            }
+            self.animateTransformation(transformValue: transform, animated: animated)
             let alpha: CGFloat = Theme.current == .light ? 0.35 : 0.15
             self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = false
@@ -154,9 +151,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
             let widthPaggination = (self.frame.width * (1 - scale)) / 2
             let heightPaggination = CGFloat(0) // (self.frame.height * (1 - scale)) / 2
             let transform = CATransform3DConcat(CATransform3DMakeScale(scale, scale, 1), CATransform3DMakeTranslation(widthPaggination, heightPaggination, 0))
-            OperationQueue.main.addOperation {
-                self.animateTransformation(transformValue: transform, animated: animated)
-            }
+            self.animateTransformation(transformValue: transform, animated: animated)
             let alpha: CGFloat = Theme.current == .light ? 0.15 : 0.07
             self.backgroundView.backgroundColor = NSColor.color(.plateFullSelection).withAlphaComponent(alpha)
             self.selectionView.isHidden = true
@@ -170,7 +165,11 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
 
     func animateTransformation(transformValue: CATransform3D, animated: Bool) {
         guard animated else {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            self.backgroundView.forceTransform = transformValue
             self.backgroundView.layer?.transform = transformValue
+            CATransaction.commit()
             return
         }
 
@@ -178,6 +177,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
         transform.fromValue = self.backgroundView.layer?.transform
         transform.toValue = transformValue
         transform.duration = 0.15
+        self.backgroundView.forceTransform = transformValue
         self.backgroundView.layer?.transform = transformValue
         self.backgroundView.layer?.add(transform, forKey: #keyPath(CALayer.transform))
     }
