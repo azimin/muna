@@ -26,8 +26,6 @@ class MainPanelShortcutsView: PopupView {
 
         static var values: [DescriptionShortcut] = [
             .nextItem,
-            .nextSection,
-            .previousSection,
             .deleteItem,
             .previewItem,
             .complete,

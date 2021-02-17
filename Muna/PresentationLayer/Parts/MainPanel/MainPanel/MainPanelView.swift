@@ -84,6 +84,24 @@ class MainPanelView: MainPanelBackgroundView {
         }
     }
 
+    func preveousSegment() {
+        var newIndex = self.segmentControl.selectedSegment - 1
+        if newIndex < 0 {
+            newIndex = self.segmentControl.segmentCount - 1
+        }
+        self.segmentControl.selectedSegment = newIndex
+        self.segmentChanged()
+    }
+
+    func nextSegment() {
+        var newIndex = self.segmentControl.selectedSegment + 1
+        if newIndex >= self.segmentControl.segmentCount {
+            newIndex = 0
+        }
+        self.segmentControl.selectedSegment = newIndex
+        self.segmentChanged()
+    }
+
     func show(selectedItem: ItemModel? = nil) {
         if let item = selectedItem {
             self.toggle(selectedItem: item)

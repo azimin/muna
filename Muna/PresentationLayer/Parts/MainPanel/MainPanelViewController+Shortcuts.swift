@@ -14,6 +14,8 @@ extension MainScreenViewController {
         case nextItem
         case preveousSection
         case nextSection
+        case nextTab
+        case preveousTab
         case deleteItem
         case previewItem
         case complete
@@ -24,6 +26,10 @@ extension MainScreenViewController {
 
         var item: ShortcutItem {
             switch self {
+            case .nextTab:
+                return ShortcutItem(key: .rightArrow, modifiers: [])
+            case .preveousTab:
+                return ShortcutItem(key: .leftArrow, modifiers: [])
             case .preveousItem:
                 return ShortcutItem(key: .upArrow, modifiers: [])
             case .nextItem:

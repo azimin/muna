@@ -128,6 +128,10 @@ class MainScreenViewController: NSViewController {
                     ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
                 }
             }
+        case .nextTab:
+            self.panelView.nextSegment()
+        case .preveousTab:
+            self.panelView.preveousSegment()
         }
     }
 
