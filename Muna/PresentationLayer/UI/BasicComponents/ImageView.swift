@@ -14,12 +14,14 @@ class ImageView: NSImageView {
     init(name: String, aspectRation: CALayerContentsGravity = .resizeAspectFill) {
         self.aspectRation = aspectRation
         super.init(frame: .zero)
+        self.wantsLayer = true
         self.image = NSImage(named: NSImage.Name(name))
     }
 
     init(aspectRation: CALayerContentsGravity = .resizeAspectFill) {
         self.aspectRation = aspectRation
         super.init(frame: .zero)
+        self.wantsLayer = true
     }
 
     required init?(coder: NSCoder) {
@@ -34,7 +36,6 @@ class ImageView: NSImageView {
             self.layer = CALayer()
             self.layer?.contentsGravity = self.aspectRation
             self.layer?.contents = newValue
-            self.wantsLayer = true
             super.image = newValue
         }
     }

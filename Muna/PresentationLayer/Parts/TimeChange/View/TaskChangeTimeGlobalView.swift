@@ -41,14 +41,10 @@ class TaskChangeTimeGlobalView: View {
 
     override func updateLayer() {
         super.updateLayer()
-        self.imageContentView.layer?.borderColor = CGColor.color(.separator)
+        print(self.imageView.frame)
     }
 
     func setup() {
-        self.imageContentView.layer?.cornerRadius = 16
-        self.imageContentView.layer?.masksToBounds = true
-        self.imageContentView.layer?.borderWidth = 1
-
         switch self.style {
         case .withImage:
             guard let imageName = self.itemModel.imageName else {
@@ -60,21 +56,22 @@ class TaskChangeTimeGlobalView: View {
                 name: imageName
             )
             self.imageView.image = image
+            let imageSideInstet: CGFloat = 12
 
             self.addSubview(self.imageContentView)
             self.imageContentView.snp.makeConstraints { maker in
                 maker.top.equalToSuperview()
                 maker.centerX.equalToSuperview()
                 if let size = image?.size {
-                    if size.width > size.height * 1.6 {
-                        let coef = 320 / size.width
+                    if size.width > size.height * 1.48 {
+                        let coef = (320 - imageSideInstet * 2) / size.width
                         let height = (size.height * coef)
                         maker.width.equalTo(320)
                         maker.height.equalTo(height)
                     } else {
                         let coef = 200 / size.height
                         let width = (size.width * coef)
-                        maker.width.equalTo(width)
+                        maker.width.equalTo(width + imageSideInstet * 2)
                         maker.height.equalTo(200)
                     }
                 }
@@ -82,12 +79,12 @@ class TaskChangeTimeGlobalView: View {
 
             self.imageContentView.addSubview(self.imageView)
             self.imageView.snp.makeConstraints { maker in
-                maker.edges.equalToSuperview()
+                maker.edges.equalToSuperview().inset(NSEdgeInsets(top: 0, left: imageSideInstet, bottom: 0, right: imageSideInstet))
             }
 
             self.addSubview(self.taskView)
             self.taskView.snp.makeConstraints { maker in
-                maker.top.equalTo(self.imageView.snp.bottom).inset(-12)
+                maker.top.equalTo(self.imageContentView.snp.bottom).inset(-12)
                 maker.leading.trailing.bottom.equalToSuperview()
             }
         case .withoutImage:
