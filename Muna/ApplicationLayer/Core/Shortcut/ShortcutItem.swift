@@ -9,6 +9,19 @@
 import Cocoa
 import MASShortcut
 
+extension MASShortcut {
+    var item: ShortcutItem? {
+        guard let key = Key(string: self.keyCodeString) else {
+            return nil
+        }
+
+        return ShortcutItem(
+            key: key,
+            modifiers: self.modifierFlags
+        )
+    }
+}
+
 class ShortcutItem {
     let key: Key
     let modifiers: NSEvent.ModifierFlags

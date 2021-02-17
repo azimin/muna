@@ -139,7 +139,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         ServiceLocator.shared.itemsDatabase.saveItems()
 
         MASShortcutBinder.shared()?.breakBinding(
-            withDefaultsKey: Preferences.defaultShortcutScreenshotKey
+            withDefaultsKey: Preferences.defaultShortcutVisualTaskKey
         )
 
         MASShortcutBinder.shared()?.breakBinding(
@@ -147,7 +147,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         MASShortcutBinder.shared()?.breakBinding(
-            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey
+            withDefaultsKey: Preferences.defaultShortcutTextTaskKey
         )
     }
 
@@ -165,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         MASShortcutBinder.shared()?.bindShortcut(
-            withDefaultsKey: Preferences.defaultShortcutScreenshotKey,
+            withDefaultsKey: Preferences.defaultShortcutVisualTaskKey,
             toAction: {
                 Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()
@@ -175,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         )
 
         MASShortcutBinder.shared()?.bindShortcut(
-            withDefaultsKey: Preferences.defaultShortcutFullscreenScreenshotKey,
+            withDefaultsKey: Preferences.defaultShortcutTextTaskKey,
             toAction: {
                 Preferences.lastActiveTimeInterval = Date().timeIntervalSince1970
                 self.hideScreenshotIfNeeded()

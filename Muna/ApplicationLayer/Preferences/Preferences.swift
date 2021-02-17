@@ -41,9 +41,9 @@ class Preferences {
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
-    static var defaultShortcutScreenshotKey = "screenshot_part_short"
+    static var defaultShortcutVisualTaskKey = "screenshot_visual_test"
     static var defaultShortcutDebugKey = "ud_activation_debug_shortcut"
-    static var defaultShortcutFullscreenScreenshotKey = "screenshot_full_short"
+    static var defaultShortcutTextTaskKey = "screenshot_text_task"
 
     enum DefaultItems: ViewShortcutProtocol {
         case defaultScreenshotShortcut
@@ -58,7 +58,7 @@ class Preferences {
                     modifiers: [.command, .shift]
                 )
             case .defaultScreenshotShortcut:
-                return ShortcutItem(
+                return Preferences.visualTaskShortcutItem ?? ShortcutItem(
                     key: .two,
                     modifiers: [.command, .shift]
                 )
@@ -80,6 +80,15 @@ class Preferences {
     private static func resetDefaults() {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
+    }
+
+    static var visualTaskShortcutItem: ShortcutItem? {
+        guard let taskData = UserDefaults.standard.object(forKey: defaultShortcutVisualTaskKey) as? Data,
+           let shortcut = try? NSKeyedUnarchiver.unarchivedObject(ofClass: MASShortcut.self, from: taskData) else {
+            return nil
+        }
+
+        return shortcut.item
     }
 
     static var defaultUserDefaults: [String: NSObject] {
@@ -116,8 +125,8 @@ class Preferences {
                 requiringSecureCoding: false
             )
         {
-            result[Preferences.defaultShortcutScreenshotKey] = data as NSObject
-            UserDefaults.standard.set(data, forKey: defaultShortcutScreenshotKey)
+            result[Preferences.defaultShortcutVisualTaskKey] = data as NSObject
+            UserDefaults.standard.set(data, forKey: defaultShortcutVisualTaskKey)
         }
 
         if let shortcut = defaultDebugShortcut,
@@ -136,8 +145,8 @@ class Preferences {
                 requiringSecureCoding: false
             )
         {
-            result[Preferences.defaultShortcutFullscreenScreenshotKey] = data as NSObject
-            UserDefaults.standard.set(data, forKey: defaultShortcutFullscreenScreenshotKey)
+            result[Preferences.defaultShortcutTextTaskKey] = data as NSObject
+            UserDefaults.standard.set(data, forKey: defaultShortcutTextTaskKey)
         }
 
         return result

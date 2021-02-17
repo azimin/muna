@@ -15,13 +15,13 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     let entireShortcutPreview = ShortcutPreviewView(
         title: "Capture text note shortcut",
         imageName: "shortcuts_fullscreen",
-        itemUDKey: Preferences.defaultShortcutFullscreenScreenshotKey
+        itemUDKey: Preferences.defaultShortcutTextTaskKey
     )
 
     let selectedAreaShortcutPreview = ShortcutPreviewView(
         title: "Capture selected positon shorcut",
         imageName: "shortcuts_selected_area",
-        itemUDKey: Preferences.defaultShortcutScreenshotKey
+        itemUDKey: Preferences.defaultShortcutVisualTaskKey
     )
 
     let showPanelShortuctPreview = ShortcutPreviewView(
