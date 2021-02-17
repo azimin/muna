@@ -14,7 +14,7 @@ class TaskChangeTimeView: PopupView {
     let presentationDateItemTransformer: DateItemsTransformer
 
     let removeTimeButton = PopupButton(style: .distructive, title: "Remove time")
-    let doneButton = PopupButton(style: .basic, title: "Done")
+    let doneButton = PopupButton(style: .basic, title: "Done (⌘↵)")
 
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView

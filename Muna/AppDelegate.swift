@@ -213,10 +213,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         let image = NSImage(named: NSImage.Name("icon_menu"))
         image?.isTemplate = true
-        statusBarItem.button?.addSubview(self.iconView)
-        self.iconView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+
+        statusBarItem.button?.image = image
+//        statusBarItem.button?.addSubview(self.iconView)
+//        self.iconView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
@@ -225,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.statusBarMenu = statusBarMenu
 
         let makeFullScreenshotItem = NSMenuItem(
-            title: "Make Full-screenshot",
+            title: "Make text task",
             action: #selector(self.toogleFullscreenScreenshotState),
             keyEquivalent: "1"
         )
@@ -233,7 +235,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarMenu.addItem(makeFullScreenshotItem)
 
         let makeSelectedAreaScreenshot = NSMenuItem(
-            title: "Make Selected Area Screenshot",
+            title: "Make visual task",
             action: #selector(self.toggleScreenshotState),
             keyEquivalent: "2"
         )

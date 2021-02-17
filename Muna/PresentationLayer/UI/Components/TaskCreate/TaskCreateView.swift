@@ -25,7 +25,7 @@ class TaskCreateView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
-    let doneButton = PopupButton(style: .basic, title: "Done")
+    let doneButton = PopupButton(style: .basic, title: "Done (⌘↵)")
 
     let reminderTextField = TextField(clearable: true)
     let datePrarserView: DateParserView
