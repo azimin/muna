@@ -13,7 +13,14 @@ class TaskChangeTimeView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
+    let buttonsStack = NSStackView(
+        orientation: .vertical,
+        alignment: .width,
+        distribution: .fill
+    )
+
     let removeTimeButton = PopupButton(style: .distructive, title: "Remove time")
+    let markCompletedButton = PopupButton(style: .basic, title: "Mark as completed")
     let doneButton = PopupButton(style: .basic, title: "Done (⌘↵)")
 
     let reminderTextField = TextField(clearable: true)
@@ -65,24 +72,36 @@ class TaskChangeTimeView: PopupView {
 
         self.reminderTextField.placeholder = "When to remind"
 
-        self.addSubview(self.removeTimeButton)
-        self.removeTimeButton.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview().inset(
+        self.addSubview(self.buttonsStack)
+        self.buttonsStack.spacing = 12
+        self.buttonsStack.snp.makeConstraints { (make) in
+            make.bottom.leading.trailing.equalToSuperview().inset(
                 NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
             )
-            maker.top.equalTo(self.datePrarserView.snp.bottom).inset(-12)
+            make.top.equalTo(self.datePrarserView.snp.bottom).inset(-12)
         }
 
-        self.addSubview(self.doneButton)
-        self.doneButton.snp.makeConstraints { maker in
-            maker.bottom.leading.trailing.equalToSuperview().inset(
-                NSEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-            )
-            maker.top.equalTo(self.removeTimeButton.snp.bottom).inset(-12)
+        if self.itemModel.dueDate != nil {
+            self.buttonsStack.addArrangedSubview(self.removeTimeButton)
+        }
+
+        if self.itemModel.isComplited == false {
+            self.buttonsStack.addArrangedSubview(self.markCompletedButton)
+        }
+
+        self.buttonsStack.addArrangedSubview(self.doneButton)
+
+        for view in [self.removeTimeButton, self.markCompletedButton, self.doneButton] where view.superview != nil {
+            view.snp.makeConstraints { (make) in
+                make.width.equalToSuperview()
+            }
         }
 
         self.removeTimeButton.target = self
         self.removeTimeButton.action = #selector(self.handleRemoveTimeButton)
+
+        self.markCompletedButton.target = self
+        self.markCompletedButton.action = #selector(self.handleMarkAsCompleted)
 
         self.doneButton.target = self
         self.doneButton.action = #selector(self.handleDoneButton)
@@ -169,6 +188,15 @@ class TaskChangeTimeView: PopupView {
     }
 
     // MARK: - Saving
+
+    @objc
+    private func handleMarkAsCompleted() {
+        defer {
+            self.closeAlert()
+        }
+
+        self.itemModel.toggleComplited()
+    }
 
     @objc
     private func handleRemoveTimeButton() {
