@@ -118,6 +118,8 @@ class MainScreenViewController: NSViewController {
             self.panelView.mainContentView.completeActiveItemAction(byShortcut: true)
         case .editTime:
             self.panelView.mainContentView.editReminder(byShortcut: true)
+        case .copyImage:
+            self.panelView.mainContentView.copyAction(byShortcut: true)
         case .close:
             if self.panelView.mainContentView.closePopUpIfNeeded() == false {
                 if self.smartAssistenIsOpen {

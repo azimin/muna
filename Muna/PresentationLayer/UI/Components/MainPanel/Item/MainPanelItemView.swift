@@ -9,7 +9,7 @@
 import Cocoa
 import SnapKit
 
-final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
+final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDraggingSource {
     enum Style {
         case basic
         case completed
@@ -223,6 +223,76 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent {
                 )
             }
         })
+    }
+
+    func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
+        return .generic
+    }
+
+    func draggingSession(_ session: NSDraggingSession, movedTo screenPoint: NSPoint) {
+        let frame = self.convert(self.frame, to: nil)
+        let rect = self.window?.convertFromScreen(frame)
+
+        if rect?.contains(screenPoint) == false, windowIsHidden == false {
+            ServiceLocator.shared.windowManager.hideWindowIfNeeded(.panel(selectedItem: nil))
+            self.windowIsHidden = true
+        }
+    }
+
+    var dragNeeded = false
+    var startPosition: CGPoint = .zero
+    var windowIsHidden = false
+
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        self.dragNeeded = true
+        self.windowIsHidden = false
+
+        self.startPosition = self.convert(event.locationInWindow, from: nil)
+    }
+
+    override func mouseDragged(with event: NSEvent) {
+        super.mouseMoved(with: event)
+
+        let position = self.convert(event.locationInWindow, from: nil)
+        if abs(position.x - self.startPosition.x) > 16 || abs(position.y - self.startPosition.y) > 16 {
+            if self.dragNeeded {
+                self.dragNeeded = false
+                self.startDragging(event: event)
+            }
+        }
+    }
+
+    private func startDragging(event: NSEvent) {
+        guard let image = self.imageView.image, self.item?.imageName != nil else {
+           return
+        }
+
+        let frame = self.imageView.frame
+
+        let draggingItem = NSDraggingItem(pasteboardWriter: image)
+        draggingItem.setDraggingFrame(self.mutateFrame(frame: frame, size: image.size), contents: image)
+
+        self.beginDraggingSession(with: [draggingItem], event: event, source: self)
+    }
+
+    private func mutateFrame(frame: CGRect, size: CGSize) -> CGRect {
+        var frame = frame
+
+        let widthRatio = self.imageView.frame.width / size.width
+        let heightRatio = self.imageView.frame.height / size.height
+        let coeficent = widthRatio / heightRatio
+
+        if widthRatio < heightRatio {
+            frame.origin.y += coeficent * self.imageView.frame.height / 2
+            frame.size.height -= coeficent * self.imageView.frame.height
+        } else {
+            let value = 1 - (1 / coeficent)
+            frame.origin.x += value * self.imageView.frame.width / 2
+            frame.size.width -= value * self.imageView.frame.width
+        }
+
+        return frame
     }
 }
 

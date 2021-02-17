@@ -18,6 +18,7 @@ extension MainScreenViewController {
         case previewItem
         case complete
         case editTime
+        case copyImage
         case close
         case showSmartAssistent
 
@@ -39,6 +40,8 @@ extension MainScreenViewController {
                 return ShortcutItem(key: .return, modifiers: [])
             case .editTime:
                 return ShortcutItem(key: .t, modifiers: [.command])
+            case .copyImage:
+                return ShortcutItem(key: .c, modifiers: [.command])
             case .close:
                 return ShortcutItem(key: .escape, modifiers: [])
             case .showSmartAssistent:

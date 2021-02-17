@@ -214,7 +214,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
 
-            let copyItem = NSMenuItem(title: "Copy Image", action: #selector(self.copyAction), keyEquivalent: "")
+            let copyItem = NSMenuItem(title: "Copy Image", action: #selector(self.copyActionWithoutShortcut), keyEquivalent: "c")
 
             let deleteItem = NSMenuItem(title: "Delete", action: #selector(self.deleteActiveItemActionWithoutShortcut), keyEquivalent: "⌫")
             deleteItem.keyEquivalentModifierMask = []
@@ -255,7 +255,12 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.popUpController.show()
     }
 
-    @objc func copyAction() {
+    @objc
+    private func copyActionWithoutShortcut() {
+        self.copyAction(byShortcut: false)
+    }
+
+    @objc func copyAction(byShortcut: Bool) {
         guard let indexPath = self.collectionView.selectionIndexPaths.first else {
             appAssertionFailure("No selected index")
             return
@@ -278,7 +283,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
         ServiceLocator.shared.analytics.executeControl(
             control: .itemCopy,
-            byShortcut: false
+            byShortcut: byShortcut
         )
     }
 
