@@ -222,6 +222,6 @@ extension DateParserView: DateParserItemViewDelegate {
 
     func dateParserItemHighlitedState(item: DateParserItemView, highlited: Bool) {
         self.options.forEach { $0.itemHighlighted = false }
-        item.itemHighlighted = true
+        item.itemHighlighted = highlited
     }
 }
