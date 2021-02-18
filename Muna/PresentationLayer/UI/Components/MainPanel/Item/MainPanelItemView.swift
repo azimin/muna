@@ -21,6 +21,11 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
     static var imageHeight: CGFloat = 172
 
     static func calculateHeight(item: ItemModel) -> CGFloat {
+        if item.shouldInvalidHeightCache {
+            self.cachedHeight[item.id] = nil
+            item.shouldInvalidHeightCache = false
+        }
+
         if let height = self.cachedHeight[item.id] {
             return height
         }

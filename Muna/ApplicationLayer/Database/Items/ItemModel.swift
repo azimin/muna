@@ -39,6 +39,8 @@ class ItemModel: ItemModelProtocol, Codable {
     }
 
     var numberOfTimeChanges: Int?
+
+    var shouldInvalidHeightCache: Bool = false
     var commentHeight: CGFloat {
         return self.commentHeightContainer ?? 0
     }
@@ -145,6 +147,7 @@ class ItemModel: ItemModelProtocol, Codable {
     private func calculateNumberOfLines() {
         guard let comment = self.comment, comment.isEmpty == false else {
             self.commentHeightContainer = 0
+            self.shouldInvalidHeightCache = true
             return
         }
 
@@ -155,5 +158,6 @@ class ItemModel: ItemModelProtocol, Codable {
             withConstrainedWidth: textWidth,
             font: MainPanelItemMetainformationStyle.commentFont
         )
+        self.shouldInvalidHeightCache = true
     }
 }

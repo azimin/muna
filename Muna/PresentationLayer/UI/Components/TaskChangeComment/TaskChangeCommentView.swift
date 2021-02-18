@@ -10,7 +10,7 @@ import Foundation
 
 class TaskChangeCommentView: PopupView {
     let doneButton = PopupButton(style: .basic, title: "Finish Editing (⌘↵)")
-    let commentTextField = TextField(clearable: true, numberOfLines: 10)
+    let commentTextField = TextField(clearable: false, numberOfLines: 10)
 
     private let itemModel: ItemModel
     private var closeHandler: CloseHandler?
@@ -20,6 +20,8 @@ class TaskChangeCommentView: PopupView {
         self.itemModel = itemModel
 
         super.init(style: .withoutShortcutsButton)
+
+        self.commentTextField.textField.stringValue = itemModel.comment ?? ""
     }
 
     required init?(coder: NSCoder) {
