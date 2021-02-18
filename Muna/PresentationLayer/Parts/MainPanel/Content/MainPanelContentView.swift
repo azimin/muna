@@ -678,7 +678,8 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         layout collectionViewLayout: NSCollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> NSSize {
-        if section == 0 {
+        let group = self.groupedData.group(in: section)
+        if group == .passed || section == 0 {
             return NSSize(
                 width: collectionView.frame.size.width,
                 height: self.headerHight + 12

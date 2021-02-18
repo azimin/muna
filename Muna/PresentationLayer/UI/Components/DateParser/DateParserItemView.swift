@@ -158,11 +158,7 @@ class DateParserItemView: NSControl {
     }
 
     func updateColors() {
-        if self.itemHighlighted, self.style != .basic {
-            self.selectionView.backgroundColor = NSColor.color(.blueSelected).withAlphaComponent(0.3)
-        } else {
-            self.selectionView.backgroundColor = NSColor.color(.clear)
-        }
+        self.selectionView.backgroundColor = NSColor.color(.clear)
         self.mainLabel.textColor = NSColor.color(.titleAccent)
         self.infoLabel.textColor = NSColor.color(.titleAccent).withAlphaComponent(0.8)
 
