@@ -23,9 +23,17 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
     let versionLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.titleAccent)
+        .withText("Version 1.7.0")
 
     let developersLabel = Label(fontStyle: .medium, size: 14)
         .withTextColorStyle(.title60AccentAlpha)
+        .withLimitedNumberOfLines(2)
+        .withText(
+            """
+            With 💜 from Alex and Egor
+            Icon from Denis
+            """
+        )
 
     let separatorView = View()
 
@@ -94,6 +102,49 @@ class AboutSettingsView: View, SettingsViewProtocol {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
             make.bottom.equalTo(self.visitSiteButton.snp.top).inset(-14)
+        }
+
+        let containerView = View()
+        containerView.addSubview(self.iconImageView)
+        self.iconImageView.snp.makeConstraints { make in
+            make.leading.top.bottom.equalToSuperview()
+            make.size.equalTo(104)
+        }
+
+        let textContainerView = View()
+        textContainerView.addSubview(self.titleLabel)
+        self.titleLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        textContainerView.addSubview(self.versionLabel)
+        self.versionLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(6)
+            make.trailing.lessThanOrEqualToSuperview()
+        }
+
+        textContainerView.addSubview(self.developersLabel)
+        self.developersLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(self.versionLabel.snp.bottom).offset(6)
+            make.trailing.lessThanOrEqualToSuperview()
+            make.bottom.equalToSuperview()
+        }
+
+        containerView.addSubview(textContainerView)
+        textContainerView.snp.makeConstraints { make in
+            make.leading.equalTo(self.iconImageView.snp.trailing)
+            make.centerY.equalTo(self.iconImageView)
+            make.trailing.equalToSuperview()
+        }
+
+        self.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.bottom.equalTo(self.separatorView.snp.top).inset(-43)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(300)
         }
     }
 }

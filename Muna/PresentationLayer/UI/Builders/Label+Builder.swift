@@ -25,4 +25,9 @@ extension Label {
         self.alignment = alignment
         return self
     }
+
+    func withLimitedNumberOfLines(_ numberOfLines: Int) -> Self {
+        self.maximumNumberOfLines = numberOfLines
+        return self
+    }
 }
