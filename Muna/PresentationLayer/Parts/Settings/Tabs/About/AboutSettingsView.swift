@@ -37,14 +37,11 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
     let separatorView = View()
 
-    let visitSiteButton = Button()
-        .withText("Visit Website")
+    let visitSiteButton = AboutSettingsButton(title: "Visit Website")
 
-    let getHelpButton = Button()
-        .withText("Get Help")
+    let getHelpButton = AboutSettingsButton(title: "Get Help")
 
-    let acknowledgementsButton = Button()
-        .withText("Acknowledgements")
+    let acknowledgementsButton = AboutSettingsButton(title: "Acknowledgements")
 
     init() {
         super.init(frame: .zero)
@@ -85,7 +82,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
         self.getHelpButton.snp.makeConstraints { make in
             make.leading.equalTo(self.visitSiteButton.snp.trailing).offset(16)
             make.centerY.equalTo(self.visitSiteButton)
-            make.width.equalTo(118)
+            make.width.equalTo(99)
             make.height.equalTo(32)
         }
 
@@ -93,7 +90,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
         self.acknowledgementsButton.snp.makeConstraints { make in
             make.leading.equalTo(self.getHelpButton.snp.trailing).offset(16)
             make.centerY.equalTo(self.visitSiteButton)
-            make.width.equalTo(118)
+            make.width.equalTo(167)
             make.height.equalTo(32)
         }
 
