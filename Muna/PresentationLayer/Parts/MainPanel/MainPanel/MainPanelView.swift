@@ -138,6 +138,7 @@ class MainPanelView: MainPanelBackgroundView {
     func switchToFirstTabIfNeeded() {
         if abs(self.closePanelTime.timeIntervalSince(Date())) > 60 {
             self.segmentControl.selectedSegment = 0
+            self.segmentChanged()
         }
     }
 
