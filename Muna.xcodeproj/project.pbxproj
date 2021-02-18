@@ -41,6 +41,7 @@
 		23561B472461EF3300097E4A /* ENWeekdaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B462461EF3300097E4A /* ENWeekdaysParser.swift */; };
 		23561B492461F46600097E4A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23561B482461F46600097E4A /* Parser.swift */; };
 		23564CC325DE4CB800380420 /* AboutSettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23564CC225DE4CB800380420 /* AboutSettingsButton.swift */; };
+		23564CC525DE5D7000380420 /* HyperlinkedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23564CC425DE5D7000380420 /* HyperlinkedTextField.swift */; };
 		236B86B2258A9DF40096AD25 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 236B86B1258A9DF40096AD25 /* LaunchAtLogin */; };
 		236F27082469B23D00CA5B12 /* MainPanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F540FF5245E2B07007BF60C /* MainPanelContentView.swift */; };
 		23895FBF2507720200322248 /* splash_anim.json in Resources */ = {isa = PBXBuildFile; fileRef = 23895FBE2507720200322248 /* splash_anim.json */; };
@@ -257,6 +258,7 @@
 		23561B462461EF3300097E4A /* ENWeekdaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENWeekdaysParser.swift; sourceTree = "<group>"; };
 		23561B482461F46600097E4A /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		23564CC225DE4CB800380420 /* AboutSettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsButton.swift; sourceTree = "<group>"; };
+		23564CC425DE5D7000380420 /* HyperlinkedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperlinkedTextField.swift; sourceTree = "<group>"; };
 		23895FBE2507720200322248 /* splash_anim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_anim.json; sourceTree = "<group>"; };
 		23895FC0250773EB00322248 /* AnimatedBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBarIconView.swift; sourceTree = "<group>"; };
 		23929969249AA4090090BDD8 /* MainPanelShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelShortcutsView.swift; sourceTree = "<group>"; };
@@ -1254,7 +1256,6 @@
 		9F8CCC80245DB48500E0F102 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				23564CC125DE4CAC00380420 /* Button */,
 				9F4EB222250EA4B0002D29C0 /* SmartAssistent */,
 				9FB3A1932507E0A60086CB05 /* Hint */,
 				23895FC2250773F100322248 /* StatusBar */,
@@ -1273,6 +1274,7 @@
 		9F8CCC81245DB49100E0F102 /* BasicComponents */ = {
 			isa = PBXGroup;
 			children = (
+				23564CC125DE4CAC00380420 /* Button */,
 				9FA07F702460C30F00654D36 /* Cells */,
 				9FC9CDC524699E7C0018FAD7 /* TextField */,
 				9FA07F5624609E0100654D36 /* View.swift */,
@@ -1500,6 +1502,7 @@
 			children = (
 				9FC9CDC624699E8A0018FAD7 /* TextField.swift */,
 				9FC9CDCE2469B55E0018FAD7 /* ActionedTextField.swift */,
+				23564CC425DE5D7000380420 /* HyperlinkedTextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -1821,6 +1824,7 @@
 				9F152701246DC2560037623B /* MainPanelViewController+Shortcuts.swift in Sources */,
 				9FC9CDCF2469B55E0018FAD7 /* ActionedTextField.swift in Sources */,
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
+				23564CC525DE5D7000380420 /* HyperlinkedTextField.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
 				9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */,
 				9F68FD0E24EC87BA00DF927E /* NSView+Animation.swift in Sources */,

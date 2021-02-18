@@ -25,15 +25,11 @@ class AboutSettingsView: View, SettingsViewProtocol {
         .withTextColorStyle(.titleAccent)
         .withText("Version 1.7.0")
 
-    let developersLabel = Label(fontStyle: .medium, size: 14)
-        .withTextColorStyle(.title60AccentAlpha)
-        .withLimitedNumberOfLines(2)
-        .withText(
-            """
-            With 💜 from Alex and Egor
-            Icon from Denis
-            """
-        )
+//    let developersLabel = Label(fontStyle: .medium, size: 14)
+//        .withTextColorStyle(.title60AccentAlpha)
+//        .withLimitedNumberOfLines(2)
+
+    let developersLabel = NSTextView()
 
     let separatorView = View()
 
@@ -48,7 +44,22 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
         self.separatorView.backgroundColor = ColorStyle.separator.color
 
+        developersLabel.textColor = ColorStyle.title60AccentAlpha.color
+        developersLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        developersLabel.drawsBackground = false
+        developersLabel.linkTextAttributes =
+            [
+                .font: NSFont.systemFont(ofSize: 14, weight: .medium),
+                .foregroundColor: ColorStyle.title60AccentAlpha.color,
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .underlineColor: ColorStyle.title60AccentAlpha.color,
+                .cursor: NSCursor.pointingHand
+            ]
+        developersLabel.isEditable = false
+        developersLabel.isSelectable = true
+
         self.setup()
+        self.setupLinks()
     }
 
     required init?(coder: NSCoder) {
@@ -127,6 +138,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
             make.leading.equalToSuperview()
             make.top.equalTo(self.versionLabel.snp.bottom).offset(6)
             make.trailing.lessThanOrEqualToSuperview()
+            make.height.equalTo(34)
             make.bottom.equalToSuperview()
         }
 
@@ -143,5 +155,30 @@ class AboutSettingsView: View, SettingsViewProtocol {
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
         }
+    }
+
+    func setupLinks() {
+        let attributedString = NSMutableAttributedString(
+            string:
+            """
+            With 💜 from Alex and Egor
+            Icon from Denis
+            """,
+            attributes: [
+                .font: NSFont.systemFont(ofSize: 14, weight: .medium),
+                .foregroundColor: ColorStyle.title60AccentAlpha.color
+            ]
+        )
+
+        attributedString.beginEditing()
+        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
+        let rangeOfEgor = (attributedString.string as NSString).range(of: "Egor")
+
+        attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlex)
+        attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
+        attributedString.endEditing()
+
+//        self.developersLabel.attributedStringValue = attributedString
+        self.developersLabel.textStorage?.setAttributedString(attributedString)
     }
 }
