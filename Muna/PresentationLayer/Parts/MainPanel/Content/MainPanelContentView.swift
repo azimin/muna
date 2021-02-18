@@ -85,6 +85,30 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         self.mouseObservable = MousePositionService.shared.mousePosition.observeNewAndCall(self) { mousePoint in
             self.updateMousePoint(mousePoint)
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.itemCommentUpdated(notification:)),
+            name: Notification.Name("ItemCommentUpdated"),
+            object: nil
+        )
+    }
+
+    @objc
+    private func itemCommentUpdated(notification: Notification) {
+        guard let item = notification.object as? ItemModel,
+              let indexPath = self.groupedData.indexPath(for: item) else {
+            return
+        }
+
+        self.collectionView.reloadItems(
+            at: .init(arrayLiteral: indexPath)
+        )
+
+        self.collectionView.selectItems(
+            at: .init(arrayLiteral: indexPath),
+            scrollPosition: .left
+        )
     }
 
     func switchContent(filter: ItemsDatabaseService.Filter) {

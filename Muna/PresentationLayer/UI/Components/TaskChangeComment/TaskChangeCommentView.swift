@@ -154,6 +154,11 @@ class TaskChangeCommentView: PopupView {
 
         self.itemModel.comment = self.commentTextField.textField.stringValue
         ServiceLocator.shared.itemsDatabase.saveItems()
+
+        NotificationCenter.default.post(
+            name: Notification.Name("ItemCommentUpdated"),
+            object: self.itemModel
+        )
     }
 }
 
