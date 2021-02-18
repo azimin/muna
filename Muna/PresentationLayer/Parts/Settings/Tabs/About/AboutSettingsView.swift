@@ -25,10 +25,6 @@ class AboutSettingsView: View, SettingsViewProtocol {
         .withTextColorStyle(.titleAccent)
         .withText("Version 1.7.0")
 
-//    let developersLabel = Label(fontStyle: .medium, size: 14)
-//        .withTextColorStyle(.title60AccentAlpha)
-//        .withLimitedNumberOfLines(2)
-
     let developersLabel = NSTextView()
 
     let separatorView = View()
@@ -46,6 +42,10 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
         self.setup()
         self.setupLinks()
+        if let dictionary = Bundle.main.infoDictionary,
+           let version = dictionary["CFBundleShortVersionString"] as? String {
+            self.versionLabel.text = "Version \(version)"
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -179,9 +179,11 @@ class AboutSettingsView: View, SettingsViewProtocol {
         attributedString.beginEditing()
         let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
         let rangeOfEgor = (attributedString.string as NSString).range(of: "Egor")
+        let rangeOfDenis = (attributedString.string as NSString).range(of: "Denis")
 
         attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlex)
         attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
+        attributedString.addAttribute(.link, value: "http://denis_ozdemir.dribbble.com", range: rangeOfDenis)
         attributedString.endEditing()
 
         self.developersLabel.textStorage?.setAttributedString(attributedString)
