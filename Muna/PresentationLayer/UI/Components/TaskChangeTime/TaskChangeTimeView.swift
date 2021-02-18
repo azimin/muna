@@ -23,7 +23,7 @@ class TaskChangeTimeView: PopupView {
     let markCompletedButton = PopupButton(style: .basic, title: "Mark as completed")
     let doneButton = PopupButton(style: .basic, title: "Finish Editing (⌘↵)")
 
-    let reminderTextField = TextField(clearable: true)
+    let reminderTextField = TextField(clearable: true, numberOfLines: 1)
     let datePrarserView: DateParserView
 
     var controller = RemindersOptionsController(

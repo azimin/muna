@@ -26,7 +26,7 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
         .withText("Modern way of creating remidners without breaking context")
         .withAligment(.center)
 
-    let betaCode = TextField(clearable: false)
+    let betaCode = TextField(clearable: false, numberOfLines: 1)
 
     let continueButton = OnboardingButton()
         .withText("Start")

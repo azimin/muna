@@ -43,8 +43,9 @@ class TextField: View, NSTextFieldDelegate {
     // Show clear button
     private let clearable: Bool
 
-    init(clearable: Bool) {
+    init(clearable: Bool, numberOfLines: Int) {
         self.clearable = clearable
+        self.textField.numberOfLines = numberOfLines
         super.init(frame: .zero)
         self.setup()
     }

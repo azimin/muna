@@ -27,9 +27,9 @@ class TaskCreateView: PopupView {
 
     let doneButton = PopupButton(style: .basic, title: "Create (⌘↵)")
 
-    let reminderTextField = TextField(clearable: true)
+    let reminderTextField = TextField(clearable: true, numberOfLines: 1)
     let datePrarserView: DateParserView
-    let commentTextField = TextField(clearable: false)
+    let commentTextField = TextField(clearable: false, numberOfLines: 3)
 
     var controller = RemindersOptionsController(
         behaviour: .emptyState
