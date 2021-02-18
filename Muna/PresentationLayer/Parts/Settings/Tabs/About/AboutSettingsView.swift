@@ -12,8 +12,37 @@ class AboutSettingsView: View, SettingsViewProtocol {
     let titlesView = View()
     let settingsView = View()
 
+    let iconImageView = ImageView(
+        name: "onboarding_icon",
+        aspectRation: .resizeAspect
+    )
+
+    let titleLabel = Label(fontStyle: .bold, size: 22)
+        .withTextColorStyle(.titleAccent)
+        .withText("Muna")
+
+    let versionLabel = Label(fontStyle: .medium, size: 16)
+        .withTextColorStyle(.titleAccent)
+
+    let developersLabel = Label(fontStyle: .medium, size: 14)
+        .withTextColorStyle(.title60AccentAlpha)
+
+    let separatorView = View()
+
+    let visitSiteButton = Button()
+        .withText("Visit Website")
+
+    let getHelpButton = Button()
+        .withText("Get Help")
+
+    let acknowledgementsButton = Button()
+        .withText("Acknowledgements")
+
     init() {
         super.init(frame: .zero)
+
+        self.separatorView.backgroundColor = ColorStyle.separator.color
+
         self.setup()
     }
 
@@ -34,6 +63,37 @@ class AboutSettingsView: View, SettingsViewProtocol {
             maker.leading.equalTo(self.titlesView.snp.trailing)
             maker.trailing.top.bottom.equalToSuperview()
             maker.width.equalTo(self.frameWidth - 120)
+        }
+
+        self.addSubview(self.visitSiteButton)
+        self.visitSiteButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().inset(16)
+            make.width.equalTo(118)
+            make.height.equalTo(32)
+        }
+
+        self.addSubview(self.getHelpButton)
+        self.getHelpButton.snp.makeConstraints { make in
+            make.leading.equalTo(self.visitSiteButton.snp.trailing).offset(16)
+            make.centerY.equalTo(self.visitSiteButton)
+            make.width.equalTo(118)
+            make.height.equalTo(32)
+        }
+
+        self.addSubview(self.acknowledgementsButton)
+        self.acknowledgementsButton.snp.makeConstraints { make in
+            make.leading.equalTo(self.getHelpButton.snp.trailing).offset(16)
+            make.centerY.equalTo(self.visitSiteButton)
+            make.width.equalTo(118)
+            make.height.equalTo(32)
+        }
+
+        self.addSubview(self.separatorView)
+        self.separatorView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1)
+            make.bottom.equalTo(self.visitSiteButton.snp.top).inset(-14)
         }
     }
 }
