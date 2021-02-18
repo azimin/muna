@@ -9,14 +9,14 @@
 import Cocoa
 
 class RemindLaterViewController: NSViewController {
-    let taskChangeView: TaskChangeTimeGlobalView
+    let taskChangeView: TaskChangeGlobalView
 
     init(itemModel: ItemModel) {
         let closeHandler = CloseHandler(close: nil)
 
-        self.taskChangeView = TaskChangeTimeGlobalView(
+        self.taskChangeView = TaskChangeGlobalView(
             itemModel: itemModel,
-            style: .withImage,
+            style: .editTimeWithImage,
             closeHandler: closeHandler
         )
 

@@ -197,4 +197,15 @@ extension MainScreenViewController: MainPanelContentViewDelegate {
         )
         self.shortcutsController?.stop()
     }
+
+    func mainPanelContentViewShouldShowCommentChange(itemModel: ItemModel) {
+        self.rootView.showChangeCommentView(
+            itemModel: itemModel,
+            closeHandler: CloseHandler(close: { [weak self] in
+                self?.rootView.hideChangeCommentView()
+                self?.shortcutsController?.start()
+            })
+        )
+        self.shortcutsController?.stop()
+    }
 }

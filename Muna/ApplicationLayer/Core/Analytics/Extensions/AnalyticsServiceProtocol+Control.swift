@@ -12,6 +12,7 @@ enum AnalyticsControl: String, AnalyticsPropertyNameProtocol {
     case itemPreview
     case itemCopy
     case itemEditTime
+    case itemEditComment
     case itemComplete
     case itemDelete
     case itemCreate

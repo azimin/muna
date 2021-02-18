@@ -11,6 +11,7 @@ import SnapKit
 
 protocol MainPanelContentViewDelegate: AnyObject {
     func mainPanelContentViewShouldShowTimeChange(itemModel: ItemModel)
+    func mainPanelContentViewShouldShowCommentChange(itemModel: ItemModel)
 }
 
 class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout, PopUpControllerDelegate {
@@ -211,6 +212,13 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
             )
             reminderItem.keyEquivalentModifierMask = [.command]
 
+            let commentItem = NSMenuItem(
+                title: (itemModel.comment?.count ?? 0) == 0 ? "Set Comment" : "Edit Comment",
+                action: #selector(self.editComment),
+                keyEquivalent: ""
+            )
+            commentItem.keyEquivalentModifierMask = []
+
             let previewItem = NSMenuItem(title: "Preview Image", action: #selector(self.previewAction), keyEquivalent: "␣")
             previewItem.keyEquivalentModifierMask = []
 
@@ -221,6 +229,7 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
 
             menu.addItem(completeItem)
             menu.addItem(reminderItem)
+            menu.addItem(commentItem)
 
             if itemModel.savingTypeCasted == .screenshot {
                 menu.addItem(NSMenuItem.separator())
@@ -346,6 +355,31 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         ServiceLocator.shared.analytics.executeControl(
             control: .itemEditTime,
             byShortcut: byShortcut
+        )
+    }
+
+    @objc
+    func editComment() {
+        guard self.groupedData.totalNumberOfItems > 0 else {
+            return
+        }
+
+        guard let indexPath = self.collectionView.selectionIndexPaths.first else {
+            appAssertionFailure("No selected index")
+            return
+        }
+
+        guard let delegate = self.delegate else {
+            appAssertionFailure("No delegate")
+            return
+        }
+
+        let item = self.groupedData.item(at: indexPath)
+        delegate.mainPanelContentViewShouldShowCommentChange(itemModel: item)
+
+        ServiceLocator.shared.analytics.executeControl(
+            control: .itemEditComment,
+            byShortcut: false
         )
     }
 

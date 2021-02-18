@@ -144,6 +144,7 @@
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
+		9F74C0E025DE99D6006D2022 /* TaskChangeCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */; };
 		9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
@@ -151,7 +152,7 @@
 		9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */; };
 		9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */; };
 		9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */; };
-		9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */; };
+		9F97D0C3247DA9C100358953 /* TaskChangeGlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeGlobalView.swift */; };
 		9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C4247DAE1C00358953 /* MainScreenView.swift */; };
 		9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */; };
 		9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F99D5FF2464B63900695A19 /* StopableScrollView.swift */; };
@@ -373,6 +374,7 @@
 		9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreateShortcuts.swift; sourceTree = "<group>"; };
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
+		9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeCommentView.swift; sourceTree = "<group>"; };
 		9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Transform.swift"; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
@@ -380,7 +382,7 @@
 		9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_3.mov; sourceTree = "<group>"; };
 		9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_4.mov; sourceTree = "<group>"; };
 		9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsServiceProtocol+Control.swift"; sourceTree = "<group>"; };
-		9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeTimeGlobalView.swift; sourceTree = "<group>"; };
+		9F97D0C2247DA9C100358953 /* TaskChangeGlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeGlobalView.swift; sourceTree = "<group>"; };
 		9F97D0C4247DAE1C00358953 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		9F97D0C7247DB19900358953 /* RemindLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindLaterViewController.swift; sourceTree = "<group>"; };
 		9F99D5FF2464B63900695A19 /* StopableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopableScrollView.swift; sourceTree = "<group>"; };
@@ -1233,6 +1235,14 @@
 			path = DateFormatter;
 			sourceTree = "<group>";
 		};
+		9F74C0DE25DE99BD006D2022 /* TaskChangeComment */ = {
+			isa = PBXGroup;
+			children = (
+				9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */,
+			);
+			path = TaskChangeComment;
+			sourceTree = "<group>";
+		};
 		9F8369DD24719BF800D74B3C /* Observable */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,6 +1271,7 @@
 				23895FC2250773F100322248 /* StatusBar */,
 				2343A2DB24DC3B3400F9C6FC /* Settings */,
 				9F581E4B2495019200A34379 /* OnboardingButton */,
+				9F74C0DE25DE99BD006D2022 /* TaskChangeComment */,
 				9F693230247ACF5200FEBC0B /* TaskChangeTime */,
 				9F693225247ABE3200FEBC0B /* DateParser */,
 				9F6C1E74246C8865003D5AD2 /* TaskCreateShortcuts */,
@@ -1329,7 +1340,7 @@
 		9F97D0C1247DA9AE00358953 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9F97D0C2247DA9C100358953 /* TaskChangeTimeGlobalView.swift */,
+				9F97D0C2247DA9C100358953 /* TaskChangeGlobalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1867,6 +1878,7 @@
 				9FDAB87524A9452C000B1158 /* MousePositionService.swift in Sources */,
 				9F693235247AD06500FEBC0B /* TaskChangeTimeView+Shortcuts.swift in Sources */,
 				9FC3F89624DB156200BC0693 /* WindowType.swift in Sources */,
+				9F74C0E025DE99D6006D2022 /* TaskChangeCommentView.swift in Sources */,
 				9FE0F53E247075690046A5C4 /* NotificationsService.swift in Sources */,
 				9FBED38A247B15160028483F /* Date+Time.swift in Sources */,
 				9F025C0C24633C8500F05D81 /* CGRect+Extensions.swift in Sources */,
@@ -1982,7 +1994,7 @@
 				9F97D0C8247DB19900358953 /* RemindLaterViewController.swift in Sources */,
 				9FB3A1952507E0B10086CB05 /* PanelHintView.swift in Sources */,
 				9F2D341424D0BA4E0049DD43 /* UserDefaults+Storage.swift in Sources */,
-				9F97D0C3247DA9C100358953 /* TaskChangeTimeGlobalView.swift in Sources */,
+				9F97D0C3247DA9C100358953 /* TaskChangeGlobalView.swift in Sources */,
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				2326DFB1250FDE6700316D8B /* HintViewController.swift in Sources */,
 				9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */,

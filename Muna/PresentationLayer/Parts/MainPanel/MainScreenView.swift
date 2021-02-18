@@ -19,7 +19,8 @@ class MainScreenView: NSView {
     let mainPanelView = MainPanelView()
     let assistentPanelView = AssistentPanelView()
     let shortcutsView = MainPanelShortcutsView(style: .withoutShortcutsButton)
-    var changeTimeView: TaskChangeTimeGlobalView?
+    var changeTimeView: TaskChangeGlobalView?
+    var changeCommentView: TaskChangeGlobalView?
 
     var isShortcutsShowed = false
 
@@ -63,11 +64,12 @@ class MainScreenView: NSView {
     }
 
     func showChangeTimeView(itemModel: ItemModel, closeHandler: CloseHandler) {
+        self.hideChangeCommentView()
         self.hideChangeTimeView()
 
-        let changeTimeView = TaskChangeTimeGlobalView(
+        let changeTimeView = TaskChangeGlobalView(
             itemModel: itemModel,
-            style: itemModel.savingTypeCasted == .screenshot ? .withImage : .withoutImage,
+            style: itemModel.savingTypeCasted == .screenshot ? .editTimeWithImage : .editTimeWithoutImage,
             closeHandler: closeHandler
         )
 
@@ -79,6 +81,26 @@ class MainScreenView: NSView {
 
         self.changeTimeView = changeTimeView
         self.window?.makeFirstResponder(changeTimeView)
+    }
+
+    func showChangeCommentView(itemModel: ItemModel, closeHandler: CloseHandler) {
+        self.hideChangeCommentView()
+        self.hideChangeTimeView()
+
+        let changeCommentView = TaskChangeGlobalView(
+            itemModel: itemModel,
+            style: itemModel.savingTypeCasted == .screenshot ? .editCommentWithImage : .editCommentWithoutImage,
+            closeHandler: closeHandler
+        )
+
+        self.addSubview(changeCommentView)
+        changeCommentView.snp.makeConstraints { maker in
+            maker.trailing.equalTo(self.mainPanelView.snp.leading).offset(-16)
+            maker.top.equalToSuperview().inset(60)
+        }
+
+        self.changeCommentView = changeCommentView
+        self.window?.makeFirstResponder(changeCommentView)
     }
 
     func toggleShortutsView() {
@@ -109,6 +131,14 @@ class MainScreenView: NSView {
         }
         changeTimeView.removeFromSuperview()
         self.changeTimeView = nil
+    }
+
+    func hideChangeCommentView() {
+        guard let changeCommentView = self.changeCommentView else {
+            return
+        }
+        changeCommentView.removeFromSuperview()
+        self.changeCommentView = nil
     }
 
     func hideShortcutsView() {
