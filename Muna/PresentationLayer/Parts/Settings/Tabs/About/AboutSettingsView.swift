@@ -44,6 +44,17 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
         self.separatorView.backgroundColor = ColorStyle.separator.color
 
+        self.setup()
+        self.setupLinks()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+
         developersLabel.textColor = ColorStyle.title60AccentAlpha.color
         developersLabel.font = .systemFont(ofSize: 14, weight: .medium)
         developersLabel.drawsBackground = false
@@ -58,12 +69,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
         developersLabel.isEditable = false
         developersLabel.isSelectable = true
 
-        self.setup()
         self.setupLinks()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func setup() {
@@ -178,7 +184,6 @@ class AboutSettingsView: View, SettingsViewProtocol {
         attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
         attributedString.endEditing()
 
-//        self.developersLabel.attributedStringValue = attributedString
         self.developersLabel.textStorage?.setAttributedString(attributedString)
     }
 }
