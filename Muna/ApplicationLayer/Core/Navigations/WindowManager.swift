@@ -313,6 +313,7 @@ class WindowManager: WindowManagerProtocol {
                 return
             }
             NSWorkspace.shared.open(url)
+            CGWindowListCreateImage(.zero, .optionOnScreenBelowWindow, kCGNullWindowID, .bestResolution)
 
             ServiceLocator.shared.analytics.logEvent(name: "Permission Alert Open Settings Tap")
         case .alertSecondButtonReturn:
