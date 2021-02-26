@@ -63,10 +63,14 @@ class ServiceLocator {
 
         inAppProductsService.requestProducts(forIds: [.monthly], nil)
 
-        self.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics)
+        self.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: true)
     }
 
-    func replaceAnalytics(shouldUseAnalytics: Bool) {
+    func replaceAnalytics(shouldUseAnalytics: Bool, force: Bool) {
+        if force == false, Preferences.shouldUseAnalytics == shouldUseAnalytics {
+            return
+        }
+        
         Preferences.shouldUseAnalytics = shouldUseAnalytics
         if shouldUseAnalytics {
             var events: [DeferredEvent] = []
