@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     lazy var windowManager = ServiceLocator.shared.windowManager
 
     func handleAssertion(error: NSError) {
-        var properties: [AnyHashable: AnalyticsValueProtocol] = [:]
+        var properties: [String: AnalyticsValueProtocol] = [:]
 
         for (key, value) in error.userInfo {
             if let fitValue = value as? AnalyticsValueProtocol {

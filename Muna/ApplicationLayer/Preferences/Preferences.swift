@@ -38,6 +38,7 @@ class Preferences {
         case lastActiveTimeInterval
         case hintShowedForNotesTimeInterval
         case hintShowedForRemindersTimeInterval
+        case shoulsUseAnalytics
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -158,6 +159,9 @@ class Preferences {
             LaunchAtLogin.isEnabled = self.launchOnStartup
         }
     }
+
+    @UserDefaultsEntry(wrappedValue: false, key: Key.shoulsUseAnalytics)
+    static var shouldUseAnalytics
 
     @UserDefaultsEntry(wrappedValue: PeriodOfStoring.week.rawValue, key: Key.periodOfStoring)
     static var periodOfStoring
