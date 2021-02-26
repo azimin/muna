@@ -16,6 +16,7 @@ enum SavingType: String, Codable {
 
 protocol ItemsDatabaseServiceProtocol: AnyObject {
     var itemUpdated: Observable<String?> { get }
+    var numberOfPassedItem: Int { get }
 
     func item(by id: String) -> ItemModel?
     func fetchItems(filter: ItemsDatabaseService.Filter) -> [ItemModel]
@@ -72,6 +73,13 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
 
     func item(by id: String) -> ItemModel? {
         return self.items.first(where: { $0.id == id })
+    }
+
+    var numberOfPassedItem: Int {
+        var items = self.items.filter { $0.isDeleted == false }
+        items = items.filter({ $0.isComplited == false })
+        items = items.filter({ $0.dueDate?.isInPast == true })
+        return items.count
     }
 
     func fetchItems(filter: Filter) -> [ItemModel] {
@@ -162,6 +170,8 @@ class ItemsDatabaseService: ItemsDatabaseServiceProtocol {
                     by: 1
                 )
             }
+
+            self.itemUpdated.value = id
         } else {
             appAssertionFailure("No id")
         }

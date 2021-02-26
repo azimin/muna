@@ -58,6 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.setupUserDefaults()
         self.setupStatusBarItem()
         self.setupShortcuts()
+        self.setupUpdateItemObserver()
         self.logAnalytics()
         self.scheduleMissingNotifications()
 
@@ -125,6 +126,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
         ServiceLocator.shared.inAppPurchaseManager.validateSubscription()
+
+        self.refreshNumberOfPassedItems()
     }
 
     func scheduleMissingNotifications() {
@@ -153,6 +156,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func setupUserDefaults() {
         UserDefaults.standard.register(defaults: Preferences.defaultUserDefaults)
+    }
+
+    private var itemUpdateObservable: ObserverTokenProtocol?
+
+    func setupUpdateItemObserver() {
+        self.itemUpdateObservable = ServiceLocator.shared.itemsDatabase.itemUpdated.observe(self) { (_, _) in
+            self.refreshNumberOfPassedItems()
+        }
+
+        let timer = Timer(timeInterval: 10, repeats: true) { (_) in
+            self.refreshNumberOfPassedItems()
+        }
+        RunLoop.main.add(timer, forMode: .common)
     }
 
     func setupShortcuts() {
@@ -204,6 +220,52 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.iconView.animateView()
     }
 
+    private var statusBarNumber = 0
+
+    func updateStatusBar(number: Int) {
+        guard let statusBarItem = self.statusBarItem else {
+            return
+        }
+
+        guard number > 0 else {
+            self.statusBarNumber = number
+            statusBarItem.length = NSStatusItem.squareLength
+            statusBarItem.button?.attributedTitle = NSAttributedString()
+            return
+        }
+
+        guard self.statusBarNumber != number else {
+            return
+        }
+
+        self.statusBarNumber = number
+
+        let string = "\u{2009}(\(number))"
+        let attributedString = NSMutableAttributedString(
+            string: string,
+            attributes: [
+                .font: FontStyle.customFont(style: .regular, size: 14),
+                .foregroundColor: NSColor.white,
+            ]
+        )
+        attributedString.addAttribute(
+            .foregroundColor,
+            value: ColorStyle.redLight.color,
+            range: NSRange(location: 2, length: string.count - 3)
+        )
+
+        let titleWidth = attributedString.boundingRect(with: .init(width: 1000, height: 30), options: .usesLineFragmentOrigin).width
+
+        statusBarItem.length = NSStatusItem.squareLength + ceil(titleWidth) + 22
+        statusBarItem.button?.attributedTitle = attributedString
+    }
+
+    func refreshNumberOfPassedItems() {
+        print("Refresh number of passed items")
+        let number = ServiceLocator.shared.itemsDatabase.numberOfPassedItem
+        self.updateStatusBar(number: number)
+    }
+
     func setupStatusBarItem() {
         let statusBar = NSStatusBar.system
 
@@ -215,6 +277,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         image?.isTemplate = true
 
         statusBarItem.button?.image = image
+        statusBarItem.button?.imagePosition = .imageLeft
 //        statusBarItem.button?.addSubview(self.iconView)
 //        self.iconView.snp.makeConstraints { make in
 //            make.edges.equalToSuperview()
