@@ -75,6 +75,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             object: nil
         )
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.hideFullscreenScreenshotIfNeeded),
+            name: NSWindow.didResignKeyNotification,
+            object: nil
+        )
+
         Preferences.setup()
 
         if Preferences.isNeededToShowOnboarding || ServiceLocator.shared.betaKey.isEntered == false {
