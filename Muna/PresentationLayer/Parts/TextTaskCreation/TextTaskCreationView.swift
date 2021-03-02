@@ -39,6 +39,8 @@ final class TextTaskCreationView: View {
             make.width.greaterThanOrEqualTo(211)
             make.center.equalToSuperview()
         }
+
+        self.addSubview(self.taskCreateShortCutsView)
     }
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
