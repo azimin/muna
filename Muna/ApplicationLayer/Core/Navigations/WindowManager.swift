@@ -85,7 +85,7 @@ class WindowManager: WindowManagerProtocol {
         ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
             "type": windowType.analytics,
         ])
-
+g
         guard let window = self.windows[windowType], windowType.rawValue != WindowType.settings(item: .general).rawValue else {
             self.setupWindow(windowType)
             return
