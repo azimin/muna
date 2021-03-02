@@ -263,7 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         statusBarMenu.addItem(
             withTitle: "About Muna",
-            action: #selector(self.togglePane),
+            action: #selector(self.toggleAboutSettingsState),
             keyEquivalent: ""
         )
 
@@ -329,7 +329,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func toggleSettingsState() {
-        self.windowManager.activateWindowIfNeeded(.settings)
+        self.windowManager.activateWindowIfNeeded(.settings(item: .general))
+    }
+
+    @objc func toggleAboutSettingsState() {
+        self.windowManager.activateWindowIfNeeded(.settings(item: .about))
     }
 
     // MARK: - Notifications

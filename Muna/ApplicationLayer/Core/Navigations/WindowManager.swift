@@ -86,7 +86,7 @@ class WindowManager: WindowManagerProtocol {
             "type": windowType.analytics,
         ])
 
-        guard let window = self.windows[windowType], windowType != .settings else {
+        guard let window = self.windows[windowType], windowType.rawValue != WindowType.settings(item: .general).rawValue else {
             self.setupWindow(windowType)
             return
         }
@@ -192,25 +192,18 @@ class WindowManager: WindowManagerProtocol {
             window.isReleasedWhenClosed = false
             window.contentViewController = OnboardingViewController()
             self.showSettings(in: window)
-        case .settings:
+        case let .settings(selectedTab):
             window = NSWindow(
-                contentRect: self.frameFor(.settings),
+                contentRect: self.frameFor(.settings(item: selectedTab)),
                 styleMask: [.closable, .titled],
                 backing: .buffered,
                 defer: true
             )
             window.isReleasedWhenClosed = false
-            window.contentViewController = SettingsViewController()
+            window.contentViewController = SettingsViewController(initialItem: selectedTab)
             self.showSettings(in: window)
         case .permissionsAlert:
-            // TODO: - Remove it
-            window = NSWindow(
-                contentRect: self.frameFor(.settings),
-                styleMask: [.closable, .titled],
-                backing: .buffered,
-                defer: true
-            )
-            window.isReleasedWhenClosed = false
+            window = NSWindow()
             self.showPermissionsAlert()
         }
 

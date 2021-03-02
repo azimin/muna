@@ -39,6 +39,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     private let aboutViewController = AboutSettingsViewController()
     private let habitsViewcontroller = HabitsSettingsViewController()
 
+    private let initialItem: ToolbarItem
     private var currentItem: ToolbarItem?
     let toolbar = NSToolbar(identifier: NSToolbar.Identifier("settings"))
 
@@ -64,6 +65,16 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         }
     }
 
+    init(initialItem: ToolbarItem) {
+        self.initialItem = initialItem
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidAppear() {
         super.viewDidAppear()
 
@@ -79,7 +90,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.toolbar.delegate = self
         self.toolbar.allowsUserCustomization = false
         self.view.window?.toolbar = self.toolbar
-        self.setView(for: .general, animate: false)
+        self.setView(for: self.initialItem, animate: false)
 
         self.window.makeKeyAndOrderFront(nil)
         self.window.center()

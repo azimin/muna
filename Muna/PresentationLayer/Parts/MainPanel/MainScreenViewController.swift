@@ -83,7 +83,7 @@ class MainScreenViewController: NSViewController {
     }
 
     @objc func settingAction() {
-        (NSApplication.shared.delegate as? AppDelegate)?.windowManager.activateWindowIfNeeded(.settings)
+        (NSApplication.shared.delegate as? AppDelegate)?.windowManager.activateWindowIfNeeded(.settings(item: .general))
     }
 
     @objc func shortcutAction() {
