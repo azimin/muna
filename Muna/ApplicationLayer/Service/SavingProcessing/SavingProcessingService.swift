@@ -81,7 +81,7 @@ class SavingProcessingService {
             )
         }
 
-        var properties: [AnyHashable: AnalyticsValueProtocol] = [:]
+        var properties: [String: AnalyticsValueProtocol] = [:]
         if let date = item.date, let dueDateString = item.dueDateString {
             properties["due_date"] = date.toFormat("dd MMM yyyy HH:mm")
             properties["current_date"] = Date().toFormat("dd MMM yyyy HH:mm")

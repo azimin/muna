@@ -44,11 +44,6 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         self.additionalServices.forEach { $0.setup(id: self.userId) }
     }
 
-    public func update(userId: String) {
-        Amplitude.instance().setUserId(userId, startNewSession: true)
-        self.additionalServices.forEach { $0.setup(id: userId) }
-    }
-
     public var userId: String {
         var id: String
         if let cachedId = self.storage.getString(forKey: "generated-auth0-user-id") {
@@ -59,6 +54,36 @@ public class AnalyticsService: AnalyticsServiceProtocol {
             id = newId
         }
         return id
+    }
+
+    public func logLaunchEvents() {
+        let pair = self.buildCohortPair()
+
+        ServiceLocator.shared.analytics.setPersonPropertyOnce(
+            name: "cohort_day",
+            value: pair.cohortDay
+        )
+        ServiceLocator.shared.analytics.setPersonPropertyOnce(
+            name: "cohort_week",
+            value: pair.cohortWeek
+        )
+        ServiceLocator.shared.analytics.setPersonPropertyOnce(
+            name: "cohort_month",
+            value: pair.cohortMonth
+        )
+        ServiceLocator.shared.analytics.setPersonPropertyOnce(
+            name: "device_id",
+            value: self.deviceId ?? ""
+        )
+
+        if let dictionary = Bundle.main.infoDictionary,
+            let build = dictionary["CFBundleVersion"] as? String
+        {
+            ServiceLocator.shared.analytics.setPersonProperty(name: "build", value: build)
+        }
+
+        ServiceLocator.shared.analytics.logEventOnce(name: "App Launched First Time")
+        ServiceLocator.shared.analytics.logEvent(name: "App Launched")
     }
 
     public var deviceId: String? {
@@ -73,7 +98,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         return (day ?? 0, weekOfYear, month)
     }
 
-    public func logEvent(name: String, properties: [AnyHashable: AnalyticsValueProtocol]? = nil) {
+    public func logEvent(name: String, properties: [String: AnalyticsValueProtocol]? = nil) {
         let propertiesObjects = properties?.mapValues { $0.analyticsValue }
 
         if let propertiesObjects = propertiesObjects {
@@ -92,11 +117,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         #endif
     }
 
-    public func logEvent(name: String) {
-        self.logEvent(name: name, properties: nil)
-    }
-
-    public func logEventOnce(name: String, properties: [AnyHashable: AnalyticsValueProtocol]? = nil) {
+    public func logEventOnce(name: String, properties: [String: AnalyticsValueProtocol]? = nil) {
         let udKey = self.storageEventKey(with: name)
         if self.storage.getBool(forKey: udKey) == true {
             return
@@ -104,10 +125,6 @@ public class AnalyticsService: AnalyticsServiceProtocol {
 
         self.logEvent(name: name, properties: properties)
         self.storage.save(bool: true, forKey: udKey)
-    }
-
-    public func logEventOnce(name: String) {
-        self.logEventOnce(name: name, properties: nil)
     }
 
     public func setPersonProperty(name: String, value: AnalyticsValueProtocol) {
@@ -162,21 +179,11 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         #endif
     }
 
-    public func loggedOnceValue(for key: String) -> NSObject? {
-        return self.storage.getObject(forKey: self.storageUserPropertiesValueKey(with: key))
-    }
+//    public func loggedOnceValue(for key: String) -> NSObject? {
+//        return self.storage.getObject(forKey: self.storageUserPropertiesValueKey(with: key))
+//    }
 
     // MARK: - Helpers
-
-    private func convertToFB(properties: [AnyHashable: Any]) -> [String: Any] {
-        var parameters: [String: Any] = [:]
-        for (key, value) in properties {
-            if let key = key as? String {
-                parameters[key] = value
-            }
-        }
-        return parameters
-    }
 
     private func storageUserPropertiesKey(with name: String) -> String {
         return "_analytics-reports.up.\(name)"

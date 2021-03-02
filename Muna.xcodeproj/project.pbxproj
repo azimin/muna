@@ -207,6 +207,7 @@
 		9FE96BDF2465F6C1007D92B8 /* Button+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */; };
 		9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE024660235007D92B8 /* ButtonCell.swift */; };
 		9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */; };
+		9FEB558D25E8F3620067685A /* MutedAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */; };
 		9FFA5B9624E453BD004670F0 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFA5B9524E453BD004670F0 /* Switcher.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
@@ -438,6 +439,7 @@
 		9FE96BDE2465F6C1007D92B8 /* Button+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Builder.swift"; sourceTree = "<group>"; };
 		9FE96BE024660235007D92B8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
+		9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutedAnalyticsService.swift; sourceTree = "<group>"; };
 		9FEF9849247C60EB0047787A /* Muna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Muna-Bridging-Header.h"; sourceTree = "<group>"; };
 		9FFA5B9524E453BD004670F0 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
@@ -931,6 +933,7 @@
 				9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */,
 				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
 				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
+				9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */,
 				9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */,
 				9F2D341524D0BB460049DD43 /* TrackableScreen.swift */,
 			);
@@ -1998,6 +2001,7 @@
 				9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */,
 				2326DFB1250FDE6700316D8B /* HintViewController.swift in Sources */,
 				9F326FE0249959F30095DEA3 /* OnboardingSubviewHowToSeeItems.swift in Sources */,
+				9FEB558D25E8F3620067685A /* MutedAnalyticsService.swift in Sources */,
 				9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */,
 				23B6C78224ADAE260071ACA8 /* UserDefaultsEntry.swift in Sources */,
 				23FA252B2484D7AD00CD69C4 /* ENMonthOffsetParser.swift in Sources */,
