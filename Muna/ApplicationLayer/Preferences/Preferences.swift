@@ -39,6 +39,8 @@ class Preferences {
         case hintShowedForNotesTimeInterval
         case hintShowedForRemindersTimeInterval
         case shoulsUseAnalytics
+        case isNeededToShowIncreaseProductivity
+        case isFirstTimeOfShowingIncreaseProductivityPopup
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -200,4 +202,10 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: Date().timeIntervalSince1970, key: Key.hintShowedForRemindersTimeInterval)
     static var hintShowedForRemindersTimeInterval
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowIncreaseProductivity)
+    static var isNeededToShowIncreaseProductivity
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isFirstTimeOfShowingIncreaseProductivityPopup)
+    static var isFirstTimeOfShowingIncreaseProductivityPopup
 }

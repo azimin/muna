@@ -51,6 +51,11 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
     }
 
     func showHintIfNeeded() {
+        let nowTime = Date().timeIntervalSince1970
+        let isBigGap = nowTime - Preferences.hintShowedForNotesTimeInterval > PresentationLayerConstants.oneHourInSeconds * 2
+
+        guard (Preferences.isNeededToShowIncreaseProductivity && isBigGap) || Preferences.isFirstTimeOfShowingIncreaseProductivityPopup else { return }
+
         self.timer = Timer(timeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else {
                 timer.invalidate()
@@ -68,6 +73,8 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
             if numberOfCreatedItems > 2 {
                 ServiceLocator.shared.windowManager.showHintPopover(sender: self.rootView.taskCreationView.shortcutsButton)
             }
+            Preferences.isFirstTimeOfShowingIncreaseProductivityPopup = false
+            Preferences.hintShowedForNotesTimeInterval = Date().timeIntervalSince1970
             self.passedTime = 0
             timer.invalidate()
             self.timer = nil

@@ -272,6 +272,7 @@ class TaskCreateView: PopupView {
 
     @objc
     private func handleShortcutsButton() {
+        Preferences.isNeededToShowIncreaseProductivity = false
         self.delegate?.shortcutsButtonTapped()
         ServiceLocator.shared.analytics.executeControl(
             control: .captureShortcuts,

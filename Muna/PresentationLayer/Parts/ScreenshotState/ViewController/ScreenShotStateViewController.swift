@@ -200,6 +200,11 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
     // MARK: - Hint
 
     func showHintIfNeeded() {
+        let nowTime = Date().timeIntervalSince1970
+        let isBigGap = nowTime - Preferences.hintShowedForNotesTimeInterval > PresentationLayerConstants.oneHourInSeconds * 2
+
+        guard (Preferences.isNeededToShowIncreaseProductivity && isBigGap) || Preferences.isFirstTimeOfShowingIncreaseProductivityPopup else { return }
+
         self.hintTimer = Timer(timeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else {
                 timer.invalidate()
@@ -218,6 +223,8 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
                 ServiceLocator.shared.windowManager.showHintPopover(sender: self.rootView.reminderSetupPopup.shortcutsButton)
             }
             self.passedTime = 0
+            Preferences.isFirstTimeOfShowingIncreaseProductivityPopup = false
+            Preferences.hintShowedForNotesTimeInterval = Date().timeIntervalSince1970
             timer.invalidate()
             self.timer = nil
         }
