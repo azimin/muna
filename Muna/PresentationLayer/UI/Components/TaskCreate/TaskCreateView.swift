@@ -25,6 +25,8 @@ class TaskCreateView: PopupView {
     var parsedDates = [DateItem]()
     let presentationDateItemTransformer: DateItemsTransformer
 
+    private var hintPopover: NSPopover?
+
     let doneButton = PopupButton(style: .basic, title: "Create (⌘↵)")
 
     let reminderTextField = TextField(clearable: true, numberOfLines: 1)

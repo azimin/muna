@@ -76,12 +76,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             object: nil
         )
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.hideFullscreenScreenshotIfNeeded),
-            name: NSWindow.didResignKeyNotification,
-            object: nil
-        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(self.hideFullscreenScreenshotIfNeeded),
+//            name: NSWindow.didResignKeyNotification,
+//            object: nil
+//        )
 
         Preferences.setup()
 
@@ -92,43 +92,43 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
         ServiceLocator.shared.analytics.logCapturePermissions(isEnabled: captureIsEnabled)
 
-        ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
-            let nowTime = Date().timeIntervalSince1970
-            let isNeededToPlayAnimation: Bool
-            switch activeApp {
-            case .notes:
-                let isBigGap = nowTime - Preferences.hintShowedForNotesTimeInterval > PresentationLayerConstants.oneHourInSeconds * 2
-                isNeededToPlayAnimation = Preferences.splashOnNotes && isBigGap
-                if Preferences.splashOnNotes {
-                    Preferences.hintShowedForNotesTimeInterval = Date().timeIntervalSince1970
-                }
-            case .reminders:
-                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
-                isNeededToPlayAnimation = Preferences.splashOnReminders && isBigGap
-                if Preferences.splashOnReminders {
-                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
-                }
-            case .things:
-                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
-                isNeededToPlayAnimation = Preferences.splashOnThings && isBigGap
-                if Preferences.splashOnThings {
-                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
-                }
-            }
-
-            let database = ServiceLocator.shared.itemsDatabase
-            let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
-            let numberOfCreatedItems = database.fetchItems(filter: .uncompleted).filter { $0.dueDate != nil}.count
-            let theWholeNumberOfItems = numberOfComplitedItems + numberOfCreatedItems
-
-            let isBigGapAfterStart = nowTime - Preferences.lastActiveTimeInterval > PresentationLayerConstants.oneHourInSeconds
-
-            if isNeededToPlayAnimation, isBigGapAfterStart, theWholeNumberOfItems < 15 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
-                }
-            }
-        }
+//        ServiceLocator.shared.activeAppCheckService.starObservingApps { activeApp in
+//            let nowTime = Date().timeIntervalSince1970
+//            let isNeededToPlayAnimation: Bool
+//            switch activeApp {
+//            case .notes:
+//                let isBigGap = nowTime - Preferences.hintShowedForNotesTimeInterval > PresentationLayerConstants.oneHourInSeconds * 2
+//                isNeededToPlayAnimation = Preferences.splashOnNotes && isBigGap
+//                if Preferences.splashOnNotes {
+//                    Preferences.hintShowedForNotesTimeInterval = Date().timeIntervalSince1970
+//                }
+//            case .reminders:
+//                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
+//                isNeededToPlayAnimation = Preferences.splashOnReminders && isBigGap
+//                if Preferences.splashOnReminders {
+//                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
+//                }
+//            case .things:
+//                let isBigGap = nowTime - Preferences.hintShowedForRemindersTimeInterval > PresentationLayerConstants.oneMinuteInSeconds * 30
+//                isNeededToPlayAnimation = Preferences.splashOnThings && isBigGap
+//                if Preferences.splashOnThings {
+//                    Preferences.hintShowedForRemindersTimeInterval = Date().timeIntervalSince1970
+//                }
+//            }
+//
+//            let database = ServiceLocator.shared.itemsDatabase
+//            let numberOfComplitedItems = database.fetchNumberOfCompletedItems()
+//            let numberOfCreatedItems = database.fetchItems(filter: .uncompleted).filter { $0.dueDate != nil}.count
+//            let theWholeNumberOfItems = numberOfComplitedItems + numberOfCreatedItems
+//
+//            let isBigGapAfterStart = nowTime - Preferences.lastActiveTimeInterval > PresentationLayerConstants.oneHourInSeconds
+//
+//            if isNeededToPlayAnimation, isBigGapAfterStart, theWholeNumberOfItems < 15 {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                    ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
+//                }
+//            }
+//        }
 
         ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()

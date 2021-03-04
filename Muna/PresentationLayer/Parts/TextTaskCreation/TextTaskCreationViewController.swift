@@ -11,6 +11,9 @@ import Cocoa
 final class TextTaskCreationViewController: NSViewController, ViewHolder {
     typealias ViewType = TextTaskCreationView
 
+    private var timer: Timer?
+    private var passedTime = 2
+
     override func loadView() {
         self.view = TextTaskCreationView()
     }
@@ -19,6 +22,12 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
         super.viewDidLoad()
 
         self.rootView.taskCreationView.delegate = self
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        self.showHintIfNeeded()
     }
 
     func hide(completion: VoidBlock?) {
@@ -40,10 +49,42 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
         self.rootView.isShortcutsViewShowed = true
         self.rootView.layoutSubtreeIfNeeded()
     }
+
+    func showHintIfNeeded() {
+        self.timer = Timer(timeInterval: 1, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+
+            guard self.passedTime >= 3 else {
+                self.passedTime += 1
+                return
+            }
+
+            let database = ServiceLocator.shared.itemsDatabase
+            let numberOfCreatedItems = database.fetchItems(filter: .uncompleted).count
+
+            if numberOfCreatedItems > 2 {
+                ServiceLocator.shared.windowManager.showHintPopover(sender: self.rootView.taskCreationView.shortcutsButton)
+            }
+            self.passedTime = 0
+            timer.invalidate()
+            self.timer = nil
+        }
+
+        guard let timer = self.timer else {
+            appAssertionFailure("Timer can't be allocated on text task creation")
+            return
+        }
+
+        RunLoop.current.add(timer, forMode: .common)
+    }
 }
 
 extension TextTaskCreationViewController: TaskCreateViewDelegate {
     func closeScreenshot() {
+        ServiceLocator.shared.windowManager.closeHintPopover()
         ServiceLocator.shared.windowManager.hideWindowIfNeeded(.textTaskCreation)
     }
 

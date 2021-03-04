@@ -85,7 +85,7 @@ class WindowManager: WindowManagerProtocol {
         ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
             "type": windowType.analytics,
         ])
-g
+
         guard let window = self.windows[windowType], windowType.rawValue != WindowType.settings(item: .general).rawValue else {
             self.setupWindow(windowType)
             return
@@ -423,7 +423,7 @@ g
         self.hintPopover?.behavior = .semitransient
         self.hintPopover?.animates = true
 
-        self.hintPopover?.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.maxY)
+        self.hintPopover?.show(relativeTo: sender.bounds, of: sender as! NSView, preferredEdge: NSRectEdge.minY)
 
         ServiceLocator.shared.analytics.increasePersonProperty(
             name: "number_of_hint_showed",

@@ -10,7 +10,10 @@ import Cocoa
 import SnapKit
 
 final class HintView: View {
-    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultScreenshotShortcut.item)
+//    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultScreenshotShortcut.item)
+    
+    let titleLabel = Label(fontStyle: .bold, size: 17)
+        .withText("Increase your productivity")
 
     let closeButton = Button()
         .withImageName("close", color: .title60Accent)
@@ -28,8 +31,8 @@ final class HintView: View {
     }
 
     private func setupInitialLayout() {
-        self.addSubview(self.partShorcutView)
-        self.partShorcutView.snp.makeConstraints { make in
+        self.addSubview(self.titleLabel)
+        self.titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().inset(12)
@@ -40,7 +43,7 @@ final class HintView: View {
             make.size.equalTo(28)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(8)
-            make.leading.equalTo(self.partShorcutView.snp.trailing).offset(8)
+            make.leading.equalTo(self.titleLabel.snp.trailing).offset(8)
         }
 
         self.addSubview(self.closeButton)
