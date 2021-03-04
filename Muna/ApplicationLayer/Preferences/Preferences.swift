@@ -41,6 +41,7 @@ class Preferences {
         case shoulsUseAnalytics
         case isNeededToShowIncreaseProductivity
         case isFirstTimeOfShowingIncreaseProductivityPopup
+        case isNeededToShowPassedItems
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -208,4 +209,7 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isFirstTimeOfShowingIncreaseProductivityPopup)
     static var isFirstTimeOfShowingIncreaseProductivityPopup
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowPassedItems)
+    static var isNeededToShowPassedItems
 }

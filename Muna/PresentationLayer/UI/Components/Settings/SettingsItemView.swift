@@ -10,6 +10,7 @@ import Cocoa
 import SnapKit
 
 protocol SettingsItemViewDelegate: AnyObject {
+    func showPassedItemsSwitchChanged(onState state: Bool)
     func launchOnStartupSwitchChanged(onState state: Bool)
 
     func pingIntervalSliderChanged(onValue value: Int)
@@ -59,6 +60,9 @@ class SettingsItemView: NSView {
             self.startupSettingItemTopConstraintToTitleLabel?.deactivate()
         }
 
+        self.showPassedTasksItem.switcher.target = self
+        self.showPassedTasksItem.switcher.action = #selector(self.passedItemsSwitchStateChanged)
+
         self.startupSettingItem.switcher.target = self
         self.startupSettingItem.switcher.action = #selector(self.switchStateChanged)
 
@@ -103,7 +107,7 @@ class SettingsItemView: NSView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             self.startupSettingItemTopConstraintToTitleLabel = make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24).constraint
-            self.startupSettingItemTopConstraintToSuperView = make.top.equalTo(self.showPassedTasksItem.snp.bottom).constraint
+            self.startupSettingItemTopConstraintToSuperView = make.top.equalTo(self.showPassedTasksItem.snp.bottom).offset(10).constraint
         }
 
         self.notificationsSettingItem.titleLabel.text = "Ping interval"
@@ -131,6 +135,11 @@ class SettingsItemView: NSView {
     @objc
     func switchStateChanged() {
         self.delegate?.launchOnStartupSwitchChanged(onState: self.startupSettingItem.switcher.checked)
+    }
+
+    @objc
+    func passedItemsSwitchStateChanged() {
+        self.delegate?.showPassedItemsSwitchChanged(onState: self.startupSettingItem.switcher.checked)
     }
 
     @objc
@@ -195,6 +204,10 @@ extension SettingsItemView: SettingsItemViewModelDelegate {
                 }
             }
         }
+    }
+
+    func showPassedItemsSwitcherSetup(withValue value: Bool) {
+        self.showPassedTasksItem.switcher.checked = value
     }
 
     func launchOnStartupSwitcherSetup(withValue value: Bool) {

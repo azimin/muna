@@ -9,6 +9,7 @@
 import Foundation
 
 protocol SettingsItemViewModelDelegate: AnyObject {
+    func showPassedItemsSwitcherSetup(withValue value: Bool)
     func launchOnStartupSwitcherSetup(withValue value: Bool)
 
     func pingIntervalSliderSetup(withValue value: Double, title: String)
@@ -28,6 +29,7 @@ class SettingsItemViewModel {
         self.setupLaunchOnStartup()
         self.setupPeriodOfStoring()
         self.setupPingInterval()
+        self.delegate?.showPassedItemsSwitcherSetup(withValue: Preferences.isNeededToShowPassedItems)
     }
 
     private func setupLaunchOnStartup() {
@@ -92,6 +94,10 @@ class SettingsItemViewModel {
 }
 
 extension SettingsItemViewModel: SettingsItemViewDelegate {
+    func showPassedItemsSwitchChanged(onState state: Bool) {
+        Preferences.isNeededToShowPassedItems = state
+    }
+
     func launchOnStartupSwitchChanged(onState state: Bool) {
         Preferences.launchOnStartup = state
     }
