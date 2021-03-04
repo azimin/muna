@@ -139,7 +139,7 @@ class SettingsItemView: NSView {
 
     @objc
     func passedItemsSwitchStateChanged() {
-        self.delegate?.showPassedItemsSwitchChanged(onState: self.startupSettingItem.switcher.checked)
+        self.delegate?.showPassedItemsSwitchChanged(onState: self.showPassedTasksItem.switcher.checked)
     }
 
     @objc
