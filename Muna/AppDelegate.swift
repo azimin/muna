@@ -268,7 +268,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     func refreshNumberOfPassedItems() {
-        print("Refresh number of passed items")
         let number = ServiceLocator.shared.itemsDatabase.numberOfPassedItem
         self.updateStatusBar(number: number)
     }

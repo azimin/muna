@@ -31,6 +31,7 @@ class SettingsItemView: NSView {
         .withTextColorStyle(.titleAccent)
         .withText("General")
 
+    let showPassedTasksItem: SwitcherSettingsItem
     let startupSettingItem: SwitcherSettingsItem
     private var startupSettingItemTopConstraintToSuperView: Constraint?
     private var startupSettingItemTopConstraintToTitleLabel: Constraint?
@@ -39,6 +40,7 @@ class SettingsItemView: NSView {
     let storageSettingItem: SliderSettingsItem
 
     init(isNeededShowTitle: Bool, style: Style, needToShake: Bool) {
+        self.showPassedTasksItem = SwitcherSettingsItem(style: style)
         self.startupSettingItem = SwitcherSettingsItem(style: style)
         self.notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4, style: style)
         self.storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3, style: style)
@@ -46,6 +48,7 @@ class SettingsItemView: NSView {
         super.init(frame: .zero)
 
         self.settingsTitleLabel.isHidden = !isNeededShowTitle
+        self.showPassedTasksItem.isHidden = isNeededShowTitle
         self.setupInitialLayout()
 
         if isNeededShowTitle {
@@ -85,6 +88,14 @@ class SettingsItemView: NSView {
             make.centerX.equalToSuperview()
         }
 
+        self.addSubview(self.showPassedTasksItem)
+        self.showPassedTasksItem.titleLabel.text = "Show passed tasks in status bar"
+        self.showPassedTasksItem.descriptionLabel.text = "Nothing will be missed!"
+        self.showPassedTasksItem.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(24)
+        }
+
         self.startupSettingItem.titleLabel.text = "Launch on startup"
         self.startupSettingItem.descriptionLabel.text = "Start Muna automatically after system restart"
         self.addSubview(self.startupSettingItem)
@@ -92,7 +103,7 @@ class SettingsItemView: NSView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             self.startupSettingItemTopConstraintToTitleLabel = make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24).constraint
-            self.startupSettingItemTopConstraintToSuperView = make.top.equalToSuperview().offset(24).constraint
+            self.startupSettingItemTopConstraintToSuperView = make.top.equalTo(self.showPassedTasksItem.snp.bottom).constraint
         }
 
         self.notificationsSettingItem.titleLabel.text = "Ping interval"
