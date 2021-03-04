@@ -55,6 +55,7 @@
 		239DC918245D95E8001FA50C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC917245D95E8001FA50C /* Assets.xcassets */; };
 		239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91A245D95E8001FA50C /* Preview Assets.xcassets */; };
 		239DC91E245D95E8001FA50C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239DC91C245D95E8001FA50C /* Main.storyboard */; };
+		239DD9EE25F0BA840093207D /* NotificationCenter+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239DD9ED25F0BA840093207D /* NotificationCenter+Name.swift */; };
 		23A12D1B247EB2FD0051FEE3 /* ENDaysParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */; };
 		23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6B2A124660A36006A7A4D /* WindowManager.swift */; };
 		23ADE2D624A899F800A2D7F9 /* ShortcutPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */; };
@@ -275,6 +276,7 @@
 		239DC91D245D95E8001FA50C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		239DC91F245D95E8001FA50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		239DC920245D95E8001FA50C /* Muna.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muna.entitlements; sourceTree = "<group>"; };
+		239DD9ED25F0BA840093207D /* NotificationCenter+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Name.swift"; sourceTree = "<group>"; };
 		23A12D1A247EB2FD0051FEE3 /* ENDaysParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDaysParser.swift; sourceTree = "<group>"; };
 		23A6B2A124660A36006A7A4D /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		23ADE2D524A899F800A2D7F9 /* ShortcutPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreviewView.swift; sourceTree = "<group>"; };
@@ -739,6 +741,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		239DD9EC25F0BA750093207D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				239DD9ED25F0BA840093207D /* NotificationCenter+Name.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -1019,6 +1029,7 @@
 		9F4A8CEE245DAC8400EA2E1E /* ApplicationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				239DD9EC25F0BA750093207D /* Extension */,
 				23B9865724E05E1900AF1BDD /* Constants */,
 				9F4FE40C24D0BE4800AAEC31 /* AppDelegateExtensions */,
 				9F1CB75024730AB500DFBB05 /* Test */,
@@ -1930,6 +1941,7 @@
 				2354371325A79E2D0096AB48 /* InAppProductsService.swift in Sources */,
 				9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
+				239DD9EE25F0BA840093207D /* NotificationCenter+Name.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,

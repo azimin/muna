@@ -211,5 +211,9 @@ class Preferences {
     static var isFirstTimeOfShowingIncreaseProductivityPopup
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowPassedItems)
-    static var isNeededToShowPassedItems
+    static var isNeededToShowPassedItems {
+        didSet {
+            NotificationCenter.default.post(name: .updateShowPassedItemSetting, object: nil)
+        }
+    }
 }

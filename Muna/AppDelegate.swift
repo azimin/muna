@@ -83,6 +83,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             object: nil
         )
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handlePassedItemsSetting),
+            name: Notification.Name.updateShowPassedItemSetting,
+            object: nil
+        )
+
         Preferences.setup()
 
         if Preferences.isNeededToShowOnboarding || ServiceLocator.shared.betaKey.isEntered == false {
@@ -356,6 +363,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             action: #selector(self.closeApp),
             keyEquivalent: "q"
         )
+    }
+
+    @objc
+    func handlePassedItemsSetting() {
+        self.refreshNumberOfPassedItems()
     }
 
     @objc func closeApp() {
