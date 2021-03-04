@@ -23,6 +23,9 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     var isNeededToDrawFrame = true
 
+    private var hintTimer: Timer?
+    private var passedTime = 0
+
     private let savingProcessingService: SavingProcessingService
 
     private var shortcutsController: ShortcutsController?
@@ -39,6 +42,12 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
     override func loadView() {
         self.view = ScreenshotStateView(delegate: self, savingService: self.savingProcessingService)
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        self.showHintIfNeeded()
     }
 
     private func setup() {
@@ -188,6 +197,39 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
         self.shortcutsController?.stop()
     }
 
+    // MARK: - Hint
+
+    func showHintIfNeeded() {
+        self.hintTimer = Timer(timeInterval: 1, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+
+            guard self.passedTime >= 3 else {
+                self.passedTime += 1
+                return
+            }
+
+            let database = ServiceLocator.shared.itemsDatabase
+            let numberOfCreatedItems = database.fetchItems(filter: .uncompleted).count
+
+            if numberOfCreatedItems > 2 {
+                ServiceLocator.shared.windowManager.showHintPopover(sender: self.rootView.reminderSetupPopup.shortcutsButton)
+            }
+            self.passedTime = 0
+            timer.invalidate()
+            self.timer = nil
+        }
+
+        guard let timer = self.hintTimer else {
+            appAssertionFailure("Timer can't be allocated on text task creation")
+            return
+        }
+
+        RunLoop.current.add(timer, forMode: .common)
+    }
+
     // MARK: - Make screenshot
 
     func makeScreenshot() {
@@ -250,6 +292,7 @@ class ScreenShotStateViewController: NSViewController, ViewHolder {
 
 extension ScreenShotStateViewController: ScreenshotStateViewDelegate {
     func escapeWasTapped() {
+        ServiceLocator.shared.windowManager.closeHintPopover()
         self.isNeededToDrawFrame = true
         if self.isFullscreenScreenshotState {
             (NSApplication.shared.delegate as? AppDelegate)?.hideFullscreenScreenshotIfNeeded()
