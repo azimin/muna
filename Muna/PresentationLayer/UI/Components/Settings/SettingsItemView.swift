@@ -93,8 +93,8 @@ class SettingsItemView: NSView {
         }
 
         self.addSubview(self.showPassedTasksItem)
-        self.showPassedTasksItem.titleLabel.text = "Show passed tasks in status bar"
-        self.showPassedTasksItem.descriptionLabel.text = "Nothing will be missed!"
+        self.showPassedTasksItem.titleLabel.text = "Number of passed tasks"
+        self.showPassedTasksItem.descriptionLabel.text = "Show number of passed tasks in menu bar"
         self.showPassedTasksItem.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().offset(24)
