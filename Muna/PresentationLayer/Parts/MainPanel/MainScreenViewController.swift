@@ -51,8 +51,8 @@ class MainScreenViewController: NSViewController {
 
         self.panelView.mainContentView.delegate = self
 
-        self.panelView.bottomBar.smartAssistentView.pressAction = {
-            self.toggleSmartAssistent()
+        self.panelView.bottomBar.tipsView.pressAction = {
+            print("Show tips view")
         }
     }
 

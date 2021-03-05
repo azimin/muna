@@ -99,9 +99,9 @@ enum ColorStyle {
             case .assitentPlateBackground:
                 return NSColor.white.withAlphaComponent(0.2)
             case .assitentLeftColor:
-                return NSColor(hex: "D9ECBC")
+                return NSColor(hex: "FA7C7C")
             case .assitentRightColor:
-                return NSColor(hex: "EBCBF6")
+                return NSColor(hex: "93B3EF")
             }
         case .light:
             switch self {

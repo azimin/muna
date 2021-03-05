@@ -34,10 +34,10 @@ class MainScreenView: NSView {
     }
 
     func setup() {
-        self.addSubview(self.assistenPanelPresentationView)
-        self.assistenPanelPresentationView.snp.makeConstraints { maker in
-            maker.top.trailing.bottom.equalToSuperview()
-        }
+//        self.addSubview(self.assistenPanelPresentationView)
+//        self.assistenPanelPresentationView.snp.makeConstraints { maker in
+//            maker.top.trailing.bottom.equalToSuperview()
+//        }
 
         self.addSubview(self.mainPanelPresentationView)
         self.mainPanelPresentationView.snp.makeConstraints { maker in
@@ -53,14 +53,14 @@ class MainScreenView: NSView {
             maker.width.equalTo(WindowManager.panelWindowFrameWidth)
         }
 
-        self.assistenPanelPresentationView.addSubview(self.assistentPanelView)
-        self.assistentPanelView.snp.makeConstraints { maker in
-            maker.leading.equalToSuperview()
-            maker.top.trailing.bottom.equalToSuperview().inset(
-                NSEdgeInsets(top: 36, left: 12, bottom: 12, right: 12 + 16 + WindowManager.panelWindowFrameWidth)
-            )
-            maker.width.equalTo(WindowManager.panelWindowFrameWidth)
-        }
+//        self.assistenPanelPresentationView.addSubview(self.assistentPanelView)
+//        self.assistentPanelView.snp.makeConstraints { maker in
+//            maker.leading.equalToSuperview()
+//            maker.top.trailing.bottom.equalToSuperview().inset(
+//                NSEdgeInsets(top: 36, left: 12, bottom: 12, right: 12 + 16 + WindowManager.panelWindowFrameWidth)
+//            )
+//            maker.width.equalTo(WindowManager.panelWindowFrameWidth)
+//        }
     }
 
     func showChangeTimeView(itemModel: ItemModel, closeHandler: CloseHandler) {

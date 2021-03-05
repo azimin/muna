@@ -10,8 +10,7 @@ import Cocoa
 import SnapKit
 
 class PanelBottomBarView: View {
-    let smartAssistentView = SmartAssistentView()
-        .withIsHidden(true)
+    let tipsView = TipsView()
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
@@ -40,8 +39,8 @@ class PanelBottomBarView: View {
             maker.height.equalTo(46)
         }
 
-        self.addSubview(self.smartAssistentView)
-        self.smartAssistentView.snp.makeConstraints { maker in
+        self.addSubview(self.tipsView)
+        self.tipsView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.leading.equalToSuperview().inset(16)
         }

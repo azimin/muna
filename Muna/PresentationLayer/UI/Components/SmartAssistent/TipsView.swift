@@ -8,18 +8,18 @@
 
 import Foundation
 
-class SmartAssistentView: View {
+class TipsView: View {
     let backgroundView = View()
         .withBackgroundColorStyle(.assitentPlateBackground)
 
     let arrowIcon = Button()
         .withImageName(
-            "icon_question",
+            "img_tips",
             color: .assitentLeftColor
         )
 
     let label = Label(fontStyle: .bold, size: 12)
-        .withText("Smart Assistent")
+        .withText("If you like our app, please tip us")
 
     var pressAction: VoidBlock?
 
