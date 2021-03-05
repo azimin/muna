@@ -242,6 +242,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
 
         guard Preferences.isNeededToShowPassedItems else {
+            self.statusBarNumber = 0
             statusBarItem.length = NSStatusItem.squareLength
             statusBarItem.button?.attributedTitle = NSAttributedString()
             return
