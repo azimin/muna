@@ -42,6 +42,9 @@ class ItemModel: ItemModelProtocol, Codable {
 
     var shouldInvalidHeightCache: Bool = false
     var commentHeight: CGFloat {
+        if self.commentHeightContainer == nil {
+            self.calculateNumberOfLines()
+        }
         return self.commentHeightContainer ?? 0
     }
     var commentHeightContainer: CGFloat?
