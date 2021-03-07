@@ -21,6 +21,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         case howToRemind
         case howToSeeItems
         case howToGetReminder
+        case analytics
         case final
 
         func next() -> Step {
@@ -105,6 +106,8 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
 
     private func viewController(for step: Step) -> OnboardingContainerViewController {
         switch step {
+        case .analytics:
+            return OnboardingAnalyticsViewController()
         case .intro:
             return OnboardingIntroViewController()
         case .howToCapture:

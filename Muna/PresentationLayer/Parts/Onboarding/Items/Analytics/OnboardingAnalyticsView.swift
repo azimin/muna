@@ -11,7 +11,7 @@ import SnapKit
 
 final class OnboardingAnalyticsView: View {
 
-    let analyticsImageView = ImageView()
+    let analyticsImageView = ImageView(name: "analytics_icon")
 
     let titleLabel = Label(fontStyle: .bold, size: 30)
         .withTextColorStyle(.titleAccent)
@@ -21,16 +21,33 @@ final class OnboardingAnalyticsView: View {
     let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
         .withText("We would be happy if you help to improve our software with anonymous usage data, but we respect your privacy")
+        .withAligment(.center)
         .withLimitedNumberOfLines(3)
 
-    let linksLabel = Label(fontStyle: .regular, size: 18)
-        .withTextColorStyle(.title60AccentAlpha)
-        .withLimitedNumberOfLines(3)
+    let linksLabel = NSTextView()
 
-    let settingsSwitcher = SwitcherSettingsItem(style: .small)
+    let settingsSwitcher = SwitcherSettingsItem(style: .oneLine)
 
     let countinueButton = OnboardingButton()
         .withText("Done")
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+
+        linksLabel.textColor = ColorStyle.title60AccentAlpha.color
+        linksLabel.font = .systemFont(ofSize: 18, weight: .regular)
+        linksLabel.drawsBackground = false
+        linksLabel.isEditable = false
+        linksLabel.isSelectable = true
+        linksLabel.alignment = .center
+
+        self.setupInitialLayout()
+        self.setupLinks()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     private func setupInitialLayout() {
         self.snp.makeConstraints { make in
@@ -68,8 +85,11 @@ final class OnboardingAnalyticsView: View {
         }
 
         self.addSubview(self.settingsSwitcher)
+        self.settingsSwitcher.titleLabel.text = "Share anonymous usage data"
         self.settingsSwitcher.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(120)
+            make.trailing.equalToSuperview().inset(120)
             make.top.equalTo(self.linksLabel.snp.bottom).offset(20)
         }
 
@@ -79,5 +99,26 @@ final class OnboardingAnalyticsView: View {
             make.top.equalTo(self.settingsSwitcher.snp.bottom).offset(53)
             make.bottom.equalToSuperview().inset(26)
         }
+    }
+
+    func setupLinks() {
+        let attributedString = NSMutableAttributedString(
+            string:
+            """
+            We use Amplitude (our events) for usage and App Center for crash reports
+            """,
+            attributes: [
+                .font: NSFont.systemFont(ofSize: 18, weight: .regular),
+                .foregroundColor: ColorStyle.title60AccentAlpha.color
+            ]
+        )
+
+        attributedString.beginEditing()
+        let rangeEvents = (attributedString.string as NSString).range(of: "(our events)")
+
+        attributedString.addAttribute(.link, value: "https://www.notion.so/muna0/Muna-Analytics-66145c7e8d41495bb84d01a3c9b63663", range: rangeEvents)
+        attributedString.endEditing()
+
+        self.linksLabel.textStorage?.setAttributedString(attributedString)
     }
 }

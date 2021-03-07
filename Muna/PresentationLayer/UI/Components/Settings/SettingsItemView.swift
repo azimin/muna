@@ -24,6 +24,7 @@ class SettingsItemView: NSView {
     enum Style {
         case big
         case small
+        case oneLine
     }
 
     weak var delegate: SettingsItemViewDelegate?

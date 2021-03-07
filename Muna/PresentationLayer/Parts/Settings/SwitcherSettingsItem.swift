@@ -15,6 +15,8 @@ class SwitcherSettingsItem: View {
 
     let switcher = Switcher()
 
+    private let style: SettingsItemView.Style
+
     init(style: SettingsItemView.Style) {
         let titleSize: CGFloat
         let descriptionSize: CGFloat
@@ -26,7 +28,12 @@ class SwitcherSettingsItem: View {
         case .small:
             titleSize = 14
             descriptionSize = 12
+        case .oneLine:
+            titleSize = 15
+            descriptionSize = .zero
         }
+
+        self.style = style
 
         self.titleLabel = Label(fontStyle: .bold, size: titleSize)
             .withTextColorStyle(.titleAccent)
@@ -46,19 +53,29 @@ class SwitcherSettingsItem: View {
     func setup() {
         self.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
+            if self.style == .oneLine {
+                make.centerY.leading.equalToSuperview()
+            } else {
+                make.top.leading.equalToSuperview()
+            }
         }
 
-        self.addSubview(self.descriptionLabel)
-        self.descriptionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
+        if self.style != .oneLine {
+            self.addSubview(self.descriptionLabel)
+            self.descriptionLabel.snp.makeConstraints { make in
+                make.leading.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
+            }
         }
 
         self.addSubview(self.switcher)
         self.switcher.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            if self.style == .oneLine {
+                make.bottom.top.equalToSuperview()
+            } else {
+                make.centerY.equalToSuperview()
+            }
             make.trailing.equalToSuperview()
         }
     }

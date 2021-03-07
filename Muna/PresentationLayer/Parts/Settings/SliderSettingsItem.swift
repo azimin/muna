@@ -32,6 +32,10 @@ class SliderSettingsItem: View {
         case .small:
             titleSize = 14
             descriptionSize = 12
+        case .oneLine:
+            appAssertionFailure("Not supported slider style: \(style)")
+            titleSize = .zero
+            descriptionSize = .zero
         }
 
         self.titleLabel = Label(fontStyle: .bold, size: titleSize)
