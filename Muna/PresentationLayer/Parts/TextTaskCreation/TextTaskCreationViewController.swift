@@ -21,6 +21,8 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.rootView.taskCreateShortCutsView.closeButton.target = self
+        self.rootView.taskCreateShortCutsView.closeButton.action = #selector(handleCloseShortcutsButton)
         self.rootView.taskCreationView.delegate = self
     }
 
