@@ -52,7 +52,7 @@ final class OnboardingAnalyticsView: View {
 
     private func setupInitialLayout() {
         self.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 527, height: 556))
+            make.size.equalTo(CGSize(width: 527, height: 570))
         }
 
         self.addSubview(self.analyticsImageView)

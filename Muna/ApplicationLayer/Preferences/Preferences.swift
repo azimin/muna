@@ -42,6 +42,7 @@ class Preferences {
         case isNeededToShowIncreaseProductivity
         case isFirstTimeOfShowingIncreaseProductivityPopup
         case isNeededToShowPassedItems
+        case isAnalyticsEnabled
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -164,7 +165,11 @@ class Preferences {
     }
 
     @UserDefaultsEntry(wrappedValue: false, key: Key.shoulsUseAnalytics)
-    static var shouldUseAnalytics
+    static var shouldUseAnalytics {
+        didSet {
+            ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: shouldUseAnalytics, force: false)
+        }
+    }
 
     @UserDefaultsEntry(wrappedValue: PeriodOfStoring.week.rawValue, key: Key.periodOfStoring)
     static var periodOfStoring
