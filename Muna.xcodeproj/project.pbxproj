@@ -20,6 +20,7 @@
 		2326DFB1250FDE6700316D8B /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326DFB0250FDE6700316D8B /* HintViewController.swift */; };
 		2326DFB3250FE20A00316D8B /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326DFB2250FE20A00316D8B /* CountDownView.swift */; };
 		232B2FAB2477CC550061801E /* ENDatesPostfixParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */; };
+		2330169125F5337400F4D56A /* OnboardingAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330169025F5337400F4D56A /* OnboardingAnalyticsView.swift */; };
 		2339C10125A7AA4600FD66F0 /* InAppRecieptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339C10025A7AA4600FD66F0 /* InAppRecieptValidationService.swift */; };
 		2339C10325A7AF3100FD66F0 /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339C10225A7AF3100FD66F0 /* InAppPurchaseManager.swift */; };
 		233E4B182507EDFD00A1243D /* CheckboxWithImageSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E4B172507EDFD00A1243D /* CheckboxWithImageSettingView.swift */; };
@@ -240,6 +241,7 @@
 		2326DFB0250FDE6700316D8B /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
 		2326DFB2250FE20A00316D8B /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		232B2FAA2477CC550061801E /* ENDatesPostfixParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENDatesPostfixParser.swift; sourceTree = "<group>"; };
+		2330169025F5337400F4D56A /* OnboardingAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnalyticsView.swift; sourceTree = "<group>"; };
 		2339C10025A7AA4600FD66F0 /* InAppRecieptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppRecieptValidationService.swift; sourceTree = "<group>"; };
 		2339C10225A7AF3100FD66F0 /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
 		233E4B172507EDFD00A1243D /* CheckboxWithImageSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxWithImageSettingView.swift; sourceTree = "<group>"; };
@@ -538,6 +540,14 @@
 				2326DFB0250FDE6700316D8B /* HintViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2330168F25F5336800F4D56A /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				2330169025F5337400F4D56A /* OnboardingAnalyticsView.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		233E747B246B4A800070EABA /* Service */ = {
@@ -1140,6 +1150,7 @@
 		9F581E412494ED0F00A34379 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				2330168F25F5336800F4D56A /* Analytics */,
 				9F581E422494ED2300A34379 /* Intro */,
 				9F581E432494ED2700A34379 /* Step */,
 				9F581E442494ED2D00A34379 /* FinalSetup */,
@@ -1921,6 +1932,7 @@
 				233F53DB2469D8AC004DD671 /* ENTimeParser.swift in Sources */,
 				2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */,
 				9FFA5B9624E453BD004670F0 /* Switcher.swift in Sources */,
+				2330169125F5337400F4D56A /* OnboardingAnalyticsView.swift in Sources */,
 				9F69322B247AC5D300FEBC0B /* ViewShortcutProtocol.swift in Sources */,
 				9F693233247AD00600FEBC0B /* TaskChangeTimeView.swift in Sources */,
 				9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */,
