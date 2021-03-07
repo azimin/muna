@@ -20,7 +20,8 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.rootView.settingsSwitcher.switcher.checked = Preferences.shouldUseAnalytics
+        self.rootView.settingsSwitcher.switcher.checked = true
+        Preferences.shouldUseAnalytics = true
     }
 
     @objc
