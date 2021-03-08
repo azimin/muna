@@ -26,7 +26,7 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         self.addSubview(self.titlesView)
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
-            maker.height.equalTo(280)
+            maker.height.equalTo(300)
         }
 
         self.addSubview(self.settingsItemView)

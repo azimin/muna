@@ -165,11 +165,7 @@ class Preferences {
     }
 
     @UserDefaultsEntry(wrappedValue: false, key: Key.shoulsUseAnalytics)
-    static var shouldUseAnalytics {
-        didSet {
-            ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: shouldUseAnalytics, force: false)
-        }
-    }
+    static var shouldUseAnalytics
 
     @UserDefaultsEntry(wrappedValue: PeriodOfStoring.week.rawValue, key: Key.periodOfStoring)
     static var periodOfStoring

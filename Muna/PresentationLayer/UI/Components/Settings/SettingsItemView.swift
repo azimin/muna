@@ -33,6 +33,7 @@ class SettingsItemView: NSView {
         .withTextColorStyle(.titleAccent)
         .withText("General")
 
+    let useAnalyticsSwitcherItem: SwitcherSettingsItem
     let showPassedTasksItem: SwitcherSettingsItem
     let startupSettingItem: SwitcherSettingsItem
     private var startupSettingItemTopConstraintToSuperView: Constraint?
@@ -43,6 +44,7 @@ class SettingsItemView: NSView {
 
     init(isNeededShowTitle: Bool, style: Style, needToShake: Bool) {
         self.showPassedTasksItem = SwitcherSettingsItem(style: style)
+        self.useAnalyticsSwitcherItem = SwitcherSettingsItem(style: .oneLine)
         self.startupSettingItem = SwitcherSettingsItem(style: style)
         self.notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4, style: style)
         self.storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3, style: style)
@@ -51,6 +53,7 @@ class SettingsItemView: NSView {
 
         self.settingsTitleLabel.isHidden = !isNeededShowTitle
         self.showPassedTasksItem.isHidden = isNeededShowTitle
+        self.useAnalyticsSwitcherItem.isHidden = isNeededShowTitle
         self.setupInitialLayout()
 
         if isNeededShowTitle {
@@ -93,12 +96,19 @@ class SettingsItemView: NSView {
             make.centerX.equalToSuperview()
         }
 
+        self.addSubview(self.useAnalyticsSwitcherItem)
+        self.useAnalyticsSwitcherItem.titleLabel.text = "Share anonymous usage data"
+        self.useAnalyticsSwitcherItem.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(24)
+        }
+
         self.addSubview(self.showPassedTasksItem)
         self.showPassedTasksItem.titleLabel.text = "Number of passed tasks"
         self.showPassedTasksItem.descriptionLabel.text = "Show number of passed tasks in menu bar"
         self.showPassedTasksItem.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
+            make.top.equalTo(self.useAnalyticsSwitcherItem.snp.bottom).offset(24)
         }
 
         self.startupSettingItem.titleLabel.text = "Launch on startup"

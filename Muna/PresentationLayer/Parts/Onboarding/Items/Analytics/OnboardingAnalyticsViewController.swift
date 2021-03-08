@@ -22,10 +22,12 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
 
         self.rootView.settingsSwitcher.switcher.checked = true
         Preferences.shouldUseAnalytics = true
+        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
     }
 
     @objc
     private func handleAnalyticsSwitcher() {
         Preferences.shouldUseAnalytics = self.rootView.settingsSwitcher.switcher.checked
+        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
     }
 }
