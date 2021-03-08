@@ -32,6 +32,7 @@ class Preferences {
         case pingInterval
         case isNeededToShowOnboarding
         case isFirstAskToPermissions
+        case isNeededToShowAnalytics
         case splashOnThings
         case splashOnNotes
         case splashOnReminders
@@ -217,4 +218,7 @@ class Preferences {
             NotificationCenter.default.post(name: .updateShowPassedItemSetting, object: nil)
         }
     }
+
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowAnalytics)
+    static var isNeededToShowAnalytics
 }

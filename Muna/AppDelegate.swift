@@ -94,6 +94,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         if Preferences.isNeededToShowOnboarding || ServiceLocator.shared.betaKey.isEntered == false {
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.onboarding)
+        } else if Preferences.isNeededToShowAnalytics {
+            ServiceLocator.shared.windowManager.activateWindowIfNeeded(.analtyics)
         }
 
         let captureIsEnabled = ServiceLocator.shared.permissionsService.canRecordScreen
