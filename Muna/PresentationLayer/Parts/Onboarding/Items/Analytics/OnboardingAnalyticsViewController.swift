@@ -22,10 +22,10 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
 
     init(usage: Usage) {
         self.usage = usage
-        
+
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,12 +46,24 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
             self.rootView.countinueButton.title = "Next"
         case .standalone:
             self.rootView.countinueButton.title = "Done"
+            self.rootView.countinueButton.target = self
+            self.rootView.countinueButton.action = #selector(buttonAction)
         }
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        Preferences.isNeededToShowAnalytics = false
     }
 
     @objc
     private func handleAnalyticsSwitcher() {
         Preferences.shouldUseAnalytics = self.rootView.settingsSwitcher.switcher.checked
         ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
+    }
+
+    @objc func buttonAction(sender: NSButton) {
+        ServiceLocator.shared.windowManager.toggleWindow(.analtyics)
     }
 }

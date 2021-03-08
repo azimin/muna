@@ -233,7 +233,12 @@ class WindowManager: WindowManagerProtocol {
         let frame: NSRect
         switch windowType {
         case .analtyics:
-            frame = NSRect(x: 0, y: 0, width: 527, height: 570)
+            frame = NSRect(
+                x: (mainScreen.frame.width - 527) / 2,
+                y: (mainScreen.frame.height - 570) / 2,
+                width: 527,
+                height: 570
+            )
         case .debug:
             frame = mainScreen.frame
         case .screenshot, .permissionsAlert:
