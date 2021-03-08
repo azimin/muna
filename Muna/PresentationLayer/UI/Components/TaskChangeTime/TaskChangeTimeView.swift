@@ -139,7 +139,7 @@ class TaskChangeTimeView: PopupView {
             } else if self.reminderTextField.isInFocus, DateParserView.Shortcuts.acceptTime.item.validateWith(event: event) {
                 self.controller.selectItemIfNeeded()
                 return nil
-            } else if Shortcuts.create.item.validateWith(event: event) {
+            } else if Shortcuts.createViaCmdReturn.item.validateWith(event: event) || Shortcuts.createViaShiftReturn.item.validateWith(event: event) {
                 self.updateWithNewTime()
                 return nil
             } else if Shortcuts.close.item.validateWith(event: event) {

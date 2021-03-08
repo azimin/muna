@@ -77,7 +77,7 @@ class TaskChangeCommentView: PopupView {
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [weak self] (event) -> NSEvent? in
             guard let self = self else { return event }
 
-            if Shortcuts.create.item.validateWith(event: event) {
+            if Shortcuts.createViaShiftReturn.item.validateWith(event: event) || Shortcuts.createViaCmdReturn.item.validateWith(event: event) {
                 self.updateWithNewComment()
                 return nil
             } else if Shortcuts.close.item.validateWith(event: event) {
@@ -164,12 +164,15 @@ class TaskChangeCommentView: PopupView {
 
 extension TaskChangeCommentView {
     enum Shortcuts: ViewShortcutProtocol {
-        case create
+        case createViaShiftReturn
+        case createViaCmdReturn
         case close
 
         var item: ShortcutItem {
             switch self {
-            case .create:
+            case .createViaCmdReturn:
+                return ShortcutItem(key: .return, modifiers: [.command])
+            case .createViaShiftReturn:
                 return ShortcutItem(key: .return, modifiers: [.shift])
             case .close:
                 return ShortcutItem(key: .w, modifiers: [.command])

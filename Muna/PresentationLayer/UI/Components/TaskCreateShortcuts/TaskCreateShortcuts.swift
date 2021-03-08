@@ -38,7 +38,10 @@ class TaskCreateShortcuts: PopupView {
         var shortcut: [ViewShortcutProtocol] {
             switch self {
             case .createCard:
-                return [TaskCreateView.Shortcuts.create]
+                return [
+                    TaskCreateView.Shortcuts.createViaShiftReturn,
+                    TaskCreateView.Shortcuts.createViaCmdReturn
+                ]
             case .nextTextField:
                 return [TaskCreateView.Shortcuts.nextField]
             case .nextTimeInterval:

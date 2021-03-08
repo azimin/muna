@@ -27,7 +27,7 @@ class TaskCreateView: PopupView {
 
     private var hintPopover: NSPopover?
 
-    let doneButton = PopupButton(style: .basic, title: "Create (⌘↵)")
+    let doneButton = PopupButton(style: .basic, title: "Create (⌘↵/⇧↵)")
 
     let reminderTextField = TextField(clearable: true, numberOfLines: 1)
     let datePrarserView: DateParserView
@@ -148,7 +148,7 @@ class TaskCreateView: PopupView {
                 self.reminderTextField.textField.nextKeyView = self.commentTextField.textField
                 self.commentTextField.textField.nextKeyView = self.reminderTextField.textField
                 return nil
-            } else if Shortcuts.create.item.validateWith(event: event) {
+            } else if Shortcuts.createViaShiftReturn.item.validateWith(event: event) || Shortcuts.createViaCmdReturn.item.validateWith(event: event) {
                 self.createTask(byShortcut: true)
                 return nil
             }

@@ -11,13 +11,16 @@ import Foundation
 extension TaskCreateView {
     enum Shortcuts: ViewShortcutProtocol {
         case nextField
-        case create
+        case createViaShiftReturn
+        case createViaCmdReturn
 
         var item: ShortcutItem {
             switch self {
+            case .createViaCmdReturn:
+                return ShortcutItem(key: .return, modifiers: [.command])
             case .nextField:
                 return ShortcutItem(key: .tab, modifiers: [])
-            case .create:
+            case .createViaShiftReturn:
                 return ShortcutItem(key: .return, modifiers: [.shift])
             }
         }
