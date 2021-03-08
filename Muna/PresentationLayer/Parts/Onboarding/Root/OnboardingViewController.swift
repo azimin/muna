@@ -107,7 +107,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
     private func viewController(for step: Step) -> OnboardingContainerViewController {
         switch step {
         case .analytics:
-            return OnboardingAnalyticsViewController()
+            return OnboardingAnalyticsViewController(usage: .onboarding)
         case .intro:
             return OnboardingIntroViewController()
         case .howToCapture:

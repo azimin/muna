@@ -42,7 +42,7 @@ class WindowManager: WindowManagerProtocol {
     private func windowState(_ windowType: WindowType) -> Bool {
         let status: Bool
         switch windowType {
-        case .settings, .onboarding, .permissionsAlert:
+        case .settings, .onboarding, .permissionsAlert, .analtyics:
             status = self.windows[windowType]?.isVisible ?? false
         case .debug, .panel, .screenshot, .textTaskCreation, .remindLater:
             status = self.windowVisibleStatus[windowType] ?? false
@@ -73,7 +73,7 @@ class WindowManager: WindowManagerProtocol {
 
         guard self.windowState(windowType) == false else {
             switch windowType {
-            case .settings, .onboarding, .permissionsAlert:
+            case .settings, .onboarding, .permissionsAlert, .analtyics:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
             case .debug, .panel, .screenshot, .textTaskCreation, .remindLater:
@@ -92,6 +92,8 @@ class WindowManager: WindowManagerProtocol {
         }
 
         switch windowType {
+        case .analtyics:
+            self.showAnalytics(in: window)
         case .debug:
             self.showDebug(in: window)
         case let .panel(selectedItem):
@@ -181,6 +183,17 @@ class WindowManager: WindowManagerProtocol {
             // Overlap dock, but not menu bar
             window.level = .statusBar
             self.showTextCreationState(in: window)
+        case .analtyics:
+            window = NSWindow(
+                contentRect: self.frameFor(.analtyics),
+                styleMask: [.closable, .titled],
+                backing: .buffered,
+                defer: true
+            )
+            window.titlebarAppearsTransparent = true
+            window.isReleasedWhenClosed = false
+            window.contentViewController = OnboardingAnalyticsViewController(usage: .standalone)
+            self.showSettings(in: window)
         case .onboarding:
             window = NSWindow(
                 contentRect: self.frameFor(.onboarding),
@@ -219,6 +232,8 @@ class WindowManager: WindowManagerProtocol {
 
         let frame: NSRect
         switch windowType {
+        case .analtyics:
+            frame = NSRect(x: 0, y: 0, width: 527, height: 570)
         case .debug:
             frame = mainScreen.frame
         case .screenshot, .permissionsAlert:
@@ -331,6 +346,11 @@ class WindowManager: WindowManagerProtocol {
         window.setIsVisible(true)
     }
 
+    private func showAnalytics(in window: NSWindow) {
+        NSApp.activate(ignoringOtherApps: true)
+        window.setIsVisible(true)
+    }
+
     private func showSettings(in window: NSWindow) {
         NSApp.activate(ignoringOtherApps: true)
         window.setIsVisible(true)
@@ -395,6 +415,8 @@ class WindowManager: WindowManagerProtocol {
             window.close()
             self.windows[windowType] = nil
         case .settings:
+            window.setIsVisible(false)
+        case .analtyics:
             window.setIsVisible(false)
         case .onboarding:
             window.setIsVisible(false)

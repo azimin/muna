@@ -41,7 +41,6 @@ final class OnboardingAnalyticsView: View {
         linksLabel.isSelectable = true
         linksLabel.alignment = .center
 
-        self.countinueButton.title = "Next"
         self.setupInitialLayout()
         self.setupLinks()
     }

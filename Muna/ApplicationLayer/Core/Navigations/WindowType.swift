@@ -15,6 +15,7 @@ enum WindowType: Equatable, Hashable {
     case debug
     case settings(item: SettingsViewController.ToolbarItem)
     case onboarding
+    case analtyics
     case remindLater(item: ItemModel)
     case permissionsAlert
 
@@ -32,6 +33,8 @@ enum WindowType: Equatable, Hashable {
             return "settings_\(tab.rawValue)"
         case .onboarding:
             return "onboarding"
+        case .analtyics:
+            return "analytics"
         case .remindLater:
             return "remindLater"
         case .permissionsAlert:
@@ -43,6 +46,8 @@ enum WindowType: Equatable, Hashable {
         switch self {
         case .panel:
             return "panel"
+        case .analtyics:
+            return "analytics"
         case .screenshot:
             return "screenshot"
         case .textTaskCreation:
