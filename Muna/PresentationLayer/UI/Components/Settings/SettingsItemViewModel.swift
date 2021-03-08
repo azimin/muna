@@ -9,6 +9,7 @@
 import Foundation
 
 protocol SettingsItemViewModelDelegate: AnyObject {
+    func useAnalyticsItemSwitcherSetup(withValue value: Bool)
     func showPassedItemsSwitcherSetup(withValue value: Bool)
     func launchOnStartupSwitcherSetup(withValue value: Bool)
 
@@ -29,6 +30,7 @@ class SettingsItemViewModel {
         self.setupLaunchOnStartup()
         self.setupPeriodOfStoring()
         self.setupPingInterval()
+        self.delegate?.useAnalyticsItemSwitcherSetup(withValue: Preferences.shouldUseAnalytics)
         self.delegate?.showPassedItemsSwitcherSetup(withValue: Preferences.isNeededToShowPassedItems)
     }
 
@@ -94,6 +96,11 @@ class SettingsItemViewModel {
 }
 
 extension SettingsItemViewModel: SettingsItemViewDelegate {
+    func useAnalyticsSwitchChanged(onState state: Bool) {
+        Preferences.shouldUseAnalytics = state
+        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
+    }
+    
     func showPassedItemsSwitchChanged(onState state: Bool) {
         Preferences.isNeededToShowPassedItems = state
     }

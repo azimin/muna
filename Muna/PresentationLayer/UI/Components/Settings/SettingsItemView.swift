@@ -10,6 +10,7 @@ import Cocoa
 import SnapKit
 
 protocol SettingsItemViewDelegate: AnyObject {
+    func useAnalyticsSwitchChanged(onState state: Bool)
     func showPassedItemsSwitchChanged(onState state: Bool)
     func launchOnStartupSwitchChanged(onState state: Bool)
 
@@ -63,6 +64,9 @@ class SettingsItemView: NSView {
             self.startupSettingItemTopConstraintToSuperView?.activate()
             self.startupSettingItemTopConstraintToTitleLabel?.deactivate()
         }
+
+        self.useAnalyticsSwitcherItem.switcher.target = self
+        self.useAnalyticsSwitcherItem.switcher.action = #selector(self.useAnalyticsSwitchStateChanged)
 
         self.showPassedTasksItem.switcher.target = self
         self.showPassedTasksItem.switcher.action = #selector(self.passedItemsSwitchStateChanged)
@@ -144,6 +148,11 @@ class SettingsItemView: NSView {
     }
 
     @objc
+    func useAnalyticsSwitchStateChanged() {
+        self.delegate?.useAnalyticsSwitchChanged(onState: self.useAnalyticsSwitcherItem.switcher.checked)
+    }
+
+    @objc
     func switchStateChanged() {
         self.delegate?.launchOnStartupSwitchChanged(onState: self.startupSettingItem.switcher.checked)
     }
@@ -215,6 +224,10 @@ extension SettingsItemView: SettingsItemViewModelDelegate {
                 }
             }
         }
+    }
+
+    func useAnalyticsItemSwitcherSetup(withValue value: Bool) {
+        self.useAnalyticsSwitcherItem.switcher.checked = value
     }
 
     func showPassedItemsSwitcherSetup(withValue value: Bool) {
