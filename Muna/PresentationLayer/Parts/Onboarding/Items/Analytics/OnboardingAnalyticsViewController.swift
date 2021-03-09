@@ -50,6 +50,9 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
 
         self.rootView.countinueButton.target = self
         self.rootView.countinueButton.action = #selector(buttonAction)
+
+        self.rootView.settingsSwitcher.switcher.target = self
+        self.rootView.settingsSwitcher.switcher.action = #selector(handleAnalyticsSwitcher)
     }
 
     override func viewDidAppear() {
