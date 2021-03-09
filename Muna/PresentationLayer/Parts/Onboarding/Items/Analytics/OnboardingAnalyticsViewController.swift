@@ -46,9 +46,10 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
             self.rootView.countinueButton.title = "Next"
         case .standalone:
             self.rootView.countinueButton.title = "Done"
-            self.rootView.countinueButton.target = self
-            self.rootView.countinueButton.action = #selector(buttonAction)
         }
+
+        self.rootView.countinueButton.target = self
+        self.rootView.countinueButton.action = #selector(buttonAction)
     }
 
     override func viewDidAppear() {
@@ -64,6 +65,11 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
     }
 
     @objc func buttonAction(sender: NSButton) {
-        ServiceLocator.shared.windowManager.toggleWindow(.analtyics)
+        switch self.usage {
+        case .onboarding:
+            self.onNext?()
+        case .standalone:
+            ServiceLocator.shared.windowManager.toggleWindow(.analtyics)
+        }
     }
 }
