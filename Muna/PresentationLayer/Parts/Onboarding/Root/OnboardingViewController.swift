@@ -27,7 +27,16 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         func next() -> Step {
             if let index = Step.allCases.firstIndex(of: self) {
                 if index < (Step.allCases.count - 1) {
-                    return Step.allCases[index + 1]
+                    let item = Step.allCases[index + 1]
+                    if item != .analytics {
+                        return item
+                    } else {
+                        if Preferences.isNeededToShowAnalytics {
+                            return item
+                        } else {
+                            return item.next()
+                        }
+                    }
                 } else {
                     return .final
                 }
