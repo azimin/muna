@@ -10,7 +10,7 @@ import Foundation
 
 class BetaKeyService {
     var isEntered: Bool {
-        return self.key != nil
+        return true
     }
 
     var key: String? {

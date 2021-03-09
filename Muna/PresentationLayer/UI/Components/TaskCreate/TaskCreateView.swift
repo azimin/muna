@@ -27,7 +27,7 @@ class TaskCreateView: PopupView {
 
     private var hintPopover: NSPopover?
 
-    let doneButton = PopupButton(style: .basic, title: "Create (⌘↵/⇧↵)")
+    let doneButton = PopupButton(style: .basic, title: "Create (⌘↵)")
 
     let reminderTextField = TextField(clearable: true, numberOfLines: 1)
     let datePrarserView: DateParserView

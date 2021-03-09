@@ -13,13 +13,13 @@ class OnboardingSubviewHowToCapture: View {
 
     let partShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
-        .withText("Capture Area")
+        .withText("Capture Visual Note")
 
     let fullShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultShortcutFullscreenScreenshotShortcut.item)
 
     let fullShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
-        .withText("Capture Fullscreen")
+        .withText("Capture Text Note")
 
     let descriptionLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)

@@ -68,12 +68,14 @@ class RemindersOptionsController {
         }
 
         if text.count >= 3 {
-            self.avialbleItems.append(
-                .init(value: .canNotFind,
-                      title: "Can't find correct option",
-                      subtitle: "",
-                      additionalText: "Report")
-            )
+            if Preferences.shouldUseAnalytics {
+                self.avialbleItems.append(
+                    .init(value: .canNotFind,
+                          title: "Can't find correct option",
+                          subtitle: "",
+                          additionalText: "Report")
+                )
+            }
         }
 
         self.selectedIndex = 0
