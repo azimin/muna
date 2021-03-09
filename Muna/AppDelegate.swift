@@ -312,7 +312,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.statusBarMenu = statusBarMenu
 
         let makeFullScreenshotItem = NSMenuItem(
-            title: "Make text task",
+            title: "Create text task",
             action: #selector(self.toogleFullscreenScreenshotState),
             keyEquivalent: "1"
         )
@@ -320,7 +320,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarMenu.addItem(makeFullScreenshotItem)
 
         let makeSelectedAreaScreenshot = NSMenuItem(
-            title: "Make visual task",
+            title: "Create visual task",
             action: #selector(self.toggleScreenshotState),
             keyEquivalent: "2"
         )
