@@ -50,12 +50,6 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
         self.rootView.countinueButton.action = #selector(buttonAction)
     }
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        
-        Preferences.isNeededToShowAnalytics = false
-    }
-
     @objc
     private func handleAnalyticsSwitcher() {
         Preferences.shouldUseAnalytics = self.rootView.settingsSwitcher.switcher.checked
