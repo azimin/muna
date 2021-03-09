@@ -14,6 +14,7 @@ class MainPanelShortcutsView: PopupView {
 
     enum DescriptionShortcut {
         case nextItem
+        case nextTab
         case previousSection
         case nextSection
         case deleteItem
@@ -26,6 +27,7 @@ class MainPanelShortcutsView: PopupView {
 
         static var values: [DescriptionShortcut] = [
             .nextItem,
+            .nextTab,
             .deleteItem,
             .previewItem,
             .complete,
@@ -41,6 +43,11 @@ class MainPanelShortcutsView: PopupView {
                 return [
                     MainScreenViewController.Shortcut.nextItem,
                     MainScreenViewController.Shortcut.preveousItem,
+                ]
+            case .nextTab:
+                return [
+                    MainScreenViewController.Shortcut.nextTab,
+                    MainScreenViewController.Shortcut.preveousTab,
                 ]
             case .nextSection:
                 return [MainScreenViewController.Shortcut.nextSection]
@@ -67,6 +74,8 @@ class MainPanelShortcutsView: PopupView {
             switch self {
             case .nextItem:
                 return "Next/Previous item"
+            case .nextTab:
+                return "Next/Previous tab"
             case .nextSection:
                 return "Next section"
             case .previousSection:
@@ -92,6 +101,8 @@ class MainPanelShortcutsView: PopupView {
             switch self {
             case .nextItem:
                 return "Select the needed item"
+            case .nextTab:
+                return "Uncompleted, no deadline, completed"
             case .nextSection:
                 return "Show the next sections"
             case .previousSection:

@@ -213,7 +213,10 @@ class MainPanelContentView: NSView, NSCollectionViewDataSource, NSCollectionView
         if let item = self.cellAt(point: point),
             let indexPath = self.collectionView.indexPath(for: item)
         {
-            self.selectIndexPath(indexPath: indexPath, completion: nil)
+            let selectedIndexes = self.collectionView.selectionIndexPaths
+            if selectedIndexes.contains(indexPath) == false {
+                self.selectIndexPath(indexPath: indexPath, completion: nil)
+            }
 
             let itemModel = self.groupedData.item(at: indexPath)
 
