@@ -37,22 +37,17 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.rootView.settingsSwitcher.switcher.checked = true
-        Preferences.shouldUseAnalytics = true
-        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
-
         switch self.usage {
         case .onboarding:
+            self.rootView.settingsSwitcher.switcher.checked = true
             self.rootView.countinueButton.title = "Next"
         case .standalone:
+            self.rootView.settingsSwitcher.switcher.checked = Preferences.shouldUseAnalytics
             self.rootView.countinueButton.title = "Done"
         }
 
         self.rootView.countinueButton.target = self
         self.rootView.countinueButton.action = #selector(buttonAction)
-
-        self.rootView.settingsSwitcher.switcher.target = self
-        self.rootView.settingsSwitcher.switcher.action = #selector(handleAnalyticsSwitcher)
     }
 
     override func viewDidAppear() {
@@ -68,6 +63,8 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
     }
 
     @objc func buttonAction(sender: NSButton) {
+        handleAnalyticsSwitcher()
+
         switch self.usage {
         case .onboarding:
             self.onNext?()
