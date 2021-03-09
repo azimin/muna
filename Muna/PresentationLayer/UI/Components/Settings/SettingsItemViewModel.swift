@@ -97,8 +97,7 @@ class SettingsItemViewModel {
 
 extension SettingsItemViewModel: SettingsItemViewDelegate {
     func useAnalyticsSwitchChanged(onState state: Bool) {
-        Preferences.shouldUseAnalytics = state
-        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: false)
+        ServiceLocator.shared.replaceAnalytics(shouldUseAnalytics: state, force: false)
     }
 
     func showPassedItemsSwitchChanged(onState state: Bool) {
