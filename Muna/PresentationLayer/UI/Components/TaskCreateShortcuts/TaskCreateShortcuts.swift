@@ -69,7 +69,7 @@ class TaskCreateShortcuts: PopupView {
         var subtitle: String {
             switch self {
             case .createCard:
-                return "To immidiatly create new card"
+                return "To immidiatly create new item"
             case .nextTextField:
                 return "To go from reminder to comment and back"
             case .nextTimeInterval:
