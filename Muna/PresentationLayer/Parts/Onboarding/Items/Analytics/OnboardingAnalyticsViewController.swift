@@ -59,6 +59,7 @@ class OnboardingAnalyticsViewController: NSViewController, OnboardingContainerPr
     }
 
     @objc func buttonAction(sender: NSButton) {
+        Preferences.isNeededToShowAnalytics = false
         handleAnalyticsSwitcher()
 
         switch self.usage {
