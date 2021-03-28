@@ -23,7 +23,7 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
 
     let descriptionLabel = Label(fontStyle: .regular, size: 20)
         .withTextColorStyle(.title60AccentAlpha)
-        .withText("Modern way of creating remidners without breaking context")
+        .withText("Modern way of creating reminders without breaking context")
         .withAligment(.center)
 
     let betaCode = TextField(clearable: false, numberOfLines: 1)
