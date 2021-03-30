@@ -12,6 +12,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
     enum ToolbarItem: String, CaseIterable {
         case general = "General"
         case shortcuts = "Shortcuts"
+        case tips = "Tips"
 //        case habits = "Habits"
         case about = "About"
 
@@ -28,6 +29,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
                 return NSImage(named: "setting_toolbar_shortcuts_\(themeSufix)")
             case .about:
                 return NSImage(named: "setting_toolbar_about")
+            case .tips:
+                return NSImage(named: "setting_toolbar_about")
 //            case .habits:
 //                return NSImage(named: "setting_toolbar_habits_\(themeSufix)")
             }
@@ -36,6 +39,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
     private let generalViewController = GeneralSettingsViewController()
     private let shortcutsViewController = ShortcutsSettingsViewController()
+    private let tipsViewController = TipsSettingsViewController()
     private let aboutViewController = AboutSettingsViewController()
     private let habitsViewcontroller = HabitsSettingsViewController()
 
@@ -148,6 +152,8 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
             return self.shortcutsViewController
         case .about:
             return self.aboutViewController
+        case .tips:
+            return self.tipsViewController
 //        case .habits:
 //            return self.habitsViewcontroller
         }

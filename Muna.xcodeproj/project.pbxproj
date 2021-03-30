@@ -148,6 +148,8 @@
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
 		9F74C0E025DE99D6006D2022 /* TaskChangeCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */; };
+		9F7A6A99261345FE009B7451 /* TipsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */; };
+		9F7A6A9B26134608009B7451 /* TipsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */; };
 		9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
@@ -382,6 +384,8 @@
 		9F6C1E77246C88E8003D5AD2 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParserFormatter.swift; sourceTree = "<group>"; };
 		9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeCommentView.swift; sourceTree = "<group>"; };
+		9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsSettingsView.swift; sourceTree = "<group>"; };
+		9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsSettingsViewController.swift; sourceTree = "<group>"; };
 		9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Transform.swift"; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
@@ -898,6 +902,7 @@
 			children = (
 				2317EFB8250B87A2005AF08E /* Habits */,
 				9FE0F538247023210046A5C4 /* SettingsViewProtocol.swift */,
+				9F7A6A97261345DF009B7451 /* Tips */,
 				9FC5D7FA24DC9F800005B902 /* About */,
 				9F152706246DD7C40037623B /* General */,
 				9FE0F533247022970046A5C4 /* Shortcuts */,
@@ -1269,6 +1274,15 @@
 				9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */,
 			);
 			path = TaskChangeComment;
+			sourceTree = "<group>";
+		};
+		9F7A6A97261345DF009B7451 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */,
+				9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */,
+			);
+			path = Tips;
 			sourceTree = "<group>";
 		};
 		9F8369DD24719BF800D74B3C /* Observable */ = {
@@ -1949,6 +1963,7 @@
 				9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */,
 				2339C10125A7AA4600FD66F0 /* InAppRecieptValidationService.swift in Sources */,
 				9FE0F52E24701A7D0046A5C4 /* GeneralSettingsView.swift in Sources */,
+				9F7A6A99261345FE009B7451 /* TipsSettingsView.swift in Sources */,
 				231E0C90248426FA0018EB8F /* ENDatesPrefixParser.swift in Sources */,
 				9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */,
 				9F152703246DCE870037623B /* TimeExampleView.swift in Sources */,
@@ -1956,6 +1971,7 @@
 				2354371325A79E2D0096AB48 /* InAppProductsService.swift in Sources */,
 				9FDAB87724A948D6000B1158 /* MainPanelItemSelectionView.swift in Sources */,
 				9FA07F742460C31B00654D36 /* NSCollectionView+Reusable.swift in Sources */,
+				9F7A6A9B26134608009B7451 /* TipsSettingsViewController.swift in Sources */,
 				239DD9EE25F0BA840093207D /* NotificationCenter+Name.swift in Sources */,
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,

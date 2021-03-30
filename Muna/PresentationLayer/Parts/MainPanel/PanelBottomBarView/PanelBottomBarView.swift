@@ -11,7 +11,6 @@ import SnapKit
 
 class PanelBottomBarView: View {
     let tipsView = TipsView()
-        .withIsHidden(true)
 
     let buttonsStackView = NSStackView()
         .withSpacing(16)
