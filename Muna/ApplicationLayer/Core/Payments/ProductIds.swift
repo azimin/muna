@@ -11,4 +11,5 @@ import Foundation
 enum ProductIds: String, CaseIterable {
 
     case monthly = "com.Abstract.Muna.monthly"
+    case oneTimeTip = "com.Abstract.Muna.one.time"
 }

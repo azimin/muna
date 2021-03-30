@@ -12,6 +12,7 @@ import SwiftyStoreKit
 final class InAppPurchaseManager {
 
     private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly.rawValue)
+    private var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip.rawValue)
 
     private let inAppProductsService: InAppProductsService
     private let inAppPurchaseService: InAppProductPurchaseService
@@ -37,10 +38,11 @@ final class InAppPurchaseManager {
     }
 
     func loadProducts(_ completion: VoidBlock? = nil) {
-        self.inAppProductsService.requestProducts(forIds: [.monthly]) {
+        self.inAppProductsService.requestProducts(forIds: [.monthly, .oneTimeTip]) {
             switch $0 {
             case let .requested(products):
-                self.monthlyProductItem.product = products.first
+                self.monthlyProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.monthly.rawValue })
+                self.oneTimeTipProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.oneTimeTip.rawValue })
                 completion?()
             case let .failed(error):
                 appAssertionFailure("Error on loading products: \(error)")
