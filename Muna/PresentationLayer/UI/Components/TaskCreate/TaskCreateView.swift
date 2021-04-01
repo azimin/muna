@@ -118,7 +118,7 @@ class TaskCreateView: PopupView {
             }
         }
 
-        self.reminderTextField.placeholder = "When to remind"
+        self.reminderTextField.placeholder = "When to remind (optional)"
         self.commentTextField.placeholder = "Comment"
 
         self.reminderTextField.delegate = self
