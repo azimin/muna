@@ -10,11 +10,11 @@ import StoreKit
 
 struct InAppProductItem {
 
-    let id: String
+    let id: ProductIds
 
     var product: SKProduct?
 
-    init(id: String) {
+    init(id: ProductIds) {
         self.id = id
     }
 

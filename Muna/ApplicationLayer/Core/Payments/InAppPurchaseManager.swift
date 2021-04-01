@@ -11,8 +11,15 @@ import SwiftyStoreKit
 
 final class InAppPurchaseManager {
 
-    private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly.rawValue)
-    private var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip.rawValue)
+    private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly)
+    private var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip)
+
+    var products: [String: InAppProductItem] {
+        return [
+            ProductIds.monthly.rawValue: self.monthlyProductItem,
+            ProductIds.oneTimeTip.rawValue: self.oneTimeTipProductItem
+        ]
+    }
 
     private let inAppProductsService: InAppProductsService
     private let inAppPurchaseService: InAppProductPurchaseService
@@ -53,7 +60,7 @@ final class InAppPurchaseManager {
     }
 
     func buyProduct(_ productId: ProductIds) {
-        guard let product = monthlyProductItem.product else {
+        guard let product = self.products[productId.rawValue]?.product else {
             self.loadProducts { [weak self] in
                 self?.buyProduct(productId)
             }
@@ -63,6 +70,7 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.buyProduct(product) { result in
             switch result {
             case let .success(purchaseDetails):
+                guard productId != .oneTimeTip else { return }
                 ServiceLocator.shared.securityStorage.save(
                     bool: true,
                     forKey: SecurityStorage.Key.isUserPro.rawValue
@@ -87,7 +95,13 @@ final class InAppPurchaseManager {
         ) else {
             return
         }
-        self.inAppRecieptValidationService.validateSubscription(forProductId: productId) { result in
+
+        guard let product = self.products[productId] else {
+            appAssertionFailure("No product for product id: \(productId)")
+            return
+        }
+
+        self.inAppRecieptValidationService.validateSubscription(forProduct: product) { result in
             switch result {
             case let .success(successResult):
                 switch successResult {

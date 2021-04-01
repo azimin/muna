@@ -10,7 +10,7 @@ import SwiftyStoreKit
 
 final class InAppRecieptValidationService {
 
-    func validateSubscription(forProductId productId: String, _ completion: @escaping (Result<VerifySubscriptionResult, ReceiptError>) -> Void) {
+    func validateSubscription(forProduct product: InAppProductItem, _ completion: @escaping (Result<VerifySubscriptionResult, ReceiptError>) -> Void) {
         let recieptValidator: AppleReceiptValidator
 
         #if DEBUG
@@ -22,9 +22,10 @@ final class InAppRecieptValidationService {
         SwiftyStoreKit.verifyReceipt(using: recieptValidator) { result in
             switch result {
             case let .success(receipt):
+                guard product.id == .monthly else { return }
                 let purchaseResult = SwiftyStoreKit.verifySubscription(
                     ofType: .autoRenewable, // or .nonRenewing (see below)
-                    productId: productId,
+                    productId: product.id.rawValue,
                     inReceipt: receipt
                 )
                 completion(.success(purchaseResult))
