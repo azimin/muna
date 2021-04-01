@@ -19,6 +19,7 @@ final class InAppProductPurchaseService {
                 if purchase.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)
                 }
+                completion(.success(purchase))
             case let .error(error):
                 completion(.failure(error))
             }
