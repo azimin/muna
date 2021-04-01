@@ -43,7 +43,7 @@ class TaskChangeCommentView: PopupView {
             maker.top.equalTo(self.closeButton.snp.bottom).inset(-16)
         }
 
-        self.commentTextField.placeholder = "Comment"
+        self.commentTextField.placeholder = "Comment (optional)"
 
         self.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { (make) in
