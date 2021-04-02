@@ -16,6 +16,6 @@ extension SettingsViewProtocol {
     }
 
     var frameWidth: CGFloat {
-        return 560
+        return 670
     }
 }

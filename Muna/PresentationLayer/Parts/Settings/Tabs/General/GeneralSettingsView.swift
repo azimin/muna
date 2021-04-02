@@ -23,6 +23,10 @@ class GeneralSettingsView: View, SettingsViewProtocol {
     }
 
     private func setup() {
+        self.snp.makeConstraints { make in
+            make.width.equalTo(self.frameWidth)
+        }
+        
         self.addSubview(self.titlesView)
         self.titlesView.snp.makeConstraints { maker in
             maker.leading.top.bottom.equalToSuperview()
@@ -34,7 +38,6 @@ class GeneralSettingsView: View, SettingsViewProtocol {
             make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(40)
             make.trailing.equalToSuperview().inset(40)
-            make.width.equalTo(self.frameWidth)
         }
     }
 

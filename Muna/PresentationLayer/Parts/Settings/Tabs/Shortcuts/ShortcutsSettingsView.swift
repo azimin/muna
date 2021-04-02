@@ -9,9 +9,6 @@
 import Cocoa
 
 class ShortcutsSettingsView: View, SettingsViewProtocol {
-    let titlesView = View()
-    let settingsView = View()
-
     let entireShortcutPreview = ShortcutPreviewView(
         title: "Capture text note shortcut",
         imageName: "shortcuts_fullscreen",
@@ -40,18 +37,9 @@ class ShortcutsSettingsView: View, SettingsViewProtocol {
     }
 
     private func setup() {
-        self.addSubview(self.titlesView)
-        self.titlesView.snp.makeConstraints { maker in
-            maker.leading.top.bottom.equalToSuperview()
-            maker.width.equalTo(self.firstPartframeWidth)
-            maker.height.equalTo(260)
-        }
-
-        self.addSubview(self.settingsView)
-        self.settingsView.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.titlesView.snp.trailing)
-            maker.trailing.top.bottom.equalToSuperview()
-            maker.width.equalTo(self.frameWidth - 120)
+        self.snp.makeConstraints { make in
+            make.width.equalTo(self.frameWidth)
+            make.height.equalTo(260)
         }
 
         self.addSubview(self.entireShortcutPreview)
