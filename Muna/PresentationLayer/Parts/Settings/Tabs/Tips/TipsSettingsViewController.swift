@@ -17,4 +17,3 @@ class TipsSettingsViewController: NSViewController {
         self.title = "Tips"
     }
 }
-

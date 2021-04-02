@@ -42,6 +42,10 @@ enum ColorStyle {
 
     case alwaysWhite
 
+    // MARK: Tips
+
+    case purchaseTipButton
+
     // MARK: Assisten
 
     case assitentPlateBackground
@@ -52,6 +56,8 @@ enum ColorStyle {
         switch Theme.current {
         case .dark:
             switch self {
+            case .purchaseTipButton:
+                return NSColor(hex: "7049D7")
             case .hint:
                 return NSColor(hex: "FFE37D")
             case .titleAccent:
@@ -105,6 +111,8 @@ enum ColorStyle {
             }
         case .light:
             switch self {
+            case .purchaseTipButton:
+                return NSColor(hex: "7049D7")
             case .hint:
                 return NSColor(hex: "FFE37D")
             case .newTitle:

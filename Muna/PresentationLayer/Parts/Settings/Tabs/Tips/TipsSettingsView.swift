@@ -9,43 +9,30 @@
 import Cocoa
 
 class TipsSettingsView: View, SettingsViewProtocol {
-    let titlesView = View()
-    let settingsView = View()
-
-    let iconImageView = ImageView(
+    let iconImage = ImageView(
         name: "onboarding_icon",
         aspectRation: .resizeAspect
     )
 
-    let titleLabel = Label(fontStyle: .bold, size: 22)
+    let introLabel = Label(fontStyle: .bold, size: 30)
         .withTextColorStyle(.titleAccent)
-        .withText("Muna")
+        .withText("Support Muna")
+        .withAligment(.center)
 
-    let versionLabel = Label(fontStyle: .medium, size: 16)
-        .withTextColorStyle(.titleAccent)
-        .withText("Version 1.7.0")
+    let descriptionLabel = Label(fontStyle: .regular, size: 20)
+        .withTextColorStyle(.title60AccentAlpha)
+        .withText("If you like idea of Muna, and would like to support future deveopment, please leave us some tips.")
+        .withAligment(.center)
 
-    let developersLabel = NSTextView()
+    let oneTimePurchase = TipPurchaseButton(style: .normal)
+    let subscriptionPurchase = TipPurchaseButton(style: .accent)
 
-    let separatorView = View()
-
-    let visitSiteButton = AboutSettingsButton(title: "Visit Website")
-
-    let getHelpButton = AboutSettingsButton(title: "Get Help")
-
-    let acknowledgementsButton = AboutSettingsButton(title: "Acknowledgements")
+    let privacyView = PrivacyView()
 
     init() {
         super.init(frame: .zero)
 
-        self.separatorView.backgroundColor = ColorStyle.separator.color
-
         self.setup()
-        self.setupLinks()
-        if let dictionary = Bundle.main.infoDictionary,
-           let version = dictionary["CFBundleShortVersionString"] as? String {
-            self.versionLabel.text = "Version \(version)"
-        }
     }
 
     required init?(coder: NSCoder) {
@@ -54,139 +41,60 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     override func updateLayer() {
         super.updateLayer()
-
-        developersLabel.textColor = ColorStyle.title60AccentAlpha.color
-        developersLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        developersLabel.drawsBackground = false
-        developersLabel.linkTextAttributes =
-            [
-                .font: NSFont.systemFont(ofSize: 14, weight: .medium),
-                .foregroundColor: ColorStyle.title60AccentAlpha.color,
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .underlineColor: ColorStyle.title60AccentAlpha.color,
-                .cursor: NSCursor.pointingHand
-            ]
-        developersLabel.isEditable = false
-        developersLabel.isSelectable = true
-
-        self.setupLinks()
     }
 
     private func setup() {
-        self.addSubview(self.titlesView)
-        self.titlesView.snp.makeConstraints { maker in
-            maker.leading.top.bottom.equalToSuperview()
-            maker.width.equalTo(self.firstPartframeWidth)
-            maker.height.equalTo(260)
+        self.snp.makeConstraints { make in
+            make.width.equalTo(self.frameWidth)
         }
 
-        self.addSubview(self.settingsView)
-        self.settingsView.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.titlesView.snp.trailing)
-            maker.trailing.top.bottom.equalToSuperview()
-            maker.width.equalTo(self.frameWidth - 120)
-        }
-
-        self.addSubview(self.visitSiteButton)
-        self.visitSiteButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().inset(16)
-            make.width.equalTo(118)
-            make.height.equalTo(32)
-        }
-
-        self.addSubview(self.getHelpButton)
-        self.getHelpButton.snp.makeConstraints { make in
-            make.leading.equalTo(self.visitSiteButton.snp.trailing).offset(16)
-            make.centerY.equalTo(self.visitSiteButton)
-            make.width.equalTo(99)
-            make.height.equalTo(32)
-        }
-
-        self.addSubview(self.acknowledgementsButton)
-        self.acknowledgementsButton.snp.makeConstraints { make in
-            make.leading.equalTo(self.getHelpButton.snp.trailing).offset(16)
-            make.centerY.equalTo(self.visitSiteButton)
-            make.width.equalTo(167)
-            make.height.equalTo(32)
-        }
-
-        self.addSubview(self.separatorView)
-        self.separatorView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
-            make.bottom.equalTo(self.visitSiteButton.snp.top).inset(-14)
-        }
-
-        let containerView = View()
-        containerView.addSubview(self.iconImageView)
-        self.iconImageView.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
-            make.size.equalTo(104)
-        }
-
-        let textContainerView = View()
-        textContainerView.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        textContainerView.addSubview(self.versionLabel)
-        self.versionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(6)
-            make.trailing.lessThanOrEqualToSuperview()
-        }
-
-        textContainerView.addSubview(self.developersLabel)
-        self.developersLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalTo(self.versionLabel.snp.bottom).offset(6)
-            make.trailing.lessThanOrEqualToSuperview()
-            make.height.equalTo(34)
-            make.bottom.equalToSuperview()
-        }
-
-        containerView.addSubview(textContainerView)
-        textContainerView.snp.makeConstraints { make in
-            make.leading.equalTo(self.iconImageView.snp.trailing)
-            make.centerY.equalTo(self.iconImageView)
-            make.trailing.equalToSuperview()
-        }
-
-        self.addSubview(containerView)
-        containerView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.separatorView.snp.top).inset(-43)
+        self.addSubview(self.iconImage)
+        self.iconImage.snp.makeConstraints { make in
+            make.size.equalTo(124)
+            make.top.equalTo(52)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
         }
-    }
 
-    func setupLinks() {
-        let attributedString = NSMutableAttributedString(
-            string:
-            """
-            With 💜 from Alex and Egor
-            Icon from Denis
-            """,
-            attributes: [
-                .font: NSFont.systemFont(ofSize: 14, weight: .medium),
-                .foregroundColor: ColorStyle.title60AccentAlpha.color
-            ]
+        self.addSubview(self.introLabel)
+        self.introLabel.snp.makeConstraints { make in
+            make.width.equalTo(360)
+            make.top.equalTo(self.iconImage.snp.bottom).inset(-24)
+            make.centerX.equalToSuperview()
+        }
+
+        self.addSubview(self.descriptionLabel)
+        self.descriptionLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(28)
+            make.top.equalTo(self.introLabel.snp.bottom).inset(-24)
+            make.centerX.equalToSuperview()
+        }
+
+        let buttonsStackView = NSStackView(
+            orientation: .horizontal,
+            alignment: .centerY,
+            distribution: .fill
         )
+        buttonsStackView.spacing = 16
+        buttonsStackView.addArrangedSubview(self.oneTimePurchase)
+        buttonsStackView.addArrangedSubview(self.subscriptionPurchase)
 
-        attributedString.beginEditing()
-        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
-        let rangeOfEgor = (attributedString.string as NSString).range(of: "Egor")
-        let rangeOfDenis = (attributedString.string as NSString).range(of: "Denis")
+        self.addSubview(buttonsStackView)
+        buttonsStackView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.descriptionLabel.snp.bottom).inset(-24)
+            make.centerX.equalToSuperview()
+        }
 
-        attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlex)
-        attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
-        attributedString.addAttribute(.link, value: "http://denis_ozdemir.dribbble.com", range: rangeOfDenis)
-        attributedString.endEditing()
+        self.addSubview(self.privacyView)
+        self.privacyView.snp.makeConstraints { make in
+            make.top.equalTo(buttonsStackView.snp.bottom).inset(-24)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(24)
+        }
 
-        self.developersLabel.textStorage?.setAttributedString(attributedString)
+        self.oneTimePurchase.titleLabel.text = "One Time Tip"
+        self.oneTimePurchase.subtitleLabel.text = "$5"
+
+        self.subscriptionPurchase.titleLabel.text = "Monthly"
+        self.subscriptionPurchase.subtitleLabel.text = "$1 / month"
     }
 }
-

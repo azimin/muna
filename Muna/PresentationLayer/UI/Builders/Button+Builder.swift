@@ -21,6 +21,26 @@ extension Button {
         return self
     }
 
+    var backgroundColor: NSColor? {
+        get {
+            if let cgBackgroundColor = self.layer?.backgroundColor {
+                return NSColor(cgColor: cgBackgroundColor)
+            } else {
+                return nil
+            }
+        }
+        set {
+            self.layer?.backgroundColor = newValue?.cgColor
+        }
+    }
+
+    func withBackgroundColorStyle(_ colorStyle: ColorStyle) -> Self {
+        self.createStyleAction(style: colorStyle) { [weak self] style in
+            self?.backgroundColor = NSColor.color(style)
+        }
+        return self
+    }
+
     func withTextColorStyle(_ colorStyle: ColorStyle) -> Self {
         self.createStyleAction(style: colorStyle) { [weak self] style in
             self?.colorStyle = style

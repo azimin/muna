@@ -150,6 +150,9 @@
 		9F74C0E025DE99D6006D2022 /* TaskChangeCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */; };
 		9F7A6A99261345FE009B7451 /* TipsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */; };
 		9F7A6A9B26134608009B7451 /* TipsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */; };
+		9F7A6A9E261615CA009B7451 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A9D261615CA009B7451 /* PrivacyView.swift */; };
+		9F7A6AA026161906009B7451 /* NSObject+Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A9F26161906009B7451 /* NSObject+Usage.swift */; };
+		9F7A6AA32616DD72009B7451 /* TipPurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6AA22616DD72009B7451 /* TipPurchaseButton.swift */; };
 		9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
 		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
@@ -386,6 +389,9 @@
 		9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeCommentView.swift; sourceTree = "<group>"; };
 		9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsSettingsView.swift; sourceTree = "<group>"; };
 		9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsSettingsViewController.swift; sourceTree = "<group>"; };
+		9F7A6A9D261615CA009B7451 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
+		9F7A6A9F26161906009B7451 /* NSObject+Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Usage.swift"; sourceTree = "<group>"; };
+		9F7A6AA22616DD72009B7451 /* TipPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPurchaseButton.swift; sourceTree = "<group>"; };
 		9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Transform.swift"; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
@@ -859,6 +865,8 @@
 		9F025C11246346E600F05D81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F7A6AA12616DD67009B7451 /* TipPurchaseButton */,
+				9F7A6A9C261615BA009B7451 /* PrivacyView */,
 				9F4EB228250EB21D002D29C0 /* MainPanelBackground */,
 				9FE96BD62465F3CE007D92B8 /* PanelBottomBarView */,
 				9F99D6012464B64B00695A19 /* Content */,
@@ -1285,6 +1293,22 @@
 			path = Tips;
 			sourceTree = "<group>";
 		};
+		9F7A6A9C261615BA009B7451 /* PrivacyView */ = {
+			isa = PBXGroup;
+			children = (
+				9F7A6A9D261615CA009B7451 /* PrivacyView.swift */,
+			);
+			path = PrivacyView;
+			sourceTree = "<group>";
+		};
+		9F7A6AA12616DD67009B7451 /* TipPurchaseButton */ = {
+			isa = PBXGroup;
+			children = (
+				9F7A6AA22616DD72009B7451 /* TipPurchaseButton.swift */,
+			);
+			path = TipPurchaseButton;
+			sourceTree = "<group>";
+		};
 		9F8369DD24719BF800D74B3C /* Observable */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,6 +1381,7 @@
 				9F68FD0D24EC87BA00DF927E /* NSView+Animation.swift */,
 				23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */,
 				9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */,
+				9F7A6A9F26161906009B7451 /* NSObject+Usage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1892,6 +1917,7 @@
 				9FB8B5212463672300BE7544 /* PopUpController.swift in Sources */,
 				9FA07F632460AB8800654D36 /* FontStyle.swift in Sources */,
 				9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */,
+				9F7A6AA026161906009B7451 /* NSObject+Usage.swift in Sources */,
 				9F99D6002464B63900695A19 /* StopableScrollView.swift in Sources */,
 				9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */,
 				23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */,
@@ -1935,6 +1961,7 @@
 				9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,
 				9F693229247AC59100FEBC0B /* DateParserView+Shortcuts.swift in Sources */,
+				9F7A6A9E261615CA009B7451 /* PrivacyView.swift in Sources */,
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
 				231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */,
@@ -2007,6 +2034,7 @@
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */,
 				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
+				9F7A6AA32616DD72009B7451 /* TipPurchaseButton.swift in Sources */,
 				9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */,
 				23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
