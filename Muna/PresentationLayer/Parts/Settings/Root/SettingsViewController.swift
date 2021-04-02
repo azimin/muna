@@ -22,17 +22,34 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
         var image: NSImage? {
             let themeSufix = Theme.current == .dark ? "dark" : "light"
-            switch self {
-            case .general:
-                return NSImage(named: "setting_toolbar_general_\(themeSufix)")
-            case .shortcuts:
-                return NSImage(named: "setting_toolbar_shortcuts_\(themeSufix)")
-            case .about:
-                return NSImage(named: "setting_toolbar_about")
-            case .tips:
-                return NSImage(named: "setting_toolbar_about")
-//            case .habits:
-//                return NSImage(named: "setting_toolbar_habits_\(themeSufix)")
+
+            if #available(OSX 11.0, *) {
+                let image: NSImage?
+                switch self {
+                case .general:
+                    image = NSImage(named: "settings_general")
+                case .shortcuts:
+                    image = NSImage(named: "settings_shortcut")
+                case .about:
+                    image = NSImage(named: "settings_about")
+                case .tips:
+                    image = NSImage(named: "settings_tips")
+                }
+                image?.isTemplate = true
+                return image
+            } else {
+                switch self {
+                case .general:
+                    return NSImage(named: "setting_toolbar_general_\(themeSufix)")
+                case .shortcuts:
+                    return NSImage(named: "setting_toolbar_shortcuts_\(themeSufix)")
+                case .about:
+                    return NSImage(named: "setting_toolbar_about")
+                case .tips:
+                    return NSImage(named: "setting_toolbar_habits_\(themeSufix)")
+    //            case .habits:
+    //                return NSImage(named: "setting_toolbar_habits_\(themeSufix)")
+                }
             }
         }
     }
@@ -95,6 +112,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.toolbar.allowsUserCustomization = false
         self.view.window?.toolbar = self.toolbar
         self.setView(for: self.initialItem, animate: false)
+//        self.toolbar.sizeMode = .small
 
         self.window.makeKeyAndOrderFront(nil)
         self.window.center()
