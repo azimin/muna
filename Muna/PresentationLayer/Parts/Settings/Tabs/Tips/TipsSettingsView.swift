@@ -9,19 +9,22 @@
 import Cocoa
 
 class TipsSettingsView: View, SettingsViewProtocol {
+    enum State {
+        case normal
+        case thankYou
+    }
+
     let iconImage = ImageView(
         name: "onboarding_icon",
         aspectRation: .resizeAspect
     )
 
-    let introLabel = Label(fontStyle: .bold, size: 30)
+    let introLabel = Label(fontStyle: .bold, size: 28)
         .withTextColorStyle(.titleAccent)
-        .withText("Support Muna")
         .withAligment(.center)
 
-    let descriptionLabel = Label(fontStyle: .regular, size: 20)
+    let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
-        .withText("If you like idea of Muna, and would like to support future deveopment, please leave us some tips.")
         .withAligment(.center)
 
     let oneTimePurchase = TipPurchaseButton(style: .normal)
@@ -50,7 +53,7 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
         self.addSubview(self.iconImage)
         self.iconImage.snp.makeConstraints { make in
-            make.size.equalTo(124)
+            make.size.equalTo(84)
             make.top.equalTo(52)
             make.centerX.equalToSuperview()
         }
@@ -96,5 +99,46 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
         self.subscriptionPurchase.titleLabel.text = "Monthly"
         self.subscriptionPurchase.subtitleLabel.text = "$1 / month"
+
+        self.oneTimePurchase.target = self
+        self.oneTimePurchase.action = #selector(self.oneTimePurchaseAction)
+
+        self.subscriptionPurchase.target = self
+        self.subscriptionPurchase.action = #selector(self.subscriptionPurchaseAction)
+
+        self.updateState(state: .normal)
+    }
+
+    func updateState(state: State) {
+        switch state {
+        case .normal:
+            self.introLabel.text = "Support Muna"
+            self.descriptionLabel.text = "If you like idea of Muna, and would like to support future deveopment, please leave us some tips."
+        case .thankYou:
+            self.introLabel.text = "Thank you ❤️"
+            self.descriptionLabel.text = "We really appreciate your help"
+        }
+    }
+
+    func updatePurchaseButton() {
+        ServiceLocator.shared.inAppPurchaseManager
+    }
+
+    func playPurchaseAnimation() {
+        print("Play purchase animation")
+    }
+
+    @objc
+    func oneTimePurchaseAction() {
+//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip)
+        self.updateState(state: .thankYou)
+        self.playPurchaseAnimation()
+    }
+
+    @objc
+    func subscriptionPurchaseAction() {
+//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
+        self.updateState(state: .thankYou)
+        self.playPurchaseAnimation()
     }
 }
