@@ -21,6 +21,9 @@ public protocol StorageServiceProtocol {
     func save(object: NSObject?, for key: String)
     func getObject(forKey key: String) -> NSObject?
 
+    func save(double: Double?, for key: String)
+    func getDouble(forKey key: String) -> Double?
+
     func saveGenericObject<T: Codable>(object: T, for key: String)
     func getGenericObject<T: Codable>(object: T.Type, for key: String) -> T?
 

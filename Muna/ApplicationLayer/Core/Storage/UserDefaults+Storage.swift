@@ -54,6 +54,15 @@ extension UserDefaults: StorageServiceProtocol {
         self.synchronize()
     }
 
+    public func save(double: Double?, for key: String) {
+        self.set(double, forKey: key)
+        self.synchronize()
+    }
+
+    public func getDouble(forKey key: String) -> Double? {
+        self.double(forKey: key)
+    }
+
     public func getBool(forKey key: String) -> Bool? {
         return self.object(forKey: key) as? Bool
     }

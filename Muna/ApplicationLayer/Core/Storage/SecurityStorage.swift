@@ -13,6 +13,9 @@ final class SecurityStorage: StorageServiceProtocol {
     enum Key: String {
         case isUserPro
         case productIdSubscription
+        case purchaseTipDate
+        case expiredDate
+        case expirationDate
     }
 
     let keychain = Keychain(service: "com.abstract.muna")
@@ -76,6 +79,27 @@ final class SecurityStorage: StorageServiceProtocol {
             return try Bool(self.keychain.getString(key) ?? "")
         } catch {
             appAssertionFailure("Error while getting string from security storage: \(error)")
+            return nil
+        }
+    }
+
+    func save(double: Double?, for key: String) {
+        guard let double = double else {
+            appAssertionFailure("Security storage allows to save only non-optional double")
+            return
+        }
+        do {
+            try keychain.set("\(double)", key: key)
+        } catch {
+            appAssertionFailure("Error while bool to security storage: \(error)")
+        }
+    }
+
+    func getDouble(forKey key: String) -> Double? {
+        do {
+            return try Double(self.keychain.getString(key) ?? "")
+        } catch {
+            appAssertionFailure("Error while getting double from security storage: \(error)")
             return nil
         }
     }
