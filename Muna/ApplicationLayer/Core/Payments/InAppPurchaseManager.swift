@@ -152,6 +152,10 @@ final class InAppPurchaseManager {
                             string: item.productId,
                             forKey: SecurityStorage.Key.productIdSubscription.rawValue
                         )
+                        ServiceLocator.shared.securityStorage.save(
+                            double: item.subscriptionExpirationDate?.timeIntervalSince1970,
+                            for: SecurityStorage.Key.expirationDate.rawValue
+                        )
                     }
                 }
             case let .failure(error):
