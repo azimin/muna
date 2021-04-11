@@ -37,8 +37,6 @@ class SettingsItemView: NSView {
     let useAnalyticsSwitcherItem: SwitcherSettingsItem
     let showPassedTasksItem: SwitcherSettingsItem
     let startupSettingItem: SwitcherSettingsItem
-    private var startupSettingItemTopConstraintToSuperView: Constraint?
-    private var startupSettingItemTopConstraintToTitleLabel: Constraint?
 
     let notificationsSettingItem: SliderSettingsItem
     let storageSettingItem: SliderSettingsItem
@@ -55,15 +53,7 @@ class SettingsItemView: NSView {
         self.settingsTitleLabel.isHidden = !isNeededShowTitle
         self.showPassedTasksItem.isHidden = isNeededShowTitle
         self.useAnalyticsSwitcherItem.isHidden = isNeededShowTitle
-        self.setupInitialLayout()
-
-        if isNeededShowTitle {
-            self.startupSettingItemTopConstraintToSuperView?.deactivate()
-            self.startupSettingItemTopConstraintToTitleLabel?.activate()
-        } else {
-            self.startupSettingItemTopConstraintToSuperView?.activate()
-            self.startupSettingItemTopConstraintToTitleLabel?.deactivate()
-        }
+        self.setupInitialLayout(isNeededShowTitle: isNeededShowTitle)
 
         self.useAnalyticsSwitcherItem.switcher.target = self
         self.useAnalyticsSwitcherItem.switcher.action = #selector(self.useAnalyticsSwitchStateChanged)
@@ -91,7 +81,7 @@ class SettingsItemView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupInitialLayout() {
+    private func setupInitialLayout(isNeededShowTitle: Bool) {
         self.addSubview(self.settingsTitleLabel)
         self.settingsTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -100,51 +90,43 @@ class SettingsItemView: NSView {
             make.centerX.equalToSuperview()
         }
 
-        self.addSubview(self.useAnalyticsSwitcherItem)
-        self.useAnalyticsSwitcherItem.titleLabel.text = "Share anonymous usage data"
-        self.useAnalyticsSwitcherItem.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
-        }
+        let contentStackView = NSStackView(
+            orientation: .vertical,
+            alignment: .leading,
+            distribution: .fill
+        )
+        contentStackView.spacing = 0
 
-        self.addSubview(self.showPassedTasksItem)
-        self.showPassedTasksItem.titleLabel.text = "Number of passed tasks"
-        self.showPassedTasksItem.descriptionLabel.text = "Show number of passed tasks in menu bar"
-        self.showPassedTasksItem.snp.makeConstraints { make in
+        self.addSubview(contentStackView)
+        contentStackView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(24)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.useAnalyticsSwitcherItem.snp.bottom).offset(24)
+            make.bottom.equalToSuperview().inset(10)
         }
 
         self.startupSettingItem.titleLabel.text = "Launch on startup"
         self.startupSettingItem.descriptionLabel.text = "Start Muna automatically after system restart"
-        self.addSubview(self.startupSettingItem)
-        self.startupSettingItem.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            self.startupSettingItemTopConstraintToTitleLabel = make.top.equalTo(self.settingsTitleLabel.snp.bottom).offset(24).constraint
-            self.startupSettingItemTopConstraintToSuperView = make.top.equalTo(self.showPassedTasksItem.snp.bottom).offset(10).constraint
-        }
+        contentStackView.addArrangedSubview(self.startupSettingItem)
+        contentStackView.setCustomSpacing(isNeededShowTitle ? 10 : 24, after: self.startupSettingItem)
+
+        self.showPassedTasksItem.titleLabel.text = "Number of passed tasks"
+        self.showPassedTasksItem.descriptionLabel.text = "Show number of passed tasks in menu bar"
+        contentStackView.addArrangedSubview(self.showPassedTasksItem)
+        contentStackView.setCustomSpacing(24, after: self.showPassedTasksItem)
+
+        self.useAnalyticsSwitcherItem.titleLabel.text = "Share anonymous usage data"
+        contentStackView.addArrangedSubview(self.useAnalyticsSwitcherItem)
+        contentStackView.setCustomSpacing(10, after: self.useAnalyticsSwitcherItem)
 
         self.notificationsSettingItem.titleLabel.text = "Ping interval"
         self.notificationsSettingItem.descriptionLabel.text = "Should remind again when you ignore reminder"
         self.notificationsSettingItem.sliderSectionLabel.text = "Month"
-        self.addSubview(self.notificationsSettingItem)
-        self.notificationsSettingItem.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.top.equalTo(self.startupSettingItem.snp.bottom)
-        }
+        contentStackView.addArrangedSubview(self.notificationsSettingItem)
 
         self.storageSettingItem.titleLabel.text = "History size"
         self.storageSettingItem.descriptionLabel.text = "How long to keep complited items"
         self.storageSettingItem.sliderSectionLabel.text = "Month"
-        self.addSubview(self.storageSettingItem)
-        self.storageSettingItem.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.top.equalTo(self.notificationsSettingItem.snp.bottom)
-            make.bottom.equalToSuperview().inset(10)
-        }
+        contentStackView.addArrangedSubview(self.storageSettingItem)
     }
 
     @objc

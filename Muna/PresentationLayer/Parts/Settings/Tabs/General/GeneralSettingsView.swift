@@ -10,7 +10,6 @@ import Cocoa
 import LaunchAtLogin
 
 class GeneralSettingsView: View, SettingsViewProtocol {
-    let titlesView = View()
     let settingsItemView = SettingsItemView(isNeededShowTitle: false, style: .small, needToShake: false)
 
     init() {
@@ -26,18 +25,13 @@ class GeneralSettingsView: View, SettingsViewProtocol {
         self.snp.makeConstraints { make in
             make.width.equalTo(self.frameWidth)
         }
-        
-        self.addSubview(self.titlesView)
-        self.titlesView.snp.makeConstraints { maker in
-            maker.leading.top.bottom.equalToSuperview()
-            maker.height.equalTo(300)
-        }
 
         self.addSubview(self.settingsItemView)
         self.settingsItemView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(40)
             make.trailing.equalToSuperview().inset(40)
+            make.bottom.equalToSuperview().offset(-24)
         }
     }
 
