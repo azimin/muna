@@ -51,6 +51,11 @@ class TipsSettingsView: View, SettingsViewProtocol {
         super.updateLayer()
     }
 
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        super.viewWillMove(toWindow: newWindow)
+        self.updatePurchaseButton()
+    }
+
     private func setup() {
         self.snp.makeConstraints { make in
             make.width.equalTo(self.frameWidth)
@@ -145,9 +150,13 @@ class TipsSettingsView: View, SettingsViewProtocol {
         }
     }
 
+    func updatePurchaseButton() {
+        // TODO: EGOR тут надо смотреть есть ли подписка и вызывать updatePurchaseButton(subscribed: Bool) с нужным параметром. Предлагаю сразу брать из кэша + вызывать обновление рецепта
+    }
+
     func updatePurchaseButton(subscribed: Bool) {
-//        ServiceLocator.shared.inAppPurchaseManager
         if subscribed {
+            self.updateState(state: .thankYou)
             self.subscriptionPurchase.titleLabel.text = "Already Subscribed"
         } else {
             self.subscriptionPurchase.titleLabel.text = "Monthly"
@@ -163,25 +172,32 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     @objc
     func oneTimePurchaseAction() {
-        self.updateState(state: .thankYou)
-        self.playPurchaseAnimation()
+        // TODO: EGOR поправь код ниже, нужно если юзер отменит сам, ничего не делать, если ошибка покупки, показывать алерт ошибки (не забудь выписать новые копии, их надо будет проверить с камиилой)
 
-//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { (status) in
-//            switch status {
-//            case .failure:
-//                break
-//            case .success:
-//                self.updateState(state: .thankYou)
-//                self.playPurchaseAnimation()
-//            }
-//        }
+        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { (status) in
+            switch status {
+            case .failure:
+                break
+            case .success:
+                self.updateState(state: .thankYou)
+                self.playPurchaseAnimation()
+            }
+        }
     }
 
     @objc
     func subscriptionPurchaseAction() {
-//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
-        self.updateState(state: .thankYou)
-        self.playPurchaseAnimation()
-        self.updatePurchaseButton(subscribed: true)
+        // TODO: EGOR поправь код ниже, нужно если юзер отменит сам, ничего не делать, если ошибка покупки, показывать алерт ошибки (не забудь выписать новые копии, их надо будет проверить с камиилой)
+
+        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
+            switch status {
+            case .failure:
+                break
+            case .success:
+                self.updateState(state: .thankYou)
+                self.playPurchaseAnimation()
+                self.updatePurchaseButton(subscribed: true)
+            }
+        }
     }
 }
