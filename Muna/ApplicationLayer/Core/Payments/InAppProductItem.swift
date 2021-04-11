@@ -9,13 +9,20 @@
 import StoreKit
 
 struct InAppProductItem {
+    enum ProductType {
+        case oneTime
+        case subscription
+    }
 
     let id: ProductIds
 
     var product: SKProduct?
+    
+    let productType: ProductType
 
-    init(id: ProductIds) {
+    init(id: ProductIds, productType: ProductType) {
         self.id = id
+        self.productType = productType
     }
 
     mutating func addProduct(_ product: SKProduct) {

@@ -185,11 +185,13 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { (status) in
             switch status {
-            case .failure:
-                break
-            case .success:
+            case .purchased:
                 self.updateState(state: .thankYou)
                 self.playPurchaseAnimation()
+            case .cancelled:
+                break
+            case let .error(error):
+                break
             }
         }
     }
@@ -200,12 +202,14 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
             switch status {
-            case .failure:
-                break
-            case .success:
+            case .purchased:
                 self.updateState(state: .thankYou)
                 self.playPurchaseAnimation()
                 self.updatePurchaseButton(subscribed: true)
+            case .cancelled:
+                break
+            case let .error(error):
+                break
             }
         }
     }
