@@ -127,6 +127,7 @@ class TipsSettingsView: View, SettingsViewProtocol {
         self.subscriptionPurchase.action = #selector(self.subscriptionPurchaseAction)
 
         self.updateState(state: .normal, shouldUpdateFrame: true)
+        self.updatePurchaseButton(subscribed: false)
     }
 
     func updateState(state: State, shouldUpdateFrame: Bool = true) {
@@ -144,8 +145,16 @@ class TipsSettingsView: View, SettingsViewProtocol {
         }
     }
 
-    func updatePurchaseButton() {
-        ServiceLocator.shared.inAppPurchaseManager
+    func updatePurchaseButton(subscribed: Bool) {
+//        ServiceLocator.shared.inAppPurchaseManager
+        if subscribed {
+            self.subscriptionPurchase.titleLabel.text = "Already Subscribed"
+        } else {
+            self.subscriptionPurchase.titleLabel.text = "Monthly"
+        }
+
+        self.subscriptionPurchase.isEnabled = !subscribed
+        self.cancelSubscriptionInfoView.isHidden = !subscribed
     }
 
     func playPurchaseAnimation() {
@@ -173,5 +182,6 @@ class TipsSettingsView: View, SettingsViewProtocol {
 //        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly)
         self.updateState(state: .thankYou)
         self.playPurchaseAnimation()
+        self.updatePurchaseButton(subscribed: true)
     }
 }

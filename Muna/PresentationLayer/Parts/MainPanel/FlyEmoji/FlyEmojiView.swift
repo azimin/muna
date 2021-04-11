@@ -12,19 +12,18 @@ class FlyEmojiView: View {
     let emojiLabels: [Label] = []
 
     func runAnimation() {
-        for j in 0...3 {
+        for j in 0...6 {
             let offset: CGFloat
             let step: CGFloat = 50
             let steps = Int(self.frame.width / step)
 
-            switch j {
-            case 0:
+            if j % 4 == 0 {
                 offset = 50
-            case 1:
+            } else if j % 4 == 1 {
                 offset = 25
-            case 2:
+            } else if j % 4 == 2 {
                 offset = 40
-            default:
+            } else {
                 offset = 10
             }
 

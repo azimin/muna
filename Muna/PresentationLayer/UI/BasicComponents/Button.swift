@@ -57,6 +57,16 @@ class Button: NSButton {
     }
 
     func updateHighlight(isHighlighted: Bool) {
+        guard self.isEnabled else {
+            return
+        }
+
         self.layer?.opacity = isHighlighted ? 0.7 : 1.0
+    }
+
+    override var isEnabled: Bool {
+        didSet {
+            self.layer?.opacity = self.isEnabled ? 1.0 : 0.6
+        }
     }
 }
