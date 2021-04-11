@@ -73,7 +73,11 @@ class WindowManager: WindowManagerProtocol {
 
         guard self.windowState(windowType) == false else {
             switch windowType {
-            case .settings, .onboarding, .permissionsAlert, .analtyics:
+            case let .settings(item):
+                NSApp.activate(ignoringOtherApps: true)
+                self.windows[windowType]?.makeKeyAndOrderFront(nil)
+                (self.windows[windowType]?.contentViewController as? SettingsViewController)?.setView(for: item, animate: true)
+            case .onboarding, .permissionsAlert, .analtyics:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
             case .debug, .panel, .screenshot, .textTaskCreation, .remindLater:
