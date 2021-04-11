@@ -9,6 +9,8 @@
 import Cocoa
 
 class TipsSettingsView: View, SettingsViewProtocol {
+    var topViewController: SettingsViewController?
+
     enum State {
         case normal
         case thankYou
@@ -30,7 +32,10 @@ class TipsSettingsView: View, SettingsViewProtocol {
     let oneTimePurchase = TipPurchaseButton(style: .normal)
     let subscriptionPurchase = TipPurchaseButton(style: .accent)
 
+    let cancelSubscriptionInfoView = CancelSubscriptionView()
     let privacyView = PrivacyView()
+
+    let flyingEmojiView = FlyEmojiView()
 
     init() {
         super.init(frame: .zero)
@@ -87,11 +92,26 @@ class TipsSettingsView: View, SettingsViewProtocol {
             make.centerX.equalToSuperview()
         }
 
-        self.addSubview(self.privacyView)
-        self.privacyView.snp.makeConstraints { make in
+        let infoStackView = NSStackView(
+            orientation: .vertical,
+            alignment: .centerX,
+            distribution: .fill
+        )
+
+        self.addSubview(infoStackView)
+        infoStackView.snp.makeConstraints { (make) in
             make.top.equalTo(buttonsStackView.snp.bottom).inset(-24)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(24)
+        }
+
+        infoStackView.addArrangedSubview(self.cancelSubscriptionInfoView)
+        infoStackView.addArrangedSubview(self.privacyView)
+
+        self.addSubview(self.flyingEmojiView)
+        self.flyingEmojiView.allowedTouchTypes = []
+        self.flyingEmojiView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
 
         self.oneTimePurchase.titleLabel.text = "One Time Tip"
@@ -106,10 +126,10 @@ class TipsSettingsView: View, SettingsViewProtocol {
         self.subscriptionPurchase.target = self
         self.subscriptionPurchase.action = #selector(self.subscriptionPurchaseAction)
 
-        self.updateState(state: .normal)
+        self.updateState(state: .normal, shouldUpdateFrame: true)
     }
 
-    func updateState(state: State) {
+    func updateState(state: State, shouldUpdateFrame: Bool = true) {
         switch state {
         case .normal:
             self.introLabel.text = "Support Muna"
@@ -118,6 +138,10 @@ class TipsSettingsView: View, SettingsViewProtocol {
             self.introLabel.text = "Thank you ❤️"
             self.descriptionLabel.text = "We really appreciate your help"
         }
+
+        if shouldUpdateFrame {
+            self.topViewController?.updateFrame(animate: true)
+        }
     }
 
     func updatePurchaseButton() {
@@ -125,14 +149,23 @@ class TipsSettingsView: View, SettingsViewProtocol {
     }
 
     func playPurchaseAnimation() {
-        print("Play purchase animation")
+        self.flyingEmojiView.runAnimation()
     }
 
     @objc
     func oneTimePurchaseAction() {
-//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip)
         self.updateState(state: .thankYou)
         self.playPurchaseAnimation()
+
+//        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { (status) in
+//            switch status {
+//            case .failure:
+//                break
+//            case .success:
+//                self.updateState(state: .thankYou)
+//                self.playPurchaseAnimation()
+//            }
+//        }
     }
 
     @objc

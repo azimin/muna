@@ -15,19 +15,20 @@ class PrivacyView: View {
         distribution: .fill
     )
 
-    let privacyPolicyButton = Button()
+    let privacyPolicyButton = Button(fontStyle: .medium, size: 13)
         .withText("Privacy Policy")
         .withTextColorStyle(.titleAccent)
 
     let dotView = View()
         .withBackgroundColorStyle(.title60Accent)
 
-    let termsOfUseButton = Button()
+    let termsOfUseButton = Button(fontStyle: .medium, size: 13)
         .withText("Terms Of Use")
         .withTextColorStyle(.titleAccent)
 
     override func viewSetup() {
         self.addSubview(self.stackView)
+        self.stackView.spacing = 4
         self.stackView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }

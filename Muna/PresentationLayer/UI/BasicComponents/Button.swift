@@ -9,6 +9,11 @@
 import Cocoa
 
 class Button: NSButton {
+    convenience init(fontStyle: FontStyle, size: CGFloat) {
+        self.init(frame: .zero)
+        self.font = FontStyle.customFont(style: fontStyle, size: size)
+    }
+
     var colorStyle: ColorStyle? {
         didSet {
             self.updateTitle()

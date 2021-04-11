@@ -90,6 +90,8 @@
 		9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F152708246DD7D70037623B /* SettingsViewController.swift */; };
 		9F15270B246DD7DF0037623B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15270A246DD7DF0037623B /* SettingsView.swift */; };
 		9F1769E125DD809200DADD05 /* ForceTransformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1769E025DD809200DADD05 /* ForceTransformView.swift */; };
+		9F17BA92261F1D2C00CADAB1 /* FlyEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F17BA91261F1D2C00CADAB1 /* FlyEmojiView.swift */; };
+		9F17BA942622AA6E00CADAB1 /* CancelSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F17BA932622AA6E00CADAB1 /* CancelSubscriptionView.swift */; };
 		9F18D5782513FD9400729B2C /* AssistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18D5772513FD9400729B2C /* AssistentService.swift */; };
 		9F1CB75224730AC400DFBB05 /* TimeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */; };
 		9F1CB7552473188100DFBB05 /* DateItemsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */; };
@@ -323,6 +325,8 @@
 		9F152708246DD7D70037623B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9F15270A246DD7DF0037623B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9F1769E025DD809200DADD05 /* ForceTransformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceTransformView.swift; sourceTree = "<group>"; };
+		9F17BA91261F1D2C00CADAB1 /* FlyEmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyEmojiView.swift; sourceTree = "<group>"; };
+		9F17BA932622AA6E00CADAB1 /* CancelSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelSubscriptionView.swift; sourceTree = "<group>"; };
 		9F18D5772513FD9400729B2C /* AssistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistentService.swift; sourceTree = "<group>"; };
 		9F1CB75124730AC400DFBB05 /* TimeParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeParserTests.swift; sourceTree = "<group>"; };
 		9F1CB7542473188100DFBB05 /* DateItemsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItemsTransformer.swift; sourceTree = "<group>"; };
@@ -865,6 +869,7 @@
 		9F025C11246346E600F05D81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F17BA90261F1D2100CADAB1 /* FlyEmoji */,
 				9F7A6AA12616DD67009B7451 /* TipPurchaseButton */,
 				9F7A6A9C261615BA009B7451 /* PrivacyView */,
 				9F4EB228250EB21D002D29C0 /* MainPanelBackground */,
@@ -925,6 +930,14 @@
 				9F152708246DD7D70037623B /* SettingsViewController.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		9F17BA90261F1D2100CADAB1 /* FlyEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				9F17BA91261F1D2C00CADAB1 /* FlyEmojiView.swift */,
+			);
+			path = FlyEmoji;
 			sourceTree = "<group>";
 		};
 		9F18D5762513FD7C00729B2C /* AssistentService */ = {
@@ -1297,6 +1310,7 @@
 			isa = PBXGroup;
 			children = (
 				9F7A6A9D261615CA009B7451 /* PrivacyView.swift */,
+				9F17BA932622AA6E00CADAB1 /* CancelSubscriptionView.swift */,
 			);
 			path = PrivacyView;
 			sourceTree = "<group>";
@@ -1965,6 +1979,7 @@
 				9F33D48D246883C900395C44 /* Key.swift in Sources */,
 				9F1526FF246DBF020037623B /* ShortcutAction.swift in Sources */,
 				231E0C922484406D0018EB8F /* ENNumberDate.swift in Sources */,
+				9F17BA92261F1D2C00CADAB1 /* FlyEmojiView.swift in Sources */,
 				9F480837250FF9AC0044F9C3 /* AssistentPanelView.swift in Sources */,
 				9FE4DD73247085BA0084D259 /* Theme.swift in Sources */,
 				239AB0AA24688E8E001526DA /* ItemsDatabaseService.swift in Sources */,
@@ -2003,6 +2018,7 @@
 				9FA7D261246C8D4D0082C4A9 /* ShortcutDescriptionView.swift in Sources */,
 				9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */,
 				23A6B2A224660A36006A7A4D /* WindowManager.swift in Sources */,
+				9F17BA942622AA6E00CADAB1 /* CancelSubscriptionView.swift in Sources */,
 				9F581E462494EDB700A34379 /* OnboardingIntroViewController.swift in Sources */,
 				9F025C0A24633C6F00F05D81 /* Panel.swift in Sources */,
 				9FA07F6F2460C2E500654D36 /* GenericCollectionViewItem.swift in Sources */,

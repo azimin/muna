@@ -56,7 +56,7 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
 
     private let generalViewController = GeneralSettingsViewController()
     private let shortcutsViewController = ShortcutsSettingsViewController()
-    private let tipsViewController = TipsSettingsViewController()
+    private lazy var tipsViewController = TipsSettingsViewController(topViewController: self)
     private let aboutViewController = AboutSettingsViewController()
     private let habitsViewcontroller = HabitsSettingsViewController()
 
@@ -130,6 +130,26 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.setView(for: item, animate: true)
     }
 
+    func updateFrame(animate: Bool) {
+        guard let item = self.currentItem else {
+            return
+        }
+
+        let newViewController = self.viewController(for: item)
+        let newFrame = self.frameFromView(newWiew: newViewController.view)
+
+        let titlebarHeight = self.window.titlebarHeight
+
+        self.window.setFrame(newFrame, display: true, animate: animate)
+        self.window.contentView?.addSubview(newViewController.view)
+        newViewController.view.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: newFrame.width,
+            height: newFrame.height - titlebarHeight
+        )
+    }
+
     func setView(for item: ToolbarItem, animate: Bool) {
         if let oldItem = self.currentItem {
             if oldItem == item {
@@ -143,21 +163,11 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
         self.currentItem = item
 
         let newViewController = self.viewController(for: item)
-        let newFrame = self.frameFromView(newWiew: newViewController.view)
 
         self.toolbar.selectedItemIdentifier = self.currentItem?.identifier
         self.window.title = newViewController.title ?? ""
 
-        let titlebarHeight = self.window.titlebarHeight
-
-        self.window.setFrame(newFrame, display: true, animate: animate)
-        self.window.contentView?.addSubview(newViewController.view)
-        newViewController.view.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: newFrame.width,
-            height: newFrame.height - titlebarHeight
-        )
+        self.updateFrame(animate: animate)
     }
 
     // MARK: - Helpers

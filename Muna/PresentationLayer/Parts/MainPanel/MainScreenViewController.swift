@@ -52,7 +52,7 @@ class MainScreenViewController: NSViewController {
         self.panelView.mainContentView.delegate = self
 
         self.panelView.bottomBar.tipsView.pressAction = {
-            print("Show tips view")
+            ServiceLocator.shared.windowManager.toggleWindow(.settings(item: .tips))
         }
     }
 
