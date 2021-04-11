@@ -131,6 +131,9 @@ class TipsSettingsView: View, SettingsViewProtocol {
         self.subscriptionPurchase.target = self
         self.subscriptionPurchase.action = #selector(self.subscriptionPurchaseAction)
 
+        self.cancelSubscriptionInfoView.howButton.target = self
+        self.cancelSubscriptionInfoView.howButton.action = #selector(self.howToUnsubscribe)
+
         self.updateState(state: .normal, shouldUpdateFrame: true)
         self.updatePurchaseButton(subscribed: false)
     }
@@ -168,6 +171,12 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     func playPurchaseAnimation() {
         self.flyingEmojiView.runAnimation()
+    }
+
+    @objc
+    func howToUnsubscribe() {
+        let url = URL(string: "https://support.apple.com/en-gb/HT202039")!
+        NSWorkspace.shared.open(url)
     }
 
     @objc
