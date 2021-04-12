@@ -24,6 +24,7 @@ final class InAppPurchaseManager {
     }
 
     typealias PurchaseCompletion = (PurchaseState) -> Void
+    typealias ValidationCompletion = (ValidationState) -> Void
 
     private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly, productType: .subscription)
     private var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip, productType: .oneTime)
@@ -50,7 +51,7 @@ final class InAppPurchaseManager {
 
         self.inAppPurchaseService.checkTransactions = { [weak self] purchases in
             guard !purchases.isEmpty else { return }
-            self?.validateSubscription()
+            self?.validateSubscription(nil)
         }
     }
 
@@ -92,7 +93,7 @@ final class InAppPurchaseManager {
                     )
                     completion(.purchased)
                 case .subscription:
-                    self?.validateSubscription()
+                    self?.validateSubscription(nil)
                 }
             case let .failure(error):
                 switch error.code {
@@ -110,7 +111,7 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.restorePurchases()
     }
 
-    func validateSubscription() {
+    func validateSubscription(_ completion: ValidationCompletion?) {
         guard let productId = ServiceLocator.shared.securityStorage.getString(
                 forKey: SecurityStorage.Key.productIdSubscription.rawValue
         ) else {
@@ -138,6 +139,7 @@ final class InAppPurchaseManager {
                         double: Date().timeIntervalSince1970,
                         for: SecurityStorage.Key.expiredDate.rawValue
                     )
+                    completion?(.expired)
                 case .notPurchased:
                     ServiceLocator.shared.securityStorage.save(
                         bool: false,
@@ -146,6 +148,7 @@ final class InAppPurchaseManager {
                     ServiceLocator.shared.securityStorage.remove(
                         forKey: SecurityStorage.Key.productIdSubscription.rawValue
                     )
+                    completion?(.notPurchased)
                 case let .purchased(_, items):
                     ServiceLocator.shared.securityStorage.save(
                         bool: true,
@@ -161,9 +164,11 @@ final class InAppPurchaseManager {
                             for: SecurityStorage.Key.expirationDate.rawValue
                         )
                     }
+                    completion?(.purchased)
                 }
             case let .failure(error):
                 appAssertionFailure("Error on subscription validation: \(error)")
+                completion?(.error(error))
             }
         }
     }

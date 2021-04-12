@@ -154,7 +154,13 @@ class TipsSettingsView: View, SettingsViewProtocol {
     }
 
     func updatePurchaseButton() {
-        // TODO: EGOR тут надо смотреть есть ли подписка и вызывать updatePurchaseButton(subscribed: Bool) с нужным параметром. Предлагаю сразу брать из кэша + вызывать обновление рецепта
+        let isUserPro = ServiceLocator.shared.securityStorage.getBool(forKey: SecurityStorage.Key.isUserPro.rawValue) ?? false
+        self.updatePurchaseButton(subscribed: isUserPro)
+        
+        ServiceLocator.shared.inAppPurchaseManager.validateSubscription { _ in
+            let isUserPro = ServiceLocator.shared.securityStorage.getBool(forKey: SecurityStorage.Key.isUserPro.rawValue) ?? false
+            self.updatePurchaseButton(subscribed: isUserPro)
+        }
     }
 
     func updatePurchaseButton(subscribed: Bool) {
@@ -181,25 +187,24 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     @objc
     func oneTimePurchaseAction() {
-        // TODO: EGOR поправь код ниже, нужно если юзер отменит сам, ничего не делать, если ошибка покупки, показывать алерт ошибки (не забудь выписать новые копии, их надо будет проверить с камиилой)
-
-        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { (status) in
+        ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { status in
             switch status {
             case .purchased:
                 self.updateState(state: .thankYou)
                 self.playPurchaseAnimation()
             case .cancelled:
                 break
-            case let .error(error):
-                break
+            case .error:
+                ServiceLocator.shared.windowManager.showAlert(
+                    title: "Oops, something went wrong!",
+                    text: "We are sorry, but we can't process your payment now 😢"
+                )
             }
         }
     }
 
     @objc
     func subscriptionPurchaseAction() {
-        // TODO: EGOR поправь код ниже, нужно если юзер отменит сам, ничего не делать, если ошибка покупки, показывать алерт ошибки (не забудь выписать новые копии, их надо будет проверить с камиилой)
-
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
             switch status {
             case .purchased:
@@ -208,8 +213,11 @@ class TipsSettingsView: View, SettingsViewProtocol {
                 self.updatePurchaseButton(subscribed: true)
             case .cancelled:
                 break
-            case let .error(error):
-                break
+            case .error:
+                ServiceLocator.shared.windowManager.showAlert(
+                    title: "Oops, something went wrong!",
+                    text: "We are sorry, but we can't process your payment now 😢"
+                )
             }
         }
     }

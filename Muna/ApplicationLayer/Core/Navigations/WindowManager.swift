@@ -14,6 +14,8 @@ protocol WindowManagerProtocol {
     func activateWindowIfNeeded(_ windowType: WindowType)
     func hideWindowIfNeeded(_ windowType: WindowType)
 
+    func showAlert(title: String, text: String)
+
     func showHintPopover(sender: AnyObject)
     func closeHintPopover()
 }
@@ -333,6 +335,15 @@ class WindowManager: WindowManagerProtocol {
         default:
             appAssertionFailure("\(value) in alert in permissions alert is not supported")
         }
+    }
+
+    func showAlert(title: String, text: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = text
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "OK")
+        _ = alert.runModal()
     }
 
     private func showPanel(in window: NSWindow, selectedItem: ItemModel?) {
