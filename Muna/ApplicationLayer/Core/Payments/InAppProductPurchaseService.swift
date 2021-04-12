@@ -26,13 +26,13 @@ final class InAppProductPurchaseService {
         }
     }
 
-    func restorePurchases() {
+    func restorePurchases(completion: @escaping ([Purchase]) -> Void) {
         SwiftyStoreKit.restorePurchases { [weak self] results in
             for purchase in results.restoredPurchases where purchase.needsFinishTransaction {
-                // Deliver content from server, then:
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
             self?.checkTransactions?(results.restoredPurchases)
+            completion(results.restoredPurchases)
         }
     }
 

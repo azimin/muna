@@ -114,8 +114,17 @@ final class InAppPurchaseManager {
         }
     }
 
-    func restorePurchases() {
-        self.inAppPurchaseService.restorePurchases()
+    func restorePurchases(completion: ValidationCompletion?) {
+        self.inAppPurchaseService.restorePurchases { [weak self] purchases in
+            guard let self = self else { return }
+            guard let purchase = purchases.last(where: { $0.productId == self.monthlyProductItem.id.rawValue }) else {
+                return
+            }
+            ServiceLocator.shared.securityStorage.save(string: purchase.productId, forKey: SecurityStorage.Key.productIdSubscription.rawValue)
+            self.validateSubscription { result in
+                completion?(result)
+            }
+        }
     }
 
     func validateSubscription(_ completion: ValidationCompletion?) {
