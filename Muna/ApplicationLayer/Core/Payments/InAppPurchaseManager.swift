@@ -93,7 +93,14 @@ final class InAppPurchaseManager {
                     )
                     completion(.purchased)
                 case .subscription:
-                    self?.validateSubscription(nil)
+                    self?.validateSubscription { result in
+                        switch result {
+                        case .purchased:
+                            completion(.purchased)
+                        default:
+                            break
+                        }
+                    }
                 }
             case let .failure(error):
                 switch error.code {
