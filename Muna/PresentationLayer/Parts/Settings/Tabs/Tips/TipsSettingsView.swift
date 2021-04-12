@@ -134,6 +134,9 @@ class TipsSettingsView: View, SettingsViewProtocol {
         self.cancelSubscriptionInfoView.howButton.target = self
         self.cancelSubscriptionInfoView.howButton.action = #selector(self.howToUnsubscribe)
 
+        self.privacyView.restoreButton.target = self
+        self.privacyView.restoreButton.action = #selector(self.restoreAction)
+
         self.updateState(state: .normal, shouldUpdateFrame: true)
         self.updatePurchaseButton(subscribed: false)
     }
@@ -177,6 +180,13 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     func playPurchaseAnimation() {
         self.flyingEmojiView.runAnimation()
+    }
+
+    @objc
+    func restoreAction() {
+        ServiceLocator.shared.inAppPurchaseManager.restorePurchases {
+            self.updatePurchaseButton()
+        }
     }
 
     @objc

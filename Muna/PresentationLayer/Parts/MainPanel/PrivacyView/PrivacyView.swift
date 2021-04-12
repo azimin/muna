@@ -26,6 +26,13 @@ class PrivacyView: View {
         .withText("Terms Of Use")
         .withTextColorStyle(.titleAccent)
 
+    let anotherDotView = View()
+        .withBackgroundColorStyle(.title60Accent)
+
+    let restoreButton = Button(fontStyle: .medium, size: 13)
+        .withText("Restore Purchases")
+        .withTextColorStyle(.titleAccent)
+
     override func viewSetup() {
         self.addSubview(self.stackView)
         self.stackView.spacing = 4
@@ -38,8 +45,15 @@ class PrivacyView: View {
         }
         self.dotView.layer?.cornerRadius = 2
 
+        self.anotherDotView.snp.makeConstraints { (make) in
+            make.size.equalTo(4)
+        }
+        self.anotherDotView.layer?.cornerRadius = 2
+
         self.stackView.addArrangedSubview(self.privacyPolicyButton)
         self.stackView.addArrangedSubview(self.dotView)
         self.stackView.addArrangedSubview(self.termsOfUseButton)
+        self.stackView.addArrangedSubview(self.anotherDotView)
+        self.stackView.addArrangedSubview(self.restoreButton)
     }
 }

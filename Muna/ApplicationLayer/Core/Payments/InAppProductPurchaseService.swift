@@ -19,18 +19,23 @@ final class InAppProductPurchaseService {
                 if purchase.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(purchase.transaction)
                 }
-                completion(.success(purchase))
+                OperationQueue.main.addOperation {
+                    completion(.success(purchase))
+                }
             case let .error(error):
-                completion(.failure(error))
+                OperationQueue.main.addOperation {
+                    completion(.failure(error))
+                }
             }
         }
     }
 
-    func restorePurchases() {
+    func restorePurchases(completion: VoidBlock?) {
         SwiftyStoreKit.restorePurchases { [weak self] results in
             for purchase in results.restoredPurchases where purchase.needsFinishTransaction {
                 // Deliver content from server, then:
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
+                completion?()
             }
             self?.checkTransactions?(results.restoredPurchases)
         }

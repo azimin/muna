@@ -114,8 +114,8 @@ final class InAppPurchaseManager {
         }
     }
 
-    func restorePurchases() {
-        self.inAppPurchaseService.restorePurchases()
+    func restorePurchases(completion: VoidBlock?) {
+        self.inAppPurchaseService.restorePurchases(completion: completion)
     }
 
     func validateSubscription(_ completion: ValidationCompletion?) {
