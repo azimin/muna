@@ -49,6 +49,10 @@ final class BackgroundScheduler: BackgroundSchedulerProtocol {
         }
 
         let task = NSBackgroundActivityScheduler(identifier: key.rawValue)
+        task.repeats = config.repeats
+        task.interval = config.interval
+        task.tolerance = config.tolerance
+        task.qualityOfService = config.qualityOfService
         task.schedule { completion in
             action()
             completion(.finished)

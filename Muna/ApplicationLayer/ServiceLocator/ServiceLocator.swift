@@ -29,6 +29,8 @@ class ServiceLocator {
 
     let assertionHandler: AssertionHandler
 
+    let backgroundScheduler: BackgroundSchedulerProtocol
+
     init(assertionHandler: AssertionHandler) {
         self.assertionHandler = assertionHandler
         self.imageStorage = ImageStorageService()
@@ -49,6 +51,8 @@ class ServiceLocator {
         let inAppPurchaseService = InAppProductPurchaseService()
         let inAppProductsService = InAppProductsService()
 
+        self.backgroundScheduler = BackgroundScheduler()
+
         #if DEBUG
         self.securityStorage = UserDefaults.standard
         #else
@@ -61,7 +65,14 @@ class ServiceLocator {
             inAppRecieptValidationService: inAppReceiptValidationService
         )
 
-        inAppProductsService.requestProducts(forIds: [.monthly], nil)
+        inAppProductsService.requestProducts(forIds: [.monthly, .oneTimeTip], nil)
+        
+        self.backgroundScheduler.addActivity(
+            byKey: .subscriptionValidationTask,
+            withConfig: .default
+        ) { [weak self] in
+            self?.inAppPurchaseManager.validateSubscription(nil)
+        }
 
         self.replaceAnalytics(shouldUseAnalytics: Preferences.shouldUseAnalytics, force: true)
     }
