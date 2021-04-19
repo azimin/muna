@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		230693FE24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */; };
 		23069402248645E200C41F4F /* DateProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23069401248645E200C41F4F /* DateProcessingService.swift */; };
+		23108792262D636600E71823 /* MunaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23108791262D636600E71823 /* MunaError.swift */; };
 		2317E9E62464A6BF00E017A3 /* ScreenshotStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */; };
 		2317EFBA250B87B7005AF08E /* HabitsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317EFB9250B87B7005AF08E /* HabitsSettingsView.swift */; };
 		2317EFBC250B8879005AF08E /* HabitsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2317EFBB250B8879005AF08E /* HabitsSettingsViewController.swift */; };
@@ -239,6 +240,7 @@
 /* Begin PBXFileReference section */
 		230693FD24862E4C00C41F4F /* ENCustomPartOfTheDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomPartOfTheDayWordsParser.swift; sourceTree = "<group>"; };
 		23069401248645E200C41F4F /* DateProcessingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProcessingService.swift; sourceTree = "<group>"; };
+		23108791262D636600E71823 /* MunaError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MunaError.swift; sourceTree = "<group>"; };
 		2317E9E52464A6BF00E017A3 /* ScreenshotStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotStateView.swift; sourceTree = "<group>"; };
 		2317EFB9250B87B7005AF08E /* HabitsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsSettingsView.swift; sourceTree = "<group>"; };
 		2317EFBB250B8879005AF08E /* HabitsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsSettingsViewController.swift; sourceTree = "<group>"; };
@@ -495,6 +497,14 @@
 				23069401248645E200C41F4F /* DateProcessingService.swift */,
 			);
 			path = DateProcessingService;
+			sourceTree = "<group>";
+		};
+		23108790262D636000E71823 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				23108791262D636600E71823 /* MunaError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		2317E9E32464A69200E017A3 /* ViewController */ = {
@@ -789,6 +799,7 @@
 		23A6B29F24660A19006A7A4D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				23108790262D636000E71823 /* Error */,
 				23721F342628CA0D00DD3653 /* BackgroundScheduler */,
 				2354370C25A79C9B0096AB48 /* Payments */,
 				9F4E4F9924F45BA40069DE9F /* HintsEngine */,
@@ -2077,6 +2088,7 @@
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
 				9FC9CDD72469F57F0018FAD7 /* DateParserItemView.swift in Sources */,
 				23D3875D25120CDD00762F6B /* NSBezierPath+CGPath.swift in Sources */,
+				23108792262D636600E71823 /* MunaError.swift in Sources */,
 				9F4FE40E24D0BE5300AAEC31 /* AppDelegate+Analytics.swift in Sources */,
 				23AE66A024DC9667004FAAFE /* SettingsItemViewModel.swift in Sources */,
 				233E747D246B4AB60070EABA /* SavingProcessingService.swift in Sources */,

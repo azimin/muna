@@ -59,14 +59,15 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.completeTransactions()
     }
 
-    func loadProducts(_ completion: VoidBlock? = nil) {
+    func loadProducts(_ completion: ((Result<Void, Error>) -> Void)? = nil) {
         self.inAppProductsService.requestProducts(forIds: [.monthly, .oneTimeTip]) {
             switch $0 {
             case let .requested(products):
                 self.monthlyProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.monthly.rawValue })
                 self.oneTimeTipProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.oneTimeTip.rawValue })
-                completion?()
+                completion?(.success(()))
             case let .failed(error):
+                completion?(.failure(error))
                 appAssertionFailure("Error on loading products: \(error)")
             default:
                 break
@@ -76,8 +77,13 @@ final class InAppPurchaseManager {
 
     func buyProduct(_ productId: ProductIds, completion: @escaping PurchaseCompletion) {
         guard let inAppItem = self.products[productId.rawValue], let product = inAppItem.product else {
-            self.loadProducts { [weak self] in
-                self?.buyProduct(productId, completion: completion)
+            self.loadProducts { [weak self] result in
+                switch result {
+                case .success:
+                    self?.buyProduct(productId, completion: completion)
+                case .failure:
+                    completion(.error(MunaError.cantGetInAppProducts))
+                }
             }
             return
         }
