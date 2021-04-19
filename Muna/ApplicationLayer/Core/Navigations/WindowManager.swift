@@ -438,8 +438,12 @@ class WindowManager: WindowManagerProtocol {
             window.setIsVisible(false)
         case .analtyics:
             window.setIsVisible(false)
+            window.close()
+            self.windows[windowType] = nil
         case .onboarding:
             window.setIsVisible(false)
+            window.close()
+            self.windows[windowType] = nil
         case .permissionsAlert:
             window.setIsVisible(false)
         }
