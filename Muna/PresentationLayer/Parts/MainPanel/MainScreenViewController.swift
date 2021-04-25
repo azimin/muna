@@ -26,6 +26,8 @@ class MainScreenViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.panelView.bottomBar.tipsView.isHidden = true
+
         var shortcutActions: [ShortcutAction] = []
         for shortcut in Shortcut.allCases {
             shortcutActions.append(.init(
@@ -54,6 +56,50 @@ class MainScreenViewController: NSViewController {
         self.panelView.bottomBar.tipsView.pressAction = {
             ServiceLocator.shared.windowManager.activateWindowIfNeeded(.settings(item: .tips))
         }
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        guard ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems() > 4 else {
+            return
+        }
+
+        let isUserPro = ServiceLocator.shared.securityStorage.getBool(forKey: SecurityStorage.Key.isUserPro.rawValue) ?? false
+        
+        guard !isUserPro else {
+            return
+        }
+
+        let expiredDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.expiredDate.rawValue)
+        let oneTimeTipDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.purchaseTipDate.rawValue)
+        
+        let oneMonthInSeconds = PresentationLayerConstants.oneMonthInSeconds
+        
+        var isTipsViewHidden = true
+        
+        if let expiredDate = expiredDate {
+            if expiredDate > oneMonthInSeconds {
+                isTipsViewHidden = false
+            } else {
+                isTipsViewHidden = true
+                
+            }
+        } else {
+            isTipsViewHidden = false
+        }
+
+        if let oneTimeTipDate = oneTimeTipDate, oneTimeTipDate > oneMonthInSeconds * 4 {
+            if oneTimeTipDate > oneMonthInSeconds * 4 {
+                isTipsViewHidden = false
+            } else {
+                isTipsViewHidden = true
+            }
+        } else {
+            isTipsViewHidden = false
+        }
+
+        self.panelView.bottomBar.tipsView.isHidden = isTipsViewHidden
     }
 
     func toggleSmartAssistent() {
