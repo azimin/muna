@@ -11,7 +11,7 @@ import SnapKit
 import SwiftDate
 
 class MainPanelView: MainPanelBackgroundView {
-    let segmentControl = NSSegmentedControl(labels: ["Uncompleted", "No deadline", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
+    let segmentControl = NSSegmentedControl(labels: ["Pending", "No due date set", "Completed"], trackingMode: .selectOne, target: nil, action: nil)
     let topSeparator = View()
         .withBackgroundColorStyle(.separator)
     let mainContentView = MainPanelContentView()

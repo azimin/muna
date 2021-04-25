@@ -61,8 +61,8 @@ class EmptyStateView: View {
 
         switch style {
         case let .noUncompletedItems(shortcut):
-            self.titelLabel.text = "No pending items"
-            self.actionLabel.text = "Create first"
+            self.titelLabel.text = "No pending reminders"
+            self.actionLabel.text = "Create your first reminder"
 
             if let shortcut = shortcut {
                 self.actionLabel.isHidden = false
@@ -72,9 +72,9 @@ class EmptyStateView: View {
                 self.shortcutView = shortcutView
             }
         case .noDeadline:
-            self.titelLabel.text = "No items without dealines"
+            self.titelLabel.text = "No reminders without due dates"
         case .noCompletedItems:
-            self.titelLabel.text = "No complited items"
+            self.titelLabel.text = "No completed reminders"
         }
     }
 }
