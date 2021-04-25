@@ -109,8 +109,8 @@ class SettingsItemView: NSView {
         contentStackView.addArrangedSubview(self.startupSettingItem)
         contentStackView.setCustomSpacing(isNeededShowTitle ? 10 : 24, after: self.startupSettingItem)
 
-        self.showPassedTasksItem.titleLabel.text = "Number of passed tasks"
-        self.showPassedTasksItem.descriptionLabel.text = "Show number of passed tasks in menu bar"
+        self.showPassedTasksItem.titleLabel.text = "Number of uncompleted tasks"
+        self.showPassedTasksItem.descriptionLabel.text = "Show number of uncompleted tasks"
         contentStackView.addArrangedSubview(self.showPassedTasksItem)
         contentStackView.setCustomSpacing(24, after: self.showPassedTasksItem)
 

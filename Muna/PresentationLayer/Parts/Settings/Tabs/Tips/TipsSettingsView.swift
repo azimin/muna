@@ -119,10 +119,10 @@ class TipsSettingsView: View, SettingsViewProtocol {
             make.edges.equalToSuperview()
         }
 
-        self.oneTimePurchase.titleLabel.text = "One Time Tip"
+        self.oneTimePurchase.titleLabel.text = "One time donation"
         self.oneTimePurchase.subtitleLabel.text = "$5"
 
-        self.subscriptionPurchase.titleLabel.text = "Monthly"
+        self.subscriptionPurchase.titleLabel.text = "Monthly donation"
         self.subscriptionPurchase.subtitleLabel.text = "$1 / month"
 
         self.oneTimePurchase.target = self
@@ -145,10 +145,10 @@ class TipsSettingsView: View, SettingsViewProtocol {
         switch state {
         case .normal:
             self.introLabel.text = "Support Muna"
-            self.descriptionLabel.text = "If you like idea of Muna, and would like to support future deveopment, please leave us some tips."
+            self.descriptionLabel.text = "If you like the idea of Muna and would like to support future development, please donate."
         case .thankYou:
             self.introLabel.text = "Thank you ❤️"
-            self.descriptionLabel.text = "We really appreciate your help"
+            self.descriptionLabel.text = "We really appreciate your support"
         }
 
         if shouldUpdateFrame {
@@ -171,7 +171,7 @@ class TipsSettingsView: View, SettingsViewProtocol {
             self.updateState(state: .thankYou)
             self.subscriptionPurchase.titleLabel.text = "Already Subscribed"
         } else {
-            self.subscriptionPurchase.titleLabel.text = "Monthly"
+            self.subscriptionPurchase.titleLabel.text = "Monthly donation"
         }
 
         self.subscriptionPurchase.isEnabled = !subscribed
