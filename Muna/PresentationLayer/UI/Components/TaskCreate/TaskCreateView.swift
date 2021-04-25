@@ -118,12 +118,12 @@ class TaskCreateView: PopupView {
             }
         }
 
-        self.reminderTextField.placeholder = "When to remind (optional)"
+        self.reminderTextField.placeholder = "Set due date (optional)"
         switch usage {
         case .screenshot:
-            self.commentTextField.placeholder = "Comment (optional)"
+            self.commentTextField.placeholder = "Notes (optional)"
         case .textCreation:
-            self.commentTextField.placeholder = "Comment"
+            self.commentTextField.placeholder = "Notes"
         }
 
         self.reminderTextField.delegate = self
