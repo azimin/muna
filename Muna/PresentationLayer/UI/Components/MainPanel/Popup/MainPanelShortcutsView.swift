@@ -73,7 +73,7 @@ class MainPanelShortcutsView: PopupView {
         var title: String {
             switch self {
             case .nextItem:
-                return "Next/Previous item"
+                return "Next/Previous reminder"
             case .nextTab:
                 return "Next/Previous tab"
             case .nextSection:
@@ -81,40 +81,40 @@ class MainPanelShortcutsView: PopupView {
             case .previousSection:
                 return "Previous section"
             case .deleteItem:
-                return "Delete item"
+                return "Delete reminder"
             case .previewItem:
-                return "Show screenshot preview"
+                return "Show preview of your reminder"
             case .complete:
                 return "Mark as completed"
             case .editTime:
-                return "Edit deadline"
+                return "Edit due date"
             case .close:
-                return "Show/Close panel"
+                return "Show/Close reminder panel"
             case .makeFullScreenshot:
-                return "Capture text note"
+                return "Capture a written note"
             case .makeSelectedAreaShot:
-                return "Capture selected area"
+                return "Capture visual note"
             }
         }
 
         var subtitle: String {
             switch self {
             case .nextItem:
-                return "Select the needed item"
+                return "Select the reminder to edit"
             case .nextTab:
-                return "Uncompleted, no deadline, completed"
+                return "Pending, no due date, completed"
             case .nextSection:
                 return "Show the next sections"
             case .previousSection:
                 return "Show the previous sections"
             case .deleteItem:
-                return "Delete unneeded task"
+                return ""
             case .previewItem:
-                return "Show a bigger image to see the context of the task"
+                return "Show a large preview of the reminder"
             case .complete:
-                return "Mark completed task"
+                return "Mark a reminder as completed"
             case .editTime:
-                return "Edit deadline if for more time flexibility"
+                return "Edit your due date if you need more time"
             case .close:
                 return ""
             case .makeFullScreenshot:
