@@ -31,20 +31,20 @@ class OnboardingFinalSetupView: NSView {
 
     let shortuctsTilteLabel = Label(fontStyle: .bold, size: 18)
         .withTextColorStyle(.titleAccent)
-        .withText("Shortucts")
+        .withText("Shortcuts")
 
     let entireShortcutPreview = ShortcutPreviewView(
-        title: "Capture text note shortcut",
+        title: "Capture a written note",
         imageName: "shortcuts_fullscreen",
         itemUDKey: Preferences.defaultShortcutTextTaskKey
     )
     let selectedAreaShortcutPreview = ShortcutPreviewView(
-        title: "Capture selected positon shorcut",
+        title: "Capture a visual note on your screen",
         imageName: "shortcuts_selected_area",
         itemUDKey: Preferences.defaultShortcutVisualTaskKey
     )
     let showPanelShortuctPreview = ShortcutPreviewView(
-        title: "Show captured items shorcut",
+        title: "Show captured reminders",
         imageName: "shortcuts_panel",
         itemUDKey: Preferences.defaultShortcutPanelKey
     )
@@ -176,7 +176,7 @@ class OnboardingFinalSetupView: NSView {
     }
 
     private func setupTilte() {
-        let string = "Setup Muna"
+        let string = "How to set up Muna"
         let attributedString = NSMutableAttributedString(
             string: string,
             attributes: [

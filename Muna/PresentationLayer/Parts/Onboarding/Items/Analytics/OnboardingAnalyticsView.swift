@@ -20,7 +20,7 @@ final class OnboardingAnalyticsView: View {
 
     let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
-        .withText("We would be happy if you help to improve our software with anonymous usage data, but we respect your privacy")
+        .withText("We use your anonymous usage data to improve our software. We respect your privacy please let us know if you would like to share your data. Thank you!")
         .withAligment(.center)
         .withLimitedNumberOfLines(3)
 
@@ -105,7 +105,7 @@ final class OnboardingAnalyticsView: View {
         let attributedString = NSMutableAttributedString(
             string:
             """
-            We use Amplitude (our events) for usage and App Center for crash reports
+            We use Amplitude for usage data (our events) and App Center for crash reports.
             """,
             attributes: [
                 .font: NSFont.systemFont(ofSize: 18, weight: .regular),

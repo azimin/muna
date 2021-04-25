@@ -19,13 +19,13 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         var title: String {
             switch self {
             case .howToCapture:
-                return "Capture important context"
+                return "First step, capture what you need to remember"
             case .howToRemind:
-                return "Ask to remind"
+                return "Set your reminder"
             case .howToSeeItems:
-                return "Check items"
+                return "Check your reminders"
             case .howToGetReminder:
-                return "Get reminder"
+                return "Receiving a reminder"
             }
         }
 

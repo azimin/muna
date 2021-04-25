@@ -11,7 +11,7 @@ import Foundation
 class OnboardingSubviewHowToRemind: View {
     let titleLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
-        .withText("You can use any language structure")
+        .withText("You can use any of these phrases or set a date and time")
 
     let contentStackView = NSStackView(orientation: .vertical, alignment: .leading)
 

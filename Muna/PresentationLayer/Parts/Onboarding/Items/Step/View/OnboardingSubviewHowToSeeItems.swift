@@ -13,11 +13,11 @@ class OnboardingSubviewHowToSeeItems: View {
 
     let panelShorcutLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
-        .withText("To open items panel")
+        .withText("To open your reminders control pane")
 
     let descriptionLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
-        .withText("You can preview, group, edit and complete any item there")
+        .withText("You can preview, group, edit or mark your reminders as complete from here")
 
     init() {
         super.init(frame: .zero)

@@ -105,7 +105,7 @@ class SettingsItemView: NSView {
         }
 
         self.startupSettingItem.titleLabel.text = "Launch on startup"
-        self.startupSettingItem.descriptionLabel.text = "Start Muna automatically after system restart"
+        self.startupSettingItem.descriptionLabel.text = "Muna will open automatically upon system restart"
         contentStackView.addArrangedSubview(self.startupSettingItem)
         contentStackView.setCustomSpacing(isNeededShowTitle ? 10 : 24, after: self.startupSettingItem)
 
@@ -118,13 +118,13 @@ class SettingsItemView: NSView {
         contentStackView.addArrangedSubview(self.useAnalyticsSwitcherItem)
         contentStackView.setCustomSpacing(10, after: self.useAnalyticsSwitcherItem)
 
-        self.notificationsSettingItem.titleLabel.text = "Ping interval"
-        self.notificationsSettingItem.descriptionLabel.text = "Should remind again when you ignore reminder"
+        self.notificationsSettingItem.titleLabel.text = "Ping frequency"
+        self.notificationsSettingItem.descriptionLabel.text = "Set the length of time between pings"
         self.notificationsSettingItem.sliderSectionLabel.text = "Month"
         contentStackView.addArrangedSubview(self.notificationsSettingItem)
 
-        self.storageSettingItem.titleLabel.text = "History size"
-        self.storageSettingItem.descriptionLabel.text = "How long to keep complited items"
+        self.storageSettingItem.titleLabel.text = "Reminder Archive"
+        self.storageSettingItem.descriptionLabel.text = "Set how long to keep completed reminders"
         self.storageSettingItem.sliderSectionLabel.text = "Month"
         contentStackView.addArrangedSubview(self.storageSettingItem)
     }

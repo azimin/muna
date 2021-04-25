@@ -12,8 +12,8 @@ class OnboardingSubviewHowToGetReminder: View {
     let descriptionLabel = Label(fontStyle: .medium, size: 16)
         .withTextColorStyle(.title60Accent)
         .withText("""
-        If you ignore reminder, system will ping you some time later
-        You can change time of reminder with language structure or smart recommendations
+        If you ignore the reminder, you will receive another reminder ping later
+        You can set the time of the second ping using phrases or smart recommendations
         """)
 
     init() {

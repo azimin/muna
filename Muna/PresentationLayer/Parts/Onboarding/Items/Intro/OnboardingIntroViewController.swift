@@ -18,12 +18,12 @@ class OnboardingIntroViewController: NSViewController, OnboardingContainerProtoc
 
     let introLabel = Label(fontStyle: .bold, size: 30)
         .withTextColorStyle(.titleAccent)
-        .withText("Welcome to Muna")
+        .withText("Welcome to Muna!")
         .withAligment(.center)
 
     let descriptionLabel = Label(fontStyle: .regular, size: 20)
         .withTextColorStyle(.title60AccentAlpha)
-        .withText("Modern way of creating reminders without breaking context")
+        .withText("Create reminders that keep you focused on what matters")
         .withAligment(.center)
 
     let betaCode = TextField(clearable: false, numberOfLines: 1)
