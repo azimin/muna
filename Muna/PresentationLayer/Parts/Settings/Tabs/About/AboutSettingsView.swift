@@ -109,7 +109,8 @@ class AboutSettingsView: View, SettingsViewProtocol {
         let containerView = View()
         containerView.addSubview(self.iconImageView)
         self.iconImageView.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.size.equalTo(104)
         }
 
@@ -132,20 +133,20 @@ class AboutSettingsView: View, SettingsViewProtocol {
             make.leading.equalToSuperview()
             make.top.equalTo(self.versionLabel.snp.bottom).offset(6)
             make.trailing.lessThanOrEqualToSuperview()
-            make.height.equalTo(34)
+            make.height.equalTo(85)
             make.bottom.equalToSuperview()
         }
 
         containerView.addSubview(textContainerView)
         textContainerView.snp.makeConstraints { make in
             make.leading.equalTo(self.iconImageView.snp.trailing)
-            make.centerY.equalTo(self.iconImageView)
+            make.top.bottom.equalToSuperview()
             make.trailing.equalToSuperview()
         }
 
         self.addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.separatorView.snp.top).inset(-43)
+            make.bottom.equalTo(self.separatorView.snp.top).inset(-22)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
         }
@@ -155,8 +156,9 @@ class AboutSettingsView: View, SettingsViewProtocol {
         let attributedString = NSMutableAttributedString(
             string:
             """
-            With 💜 from Alex and Egor
+            With 💜 from Alexander and Egor
             Icon from Denis
+            Site from Alex
             """,
             attributes: [
                 .font: NSFont.systemFont(ofSize: 14, weight: .medium),
@@ -165,13 +167,16 @@ class AboutSettingsView: View, SettingsViewProtocol {
         )
 
         attributedString.beginEditing()
-        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
+        let rangeOfAlexander = (attributedString.string as NSString).range(of: "Alexander")
         let rangeOfEgor = (attributedString.string as NSString).range(of: "Egor")
         let rangeOfDenis = (attributedString.string as NSString).range(of: "Denis")
+        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
 
-        attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlex)
+        attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlexander)
         attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
         attributedString.addAttribute(.link, value: "http://denis_ozdemir.dribbble.com", range: rangeOfDenis)
+        attributedString.addAttribute(.link, value: "https://dribbble.com/Lafaki", range: rangeOfAlex)
+        
         attributedString.endEditing()
 
         self.developersLabel.textStorage?.setAttributedString(attributedString)
