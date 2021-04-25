@@ -56,26 +56,26 @@ class TaskCreateShortcuts: PopupView {
         var title: String {
             switch self {
             case .createCard:
-                return "Create item"
+                return "Create reminder"
             case .nextTextField:
-                return "Next text field"
+                return "Next text fields"
             case .nextTimeInterval:
-                return "Next time interval"
+                return "Select a due date and time"
             case .seletTimeInterval:
-                return "Enter time interval"
+                return "Enter Time Interval"
             }
         }
 
         var subtitle: String {
             switch self {
             case .createCard:
-                return "To immidiatly create new item"
+                return "Immediately opens reminder window"
             case .nextTextField:
-                return "To go from reminder to comment and back"
+                return "Allows you toggle between due date to notes fields"
             case .nextTimeInterval:
-                return "To switch time values when reminder suggest multiply values"
+                return "Select between options for your reminder’s due date"
             case .seletTimeInterval:
-                return "To select highlited time interval"
+                return "Set the time you would like to be reminded"
             }
         }
     }
@@ -139,8 +139,8 @@ class TaskCreateShortcuts: PopupView {
         }
 
         let view = ShortcutDescriptionView(
-            title: "Reminder",
-            subtitle: "Example of text you can enter to reminder text field",
+            title: "Set due date",
+            subtitle: "Examples of phrases you can enter into the due date field",
             shortcutItems: []
         )
         self.contentStackView.addArrangedSubview(view)
