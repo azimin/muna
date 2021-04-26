@@ -159,10 +159,6 @@
 		9F7A6AA32616DD72009B7451 /* TipPurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6AA22616DD72009B7451 /* TipPurchaseButton.swift */; };
 		9F7D44FB2525D4A00089B98E /* NSScreen+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */; };
 		9F8369DF24719BFE00D74B3C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8369DE24719BFE00D74B3C /* Observable.swift */; };
-		9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */; };
-		9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */; };
-		9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */; };
-		9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */; };
 		9F93D9A924E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */; };
 		9F97D0C3247DA9C100358953 /* TaskChangeGlobalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C2247DA9C100358953 /* TaskChangeGlobalView.swift */; };
 		9F97D0C5247DAE1C00358953 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F97D0C4247DAE1C00358953 /* MainScreenView.swift */; };
@@ -220,6 +216,10 @@
 		9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE024660235007D92B8 /* ButtonCell.swift */; };
 		9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */; };
 		9FEB558D25E8F3620067685A /* MutedAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */; };
+		9FEEF6F02636E769005C97F8 /* onboarding_part_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6EE2636E764005C97F8 /* onboarding_part_1.mp4 */; };
+		9FEEF6F12636E769005C97F8 /* onboarding_part_3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6EF2636E765005C97F8 /* onboarding_part_3.mp4 */; };
+		9FEEF6F22636E769005C97F8 /* onboarding_part_2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6EC2636E764005C97F8 /* onboarding_part_2.mp4 */; };
+		9FEEF6F32636E769005C97F8 /* onboarding_part_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6ED2636E764005C97F8 /* onboarding_part_4.mp4 */; };
 		9FFA5B9624E453BD004670F0 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFA5B9524E453BD004670F0 /* Switcher.swift */; };
 		A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FB9257496CE07B12EE55AB /* Pods_Muna.framework */; };
 /* End PBXBuildFile section */
@@ -402,10 +402,6 @@
 		9F7A6AA22616DD72009B7451 /* TipPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPurchaseButton.swift; sourceTree = "<group>"; };
 		9F7D44FA2525D4A00089B98E /* NSScreen+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Transform.swift"; sourceTree = "<group>"; };
 		9F8369DE24719BFE00D74B3C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_1.mov; sourceTree = "<group>"; };
-		9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_2.mov; sourceTree = "<group>"; };
-		9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_3.mov; sourceTree = "<group>"; };
-		9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = onboarding_part_4.mov; sourceTree = "<group>"; };
 		9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsServiceProtocol+Control.swift"; sourceTree = "<group>"; };
 		9F97D0C2247DA9C100358953 /* TaskChangeGlobalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChangeGlobalView.swift; sourceTree = "<group>"; };
 		9F97D0C4247DAE1C00358953 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
@@ -464,6 +460,10 @@
 		9FE96BE024660235007D92B8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutedAnalyticsService.swift; sourceTree = "<group>"; };
+		9FEEF6EC2636E764005C97F8 /* onboarding_part_2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_2.mp4; sourceTree = "<group>"; };
+		9FEEF6ED2636E764005C97F8 /* onboarding_part_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_4.mp4; sourceTree = "<group>"; };
+		9FEEF6EE2636E764005C97F8 /* onboarding_part_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_1.mp4; sourceTree = "<group>"; };
+		9FEEF6EF2636E765005C97F8 /* onboarding_part_3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_3.mp4; sourceTree = "<group>"; };
 		9FEF9849247C60EB0047787A /* Muna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Muna-Bridging-Header.h"; sourceTree = "<group>"; };
 		9FFA5B9524E453BD004670F0 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		B3F733D3608C4C230F0A34D4 /* Pods-Muna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muna.release.xcconfig"; path = "Target Support Files/Pods-Muna/Pods-Muna.release.xcconfig"; sourceTree = "<group>"; };
@@ -1247,10 +1247,10 @@
 		9F581E4E2495115D00A34379 /* OnboardingVideos */ = {
 			isa = PBXGroup;
 			children = (
-				9F8BF1F624E090DE000777DA /* onboarding_part_1.mov */,
-				9F8BF1F824E090FE000777DA /* onboarding_part_2.mov */,
-				9F93D9A024E0928200CBBF5E /* onboarding_part_3.mov */,
-				9F93D9A524E1D1CD00CBBF5E /* onboarding_part_4.mov */,
+				9FEEF6EE2636E764005C97F8 /* onboarding_part_1.mp4 */,
+				9FEEF6EC2636E764005C97F8 /* onboarding_part_2.mp4 */,
+				9FEEF6EF2636E765005C97F8 /* onboarding_part_3.mp4 */,
+				9FEEF6ED2636E764005C97F8 /* onboarding_part_4.mp4 */,
 			);
 			path = OnboardingVideos;
 			sourceTree = "<group>";
@@ -1806,16 +1806,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F93D9A124E0928200CBBF5E /* onboarding_part_3.mov in Resources */,
-				9F93D9A624E1D1CD00CBBF5E /* onboarding_part_4.mov in Resources */,
+				9FEEF6F02636E769005C97F8 /* onboarding_part_1.mp4 in Resources */,
+				9FEEF6F32636E769005C97F8 /* onboarding_part_4.mp4 in Resources */,
+				9FEEF6F12636E769005C97F8 /* onboarding_part_3.mp4 in Resources */,
 				239DC91E245D95E8001FA50C /* Main.storyboard in Resources */,
 				239DC91B245D95E8001FA50C /* Preview Assets.xcassets in Resources */,
 				239DC918245D95E8001FA50C /* Assets.xcassets in Resources */,
-				9F8BF1F724E090DE000777DA /* onboarding_part_1.mov in Resources */,
 				9FC3F89124D886E700BC0693 /* GoogleService-Info.plist in Resources */,
 				23895FBF2507720200322248 /* splash_anim.json in Resources */,
+				9FEEF6F22636E769005C97F8 /* onboarding_part_2.mp4 in Resources */,
 				9F3AAE8124E8560E000453C0 /* fridge.icns in Resources */,
-				9F8BF1F924E090FE000777DA /* onboarding_part_2.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
