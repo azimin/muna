@@ -40,6 +40,8 @@ final class InAppPurchaseManager {
     private let inAppPurchaseService: InAppProductPurchaseService
     private let inAppRecieptValidationService: InAppRecieptValidationService
 
+    private var loadingProductsTry = 0
+
     init(
         inAppProductsService: InAppProductsService,
         inAppPurchaseService: InAppProductPurchaseService,
@@ -77,13 +79,18 @@ final class InAppPurchaseManager {
 
     func buyProduct(_ productId: ProductIds, completion: @escaping PurchaseCompletion) {
         guard let inAppItem = self.products[productId.rawValue], let product = inAppItem.product else {
-            self.loadProducts { [weak self] result in
-                switch result {
-                case .success:
-                    self?.buyProduct(productId, completion: completion)
-                case .failure:
-                    completion(.error(MunaError.cantGetInAppProducts))
+            self.loadingProductsTry += 1
+            if loadingProductsTry < 3 {
+                self.loadProducts { [weak self] result in
+                    switch result {
+                    case .success:
+                        self?.buyProduct(productId, completion: completion)
+                    case .failure:
+                        completion(.error(MunaError.cantGetInAppProducts))
+                    }
                 }
+            } else {
+                completion(.error(MunaError.cantGetInAppProducts))
             }
             return
         }
