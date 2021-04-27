@@ -193,7 +193,7 @@ class AssistentItemView: View {
                 maker.width.equalToSuperview()
                 maker.width.equalTo(videoView.snp.height).multipliedBy(aspectRatio)
             }
-            if let url = Bundle.main.url(forResource: name, withExtension: "mov") {
+            if let url = Bundle.main.url(forResource: name, withExtension: "mp4") {
                 videoView.player = AVPlayer(url: url)
                 videoView.player?.play()
             } else {

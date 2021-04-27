@@ -150,6 +150,33 @@ class AboutSettingsView: View, SettingsViewProtocol {
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
         }
+
+        self.visitSiteButton.target = self
+        self.visitSiteButton.action = #selector(self.visitWebpage)
+
+        self.getHelpButton.target = self
+        self.getHelpButton.action = #selector(self.getHelp)
+
+        self.acknowledgementsButton.target = self
+        self.acknowledgementsButton.action = #selector(self.visitAcknowledgement)
+    }
+
+    @objc
+    func visitWebpage() {
+        let url = URL(string: "https://muna.live")!
+        NSWorkspace.shared.open(url)
+    }
+
+    @objc
+    func getHelp() {
+        let url = URL(string: "https://muna.live")!
+        NSWorkspace.shared.open(url)
+    }
+
+    @objc
+    func visitAcknowledgement() {
+        let url = URL(string: "https://muna.live/acknowledgement")!
+        NSWorkspace.shared.open(url)
     }
 
     func setupLinks() {

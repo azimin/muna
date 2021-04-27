@@ -55,5 +55,23 @@ class PrivacyView: View {
         self.stackView.addArrangedSubview(self.termsOfUseButton)
         self.stackView.addArrangedSubview(self.anotherDotView)
         self.stackView.addArrangedSubview(self.restoreButton)
+
+        self.privacyPolicyButton.target = self
+        self.privacyPolicyButton.action = #selector(self.openPrivacy)
+
+        self.termsOfUseButton.target = self
+        self.termsOfUseButton.action = #selector(self.openTerms)
+    }
+
+    @objc
+    func openPrivacy() {
+        let url = URL(string: "https://muna.live/privacy")!
+        NSWorkspace.shared.open(url)
+    }
+
+    @objc
+    func openTerms() {
+        let url = URL(string: "https://muna.live/terms")!
+        NSWorkspace.shared.open(url)
     }
 }

@@ -98,10 +98,10 @@ class OnboardingStepViewController: NSViewController, OnboardingContainerProtoco
         self.videoView.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(4)
             maker.width.equalToSuperview()
-            maker.width.equalTo(self.videoView.snp.height).multipliedBy(1.6)
+            maker.width.equalTo(self.videoView.snp.height).multipliedBy(1.45)
         }
 
-        if let url = Bundle.main.url(forResource: self.style.videoName, withExtension: "mov") {
+        if let url = Bundle.main.url(forResource: self.style.videoName, withExtension: "mp4") {
             self.videoView.player = AVPlayer(url: url)
             self.videoView.player?.play()
         } else {
