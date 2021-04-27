@@ -312,7 +312,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         self.statusBarMenu = statusBarMenu
 
         let makeFullScreenshotItem = NSMenuItem(
-            title: "Create text task",
+            title: "Capture a written note",
             action: #selector(self.toogleFullscreenScreenshotState),
             keyEquivalent: "1"
         )
@@ -320,7 +320,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarMenu.addItem(makeFullScreenshotItem)
 
         let makeSelectedAreaScreenshot = NSMenuItem(
-            title: "Create visual task",
+            title: "Capture a visual note",
             action: #selector(self.toggleScreenshotState),
             keyEquivalent: "2"
         )
@@ -328,7 +328,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarMenu.addItem(makeSelectedAreaScreenshot)
 
         let item = NSMenuItem(
-            title: "Show Items",
+            title: "Show Reminders",
             action: #selector(self.togglePane),
             keyEquivalent: "w"
         )
