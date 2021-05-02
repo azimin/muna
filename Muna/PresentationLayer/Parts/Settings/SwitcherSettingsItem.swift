@@ -7,15 +7,18 @@
 //
 
 import Cocoa
-
+import SnapKit
 class SwitcherSettingsItem: View {
     let titleLabel: Label
 
-    let descriptionLabel: Label
+    let descriptionLabel: NSTextView
+    private var descriptionHeightConstraint: Constraint?
 
     let switcher = Switcher()
 
     private let style: SettingsItemView.Style
+
+    private let descriptionSize: CGFloat
 
     init(style: SettingsItemView.Style) {
         let titleSize: CGFloat
@@ -35,11 +38,18 @@ class SwitcherSettingsItem: View {
 
         self.style = style
 
+        self.descriptionSize = descriptionSize
+
         self.titleLabel = Label(fontStyle: .bold, size: titleSize)
             .withTextColorStyle(.titleAccent)
 
-        self.descriptionLabel = Label(fontStyle: .medium, size: descriptionSize)
-            .withTextColorStyle(.title60Accent)
+        self.descriptionLabel = NSTextView()
+        self.descriptionLabel.font = FontStyle.customFont(style: .medium, size: descriptionSize)
+        self.descriptionLabel.textColor =  ColorStyle.title60Accent.color
+        self.descriptionLabel.drawsBackground = false
+        self.descriptionLabel.isEditable = false
+        self.descriptionLabel.isSelectable = true
+        self.descriptionLabel.textContainerInset = .zero
 
         super.init(frame: .zero)
 
@@ -60,15 +70,6 @@ class SwitcherSettingsItem: View {
             }
         }
 
-        if self.style != .oneLine {
-            self.addSubview(self.descriptionLabel)
-            self.descriptionLabel.snp.makeConstraints { make in
-                make.leading.equalToSuperview()
-                make.bottom.equalToSuperview()
-                make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
-            }
-        }
-
         self.addSubview(self.switcher)
         self.switcher.snp.makeConstraints { make in
             if self.style == .oneLine {
@@ -78,5 +79,40 @@ class SwitcherSettingsItem: View {
             }
             make.trailing.equalToSuperview()
         }
+
+        if self.style != .oneLine {
+            self.addSubview(self.descriptionLabel)
+            self.descriptionLabel.snp.makeConstraints { make in
+                make.leading.equalToSuperview()
+                make.trailing.equalTo(self.switcher.snp.leading).inset(8)
+                make.bottom.equalToSuperview()
+                self.descriptionHeightConstraint = make.height.equalTo(0).constraint
+                make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
+            }
+        }
+    }
+
+    func setDescription(_ string: String, withLink link: String? = nil, linkedPart: String? = nil) {
+        let attributedString = NSMutableAttributedString(
+            string: string,
+            attributes: [
+                .font: FontStyle.customFont(style: .medium, size: descriptionSize) as NSFont,
+                .foregroundColor: ColorStyle.title60Accent.color as NSColor
+            ]
+        )
+
+        if let link = link, let linkedPart = linkedPart {
+            attributedString.beginEditing()
+
+            let rangeOfText = (attributedString.string as NSString).range(of: linkedPart)
+            
+            attributedString.addAttribute(.link, value: link, range: rangeOfText)
+            
+            attributedString.endEditing()
+        }
+    
+        self.descriptionHeightConstraint?.update(offset: attributedString.calculateHeight(forWidth: self.descriptionLabel.frame.width))
+        
+        self.descriptionLabel.textStorage?.setAttributedString(attributedString)
     }
 }

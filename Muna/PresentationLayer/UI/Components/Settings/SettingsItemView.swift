@@ -43,7 +43,7 @@ class SettingsItemView: NSView {
 
     init(isNeededShowTitle: Bool, style: Style, needToShake: Bool) {
         self.showPassedTasksItem = SwitcherSettingsItem(style: style)
-        self.useAnalyticsSwitcherItem = SwitcherSettingsItem(style: .oneLine)
+        self.useAnalyticsSwitcherItem = SwitcherSettingsItem(style: style)
         self.startupSettingItem = SwitcherSettingsItem(style: style)
         self.notificationsSettingItem = SliderSettingsItem(minValue: 0, maxValue: 4, style: style)
         self.storageSettingItem = SliderSettingsItem(minValue: 0, maxValue: 3, style: style)
@@ -105,16 +105,21 @@ class SettingsItemView: NSView {
         }
 
         self.startupSettingItem.titleLabel.text = "Launch on startup"
-        self.startupSettingItem.descriptionLabel.text = "Muna will open automatically upon system restart"
+        self.startupSettingItem.setDescription("Muna will open automatically upon system restart")
         contentStackView.addArrangedSubview(self.startupSettingItem)
         contentStackView.setCustomSpacing(isNeededShowTitle ? 10 : 24, after: self.startupSettingItem)
 
         self.showPassedTasksItem.titleLabel.text = "Number of uncompleted tasks"
-        self.showPassedTasksItem.descriptionLabel.text = "Show number of uncompleted tasks"
+        self.showPassedTasksItem.setDescription("Show number of uncompleted tasks")
         contentStackView.addArrangedSubview(self.showPassedTasksItem)
         contentStackView.setCustomSpacing(24, after: self.showPassedTasksItem)
 
         self.useAnalyticsSwitcherItem.titleLabel.text = "Share anonymous usage data"
+        self.useAnalyticsSwitcherItem.setDescription(
+            "We use Amplitude for usage data (our events) and App Center for crash reports.",
+            withLink: "https://www.notion.so/muna0/Muna-Analytics-66145c7e8d41495bb84d01a3c9b63663",
+            linkedPart: "(our events)"
+        )
         contentStackView.addArrangedSubview(self.useAnalyticsSwitcherItem)
         contentStackView.setCustomSpacing(10, after: self.useAnalyticsSwitcherItem)
 

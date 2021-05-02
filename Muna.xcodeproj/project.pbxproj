@@ -76,6 +76,7 @@
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
 		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
+		23E1E3FE263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1E3FD263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
 		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
 		23FA25292484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */; };
@@ -308,6 +309,7 @@
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersmissionsService.swift; sourceTree = "<group>"; };
 		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+LogPermissions.swift"; sourceTree = "<group>"; };
+		23E1E3FD263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Calculations.swift"; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
 		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
 		23FA25282484D15500CD69C4 /* ENTimeMintuesOffsetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeMintuesOffsetParser.swift; sourceTree = "<group>"; };
@@ -792,6 +794,7 @@
 			isa = PBXGroup;
 			children = (
 				239DD9ED25F0BA840093207D /* NotificationCenter+Name.swift */,
+				23E1E3FD263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2083,6 +2086,7 @@
 				23B9865924E05E8300AF1BDD /* PresentationLayerConstants.swift in Sources */,
 				9FC9CDD22469B6AA0018FAD7 /* TaskCreateView.swift in Sources */,
 				9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */,
+				23E1E3FE263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift in Sources */,
 				9FAB1DA6250E60CB00DA4971 /* HabitAppsView.swift in Sources */,
 				9F025C0F24633D1700F05D81 /* Blocks.swift in Sources */,
 				9F326FDE249959E70095DEA3 /* OnboardingSubviewHowToRemind.swift in Sources */,
