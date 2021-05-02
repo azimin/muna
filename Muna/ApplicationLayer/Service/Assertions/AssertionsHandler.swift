@@ -74,5 +74,5 @@ public func appAssertionFailure(
         fatalError("No assertion error handler")
     }
 
-    assertionFailure(message(), file: file, line: line)
+//    assertionFailure(message(), file: file, line: line)
 }

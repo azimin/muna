@@ -90,10 +90,12 @@ final class InAppPurchaseManager {
                     }
                 }
             } else {
+                self.loadingProductsTry = 0
                 completion(.error(MunaError.cantGetInAppProducts))
             }
             return
         }
+        self.loadingProductsTry = 0
 
         self.inAppPurchaseService.buyProduct(product) { [weak self] result in
             switch result {
@@ -106,6 +108,10 @@ final class InAppPurchaseManager {
                     )
                     completion(.purchased)
                 case .subscription:
+                    ServiceLocator.shared.securityStorage.save(
+                        string: product.productIdentifier,
+                        forKey: SecurityStorage.Key.productIdSubscription.rawValue
+                    )
                     self?.validateSubscription { result in
                         switch result {
                         case .purchased:

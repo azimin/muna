@@ -216,18 +216,20 @@ class TipsSettingsView: View, SettingsViewProtocol {
     @objc
     func subscriptionPurchaseAction() {
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
-            switch status {
-            case .purchased:
-                self.updateState(state: .thankYou)
-                self.playPurchaseAnimation()
-                self.updatePurchaseButton(subscribed: true)
-            case .cancelled:
-                break
-            case .error:
-                ServiceLocator.shared.windowManager.showAlert(
-                    title: "Oops, something went wrong!",
-                    text: "We are sorry, but we can't process your payment now 😢"
-                )
+            DispatchQueue.main.async {
+                switch status {
+                case .purchased:
+                    self.updateState(state: .thankYou)
+                    self.playPurchaseAnimation()
+                    self.updatePurchaseButton(subscribed: true)
+                case .cancelled:
+                    break
+                case .error:
+                    ServiceLocator.shared.windowManager.showAlert(
+                        title: "Oops, something went wrong!",
+                        text: "We are sorry, but we can't process your payment now 😢"
+                    )
+                }
             }
         }
     }

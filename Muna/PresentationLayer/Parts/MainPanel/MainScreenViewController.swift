@@ -73,13 +73,14 @@ class MainScreenViewController: NSViewController {
 
         let expiredDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.expiredDate.rawValue)
         let oneTimeTipDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.purchaseTipDate.rawValue)
-        
+
         let oneMonthInSeconds = PresentationLayerConstants.oneMonthInSeconds
         
         var isTipsViewHidden = true
         
         if let expiredDate = expiredDate {
-            if expiredDate > oneMonthInSeconds {
+            let dateSinceExpiration = Date().timeIntervalSince1970 - expiredDate
+            if dateSinceExpiration > oneMonthInSeconds {
                 isTipsViewHidden = false
             } else {
                 isTipsViewHidden = true
@@ -90,7 +91,8 @@ class MainScreenViewController: NSViewController {
         }
 
         if let oneTimeTipDate = oneTimeTipDate, oneTimeTipDate > oneMonthInSeconds * 4 {
-            if oneTimeTipDate > oneMonthInSeconds * 4 {
+            let dateSinceTip = Date().timeIntervalSince1970 - oneTimeTipDate
+            if dateSinceTip > oneMonthInSeconds * 4 {
                 isTipsViewHidden = false
             } else {
                 isTipsViewHidden = true
