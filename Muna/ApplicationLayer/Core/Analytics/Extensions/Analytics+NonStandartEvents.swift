@@ -14,4 +14,15 @@ extension AnalyticsServiceProtocol {
             "type": name,
         ])
     }
+
+    func logTipGiven(isSubscription: Bool) {
+        ServiceLocator.shared.analytics.logEvent(name: "Gave Tip", properties: [
+            "type": isSubscription ? "subscription" : "one_time_purchase",
+        ])
+
+        ServiceLocator.shared.analytics.setPersonProperty(
+            name: "supporter",
+            value: true
+        )
+    }
 }
