@@ -116,7 +116,7 @@ class SettingsItemView: NSView {
 
         self.useAnalyticsSwitcherItem.titleLabel.text = "Share anonymous usage data"
         self.useAnalyticsSwitcherItem.setDescription(
-            "We report this events to Amplitude for usage data and use App Center for crash reports.",
+            "We report this events to Amplitude for usage data and use App Center for crash reports",
             withLink: "https://www.notion.so/muna0/Muna-Analytics-66145c7e8d41495bb84d01a3c9b63663",
             linkedPart: "this events"
         )

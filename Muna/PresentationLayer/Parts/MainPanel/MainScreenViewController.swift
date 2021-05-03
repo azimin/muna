@@ -84,7 +84,6 @@ class MainScreenViewController: NSViewController {
                 isTipsViewHidden = false
             } else {
                 isTipsViewHidden = true
-                
             }
         } else {
             isTipsViewHidden = false
