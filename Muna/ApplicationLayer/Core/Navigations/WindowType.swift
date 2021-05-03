@@ -24,7 +24,7 @@ enum WindowType: Equatable, Hashable {
         case let .panel(item):
             return item == nil ? "panel" : "panel_selected_item"
         case .screenshot:
-            return "screenshot"
+            return "visual_task_creation"
         case .textTaskCreation:
             return "text_task_creation"
         case .debug:
