@@ -25,6 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     lazy var windowManager = ServiceLocator.shared.windowManager
 
+    var themeObservation: NSKeyValueObservation?
+
     func handleAssertion(error: NSError) {
         var properties: [String: AnalyticsValueProtocol] = [:]
 
@@ -143,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
         ServiceLocator.shared.inAppPurchaseManager.validateSubscription(nil)
 
-        self.refreshNumberOfPassedItems()
+        self.refreshNumberOfPassedItems(force: true)
     }
 
     func scheduleMissingNotifications() {
@@ -178,13 +180,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func setupUpdateItemObserver() {
         self.itemUpdateObservable = ServiceLocator.shared.itemsDatabase.itemUpdated.observe(self) { (_, _) in
-            self.refreshNumberOfPassedItems()
+            self.refreshNumberOfPassedItems(force: false)
         }
 
         let timer = Timer(timeInterval: 10, repeats: true) { (_) in
-            self.refreshNumberOfPassedItems()
+            self.refreshNumberOfPassedItems(force: false)
         }
         RunLoop.main.add(timer, forMode: .common)
+
+        self.themeObservation = NSApp.observe(\.effectiveAppearance) { (_, _) in
+            OperationQueue.main.addOperation {
+                self.refreshNumberOfPassedItems(force: true)
+            }
+        }
     }
 
     func setupShortcuts() {
@@ -238,7 +246,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     private var statusBarNumber = 0
 
-    func updateStatusBar(number: Int) {
+    func updateStatusBar(number: Int, force: Bool) {
         guard let statusBarItem = self.statusBarItem else {
             return
         }
@@ -257,7 +265,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             return
         }
 
-        guard self.statusBarNumber != number else {
+        if force == false, self.statusBarNumber == number {
             return
         }
 
@@ -268,12 +276,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             string: string,
             attributes: [
                 .font: FontStyle.customFont(style: .regular, size: 14),
-                .foregroundColor: NSColor.white,
+                .foregroundColor: ColorStyle.titleAccent.color,
             ]
         )
         attributedString.addAttribute(
             .foregroundColor,
-            value: ColorStyle.redLight.color,
+            value: ColorStyle.redStatusBarWarning.color,
             range: NSRange(location: 2, length: string.count - 3)
         )
 
@@ -283,9 +291,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarItem.button?.attributedTitle = attributedString
     }
 
-    func refreshNumberOfPassedItems() {
+    func refreshNumberOfPassedItems(force: Bool) {
         let number = ServiceLocator.shared.itemsDatabase.numberOfPassedItem
-        self.updateStatusBar(number: number)
+        self.updateStatusBar(number: number, force: force)
     }
 
     func setupStatusBarItem() {
@@ -300,10 +308,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         statusBarItem.button?.image = image
         statusBarItem.button?.imagePosition = .imageLeft
-//        statusBarItem.button?.addSubview(self.iconView)
-//        self.iconView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
 
         let statusBarMenu = NSMenu(title: "Cap Status Bar Menu")
         statusBarItem.menu = statusBarMenu
@@ -370,7 +374,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     @objc
     func handlePassedItemsSetting() {
-        self.refreshNumberOfPassedItems()
+        self.refreshNumberOfPassedItems(force: true)
+    }
+
+    @objc
+    func forceRefreshStatusBar() {
+        self.refreshNumberOfPassedItems(force: true)
     }
 
     @objc func closeApp() {

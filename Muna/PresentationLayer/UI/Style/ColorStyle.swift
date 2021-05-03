@@ -36,6 +36,7 @@ enum ColorStyle {
     case warningSelected
     case redLight
     case redDots
+    case redStatusBarWarning
 
     case separator
     case clear
@@ -96,6 +97,8 @@ enum ColorStyle {
                 return NSColor(hex: "FD7D7D")
             case .redDots:
                 return NSColor(hex: "FF2F2F")
+            case .redStatusBarWarning:
+                return NSColor(hex: "FD7D7D")
             case .separator:
                 return NSColor(hex: "525252").withAlphaComponent(0.5)
             case .alwaysWhite:
@@ -155,6 +158,8 @@ enum ColorStyle {
                 return NSColor(hex: "FF8484")
             case .redDots:
                 return NSColor(hex: "FF2F2F")
+            case .redStatusBarWarning:
+                return NSColor(hex: "DF4141")
             case .separator:
                 return NSColor.black.withAlphaComponent(0.13)
             case .alwaysWhite:
