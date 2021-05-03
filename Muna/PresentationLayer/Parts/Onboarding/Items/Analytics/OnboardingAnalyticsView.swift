@@ -56,7 +56,7 @@ final class OnboardingAnalyticsView: View {
 
     private func setupInitialLayout() {
         self.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 527, height: 570))
+            make.width.equalTo(527)
         }
 
         self.addSubview(self.analyticsImageView)
@@ -85,8 +85,7 @@ final class OnboardingAnalyticsView: View {
         self.addSubview(self.linksLabel)
         self.linksLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(100)
-            make.trailing.equalToSuperview().inset(100)
+            make.width.equalTo(327)
             make.top.equalTo(self.descriptionLabel.snp.bottom).offset(25)
         }
 
@@ -126,5 +125,12 @@ final class OnboardingAnalyticsView: View {
         attributedString.endEditing()
 
         self.linksLabel.textStorage?.setAttributedString(attributedString)
+
+        self.linksLabel.snp.makeConstraints { make in
+            let height = self.linksLabel.attributedString().calculateHeight(
+                forWidth: 327
+            )
+            make.height.equalTo(height)
+        }
     }
 }
