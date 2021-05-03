@@ -139,6 +139,13 @@ class TaskCreateView: PopupView {
 
     func addMonitor() {
         self.removeMonitor()
+
+        OperationQueue.main.addOperation {
+            self.window?.initialFirstResponder = self.reminderTextField.textField
+            self.reminderTextField.textField.nextKeyView = self.commentTextField.textField
+            self.commentTextField.textField.nextKeyView = self.reminderTextField.textField
+        }
+
         self.downMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [weak self] (event) -> NSEvent? in
             guard let self = self else { return event }
 
@@ -165,19 +172,11 @@ class TaskCreateView: PopupView {
     override func viewDidUnhide() {
         super.viewDidUnhide()
         self.addMonitor()
-
-        self.window?.initialFirstResponder = self.reminderTextField.textField
-        self.reminderTextField.textField.nextKeyView = self.commentTextField.textField
-        self.commentTextField.textField.nextKeyView = self.reminderTextField.textField
     }
 
     override func viewDidHide() {
         super.viewDidHide()
         self.removeMonitor()
-
-        self.window?.initialFirstResponder = nil
-        self.reminderTextField.textField.nextKeyView = nil
-        self.commentTextField.textField.nextKeyView = nil
     }
 
     override func viewWillMove(toWindow newWindow: NSWindow?) {
@@ -189,6 +188,10 @@ class TaskCreateView: PopupView {
     }
 
     func removeMonitor() {
+        self.window?.initialFirstResponder = nil
+        self.reminderTextField.textField.nextKeyView = nil
+        self.commentTextField.textField.nextKeyView = nil
+
         if let monitor = self.downMonitor {
             NSEvent.removeMonitor(monitor)
         }
