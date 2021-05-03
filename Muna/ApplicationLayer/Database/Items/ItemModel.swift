@@ -38,7 +38,18 @@ class ItemModel: ItemModelProtocol, Codable {
         return self.savingType ?? .screenshot
     }
 
-    var numberOfTimeChanges: Int?
+    var numberOfTimeChanges: Int? {
+        didSet {
+            if let numberOfTimeChanges = numberOfTimeChanges,
+               numberOfTimeChanges > 0,
+               isComplited == false {
+                ServiceLocator.shared.analytics.increasePersonProperty(
+                    name: "number_of_item_time_moved_actions",
+                    by: 1
+                )
+            }
+        }
+    }
 
     var shouldInvalidHeightCache: Bool = false
     var commentHeight: CGFloat {

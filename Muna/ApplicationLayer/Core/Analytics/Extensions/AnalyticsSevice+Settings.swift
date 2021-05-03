@@ -14,7 +14,7 @@ extension AnalyticsServiceProtocol {
     }
 
     func logSetShowNumberOfUncomplitedItems(isShow: Bool) {
-        self.setPersonProperty(name: "show_number_of_uncompleted_items", value: isShow)
+        self.setPersonProperty(name: "is_showing_number_of_uncompleted_items", value: isShow)
     }
 
     func logLaunchOnStartup(shouldLaunch: Bool) {
