@@ -161,6 +161,12 @@ class Preferences {
     @UserDefaultsEntry(key: Key.launchOnStartup)
     static var launchOnStartup = false {
         didSet {
+            if oldValue != self.launchOnStartup {
+                ServiceLocator.shared.analytics.logLaunchOnStartup(
+                    shouldLaunch: self.launchOnStartup
+                )
+            }
+
             LaunchAtLogin.isEnabled = self.launchOnStartup
         }
     }
