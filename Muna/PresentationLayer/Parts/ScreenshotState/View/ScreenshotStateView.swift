@@ -155,16 +155,6 @@ class ScreenshotStateView: View {
         let topSpace = aroundRect.minY
         let bottomSpace = self.bounds.maxY - aroundRect.maxY
 
-        let rightSpaceFromScreenshot = self.bounds.maxX - self.screenshotFrame.maxX
-        let leftSpaceFromScreenshot = self.screenshotFrame.minX
-        let topSpaceFromScreenshot = self.screenshotFrame.minY
-        let bottomSpaceFromScreenshot = self.bounds.maxY - self.screenshotFrame.maxY
-
-        let isEnoughRightSpaceFromScreenshot = rightSpaceFromScreenshot >= rect.width + 16
-        let isEnoughLeftSpaceFromScreenshot = leftSpaceFromScreenshot >= rect.width + 16
-        let isEnoughTopSpaceFromScreenshot = topSpaceFromScreenshot >= rect.height + 16
-        let isEnoughBottomSpaceFromScreenshot = bottomSpaceFromScreenshot >= rect.height + 16
-
         let isEnoughRightSpace = rightSpace >= rect.width + 16
         let isEnoughLeftSpace = leftSpace >= rect.width + 16
         let isEnoughTopSpace = topSpace >= rect.height + 16
@@ -174,145 +164,23 @@ class ScreenshotStateView: View {
 
         if isEnoughRightSpace {
             newRect.origin.x = aroundRect.maxX + 16
-
-            if !self.screenshotFrame.intersects(newRect) {
-                return newRect
-            }
-        }
-
-        if isEnoughLeftSpace {
-            newRect.origin.x = aroundRect.minX - 16 - newRect.width
-
-            if !self.screenshotFrame.intersects(newRect) {
-                return newRect
-            }
-        }
-
-        if isEnoughLeftSpace {
-            newRect.origin.x = aroundRect.minX - 16 - newRect.width
-
-            if !self.screenshotFrame.intersects(newRect) {
-                return newRect
-            }
-        }
-
-        if isEnoughTopSpace {
+        } else if isEnoughLeftSpace {
+            newRect.origin.x = aroundRect.minX - newRect.width - 16
+        } else {
             newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.minY - 16 - newRect.height
         }
 
-        if isEnoughBottomSpace, !isEnoughTopSpace {
-            newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.maxY + 16
+        if isEnoughBottomSpace && isEnoughTopSpace {
+            newRect.origin.y = aroundRect.midY - newRect.minY / 2
+        }
+        
+        if !isEnoughBottomSpace && isEnoughTopSpace {
+            newRect.origin.y = self.bounds.maxY - newRect.height - 16
         }
 
-        if self.bounds.minX > newRect.origin.x {
-            newRect.origin.x = self.bounds.minX + 16
+        if isEnoughBottomSpace && !isEnoughTopSpace {
+            newRect.origin.y = 16
         }
-        if self.bounds.maxX < newRect.maxX {
-            newRect.origin.x = self.bounds.maxX - 16 - newRect.width
-        }
-
-        if !self.screenshotFrame.intersects(newRect) {
-            return newRect
-        }
-
-        if isEnoughLeftSpaceFromScreenshot, isEnoughTopSpace {
-            newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.minY - newRect.height - 16
-
-            if self.screenshotFrame.intersects(newRect) {
-                newRect.origin.x = self.screenshotFrame.minX - 16 - newRect.width
-                return newRect
-            }
-        }
-
-        if isEnoughLeftSpaceFromScreenshot, isEnoughBottomSpace {
-            newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.maxY + 16
-
-            if self.screenshotFrame.intersects(newRect) {
-                newRect.origin.x = self.screenshotFrame.minX - 16 - newRect.width
-                return newRect
-            }
-        }
-
-        if isEnoughRightSpaceFromScreenshot, isEnoughTopSpace {
-            newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.minY - newRect.height - 16
-
-            if self.screenshotFrame.intersects(newRect) {
-                newRect.origin.x = self.screenshotFrame.maxX + 16
-                return newRect
-            }
-        }
-
-        if isEnoughRightSpaceFromScreenshot, isEnoughBottomSpace {
-            newRect.origin.x = aroundRect.midX - newRect.width / 2
-            newRect.origin.y = aroundRect.maxY + 16
-
-            if self.screenshotFrame.intersects(newRect) {
-                newRect.origin.x = self.screenshotFrame.maxX + 16
-                return newRect
-            }
-        }
-
-        if isEnoughRightSpaceFromScreenshot {
-            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
-            newRect.origin.x = self.screenshotFrame.maxX + 16
-
-            if !aroundRect.intersects(newRect) {
-                return newRect
-            }
-        }
-
-        if isEnoughLeftSpaceFromScreenshot {
-            newRect.origin.y = self.screenshotFrame.midY - newRect.height / 2
-            newRect.origin.x = self.screenshotFrame.minX - 16 - newRect.width
-
-            if !aroundRect.intersects(newRect) {
-                return newRect
-            }
-        }
-
-        if isEnoughTopSpaceFromScreenshot {
-            newRect.origin.x = self.screenshotFrame.midX - newRect.width / 2
-            newRect.origin.y = self.screenshotFrame.minY - newRect.height - 16
-
-            if !aroundRect.intersects(newRect) {
-                newRect.origin.x = aroundRect.maxX + 16
-            }
-            return newRect
-        }
-
-        if isEnoughBottomSpaceFromScreenshot {
-            newRect.origin.x = self.screenshotFrame.midX - newRect.width / 2
-            newRect.origin.y = self.screenshotFrame.maxY + 16
-
-            if !aroundRect.intersects(newRect) {
-                newRect.origin.x = aroundRect.maxX + 16
-            }
-            return newRect
-        }
-
-        newRect.origin.y = aroundRect.midY - newRect.height / 2
-
-        if isEnoughRightSpace {
-            newRect.origin.x = aroundRect.maxX + 16
-        }
-
-        if isEnoughLeftSpace {
-            newRect.origin.x = aroundRect.minX - 16 - newRect.width
-        }
-
-        if self.bounds.minY > newRect.origin.y {
-            newRect.origin.y = self.bounds.minY + 16
-        }
-
-        if self.bounds.maxY < newRect.maxY {
-            newRect.origin.y = self.bounds.maxY - 16 - newRect.height
-        }
-
         return newRect
     }
 
