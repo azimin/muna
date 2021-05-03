@@ -11,7 +11,11 @@ import SnapKit
 
 final class OnboardingAnalyticsView: View {
 
-    let analyticsImageView = ImageView(name: "analytics_icon")
+    let analyticsImageView = Button()
+        .withImageName(
+            "analytics_icon",
+            color: .titleAccent
+        )
 
     let titleLabel = Label(fontStyle: .bold, size: 30)
         .withTextColorStyle(.titleAccent)
@@ -56,6 +60,7 @@ final class OnboardingAnalyticsView: View {
         }
 
         self.addSubview(self.analyticsImageView)
+        self.analyticsImageView.isEnabled = false
         self.analyticsImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(71)
