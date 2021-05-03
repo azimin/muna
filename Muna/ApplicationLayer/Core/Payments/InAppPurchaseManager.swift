@@ -166,7 +166,7 @@ final class InAppPurchaseManager {
             switch result {
             case let .success(successResult):
                 switch successResult {
-                case .expired:
+                case let .expired(expiryDate, _):
                     ServiceLocator.shared.securityStorage.save(
                         bool: false,
                         forKey: SecurityStorage.Key.isUserPro.rawValue
@@ -175,7 +175,7 @@ final class InAppPurchaseManager {
                         forKey: SecurityStorage.Key.productIdSubscription.rawValue
                     )
                     ServiceLocator.shared.securityStorage.save(
-                        double: Date().timeIntervalSince1970,
+                        double: expiryDate.timeIntervalSince1970,
                         for: SecurityStorage.Key.expiredDate.rawValue
                     )
                     completion?(.expired)
