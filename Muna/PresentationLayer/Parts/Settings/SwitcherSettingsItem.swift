@@ -83,7 +83,7 @@ class SwitcherSettingsItem: View {
         if self.style != .oneLine {
             self.addSubview(self.descriptionLabel)
             self.descriptionLabel.snp.makeConstraints { make in
-                make.leading.equalToSuperview()
+                make.leading.equalToSuperview().inset(-3.5)
                 make.trailing.equalTo(self.switcher.snp.leading).inset(8)
                 make.bottom.equalToSuperview()
                 self.descriptionHeightConstraint = make.height.equalTo(0).constraint

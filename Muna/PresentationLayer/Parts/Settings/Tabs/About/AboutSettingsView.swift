@@ -130,7 +130,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
         textContainerView.addSubview(self.developersLabel)
         self.developersLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(-3)
             make.top.equalTo(self.versionLabel.snp.bottom).offset(6)
             make.trailing.lessThanOrEqualToSuperview()
             make.height.equalTo(85)
@@ -139,7 +139,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
 
         containerView.addSubview(textContainerView)
         textContainerView.snp.makeConstraints { make in
-            make.leading.equalTo(self.iconImageView.snp.trailing)
+            make.leading.equalTo(self.iconImageView.snp.trailing).inset(-12)
             make.top.bottom.equalToSuperview()
             make.trailing.equalToSuperview()
         }
@@ -148,7 +148,7 @@ class AboutSettingsView: View, SettingsViewProtocol {
         containerView.snp.makeConstraints { make in
             make.bottom.equalTo(self.separatorView.snp.top).inset(-22)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
+            make.width.equalTo(392)
         }
 
         self.visitSiteButton.target = self
@@ -180,16 +180,20 @@ class AboutSettingsView: View, SettingsViewProtocol {
     }
 
     func setupLinks() {
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 4
+
         let attributedString = NSMutableAttributedString(
             string:
             """
             With 💜 from Alexander and Egor
             Icon from Denis
-            Site from Alex
+            Site designed by Alex L., built by Ilya
             """,
             attributes: [
                 .font: NSFont.systemFont(ofSize: 14, weight: .medium),
-                .foregroundColor: ColorStyle.title60AccentAlpha.color
+                .foregroundColor: ColorStyle.title60AccentAlpha.color,
+                .paragraphStyle: style
             ]
         )
 
@@ -197,12 +201,14 @@ class AboutSettingsView: View, SettingsViewProtocol {
         let rangeOfAlexander = (attributedString.string as NSString).range(of: "Alexander")
         let rangeOfEgor = (attributedString.string as NSString).range(of: "Egor")
         let rangeOfDenis = (attributedString.string as NSString).range(of: "Denis")
-        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex")
+        let rangeOfAlex = (attributedString.string as NSString).range(of: "Alex L.")
+        let rangeOfIlya = (attributedString.string as NSString).range(of: "Ilya")
 
         attributedString.addAttribute(.link, value: "https://github.com/azimin", range: rangeOfAlexander)
         attributedString.addAttribute(.link, value: "https://github.com/barbatosso", range: rangeOfEgor)
-        attributedString.addAttribute(.link, value: "http://denis_ozdemir.dribbble.com", range: rangeOfDenis)
+        attributedString.addAttribute(.link, value: "https://denis_ozdemir.dribbble.com", range: rangeOfDenis)
         attributedString.addAttribute(.link, value: "https://dribbble.com/Lafaki", range: rangeOfAlex)
+        attributedString.addAttribute(.link, value: "https://github.com/ilyamilosevic", range: rangeOfIlya)
         
         attributedString.endEditing()
 
