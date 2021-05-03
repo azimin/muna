@@ -12,4 +12,8 @@ extension AnalyticsServiceProtocol {
     func logCapturePermissions(isEnabled: Bool) {
         self.setPersonProperty(name: "screen_capture_permissions", value: isEnabled)
     }
+
+    func logSetShowNumberOfUncomplitedItems(isShow: Bool) {
+        self.setPersonProperty(name: "show_number_of_uncompleted_items", value: isShow)
+    }
 }

@@ -37,6 +37,10 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
         self.rootView.continueButton.target = self
         self.rootView.continueButton.action = #selector(self.buttonAction)
 
+        ServiceLocator.shared.analytics.logSetShowNumberOfUncomplitedItems(
+            isShow: Preferences.isNeededToShowPassedItems
+        )
+
 //        self.rootView.habitAppsView.notesHabitView.checkboxButton.target = self
 //        self.rootView.habitAppsView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)
 //

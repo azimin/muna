@@ -75,7 +75,7 @@
 		23D3875D25120CDD00762F6B /* NSBezierPath+CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */; };
 		23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */; };
 		23DAE38024E2897600D3B1AD /* PersmissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */; };
-		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */; };
+		23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+Settings.swift */; };
 		23E1E3FE263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E1E3FD263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift */; };
 		23FA25252484500D00CD69C4 /* ENTimeHoursOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */; };
 		23FA25272484CEFC00CD69C4 /* ENCustomDayWordsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */; };
@@ -310,7 +310,7 @@
 		23D3875C25120CDD00762F6B /* NSBezierPath+CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+CGPath.swift"; sourceTree = "<group>"; };
 		23DA03F524A3DB1C006F94DF /* OnboardingFinalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalSetupView.swift; sourceTree = "<group>"; };
 		23DAE37F24E2897600D3B1AD /* PersmissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersmissionsService.swift; sourceTree = "<group>"; };
-		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+LogPermissions.swift"; sourceTree = "<group>"; };
+		23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsSevice+Settings.swift"; sourceTree = "<group>"; };
 		23E1E3FD263EE0CC005BCBD7 /* NSAttributedString+Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Calculations.swift"; sourceTree = "<group>"; };
 		23FA25242484500D00CD69C4 /* ENTimeHoursOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENTimeHoursOffset.swift; sourceTree = "<group>"; };
 		23FA25262484CEFC00CD69C4 /* ENCustomDayWordsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENCustomDayWordsParser.swift; sourceTree = "<group>"; };
@@ -1012,7 +1012,6 @@
 				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
 				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
 				9FEA9D6426403304005E6C96 /* Analytics+Debug.swift */,
-				9FEA9D6626403AE3005E6C96 /* Analytics+NonStandartEvents.swift */,
 				9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */,
 				9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */,
 				9F2D341524D0BB460049DD43 /* TrackableScreen.swift */,
@@ -1434,7 +1433,8 @@
 		9F93D9A724E1D48C00CBBF5E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift */,
+				9FEA9D6626403AE3005E6C96 /* Analytics+NonStandartEvents.swift */,
+				23DAE38524E29EAE00D3B1AD /* AnalyticsSevice+Settings.swift */,
 				9F93D9A824E1D4A700CBBF5E /* AnalyticsServiceProtocol+Control.swift */,
 			);
 			path = Extensions;
@@ -2001,7 +2001,7 @@
 				9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */,
 				9FE96BD82465F3EF007D92B8 /* PanelBottomBarView.swift in Sources */,
 				9F152709246DD7D70037623B /* SettingsViewController.swift in Sources */,
-				23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+LogPermissions.swift in Sources */,
+				23DAE38624E29EAE00D3B1AD /* AnalyticsSevice+Settings.swift in Sources */,
 				23C7C9C724F83FE3005110CB /* ActiveAppCheckService.swift in Sources */,
 				9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */,
 				9FC9CDD42469F3E20018FAD7 /* PopupButton.swift in Sources */,

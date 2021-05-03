@@ -215,6 +215,11 @@ class Preferences {
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowPassedItems)
     static var isNeededToShowPassedItems {
         didSet {
+            if oldValue != self.isNeededToShowPassedItems {
+                ServiceLocator.shared.analytics.logSetShowNumberOfUncomplitedItems(
+                    isShow: self.isNeededToShowPassedItems
+                )
+            }
             NotificationCenter.default.post(name: .updateShowPassedItemSetting, object: nil)
         }
     }
