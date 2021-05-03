@@ -113,7 +113,7 @@ class MainScreenView: NSView {
 
     func showShortcutsView() {
         ServiceLocator.shared.analytics.executeControl(
-            control: .panelShortcuts,
+            control: .showShortcutsPanel,
             byShortcut: false
         )
 

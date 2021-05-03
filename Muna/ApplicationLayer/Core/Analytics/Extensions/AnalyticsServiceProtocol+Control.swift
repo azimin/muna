@@ -16,8 +16,8 @@ enum AnalyticsControl: String, AnalyticsPropertyNameProtocol {
     case itemComplete
     case itemDelete
     case itemCreate
-    case panelShortcuts
-    case captureShortcuts
+    case showShortcutsPanel
+    case showShortcutsCapture
 }
 
 extension AnalyticsServiceProtocol {
