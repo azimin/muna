@@ -26,7 +26,7 @@ enum WindowType: Equatable, Hashable {
         case .screenshot:
             return "screenshot"
         case .textTaskCreation:
-            return "textTaskCreation"
+            return "text_task_creation"
         case .debug:
             return "debug"
         case let .settings(tab):
@@ -36,9 +36,9 @@ enum WindowType: Equatable, Hashable {
         case .analtyics:
             return "analytics"
         case .remindLater:
-            return "remindLater"
+            return "remind_later"
         case .permissionsAlert:
-            return "permissionsAlert"
+            return "permissions_alert"
         }
     }
 
