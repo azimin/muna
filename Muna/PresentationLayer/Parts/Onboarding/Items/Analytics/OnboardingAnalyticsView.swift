@@ -20,6 +20,7 @@ final class OnboardingAnalyticsView: View {
 
     let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
+        // swiftlint:disable line_length
         .withText("We use your anonymous usage data to improve our software. We respect your privacy please let us know if you would like to share your data. Thank you!")
         .withAligment(.center)
         .withLimitedNumberOfLines(3)

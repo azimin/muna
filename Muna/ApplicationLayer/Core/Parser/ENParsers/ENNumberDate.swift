@@ -21,12 +21,12 @@ class ENNumberDate: Parser {
     override func extract(fromParsedItem parsedItem: ParsedItem) -> ParsedResult? {
         guard
             !parsedItem.match.isEmpty(atRangeIndex: self.dayGroup),
-            var day = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup))
+            let day = Int(parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.dayGroup))
         else {
             return nil
         }
 
-        var year = parsedItem.refDate.year
+        let year = parsedItem.refDate.year
 
         var month = parsedItem.refDate.month
         if !parsedItem.match.isEmpty(atRangeIndex: self.monthGroup),

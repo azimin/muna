@@ -46,7 +46,8 @@ final class TextTaskCreationViewController: NSViewController, ViewHolder {
 
     func showShortcutsView(aroundViewFrame frame: NSRect) {
         self.rootView.taskCreateShortCutsView.frame.origin.x = self.rootView.taskCreationView.frame.maxX + 16
-        self.rootView.taskCreateShortCutsView.frame.origin.y = self.rootView.taskCreationView.frame.height / 2 + self.rootView.taskCreateShortCutsView.frame.height / 2
+        let yValue = self.rootView.taskCreationView.frame.height / 2 + self.rootView.taskCreateShortCutsView.frame.height / 2
+        self.rootView.taskCreateShortCutsView.frame.origin.y = yValue
         self.rootView.taskCreateShortCutsView.isHidden = false
         self.rootView.isShortcutsViewShowed = true
         self.rootView.layoutSubtreeIfNeeded()

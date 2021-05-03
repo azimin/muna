@@ -30,8 +30,8 @@ class SavingProcessingService {
     }
 
     func save(withItem item: ItemToSave, byShortcut: Bool) {
-        // TODO: Do in background
-        // TODO: Add quaility selection in settings
+        // FUTURE: Do in background
+        // FUTURE: Add quaility selection in settings
         var convertedData: Data?
 
         switch item.savingType{
