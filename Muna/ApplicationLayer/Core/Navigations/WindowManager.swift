@@ -78,7 +78,7 @@ class WindowManager: WindowManagerProtocol {
             case let .settings(item):
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
-                (self.windows[windowType]?.contentViewController as? SettingsViewController)?.setView(for: item, animate: true)
+                (self.windows[windowType]?.contentViewController as? SettingsViewController)?.switchView(for: item, animate: true)
             case .onboarding, .permissionsAlert, .analtyics:
                 NSApp.activate(ignoringOtherApps: true)
                 self.windows[windowType]?.makeKeyAndOrderFront(nil)
@@ -88,9 +88,9 @@ class WindowManager: WindowManagerProtocol {
             return
         }
 
-        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
-            "type": windowType.analytics,
-        ])
+        ServiceLocator.shared.analytics.logShowWindow(
+            name: windowType.analytics
+        )
 
         guard let window = self.windows[windowType], windowType.rawValue != WindowType.settings(item: .general).rawValue else {
             self.setupWindow(windowType)
@@ -458,9 +458,9 @@ class WindowManager: WindowManagerProtocol {
 
         self.isNeededToShowPopup = false
 
-        ServiceLocator.shared.analytics.logEvent(name: "Show Window", properties: [
-            "type": "Hint popup",
-        ])
+        ServiceLocator.shared.analytics.logShowWindow(
+            name: "Hint popup"
+        )
 
         let controller = HintViewController()
 

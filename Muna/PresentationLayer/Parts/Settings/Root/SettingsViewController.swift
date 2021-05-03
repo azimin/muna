@@ -20,6 +20,10 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
             return NSToolbarItem.Identifier(self.rawValue)
         }
 
+        var analytics: String {
+            return "settings_\(self.rawValue.lowercased())"
+        }
+
         var image: NSImage? {
             let themeSufix = Theme.current == .dark ? "dark" : "light"
 
@@ -127,7 +131,17 @@ class SettingsViewController: NSViewController, NSToolbarDelegate {
             return
         }
 
-        self.setView(for: item, animate: true)
+        self.switchView(for: item, animate: true)
+    }
+
+    func switchView(for item: ToolbarItem, animate: Bool) {
+        if self.currentItem != item {
+            ServiceLocator.shared.analytics.logShowWindow(
+                name: item.analytics
+            )
+        }
+
+        self.setView(for: item, animate: animate)
     }
 
     func updateFrame(animate: Bool) {

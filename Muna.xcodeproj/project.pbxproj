@@ -218,6 +218,7 @@
 		9FE96BE124660235007D92B8 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE024660235007D92B8 /* ButtonCell.swift */; };
 		9FE96BE3246605DA007D92B8 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */; };
 		9FEA9D6526403304005E6C96 /* Analytics+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9D6426403304005E6C96 /* Analytics+Debug.swift */; };
+		9FEA9D6726403AE3005E6C96 /* Analytics+NonStandartEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9D6626403AE3005E6C96 /* Analytics+NonStandartEvents.swift */; };
 		9FEB558D25E8F3620067685A /* MutedAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */; };
 		9FEEF6F12636E769005C97F8 /* onboarding_part_3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6EF2636E765005C97F8 /* onboarding_part_3.mp4 */; };
 		9FEEF6F22636E769005C97F8 /* onboarding_part_2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9FEEF6EC2636E764005C97F8 /* onboarding_part_2.mp4 */; };
@@ -464,6 +465,7 @@
 		9FE96BE024660235007D92B8 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9FE96BE2246605DA007D92B8 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		9FEA9D6426403304005E6C96 /* Analytics+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+Debug.swift"; sourceTree = "<group>"; };
+		9FEA9D6626403AE3005E6C96 /* Analytics+NonStandartEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+NonStandartEvents.swift"; sourceTree = "<group>"; };
 		9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutedAnalyticsService.swift; sourceTree = "<group>"; };
 		9FEEF6EC2636E764005C97F8 /* onboarding_part_2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_2.mp4; sourceTree = "<group>"; };
 		9FEEF6ED2636E764005C97F8 /* onboarding_part_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onboarding_part_4.mp4; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 				9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */,
 				9F2D340F24D0B9EF0049DD43 /* AnalyticsService.swift */,
 				9FEA9D6426403304005E6C96 /* Analytics+Debug.swift */,
+				9FEA9D6626403AE3005E6C96 /* Analytics+NonStandartEvents.swift */,
 				9FEB558C25E8F3620067685A /* MutedAnalyticsService.swift */,
 				9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */,
 				9F2D341524D0BB460049DD43 /* TrackableScreen.swift */,
@@ -2082,6 +2085,7 @@
 				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,
 				9F7A6AA32616DD72009B7451 /* TipPurchaseButton.swift in Sources */,
 				9F581E3E2494E89600A34379 /* OnboardingView.swift in Sources */,
+				9FEA9D6726403AE3005E6C96 /* Analytics+NonStandartEvents.swift in Sources */,
 				23ADE2E024A8B2CF00A2D7F9 /* SliderSettingsItem.swift in Sources */,
 				9FA07F6D2460C24300654D36 /* GenericCellSubview.swift in Sources */,
 				9FE0F535247022A60046A5C4 /* ShortcutsSettingsView.swift in Sources */,

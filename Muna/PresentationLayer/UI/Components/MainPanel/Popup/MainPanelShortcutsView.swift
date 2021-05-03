@@ -33,8 +33,7 @@ class MainPanelShortcutsView: PopupView {
             .complete,
             .editTime,
             .makeFullScreenshot,
-            .makeSelectedAreaShot,
-            .close,
+            .makeSelectedAreaShot
         ]
 
         var shortcut: [ViewShortcutProtocol] {

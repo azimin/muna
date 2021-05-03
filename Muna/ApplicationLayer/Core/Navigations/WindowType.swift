@@ -30,7 +30,7 @@ enum WindowType: Equatable, Hashable {
         case .debug:
             return "debug"
         case let .settings(tab):
-            return "settings_\(tab.rawValue)"
+            return tab.analytics
         case .onboarding:
             return "onboarding"
         case .analtyics:
