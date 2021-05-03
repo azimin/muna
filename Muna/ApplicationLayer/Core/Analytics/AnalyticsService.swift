@@ -17,6 +17,8 @@ public class AnalyticsService: AnalyticsServiceProtocol {
     private var apmplitudeId: String?
     private var additionalServices: [AnalyticsAdditionalServiceProtocol]
 
+    private let logger: DebugLogAnalyticsProtocol = DebugXcodeLogAnalytics()
+
     public init(
         storage: StorageServiceProtocol,
         apmplitudeId: String?,
@@ -109,11 +111,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         self.additionalServices.forEach { $0.logEvent(name: name, properties: propertiesObjects) }
 
         #if DEBUG
-            if let propertiesValue = propertiesObjects {
-                print("Log Event: \(name)", propertiesValue)
-            } else {
-                print("Log Event: \(name)")
-            }
+            self.logger.logEvent(name: name, properties: properties)
         #endif
     }
 
@@ -136,7 +134,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         self.additionalServices.forEach { $0.setPersonProperty(name: name, value: object) }
 
         #if DEBUG
-            print("Set person property: \(name) - \(value)")
+            self.logger.setUserProperty(name: name, value: value)
         #endif
     }
 
@@ -157,7 +155,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
             self.storage.save(object: object, for: udValueKey)
 
             #if DEBUG
-                print("Set person property once: \(name) - \(value)")
+                self.logger.setUserPropertyOnce(name: name, value: value)
             #endif
         }
     }
@@ -175,7 +173,7 @@ public class AnalyticsService: AnalyticsServiceProtocol {
         self.additionalServices.forEach { $0.setPersonProperty(name: name, value: "\(value)" as NSObject) }
 
         #if DEBUG
-            print("Increase person property: \(name) - \(value)")
+            self.logger.increaseUserProperty(name: name, by: value)
         #endif
     }
 
