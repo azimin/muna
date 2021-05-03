@@ -18,6 +18,8 @@ enum AnalyticsControl: String, AnalyticsPropertyNameProtocol {
     case itemCreate
     case showShortcutsPanel
     case showShortcutsCapture
+    case screenRecordPermissionsAlertOpenSettings
+    case screenRecordPermissionsAlertCancel
 }
 
 extension AnalyticsServiceProtocol {

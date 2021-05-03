@@ -329,9 +329,15 @@ class WindowManager: WindowManagerProtocol {
             NSWorkspace.shared.open(url)
             CGWindowListCreateImage(.zero, .optionOnScreenBelowWindow, kCGNullWindowID, .bestResolution)
 
-            ServiceLocator.shared.analytics.logEvent(name: "Permission Alert Open Settings Tap")
+            ServiceLocator.shared.analytics.executeControl(
+                control: .screenRecordPermissionsAlertOpenSettings,
+                byShortcut: false
+            )
         case .alertSecondButtonReturn:
-            ServiceLocator.shared.analytics.logEvent(name: "Permission Alert Cancel Tap")
+            ServiceLocator.shared.analytics.executeControl(
+                control: .screenRecordPermissionsAlertCancel,
+                byShortcut: false
+            )
         default:
             appAssertionFailure("\(value) in alert in permissions alert is not supported")
         }
@@ -459,7 +465,7 @@ class WindowManager: WindowManagerProtocol {
         self.isNeededToShowPopup = false
 
         ServiceLocator.shared.analytics.logShowWindow(
-            name: "Hint popup"
+            name: "hint_popup"
         )
 
         let controller = HintViewController()

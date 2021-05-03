@@ -169,9 +169,9 @@ class DateParserView: View, RemindersOptionsControllerDelegate {
             ServiceLocator.shared.analytics.logEvent(
                 name: "Report missing time",
                 properties: [
-                    "text": self.controller.text,
-                    "date": Date().toFormat("dd MMM yyyy HH:mm"),
-                    "suggest": suggestion,
+                    "due_date_string": self.controller.text,
+                    "current_date": Date().toFormat("dd MMM yyyy HH:mm"),
+                    "suggestion": suggestion,
                 ]
             )
 
