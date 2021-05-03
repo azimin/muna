@@ -86,12 +86,16 @@ final class InAppPurchaseManager {
                     case .success:
                         self?.buyProduct(productId, completion: completion)
                     case .failure:
-                        completion(.error(MunaError.cantGetInAppProducts))
+                        OperationQueue.main.addOperation {
+                            completion(.error(MunaError.cantGetInAppProducts))
+                        }
                     }
                 }
             } else {
                 self.loadingProductsTry = 0
-                completion(.error(MunaError.cantGetInAppProducts))
+                OperationQueue.main.addOperation {
+                    completion(.error(MunaError.cantGetInAppProducts))
+                }
             }
             return
         }

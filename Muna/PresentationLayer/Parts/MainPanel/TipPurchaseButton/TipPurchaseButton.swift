@@ -15,10 +15,7 @@ class TipPurchaseButton: Button {
     }
 
     let titleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.title60AccentAlpha)
-
     let subtitleLabel = Label(fontStyle: .bold, size: 18)
-        .withTextColorStyle(.titleAccent)
 
     let style: Style
 
@@ -29,6 +26,15 @@ class TipPurchaseButton: Button {
         self.layerContentsRedrawPolicy = .onSetNeedsDisplay
         self.title = ""
         self.setup()
+
+        switch self.style {
+        case .accent:
+            _ = self.titleLabel.withTextColorStyle(.alwaysWhite)
+            _ = self.subtitleLabel.withTextColorStyle(.alwaysWhite60AccentAlpha)
+        case .normal:
+            _ = self.titleLabel.withTextColorStyle(.titleAccent)
+            _ = self.subtitleLabel.withTextColorStyle(.title60AccentAlpha)
+        }
     }
 
     required init?(coder: NSCoder) {

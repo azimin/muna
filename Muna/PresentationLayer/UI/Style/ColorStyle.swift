@@ -42,6 +42,7 @@ enum ColorStyle {
     case clear
 
     case alwaysWhite
+    case alwaysWhite60AccentAlpha
 
     // MARK: Tips
 
@@ -103,6 +104,8 @@ enum ColorStyle {
                 return NSColor(hex: "525252").withAlphaComponent(0.5)
             case .alwaysWhite:
                 return NSColor.white
+            case .alwaysWhite60AccentAlpha:
+                return NSColor.white.withAlphaComponent(0.6)
             case .newTitle:
                 return NSColor(hex: "E3E4E4")
             case .assitentPlateBackground:
@@ -164,6 +167,8 @@ enum ColorStyle {
                 return NSColor.black.withAlphaComponent(0.13)
             case .alwaysWhite:
                 return NSColor.white
+            case .alwaysWhite60AccentAlpha:
+                return NSColor.white.withAlphaComponent(0.6)
             case .assitentPlateBackground:
                 return NSColor.black.withAlphaComponent(0.2)
             case .assitentLeftColor:

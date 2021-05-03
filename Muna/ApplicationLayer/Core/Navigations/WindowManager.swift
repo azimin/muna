@@ -338,12 +338,14 @@ class WindowManager: WindowManagerProtocol {
     }
 
     func showAlert(title: String, text: String) {
-        let alert = NSAlert()
-        alert.messageText = title
-        alert.informativeText = text
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
-        _ = alert.runModal()
+        OperationQueue.main.addOperation {
+            let alert = NSAlert()
+            alert.messageText = title
+            alert.informativeText = text
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            _ = alert.runModal()
+        }
     }
 
     private func showPanel(in window: NSWindow, selectedItem: ItemModel?) {
