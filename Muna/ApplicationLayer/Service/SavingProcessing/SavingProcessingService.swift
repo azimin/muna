@@ -88,6 +88,7 @@ class SavingProcessingService {
             properties["due_date_string"] = dueDateString
             properties["by_shortcut"] = byShortcut
         }
+        properties["item_type"] = item.savingType.rawValue
 
         ServiceLocator.shared.analytics.increasePersonProperty(
             name: "number_of_created_items",
