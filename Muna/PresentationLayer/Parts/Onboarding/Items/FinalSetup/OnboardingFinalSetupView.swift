@@ -59,7 +59,7 @@ class OnboardingFinalSetupView: NSView {
 
 //    let habitAppsView = HabitAppsView()
 
-    let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: true)
+    let settingsItemView = SettingsItemView(isNeededShowTitle: true, style: .big, needToShake: false)
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

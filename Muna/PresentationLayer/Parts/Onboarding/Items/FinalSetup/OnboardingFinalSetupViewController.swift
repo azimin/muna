@@ -41,9 +41,13 @@ class OnboardingFinalSetupViewController: NSViewController, OnboardingContainerP
             isShow: Preferences.isNeededToShowPassedItems
         )
 
-        ServiceLocator.shared.analytics.logLaunchOnStartup(
-            shouldLaunch: Preferences.launchOnStartup
-        )
+        if Preferences.usedForcedLaunchAtLogin == false {
+            Preferences.launchOnStartup = true
+        }
+
+//        ServiceLocator.shared.analytics.logLaunchOnStartup(
+//            shouldLaunch: Preferences.launchOnStartup
+//        )
 
 //        self.rootView.habitAppsView.notesHabitView.checkboxButton.target = self
 //        self.rootView.habitAppsView.notesHabitView.checkboxButton.action = #selector(self.splashOnNotesActions)

@@ -44,6 +44,7 @@ class Preferences {
         case isFirstTimeOfShowingIncreaseProductivityPopup
         case isNeededToShowPassedItems
         case isAnalyticsEnabled
+        case usedForcedLaunchAtLogin
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -157,6 +158,9 @@ class Preferences {
 
         return result
     }
+
+    @UserDefaultsEntry(wrappedValue: false, key: Key.usedForcedLaunchAtLogin)
+    static var usedForcedLaunchAtLogin
 
     @UserDefaultsEntry(key: Key.launchOnStartup)
     static var launchOnStartup = false {
