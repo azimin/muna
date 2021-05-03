@@ -10,6 +10,6 @@ import Foundation
 
 extension AnalyticsServiceProtocol {
     func logCapturePermissions(isEnabled: Bool) {
-        self.setPersonProperty(name: "screen_captur_permissions", value: isEnabled)
+        self.setPersonProperty(name: "screen_capture_permissions", value: isEnabled)
     }
 }
