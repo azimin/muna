@@ -190,7 +190,7 @@ class OnboardingFinalSetupView: NSView {
         attributedString.addAttributes([.foregroundColor: NSColor(hex: "72AEE4")], range: range)
         range = (string as NSString).range(of: "Setup Muna")
 
-        attributedString.setAlignment(.center, range: range)
+        attributedString.setAlignment(.center, range: NSRange(location: 0, length: string.count))
         self.introLabel.alignment = .center
         self.introLabel.isBezeled = false
         self.introLabel.isEditable = false

@@ -178,7 +178,7 @@ class Preferences {
     @UserDefaultsEntry(wrappedValue: false, key: Key.shoulsUseAnalytics)
     static var shouldUseAnalytics
 
-    @UserDefaultsEntry(wrappedValue: PeriodOfStoring.week.rawValue, key: Key.periodOfStoring)
+    @UserDefaultsEntry(wrappedValue: PeriodOfStoring.month.rawValue, key: Key.periodOfStoring)
     static var periodOfStoring
 
     @UserDefaultsEntry(wrappedValue: PingInterval.fiveMins.rawValue, key: Key.pingInterval)
