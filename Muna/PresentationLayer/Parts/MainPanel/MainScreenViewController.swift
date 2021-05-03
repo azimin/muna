@@ -61,46 +61,7 @@ class MainScreenViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        guard ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems() > 4 else {
-            return
-        }
-
-        let isUserPro = ServiceLocator.shared.securityStorage.getBool(forKey: SecurityStorage.Key.isUserPro.rawValue) ?? false
-        
-        guard !isUserPro else {
-            return
-        }
-
-        let expiredDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.expiredDate.rawValue)
-        let oneTimeTipDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.purchaseTipDate.rawValue)
-
-        let oneMonthInSeconds = PresentationLayerConstants.oneMonthInSeconds
-        
-        var isTipsViewHidden = true
-        
-        if let expiredDate = expiredDate {
-            let dateSinceExpiration = Date().timeIntervalSince1970 - expiredDate
-            if dateSinceExpiration > oneMonthInSeconds {
-                isTipsViewHidden = false
-            } else {
-                isTipsViewHidden = true
-            }
-        } else {
-            isTipsViewHidden = false
-        }
-
-        if let oneTimeTipDate = oneTimeTipDate, oneTimeTipDate > oneMonthInSeconds * 4 {
-            let dateSinceTip = Date().timeIntervalSince1970 - oneTimeTipDate
-            if dateSinceTip > oneMonthInSeconds * 4 {
-                isTipsViewHidden = false
-            } else {
-                isTipsViewHidden = true
-            }
-        } else {
-            isTipsViewHidden = false
-        }
-
-        self.panelView.bottomBar.tipsView.isHidden = isTipsViewHidden
+        self.panelView.bottomBar.tipsView.isHidden = !ServiceLocator.shared.inAppPurchaseManager.isNeededToShowTips()
     }
 
     func toggleSmartAssistent() {

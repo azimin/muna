@@ -211,4 +211,48 @@ final class InAppPurchaseManager {
             }
         }
     }
+
+    func isNeededToShowTips() -> Bool {
+        guard ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems() > 4 else {
+            return false
+        }
+
+        let isUserPro = ServiceLocator.shared.securityStorage.getBool(forKey: SecurityStorage.Key.isUserPro.rawValue) ?? false
+        
+        guard !isUserPro else {
+            return false
+        }
+
+        let expiredDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.expiredDate.rawValue)
+        let oneTimeTipDate = ServiceLocator.shared.securityStorage.getDouble(forKey: SecurityStorage.Key.purchaseTipDate.rawValue)
+
+        let oneMonthInSeconds = PresentationLayerConstants.oneMonthInSeconds
+        
+        let isExpirationValidForShowing: Bool
+        let isTipsPayDateValidForShowing: Bool
+        
+        if let expiredDate = expiredDate {
+            let dateSinceExpiration = Date().timeIntervalSince1970 - expiredDate
+            if dateSinceExpiration > oneMonthInSeconds {
+                isExpirationValidForShowing = true
+            } else {
+                isExpirationValidForShowing = false
+            }
+        } else {
+            isExpirationValidForShowing = true
+        }
+
+        if let oneTimeTipDate = oneTimeTipDate {
+            let dateSinceTip = Date().timeIntervalSince1970 - oneTimeTipDate
+            if dateSinceTip > oneMonthInSeconds * 4 {
+                isTipsPayDateValidForShowing = true
+            } else {
+                isTipsPayDateValidForShowing = false
+            }
+        } else {
+            isTipsPayDateValidForShowing = true
+        }
+
+        return isExpirationValidForShowing && isTipsPayDateValidForShowing
+    }
 }
