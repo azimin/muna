@@ -208,16 +208,36 @@ class TipsSettingsView: View, SettingsViewProtocol {
     @objc
     func oneTimePurchaseAction() {
         self.oneTimePurchase.isLoading = true
+
+        ServiceLocator.shared.analytics.logPurchaseState(
+            state: .started,
+            isSubscription: false
+        )
+
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { status in
             self.oneTimePurchase.isLoading = false
             switch status {
             case .purchased:
+                ServiceLocator.shared.analytics.logPurchaseState(
+                    state: .finished,
+                    isSubscription: false
+                )
+
                 self.updateState(state: .thankYou)
                 self.playPurchaseAnimation()
                 ServiceLocator.shared.analytics.logTipGiven(isSubscription: false)
             case .cancelled:
-                break
-            case .error:
+                ServiceLocator.shared.analytics.logPurchaseState(
+                    state: .cancelled,
+                    isSubscription: false
+                )
+            case let .error(error):
+                ServiceLocator.shared.analytics.logPurchaseState(
+                    state: .failed,
+                    isSubscription: false,
+                    message: error.localizedDescription
+                )
+
                 ServiceLocator.shared.windowManager.showAlert(
                     title: "Oops, something went wrong!",
                     text: "We are sorry, but we can't process your payment now 😢"
@@ -229,18 +249,38 @@ class TipsSettingsView: View, SettingsViewProtocol {
     @objc
     func subscriptionPurchaseAction() {
         self.subscriptionPurchase.isLoading = true
+
+        ServiceLocator.shared.analytics.logPurchaseState(
+            state: .started,
+            isSubscription: true
+        )
+
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
             self.subscriptionPurchase.isLoading = false
             DispatchQueue.main.async {
                 switch status {
                 case .purchased:
+                    ServiceLocator.shared.analytics.logPurchaseState(
+                        state: .finished,
+                        isSubscription: true
+                    )
+
                     self.updateState(state: .thankYou)
                     self.playPurchaseAnimation()
                     self.updatePurchaseButton(subscribed: true)
                     ServiceLocator.shared.analytics.logTipGiven(isSubscription: true)
                 case .cancelled:
-                    break
-                case .error:
+                    ServiceLocator.shared.analytics.logPurchaseState(
+                        state: .cancelled,
+                        isSubscription: true
+                    )
+                case let .error(error):
+                    ServiceLocator.shared.analytics.logPurchaseState(
+                        state: .failed,
+                        isSubscription: true,
+                        message: error.localizedDescription
+                    )
+
                     ServiceLocator.shared.windowManager.showAlert(
                         title: "Oops, something went wrong!",
                         text: "We are sorry, but we can't process your payment now 😢"

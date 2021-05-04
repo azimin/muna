@@ -33,15 +33,21 @@ extension AnalyticsServiceProtocol {
         )
     }
 
-    func logPurchaseState(state: AnalyticsPurhcaseState, message: String? = nil) {
+    func logPurchaseState(
+        state: AnalyticsPurhcaseState,
+        isSubscription: Bool,
+        message: String? = nil
+    ) {
         if let message = message {
             self.logEvent(name: "Purchase State", properties: [
                 "state": state.rawValue,
+                "type": isSubscription ? "subscription" : "one_time_purchase",
                 "message": message
             ])
         } else {
             self.logEvent(name: "Purchase State", properties: [
-                "state": state.rawValue
+                "state": state.rawValue,
+                "type": isSubscription ? "subscription" : "one_time_purchase",
             ])
         }
     }
