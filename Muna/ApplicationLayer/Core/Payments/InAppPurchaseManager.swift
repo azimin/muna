@@ -154,11 +154,13 @@ final class InAppPurchaseManager {
         guard let productId = ServiceLocator.shared.securityStorage.getString(
                 forKey: SecurityStorage.Key.productIdSubscription.rawValue
         ) else {
+            completion?(.error(MunaError.noProductForValiodation))
             return
         }
 
         guard let product = self.products[productId], product.id != .oneTimeTip else {
             appAssertionFailure("No product for product id: \(productId)")
+            completion?(.error(MunaError.wrongProductForValidation))
             return
         }
 
@@ -193,16 +195,24 @@ final class InAppPurchaseManager {
                         bool: true,
                         forKey: SecurityStorage.Key.isUserPro.rawValue
                     )
-                    items.forEach { item in
-                        ServiceLocator.shared.securityStorage.save(
-                            string: item.productId,
-                            forKey: SecurityStorage.Key.productIdSubscription.rawValue
-                        )
-                        ServiceLocator.shared.securityStorage.save(
-                            double: item.subscriptionExpirationDate?.timeIntervalSince1970,
-                            for: SecurityStorage.Key.expirationDate.rawValue
-                        )
+                    guard let item = items.first(where: { item in
+                        guard let expirationDate = item.subscriptionExpirationDate else {
+                            return false
+                        }
+
+                        return expirationDate.timeIntervalSince1970 > Date().timeIntervalSince1970
+                    }) else {
+                        completion?(.purchased)
+                        return
                     }
+                    ServiceLocator.shared.securityStorage.save(
+                        string: item.productId,
+                        forKey: SecurityStorage.Key.productIdSubscription.rawValue
+                    )
+                    ServiceLocator.shared.securityStorage.save(
+                        double: item.subscriptionExpirationDate?.timeIntervalSince1970,
+                        for: SecurityStorage.Key.expirationDate.rawValue
+                    )
                     completion?(.purchased)
                 }
             case let .failure(error):
