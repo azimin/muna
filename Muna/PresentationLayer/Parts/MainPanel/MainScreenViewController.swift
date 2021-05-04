@@ -58,10 +58,17 @@ class MainScreenViewController: NSViewController {
         }
     }
 
+    var lastPulseAnimation: Date?
+
     override func viewWillAppear() {
         super.viewWillAppear()
 
         self.panelView.bottomBar.tipsView.isHidden = !ServiceLocator.shared.inAppPurchaseManager.isNeededToShowTips()
+
+        if self.lastPulseAnimation == nil || self.lastPulseAnimation?.isToday == false {
+            self.panelView.bottomBar.tipsView.runPulseAnimation()
+            self.lastPulseAnimation = Date()
+        }
     }
 
     func toggleSmartAssistent() {
