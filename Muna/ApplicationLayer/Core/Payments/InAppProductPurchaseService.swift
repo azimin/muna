@@ -40,7 +40,7 @@ final class InAppProductPurchaseService {
 
     func completeTransactions() {
         SwiftyStoreKit.completeTransactions { [weak self] purchases in
-            for purchase in purchases where purchase.needsFinishTransaction {
+            for purchase in purchases {
                 // Deliver content from server, then:
                 SwiftyStoreKit.finishTransaction(purchase.transaction)
             }

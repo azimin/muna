@@ -14,12 +14,18 @@ final class InAppPurchaseManager {
         case purchased
         case notPurchased
         case expired
+        case noProductToValidate
         case error(Error)
     }
 
     enum PurchaseState {
         case purchased
         case cancelled
+        case error(Error)
+    }
+    
+    enum ProductRequestState {
+        case requested
         case error(Error)
     }
 
@@ -61,17 +67,19 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.completeTransactions()
     }
 
-    func loadProducts(_ completion: ((Result<Void, Error>) -> Void)? = nil) {
+    func loadProducts(_ completion: ((ProductRequestState) -> Void)? = nil) {
         self.inAppProductsService.requestProducts(forIds: [.monthly, .oneTimeTip]) {
             switch $0 {
             case let .requested(products):
                 self.monthlyProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.monthly.rawValue })
                 self.oneTimeTipProductItem.product = products.first(where: { $0.productIdentifier ==  ProductIds.oneTimeTip.rawValue })
-                completion?(.success(()))
+                completion?(.requested)
             case let .failed(error):
-                completion?(.failure(error))
+                completion?(.error(error))
                 appAssertionFailure("Error on loading products: \(error)")
-            default:
+            case .none:
+                completion?(.error(MunaError.uknownError))
+            case .requesting:
                 break
             }
         }
@@ -83,9 +91,9 @@ final class InAppPurchaseManager {
             if loadingProductsTry < 3 {
                 self.loadProducts { [weak self] result in
                     switch result {
-                    case .success:
+                    case .requested:
                         self?.buyProduct(productId, completion: completion)
-                    case .failure:
+                    case .error:
                         OperationQueue.main.addOperation {
                             completion(.error(MunaError.cantGetInAppProducts))
                         }
@@ -143,6 +151,7 @@ final class InAppPurchaseManager {
         self.inAppPurchaseService.restorePurchases { [weak self] purchases in
             guard let self = self else { return }
             guard let purchase = purchases.last(where: { $0.productId == self.monthlyProductItem.id.rawValue }) else {
+                completion?(.noProductToValidate)
                 return
             }
             ServiceLocator.shared.securityStorage.save(string: purchase.productId, forKey: SecurityStorage.Key.productIdSubscription.rawValue)
@@ -156,7 +165,7 @@ final class InAppPurchaseManager {
         guard let productId = ServiceLocator.shared.securityStorage.getString(
                 forKey: SecurityStorage.Key.productIdSubscription.rawValue
         ) else {
-            completion?(.error(MunaError.noProductForValiodation))
+            completion?(.noProductToValidate)
             return
         }
 
