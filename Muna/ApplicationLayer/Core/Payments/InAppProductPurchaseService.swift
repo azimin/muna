@@ -16,9 +16,7 @@ final class InAppProductPurchaseService {
         SwiftyStoreKit.purchaseProduct(product) { result in
             switch result {
             case let .success(purchase):
-                if purchase.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(purchase.transaction)
-                }
+                SwiftyStoreKit.finishTransaction(purchase.transaction)
                 OperationQueue.main.addOperation {
                     completion(.success(purchase))
                 }
