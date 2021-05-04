@@ -19,7 +19,7 @@ final class InAppRecieptValidationService {
         recieptValidator = AppleReceiptValidator(service: .production, sharedSecret: "63f46b0bd1c944119be1b74d18c8509d")
         #endif
         
-        SwiftyStoreKit.verifyReceipt(using: recieptValidator, forceRefresh: true) { result in
+        SwiftyStoreKit.fetchReceipt(forceRefresh: true) { result in
             switch result {
             case .success:
                 SwiftyStoreKit.verifyReceipt(using: recieptValidator) { result in
