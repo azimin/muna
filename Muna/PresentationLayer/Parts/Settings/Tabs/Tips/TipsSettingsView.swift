@@ -12,9 +12,12 @@ class TipsSettingsView: View, SettingsViewProtocol {
     var topViewController: SettingsViewController?
 
     enum State {
+        case undefined
         case normal
         case thankYou
     }
+
+    var currentState: State = .undefined
 
     let iconImage = ImageView(
         name: "onboarding_icon",
@@ -142,6 +145,11 @@ class TipsSettingsView: View, SettingsViewProtocol {
     }
 
     func updateState(state: State, shouldUpdateFrame: Bool = true) {
+        if state == self.currentState {
+            return
+        }
+
+        self.currentState = state
         switch state {
         case .normal:
             self.introLabel.text = "Support Muna"
@@ -149,6 +157,8 @@ class TipsSettingsView: View, SettingsViewProtocol {
         case .thankYou:
             self.introLabel.text = "Thank you ❤️"
             self.descriptionLabel.text = "We really appreciate your support"
+        case .undefined:
+            break
         }
 
         if shouldUpdateFrame {
