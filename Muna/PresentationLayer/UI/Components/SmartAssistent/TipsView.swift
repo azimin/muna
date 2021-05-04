@@ -23,6 +23,24 @@ class TipsView: View {
 
     var pressAction: VoidBlock?
 
+    func runPulseAnimation() {
+        let pulse1 = CASpringAnimation(keyPath: "transform")
+        pulse1.duration = 0.6
+        pulse1.fromValue = CATransform3DIdentity
+        pulse1.toValue = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1)
+        pulse1.autoreverses = true
+        pulse1.repeatCount = 1
+        pulse1.initialVelocity = 0.5
+        pulse1.damping = 0.8
+
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 2
+        animationGroup.repeatCount = 3
+        animationGroup.animations = [pulse1]
+
+        self.layer?.add(animationGroup, forKey: "pulse")
+    }
+
     override func updateLayer() {
         super.updateLayer()
 
