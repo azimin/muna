@@ -207,7 +207,9 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     @objc
     func oneTimePurchaseAction() {
+        self.oneTimePurchase.isLoading = true
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.oneTimeTip) { status in
+            self.oneTimePurchase.isLoading = false
             switch status {
             case .purchased:
                 self.updateState(state: .thankYou)
@@ -226,7 +228,9 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     @objc
     func subscriptionPurchaseAction() {
+        self.subscriptionPurchase.isLoading = true
         ServiceLocator.shared.inAppPurchaseManager.buyProduct(.monthly) { (status) in
+            self.subscriptionPurchase.isLoading = false
             DispatchQueue.main.async {
                 switch status {
                 case .purchased:

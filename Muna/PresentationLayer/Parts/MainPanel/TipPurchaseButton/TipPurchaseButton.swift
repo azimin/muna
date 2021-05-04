@@ -14,8 +14,28 @@ class TipPurchaseButton: Button {
         case normal
     }
 
+    var isLoading: Bool = false {
+        didSet {
+            self.progressIndocator.isHidden = self.isLoading == false
+            self.buttonsStackView.isHidden = self.isLoading
+            if self.isLoading {
+                self.progressIndocator.isIndeterminate = true
+                self.progressIndocator.usesThreadedAnimation = true
+                self.progressIndocator.startAnimation(nil)
+            } else {
+                self.progressIndocator.stopAnimation(nil)
+            }
+        }
+    }
+
     let titleLabel = Label(fontStyle: .bold, size: 18)
     let subtitleLabel = Label(fontStyle: .bold, size: 18)
+    let progressIndocator = NSProgressIndicator()
+    let buttonsStackView = NSStackView(
+        orientation: .vertical,
+        alignment: .centerX,
+        distribution: .fill
+    )
 
     let style: Style
 
@@ -46,20 +66,23 @@ class TipPurchaseButton: Button {
             make.size.equalTo(CGSize.init(width: 216, height: 80))
         }
 
-        let stackView = NSStackView(
-            orientation: .vertical,
-            alignment: .centerX,
-            distribution: .fill
-        )
-        stackView.spacing = 0
+        self.buttonsStackView.spacing = 0
 
-        self.addSubview(stackView)
-        stackView.snp.makeConstraints { (make) in
+        self.addSubview(self.buttonsStackView)
+        self.buttonsStackView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
 
-        stackView.addArrangedSubview(self.titleLabel)
-        stackView.addArrangedSubview(self.subtitleLabel)
+        self.addSubview(self.progressIndocator)
+        self.progressIndocator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(30)
+        }
+        self.progressIndocator.style = .spinning
+        self.progressIndocator.isHidden = true
+
+        self.buttonsStackView.addArrangedSubview(self.titleLabel)
+        self.buttonsStackView.addArrangedSubview(self.subtitleLabel)
 
         switch self.style {
         case .accent:
