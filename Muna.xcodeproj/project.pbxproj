@@ -2278,7 +2278,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2292,7 +2292,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
@@ -2310,7 +2310,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2324,7 +2324,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
@@ -2402,7 +2402,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2416,7 +2416,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Abstract.Muna.Debug;
 				PRODUCT_NAME = "Muna Test";
 				SWIFT_OBJC_BRIDGING_HEADER = "Muna/PresentationLayer/Parts/ScreenshotState/ViewController/Muna-Bridging-Header.h";
