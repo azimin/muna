@@ -11,11 +11,20 @@ import Foundation
 enum MunaError: LocalizedError {
 
     case cantGetInAppProducts
+    case wrongProductForValidation
+    case noProductForValiodation
+    case uknownError
     
     var errorDescription: String? {
         switch self {
         case .cantGetInAppProducts:
             return "Сan't load products"
+        case .wrongProductForValidation:
+            return "Wrong product for validation"
+        case .noProductForValiodation:
+            return "No product for validation"
+        case .uknownError:
+            return "Unknown error"
         }
     }
 }
