@@ -13,6 +13,7 @@ enum MunaError: LocalizedError {
     case cantGetInAppProducts
     case wrongProductForValidation
     case noProductForValiodation
+    case uknownError
     
     var errorDescription: String? {
         switch self {
@@ -22,6 +23,8 @@ enum MunaError: LocalizedError {
             return "Wrong product for validation"
         case .noProductForValiodation:
             return "No product for validation"
+        case .uknownError:
+            return "Unknown error"
         }
     }
 }

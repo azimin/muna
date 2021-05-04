@@ -120,8 +120,10 @@ final class InAppPurchaseManager {
                         switch result {
                         case .purchased:
                             completion(.purchased)
+                        case let .error(error):
+                            completion(.error(error))
                         default:
-                            break
+                            completion(.error(MunaError.uknownError))
                         }
                     }
                 }
