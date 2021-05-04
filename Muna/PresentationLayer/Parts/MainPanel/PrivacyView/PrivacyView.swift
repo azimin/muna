@@ -33,6 +33,22 @@ class PrivacyView: View {
         .withText("Restore Purchases")
         .withTextColorStyle(.titleAccent)
 
+    let restoreLoader = NSProgressIndicator()
+
+    var isRestoreLoading: Bool = false {
+        didSet {
+            self.restoreLoader.isHidden = self.isRestoreLoading == false
+            self.restoreButton.isHidden = self.isRestoreLoading
+            if self.isRestoreLoading {
+                self.restoreLoader.isIndeterminate = true
+                self.restoreLoader.usesThreadedAnimation = true
+                self.restoreLoader.startAnimation(nil)
+            } else {
+                self.restoreLoader.stopAnimation(nil)
+            }
+        }
+    }
+
     override func viewSetup() {
         self.addSubview(self.stackView)
         self.stackView.spacing = 4
@@ -50,11 +66,18 @@ class PrivacyView: View {
         }
         self.anotherDotView.layer?.cornerRadius = 2
 
+        self.restoreLoader.snp.makeConstraints { make in
+            make.size.equalTo(10)
+        }
+        self.restoreLoader.style = .spinning
+        self.restoreLoader.isHidden = true
+
         self.stackView.addArrangedSubview(self.privacyPolicyButton)
         self.stackView.addArrangedSubview(self.dotView)
         self.stackView.addArrangedSubview(self.termsOfUseButton)
         self.stackView.addArrangedSubview(self.anotherDotView)
         self.stackView.addArrangedSubview(self.restoreButton)
+        self.stackView.addArrangedSubview(self.restoreLoader)
 
         self.privacyPolicyButton.target = self
         self.privacyPolicyButton.action = #selector(self.openPrivacy)
