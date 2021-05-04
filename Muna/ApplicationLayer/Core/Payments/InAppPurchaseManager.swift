@@ -33,8 +33,8 @@ final class InAppPurchaseManager {
     typealias PurchaseCompletion = (PurchaseState) -> Void
     typealias ValidationCompletion = (ValidationState) -> Void
 
-    private var monthlyProductItem = InAppProductItem(id: ProductIds.monthly, productType: .subscription)
-    private var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip, productType: .oneTime)
+    private(set) var monthlyProductItem = InAppProductItem(id: ProductIds.monthly, productType: .subscription)
+    private(set) var oneTimeTipProductItem = InAppProductItem(id: ProductIds.oneTimeTip, productType: .oneTime)
 
     var products: [String: InAppProductItem] {
         return [

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import StoreKit
 
 class TipsSettingsView: View, SettingsViewProtocol {
     var topViewController: SettingsViewController?
@@ -142,6 +143,26 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
         self.updateState(state: .normal, shouldUpdateFrame: true)
         self.updatePurchaseButton(subscribed: false)
+
+        self.loadButtonsInfo()
+    }
+
+    func loadButtonsInfo() {
+        if ServiceLocator.shared.inAppPurchaseManager.monthlyProductItem.product == nil {
+            ServiceLocator.shared.inAppPurchaseManager.loadProducts { _ in
+                self.presentButtonsInfo()
+            }
+        } else {
+            self.presentButtonsInfo()
+        }
+    }
+
+    func presentButtonsInfo() {
+        let monthlyPrice = ServiceLocator.shared.inAppPurchaseManager.monthlyProductItem.product?.localizedPrice ?? "$1"
+        let oneTimePrice = ServiceLocator.shared.inAppPurchaseManager.oneTimeTipProductItem.product?.localizedPrice ?? "$5"
+
+        self.oneTimePurchase.subtitleLabel.text = oneTimePrice
+        self.subscriptionPurchase.subtitleLabel.text = "\(monthlyPrice) / month"
     }
 
     func updateState(state: State, shouldUpdateFrame: Bool = true) {
@@ -292,5 +313,14 @@ class TipsSettingsView: View, SettingsViewProtocol {
                 }
             }
         }
+    }
+}
+
+extension SKProduct {
+    var localizedPrice: String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = priceLocale
+        return formatter.string(from: price)
     }
 }
