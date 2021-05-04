@@ -194,7 +194,9 @@ class TipsSettingsView: View, SettingsViewProtocol {
 
     @objc
     func restoreAction() {
+        self.privacyView.isRestoreLoading = true
         ServiceLocator.shared.inAppPurchaseManager.restorePurchases { _ in
+            self.privacyView.isRestoreLoading = false
             self.updatePurchaseButton()
         }
     }
