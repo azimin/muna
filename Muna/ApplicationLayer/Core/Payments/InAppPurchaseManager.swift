@@ -21,6 +21,7 @@ final class InAppPurchaseManager {
     enum PurchaseState {
         case purchased
         case cancelled
+        case notPurchased
         case error(Error)
     }
     
@@ -126,11 +127,13 @@ final class InAppPurchaseManager {
                     )
                     self?.validateSubscription { result in
                         switch result {
-                        case .purchased:
+                        case .purchased, .noProductToValidate:
                             completion(.purchased)
                         case let .error(error):
                             completion(.error(error))
-                        default:
+                        case .notPurchased:
+                            completion(.notPurchased)
+                        case .expired:
                             completion(.error(MunaError.uknownError))
                         }
                     }
@@ -229,6 +232,8 @@ final class InAppPurchaseManager {
             case let .failure(error):
                 appAssertionFailure("Error on subscription validation: \(error)")
                 completion?(.error(error))
+            case .noProductToValidate:
+                completion?(.noProductToValidate)
             }
         }
     }

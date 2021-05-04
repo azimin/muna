@@ -230,7 +230,7 @@ class TipsSettingsView: View, SettingsViewProtocol {
                 self.updateState(state: .thankYou)
                 self.playPurchaseAnimation()
                 ServiceLocator.shared.analytics.logTipGiven(isSubscription: false)
-            case .cancelled:
+            case .cancelled, .notPurchased:
                 ServiceLocator.shared.analytics.logPurchaseState(
                     state: .cancelled,
                     isSubscription: false
@@ -273,7 +273,7 @@ class TipsSettingsView: View, SettingsViewProtocol {
                     self.playPurchaseAnimation()
                     self.updatePurchaseButton(subscribed: true)
                     ServiceLocator.shared.analytics.logTipGiven(isSubscription: true)
-                case .cancelled:
+                case .cancelled, .notPurchased:
                     ServiceLocator.shared.analytics.logPurchaseState(
                         state: .cancelled,
                         isSubscription: true
