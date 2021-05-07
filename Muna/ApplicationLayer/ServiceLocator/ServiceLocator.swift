@@ -56,7 +56,8 @@ class ServiceLocator {
         #if DEBUG
         self.securityStorage = UserDefaults.standard
         #else
-        self.securityStorage = SecurityStorage()
+        self.securityStorage = UserDefaults.standard
+//        self.securityStorage = SecurityStorage()
         #endif
 
         self.inAppPurchaseManager = InAppPurchaseManager(
