@@ -239,7 +239,7 @@ final class InAppPurchaseManager {
     }
 
     func isNeededToShowTips() -> Bool {
-        guard ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems() > 4 else {
+        guard ServiceLocator.shared.itemsDatabase.fetchNumberOfCompletedItems() > 10 else {
             return false
         }
 
