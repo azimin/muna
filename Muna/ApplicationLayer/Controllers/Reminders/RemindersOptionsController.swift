@@ -87,6 +87,7 @@ class RemindersOptionsController {
     }
 
     func hilightNextItemIfNeeded() {
+
         guard self.isEditingState else {
             return
         }

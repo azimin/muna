@@ -35,14 +35,44 @@ enum CustomDayWords: String, CaseIterable {
     case weekends
     case tomorrow
     case yesterday
-    case tom
+    case today
+    case none
+    case fortnight
+
+    var representSymbol: Int {
+        switch self {
+        case .weekends:
+            return 5
+        case .tomorrow:
+            return 3
+        case .today:
+            return 3
+        case .yesterday:
+            return 3
+        case .none:
+            return 2
+        case .fortnight:
+            return 5
+        }
+    }
+
+    init?(partOfString: String) {
+        for value in CustomDayWords.allCases {
+            if value.rawValue.hasPrefix(partOfString) {
+                self = value
+                return
+            }
+        }
+        self = .none
+    }
 
     static var day: Set<String> {
         return [
             CustomDayWords.weekends.rawValue,
-            CustomDayWords.tom.rawValue,
+            CustomDayWords.today.rawValue,
             CustomDayWords.tomorrow.rawValue,
             CustomDayWords.yesterday.rawValue,
+            CustomDayWords.fortnight.rawValue,
         ]
     }
 }

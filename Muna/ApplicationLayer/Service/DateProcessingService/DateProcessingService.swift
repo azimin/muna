@@ -231,7 +231,9 @@ class DateProcesingService {
         let pureDays = parsedResult.customDayComponents.map { dayComponent -> [PureDay] in
             let date: [Date]
             switch dayComponent {
-            case .tom, .tomorrow:
+            case .fortnight:
+                date = [parsedResult.refDate + 2.weeks]
+            case .tomorrow:
                 var additionalDay = 0
                 if let prefix = parsedResult.prefix, prefix == .after {
                     additionalDay = 1
@@ -246,10 +248,14 @@ class DateProcesingService {
                         parsedResult.refDate + 1.days + additionalDay.days,
                     ]
                 }
+            case .today:
+                date = [parsedResult.refDate]
             case .yesterday:
                 date = [parsedResult.refDate - 1.days]
             case .weekends:
                 date = self.makeWeekendsFromDate(parsedResult.refDate, prefix: parsedResult.prefix)
+            case .none:
+                date = []
             }
             return date.map {
                 return PureDay(day: $0.day, month: $0.month, year: $0.year)

@@ -9,9 +9,18 @@
 import Foundation
 
 class ENCustomDayWordsParser: Parser {
-    var customUnits: String {
-        return CustomDayWords.allCases.map { $0.rawValue }.joined(separator: "|")
-    }
+    var customUnits: String = {
+        var string = ""
+        for word in CustomDayWords.allCases {
+            for i in (word.representSymbol - 1)..<word.rawValue.count {
+                let newWord = word.rawValue[0...i]
+                string += "\(newWord)|"
+            }
+        }
+        string.removeLast()
+        return string
+//        return CustomDayWords.allCases.map { $0.rawValue }.joined(separator: "|")
+    }()
 
     private var prefixes: String {
         return DatePrefix.allCases.map { $0.rawValue }.joined(separator: "|")
@@ -36,7 +45,7 @@ class ENCustomDayWordsParser: Parser {
         }
 
         let word = parsedItem.match.string(from: parsedItem.text, atRangeIndex: self.wordItem).lowercased()
-        guard let dayComponent = CustomDayWords(rawValue: word) else {
+        guard let dayComponent = CustomDayWords(partOfString: word), dayComponent != .none else {
             return nil
         }
 
