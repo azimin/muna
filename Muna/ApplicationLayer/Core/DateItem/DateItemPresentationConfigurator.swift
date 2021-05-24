@@ -19,20 +19,20 @@ class BasicDateItemPresentationConfigurator: DateItemPresentationConfiguratorPro
             return [timeOfDay]
         case .afertnoon:
             if preferedAmount == 1 {
-                return [TimeOfDay(hours: 5, minutes: 0, seconds: 0)]
+                return [TimeOfDay(hours: 15, minutes: 0, seconds: 0)]
             } else {
                 return [
-                    TimeOfDay(hours: 5, minutes: 0, seconds: 0),
-                    TimeOfDay(hours: 6, minutes: 0, seconds: 0),
+                    TimeOfDay(hours: 15, minutes: 0, seconds: 0),
+                    TimeOfDay(hours: 17, minutes: 0, seconds: 0),
                 ]
             }
         case .evening:
             if preferedAmount == 1 {
-                return [TimeOfDay(hours: 7, minutes: 0, seconds: 0)]
+                return [TimeOfDay(hours: 19, minutes: 0, seconds: 0)]
             } else {
                 return [
-                    TimeOfDay(hours: 7, minutes: 0, seconds: 0),
-                    TimeOfDay(hours: 8, minutes: 0, seconds: 0),
+                    TimeOfDay(hours: 19, minutes: 0, seconds: 0),
+                    TimeOfDay(hours: 20, minutes: 0, seconds: 0),
                 ]
             }
         case .mindnight:
@@ -53,14 +53,7 @@ class BasicDateItemPresentationConfigurator: DateItemPresentationConfiguratorPro
                 ]
             }
         case .noon:
-            if preferedAmount == 1 {
-                return [TimeOfDay(hours: 3, minutes: 0, seconds: 0)]
-            } else {
-                return [
-                    TimeOfDay(hours: 3, minutes: 0, seconds: 0),
-                    TimeOfDay(hours: 4, minutes: 0, seconds: 0),
-                ]
-            }
+            return [TimeOfDay(hours: 12, minutes: 0, seconds: 0)]
         case .allDay:
             if preferedAmount == 1 {
                 return [TimeOfDay(hours: 12, minutes: 0, seconds: 0)]
