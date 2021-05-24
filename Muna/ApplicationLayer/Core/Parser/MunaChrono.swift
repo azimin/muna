@@ -49,7 +49,7 @@ class MunaChrono {
 
         let dates = timeOffset.filter { $0.length == length }
 
-        if string == self.evening && dates.isEmpty {
+        if string.lowercased().contains(self.evening.lowercased()) && dates.isEmpty {
             appAssertionFailure("Parser result: \(allParsedResults) \n Time merge: \(timeOffset) \n Final Result: \(dates)")
         }
         
