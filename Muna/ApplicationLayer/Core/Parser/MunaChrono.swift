@@ -24,6 +24,8 @@ class MunaChrono {
         ENWeekParser(),
     ]
 
+    private let evening = "evening"
+
     func parseFromString(_ string: String, date: Date) -> [ParsedResult] {
         var allParsedResults = [ParsedResult]()
 
@@ -47,6 +49,10 @@ class MunaChrono {
 
         let dates = timeOffset.filter { $0.length == length }
 
+        if string == self.evening && dates.isEmpty {
+            appAssertionFailure("Parser result: \(allParsedResults) \n Time merge: \(timeOffset) \n Final Result: \(dates)")
+        }
+        
         return dates
     }
 
