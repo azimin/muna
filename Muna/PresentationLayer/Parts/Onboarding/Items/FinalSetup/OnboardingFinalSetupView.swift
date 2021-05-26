@@ -21,7 +21,7 @@ class OnboardingFinalSetupView: NSView {
 
     let descriptionLabel = Label(fontStyle: .regular, size: 18)
         .withTextColorStyle(.title60AccentAlpha)
-        .withText("Modern way of creating remidners without breaking context")
+        .withText("Modern way of creating reminders without breaking context")
         .withAligment(.center)
 
     let continueButton = OnboardingButton()
