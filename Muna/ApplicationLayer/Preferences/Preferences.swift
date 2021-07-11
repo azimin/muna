@@ -33,6 +33,7 @@ class Preferences {
         case isNeededToShowOnboarding
         case isFirstAskToPermissions
         case isNeededToShowAnalytics
+        case isNeededToShowLaunchOnStartup
         case splashOnThings
         case splashOnNotes
         case splashOnReminders
@@ -236,4 +237,7 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowAnalytics)
     static var isNeededToShowAnalytics
+    
+    @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowLaunchOnStartup)
+    static var isNeededToShowLaunchOnStartup
 }

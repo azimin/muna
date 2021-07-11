@@ -21,6 +21,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         case howToRemind
         case howToSeeItems
         case howToGetReminder
+        case launchOnStartup
         case analytics
         case final
 
@@ -28,15 +29,23 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
             if let index = Step.allCases.firstIndex(of: self) {
                 if index < (Step.allCases.count - 1) {
                     let item = Step.allCases[index + 1]
-                    if item != .analytics {
-                        return item
-                    } else {
+                
+                    if item == .analytics {
                         if Preferences.isNeededToShowAnalytics {
                             return item
                         } else {
                             return item.next()
                         }
+                    } else if item == .launchOnStartup {
+                        if Preferences.isNeededToShowLaunchOnStartup {
+                            return item
+                        } else {
+                            return item.next()
+                        }
+                    } else {
+                        return item
                     }
+                    
                 } else {
                     return .final
                 }
@@ -79,6 +88,13 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
                 step: index,
                 stepType: step
             )
+        }
+        
+        if step == .final {
+            Preferences.isNeededToShowOnboarding = false
+            ServiceLocator.shared.windowManager.toggleWindow(.onboarding)
+            
+            return
         }
 
         if let oldItem = self.currentStep, let oldViewController = self.currentViewController {
@@ -127,6 +143,8 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
             return OnboardingStepViewController(style: .howToSeeItems)
         case .howToGetReminder:
             return OnboardingStepViewController(style: .howToGetReminder)
+        case .launchOnStartup:
+            return OnboardingLaunchOnStartupViewController()
         case .final:
             return OnboardingFinalSetupViewController()
         }

@@ -9,7 +9,15 @@
 import Cocoa
 
 class OnboardingButton: Button {
-    init() {
+    enum Style {
+        case basic
+        case minimal
+    }
+    
+    let style: Style
+    
+    init(style: Style = .basic) {
+        self.style = style
         super.init(frame: .zero)
         self.setup()
     }
@@ -25,7 +33,14 @@ class OnboardingButton: Button {
         }
 
         self.wantsLayer = true
-        self.layer?.backgroundColor = CGColor.color(.blueSelected)
+        
+        switch style {
+        case .basic:
+            self.layer?.backgroundColor = CGColor.color(.blueSelected)
+        case .minimal:
+            self.layer?.borderWidth = 2
+            self.layer?.borderColor = CGColor.color(.blueSelected)
+        }
         self.layer?.cornerRadius = 8
 
         self.font = FontStyle.customFont(style: .bold, size: 16)
