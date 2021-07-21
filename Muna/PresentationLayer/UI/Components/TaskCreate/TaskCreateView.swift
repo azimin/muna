@@ -216,6 +216,9 @@ class TaskCreateView: PopupView {
     }
 
     func createTask(byShortcut: Bool) {
+        var itemToSave: SavingProcessingService.ItemToSave
+
+        
         defer {
             switch self.usage {
             case .screenshot:
@@ -227,7 +230,6 @@ class TaskCreateView: PopupView {
             }
         }
 
-        var itemToSave: SavingProcessingService.ItemToSave
         switch self.usage {
         case .screenshot:
             itemToSave = SavingProcessingService.ItemToSave(savingType: .screenshot)

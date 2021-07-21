@@ -136,10 +136,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //
 //            if isNeededToPlayAnimation, isBigGapAfterStart, theWholeNumberOfItems < 15 {
 //                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                    ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
 //                }
 //            }
 //        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)            
+        }
 
         ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
