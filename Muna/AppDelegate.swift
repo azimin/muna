@@ -139,11 +139,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 //                }
 //            }
 //        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)            
+        
+        
+        if ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).count < 3, Preferences.isNeededToShowOnboarding == false {
         }
 
+        self.showHintIfPossible()
         ServiceLocator.shared.inAppPurchaseManager.loadProducts()
         ServiceLocator.shared.inAppPurchaseManager.completeTransaction()
         ServiceLocator.shared.inAppPurchaseManager.validateSubscription(nil)
@@ -156,6 +157,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             if let date = item.dueDate, date.isInPast {
                 self.pingNotificationSetup(itemId: item.id, onlyIfMissing: true)
             }
+        }
+    }
+    
+    func showHintIfPossible() {
+        let numberOfItems = ServiceLocator.shared.itemsDatabase.fetchItems(filter: .all).count
+        
+        var dockIsVisible = false
+        
+        if let mainScreen = NSScreen.main {
+            dockIsVisible = mainScreen.visibleFrame.height < mainScreen.frame.height
+        }
+
+        guard numberOfItems < 3, Preferences.isNeededToShowOnboarding == false, dockIsVisible else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            ServiceLocator.shared.windowManager.showHintPopover(sender: self.statusBarItem.button!)
         }
     }
 

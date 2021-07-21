@@ -13,7 +13,7 @@ final class HintView: View {
 //    let partShorcutView = ShortcutView(item: Preferences.DefaultItems.defaultScreenshotShortcut.item)
     
     let titleLabel = Label(fontStyle: .bold, size: 17)
-        .withText("Increase your productivity")
+        .withText("Muna is ready to use!")
 
 //    let closeButton = Button()
 //        .withImageName("close", color: .title60Accent)
