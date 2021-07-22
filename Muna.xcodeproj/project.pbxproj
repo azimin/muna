@@ -119,7 +119,6 @@
 		9F33D4882468826100395C44 /* ShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D4872468826100395C44 /* ShortcutView.swift */; };
 		9F33D48B2468828F00395C44 /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48A2468828F00395C44 /* ShortcutItem.swift */; };
 		9F33D48D246883C900395C44 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33D48C246883C900395C44 /* Key.swift */; };
-		9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F33FC4F24E335C200942BFD /* BetaKeyService.swift */; };
 		9F3AAE8124E8560E000453C0 /* fridge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9F3AAE8024E8560E000453C0 /* fridge.icns */; };
 		9F3BC1482461DA96002B6217 /* MainPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */; };
 		9F3BC14A2461DC2F002B6217 /* PanelItemModelGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */; };
@@ -366,7 +365,6 @@
 		9F33D4872468826100395C44 /* ShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutView.swift; sourceTree = "<group>"; };
 		9F33D48A2468828F00395C44 /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		9F33D48C246883C900395C44 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
-		9F33FC4F24E335C200942BFD /* BetaKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaKeyService.swift; sourceTree = "<group>"; };
 		9F3AAE8024E8560E000453C0 /* fridge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fridge.icns; sourceTree = "<group>"; };
 		9F3BC1472461DA96002B6217 /* MainPanelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanelHeaderView.swift; sourceTree = "<group>"; };
 		9F3BC1492461DC2F002B6217 /* PanelItemModelGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelItemModelGrouping.swift; sourceTree = "<group>"; };
@@ -592,9 +590,9 @@
 		233E747B246B4A800070EABA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9F2CD37726AA094B0039CE90 /* DueDateText */,
 				9F18D5762513FD7C00729B2C /* AssistentService */,
 				23C7C9C524F83FA8005110CB /* ActiveAppCheckService */,
-				9F33FC4E24E335BA00942BFD /* Beta */,
 				23DAE37E24E2896200D3B1AD /* PermissionsService */,
 				9FC3F89224DB0FA700BC0693 /* Assertions */,
 				23069400248645D200C41F4F /* DateProcessingService */,
@@ -1017,6 +1015,13 @@
 			path = LaunchOnStartup;
 			sourceTree = "<group>";
 		};
+		9F2CD37726AA094B0039CE90 /* DueDateText */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DueDateText;
+			sourceTree = "<group>";
+		};
 		9F2D340824D0B95C0049DD43 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,14 +1077,6 @@
 				9F1526FC246DBDA30037623B /* ShortcutController.swift */,
 			);
 			path = Shortcut;
-			sourceTree = "<group>";
-		};
-		9F33FC4E24E335BA00942BFD /* Beta */ = {
-			isa = PBXGroup;
-			children = (
-				9F33FC4F24E335C200942BFD /* BetaKeyService.swift */,
-			);
-			path = Beta;
 			sourceTree = "<group>";
 		};
 		9F3BC1442461D098002B6217 /* Models */ = {
@@ -1963,7 +1960,6 @@
 				9FE0F53224701E380046A5C4 /* GeneralSettingsViewController.swift in Sources */,
 				23564CC525DE5D7000380420 /* HyperlinkedTextField.swift in Sources */,
 				239DC914245D95E5001FA50C /* AppDelegate.swift in Sources */,
-				9F33FC5024E335C200942BFD /* BetaKeyService.swift in Sources */,
 				9F68FD0E24EC87BA00DF927E /* NSView+Animation.swift in Sources */,
 				2326DFAE250FD73200316D8B /* HintView.swift in Sources */,
 				9F581E4A2494EDCA00A34379 /* OnboardingFinalSetupViewController.swift in Sources */,

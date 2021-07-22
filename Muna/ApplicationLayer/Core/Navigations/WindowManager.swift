@@ -30,14 +30,11 @@ class WindowManager: WindowManagerProtocol {
     private var windows = [WindowType: NSWindow]()
     private var windowVisibleStatus: [WindowType: Bool] = [:]
 
-    private let betaKey: BetaKeyService
-
     private var isNeededToShowPopup = true
 
     private var hintPopover: NSPopover?
 
-    init(betaKey: BetaKeyService) {
-        self.betaKey = betaKey
+    init() {
         self.setup()
     }
 
@@ -68,11 +65,6 @@ class WindowManager: WindowManagerProtocol {
     }
 
     func activateWindowIfNeeded(_ windowType: WindowType) {
-        if self.betaKey.isEntered == false, windowType != .onboarding {
-            self.activateWindowIfNeeded(.onboarding)
-            return
-        }
-
         guard self.windowState(windowType) == false else {
             switch windowType {
             case let .settings(item):

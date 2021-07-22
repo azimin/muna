@@ -22,7 +22,6 @@ class ServiceLocator {
     let windowManager: WindowManagerProtocol
     let activeAppCheckService: ActiveAppCheckServiceProtocol
     let assistent: AssistentServiceProtocol
-    let betaKey: BetaKeyService
     let inAppPurchaseManager: InAppPurchaseManager
 
     let securityStorage: StorageServiceProtocol
@@ -35,13 +34,12 @@ class ServiceLocator {
         self.assertionHandler = assertionHandler
         self.imageStorage = ImageStorageService()
         self.notifications = NotificationsService()
-        self.betaKey = BetaKeyService()
         self.itemsDatabase = ItemsDatabaseService(
             imageStorage: self.imageStorage,
             notifications: self.notifications
         )
         self.savingService = SavingProcessingService(database: self.itemsDatabase)
-        self.windowManager = WindowManager(betaKey: self.betaKey)
+        self.windowManager = WindowManager()
         self.permissionsService = PermissionsService()
         self.activeAppCheckService = ActiveAppCheckService()
         self.assistent = AssistentService()
