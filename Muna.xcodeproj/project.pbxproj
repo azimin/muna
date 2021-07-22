@@ -103,6 +103,7 @@
 		9F1CB75F24731D9C00DFBB05 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB75E24731D9C00DFBB05 /* DateItem.swift */; };
 		9F1CB7622473298F00DFBB05 /* NSView+StyleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */; };
 		9F28291B269B4BAC00C235C5 /* OnboardingLaunchOnStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F28291A269B4BAC00C235C5 /* OnboardingLaunchOnStartupViewController.swift */; };
+		9F2CD37926AA09C10039CE90 /* DueDateTextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2CD37826AA09C10039CE90 /* DueDateTextService.swift */; };
 		9F2D340A24D0B9790049DD43 /* AnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */; };
 		9F2D340C24D0B9A50049DD43 /* AnalyticsValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */; };
 		9F2D340E24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */; };
@@ -345,6 +346,7 @@
 		9F1CB7612473298F00DFBB05 /* NSView+StyleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+StyleHolder.swift"; sourceTree = "<group>"; };
 		9F2682BF2471BEE100B79D03 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
 		9F28291A269B4BAC00C235C5 /* OnboardingLaunchOnStartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLaunchOnStartupViewController.swift; sourceTree = "<group>"; };
+		9F2CD37826AA09C10039CE90 /* DueDateTextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateTextService.swift; sourceTree = "<group>"; };
 		9F2D340924D0B9790049DD43 /* AnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
 		9F2D340B24D0B9A40049DD43 /* AnalyticsValueProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsValueProtocol.swift; sourceTree = "<group>"; };
 		9F2D340D24D0B9DB0049DD43 /* AnalyticsAdditionalServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsAdditionalServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 		9F2CD37726AA094B0039CE90 /* DueDateText */ = {
 			isa = PBXGroup;
 			children = (
+				9F2CD37826AA09C10039CE90 /* DueDateTextService.swift */,
 			);
 			path = DueDateText;
 			sourceTree = "<group>";
@@ -2091,6 +2094,7 @@
 				9FC5D7FE24DC9FAF0005B902 /* AboutSettingsViewController.swift in Sources */,
 				23561B412461ECB900097E4A /* ParserProtocol.swift in Sources */,
 				9F693227247ABE4100FEBC0B /* DateParserView.swift in Sources */,
+				9F2CD37926AA09C10039CE90 /* DueDateTextService.swift in Sources */,
 				9FA07F652460AD2800654D36 /* ImageView.swift in Sources */,
 				23DA03F624A3DB1C006F94DF /* OnboardingFinalSetupView.swift in Sources */,
 				23069402248645E200C41F4F /* DateProcessingService.swift in Sources */,

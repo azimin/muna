@@ -118,7 +118,8 @@ class TaskCreateView: PopupView {
             }
         }
 
-        self.reminderTextField.placeholder = "Set due date (optional)"
+        self.reminderTextField.placeholder = ServiceLocator.shared.dueDateTextService.requstDueDatePlaceholder()
+        
         switch usage {
         case .screenshot:
             self.commentTextField.placeholder = "Notes (optional)"

@@ -20,9 +20,14 @@ class SavingProcessingService {
     private var image: NSImage?
 
     private let database: ItemsDatabaseServiceProtocol
+    private let dueDateTextService: DueDateTextServiceProtocol
 
-    init(database: ItemsDatabaseServiceProtocol) {
+    init(
+        database: ItemsDatabaseServiceProtocol,
+        dueDateTextService: DueDateTextServiceProtocol
+    ) {
         self.database = database
+        self.dueDateTextService = dueDateTextService
     }
 
     func addImage(_ image: NSImage) {
@@ -73,6 +78,7 @@ class SavingProcessingService {
             dueDate: item.date,
             comment: item.comment
         )
+        self.dueDateTextService.newItemCreated(dueDateUsed: item.date != nil)
         self.image = nil
 
         if let itemModel = itemModel {

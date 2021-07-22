@@ -23,6 +23,7 @@ class ServiceLocator {
     let activeAppCheckService: ActiveAppCheckServiceProtocol
     let assistent: AssistentServiceProtocol
     let inAppPurchaseManager: InAppPurchaseManager
+    let dueDateTextService: DueDateTextServiceProtocol
 
     let securityStorage: StorageServiceProtocol
 
@@ -38,7 +39,11 @@ class ServiceLocator {
             imageStorage: self.imageStorage,
             notifications: self.notifications
         )
-        self.savingService = SavingProcessingService(database: self.itemsDatabase)
+        self.dueDateTextService = DueDateTextService()
+        self.savingService = SavingProcessingService(
+            database: self.itemsDatabase,
+            dueDateTextService: self.dueDateTextService
+        )
         self.windowManager = WindowManager()
         self.permissionsService = PermissionsService()
         self.activeAppCheckService = ActiveAppCheckService()

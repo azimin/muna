@@ -46,6 +46,8 @@ class Preferences {
         case isNeededToShowPassedItems
         case isAnalyticsEnabled
         case usedForcedLaunchAtLogin
+        case usedDueDateOnItem
+        case usedDueDateTextIndex
     }
 
     static var defaultShortcutPanelKey = "ud_activation_shortcut"
@@ -184,6 +186,12 @@ class Preferences {
 
     @UserDefaultsEntry(wrappedValue: PingInterval.fiveMins.rawValue, key: Key.pingInterval)
     static var pingInterval
+    
+    @UserDefaultsEntry(wrappedValue: false, key: Key.usedDueDateOnItem)
+    static var usedDueDateOnItem
+    
+    @UserDefaultsEntry(wrappedValue: 0, key: Key.usedDueDateTextIndex)
+    static var usedDueDateTextIndex
 
     @UserDefaultsEntry(wrappedValue: true, key: Key.isNeededToShowOnboarding)
     static var isNeededToShowOnboarding
