@@ -93,6 +93,7 @@ class OnboardingViewController: NSViewController, NSToolbarDelegate {
         if step == .final {
             Preferences.isNeededToShowOnboarding = false
             ServiceLocator.shared.windowManager.toggleWindow(.onboarding)
+            (NSApp.delegate as? AppDelegate)?.showHintIfPossible()
             
             return
         }
