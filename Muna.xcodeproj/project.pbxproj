@@ -128,6 +128,10 @@
 		9F3E6D4D24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4C24A80E7B00CEFDBE /* MainPanelPresentationAnimationView.swift */; };
 		9F3E6D4F24A8121C00CEFDBE /* MainPanelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D4E24A8121C00CEFDBE /* MainPanelItemView.swift */; };
 		9F3E6D5124A818BB00CEFDBE /* MainPanelItemMetainformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E6D5024A818BB00CEFDBE /* MainPanelItemMetainformationView.swift */; };
+		9F3F2AC826C1AC9600CDE141 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3F2AC726C1AC9600CDE141 /* SnapKit */; };
+		9F3F2ACB26C1ACC000CDE141 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3F2ACA26C1ACC000CDE141 /* SwiftDate */; };
+		9F3F2AD126C1AD4B00CDE141 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3F2AD026C1AD4B00CDE141 /* SwiftyStoreKit */; };
+		9F3F2AD426C1AD6500CDE141 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9F3F2AD326C1AD6500CDE141 /* KeychainAccess */; };
 		9F480837250FF9AC0044F9C3 /* AssistentPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F480836250FF9AC0044F9C3 /* AssistentPanelView.swift */; };
 		9F4E4F9B24F45BB70069DE9F /* HintsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9A24F45BB70069DE9F /* HintsService.swift */; };
 		9F4E4F9D24F45BC00069DE9F /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4E4F9C24F45BC00069DE9F /* Hint.swift */; };
@@ -154,6 +158,7 @@
 		9F6C1E76246C8871003D5AD2 /* TaskCreateShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E75246C8871003D5AD2 /* TaskCreateShortcuts.swift */; };
 		9F6C1E78246C88E8003D5AD2 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C1E77246C88E8003D5AD2 /* PopupView.swift */; };
 		9F6E7BBF2477072E00A3D5EB /* DateParserFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E7BBE2477072E00A3D5EB /* DateParserFormatter.swift */; };
+		9F70054526C1AEA4001F6E98 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 9F70054426C1AEA4001F6E98 /* Amplitude */; };
 		9F74C0E025DE99D6006D2022 /* TaskChangeCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74C0DF25DE99D6006D2022 /* TaskChangeCommentView.swift */; };
 		9F7A6A99261345FE009B7451 /* TipsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A98261345FE009B7451 /* TipsSettingsView.swift */; };
 		9F7A6A9B26134608009B7451 /* TipsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A6A9A26134608009B7451 /* TipsSettingsViewController.swift */; };
@@ -485,6 +490,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F3F2ACB26C1ACC000CDE141 /* SwiftDate in Frameworks */,
+				9F3F2AD426C1AD6500CDE141 /* KeychainAccess in Frameworks */,
+				9F3F2AC826C1AC9600CDE141 /* SnapKit in Frameworks */,
+				9F3F2AD126C1AD4B00CDE141 /* SwiftyStoreKit in Frameworks */,
+				9F70054526C1AEA4001F6E98 /* Amplitude in Frameworks */,
 				236B86B2258A9DF40096AD25 /* LaunchAtLogin in Frameworks */,
 				A3F6ECB7F7E0F28BB4A62A09 /* Pods_Muna.framework in Frameworks */,
 			);
@@ -1782,6 +1792,11 @@
 			name = Muna;
 			packageProductDependencies = (
 				236B86B1258A9DF40096AD25 /* LaunchAtLogin */,
+				9F3F2AC726C1AC9600CDE141 /* SnapKit */,
+				9F3F2ACA26C1ACC000CDE141 /* SwiftDate */,
+				9F3F2AD026C1AD4B00CDE141 /* SwiftyStoreKit */,
+				9F3F2AD326C1AD6500CDE141 /* KeychainAccess */,
+				9F70054426C1AEA4001F6E98 /* Amplitude */,
 			);
 			productName = Muna;
 			productReference = 239DC910245D95E5001FA50C /* Muna.app */;
@@ -1814,6 +1829,11 @@
 			mainGroup = 239DC907245D95E5001FA50C;
 			packageReferences = (
 				236B86B0258A9DF40096AD25 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				9F3F2AC626C1AC9600CDE141 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9F3F2AC926C1ACC000CDE141 /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				9F3F2ACF26C1AD4B00CDE141 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+				9F3F2AD226C1AD6500CDE141 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				9F70054326C1AEA4001F6E98 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 			);
 			productRefGroup = 239DC911245D95E5001FA50C /* Products */;
 			projectDirPath = "";
@@ -2296,7 +2316,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = MEH36U69XD;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2329,7 +2349,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = MEH36U69XD;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2422,7 +2442,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Muna/Resources/Preview Content\"";
-				DEVELOPMENT_TEAM = MEH36U69XD;
+				DEVELOPMENT_TEAM = 5MGEMLZRS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2478,6 +2498,46 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		9F3F2AC626C1AC9600CDE141 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		9F3F2AC926C1ACC000CDE141 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.1;
+			};
+		};
+		9F3F2ACF26C1AD4B00CDE141 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.16.3;
+			};
+		};
+		9F3F2AD226C1AD6500CDE141 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
+		9F70054326C1AEA4001F6E98 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2485,6 +2545,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 236B86B0258A9DF40096AD25 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
 			productName = LaunchAtLogin;
+		};
+		9F3F2AC726C1AC9600CDE141 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F3F2AC626C1AC9600CDE141 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		9F3F2ACA26C1ACC000CDE141 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F3F2AC926C1ACC000CDE141 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		9F3F2AD026C1AD4B00CDE141 /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F3F2ACF26C1AD4B00CDE141 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
+		};
+		9F3F2AD326C1AD6500CDE141 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F3F2AD226C1AD6500CDE141 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		9F70054426C1AEA4001F6E98 /* Amplitude */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F70054326C1AEA4001F6E98 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
+			productName = Amplitude;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,13 +9,7 @@ target 'Muna' do
   pod 'AppCenter'
 
   # Pods for Muna
-  pod 'SnapKit'
   pod 'MASShortcut'
   pod 'SwiftyChrono'
-  pod 'SwiftDate'
   pod 'lottie-ios'
-  pod 'SwiftyStoreKit'
-  pod 'KeychainAccess'
-
-  pod 'Amplitude'
 end
