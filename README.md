@@ -16,6 +16,6 @@ Available for macOS
 ![](repo_images/4.gif)
 
 # Credits
-With 💜 from [Alexander](https://github.com/azimin) and [Egor](https://github.com/barbatosso)
-Icon from [Denis](https://denis_ozdemir.dribbble.com)
-Site designed by [Alex L.](https://dribbble.com/Lafaki), built by [Ilya](https://github.com/ilyamilosevic)
+With 💜 from [Alexander](https://github.com/azimin) and [Egor](https://github.com/barbatosso)<br />
+Icon from [Denis](https://denis_ozdemir.dribbble.com)<br />
+Site designed by [Alex L.](https://dribbble.com/Lafaki), built by [Ilya](https://github.com/ilyamilosevic)<br />
