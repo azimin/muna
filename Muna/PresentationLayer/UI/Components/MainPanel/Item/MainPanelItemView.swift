@@ -257,7 +257,7 @@ final class MainPanelItemView: View, GenericCellSubview, ReusableComponent, NSDr
     }
 
     override func mouseDragged(with event: NSEvent) {
-        super.mouseMoved(with: event)
+        super.mouseDragged(with: event)
 
         let position = self.convert(event.locationInWindow, from: nil)
         if abs(position.x - self.startPosition.x) > 16 || abs(position.y - self.startPosition.y) > 16 {
